@@ -20,7 +20,12 @@ const Subscribe = () => {
             alignItems="center"
           >
             <Box>
-              <Typography variant="h3">Subscribe Our Newsletter</Typography>
+              <Typography
+                variant="h3"
+                sx={{ color: (theme) => theme.palette.common.white }}
+              >
+                Subscribe Our Newsletter
+              </Typography>
             </Box>
             <Box>
               <TextBox
