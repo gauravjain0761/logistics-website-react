@@ -99,8 +99,8 @@ const Testimonials = () => {
             </Grid>
           </Grid>
           <Box textAlign={"right"} my="2em">
-            <Button variant="contained">
-              <VisibilityIcon /> See More
+            <Button startIcon={<VisibilityIcon />} variant="outlined" color="light" >
+               See More
             </Button>
           </Box>
         </Container>

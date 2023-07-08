@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from "@mui/material";
+import { Box,  styled, Typography } from "@mui/material";
 
 export const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#f6f6f7",
@@ -26,9 +26,14 @@ export const StyledBgTestBox = styled("div")(({ theme }) => ({
 export const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   margin: "1em 0",
-  color:"#fff"
+  color: "#fff",
 }));
 export const StyledBoxTest = styled(Box)(({ theme }) => ({
-  backgroundColor:"#ff7533",
-  padding:"3em 0"
+  backgroundColor: "#ff7533",
+  padding: "3em 0",
 }));
+export const StyledBoxhelpful = styled(Box)(({ theme }) => ({
+  backgroundColor: "#ececec",
+  padding: "4em 0",
+}));
+

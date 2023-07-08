@@ -79,6 +79,11 @@ const DARK = {
   darker: "#454545",
   contrastText: "#fff",
 };
+
+const LIGHT = {
+  main: "#ffffff",
+};
+
 const COMMON = {
   common: { black: "#000", white: "#fff" },
   primary: PRIMARY,
@@ -89,6 +94,7 @@ const COMMON = {
   error: ERROR,
   grey: GREY,
   dark: DARK,
+  light: LIGHT,
   divider: alpha(GREY[500], 0.24),
   action: {
     hover: alpha(GREY[500], 0.08),
