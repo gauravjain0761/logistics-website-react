@@ -1,15 +1,25 @@
 import React from "react";
 import Banner from "./Banner";
 import Fleet from "./Fleet";
+import ListTransport from "./ListTransport";
 import Mobile from "./Mobile";
+import MobileTwo from "./MobileTwo";
+import Shipment from "./Shipment";
+import Testimonials from "./Testimonials";
+import TotalCard from "./TotalCard";
 
 const HomeSection = () => {
   return (
-    <div>
+    <>
       <Banner />
       <Fleet/>
       <Mobile/>
-    </div>
+      <TotalCard/>
+      <Shipment/>
+      <ListTransport/>
+      <MobileTwo/>
+      <Testimonials/>
+    </>
   );
 };
 

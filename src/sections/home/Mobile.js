@@ -1,15 +1,16 @@
 import { Box, Button, Card, CardContent, Container, Grid, Typography } from "@mui/material";
 import React from "react";
+import { StyledBox } from "./homeStyled";
 
 const Mobile = () => {
   return (
     <React.Fragment>
-      <Box py={8}>
+      <StyledBox >
         <Container>
           <Grid container spacing={0}>
             <Grid item lg={6}>
               <Box>
-                <Box component={"img"} src={"./mobile.png"} />
+                <Box m={"auto"} component={"img"} src={"./mobile.png"} />
               </Box>
             </Grid>
             <Grid item lg={6}>
@@ -38,7 +39,7 @@ const Mobile = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box>
+      </StyledBox>
     </React.Fragment>
   );
 };
