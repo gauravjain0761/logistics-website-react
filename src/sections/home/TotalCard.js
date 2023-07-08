@@ -17,7 +17,7 @@ const TotalCard = () => {
       <Box sx={{ backgroundColor: "#ff7533" }} py={10}>
         <Container>
           <Grid container spacing={14}>
-            <Grid item  sm={12} md={6} lg={3}>
+            <Grid item  xs={12} sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox textAlign={"center"}>
@@ -36,7 +36,7 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item  sm={12} md={6} lg={3}>
+            <Grid item  xs={12} sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
@@ -55,7 +55,7 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item  sm={12} md={6} lg={3}>
+            <Grid item  xs={12} sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
@@ -74,7 +74,7 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item  sm={12} md={6} lg={3}>
+            <Grid item  xs={12} sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
