@@ -20,11 +20,11 @@ const Fleet = () => {
             </Typography>
           </Box>
           <Grid container spacing={3}>
-            <Grid item lg={3}>
+            <Grid item  sm={6} md={3} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <Box>
-                    <Typography variant="h5">PickUp Truck</Typography>
+                    <Typography variant="h5" color="primary">PickUp Truck</Typography>
                   </Box>
                   <Box>
                     <Typography variant="p">
@@ -40,11 +40,11 @@ const Fleet = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item sm={6} md={3} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <Box>
-                    <Typography variant="h5">PickUp Truck</Typography>
+                    <Typography variant="h5" color="primary">PickUp Truck</Typography>
                   </Box>
                   <Box>
                     <Typography variant="p">
@@ -60,11 +60,11 @@ const Fleet = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item sm={6} md={3} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <Box>
-                    <Typography variant="h5">PickUp Truck</Typography>
+                    <Typography variant="h5" color="primary">PickUp Truck</Typography>
                   </Box>
                   <Box>
                     <Typography variant="p">
@@ -80,11 +80,11 @@ const Fleet = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item sm={6} md={3} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <Box>
-                    <Typography variant="h5">PickUp Truck</Typography>
+                    <Typography variant="h5" color="primary">PickUp Truck</Typography>
                   </Box>
                   <Box>
                     <Typography variant="p">

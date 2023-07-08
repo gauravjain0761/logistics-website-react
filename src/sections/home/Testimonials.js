@@ -25,7 +25,7 @@ const Testimonials = () => {
             <StyledTypography variant="h3">Testimonials</StyledTypography>
           </Box>
           <Grid container spacing={5}>
-            <Grid item lg={4}>
+            <Grid item md={4} lg={4}>
               <Card content="outlined">
                 <CardContent>
                   <StyledImageBox component={"img"} src="/r1.png" />
@@ -36,10 +36,10 @@ const Testimonials = () => {
                   </Typography>
                   <StyledBgTestBox>
                     <Grid container spacing={4}>
-                      <Grid item lg={4}>
+                      <Grid item md={4} lg={4}>
                         <Box component={"img"} src="/testimonialimage.png" />
                       </Grid>
-                      <Grid item lg={8}>
+                      <Grid item md={8} lg={8}>
                         <Rating name="read-only" value={4} readOnly />
                         <Typography variant="h6">Diego Thompson</Typography>
                         <Typography>Lives in: Atlantis Resort</Typography>
@@ -49,7 +49,7 @@ const Testimonials = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={4}>
+            <Grid item md={4} lg={4}>
               <Card content="outlined">
                 <CardContent>
                   <StyledImageBox component={"img"} src="/r1.png" />
@@ -60,10 +60,10 @@ const Testimonials = () => {
                   </Typography>
                   <StyledBgTestBox>
                     <Grid container spacing={4}>
-                      <Grid item lg={4}>
+                      <Grid item md={4} lg={4}>
                         <Box component={"img"} src="/testimonialimage.png" />
                       </Grid>
-                      <Grid item lg={8}>
+                      <Grid item md={8} lg={8}>
                         <Rating name="read-only" value={4} readOnly />
                         <Typography variant="h6">Diego Thompson</Typography>
                         <Typography>Lives in: Atlantis Resort</Typography>
@@ -73,7 +73,7 @@ const Testimonials = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={4}>
+            <Grid item md={4} lg={4}>
               <Card content="outlined">
                 <CardContent>
                   <StyledImageBox component={"img"} src="/r1.png" />
@@ -84,10 +84,10 @@ const Testimonials = () => {
                   </Typography>
                   <StyledBgTestBox>
                     <Grid container spacing={4}>
-                      <Grid item lg={4}>
+                      <Grid item md={4} lg={4}>
                         <Box component={"img"} src="/testimonialimage.png" />
                       </Grid>
-                      <Grid item lg={8}>
+                      <Grid item md={8} lg={8}>
                         <Rating name="read-only" value={4} readOnly />
                         <Typography variant="h6">Diego Thompson</Typography>
                         <Typography>Lives in: Atlantis Resort</Typography>
@@ -99,7 +99,7 @@ const Testimonials = () => {
             </Grid>
           </Grid>
           <Box textAlign={"right"} my="2em">
-            <Button startIcon={<VisibilityIcon />} variant="outlined" color="light" >
+            <Button startIcon={<VisibilityIcon />} variant="outlined"  color="light" >
                See More
             </Button>
           </Box>

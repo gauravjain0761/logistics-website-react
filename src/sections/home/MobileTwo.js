@@ -15,13 +15,13 @@ const MobileTwo = () => {
     <React.Fragment>
       <StyledBox>
         <Container>
-          <Grid container spacing={0}>
-            <Grid item lg={6}>
+          <Grid container spacing={4}>
+            <Grid item xs={12}sm={6} md={6} lg={6}>
               <Box>
                 <Box m={"auto"} component={"img"} src={"./mobile2.jpg"} />
               </Box>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item xs={12}sm={6} md={6} lg={6}>
               <Box variant="outlined">
                 <Box>
                   <Button variant="contained">For Clients</Button>

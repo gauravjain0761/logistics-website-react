@@ -10,13 +10,14 @@ import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { StyledIconBox } from "./homeStyled";
+import Iconify from "@/components/iconify";
 const TotalCard = () => {
   return (
     <React.Fragment>
-      <Box sx={{backgroundColor:"#ff7533"}} py={10}>
+      <Box sx={{ backgroundColor: "#ff7533" }} py={10}>
         <Container>
           <Grid container spacing={14}>
-            <Grid item lg={3}>
+            <Grid item  sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox textAlign={"center"}>
@@ -35,7 +36,7 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item  sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
@@ -54,7 +55,7 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item  sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
@@ -73,11 +74,11 @@ const TotalCard = () => {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item lg={3}>
+            <Grid item  sm={12} md={6} lg={3}>
               <Card variant="outlined">
                 <CardContent>
                   <StyledIconBox>
-                    <PersonIcon sx={{ fontSize: "5em" }} />
+                    <Iconify icon="ps:justice" width="5em" />
                   </StyledIconBox>
                   <Box>
                     <Typography variant="h5" align="center">

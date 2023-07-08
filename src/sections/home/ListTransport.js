@@ -11,7 +11,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import {  StyledListBox } from "./homeStyled";
+import { StyledListBox } from "./homeStyled";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 const ListTransport = () => {
   return (
@@ -19,9 +19,9 @@ const ListTransport = () => {
       <StyledListBox py={8}>
         <Container>
           <Grid container spacing={0}>
-            <Grid item lg={6}>
-              <Card sx={{p:5}}>
-                <Box >
+            <Grid item sm={12} md={6} lg={6}>
+              <Card sx={{ p: 5 }}>
+                <Box>
                   <Box>
                     <Typography variant="h4">
                       Lorem Ipsum es simplemente el texto de relleno de las
@@ -68,7 +68,7 @@ const ListTransport = () => {
                 </Box>
               </Card>
             </Grid>
-            <Grid item lg={6} justifyContent={"center"} alignContent={"center"}>
+            <Grid item sm={12} md={6} lg={6} justifyContent={"center"} alignContent={"center"}>
               <Box>
                 <Box margin={"auto"} component={"img"} src={"./shipment.jpg"} />
               </Box>

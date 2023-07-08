@@ -6,14 +6,14 @@ const Banner = () => {
     <React.Fragment>
       <StyledBox>
         <Container>
-          <Grid container spacing={0}>
-            <Grid item lg={6}>
+          <Grid container spacing={2}>
+            <Grid item  sm={6} md={6} lg={6}>
               <Box>
                 <Typography variant="h3">
                   Your Logistic Solution For Business <br />
                   Client & Driver’s
                 </Typography>
-                <Box>
+                <Box >
                   <Button
                     variant="contained"
                     size="large"
@@ -40,7 +40,7 @@ const Banner = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item sm={6} md={6} lg={6}>
               <Box component="img" src={"/banner.jpg"} />
             </Grid>
           </Grid>

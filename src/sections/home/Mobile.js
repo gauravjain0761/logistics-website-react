@@ -8,12 +8,12 @@ const Mobile = () => {
       <StyledBox >
         <Container>
           <Grid container spacing={0}>
-            <Grid item lg={6}>
+            <Grid item sm={6} md={6} lg={6}>
               <Box>
                 <Box m={"auto"} component={"img"} src={"./mobile.png"} />
               </Box>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item sm={6} md={6} lg={6}>
               <Card variant="outlined">
                 <CardContent>
                   <Box>
@@ -21,7 +21,7 @@ const Mobile = () => {
                   </Box>
                   <Box py={5}>
                     <Box>
-                      <Typography variant="h3">Join Our Fleet ____</Typography>
+                      <Typography variant="h3" color="primary">Join Our Fleet ____</Typography>
                     </Box>
                     <Box>
                       <Typography variant="h6">
