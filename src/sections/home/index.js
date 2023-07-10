@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import Fleet from "./Fleet";
 import Helpful from "./Helpful";
 import ListTransport from "./ListTransport";
+import Location from "./Location";
 import Mobile from "./Mobile";
 import MobileTwo from "./MobileTwo";
 import Shipment from "./Shipment";
@@ -15,6 +16,7 @@ const HomeSection = () => {
       <Banner />
       <Fleet/>
       <Mobile/>
+      <Location/>
       <TotalCard/>
       <Shipment/>
       <ListTransport/>

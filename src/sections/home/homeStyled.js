@@ -10,6 +10,10 @@ export const StyledIconBox = styled(Box)(({ theme }) => ({
 export const StyledListBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#f2f2f2",
 }));
+export const StyledLocBox = styled(Box)(({ theme }) => ({
+  backgroundColor: "#f2f2f2",
+  padding:"4em"
+}));
 export const StyledImageBox = styled(Box)(({ theme }) => ({
   width: "6em",
 }));
