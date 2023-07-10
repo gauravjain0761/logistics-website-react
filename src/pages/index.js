@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { WebLayout } from "@/layout";
 import HomeSection from "@/sections/home";
+import SignIn from "@/sections/Auth/SignIn";
 
 HomePage.getLayout = function getLayout(page) {
   return <WebLayout>{page}</WebLayout>;
@@ -16,6 +17,7 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeSection />
+      <SignIn/>
     </>
   );
 }
