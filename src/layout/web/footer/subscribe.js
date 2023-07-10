@@ -36,7 +36,7 @@ const Subscribe = () => {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     background: (theme) => theme.palette.common.white,
-                    borderRadius: "20px",
+                    borderRadius: "30px",
                     padding: "2px",
                   },
                   overflow: "hidden",
@@ -48,7 +48,7 @@ const Subscribe = () => {
                 }}
                 inputAdornmentPosition="end"
                 icon={
-                  <Button variant="contained" sx={{ borderRadius: "20px" }}>
+                  <Button variant="contained" sx={{ borderRadius: "30px", px:4 }} >
                     Sent
                   </Button>
                 }
