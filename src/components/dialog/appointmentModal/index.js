@@ -67,7 +67,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
         <DialogHeader onClose={onClose} title={title} />
         <DialogContent dividers={"paper"}>
-          <Stack textAlign={"center"}>
+          <Stack textAlign={"center"} mt={2}>
             <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
             <Typography
               variant="h4"
@@ -83,7 +83,17 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
           </Stack>
           <DialogForm formik={formik} />
           <Box>
-            <Typography>Didn{"'"}t receive OTP? Resend OTP</Typography>
+            <Typography>
+              Didn{"'"}t receive OTP ?{" "}
+              <Typography
+                color="primary"
+                component="span"
+                fontWeight={700}
+                sx={{ cursor: "pointer" }}
+              >
+                Resend OTP
+              </Typography>
+            </Typography>
           </Box>
         </DialogContent>
         <Divider />

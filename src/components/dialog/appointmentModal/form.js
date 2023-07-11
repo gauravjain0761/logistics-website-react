@@ -9,22 +9,26 @@ export const DialogForm = ({ formik }) => {
       <Box sx={{ mt: 4 }} />
 
       <TextBox
-      startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
+        size="small"
+        startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
         fullWidth
         start
-        label="Email"
+        // label="Email"
         name={`email`}
+        placeholder="Enter your Registered Email"
         value={formik?.values?.email}
         onChange={formik.handleChange}
         error={formik.touched.email && formik.errors.email}
         helperText={formik.touched.email && formik.errors.email}
       />
       <TextBox
+        size="small"
         fullWidth
         startIcon={<Iconify icon="ic:round-call" color="#ff7534" />}
-        label="Mobile No."
+        // label="Mobile No."
         // required
         name={`mobile`}
+        placeholder="Enter your Registered Contact No"
         value={formik?.values?.mobile}
         onChange={formik.handleChange}
         error={formik.touched.mobile && formik.errors.mobile}
