@@ -128,7 +128,7 @@ const Header = (props) => {
                 ))}
               <Button
                 component={Link}
-                href={"/"}
+                href={"/auth/login"}
                 sx={{ color: "#fff", ml: 1 }}
                 aria-owns="mouse-over-popover"
                 aria-haspopup="true"

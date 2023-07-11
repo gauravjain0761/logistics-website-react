@@ -15,11 +15,13 @@ const TextBox = (props) => {
     variant,
     type,
     InputLabelProps,
-    icon,
+    startIcon,
+    endIcon,
     value,
     required,
     multiline,
-    inputAdornmentPosition = "end",
+    inputEndAdornmentPosition = "end",
+    inputStartAdornmentPosition = "start",
     fullWidth,
     helperText,
     disabled,
@@ -61,9 +63,15 @@ const TextBox = (props) => {
         inputProps={{ maxLength: isMaxLenght ? isMaxLenght : null }}
         InputProps={{
           endAdornment: (
-            <InputAdornment position={inputAdornmentPosition}>
+            <InputAdornment position={inputEndAdornmentPosition}>
               {/* <Icon>{icon}</Icon> */}
-              {icon}
+              {endIcon}
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment position={inputStartAdornmentPosition}>
+              {/* <Icon>{icon}</Icon> */}
+              {startIcon}
             </InputAdornment>
           ),
         }}
