@@ -1,4 +1,5 @@
 import { TextBox } from "@/components/form";
+import Iconify from "@/components/iconify/Iconify";
 import { Box } from "@mui/material";
 import * as React from "react";
 
@@ -8,7 +9,9 @@ export const DialogForm = ({ formik }) => {
       <Box sx={{ mt: 4 }} />
 
       <TextBox
+      startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
         fullWidth
+        start
         label="Email"
         name={`email`}
         value={formik?.values?.email}
@@ -18,6 +21,7 @@ export const DialogForm = ({ formik }) => {
       />
       <TextBox
         fullWidth
+        startIcon={<Iconify icon="ic:round-call" color="#ff7534" />}
         label="Mobile No."
         // required
         name={`mobile`}

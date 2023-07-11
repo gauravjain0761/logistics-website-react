@@ -68,7 +68,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         <DialogHeader onClose={onClose} title={title} />
         <DialogContent dividers={"paper"}>
           <Stack textAlign={"center"}  >
-            <Box component="img" src={forgotimg} width={"6em"} />
+            <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
             <Typography variant="h4" fontWeight={300}>Forget Password</Typography>
             <Typography>
               Enter Your Registerd Email or Contact no & Well Send you a link to
@@ -76,6 +76,9 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
             </Typography>
           </Stack>
           <DialogForm formik={formik} />
+          <Box>
+            <Typography>Didn{"'"}t receive OTP? Resend OTP</Typography>
+          </Box>
         </DialogContent>
         <Divider />
         <DialogActions>
@@ -95,7 +98,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
             color="primary"
             type="submit"
           >
-            Submit
+            Verify
           </Button>
         </DialogActions>
         {/* </Box> */}
