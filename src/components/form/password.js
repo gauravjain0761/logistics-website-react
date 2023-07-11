@@ -9,12 +9,14 @@ const PasswordBox = props => {
   const {
     name,
     label,
+    startIcon,
     value,
     required,
     inputAdornmentPosition,
     fullWidth,
     helperText,
-    disabled
+    disabled,
+    placeholder
   } = props;
 
   return (
@@ -26,6 +28,7 @@ const PasswordBox = props => {
       <TextField
         error={helperText ? true : false}
         name={name}
+        placeholder={placeholder}
         label={label}
         type={showPassword ? "text" : "password"}
         required={required}
@@ -40,6 +43,11 @@ const PasswordBox = props => {
               <Icon onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? "visibility" : "visibility_off"}
               </Icon>
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment position={inputAdornmentPosition || "start"}>
+             {startIcon}
             </InputAdornment>
           )
         }}

@@ -1,11 +1,14 @@
-import { TextBox } from "@/components/form";
+import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Checkbox,
   Container,
+  FormControlLabel,
+  FormGroup,
   Grid,
   Stack,
   Typography,
@@ -28,7 +31,7 @@ const Login = ({ formik }) => {
                   }}
                 >
                   <CardContent>
-                    <Stack direction={"row"}>
+                    <Stack direction={"row"} justifyContent={"center"}>
                       <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
                       <Typography
                         color={"primary"}
@@ -48,15 +51,98 @@ const Login = ({ formik }) => {
                   }}
                 >
                   <CardContent>
-                    <Box>
-                      <TextBox fullWidth placeholder={"Enter Your Email Address"} startIcon={<Iconify icon="mdi:user" color="#ff7534"/>} size={"small"} />
-                    </Box>
-                    <Box>
-                      <TextBox fullWidth placeholder={"Enter Password"} startIcon={<Iconify icon="solar:lock-bold" color="#ff7534"/>}  size={"small"}/>
-                    </Box>
-                    <Box>
-                      <Checkbox label={"Remember me"} />
-                    </Box>
+                    <FormGroup>
+                      <Box>
+                        <TextBox
+                          fullWidth
+                          placeholder={"Enter Your Email Address"}
+                          startIcon={
+                            <Iconify icon="mdi:user" color="#ff7534" />
+                          }
+                          size={"small"}
+                        />
+                      </Box>
+                      <Box>
+                        <PasswordBox
+                          onChange={(e) => {
+                            e.target.value;
+                          }}
+                          fullWidth
+                          placeholder={"Enter Password"}
+                          startIcon={
+                            <Iconify icon="solar:lock-bold" color="#ff7534" />
+                          }
+                          size={"small"}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Box>
+                          <FormControlLabel
+                            control={<Checkbox />}
+                            label="Remember Me"
+                          />
+                        </Box>
+                        <Box>
+                          <Typography variant="p" color="primary">
+                            Forget Password ?
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Box>
+                        <Button fullWidth variant="contained" color="primary">
+                          Login Now
+                        </Button>
+                      </Box>
+                      <Box textAlign={"center"} mt={4}>
+                        <Typography variant="p">
+                          Don{"'"}t have An Account? Register Now
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Button
+                          fullWidth
+                          sx={{
+                            backgroundColor: "#2A4E95",
+                            color: "#fff",
+                            my: 1,
+                            ":hover":{
+                            backgroundColor: "#2A4E95"
+                          } 
+                          }}
+                          startIcon={
+                            <Iconify
+                              icon="ic:baseline-facebook"
+                              color="white"
+                            />
+                          }
+                        >
+                          Continue with Facebook
+                        </Button>
+                      </Box>
+                      <Box>
+                        <Button
+                        
+                          fullWidth
+                          sx={{ backgroundColor: "#CD2C2E", color: "#fff",":hover":{
+                            backgroundColor: "#CD2C2E"
+                          } }}
+                          startIcon={
+                            <Iconify
+                              icon="ant-design:google-outlined"
+                              color="white"
+                            />
+                          }
+                        >
+                          Continue with Google
+                        </Button>
+                      </Box>
+                    </FormGroup>
                   </CardContent>
                 </Card>
               </Stack>
