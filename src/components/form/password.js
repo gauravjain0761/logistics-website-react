@@ -3,7 +3,7 @@ import React from "react";
 import { FormControl } from "./index";
 import PropTypes from "prop-types";
 
-const PasswordBox = props => {
+const PasswordBox = (props) => {
   const [showPassword, setShowPassword] = React.useState("");
 
   const {
@@ -16,7 +16,8 @@ const PasswordBox = props => {
     fullWidth,
     helperText,
     disabled,
-    placeholder
+    placeholder,
+    size,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ const PasswordBox = props => {
       <TextField
         error={helperText ? true : false}
         name={name}
+        size={size}
         placeholder={placeholder}
         label={label}
         type={showPassword ? "text" : "password"}
@@ -36,27 +38,24 @@ const PasswordBox = props => {
         disabled={disabled}
         // autoComplete={"false"} //MUI pickUp the string value on autoComplete
         autoComplete="new-password"
-        onChange={e => props.onChange(e)}
+        onChange={(e) => props.onChange(e)}
         InputProps={{
           endAdornment: (
             <InputAdornment position={inputAdornmentPosition || "end"}>
-              <Icon onClick={() => setShowPassword(!showPassword)}>
+              <Icon onClick={() => setShowPassword(!showPassword)} color="primary" fontSize="small">
                 {showPassword ? "visibility" : "visibility_off"}
               </Icon>
             </InputAdornment>
           ),
           startAdornment: (
             <InputAdornment position={inputAdornmentPosition || "start"}>
-             {startIcon}
+              {startIcon}
             </InputAdornment>
-          )
+          ),
         }}
       />
 
-      {helperText &&
-        <FormHelperText>
-          {helperText}
-        </FormHelperText>}
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };
@@ -71,6 +70,6 @@ PasswordBox.propTypes = {
   helperText: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-}
+};
 
 export default PasswordBox;

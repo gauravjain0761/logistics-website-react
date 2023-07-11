@@ -4,9 +4,14 @@ import React from "react";
 
 export const DialogHeader = ({ onClose, title }) => {
   return (
-    <Box>
+    <Box sx={{ background: (theme) => theme.palette.primary.main }}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle
+          color="inherit"
+          sx={{ color: (theme) => theme.palette.common.white }}
+        >
+          {title}
+        </DialogTitle>
         <Box mr={1}>
           <IconButton onClick={onClose}>
             <Close />
