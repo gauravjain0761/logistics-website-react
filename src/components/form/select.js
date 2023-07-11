@@ -1,16 +1,29 @@
-import { FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormHelperText,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { FormControl } from "./index";
 import PropTypes from "prop-types";
-const SelectBox = props => {
+const SelectBox = (props) => {
   const {
     name,
-    label,
+    label = "",
     value,
     required,
     options,
     fullWidth,
     helperText,
-    isRequired
+    isRequired,
+    size,
+    inputEndAdornmentPosition = "end",
+    inputStartAdornmentPosition = "start",
+    startIcon,
+    endIcon,
+    placeholder,
   } = props;
 
   return (
@@ -22,32 +35,44 @@ const SelectBox = props => {
         !fullWidth ? { width: "50%", paddingLeft: 5, paddingRight: 5 } : {}
       }
     >
-      <InputLabel>
-        {`${label} ${isRequired ? "*" : ''}`}
-      </InputLabel>
+      {label && <InputLabel>{`${label} ${isRequired ? "*" : ""}`}</InputLabel>}
 
       <Select
+        size={size}
         name={name}
         label={label}
         required={required}
         value={value}
-        onChange={e => props.onChange(e)}
+        onChange={(e) => props.onChange(e)}
         inputProps={{
-          name: name
+          name: name,
+        }}
+        placeholder={placeholder}
+        renderInput={(params) => <TextField {...params} label="10,000 options" />}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position={inputEndAdornmentPosition}>
+              {/* <Icon>{icon}</Icon> */}
+              {endIcon}
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment position={inputStartAdornmentPosition}>
+              {/* <Icon>{icon}</Icon> */}
+              {startIcon}
+            </InputAdornment>
+          ),
         }}
       >
         {options &&
-          options.map(option => (
+          options.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
       </Select>
 
-      {helperText &&
-        <FormHelperText>
-          {helperText}
-        </FormHelperText>}
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };
@@ -63,5 +88,5 @@ SelectBox.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   isRequired: PropTypes.bool,
-}
+};
 export default SelectBox;
