@@ -13,9 +13,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 
 const Register = () => {
+  const router = useRouter();
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -32,7 +34,11 @@ const Register = () => {
                 >
                   <CardContent>
                     <Stack direction={"row"} justifyContent={"center"}>
-                      <Iconify icon="solar:lock-bold" width="32px" color="#ff7534" />
+                      <Iconify
+                        icon="solar:lock-bold"
+                        width="32px"
+                        color="#ff7534"
+                      />
                       <Typography
                         color={"primary"}
                         variant="h4"
@@ -52,7 +58,7 @@ const Register = () => {
                 >
                   <CardContent>
                     <FormGroup>
-                    <Box>
+                      <Box>
                         <TextBox
                           fullWidth
                           placeholder={"Enter Your Full Name "}
@@ -67,7 +73,10 @@ const Register = () => {
                           fullWidth
                           placeholder={"Enter Your Email Address"}
                           startIcon={
-                            <Iconify icon="fluent:mail-20-filled" color="#ff7534" />
+                            <Iconify
+                              icon="fluent:mail-20-filled"
+                              color="#ff7534"
+                            />
                           }
                           size={"small"}
                         />
@@ -77,7 +86,10 @@ const Register = () => {
                           fullWidth
                           placeholder={"Enter Your Contact Number"}
                           startIcon={
-                            <Iconify icon="material-symbols:call" color="#ff7534" />
+                            <Iconify
+                              icon="material-symbols:call"
+                              color="#ff7534"
+                            />
                           }
                           size={"small"}
                         />
@@ -123,26 +135,37 @@ const Register = () => {
                         </Box>
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
-
-                      <Box>
-                        <Button fullWidth variant="contained" color="primary">
-                          Register Now
-                        </Button>
-                      </Box>
-                      <Box>
-                        <Button fullWidth variant="contained" color="dark">
-                          Reset Now
-                        </Button>
-                      </Box>
+                        <Box>
+                          <Button fullWidth variant="contained" color="primary">
+                            Register Now
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button fullWidth variant="contained" color="dark">
+                            Reset Now
+                          </Button>
+                        </Box>
                       </Stack>
 
                       <Stack my={4} direction={"row"} justifyContent={"center"}>
-                        <Typography variant="p" >  
-                        Already have An Account?
+                        <Typography variant="p">
+                          Already have An Account?
                         </Typography>
-                        <Typography color={"primary"}>Login Now</Typography>
+                        <Typography
+                          color={"primary"}
+                          onClick={() => router.push("/auth/login")}
+                          sx={{ cursor: "pointer" }}
+                        >
+                          Login Here
+                        </Typography>
                       </Stack>
-                      <Box><Typography textAlign={"center"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography></Box>
+                      <Box>
+                        <Typography textAlign={"center"}>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua.
+                        </Typography>
+                      </Box>
                       <Box>
                         <Button
                           fullWidth
@@ -155,16 +178,12 @@ const Register = () => {
                             },
                           }}
                           startIcon={
-                            <Iconify
-                            icon="ion:bicycle" 
-                              color="white"
-                            />
+                            <Iconify icon="ion:bicycle" color="white" />
                           }
                         >
                           Want To Become A Driver
                         </Button>
                       </Box>
-                      
                     </FormGroup>
                   </CardContent>
                 </Card>

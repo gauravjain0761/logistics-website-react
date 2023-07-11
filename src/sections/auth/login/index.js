@@ -14,9 +14,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const Login = ({ formik }) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   return (
@@ -73,7 +75,7 @@ const Login = ({ formik }) => {
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534"  />
+                            <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
                           size={"small"}
                         />
@@ -111,7 +113,12 @@ const Login = ({ formik }) => {
                         <Box textAlign={"center"} mt={4}>
                           <Typography variant="p">
                             Don{"'"}t have An Account?{" "}
-                            <Typography component="span" color="primary">
+                            <Typography
+                              component="span"
+                              color="primary"
+                              onClick={() => router.push("/auth/register")}
+                              sx={{ cursor: "pointer" }}
+                            >
                               Register Now
                             </Typography>
                           </Typography>
