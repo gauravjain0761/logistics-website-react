@@ -31,7 +31,7 @@ const Testimonials = () => {
                   <StyledImageBox component={"img"} src="/r1.png" />
                   <Typography my="1em">
                     Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
+                    typesetting industry. Lorem Ipsum has been the industry{"'"}s
                     standard dummy text ever since
                   </Typography>
                   <StyledBgTestBox>
@@ -55,7 +55,7 @@ const Testimonials = () => {
                   <StyledImageBox component={"img"} src="/r1.png" />
                   <Typography my="1em">
                     Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
+                    typesetting industry. Lorem Ipsum has been the industry{"'"}s
                     standard dummy text ever since
                   </Typography>
                   <StyledBgTestBox>
@@ -79,7 +79,7 @@ const Testimonials = () => {
                   <StyledImageBox component={"img"} src="/r1.png" />
                   <Typography my="1em">
                     Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
+                    typesetting industry. Lorem Ipsum has been the industry{"'"}s
                     standard dummy text ever since
                   </Typography>
                   <StyledBgTestBox>
