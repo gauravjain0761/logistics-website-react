@@ -90,7 +90,7 @@ const Register = () => {
                         </Box>
                         <Box>
                           <Typography
-                            onClick={() => setOpen(true)}
+                            // onClick={() => setOpen(true)}
                             variant="p"
                             color="primary"
                           >
@@ -104,7 +104,7 @@ const Register = () => {
                         </Button>
                       </Box>
                       <Box textAlign={"center"} mt={4}>
-                        <Typography variant="p">
+                        <Typography variant="p">  
                           Don{"'"}t have An Account? Register Now
                         </Typography>
                       </Box>

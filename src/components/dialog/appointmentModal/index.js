@@ -67,9 +67,15 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
         <DialogHeader onClose={onClose} title={title} />
         <DialogContent dividers={"paper"}>
-          <Stack textAlign={"center"}  >
+          <Stack textAlign={"center"}>
             <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
-            <Typography variant="h4" fontWeight={300}>Forget Password</Typography>
+            <Typography
+              variant="h4"
+              fontWeight={300}
+              sx={{ cursor: "pointer" }}
+            >
+              Forget Password
+            </Typography>
             <Typography>
               Enter Your Registerd Email or Contact no & Well Send you a link to
               reset your Password

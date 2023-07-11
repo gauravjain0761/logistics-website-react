@@ -17,8 +17,8 @@ import {
 import React, { useState } from "react";
 
 const Login = ({ formik }) => {
-  const [open,setOpen] = useState(false);
-  const handleClose = ()=> setOpen(false);
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -54,7 +54,7 @@ const Login = ({ formik }) => {
                   }}
                 >
                   <CardContent>
-                    <FormGroup>
+                    <Stack spacing={1} py={2}>
                       <Box>
                         <TextBox
                           fullWidth
@@ -73,7 +73,7 @@ const Login = ({ formik }) => {
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
+                            <Iconify icon="solar:lock-bold" color="#ff7534"  />
                           }
                           size={"small"}
                         />
@@ -92,60 +92,73 @@ const Login = ({ formik }) => {
                           />
                         </Box>
                         <Box>
-                          <Typography onClick={()=> setOpen(true)}  variant="p" color="primary">
+                          <Typography
+                            onClick={() => setOpen(true)}
+                            variant="p"
+                            color="primary"
+                            sx={{ cursor: "pointer" }}
+                          >
                             Forget Password ?
                           </Typography>
                         </Box>
                       </Box>
-                      <Box>
+                      <Box mt={2}>
                         <Button fullWidth variant="contained" color="primary">
                           Login Now
                         </Button>
                       </Box>
-                      <Box textAlign={"center"} mt={4}>
-                        <Typography variant="p">
-                          Don{"'"}t have An Account? Register Now
-                        </Typography>
-                      </Box>
                       <Box>
-                        <Button
-                          fullWidth
-                          sx={{
-                            backgroundColor: "#2A4E95",
-                            color: "#fff",
-                            my: 1,
-                            ":hover":{
-                            backgroundColor: "#2A4E95"
-                          } 
-                          }}
-                          startIcon={
-                            <Iconify
-                              icon="ic:baseline-facebook"
-                              color="white"
-                            />
-                          }
-                        >
-                          Continue with Facebook
-                        </Button>
+                        <Box textAlign={"center"} mt={4}>
+                          <Typography variant="p">
+                            Don{"'"}t have An Account?{" "}
+                            <Typography component="span" color="primary">
+                              Register Now
+                            </Typography>
+                          </Typography>
+                        </Box>
+                        <Box>
+                          <Button
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#2A4E95",
+                              color: "#fff",
+                              my: 1,
+                              ":hover": {
+                                backgroundColor: "#2A4E95",
+                              },
+                            }}
+                            startIcon={
+                              <Iconify
+                                icon="ic:baseline-facebook"
+                                color="white"
+                              />
+                            }
+                          >
+                            Continue with Facebook
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#CD2C2E",
+                              color: "#fff",
+                              ":hover": {
+                                backgroundColor: "#CD2C2E",
+                              },
+                            }}
+                            startIcon={
+                              <Iconify
+                                icon="ant-design:google-outlined"
+                                color="white"
+                              />
+                            }
+                          >
+                            Continue with Google
+                          </Button>
+                        </Box>
                       </Box>
-                      <Box>
-                        <Button
-                        
-                          fullWidth
-                          sx={{ backgroundColor: "#CD2C2E", color: "#fff",":hover":{
-                            backgroundColor: "#CD2C2E"
-                          } }}
-                          startIcon={
-                            <Iconify
-                              icon="ant-design:google-outlined"
-                              color="white"
-                            />
-                          }
-                        >
-                          Continue with Google
-                        </Button>
-                      </Box>
-                    </FormGroup>
+                    </Stack>
                   </CardContent>
                 </Card>
               </Stack>
@@ -155,8 +168,8 @@ const Login = ({ formik }) => {
       </Box>
       <DialogBox
         title="Forget Password"
-      open={open}
-      onClose={()=>handleClose()}
+        open={open}
+        onClose={() => handleClose()}
       />
     </React.Fragment>
   );
