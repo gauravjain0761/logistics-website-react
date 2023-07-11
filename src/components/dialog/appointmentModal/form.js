@@ -1,15 +1,16 @@
 import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { Close } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Autocomplete, Box, InputAdornment, TextField } from "@mui/material";
 import * as React from "react";
+import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 
 export const DialogForm = ({ formik }) => {
   const OTPSelect = [
-    {
-      label: "Choose Option for Get OTP",
-      value: 0,
-    },
+    // {
+    //   label: "Choose Option for Get OTP",
+    //   value: 0,
+    // },
     {
       label: "Email",
       value: "email",
@@ -23,18 +24,30 @@ export const DialogForm = ({ formik }) => {
     <React.Fragment>
       <Box sx={{ mt: 4 }} />
 
-      <SelectBox
+      <Autocomplete
+        sx={{ mb: 1 }}
         size="small"
-        startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
         fullWidth
-        start
         options={OTPSelect}
-        placeholder="Choose Option for Get OTP"
         name={`otp`}
         value={formik?.values?.otp}
         onChange={formik.handleChange}
         error={formik.touched.otp && formik.errors.otp}
         helperText={formik.touched.otp && formik.errors.otp}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            placeholder="Choose Option for Get OTP"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment sx={{ ml: 1 }}>
+                  <ArrowDropDownCircleIcon color="primary" fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
       />
 
       <TextBox
