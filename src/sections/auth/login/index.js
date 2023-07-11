@@ -1,3 +1,4 @@
+import DialogBox from "@/components/dialog/appointmentModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
@@ -13,9 +14,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const Login = ({ formik }) => {
+  const [open,setOpen] = useState(false);
+  const handleClose = ()=> setOpen(false);
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -89,7 +92,7 @@ const Login = ({ formik }) => {
                           />
                         </Box>
                         <Box>
-                          <Typography variant="p" color="primary">
+                          <Typography onClick={()=> setOpen(true)}  variant="p" color="primary">
                             Forget Password ?
                           </Typography>
                         </Box>
@@ -150,6 +153,11 @@ const Login = ({ formik }) => {
           </Grid>
         </Container>
       </Box>
+      <DialogBox
+        title="Forget Password"
+      open={open}
+      onClose={()=>handleClose()}
+      />
     </React.Fragment>
   );
 };

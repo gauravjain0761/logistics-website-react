@@ -8,16 +8,18 @@ import {
   DialogContentText,
   Divider,
   Slide,
+  Stack,
+  Typography,
 } from "@mui/material";
 import { DialogHeader } from "./header";
 import { DialogForm } from "./form";
 import { useFormik } from "formik";
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
+const forgotimg = "/assets/images/auth/forgot.png";
 
-const ModalBox = ({ keepMounted, onClose, open, title }) => {
+const DialogBox = ({ keepMounted, onClose, open, title }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -48,6 +50,9 @@ const ModalBox = ({ keepMounted, onClose, open, title }) => {
     },
   });
 
+  const handleClose = () => {
+    formik.resetForm();
+  };
   return (
     <div>
       <Dialog
@@ -55,26 +60,47 @@ const ModalBox = ({ keepMounted, onClose, open, title }) => {
         TransitionComponent={Transition}
         keepMounted={keepMounted}
         components="form"
+        scroll="paper"
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <Box component="form" onSubmit={formik.handleSubmit}>
-          <DialogHeader onClose={onClose} title={title} />
-          <DialogContent sx={{ mt: 1, mb: 0 }}>
-            <DialogForm formik={formik} />
-          </DialogContent>
-          <Divider />
-          <DialogActions>
-            <Button variant="outlined" color="primary" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
-          </DialogActions>
-        </Box>
+        {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
+        <DialogHeader onClose={onClose} title={title} />
+        <DialogContent dividers={"paper"}>
+          <Stack textAlign={"center"}  >
+            <Box component="img" src={forgotimg} width={"6em"} />
+            <Typography variant="h4" fontWeight={300}>Forget Password</Typography>
+            <Typography>
+              Enter Your Registerd Email or Contact no & Well Send you a link to
+              reset your Password
+            </Typography>
+          </Stack>
+          <DialogForm formik={formik} />
+        </DialogContent>
+        <Divider />
+        <DialogActions>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              onClose();
+              handleClose();
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => formik.handleSubmit()}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </DialogActions>
+        {/* </Box> */}
       </Dialog>
     </div>
   );
 };
-export default ModalBox;
+export default DialogBox;
