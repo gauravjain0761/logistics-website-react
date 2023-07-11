@@ -136,11 +136,12 @@ const Register = () => {
                       </Box>
                       </Stack>
 
-                      <Box textAlign={"center"} my={4}>
+                      <Stack my={4} direction={"row"} justifyContent={"center"}>
                         <Typography variant="p" >  
-                        Already have An Account? Login Now
+                        Already have An Account?
                         </Typography>
-                      </Box>
+                        <Typography color={"primary"}>Login Now</Typography>
+                      </Stack>
                       <Box><Typography textAlign={"center"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography></Box>
                       <Box>
                         <Button
