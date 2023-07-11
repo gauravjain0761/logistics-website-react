@@ -32,7 +32,7 @@ const Register = () => {
                 >
                   <CardContent>
                     <Stack direction={"row"} justifyContent={"center"}>
-                      <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
+                      <Iconify icon="solar:lock-bold" width="32px" color="#ff7534" />
                       <Typography
                         color={"primary"}
                         variant="h4"
@@ -52,12 +52,32 @@ const Register = () => {
                 >
                   <CardContent>
                     <FormGroup>
+                    <Box>
+                        <TextBox
+                          fullWidth
+                          placeholder={"Enter Your Full Name "}
+                          startIcon={
+                            <Iconify icon="mdi:user" color="#ff7534" />
+                          }
+                          size={"small"}
+                        />
+                      </Box>
                       <Box>
                         <TextBox
                           fullWidth
                           placeholder={"Enter Your Email Address"}
                           startIcon={
-                            <Iconify icon="mdi:user" color="#ff7534" />
+                            <Iconify icon="fluent:mail-20-filled" color="#ff7534" />
+                          }
+                          size={"small"}
+                        />
+                      </Box>
+                      <Box>
+                        <TextBox
+                          fullWidth
+                          placeholder={"Enter Your Contact Number"}
+                          startIcon={
+                            <Iconify icon="material-symbols:call" color="#ff7534" />
                           }
                           size={"small"}
                         />
@@ -75,6 +95,19 @@ const Register = () => {
                           size={"small"}
                         />
                       </Box>
+                      <Box>
+                        <PasswordBox
+                          onChange={(e) => {
+                            e.target.value;
+                          }}
+                          fullWidth
+                          placeholder={"Enter Confirm Password"}
+                          startIcon={
+                            <Iconify icon="solar:lock-bold" color="#ff7534" />
+                          }
+                          size={"small"}
+                        />
+                      </Box>
                       <Box
                         sx={{
                           display: "flex",
@@ -85,70 +118,52 @@ const Register = () => {
                         <Box>
                           <FormControlLabel
                             control={<Checkbox />}
-                            label="Remember Me"
+                            label="I agree to the Terms and Conditions as set out by the user agreement."
                           />
                         </Box>
-                        <Box>
-                          <Typography
-                            // onClick={() => setOpen(true)}
-                            variant="p"
-                            color="primary"
-                          >
-                            Forget Password ?
-                          </Typography>
-                        </Box>
                       </Box>
+                      <Stack direction={"row"} justifyContent={"space-around"}>
+
                       <Box>
                         <Button fullWidth variant="contained" color="primary">
-                          Login Now
+                          Register Now
                         </Button>
                       </Box>
-                      <Box textAlign={"center"} mt={4}>
-                        <Typography variant="p">  
-                          Don{"'"}t have An Account? Register Now
+                      <Box>
+                        <Button fullWidth variant="contained" color="dark">
+                          Reset Now
+                        </Button>
+                      </Box>
+                      </Stack>
+
+                      <Box textAlign={"center"} my={4}>
+                        <Typography variant="p" >  
+                        Already have An Account? Login Now
                         </Typography>
                       </Box>
+                      <Box><Typography textAlign={"center"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography></Box>
                       <Box>
                         <Button
                           fullWidth
                           sx={{
-                            backgroundColor: "#2A4E95",
+                            backgroundColor: "#ff7534",
                             color: "#fff",
                             my: 1,
                             ":hover": {
-                              backgroundColor: "#2A4E95",
+                              backgroundColor: "#ff7534",
                             },
                           }}
                           startIcon={
                             <Iconify
-                              icon="ic:baseline-facebook"
+                            icon="ion:bicycle" 
                               color="white"
                             />
                           }
                         >
-                          Continue with Facebook
+                          Want To Become A Driver
                         </Button>
                       </Box>
-                      <Box>
-                        <Button
-                          fullWidth
-                          sx={{
-                            backgroundColor: "#CD2C2E",
-                            color: "#fff",
-                            ":hover": {
-                              backgroundColor: "#CD2C2E",
-                            },
-                          }}
-                          startIcon={
-                            <Iconify
-                              icon="ant-design:google-outlined"
-                              color="white"
-                            />
-                          }
-                        >
-                          Continue with Google
-                        </Button>
-                      </Box>
+                      
                     </FormGroup>
                   </CardContent>
                 </Card>
