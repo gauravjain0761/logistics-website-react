@@ -24,12 +24,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { navItems } from "./navConfig";
 import useOffSetTop from "@/hooks/useOffSetTop";
+import useResponsive from "@/hooks/useResponsive";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
-  const value = useOffSetTop(52, { offset: ["start end", "end end"] });
+  const isMobile = useResponsive("down", "md");
+  const responsiveHeight = isMobile ? 78.5 : 52;
+  const value = useOffSetTop(responsiveHeight, {
+    offset: ["start end", "end end"],
+  });
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 

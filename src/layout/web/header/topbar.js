@@ -10,11 +10,23 @@ const TopBar = () => {
           sx={{
             minHeight: "52px !important",
             px: "6rem !important",
-            justifyContent: "space-between",
+            gap: { md: 0, sm: 1, xs: 1 },
+            justifyContent: {
+              lg: "space-between",
+              md: "space-between",
+              sm: "center",
+              xs: "center",
+            },
+            display: {
+              md: "flex !important",
+              sm: "grid !important",
+              xs: "grid !important",
+            },
+            py: { md: 0, sm: 1, xs: 1 },
           }}
         >
           <Box>
-            <Stack direction="row" spacing={3}>
+            <Stack direction="row" spacing={3} justifyContent="center">
               <Stack direction="row" spacing={0.5} alignItems="center">
                 <Phone sx={{ fontSize: "18px" }} />{" "}
                 <Typography sx={{ fontSize: "15px" }}>0123456789</Typography>
@@ -26,7 +38,7 @@ const TopBar = () => {
             </Stack>
           </Box>
           <Box>
-            <Stack direction="row" spacing={1.5}>
+            <Stack direction="row" spacing={1.5} justifyContent="center">
               <Box
                 component="img"
                 src="/assets/images/layout/topbar/fb-icon.jpg"

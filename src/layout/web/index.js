@@ -7,10 +7,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "./scrollTop";
 import useOffSetTop from "@/hooks/useOffSetTop";
 import TopBar from "./header/topbar";
+import useResponsive from "@/hooks/useResponsive";
 
 const WebLayout = (props) => {
   const { children } = props;
-  const value = useOffSetTop(52, { offset: ["start end", "end end"] });
+  const isMobile = useResponsive("down", "md");
+  const responsiveHeight = isMobile ? 78.5 : 52;
+  const value = useOffSetTop(responsiveHeight, {
+    offset: ["start end", "end end"],
+  });
   return (
     <>
       <TopBar />
