@@ -23,7 +23,7 @@ const Register = () => {
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={6} sm={12} xs={12}>
+            <Grid item md={5.6} sm={12} xs={12}>
               <Stack spacing={0.9}>
                 <Card
                   sx={{
@@ -33,7 +33,7 @@ const Register = () => {
                   }}
                 >
                   <CardContent>
-                    <Stack direction={"row"} justifyContent={"center"}>
+                    <Stack direction="row" justifyContent="center">
                       <Iconify
                         icon="solar:lock-bold"
                         width="32px"
@@ -56,7 +56,7 @@ const Register = () => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent>
+                  <CardContent sx={{ p: 6 }}>
                     <FormGroup>
                       <Box>
                         <TextBox
@@ -117,7 +117,7 @@ const Register = () => {
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
-                          size={"small"}
+                          size="small"
                         />
                       </Box>
                       <Box
@@ -127,22 +127,29 @@ const Register = () => {
                           alignItems: "center",
                         }}
                       >
-                        <Box>
+                        <Box my={2}>
                           <FormControlLabel
-                            control={<Checkbox />}
-                            label="I agree to the Terms and Conditions as set out by the user agreement."
+                            control={
+                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
+                            }
+                            label={
+                              <Typography textAlign="center">
+                                I agree to the Terms and Conditions as set out
+                                by the user agreement.
+                              </Typography>
+                            }
                           />
                         </Box>
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
-                            Register Now
+                            <Typography px="1.5em">Register Now</Typography>
                           </Button>
                         </Box>
                         <Box>
                           <Button fullWidth variant="contained" color="dark">
-                            Reset Now
+                            <Typography px="2.1em">Reset Now</Typography>
                           </Button>
                         </Box>
                       </Stack>
@@ -168,7 +175,7 @@ const Register = () => {
                       </Box>
                       <Box>
                         <Button
-                        onClick={()=> router.push("/auth/driver_register")}
+                          onClick={() => router.push("/auth/driver_register")}
                           fullWidth
                           sx={{
                             backgroundColor: "#ff7534",
@@ -182,7 +189,7 @@ const Register = () => {
                             <Iconify icon="ion:bicycle" color="white" />
                           }
                         >
-                          Want To Become A Driver
+                          <Typography>Want To Become A Driver</Typography>
                         </Button>
                       </Box>
                     </FormGroup>
