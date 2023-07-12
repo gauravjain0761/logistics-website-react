@@ -26,7 +26,7 @@ const Login = ({ formik }) => {
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={6} sm={12} xs={12}>
+            <Grid item md={5.4} sm={12} xs={12}>
               <Stack spacing={0.9}>
                 <Card
                   sx={{
@@ -55,7 +55,7 @@ const Login = ({ formik }) => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent>
+                  <CardContent sx={{ px: "3em" }}>
                     <Stack spacing={1} py={2}>
                       <Box>
                         <TextBox
@@ -75,7 +75,11 @@ const Login = ({ formik }) => {
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
+                            <Iconify
+                              
+                              icon="solar:lock-bold"
+                              color="#ff7534"
+                            />
                           }
                           size={"small"}
                         />
@@ -89,8 +93,8 @@ const Login = ({ formik }) => {
                       >
                         <Box>
                           <FormControlLabel
-                            control={<Checkbox />}
-                            label="Remember Me"
+                            control={<Checkbox size="" defaultChecked />}
+                            label="Remember me"
                           />
                         </Box>
                         <Box>
@@ -105,8 +109,15 @@ const Login = ({ formik }) => {
                         </Box>
                       </Box>
                       <Box mt={2}>
-                        <Button fullWidth variant="contained" color="primary" onClick={()=> router.push("/dashboard/customer_dashboard")}>
-                          Login Now
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          onClick={() =>
+                            router.push("/dashboard/customer_dashboard")
+                          }
+                        >
+                          <Typography>Login Now</Typography>
                         </Button>
                       </Box>
                       <Box>
@@ -141,7 +152,9 @@ const Login = ({ formik }) => {
                               />
                             }
                           >
-                            Continue with Facebook
+                            <Typography fontSize={"15px"}>
+                              Continue with Facebook
+                            </Typography>
                           </Button>
                         </Box>
                         <Box>
@@ -161,7 +174,9 @@ const Login = ({ formik }) => {
                               />
                             }
                           >
-                            Continue with Google
+                            <Typography fontSize={"15px"}>
+                              Continue with Google
+                            </Typography>
                           </Button>
                         </Box>
                       </Box>

@@ -24,7 +24,7 @@ const DriverRegister = ({ formik }) => {
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={6} sm={12} xs={12}>
+            <Grid item md={5.6} sm={12} xs={12}>
               <Stack spacing={0.9}>
                 <Card
                   sx={{
@@ -34,7 +34,7 @@ const DriverRegister = ({ formik }) => {
                   }}
                 >
                   <CardContent>
-                    <Stack direction={"row"} justifyContent={"center"}>
+                    <Stack direction="row" justifyContent="center">
                       <Iconify
                         icon="solar:lock-bold"
                         width="32px"
@@ -57,7 +57,7 @@ const DriverRegister = ({ formik }) => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent>
+                  <CardContent sx={{px:6}}>
                     <FormGroup>
                       <Box mb={3}>
                         <FormControlLabel
@@ -214,22 +214,26 @@ const DriverRegister = ({ formik }) => {
                           alignItems: "center",
                         }}
                       >
-                        <Box>
+                        <Box my={3}>
                           <FormControlLabel
-                            control={<Checkbox />}
-                            label="I agree to the Terms and Conditions as set out by the user agreement."
+                             control={<Checkbox size="" sx={{paddingBottom:"2em"}}/>}
+                            label={<Typography textAlign="center">I agree to the Terms and Conditions as set out by the user agreement.</Typography> }
                           />
                         </Box>
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
+                          <Typography px="1.5em">
                             Register Now
+                          </Typography>
                           </Button>
                         </Box>
-                        <Box>
-                          <Button fullWidth variant="contained" color="dark">
+                        <Box >
+                          <Button fullWidth variant="contained" color="dark" >
+                          <Typography px="2.1em">
                             Reset Now
+                          </Typography>
                           </Button>
                         </Box>
                       </Stack>
@@ -266,7 +270,9 @@ const DriverRegister = ({ formik }) => {
                           }}
                           startIcon={<Iconify icon="mdi:user" color="#fff" />}
                         >
+                        <Typography>
                           Become A Customer
+                        </Typography>
                         </Button>
                       </Box>
                     </FormGroup>

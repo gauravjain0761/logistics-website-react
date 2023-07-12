@@ -23,7 +23,7 @@ const Register = () => {
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={6} sm={12} xs={12}>
+            <Grid item md={5.6} sm={12} xs={12}>
               <Stack spacing={0.9}>
                 <Card
                   sx={{
@@ -33,7 +33,7 @@ const Register = () => {
                   }}
                 >
                   <CardContent>
-                    <Stack direction={"row"} justifyContent={"center"}>
+                    <Stack direction="row" justifyContent="center">
                       <Iconify
                         icon="solar:lock-bold"
                         width="32px"
@@ -56,7 +56,7 @@ const Register = () => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent>
+                  <CardContent sx={{ p: 6 }}>
                     <FormGroup>
                       <Box>
                         <TextBox
@@ -117,7 +117,7 @@ const Register = () => {
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
-                          size={"small"}
+                          size="small"
                         />
                       </Box>
                       <Box
@@ -127,36 +127,29 @@ const Register = () => {
                           alignItems: "center",
                         }}
                       >
-                        <Box>
+                        <Box my={2}>
                           <FormControlLabel
-                            control={<Checkbox />}
-                            label="I agree to the Terms and Conditions as set out by the user agreement."
+                            control={
+                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
+                            }
+                            label={
+                              <Typography textAlign="center">
+                                I agree to the Terms and Conditions as set out
+                                by the user agreement.
+                              </Typography>
+                            }
                           />
                         </Box>
                       </Box>
-                      <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        spacing={2}
-                      >
-                        <Box sx={{ width: "100%" }}>
-                          <Button
-                            size="medium"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                          >
-                            Register Now
+                      <Stack direction={"row"} justifyContent={"space-around"}>
+                        <Box>
+                          <Button fullWidth variant="contained" color="primary">
+                            <Typography px="1.5em">Register Now</Typography>
                           </Button>
                         </Box>
-                        <Box sx={{ width: "100%" }}>
-                          <Button
-                            size="medium"
-                            fullWidth
-                            variant="contained"
-                            color="dark"
-                          >
-                            Reset Now
+                        <Box>
+                          <Button fullWidth variant="contained" color="dark">
+                            <Typography px="2.1em">Reset Now</Typography>
                           </Button>
                         </Box>
                       </Stack>
@@ -196,7 +189,7 @@ const Register = () => {
                             <Iconify icon="ion:bicycle" color="white" />
                           }
                         >
-                          Want To Become A Driver
+                          <Typography>Want To Become A Driver</Typography>
                         </Button>
                       </Box>
                     </FormGroup>
