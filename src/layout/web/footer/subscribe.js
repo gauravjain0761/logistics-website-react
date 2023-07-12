@@ -1,3 +1,4 @@
+import SubscribeButton from "@/components/button/subscribeButton";
 import { TextBox } from "@/components/form";
 import {
   Box,
@@ -16,8 +17,9 @@ const Subscribe = () => {
         <CardContent sx={{ paddingBottom: "24px!imporatant" }}>
           <Stack
             justifyContent="space-between"
-            direction="row"
+            direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
             alignItems="center"
+            spacing={{ md: 0, sm: 2, xs: 2 }}
           >
             <Box>
               <Typography
@@ -28,32 +30,7 @@ const Subscribe = () => {
               </Typography>
             </Box>
             <Box>
-              <TextBox
-                fullWidth
-                color="inherit"
-                size="small"
-                placeholder="Enter your email address"
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    background: (theme) => theme.palette.common.white,
-                    borderRadius: "30px",
-                    padding: "2px",
-                  },
-                  overflow: "hidden",
-                }}
-                formSx={{
-                  "&.MuiFormControl-root": {
-                    marginBottom: "0px!important",
-                  },
-                }}
-                inputAdornmentPosition="end"
-                icon={
-                  <Button variant="contained" sx={{ borderRadius: "30px", px:4 }} >
-                    Sent
-                  </Button>
-                }
-                // onChange={()}
-              />
+              <SubscribeButton />
             </Box>
           </Stack>
         </CardContent>
