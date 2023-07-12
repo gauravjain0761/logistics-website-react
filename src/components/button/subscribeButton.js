@@ -44,11 +44,12 @@ const SubscribeButton = () => {
         },
         "& .MuiOutlinedInput-root": {
           paddingRight: "2px !important",
+          overflow: "hidden",
         },
         "& .MuiOutlinedInput-input": {
           color: (theme) => theme.palette.common.black,
           background: (theme) => theme.palette.common.white,
-          borderRadius: "30px !important",
+          borderRadius: "30px 0px 0px 30px !important",
           paddingRight: "12px !important",
           padding: "12px",
           fontSize: "14px !important",
