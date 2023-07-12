@@ -134,14 +134,28 @@ const Register = () => {
                           />
                         </Box>
                       </Box>
-                      <Stack direction={"row"} justifyContent={"space-around"}>
-                        <Box>
-                          <Button fullWidth variant="contained" color="primary">
+                      <Stack
+                        direction={"row"}
+                        justifyContent={"space-between"}
+                        spacing={2}
+                      >
+                        <Box sx={{ width: "100%" }}>
+                          <Button
+                            size="medium"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                          >
                             Register Now
                           </Button>
                         </Box>
-                        <Box>
-                          <Button fullWidth variant="contained" color="dark">
+                        <Box sx={{ width: "100%" }}>
+                          <Button
+                            size="medium"
+                            fullWidth
+                            variant="contained"
+                            color="dark"
+                          >
                             Reset Now
                           </Button>
                         </Box>
@@ -168,7 +182,7 @@ const Register = () => {
                       </Box>
                       <Box>
                         <Button
-                        onClick={()=> router.push("/auth/driver_register")}
+                          onClick={() => router.push("/auth/driver_register")}
                           fullWidth
                           sx={{
                             backgroundColor: "#ff7534",
