@@ -170,8 +170,10 @@ const CustomerDashboard = () => {
                           pulvinar.
                         </Typography>
                         <Box>
-                          <Button variant="contained" color="inherit">
-                            Post Your Job
+                          <Button variant="contained" color="inherit"   sx={{py:1.4, borderRadius:"50px", width:"20em",":hover":{
+                            backgroundColor:"#000", color:"#fff"
+                          }}} >
+                            POST YOUR FIRST JOB
                           </Button>
                         </Box>
                       </Stack>

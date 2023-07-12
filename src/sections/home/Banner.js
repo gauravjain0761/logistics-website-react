@@ -7,35 +7,56 @@ const Banner = () => {
       <StyledBox>
         <Container>
           <Grid container spacing={2}>
-            <Grid item  sm={6} md={6} lg={6}>
+            <Grid item sm={6} md={6} lg={6}>
               <Box>
-                <Typography variant="h3">
-                  Your Logistic Solution For Business <br />
-                  Client & Driver’s
+                <Typography variant="h3" color="#555555">
+                  Your Logistic Solution For
+                  <br /> Business Client & Driver{"'"}s
                 </Typography>
-                <Box >
+                <Box>
                   <Button
                     variant="contained"
                     size="large"
-                    sx={{ margin: "12px" }}
+                    sx={{
+                      margin: "12px",
+                      backgroundColor: "#555555",
+                      ":hover": {
+                        backgroundColor: "#555555",
+                      },
+                    }}
                   >
-                    For Clients
+                    <Typography  variant="h5" fontWeight={500}>For Clients</Typography>
                   </Button>
                   <Button
                     variant="outlined"
                     size="large"
-                    sx={{ margin: "12px" }}
+                    sx={{
+                      margin: "12px",
+                      color: "#555555",
+                      borderColor: "#555555",
+                      backgroundColor: "#ffffff",
+                      ":hover": {
+                        borderColor: "#555555",
+                        backgroundColor: "#ffffff",
+                      },
+                    }}
                   >
-                    For Business
+                    <Typography variant="h5" fontWeight={500}>For Business</Typography>
                   </Button>
                 </Box>
                 <Box>
                   <Button
                     variant="contained"
                     size="large"
-                    sx={{ margin: "12px" }}
+                    sx={{
+                      margin: "12px",
+                      backgroundColor: "#555555",
+                      ":hover": {
+                        backgroundColor: "#555555",
+                      },
+                    }}
                   >
-                    For Driver
+                    <Typography variant="h5" fontWeight={500}>For Driver</Typography>
                   </Button>
                 </Box>
               </Box>

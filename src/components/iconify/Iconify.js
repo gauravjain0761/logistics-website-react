@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import * as React from "react";
 
 // ----------------------------------------------------------------------
-function IconifyIcon({ icon, width = 20, sx, ...other }, ref) {
+function IconifyIcon({ icon, width = 18, sx, ...other }, ref) {
   return (
     <Box
       ref={ref}
