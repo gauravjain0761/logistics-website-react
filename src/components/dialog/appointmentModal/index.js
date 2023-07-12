@@ -27,7 +27,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
       email: "",
       mobile: "",
       description: "",
-      otp: 0,
+      otp: "",
     },
     validate: (values) => {
       const errors = {};
