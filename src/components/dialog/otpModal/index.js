@@ -19,29 +19,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const forgotimg = "/assets/images/auth/forgot.png";
 
-const DialogBox = ({ keepMounted, onClose, open, title }) => {
+const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      date: "",
-      email: "",
-      mobile: "",
-      description: "",
       otp: "",
     },
     validate: (values) => {
       const errors = {};
 
-      if (!values.name) {
-        errors.name = "Name  is required";
-      }
-
-      if (!values.date) {
-        errors.date = "Date  is required";
-      }
-
-      if (!values.mobile) {
-        errors.mobile = "Mobile number  is required";
+      if (!values.otp) {
+        errors.otp = "OTP  is required";
       }
 
       return errors;
@@ -68,19 +55,15 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
         <DialogHeader onClose={onClose} title={title} />
         <DialogContent dividers={"paper"}>
-          <Stack textAlign={"center"} mt={2}>
-            <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
+          <Stack textAlign={"left"} mt={2}>
             <Typography
-              variant="h4"
-              fontWeight={300}
+              variant="h5"
+              fontWeight={500}
               sx={{ cursor: "pointer" }}
             >
-              Forget Password
+              Please Enter One Time Password to Verify your Account
             </Typography>
-            <Typography>
-              Enter Your Registerd Email or Contact no & Well Send you a link to
-              reset your Password
-            </Typography>
+            <Typography>A Code has Been Sent To Your Email-id</Typography>
           </Stack>
           <DialogForm formik={formik} />
           <Box>
@@ -92,7 +75,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
                 fontWeight={700}
                 sx={{ cursor: "pointer" }}
               >
-                Resend OTP
+                Resend OTP..
               </Typography>
             </Typography>
           </Box>
@@ -123,4 +106,4 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
     </div>
   );
 };
-export default DialogBox;
+export default OTPDialogBox;
