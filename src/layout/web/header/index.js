@@ -22,14 +22,14 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { navItems } from "./navConfig";
+import useOffSetTop from "@/hooks/useOffSetTop";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
-
+  const value = useOffSetTop(52, { offset: ["start end", "end end"] });
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -82,7 +82,11 @@ const Header = (props) => {
     window !== undefined ? () => window().document.body : undefined;
   return (
     <>
-      <AppBar component="nav" position="fixed" color="inherit">
+      <AppBar
+        component="nav"
+        position={value ? "fixed" : "relative"}
+        color="inherit"
+      >
         <Container maxWidth>
           <Toolbar
             sx={{

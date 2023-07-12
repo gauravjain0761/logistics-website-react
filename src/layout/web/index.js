@@ -5,13 +5,17 @@ import Footer from "./footer";
 import { Fab, Toolbar } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "./scrollTop";
+import useOffSetTop from "@/hooks/useOffSetTop";
+import TopBar from "./header/topbar";
 
 const WebLayout = (props) => {
   const { children } = props;
+  const value = useOffSetTop(52, { offset: ["start end", "end end"] });
   return (
     <>
+      <TopBar />
       <Header />
-      <Toolbar id="back-to-top-anchor" />
+      {value && <Toolbar id="back-to-top-anchor" />}
       {children}
       <Footer />
       <ScrollTop {...props}>
