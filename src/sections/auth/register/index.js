@@ -1,3 +1,4 @@
+import OTPDialogBox from "@/components/dialog/otpModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
@@ -18,6 +19,10 @@ import React from "react";
 
 const Register = () => {
   const router = useRouter();
+  const [open,setOpen] = React.useState(false);
+  const handleOpenClose = ()=>{
+    setOpen(!open)
+  }
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -144,7 +149,7 @@ const Register = () => {
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
-                            <Typography px="1.5em">Register Now</Typography>
+                            <Typography px="1.5em" onClick={handleOpenClose}>Register Now</Typography>
                           </Button>
                         </Box>
                         <Box>
@@ -200,6 +205,12 @@ const Register = () => {
           </Grid>
         </Container>
       </Box>
+
+      <OTPDialogBox
+        onClose={handleOpenClose}
+        open={open}
+        title="OTP Verification"
+      />
     </React.Fragment>
   );
 };

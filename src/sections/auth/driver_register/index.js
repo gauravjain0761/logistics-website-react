@@ -1,3 +1,4 @@
+import OTPDialogBox from "@/components/dialog/otpModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
@@ -18,6 +19,10 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const DriverRegister = ({ formik }) => {
+  const [open,setOpen] = React.useState(false);
+  const handleOpenClose = ()=>{
+    setOpen(!open)
+  }
   const router = useRouter();
   return (
     <React.Fragment>
@@ -224,7 +229,7 @@ const DriverRegister = ({ formik }) => {
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
-                          <Typography px="1.5em">
+                          <Typography px="1.5em" onClick={handleOpenClose}>
                             Register Now
                           </Typography>
                           </Button>
@@ -283,6 +288,11 @@ const DriverRegister = ({ formik }) => {
           </Grid>
         </Container>
       </Box>
+      <OTPDialogBox
+        onClose={handleOpenClose}
+        open={open}
+        title="OTP Verification"
+      />
     </React.Fragment>
   );
 };
