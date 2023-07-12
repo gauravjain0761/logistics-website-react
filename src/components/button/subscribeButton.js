@@ -38,20 +38,23 @@ const SubscribeButton = () => {
       sx={{
         "&.MuiTextField-root": {
           background: (theme) => theme.palette.common.white,
-          borderRadius: "30px",
+          borderRadius: "30px !important",
           fontSize: "14px !important",
           width: { md: "500px", sm: "100%", xs: "100%" },
+        },
+        "& .MuiOutlinedInput-root": {
+          paddingRight: "2px !important",
         },
         "& .MuiOutlinedInput-input": {
           color: (theme) => theme.palette.common.black,
           background: (theme) => theme.palette.common.white,
-          borderRadius: "30px 0px 0px 30px",
+          borderRadius: "30px !important",
           paddingRight: "12px !important",
           padding: "12px",
           fontSize: "14px !important",
         },
         "& .MuiOutlinedInput-notchedOutline": {
-          borderRadius: "30px",
+          borderRadius: "30px !important",
         },
       }}
       id="outlined-basic"
