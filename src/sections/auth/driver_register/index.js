@@ -10,13 +10,14 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
+  Radio,
   Stack,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 
-const Register = () => {
+const DriverRegister = ({ formik }) => {
   const router = useRouter();
   return (
     <React.Fragment>
@@ -58,20 +59,65 @@ const Register = () => {
                 >
                   <CardContent>
                     <FormGroup>
+                      <Box mb={3}>
+                        <FormControlLabel
+                          control={
+                            <Radio
+                              size="large"
+                              name="type"
+                              onChange={(e) => {
+                                formik.setFieldValue("type", "driver");
+                              }}
+                              checked={formik.values.type === "driver"}
+                            />
+                          }
+                          label={
+                            <Typography variant="h5" fontWeight={500}>
+                              Driver
+                            </Typography>
+                          }
+                        />
+                        <FormControlLabel
+                          control={
+                            <Radio
+                              size="large"
+                              name="type"
+                              onChange={(e) => {
+                                formik.setFieldValue("type", "company");
+                              }}
+                              checked={formik.values.type === "company"}
+                            />
+                          }
+                          label={
+                            <Typography variant="h5" fontWeight={500}>
+                              Company
+                            </Typography>
+                          }
+                        />
+                      </Box>
                       <Box>
                         <TextBox
                           fullWidth
-                          placeholder={"Enter Your Full Name "}
+                          placeholder={
+                            formik.values.type === "company"
+                              ? "Enter Company Name"
+                              : "Enter Your Full Name "
+                          }
                           startIcon={
                             <Iconify icon="mdi:user" color="#ff7534" />
                           }
                           size={"small"}
                         />
                       </Box>
+
                       <Box>
                         <TextBox
                           fullWidth
-                          placeholder={"Enter Your Email Address"}
+                          placeholder={
+                            formik.values.type === "company"
+                              ? "Enter Company Email"
+                              : "Enter Your Email Address"
+                          }
                           startIcon={
                             <Iconify
                               icon="fluent:mail-20-filled"
@@ -120,6 +166,47 @@ const Register = () => {
                           size={"small"}
                         />
                       </Box>
+                      {formik.values.type === "company" ? (
+                        <Box>
+                          <Stack textAlign={"center"}>
+                            <Typography variant="p">
+                              Company Certificate
+                            </Typography>
+                            <TextBox
+                              fullWidth
+                              startIcon={
+                                <Iconify
+                                  icon="solar:file-bold"
+                                  color="#ff7534"
+                                />
+                              }
+                              type="file"
+                              size="small"
+                              onChange={() => {}}
+                            />
+                          </Stack>
+                          <Stack textAlign={"center"}>
+                            <Typography variant="p">
+                              Company VAT Certificate (Optional)
+                            </Typography>
+                            <TextBox
+                              fullWidth
+                              startIcon={
+                                <Iconify
+                                  icon="solar:file-bold"
+                                  color="#ff7534"
+                                />
+                              }
+                              type="file"
+                              size="small"
+                              onChange={() => {}}
+                            />
+                          </Stack>
+                        </Box>
+                      ) : (
+                        ""
+                      )}
+
                       <Box
                         sx={{
                           display: "flex",
@@ -146,7 +233,6 @@ const Register = () => {
                           </Button>
                         </Box>
                       </Stack>
-
                       <Stack my={4} direction={"row"} justifyContent={"center"}>
                         <Typography variant="p">
                           Already have An Account?
@@ -168,7 +254,7 @@ const Register = () => {
                       </Box>
                       <Box>
                         <Button
-                        onClick={()=> router.push("/auth/driver_register")}
+                          onClick={() => router.push("/auth/register")}
                           fullWidth
                           sx={{
                             backgroundColor: "#ff7534",
@@ -178,11 +264,9 @@ const Register = () => {
                               backgroundColor: "#ff7534",
                             },
                           }}
-                          startIcon={
-                            <Iconify icon="ion:bicycle" color="white" />
-                          }
+                          startIcon={<Iconify icon="mdi:user" color="#fff" />}
                         >
-                          Want To Become A Driver
+                          Become A Customer
                         </Button>
                       </Box>
                     </FormGroup>
@@ -197,4 +281,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default DriverRegister;

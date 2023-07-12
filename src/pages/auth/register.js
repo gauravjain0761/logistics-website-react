@@ -5,12 +5,12 @@ import React from "react";
 
 
 
-const Page = () => {
+const RegisterPage = () => {
   const formik = useFormik({});
   return <Register formik={formik} />;
 };
 
-Page.getLayout = function getLayout(page) {
+RegisterPage.getLayout = function getLayout(page) {
   return <WebLayout>{page}</WebLayout>;
 };
-export default Page;
+export default RegisterPage;

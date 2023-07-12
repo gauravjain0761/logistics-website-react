@@ -105,7 +105,7 @@ const Login = ({ formik }) => {
                         </Box>
                       </Box>
                       <Box mt={2}>
-                        <Button fullWidth variant="contained" color="primary">
+                        <Button fullWidth variant="contained" color="primary" onClick={()=> router.push("/dashboard/customer_dashboard")}>
                           Login Now
                         </Button>
                       </Box>

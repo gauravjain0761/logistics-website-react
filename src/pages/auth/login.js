@@ -3,12 +3,12 @@ import Login from "@/sections/auth/login";
 import { useFormik } from "formik";
 import React from "react";
 
-const Page = () => {
+const LoginPage = () => {
   const formik = useFormik({});
   return <Login formik={formik} />;
 };
 
-Page.getLayout = function getLayout(page) {
+LoginPage.getLayout = function getLayout(page) {
   return <WebLayout>{page}</WebLayout>;
 };
-export default Page;
+export default LoginPage;
