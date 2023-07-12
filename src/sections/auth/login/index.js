@@ -55,7 +55,7 @@ const Login = ({ formik }) => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent sx={{px:"3em"}}>
+                  <CardContent sx={{ px: "3em" }}>
                     <Stack spacing={1} py={2}>
                       <Box>
                         <TextBox
@@ -75,7 +75,11 @@ const Login = ({ formik }) => {
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
+                            <Iconify
+                              
+                              icon="solar:lock-bold"
+                              color="#ff7534"
+                            />
                           }
                           size={"small"}
                         />
@@ -88,7 +92,10 @@ const Login = ({ formik }) => {
                         }}
                       >
                         <Box>
-                        <FormControlLabel control={<Checkbox size=""  defaultChecked />} label="Remember me" />
+                          <FormControlLabel
+                            control={<Checkbox size="" defaultChecked />}
+                            label="Remember me"
+                          />
                         </Box>
                         <Box>
                           <Typography
@@ -102,8 +109,15 @@ const Login = ({ formik }) => {
                         </Box>
                       </Box>
                       <Box mt={2}>
-                        <Button fullWidth variant="contained" color="primary" onClick={()=> router.push("/dashboard/customer_dashboard")}>
-                          <Typography >Login Now</Typography>
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          onClick={() =>
+                            router.push("/dashboard/customer_dashboard")
+                          }
+                        >
+                          <Typography>Login Now</Typography>
                         </Button>
                       </Box>
                       <Box>
@@ -138,7 +152,9 @@ const Login = ({ formik }) => {
                               />
                             }
                           >
-                             <Typography fontSize={"15px"}>Continue with Facebook</Typography>
+                            <Typography fontSize={"15px"}>
+                              Continue with Facebook
+                            </Typography>
                           </Button>
                         </Box>
                         <Box>
@@ -158,8 +174,9 @@ const Login = ({ formik }) => {
                               />
                             }
                           >
-                          <Typography fontSize={"15px"}>Continue with Google</Typography>
-                            
+                            <Typography fontSize={"15px"}>
+                              Continue with Google
+                            </Typography>
                           </Button>
                         </Box>
                       </Box>
