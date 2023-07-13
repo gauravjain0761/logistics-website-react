@@ -7,7 +7,7 @@ const HelpfulHome = () => {
     <React.Fragment>
       <Box py={4} sx={{ backgroundColor: "#000000d1" }}>
         <Container>
-          <Grid container>
+          <Grid container spacing={1} borderBottom="1px solid grey" py={4} >
             <Grid item lg={6}>
               <Typography variant="h2">Image</Typography>
             </Grid>
