@@ -222,7 +222,7 @@ const DriverRegister = ({ formik }) => {
                         <Box my={3}>
                           <FormControlLabel
                              control={<Checkbox size="" sx={{paddingBottom:"2em"}}/>}
-                            label={<Typography textAlign="center">I agree to the Terms and Conditions as set out by the user agreement.</Typography> }
+                            label={<Typography textAlign="center">I agree to the <Typography color="primary" component="span">Terms and Conditions</Typography> as set out by the user agreement.</Typography> }
                           />
                         </Box>
                       </Box>

@@ -139,7 +139,7 @@ const Register = () => {
                             }
                             label={
                               <Typography textAlign="center">
-                                I agree to the Terms and Conditions as set out
+                                I agree to the <Typography color="primary" component="span">Terms and Conditions</Typography> as set out
                                 by the user agreement.
                               </Typography>
                             }
