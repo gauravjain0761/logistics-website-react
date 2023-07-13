@@ -15,7 +15,7 @@ const Fleet = () => {
       <Box>
         <Container>
           <Box py={4}>
-            <Typography textAlign={"center"} variant="h3">
+            <Typography textAlign="center" variant="h3" fontWeight={400}>
               Our Fleet
             </Typography>
           </Box>

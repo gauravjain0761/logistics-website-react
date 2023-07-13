@@ -14,14 +14,14 @@ const Mobile = () => {
               </Box>
             </Grid>
             <Grid item sm={6} md={6} lg={6}>
-              <Card variant="outlined">
+              <Card variant="outlined" >
                 <CardContent>
                   <Box>
-                    <Button variant="contained">For Driver</Button>
+                    <Button variant="contained" sx={{borderRadius:"10px"}}>For Driver</Button>
                   </Box>
                   <Box py={5}>
                     <Box>
-                      <Typography variant="h3" color="primary">Join Our Fleet ____</Typography>
+                      <Typography variant="h4" color="primary" fontWeight={400}>Join Our Fleet ____</Typography>
                     </Box>
                     <Box>
                       <Typography variant="h6">
@@ -32,7 +32,7 @@ const Mobile = () => {
                   </Box>
 
                   <Box>
-                    <Button variant="contained">Sign Up as a Driver</Button>
+                    <Button variant="contained" sx={{borderRadius:"10px"}}>Sign Up as a Driver</Button>
                   </Box>
                 </CardContent>
               </Card>
