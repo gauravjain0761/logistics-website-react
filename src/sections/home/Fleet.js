@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import ToysIcon from "@mui/icons-material/Toys";
+import Iconify from "@/components/iconify/Iconify";
 const Fleet = () => {
   return (
     <React.Fragment>
@@ -28,17 +28,28 @@ const Fleet = () => {
                       PickUp Truck
                     </Typography>
                   </Box>
-                  <Box>
-                    <Typography >
+                  <Box height={40}>
+                    <Typography>
                       Extensive equipment and consolidation options
                     </Typography>
                   </Box>
                   <Box>
-                    <ToysIcon sx={{ fontSize: "8em" }} />
+                    <Iconify
+                      width="7em"
+                      icon="mingcute:truck-fill"
+                      color="#dadadb"
+                      hFlip={true}
+                    />
                   </Box>
                 </CardContent>
                 <Box>
-                  <Button variant="contained" fullWidth sx={{borderRadius:"0"}}>View All</Button>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ borderRadius: "0" }}
+                  >
+                    View All
+                  </Button>
                 </Box>
               </Card>
             </Grid>
@@ -47,20 +58,29 @@ const Fleet = () => {
                 <CardContent>
                   <Box>
                     <Typography variant="h5" color="primary">
-                      PickUp Truck
+                      Refrigetro Truck
                     </Typography>
                   </Box>
-                  <Box>
-                    <Typography >
-                      Extensive equipment and consolidation options
-                    </Typography>
+                  <Box height={40}>
+                    <Typography>Flexible and reliable</Typography>
                   </Box>
                   <Box>
-                    <ToysIcon sx={{ fontSize: "8em" }} />
+                    <Iconify
+                      width="7em"
+                      icon="mdi:truck-refrigerator"
+                      color="#dadadb"
+                      hFlip={true}
+                    />
                   </Box>
                 </CardContent>
                 <Box>
-                  <Button variant="contained" fullWidth sx={{borderRadius:"0"}}>View All</Button>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ borderRadius: "0" }}
+                  >
+                    View All
+                  </Button>
                 </Box>
               </Card>
             </Grid>
@@ -69,20 +89,29 @@ const Fleet = () => {
                 <CardContent>
                   <Box>
                     <Typography variant="h5" color="primary">
-                      PickUp Truck
+                      Car
                     </Typography>
                   </Box>
-                  <Box>
-                    <Typography >
-                      Extensive equipment and consolidation options
-                    </Typography>
+                  <Box height={40}>
+                    <Typography>Reliable and hassle free</Typography>
                   </Box>
                   <Box>
-                    <ToysIcon sx={{ fontSize: "8em" }} />
+                    <Iconify
+                      width="7em"
+                      icon="clarity:car-solid"
+                      color="#dadadb"
+                      hFlip={true}
+                    />
                   </Box>
                 </CardContent>
                 <Box>
-                  <Button variant="contained" fullWidth sx={{borderRadius:"0"}}>View All</Button>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ borderRadius: "0" }}
+                  >
+                    View All
+                  </Button>
                 </Box>
               </Card>
             </Grid>
@@ -91,20 +120,31 @@ const Fleet = () => {
                 <CardContent>
                   <Box>
                     <Typography variant="h5" color="primary">
-                      PickUp Truck
+                      Van
+                    </Typography>
+                  </Box>
+                  <Box height={40}>
+                    <Typography>
+                      Secure reliable and cost-effective transportation
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography >
-                      Extensive equipment and consolidation options
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <ToysIcon sx={{ fontSize: "8em" }} />
+                    <Iconify
+                      width="7em"
+                      icon="ph:van-fill"
+                      color="#dadadb"
+                      hFlip={true}
+                    />
                   </Box>
                 </CardContent>
                 <Box>
-                  <Button variant="contained" fullWidth sx={{borderRadius:"0"}}>View All</Button>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    sx={{ borderRadius: "0" }}
+                  >
+                    View All
+                  </Button>
                 </Box>
               </Card>
             </Grid>

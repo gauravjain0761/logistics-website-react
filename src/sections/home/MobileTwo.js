@@ -18,7 +18,7 @@ const MobileTwo = () => {
           <Grid container spacing={4}>
             <Grid item xs={12}sm={6} md={6} lg={6}>
               <Box>
-                <Box m={"auto"} component={"img"} src={"./mobile2.jpg"} />
+                <Box m="auto" component="img" src="/mobile2.jpg" />
               </Box>
             </Grid>
             <Grid item xs={12}sm={6} md={6} lg={6}>

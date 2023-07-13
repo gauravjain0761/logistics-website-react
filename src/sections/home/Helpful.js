@@ -16,7 +16,7 @@ const Helpful = () => {
               <Grid container spacing={4}>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify icon="akar-icons:info-fill" width="50px" />
+                    <Iconify icon="akar-icons:info-fill" width="35px" />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">Help Center</Typography>
@@ -29,7 +29,7 @@ const Helpful = () => {
                 </Grid>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify  icon="bxs:user" width="50px" />
+                    <Iconify  icon="bxs:user" width="35px" />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">Business</Typography>
@@ -42,7 +42,7 @@ const Helpful = () => {
                 </Grid>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify  icon="mingcute:ship-fill"  width="50px" />
+                    <Iconify  icon="mingcute:ship-fill"  width="35px" />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">Ship Online Now</Typography>
@@ -55,7 +55,7 @@ const Helpful = () => {
                 </Grid>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify   icon="fa6-solid:building"  width="50px" />
+                    <Iconify   icon="fa6-solid:building"  width="35px" />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">Company</Typography>
@@ -68,7 +68,7 @@ const Helpful = () => {
                 </Grid>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify   icon="bxs:news" width="50px" hFlip={true}  />
+                    <Iconify   icon="bxs:news" width="35px" hFlip={true}  />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">News</Typography>
@@ -81,7 +81,7 @@ const Helpful = () => {
                 </Grid>
                 <Grid item sm={4} md={4} lg={4} >
                   <Box>
-                    <Iconify   icon="la:blog" width="50px"  />
+                    <Iconify   icon="la:blog" width="35px"  />
                   </Box>
                   <Box>
                     <Typography variant="h6" color="primary">Our Blog</Typography>
