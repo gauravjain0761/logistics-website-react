@@ -1,5 +1,7 @@
+import Iconify from "@/components/iconify/Iconify";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -27,10 +29,10 @@ const NewTestimonial = () => {
               </Typography>
             </Grid>
             <Grid item lg={4}>
-              <Card>
+              <Card sx={{position:"relative"}}>
                 <CardContent>
                   <Rating name="read-only" value={4} readOnly/>
-                  <Typography mb={1} color="grey">
+                  <Typography mb={2.2} color="grey">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industryLorem Ipsum is simply dummy text of the
                     printing and typesetting industry
@@ -44,14 +46,16 @@ const NewTestimonial = () => {
                       <Typography>Lives in: Atlantis Resort</Typography>
                     </Grid>
                   </Grid>
+                  
+                  <Button variant="contained" sx={{position:"absolute",right:"0",bottom:"0",borderRadius:"6px",py:2 }}><Iconify icon="ep:right" color="primary"  /></Button>
                 </CardContent>
               </Card>
             </Grid>
             <Grid item lg={4}>
-              <Card>
+              <Card sx={{position:"relative"}}>
                 <CardContent>
                   <Rating name="read-only" value={4} readOnly/>
-                  <Typography mb={1} color="grey">
+                  <Typography mb={2.2} color="grey">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industryLorem Ipsum is simply dummy text of the
                     printing and typesetting industry
@@ -65,6 +69,8 @@ const NewTestimonial = () => {
                       <Typography>Lives in: Atlantis Resort</Typography>
                     </Grid>
                   </Grid>
+                  
+                  <Button variant="contained" sx={{position:"absolute",right:"0",bottom:"0",borderRadius:"6px",py:2 }}><Iconify icon="ep:right" color="primary"  /></Button>
                 </CardContent>
               </Card>
             </Grid>
