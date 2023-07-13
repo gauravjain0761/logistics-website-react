@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 
 const NewBanner = () => {
@@ -6,11 +6,13 @@ const NewBanner = () => {
     <React.Fragment>
       <Box>
         <Container>
-          <Grid container>
-            <Grid item lg={6}>
-              <Typography variant="h4">Animation</Typography>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item lg={6} >
+            <Box component="img" src="/assets/images/home/bannertruck.png" alt="truck"/>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item lg={6} >
+            <Stack spacing={6} >
+
               <Box>
                 <Typography variant="h3">Your Logistic Solution</Typography>
                 <Typography variant="h4">
@@ -62,6 +64,8 @@ const NewBanner = () => {
                   <Typography fontWeight={500}>For Driver</Typography>
                 </Button>
               </Box>
+            </Stack>
+
             </Grid>
           </Grid>
         </Container>

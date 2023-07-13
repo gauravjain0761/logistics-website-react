@@ -5,7 +5,7 @@ import React from "react";
 const OurFleet = () => {
   return (
     <React.Fragment>
-      <Box>
+      <Box py={4}>
         <Container>
           <Grid container spacing={3}>
             <Grid item lg={4}>
