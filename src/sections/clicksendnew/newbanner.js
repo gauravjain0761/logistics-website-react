@@ -18,7 +18,7 @@ const NewBanner = () => {
           <Grid item lg={6}>
             <Container>
               <CardContent>
-                <Box component="img" src="/truck.png" alt="truck" />
+                <Box component="img" src="/Truck.png" alt="truck" />
               </CardContent>
             </Container>
           </Grid>
