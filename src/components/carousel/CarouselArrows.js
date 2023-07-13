@@ -38,10 +38,7 @@ const ArrowStyle = styled(IconButtonAnimate, {
     justifyContent: "center",
     borderRadius: "50%",
     "&:hover": {
-      opacity: 1,
-      color: theme.palette.common.black,
-      backgroundColor: alpha(theme.palette.common.white, 0.7),
-      border: `1px solid ${theme.palette.common.black}`,
+     
     },
   }),
 }));
