@@ -1,15 +1,17 @@
 import Iconify from "@/components/iconify/Iconify";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, CardContent, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const HelpfulHome = () => {
   return (
     <React.Fragment>
-      <Box py={4} sx={{ backgroundColor: "#000000d1" }}>
+      <Box py={4} sx={{ backgroundColor: "#000000" }}>
         <Container>
-          <Grid container spacing={1} borderBottom="1px solid grey" py={4} >
+          <Grid container spacing={1} borderBottom="1px solid grey" py={4}>
             <Grid item lg={6}>
-              <Typography variant="h2">Image</Typography>
+              <CardContent>
+                <Box component="img" src="/box.png" alt="truck" />
+              </CardContent>
             </Grid>
             <Grid item lg={6}>
               <Grid container spacing={4}>

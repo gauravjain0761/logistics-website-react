@@ -16,10 +16,14 @@ const ForCard = () => {
       <Box py={4}>
         <Container>
           <Grid container>
-            <Grid item lg={7}>
-              <Typography variant="h2">Picture</Typography>
+            <Grid item lg={6}>
+              <CardContent>
+                <CardContent>
+                  <Box component="img" src="/map.png" alt="truck" />
+                </CardContent>
+              </CardContent>
             </Grid>
-            <Grid item lg={5}>
+            <Grid item lg={6}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
