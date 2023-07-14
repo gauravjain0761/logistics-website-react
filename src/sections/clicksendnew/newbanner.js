@@ -135,6 +135,7 @@ const NewBanner = () => {
                           <Button
                             variant="outlined"
                             size="large"
+                            color="inherit"
                             sx={{
                               margin: "12px",
                               color: "#000",
