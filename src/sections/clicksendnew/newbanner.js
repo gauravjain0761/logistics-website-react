@@ -16,10 +16,12 @@ const NewBanner = () => {
         {/* <Container> */}
         <Grid container>
           <Grid item lg={6}>
-            <Container>
-              <CardContent>
-                <Box component="img" src="/Truck.png" alt="truck" />
-              </CardContent>
+            <Container sx={{ mt: 8 }}>
+              <Stack direction="row" alignItems="flex-end">
+                <CardContent sx={{ pb: "0px !important" }}>
+                  <Box component="img" src="/Truck.png" alt="truck" />
+                </CardContent>
+              </Stack>
             </Container>
           </Grid>
           <Grid item lg={6} sx={{ position: "relative" }}>
@@ -37,12 +39,12 @@ const NewBanner = () => {
             />
             <Stack
               spacing={6}
-              alignItems="center"
+              alignItems="flex-end"
               direction="row"
               justifyContent="left"
               height="100%"
             >
-              <CardContent sx={{ px: 6 }}>
+              <CardContent sx={{ px: 6, mb: 6 }}>
                 <Stack spacing={6}>
                   <Box>
                     <Typography color="common.white" variant="h3">
