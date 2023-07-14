@@ -17,11 +17,66 @@ const NewBanner = () => {
         <Grid container>
           <Grid item lg={6}>
             <Container sx={{ mt: 8 }}>
-              <Stack direction="row" alignItems="flex-end">
-                <CardContent sx={{ pb: "0px !important" }}>
-                  <Box component="img" src="/Truck.png" alt="truck" />
-                </CardContent>
-              </Stack>
+              <CardContent>
+                <Stack direction="row" alignItems="flex-end">
+                  <CardContent sx={{ pb: "0px !important", width: "100%" }}>
+                    <Stack spacing={4}>
+                      <Box>
+                        <Stack direction="row" justifyContent="space-between">
+                          <Box>
+                            <Stack spacing={4}>
+                              <Box>
+                                <Box
+                                  component="img"
+                                  sx={{ width: "200px" }}
+                                  src="/assets/images/home/new/download-app.png"
+                                  alt="truck"
+                                />
+                              </Box>
+                              <Box>
+                                <Box
+                                  component="img"
+                                  sx={{ width: "200px" }}
+                                  src="/assets/images/home/new/start-job.png"
+                                  alt="truck"
+                                />
+                              </Box>
+                            </Stack>
+                          </Box>
+                          <Box sx={{ mt: 6 }}>
+                            <Stack spacing={4}>
+                              <Box>
+                                <Box
+                                  component="img"
+                                  sx={{ width: "200px" }}
+                                  src="/assets/images/home/new/place-bid.png"
+                                  alt="truck"
+                                />
+                              </Box>
+                              <Box>
+                                <Box
+                                  component="img"
+                                  sx={{ width: "200px" }}
+                                  src="/assets/images/home/new/invoice.png"
+                                  alt="truck"
+                                />
+                              </Box>
+                            </Stack>
+                          </Box>
+                        </Stack>
+                      </Box>
+                      <Box>
+                        <Box
+                          component="img"
+                          sx={{ width: "400px" }}
+                          src="/assets/images/home/new/banner-image.jpg"
+                          alt="truck"
+                        />
+                      </Box>
+                    </Stack>
+                  </CardContent>
+                </Stack>
+              </CardContent>
             </Container>
           </Grid>
           <Grid item lg={6} sx={{ position: "relative" }}>
