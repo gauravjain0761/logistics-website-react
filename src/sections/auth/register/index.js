@@ -165,10 +165,15 @@ const Register = () => {
                         </Box>
                       </Stack>
 
-                      <Stack my={4} direction={"row"} justifyContent={"center"}>
+                      <Stack
+                        my={4}
+                        direction={"row"}
+                        justifyContent={"center"}
+                        spacing={0.5}
+                      >
                         <Typography variant="p">
                           Already have An Account?
-                        </Typography>
+                        </Typography>{" "}
                         <Typography
                           color={"primary"}
                           onClick={() => router.push("/auth/login")}
