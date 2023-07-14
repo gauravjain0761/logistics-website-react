@@ -51,6 +51,12 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
         scroll="paper"
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
+        sx={{
+          "& .MuiPaper-rounded": {
+            borderRadius: "0px",
+          },
+        }}
+        maxWidth="xs"
       >
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
         <DialogHeader onClose={onClose} title={title} />
@@ -59,21 +65,23 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
             <Typography
               variant="h5"
               fontWeight={500}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", fontSize: "16px", fontWeight: 500 }}
             >
               Please Enter One Time Password to Verify your Account
             </Typography>
-            <Typography>A Code has Been Sent To Your Email-id</Typography>
+            <Typography sx={{ fontSize: "16px" }}>
+              A Code has Been Sent To Your Email-id
+            </Typography>
           </Stack>
           <DialogForm formik={formik} />
           <Box>
-            <Typography>
+            <Typography sx={{ fontSize: "16px" }}>
               Didn{"'"}t receive OTP ?{" "}
               <Typography
                 color="primary"
                 component="span"
                 fontWeight={700}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", fontSize: "15px" }}
               >
                 Resend OTP..
               </Typography>

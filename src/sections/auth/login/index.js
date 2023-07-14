@@ -41,7 +41,9 @@ const Login = ({ formik }) => {
                       <Typography
                         color={"primary"}
                         variant="h4"
-                        fontWeight={"300"}
+                        fontWeight={500}
+                        fontSize="1.75rem"
+                        sx={{ fontSize: "1.75rem!important" }}
                       >
                         Hello Again!
                       </Typography>
@@ -75,11 +77,7 @@ const Login = ({ formik }) => {
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
-                            <Iconify
-                              
-                              icon="solar:lock-bold"
-                              color="#ff7534"
-                            />
+                            <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
                           size={"small"}
                         />
@@ -102,7 +100,7 @@ const Login = ({ formik }) => {
                             onClick={() => setOpen(true)}
                             variant="p"
                             color="primary"
-                            sx={{ cursor: "pointer" }}
+                            sx={{ cursor: "pointer", fontSize: "15px" }}
                           >
                             Forget Password ?
                           </Typography>
@@ -122,13 +120,13 @@ const Login = ({ formik }) => {
                       </Box>
                       <Box>
                         <Box textAlign={"center"} mt={4}>
-                          <Typography variant="p">
+                          <Typography variant="p" sx={{ fontSize: "1rem" }}>
                             Don{"'"}t have An Account?{" "}
                             <Typography
                               component="span"
                               color="primary"
                               onClick={() => router.push("/auth/register")}
-                              sx={{ cursor: "pointer" }}
+                              sx={{ cursor: "pointer", fontSize: "15px" }}
                             >
                               Register Now
                             </Typography>

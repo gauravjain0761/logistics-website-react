@@ -64,6 +64,12 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         scroll="paper"
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
+        maxWidth="xs"
+        sx={{
+          "& .MuiPaper-rounded": {
+            borderRadius: "0px",
+          },
+        }}
       >
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
         <DialogHeader onClose={onClose} title={title} />
@@ -73,24 +79,24 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
             <Typography
               variant="h4"
               fontWeight={300}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", fontSize: "16px", fontWeight: 500 }}
             >
               Forget Password
             </Typography>
-            <Typography>
+            <Typography sx={{ fontSize: "16px" }}>
               Enter Your Registerd Email or Contact no & Well Send you a link to
               reset your Password
             </Typography>
           </Stack>
           <DialogForm formik={formik} />
           <Box>
-            <Typography>
+            <Typography sx={{ fontSize: "16px" }}>
               Didn{"'"}t receive OTP ?{" "}
               <Typography
                 color="primary"
                 component="span"
                 fontWeight={700}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: "pointer", fontSize: "15px" }}
               >
                 Resend OTP
               </Typography>
