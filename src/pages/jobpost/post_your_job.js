@@ -12,6 +12,6 @@ const PostJob = () => {
 };
 
 PostJob.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <WebLayout>{page}</WebLayout>;
 };
 export default PostJob;

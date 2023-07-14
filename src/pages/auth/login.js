@@ -10,6 +10,6 @@ const LoginPage = () => {
 };
 
 LoginPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <WebLayout>{page}</WebLayout>;
 };
 export default LoginPage;
