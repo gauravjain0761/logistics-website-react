@@ -22,7 +22,7 @@ const NewBanner = () => {
                   <CardContent sx={{ pb: "0px !important", width: "100%" }}>
                     <Stack spacing={4}>
                       <Box>
-                        <Stack direction="row" justifyContent="space-between">
+                        <Stack direction="row" justifyContent="space-evenly">
                           <Box>
                             <Stack spacing={4}>
                               <Box>
@@ -65,7 +65,7 @@ const NewBanner = () => {
                           </Box>
                         </Stack>
                       </Box>
-                      <Box>
+                      <Box sx={{ display: "flex", justifyContent: "center" }}>
                         <Box
                           component="img"
                           sx={{ width: "400px" }}
@@ -100,7 +100,7 @@ const NewBanner = () => {
               height="100%"
             >
               <CardContent sx={{ px: 6, mb: 6 }}>
-                <Stack spacing={6}>
+                <Stack spacing={0} mb={15}>
                   <Box>
                     <Typography color="common.white" variant="h3">
                       Your Logistic Solution
@@ -110,50 +110,67 @@ const NewBanner = () => {
                       For Business, For Client &<br /> For Driver{"'"}s
                     </Typography>
                   </Box>
-                  <Box>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      sx={{
-                        backgroundColor: "#000",
-                        ":hover": {
-                          backgroundColor: "#555555",
-                        },
-                      }}
-                    >
-                      <Typography fontWeight={500}>For Clients</Typography>
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      size="large"
-                      sx={{
-                        margin: "12px",
-                        color: "#000",
-                        borderColor: "#555555",
-                        backgroundColor: "#ffffff",
-                        ":hover": {
-                          borderColor: "#555555",
-                          backgroundColor: "#ffffff",
-                        },
-                      }}
-                    >
-                      <Typography fontWeight={500}>For Business</Typography>
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      sx={{
-                        margin: "12px",
-                        backgroundColor: "#000",
-                        ":hover": {
-                          backgroundColor: "#555555",
-                        },
-                      }}
-                    >
-                      <Typography fontWeight={500}>For Driver</Typography>
-                    </Button>
-                  </Box>
                 </Stack>
+                <Box>
+                  <Stack direction="row" alignItemd="flex-end" height="100%">
+                    <Box>
+                      <Stack direction="row" alignItems={"center"}>
+                        <Box>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            sx={{
+                              backgroundColor: "#000",
+                              ":hover": {
+                                backgroundColor: "#555555",
+                              },
+                            }}
+                          >
+                            <Typography fontWeight={500}>
+                              For Clients
+                            </Typography>
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button
+                            variant="outlined"
+                            size="large"
+                            color="inherit"
+                            sx={{
+                              margin: "12px",
+                              color: "#000",
+                              borderColor: "#555555",
+                              backgroundColor: "#ffffff",
+                              ":hover": {
+                                borderColor: "#555555",
+                                backgroundColor: "#ffffff",
+                              },
+                            }}
+                          >
+                            <Typography fontWeight={500}>
+                              For Business
+                            </Typography>
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button
+                            variant="contained"
+                            size="large"
+                            sx={{
+                              margin: "12px",
+                              backgroundColor: "#000",
+                              ":hover": {
+                                backgroundColor: "#555555",
+                              },
+                            }}
+                          >
+                            <Typography fontWeight={500}>For Driver</Typography>
+                          </Button>
+                        </Box>
+                      </Stack>
+                    </Box>
+                  </Stack>
+                </Box>
               </CardContent>
             </Stack>
           </Grid>
