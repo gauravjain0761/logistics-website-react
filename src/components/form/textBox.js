@@ -67,7 +67,11 @@ const TextBox = (props) => {
           error={helperText ? true : false}
           variant={variant}
           name={name}
-          sx={sx}
+          sx={{
+            "&.MuiOutlinedInput-input": {
+              background: (theme) => theme.palette.common.white,
+            },
+          }}
           label={label}
           InputLabelProps={InputLabelProps}
           type={type}

@@ -3,6 +3,7 @@ import { WebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import { useFormik } from "formik";
 import CustomerDashboard from '@/sections/customerdashboard';
+import SecondaryWebLayout from '@/layout/secondaryweb';
 
 
 
@@ -12,6 +13,6 @@ const DashboardPage = () => {
 };
 
 DashboardPage.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default DashboardPage;

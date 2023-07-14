@@ -19,10 +19,10 @@ import React from "react";
 
 const Register = () => {
   const router = useRouter();
-  const [open,setOpen] = React.useState(false);
-  const handleOpenClose = ()=>{
-    setOpen(!open)
-  }
+  const [open, setOpen] = React.useState(false);
+  const handleOpenClose = () => {
+    setOpen(!open);
+  };
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -47,7 +47,8 @@ const Register = () => {
                       <Typography
                         color={"primary"}
                         variant="h4"
-                        fontWeight={"300"}
+                        fontWeight={500}
+                        sx={{ fontSize: "1.75rem!important" }}
                       >
                         Registration
                       </Typography>
@@ -139,8 +140,11 @@ const Register = () => {
                             }
                             label={
                               <Typography textAlign="center">
-                                I agree to the <Typography color="primary" component="span">Terms and Conditions</Typography> as set out
-                                by the user agreement.
+                                I agree to the{" "}
+                                <Typography color="primary" component="span">
+                                  Terms and Conditions
+                                </Typography>{" "}
+                                as set out by the user agreement.
                               </Typography>
                             }
                           />
@@ -149,7 +153,9 @@ const Register = () => {
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
-                            <Typography px="1.5em" onClick={handleOpenClose}>Register Now</Typography>
+                            <Typography px="1.5em" onClick={handleOpenClose}>
+                              Register Now
+                            </Typography>
                           </Button>
                         </Box>
                         <Box>

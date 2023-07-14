@@ -2,6 +2,7 @@ import React from 'react';
 import { WebLayout } from "@/layout";
 import { useFormik } from "formik";
 import ClickSend from '@/sections/work';
+import SecondaryWebLayout from '@/layout/secondaryweb';
 
 
 
@@ -11,6 +12,6 @@ const ClickAndSend = () => {
 };
 
 ClickAndSend.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default ClickAndSend;

@@ -8,7 +8,11 @@ export const DialogHeader = ({ onClose, title }) => {
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <DialogTitle
           color="inherit"
-          sx={{ color: (theme) => theme.palette.common.white }}
+          sx={{
+            color: (theme) => theme.palette.common.white,
+            fontSize: "20px",
+            fontWeight: 500,
+          }}
         >
           {title}
         </DialogTitle>
