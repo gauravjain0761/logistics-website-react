@@ -19,7 +19,12 @@ const ForCard = () => {
             <Grid item lg={6}>
               <CardContent>
                 <CardContent>
-                  <Box component="img" src="/map.png" alt="truck" />
+                  <Box
+                    component="img"
+                    sx={{ width: "100%" }}
+                    src="/assets/images/home/new/ukmap.jpg"
+                    alt="truck"
+                  />
                 </CardContent>
               </CardContent>
             </Grid>

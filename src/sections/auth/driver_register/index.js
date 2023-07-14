@@ -19,10 +19,10 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const DriverRegister = ({ formik }) => {
-  const [open,setOpen] = React.useState(false);
-  const handleOpenClose = ()=>{
-    setOpen(!open)
-  }
+  const [open, setOpen] = React.useState(false);
+  const handleOpenClose = () => {
+    setOpen(!open);
+  };
   const router = useRouter();
   return (
     <React.Fragment>
@@ -62,7 +62,7 @@ const DriverRegister = ({ formik }) => {
                     background: (theme) => theme.palette.grey[100],
                   }}
                 >
-                  <CardContent sx={{px:6}}>
+                  <CardContent sx={{ px: 6 }}>
                     <FormGroup>
                       <Box mb={3}>
                         <FormControlLabel
@@ -221,31 +221,44 @@ const DriverRegister = ({ formik }) => {
                       >
                         <Box my={3}>
                           <FormControlLabel
-                             control={<Checkbox size="" sx={{paddingBottom:"2em"}}/>}
-                            label={<Typography textAlign="center">I agree to the <Typography color="primary" component="span">Terms and Conditions</Typography> as set out by the user agreement.</Typography> }
+                            control={
+                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
+                            }
+                            label={
+                              <Typography textAlign="center">
+                                I agree to the{" "}
+                                <Typography color="primary" component="span">
+                                  Terms and Conditions
+                                </Typography>{" "}
+                                as set out by the user agreement.
+                              </Typography>
+                            }
                           />
                         </Box>
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">
-                          <Typography px="1.5em" onClick={handleOpenClose}>
-                            Register Now
-                          </Typography>
+                            <Typography px="1.5em" onClick={handleOpenClose}>
+                              Register Now
+                            </Typography>
                           </Button>
                         </Box>
-                        <Box >
-                          <Button fullWidth variant="contained" color="dark" >
-                          <Typography px="2.1em">
-                            Reset Now
-                          </Typography>
+                        <Box>
+                          <Button fullWidth variant="contained" color="dark">
+                            <Typography px="2.1em">Reset Now</Typography>
                           </Button>
                         </Box>
                       </Stack>
-                      <Stack my={4} direction={"row"} justifyContent={"center"}>
+                      <Stack
+                        my={4}
+                        direction={"row"}
+                        justifyContent={"center"}
+                        spacing={0.5}
+                      >
                         <Typography variant="p">
                           Already have An Account?
-                        </Typography>
+                        </Typography>{" "}
                         <Typography
                           color={"primary"}
                           onClick={() => router.push("/auth/login")}
@@ -275,9 +288,7 @@ const DriverRegister = ({ formik }) => {
                           }}
                           startIcon={<Iconify icon="mdi:user" color="#fff" />}
                         >
-                        <Typography>
-                          Become A Customer
-                        </Typography>
+                          <Typography>Become A Customer</Typography>
                         </Button>
                       </Box>
                     </FormGroup>
