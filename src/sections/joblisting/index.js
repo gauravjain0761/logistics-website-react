@@ -27,7 +27,7 @@ const JobList = () => {
         <Container>
           <Box py={4}>
             <Stack direction="row" justifyContent="space-between" py={3}>
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={1} alignItems="center">
                 <Typography fontSize="1.75rem" fontWeight={700} color="primary">
                   Total Bid{"'"}s
                 </Typography>
@@ -131,12 +131,12 @@ const JobList = () => {
                                 alt="profile"
                               />
                             </Box>
-                            <Stack direction="row" spacing={1}>
-                              <Typography fontWeight={400} fontSize="1.5rem">
+                            <Stack direction="row" spacing={1} alignItems="center" mt={0.5}>
+                              <Typography fontWeight={600} fontSize="1.5rem">
                                 Bid :{" "}
                               </Typography>
                               <Typography
-                                fontWeight={600}
+                                fontWeight={700}
                                 fontSize="1.5rem"
                                 color="primary"
                               >
@@ -144,7 +144,7 @@ const JobList = () => {
                               </Typography>
                             </Stack>
                           </Grid>
-                          <Grid item md={8}>
+                          <Grid item md={8.2}>
                             <Stack direction="row" spacing={5}>
                               <Stack direction="row" spacing={1}>
                                 <Typography fontWeight={400}>
@@ -182,7 +182,7 @@ const JobList = () => {
                               </Typography>
                             </Box>
                           </Grid>
-                          <Grid item md={2}>
+                          <Grid item md={1.8}>
                             <Stack spacing={0.5}>
                               <Box>
                                 <Button
