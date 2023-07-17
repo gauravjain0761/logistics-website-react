@@ -178,6 +178,7 @@ const DashboardJobPost = ({ formik }) => {
                     my: 2,
                     borderColor: "rgba(0,0,0,.125)",
                   }}
+                  variant="contained"
                   key={index}
                 >
                   <Box
@@ -340,7 +341,7 @@ const DashboardJobPost = ({ formik }) => {
                   slots={{
                     previous: () => {
                       return (
-                        <Stack direction="row" spacing={0.5}>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
                           <Iconify icon="ant-design:backward-filled" />
                           <Typography sx={{ fontSize: "14px" }}>
                             Previous
@@ -350,7 +351,7 @@ const DashboardJobPost = ({ formik }) => {
                     },
                     next: () => {
                       return (
-                        <Stack direction="row" spacing={0.5}>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
                           <Typography sx={{ fontSize: "14px" }}>
                             Next
                           </Typography>
