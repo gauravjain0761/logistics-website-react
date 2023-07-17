@@ -9,7 +9,7 @@ import useOffSetTop from "@/hooks/useOffSetTop";
 import TopBar from "./header/topbar";
 import useResponsive from "@/hooks/useResponsive";
 
-const WebLayout = (props) => {
+const PrimaryWebLayout = (props) => {
   const { children } = props;
   const isMobile = useResponsive("down", "md");
   const responsiveHeight = isMobile ? 78.5 : 52;
@@ -32,4 +32,4 @@ const WebLayout = (props) => {
   );
 };
 
-export default WebLayout;
+export default PrimaryWebLayout;

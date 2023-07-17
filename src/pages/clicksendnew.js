@@ -1,5 +1,5 @@
 import React from 'react';
-import { WebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import ClickNewSend from '@/sections/clicksendnew';
 
@@ -11,6 +11,6 @@ const ClickSendNew = () => {
 };
 
 ClickSendNew.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default ClickSendNew;

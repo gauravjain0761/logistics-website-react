@@ -66,6 +66,7 @@ const MaterialSelect = [
   },
 ];
 const JobPost = ({ formik }) => {
+  const router = useRouter();
   return (
     <React.Fragment>
       <Box sx={{ background: (theme) => theme.palette.grey[400] }}>
@@ -468,6 +469,7 @@ const JobPost = ({ formik }) => {
                             startIcon={<Iconify icon="ic:baseline-telegram" />}
                             variant="contained"
                             fullWidth
+                            onClick={()=> router.push("/dashboard/customer_dashboard_next")}
                           >
                             Send Request
                           </Button>

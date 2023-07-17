@@ -2,16 +2,16 @@ import React from 'react';
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import CustomerDashboard from '@/sections/customerdashboard';
-import SecondaryWebLayout from '@/layout/secondaryWeb';
+import JobList from '@/sections/joblisting';
 
 
 
-const DashboardPage = () => {
+const JobListing = () => {
   const formik = useFormik({});
-  return <CustomerDashboard formik={formik} />;
+  return <JobList formik={formik} />;
 };
 
-DashboardPage.getLayout = function getLayout(page) {
+JobListing.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default DashboardPage;
+export default JobListing;
