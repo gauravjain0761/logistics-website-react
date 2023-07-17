@@ -1,5 +1,4 @@
-import { WebLayout } from "@/layout";
-import SecondaryWebLayout from "@/layout/secondaryWeb";
+import { PrimaryWebLayout } from "@/layout";
 import Login from "@/sections/auth/login";
 import { useFormik } from "formik";
 import React from "react";
@@ -10,6 +9,6 @@ const LoginPage = () => {
 };
 
 LoginPage.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default LoginPage;

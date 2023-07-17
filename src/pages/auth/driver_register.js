@@ -1,5 +1,4 @@
-import { WebLayout } from "@/layout";
-import SecondaryWebLayout from "@/layout/secondaryWeb";
+import { PrimaryWebLayout } from "@/layout";
 import DriverRegister from "@/sections/auth/driver_register";
 import { useFormik } from "formik";
 import React from "react";
@@ -14,6 +13,6 @@ const DriverPage = () => {
 };
 
 DriverPage.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default DriverPage;

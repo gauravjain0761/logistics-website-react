@@ -1,6 +1,6 @@
 import Head from "next/head";
 import ClickNewSend from "@/sections/clicksendnew";
-import SecondaryWebLayout from "@/layout/secondaryWeb";
+import { SecondaryWebLayout } from "@/layout";
 
 HomePage.getLayout = function getLayout(page) {
   return <SecondaryWebLayout>{page}</SecondaryWebLayout>;

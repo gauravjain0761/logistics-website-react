@@ -1,1 +1,2 @@
-export { default as WebLayout } from "./web/index";
+export { default as PrimaryWebLayout } from "./primaryWeb";
+export { default as SecondaryWebLayout } from "./secondaryWeb";

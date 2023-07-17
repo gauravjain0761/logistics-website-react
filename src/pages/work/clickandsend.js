@@ -1,5 +1,5 @@
 import React from 'react';
-import { WebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import ClickSend from '@/sections/work';
 import SecondaryWebLayout from '@/layout/secondaryWeb';

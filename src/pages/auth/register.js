@@ -1,5 +1,4 @@
-import { WebLayout } from "@/layout";
-import SecondaryWebLayout from "@/layout/secondaryWeb";
+import { PrimaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import { useFormik } from "formik";
 import React from "react";
@@ -12,6 +11,6 @@ const RegisterPage = () => {
 };
 
 RegisterPage.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default RegisterPage;
