@@ -190,7 +190,7 @@ const DashboardJobPost = ({ formik }) => {
                       borderColor: "rgba(0,0,0,.125)",
                     }}
                   >
-                    <Stack direction="row" justifyContent="space-between">
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
                       <Stack direction="row" spacing={1}>
                         <Typography fontWeight={600}>
                           {index + 1}. Job Title :
@@ -231,7 +231,7 @@ const DashboardJobPost = ({ formik }) => {
                           </Box>
                         </Grid>
                         <Grid item md={4.3}>
-                          <Stack>
+                          <Box>
                             <Stack direction="row" spacing={1}>
                               <Typography fontWeight={600}>
                                 Pick-Up Date :{" "}
@@ -259,10 +259,10 @@ const DashboardJobPost = ({ formik }) => {
                                 Plastic Box
                               </Typography>
                             </Stack>
-                          </Stack>
+                          </Box>
                         </Grid>
                         <Grid item md={4.3}>
-                          <Stack>
+                          <Box>
                             <Stack direction="row" spacing={1}>
                               <Typography fontWeight={600}>
                                 Pick-Up Date :{" "}
@@ -290,7 +290,7 @@ const DashboardJobPost = ({ formik }) => {
                                 Plastic Box
                               </Typography>
                             </Stack>
-                          </Stack>
+                          </Box>
                         </Grid>
                         <Grid item md={1.4}>
                           <Button
