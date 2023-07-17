@@ -1,5 +1,6 @@
 import Iconify from "@/components/iconify/Iconify";
 import DashboardCard from "@/module/dashboard/dashboardCard";
+import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
   Box,
@@ -160,8 +161,8 @@ const DashboardJobPost = ({ formik }) => {
               </Grid>
               <Grid item md={2}>
                 <Box>
-                  <Button variant="contained" fullWidth>
-                    + Add New Post
+                  <Button startIcon={<Add />} variant="contained" fullWidth>
+                    Add New Post
                   </Button>
                 </Box>
               </Grid>
@@ -296,7 +297,9 @@ const DashboardJobPost = ({ formik }) => {
                             fullWidth
                             variant="contained"
                             startIcon={<Iconify icon="material-symbols:star" />}
-                            onClick={()=>router.push("/dashboard/job_listing")}
+                            onClick={() =>
+                              router.push("/dashboard/job_listing")
+                            }
                           >
                             View Bids
                           </Button>
@@ -324,7 +327,7 @@ const DashboardJobPost = ({ formik }) => {
               );
             })}
           </Box>
-          <Stack alignItems="end" >
+          <Stack alignItems="end">
             <Pagination
               count={pageCount}
               color="primary"
@@ -349,7 +352,7 @@ const DashboardJobPost = ({ formik }) => {
                       return (
                         <Stack direction="row" spacing={0.5}>
                           <Typography sx={{ fontSize: "14px" }}>
-                            Next 
+                            Next
                           </Typography>
                           <Iconify icon="ant-design:forward-outlined" />
                         </Stack>
