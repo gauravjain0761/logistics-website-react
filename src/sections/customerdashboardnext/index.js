@@ -92,7 +92,7 @@ const DashboardJobPost = ({ formik }) => {
           <Box py={2}>
             <Grid container spacing={4}>
               <Grid item md={6}>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} alignItems="center">
                   <Typography
                     fontSize="1.75rem"
                     fontWeight={700}
