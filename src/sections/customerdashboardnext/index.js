@@ -16,9 +16,11 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 
 const DashboardJobPost = ({ formik }) => {
+  const router = useRouter();
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
@@ -294,6 +296,7 @@ const DashboardJobPost = ({ formik }) => {
                             fullWidth
                             variant="contained"
                             startIcon={<Iconify icon="material-symbols:star" />}
+                            onClick={()=>router.push("/dashboard/job_listing")}
                           >
                             View Bids
                           </Button>
