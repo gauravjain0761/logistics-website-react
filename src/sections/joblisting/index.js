@@ -15,15 +15,15 @@ import React, { useState } from "react";
 const JobList = () => {
   const [layout, setLayout] = useState(true);
   const handleLayout = (key) => {
-if(key === "list"){
-  setLayout(true)
-}else{
-  setLayout(false)
-}
+    if (key === "list") {
+      setLayout(true);
+    } else {
+      setLayout(false);
+    }
   };
   return (
     <React.Fragment>
-      <Box py={4}>
+      <Box py={4} sx={{ background: "#ececec" }}>
         <Container>
           <Box py={4}>
             <Stack direction="row" justifyContent="space-between" py={3}>
@@ -45,12 +45,24 @@ if(key === "list"){
                   </Typography>
                 </Box>
               </Stack>
-              <Stack direction="row">
-                <Button onClick={()=>handleLayout("list")}>
+              <Stack direction="row" spacing={2}>
+                <Button
+                  sx={{
+                    minWidth: "50px !important",
+                    background: (theme) => theme.palette.common.white,
+                  }}
+                  onClick={() => handleLayout("list")}
+                >
                   <Iconify icon="ion:list-sharp" width={20} />
                 </Button>
-                <Button>
-                  <Iconify onClick={()=>handleLayout("grid")} icon="system-uicons:grid" width={20} />
+                <Button
+                  sx={{
+                    minWidth: "50px !important",
+                    background: (theme) => theme.palette.common.white,
+                  }}
+                  onClick={() => handleLayout("grid")}
+                >
+                  <Iconify icon="system-uicons:grid" width={20} />
                 </Button>
               </Stack>
             </Stack>
