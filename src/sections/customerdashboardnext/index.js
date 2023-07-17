@@ -99,17 +99,17 @@ const DashboardJobPost = ({ formik }) => {
                     Job Posted By You
                   </Typography>
                   <Box>
-                  <Typography
-                    fontSize="1.3rem"
-                    fontWeight={700}
-                    backgroundColor={(theme) => theme.palette.primary.main}
-                    color="white"
-                    borderRadius="50%"
-                    py={0.3}
-                    px={0.6}
-                  >
-                    02
-                  </Typography>
+                    <Typography
+                      fontSize="1.3rem"
+                      fontWeight={700}
+                      backgroundColor={(theme) => theme.palette.primary.main}
+                      color="white"
+                      borderRadius="50%"
+                      py={0.3}
+                      px={0.6}
+                    >
+                      02
+                    </Typography>
                   </Box>
                 </Stack>
               </Grid>
@@ -321,7 +321,7 @@ const DashboardJobPost = ({ formik }) => {
               );
             })}
           </Box>
-          <Box>
+          <Stack alignItems="end" >
             <Pagination
               count={pageCount}
               color="primary"
@@ -334,16 +334,22 @@ const DashboardJobPost = ({ formik }) => {
                   slots={{
                     previous: () => {
                       return (
-                        <Typography sx={{ fontSize: "14px" }}>
-                          <Iconify icon="ant-design:backward-filled" /> Previous
-                        </Typography>
+                        <Stack direction="row" spacing={0.5}>
+                          <Iconify icon="ant-design:backward-filled" />
+                          <Typography sx={{ fontSize: "14px" }}>
+                            Previous
+                          </Typography>
+                        </Stack>
                       );
                     },
                     next: () => {
                       return (
-                        <Typography sx={{ fontSize: "14px" }}>
-                          Next <Iconify icon="ant-design:forward-outlined" />
-                        </Typography>
+                        <Stack direction="row" spacing={0.5}>
+                          <Typography sx={{ fontSize: "14px" }}>
+                            Next 
+                          </Typography>
+                          <Iconify icon="ant-design:forward-outlined" />
+                        </Stack>
                       );
                     },
                   }}
@@ -351,7 +357,7 @@ const DashboardJobPost = ({ formik }) => {
                 />
               )}
             />
-          </Box>
+          </Stack>
         </Container>
       </Box>
     </React.Fragment>
