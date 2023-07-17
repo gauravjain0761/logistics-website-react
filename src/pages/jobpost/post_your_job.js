@@ -2,7 +2,7 @@ import React from 'react';
 import { WebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPost from '@/sections/jobposter';
-import SecondaryWebLayout from '@/layout/secondaryweb';
+import SecondaryWebLayout from '@/layout/secondaryWeb';
 
 
 

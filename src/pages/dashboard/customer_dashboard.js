@@ -3,7 +3,7 @@ import { WebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import { useFormik } from "formik";
 import CustomerDashboard from '@/sections/customerdashboard';
-import SecondaryWebLayout from '@/layout/secondaryweb';
+import SecondaryWebLayout from '@/layout/secondaryWeb';
 
 
 

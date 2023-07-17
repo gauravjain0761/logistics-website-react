@@ -1,5 +1,5 @@
 import { WebLayout } from "@/layout";
-import SecondaryWebLayout from "@/layout/secondaryweb";
+import SecondaryWebLayout from "@/layout/secondaryWeb";
 import DriverRegister from "@/sections/auth/driver_register";
 import { useFormik } from "formik";
 import React from "react";
