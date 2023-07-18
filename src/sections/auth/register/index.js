@@ -204,14 +204,6 @@ const Register = ({ formik }) => {
                           </FormControl>
                         </Box>
                       </Box>
-                      <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                      >
-                        <Typography px="1.5em">Register Now fs</Typography>
-                      </Button>
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
                           <Button fullWidth variant="contained" color="primary">

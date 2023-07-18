@@ -18,9 +18,8 @@ const SecondaryWebLayout = (props) => {
   // });
   return (
     <>
-      {/* <TopBar /> */}
       <Header />
-      {/* {value && <Toolbar id="back-to-top-anchor" />} */}
+      <Toolbar id="back-to-top-anchor" />
       {children}
       <Footer />
       <ScrollTop {...props}>
