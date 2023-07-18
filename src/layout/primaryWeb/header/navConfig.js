@@ -17,7 +17,11 @@ export const navItems = [
   },
   {
     name: "FAQ",
-    link: "/contact",
+    link: "/faqs",
+  },
+  {
+    name: "Blog",
+    link: "/blog",
   },
   {
     name: "Contact us",

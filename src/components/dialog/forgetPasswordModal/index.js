@@ -152,7 +152,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
   };
   console.log("formik.values.type", formik.values.type);
   return (
-    <div>
+    <>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -241,7 +241,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         </DialogActions>
         {/* </Box> */}
       </Dialog>
-    </div>
+    </>
   );
 };
 export default ForgetPasswordDialogBox;

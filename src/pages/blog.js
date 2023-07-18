@@ -1,14 +1,13 @@
 import React from 'react';
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import ContactSection from '@/sections/contact';
-const ContactUs = () => {
+import Blogs from '@/sections/blog';
+const BlogPage = () => {
   const formik = useFormik({});
-  return <ContactSection formik={formik} />;
+  return <Blogs formik={formik} />;
 };
 
-ContactUs.getLayout = function getLayout(page) {
+BlogPage.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default ContactUs;
-
+export default BlogPage;

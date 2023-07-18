@@ -1,4 +1,4 @@
-import { Box, CardContent, Typography } from "@mui/material";
+import { Box, CardContent, Stack, Typography } from "@mui/material";
 import React from "react";
 import { BreadcrumbComponent } from "../breadcrumb";
 
@@ -17,7 +17,7 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           backgroundPosition: "right center",
           zIndex: 5,
           display: "flex",
-          juatifyCotent: "left",
+          justifyContent: "center",
           alignItems: "center",
           "&::before": {
             content: '""',
@@ -48,9 +48,11 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
             },
             position: "relative",
             zIndex: 9,
+            
           }}
         >
           {/* <CardContentOverlay> */}
+
           <Typography
             gutterBottom
             variant="h2"
@@ -60,9 +62,10 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           >
             {title}
           </Typography>
-          <Box>
+          <Stack  alignItems="center">
             <BreadcrumbComponent />
-          </Box>
+          </Stack>
+
           {/* </CardContentOverlay> */}
         </CardContent>
       </Box>
