@@ -22,14 +22,19 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { navItems } from "./navConfig";
+import useOffSetTop from "@/hooks/useOffSetTop";
+import useResponsive from "@/hooks/useResponsive";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
-
+  const isMobile = useResponsive("down", "md");
+  const responsiveHeight = isMobile ? 78.5 : 52;
+  const value = useOffSetTop(responsiveHeight, {
+    offset: ["start end", "end end"],
+  });
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -82,7 +87,11 @@ const Header = (props) => {
     window !== undefined ? () => window().document.body : undefined;
   return (
     <>
-      <AppBar component="nav" position="fixed" color="inherit">
+      <AppBar
+        component="nav"
+        position={value ? "fixed" : "relative"}
+        color="inherit"
+      >
         <Container maxWidth>
           <Toolbar
             sx={{
@@ -128,7 +137,7 @@ const Header = (props) => {
                 ))}
               <Button
                 component={Link}
-                href={"/"}
+                href={"/auth/login"}
                 sx={{ color: "#fff", ml: 1 }}
                 aria-owns="mouse-over-popover"
                 aria-haspopup="true"

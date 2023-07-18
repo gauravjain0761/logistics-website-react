@@ -16,7 +16,7 @@ const Location = () => {
       <StyledLocBox>
         <Container>
           <Box>
-            <Typography variant="h3" textAlign={"center"} py={5}>
+            <Typography variant="h3" fontWeight={400} textAlign="center" py={5}>
               Our Presence
             </Typography>
           </Box>

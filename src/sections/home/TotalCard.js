@@ -18,18 +18,18 @@ const TotalCard = () => {
         <Container>
           <Grid container spacing={14}>
             <Grid item  xs={12} sm={12} md={6} lg={3}>
-              <Card variant="outlined">
+              <Card variant="outlined" sx={{backgroundColor:"#ffffffb5", borderRadius:"30px" }}>
                 <CardContent>
                   <StyledIconBox textAlign={"center"}>
                     <PersonIcon sx={{ fontSize: "5em" }} />
                   </StyledIconBox>
                   <Box>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h5" align="center" fontWeight={400} >
                       Total User
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="h4" align="center">
+                    <Typography variant="h4" align="center" fontWeight={400}>
                       1211+
                     </Typography>
                   </Box>
@@ -37,18 +37,18 @@ const TotalCard = () => {
               </Card>
             </Grid>
             <Grid item  xs={12} sm={12} md={6} lg={3}>
-              <Card variant="outlined">
+              <Card variant="outlined" sx={{backgroundColor:"#ffffffb5", borderRadius:"30px" }}>
                 <CardContent>
                   <StyledIconBox>
                     <PersonIcon sx={{ fontSize: "5em" }} />
                   </StyledIconBox>
                   <Box>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h5" align="center" fontWeight={400}>
                       Total Drivers
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="h4" align="center">
+                    <Typography variant="h4" align="center" fontWeight={400}>
                       5999+
                     </Typography>
                   </Box>
@@ -56,18 +56,18 @@ const TotalCard = () => {
               </Card>
             </Grid>
             <Grid item  xs={12} sm={12} md={6} lg={3}>
-              <Card variant="outlined">
+              <Card variant="outlined" sx={{backgroundColor:"#ffffffb5", borderRadius:"30px" }}>
                 <CardContent>
                   <StyledIconBox>
                     <BusinessCenterIcon sx={{ fontSize: "5em" }} />
                   </StyledIconBox>
                   <Box>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h5" align="center" fontWeight={400}>
                       Total Jobs
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="h4" align="center">
+                    <Typography variant="h4" align="center" fontWeight={400}>
                       25987+
                     </Typography>
                   </Box>
@@ -75,18 +75,18 @@ const TotalCard = () => {
               </Card>
             </Grid>
             <Grid item  xs={12} sm={12} md={6} lg={3}>
-              <Card variant="outlined">
+              <Card variant="outlined" sx={{backgroundColor:"#ffffffb5", borderRadius:"30px" }}>
                 <CardContent>
                   <StyledIconBox>
                     <Iconify icon="ps:justice" width="5em" />
                   </StyledIconBox>
                   <Box>
-                    <Typography variant="h5" align="center">
+                    <Typography variant="h5" align="center" fontWeight={400}>
                       Total Bids
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="h4" align="center">
+                    <Typography variant="h4" align="center" fontWeight={400}>
                       25764+
                     </Typography>
                   </Box>

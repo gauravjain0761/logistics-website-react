@@ -8,7 +8,10 @@ const Shipment = () => {
       <StyledBox py={8}>
         <Container>
           <Grid container spacing={0}>
-            <Grid item lg={6}>
+          <Grid item lg={1} md={0}>
+
+          </Grid>
+            <Grid item lg={6} >
               <Box>
                 <Box>
                   <Button variant="contained">For Clients</Button>
@@ -29,9 +32,9 @@ const Shipment = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item lg={6} justifyContent={"center"} alignContent={"center"}>
+            <Grid item lg={5} md={6} justifyContent="center" alignContent="center">
               <Box>
-                <Box margin={"auto"} component={"img"} src={"./shipment.jpg"} />
+                <Box margin="auto" component="img" src="/shipment.jpg" />
               </Box>
             </Grid>
           </Grid>

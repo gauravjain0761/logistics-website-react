@@ -1,11 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
-import { WebLayout } from "@/layout";
-import HomeSection from "@/sections/home";
-import SignIn from "@/sections/Auth/SignIn";
+import ClickNewSend from "@/sections/clicksendnew";
+import { SecondaryWebLayout } from "@/layout";
 
 HomePage.getLayout = function getLayout(page) {
-  return <WebLayout>{page}</WebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default function HomePage() {
   return (
@@ -16,8 +14,8 @@ export default function HomePage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HomeSection />
-      <SignIn/>
+      {/* <HomeSection /> */}
+      <ClickNewSend />
     </>
   );
 }
