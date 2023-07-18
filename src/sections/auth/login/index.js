@@ -16,11 +16,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-
 
 const Login = ({ formik }) => {
-
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -62,133 +59,137 @@ const Login = ({ formik }) => {
                 >
                   <CardContent sx={{ px: "3em" }}>
                     <Stack spacing={1} py={2}>
-                      <Form onSubmit={formik.handleSubmit}>
-                      <Box>
-                        <TextBox
-                          fullWidth
-                          placeholder={"Enter Your Email Address"}
-                          startIcon={
-                            <Iconify icon="mdi:user" color="#ff7534" />
-                          }
-                          size={"small"}
-                          onChange={formik.handleChange}
-                          value={formik.values.email}
-                          name="email"
-                          helperText={formik?.errors?.email}
-                        />
-                      </Box>
-                      <Box>
-                        <PasswordBox
-                          onChange={formik.handleChange}
-                          fullWidth
-                          placeholder={"Enter Password"}
-                          startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
-                          }
-                          size={"small"}
-                          value={formik.values.password}
-                          name="password"
-                          helperText={formik?.errors?.password}
-                        />
-                      </Box>
                       <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
+                        component="form"
+                        noValidate
+                        onSubmit={formik.handleSubmit}
                       >
                         <Box>
-                          <FormControlLabel
-                            control={<Checkbox size="" defaultChecked />}
-                            label="Remember me"
+                          <TextBox
+                            fullWidth
+                            placeholder={"Enter Your Email Address"}
+                            startIcon={
+                              <Iconify icon="mdi:user" color="#ff7534" />
+                            }
+                            size={"small"}
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            name="email"
+                            helperText={formik?.errors?.email}
                           />
                         </Box>
                         <Box>
-                          <Typography
-                            onClick={() => setOpen(true)}
-                            variant="p"
-                            color="primary"
-                            sx={{ cursor: "pointer", fontSize: "15px" }}
-                          >
-                            Forget Password ?
-                          </Typography>
+                          <PasswordBox
+                            onChange={formik.handleChange}
+                            fullWidth
+                            placeholder={"Enter Password"}
+                            startIcon={
+                              <Iconify icon="solar:lock-bold" color="#ff7534" />
+                            }
+                            size={"small"}
+                            value={formik.values.password}
+                            name="password"
+                            helperText={formik?.errors?.password}
+                          />
                         </Box>
-                      </Box>
-                      <Box mt={2}>
-                        <Button
-                          fullWidth
-                          variant="contained"
-                          color="primary"
-                          // onClick={() =>
-                          //   router.push("/dashboard/customer_dashboard")
-                          // }
-                          type="submit"
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
                         >
-                          <Typography>Login Now</Typography>
-                        </Button>
-                      </Box>
-                      <Box>
-                        <Box textAlign={"center"} mt={4}>
-                          <Typography variant="p" sx={{ fontSize: "1rem" }}>
-                            Don{"'"}t have An Account?{" "}
+                          <Box>
+                            <FormControlLabel
+                              control={<Checkbox size="" defaultChecked />}
+                              label="Remember me"
+                            />
+                          </Box>
+                          <Box>
                             <Typography
-                              component="span"
+                              onClick={() => setOpen(true)}
+                              variant="p"
                               color="primary"
-                              onClick={() => router.push("/auth/register")}
                               sx={{ cursor: "pointer", fontSize: "15px" }}
                             >
-                              Register Now
+                              Forget Password ?
                             </Typography>
-                          </Typography>
+                          </Box>
                         </Box>
-                        <Box>
+                        <Box mt={2}>
                           <Button
                             fullWidth
-                            sx={{
-                              backgroundColor: "#2A4E95",
-                              color: "#fff",
-                              my: 1,
-                              ":hover": {
+                            variant="contained"
+                            color="primary"
+                            // onClick={() =>
+                            //   router.push("/dashboard/customer_dashboard")
+                            // }
+                            type="submit"
+                          >
+                            <Typography>Login Now</Typography>
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Box textAlign={"center"} mt={4}>
+                            <Typography variant="p" sx={{ fontSize: "1rem" }}>
+                              Don{"'"}t have An Account?{" "}
+                              <Typography
+                                component="span"
+                                color="primary"
+                                onClick={() => router.push("/auth/register")}
+                                sx={{ cursor: "pointer", fontSize: "15px" }}
+                              >
+                                Register Now
+                              </Typography>
+                            </Typography>
+                          </Box>
+                          <Box>
+                            <Button
+                              fullWidth
+                              sx={{
                                 backgroundColor: "#2A4E95",
-                              },
-                            }}
-                            startIcon={
-                              <Iconify
-                                icon="ic:baseline-facebook"
-                                color="white"
-                              />
-                            }
-                          >
-                            <Typography fontSize={"15px"}>
-                              Continue with Facebook
-                            </Typography>
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Button
-                            fullWidth
-                            sx={{
-                              backgroundColor: "#CD2C2E",
-                              color: "#fff",
-                              ":hover": {
+                                color: "#fff",
+                                my: 1,
+                                ":hover": {
+                                  backgroundColor: "#2A4E95",
+                                },
+                              }}
+                              startIcon={
+                                <Iconify
+                                  icon="ic:baseline-facebook"
+                                  color="white"
+                                />
+                              }
+                            >
+                              <Typography fontSize={"15px"}>
+                                Continue with Facebook
+                              </Typography>
+                            </Button>
+                          </Box>
+                          <Box>
+                            <Button
+                              fullWidth
+                              sx={{
                                 backgroundColor: "#CD2C2E",
-                              },
-                            }}
-                            startIcon={
-                              <Iconify
-                                icon="ant-design:google-outlined"
-                                color="white"
-                              />
-                            }
-                          >
-                            <Typography fontSize={"15px"}>
-                              Continue with Google
-                            </Typography>
-                          </Button>
+                                color: "#fff",
+                                ":hover": {
+                                  backgroundColor: "#CD2C2E",
+                                },
+                              }}
+                              startIcon={
+                                <Iconify
+                                  icon="ant-design:google-outlined"
+                                  color="white"
+                                />
+                              }
+                            >
+                              <Typography fontSize={"15px"}>
+                                Continue with Google
+                              </Typography>
+                            </Button>
+                          </Box>
                         </Box>
                       </Box>
-                      </Form>
                     </Stack>
                   </CardContent>
                 </Card>
