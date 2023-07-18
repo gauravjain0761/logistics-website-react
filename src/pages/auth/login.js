@@ -1,14 +1,14 @@
 import { PrimaryWebLayout } from "@/layout";
 import Login from "@/sections/auth/login";
-import { ApiPost } from "@/utils/apiHelper";
+import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
-import { toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 
 const LoginPage = () => {
-
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   const formik = useFormik({
     initialValues: {
@@ -19,8 +19,10 @@ const LoginPage = () => {
       const errors = {};
       if (!values.email) {
         errors.email = "Email Required";
-      }else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-          errors.email = "Invalid email address";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
       }
 
       if (!values.password) {
@@ -30,31 +32,46 @@ const LoginPage = () => {
       }
       return errors;
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       // call api
       const data = {
         email: values.email,
         password: values.password,
       };
-      ApiPost("auth/login", data).then((res) => {
-        if (res?.code === 200) {
-          toast.success("Login Successfull");
-          localStorage.setItem("token", res?.data?.access_token);
-          // save user data
-          localStorage.setItem("userData", JSON.stringify(res?.data?.user));
-
-          router.push("/dashboard/customer_dashboard")
-        }
-      }).catch((err) => {
-        if(err?.code === 401){
-          toast.error("Invalid Credentials");
-        }
-      });
-    }
+      await axiosInstance
+        .post("api/auth/login", data)
+        .then((response) => {
+          console.log("response", response);
+          if (response?.status === 200) {
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            formik.resetForm();
+            router.push("/dashboard/customer_dashboard");
+          } else {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          if (response.status === 422) {
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
+    },
   });
-
-   
-
 
   return <Login formik={formik} />;
 };
