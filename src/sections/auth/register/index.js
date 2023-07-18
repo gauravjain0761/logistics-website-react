@@ -8,8 +8,10 @@ import {
   CardContent,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   Grid,
   Stack,
   Typography,
@@ -164,20 +166,42 @@ const Register = ({ formik }) => {
                         }}
                       >
                         <Box my={2}>
-                          <FormControlLabel
-                            control={
-                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
-                            }
-                            label={
-                              <Typography textAlign="center">
-                                I agree to the{" "}
-                                <Typography color="primary" component="span">
-                                  Terms and Conditions
-                                </Typography>{" "}
-                                as set out by the user agreement.
-                              </Typography>
-                            }
-                          />
+                          <FormControl
+                            error={formik.errors.term ? true : false}
+                            fullWidth
+                          >
+                            <FormControlLabel
+                              name="term"
+                              checked={formik.values.term}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  formik.setFieldValue("term", true);
+                                } else {
+                                  formik.setFieldValue("term", false);
+                                }
+                              }}
+                              control={
+                                <Checkbox
+                                  size=""
+                                  sx={{ marginBottom: "1.6em" }}
+                                />
+                              }
+                              label={
+                                <Typography textAlign="center">
+                                  I agree to the{" "}
+                                  <Typography color="primary" component="span">
+                                    Terms and Conditions
+                                  </Typography>{" "}
+                                  as set out by the user agreement.
+                                </Typography>
+                              }
+                            />
+                            {formik.errors.term && (
+                              <FormHelperText>
+                                {formik.errors.term}
+                              </FormHelperText>
+                            )}
+                          </FormControl>
                         </Box>
                       </Box>
                       <Button

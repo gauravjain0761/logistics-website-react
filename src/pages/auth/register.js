@@ -15,7 +15,7 @@ const RegisterPage = () => {
       user_type: "",
       email: "",
       mobile: "",
-      term: " ",
+      term: false,
       password: "",
       password_confirmation: "",
     },
@@ -27,6 +27,7 @@ const RegisterPage = () => {
       if (!values.user_name) {
         errors.user_name = "User name is required";
       }
+
       if (!values.email) {
         errors.email = "Email is required";
       } else if (
@@ -59,6 +60,10 @@ const RegisterPage = () => {
         values.password != values.password_confirmation
       ) {
         errors.password_confirmation = "Password didn't match.";
+      }
+
+      if (!values.term) {
+        errors.term = "T&C is required";
       }
 
       return errors;
@@ -97,10 +102,7 @@ const RegisterPage = () => {
         });
     },
   });
-  console.log(
-    "formikpass",
-    !isEqual(formik.values.password, formik.values.password_confirmation)
-  );
+
   return <Register formik={formik} />;
 };
 
