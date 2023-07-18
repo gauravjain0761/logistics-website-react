@@ -30,6 +30,11 @@ export const DialogForm = ({ formik }) => {
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }} />
+      <Box
+                      component="form"
+                      noValidate
+                      onSubmit={formik.handleSubmit}
+                    >
 
       <Stack direction="row" mb={1.3}>
         <Box
@@ -101,6 +106,7 @@ export const DialogForm = ({ formik }) => {
         error={formik.touched.mobile && formik.errors.mobile}
         helperText={formik.touched.mobile && formik.errors.mobile}
       />
+      </Box>
     </React.Fragment>
   );
 };

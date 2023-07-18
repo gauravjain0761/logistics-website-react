@@ -23,10 +23,10 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      date: "",
       email: "",
       mobile: "",
-      description: "",
+      password: "",
+      password_confirmation: "",
       otp: "",
     },
     validate: (values) => {
@@ -39,15 +39,48 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
       if (!values.date) {
         errors.date = "Date  is required";
       }
-
+      if (!values.email) {
+        errors.email = "Email number  is required";
+      }
       if (!values.mobile) {
         errors.mobile = "Mobile number  is required";
       }
 
       return errors;
     },
-    onSubmit: (values) => {
-      console.log("Appointment", values);
+    onSubmit: async (values, { setErrors }) => {
+      await axiosInstance
+        .post("/api/user/reset-password", values, { setErrors })
+        .then((response) => {
+          if (response?.status === 200) {
+            handleOpenClose();
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            formik.resetForm();
+          } else {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          if (response.status === 422) {
+            console.log("response", response.data.error);
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
     },
   });
 
@@ -55,7 +88,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
     formik.resetForm();
   };
   return (
-    <div>
+    <>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -88,6 +121,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
               reset your Password
             </Typography>
           </Stack>
+
           <DialogForm formik={formik} />
           <Box>
             <Typography sx={{ fontSize: "16px" }}>
@@ -126,7 +160,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         </DialogActions>
         {/* </Box> */}
       </Dialog>
-    </div>
+    </>
   );
 };
 export default DialogBox;
