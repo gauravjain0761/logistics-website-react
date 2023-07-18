@@ -13,6 +13,31 @@ const RegisterPage = () => {
     setOpen(!open);
   };
 
+  const sendOtp = async (values) => {
+    await axiosInstance
+      .post("api/user/send-otp", values)
+      .then((response) => {
+        if (response?.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+        let status = [406, 404];
+        if (status.includes(response?.status)) {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      });
+  };
+
   const formik = useFormik({
     initialValues: {
       user_name: "",
@@ -66,7 +91,7 @@ const RegisterPage = () => {
         errors.password_confirmation = "Password didn't match.";
       }
 
-      if (!values.term) {
+      if (!values.term == "no") {
         errors.term = "T&C is required";
       }
 
@@ -74,14 +99,18 @@ const RegisterPage = () => {
     },
     onSubmit: async (values, { setErrors }) => {
       await axiosInstance
-        .post("/api/user/customer-register", values, { setErrors })
+        .post("/api/user/customer-register", values)
         .then((response) => {
           if (response?.status === 200) {
+            sendOtp({
+              email: values.email,
+              type: values.user_type,
+            });
             handleOpenClose();
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            formik.resetForm();
+            // formik.resetForm();
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",

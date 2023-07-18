@@ -8,15 +8,20 @@ import {
   CardContent,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   Grid,
+  IconButton,
   Radio,
   Stack,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { BsX } from "react-icons/bs";
 import React from "react";
+import { Close } from "@mui/icons-material";
 
 const DriverRegister = ({ formik }) => {
   const [open, setOpen] = React.useState(false);
@@ -24,6 +29,7 @@ const DriverRegister = ({ formik }) => {
     setOpen(!open);
   };
   const router = useRouter();
+  console.log("formik.values", formik.values);
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -63,17 +69,22 @@ const DriverRegister = ({ formik }) => {
                   }}
                 >
                   <CardContent sx={{ px: 6 }}>
-                    <FormGroup>
+                    <Box
+                      component="form"
+                      noValidate
+                      onSubmit={formik.handleSubmit}
+                    >
                       <Box mb={3}>
                         <FormControlLabel
                           control={
                             <Radio
                               size="large"
-                              name="type"
+                              name="user_type"
                               onChange={(e) => {
-                                formik.setFieldValue("type", "driver");
+                                formik.resetForm();
+                                formik.setFieldValue("user_type", "driver");
                               }}
-                              checked={formik.values.type === "driver"}
+                              checked={formik.values.user_type === "driver"}
                             />
                           }
                           label={
@@ -86,11 +97,12 @@ const DriverRegister = ({ formik }) => {
                           control={
                             <Radio
                               size="large"
-                              name="type"
+                              name="user_type"
                               onChange={(e) => {
-                                formik.setFieldValue("type", "company");
+                                formik.resetForm();
+                                formik.setFieldValue("user_type", "company");
                               }}
-                              checked={formik.values.type === "company"}
+                              checked={formik.values.user_type === "company"}
                             />
                           }
                           label={
@@ -104,9 +116,15 @@ const DriverRegister = ({ formik }) => {
                         <TextBox
                           fullWidth
                           placeholder={
-                            formik.values.type === "company"
+                            formik.values.user_type === "company"
                               ? "Enter Company Name"
                               : "Enter Your Full Name "
+                          }
+                          name="user_name"
+                          value={formik.values.user_name}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.user_name && formik.errors.user_name
                           }
                           startIcon={
                             <Iconify icon="mdi:user" color="#ff7534" />
@@ -119,7 +137,7 @@ const DriverRegister = ({ formik }) => {
                         <TextBox
                           fullWidth
                           placeholder={
-                            formik.values.type === "company"
+                            formik.values.user_type === "company"
                               ? "Enter Company Email"
                               : "Enter Your Email Address"
                           }
@@ -129,9 +147,16 @@ const DriverRegister = ({ formik }) => {
                               color="#ff7534"
                             />
                           }
+                          name="email"
+                          value={formik.values.email}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.email && formik.errors.email
+                          }
                           size={"small"}
                         />
                       </Box>
+
                       <Box>
                         <TextBox
                           fullWidth
@@ -142,70 +167,203 @@ const DriverRegister = ({ formik }) => {
                               color="#ff7534"
                             />
                           }
+                          name="mobile"
+                          value={formik.values.mobile}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.mobile && formik.errors.mobile
+                          }
                           size={"small"}
                         />
                       </Box>
                       <Box>
                         <PasswordBox
-                          onChange={(e) => {
-                            e.target.value;
-                          }}
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
+                          name="password"
+                          value={formik.values.password}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.password && formik.errors.password
+                          }
                           size={"small"}
                         />
                       </Box>
                       <Box>
                         <PasswordBox
-                          onChange={(e) => {
-                            e.target.value;
-                          }}
                           fullWidth
                           placeholder={"Enter Confirm Password"}
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
+                          name="password_confirmation"
+                          value={formik.values.password_confirmation}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.password_confirmation &&
+                            formik.errors.password_confirmation
+                          }
                           size={"small"}
                         />
                       </Box>
-                      {formik.values.type === "company" ? (
+                      {formik.values.user_type === "company" ? (
                         <Box>
                           <Stack textAlign={"center"}>
-                            <Typography variant="p">
+                            <Typography textAlign="left" variant="p">
                               Company Certificate
                             </Typography>
-                            <TextBox
-                              fullWidth
-                              startIcon={
-                                <Iconify
-                                  icon="solar:file-bold"
-                                  color="#ff7534"
-                                />
-                              }
-                              type="file"
-                              size="small"
-                              onChange={() => {}}
-                            />
+                            {!formik.values.company_certificate && (
+                              <TextBox
+                                fullWidth
+                                startIcon={
+                                  <Iconify
+                                    icon="solar:file-bold"
+                                    color="#ff7534"
+                                  />
+                                }
+                                type="file"
+                                size="small"
+                                value=""
+                                name="company_certificate"
+                                onChange={(e) => {
+                                  formik.setFieldValue(
+                                    "company_certificate",
+                                    e.target.files[0]
+                                  );
+                                  formik.setFieldValue(
+                                    "company_certificate_url",
+                                    URL.createObjectURL(e.target.files[0])
+                                  );
+                                }}
+                              />
+                            )}
+
+                            {formik.values.company_certificate_url && (
+                              <Card sx={{ width: "max-content" }}>
+                                <CardContent
+                                  sx={{
+                                    pb: "10px !important",
+                                    pt: "30px !important",
+                                    px: "10px !important",
+                                  }}
+                                >
+                                  <Box
+                                    sx={{
+                                      position: "absolute",
+                                      top: 5,
+                                      right: 6,
+                                    }}
+                                  >
+                                    <Card sx={{ borderRadius: "50%" }}>
+                                      <IconButton
+                                        size="small"
+                                        onClick={() => {
+                                          formik.setFieldValue(
+                                            "company_certificate",
+                                            ""
+                                          );
+                                          formik.setFieldValue(
+                                            "company_certificate_url",
+                                            ""
+                                          );
+                                        }}
+                                      >
+                                        <Close fontSize="small" />
+                                      </IconButton>
+                                    </Card>
+                                  </Box>
+                                  <Box
+                                    component="img"
+                                    style={{ margin: "10px" }}
+                                    src={formik.values.company_certificate_url}
+                                    alt={formik.values.company_certificate.name}
+                                    width="150px"
+                                    height="150px"
+                                    thumbnail
+                                  />
+                                </CardContent>
+                              </Card>
+                            )}
                           </Stack>
-                          <Stack textAlign={"center"}>
-                            <Typography variant="p">
+                          <Stack textAlign={"center"} mt={2}>
+                            <Typography textAlign="left" variant="p">
                               Company VAT Certificate (Optional)
                             </Typography>
-                            <TextBox
-                              fullWidth
-                              startIcon={
-                                <Iconify
-                                  icon="solar:file-bold"
-                                  color="#ff7534"
-                                />
-                              }
-                              type="file"
-                              size="small"
-                              onChange={() => {}}
-                            />
+                            {!formik.values.company_vat && (
+                              <TextBox
+                                fullWidth
+                                startIcon={
+                                  <Iconify
+                                    icon="solar:file-bold"
+                                    color="#ff7534"
+                                  />
+                                }
+                                type="file"
+                                size="small"
+                                value=""
+                                name="company_vat"
+                                onChange={(e) => {
+                                  formik.setFieldValue(
+                                    "company_vat",
+                                    e.target.files[0]
+                                  );
+                                  formik.setFieldValue(
+                                    "company_vat_url",
+                                    URL.createObjectURL(e.target.files[0])
+                                  );
+                                }}
+                              />
+                            )}
+
+                            {formik.values.company_vat_url && (
+                              <Card sx={{ width: "max-content" }}>
+                                <CardContent
+                                  sx={{
+                                    pb: "10px !important",
+                                    pt: "30px !important",
+                                    px: "10px !important",
+                                  }}
+                                >
+                                  <Box
+                                    sx={{
+                                      position: "absolute",
+                                      top: 5,
+                                      right: 6,
+                                    }}
+                                  >
+                                    <Card sx={{ borderRadius: "50%" }}>
+                                      <IconButton
+                                        size="small"
+                                        onClick={() => {
+                                          formik.setFieldValue(
+                                            "company_vat",
+                                            ""
+                                          );
+                                          formik.setFieldValue(
+                                            "company_vat_url",
+                                            ""
+                                          );
+                                        }}
+                                      >
+                                        <Close fontSize="small" />
+                                      </IconButton>
+                                    </Card>
+                                  </Box>
+                                  <Box
+                                    component="img"
+                                    style={{ margin: "10px" }}
+                                    src={formik.values.company_vat_url}
+                                    alt={formik.values.company_vat.name}
+                                    width="150px"
+                                    height="150px"
+                                    thumbnail
+                                  />
+                                </CardContent>
+                              </Card>
+                            )}
                           </Stack>
                         </Box>
                       ) : (
@@ -220,28 +378,54 @@ const DriverRegister = ({ formik }) => {
                         }}
                       >
                         <Box my={3}>
-                          <FormControlLabel
-                            control={
-                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
-                            }
-                            label={
-                              <Typography textAlign="center">
-                                I agree to the{" "}
-                                <Typography color="primary" component="span">
-                                  Terms and Conditions
-                                </Typography>{" "}
-                                as set out by the user agreement.
-                              </Typography>
-                            }
-                          />
+                          <FormControl
+                            error={formik.errors.term ? true : false}
+                            fullWidth
+                          >
+                            <FormControlLabel
+                              name="term"
+                              checked={formik.values.term == "yes"}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  formik.setFieldValue("term", "yes");
+                                } else {
+                                  formik.setFieldValue("term", "no");
+                                }
+                              }}
+                              control={
+                                <Checkbox
+                                  size=""
+                                  sx={{ marginBottom: "1.6em" }}
+                                />
+                              }
+                              label={
+                                <Typography textAlign="center">
+                                  I agree to the{" "}
+                                  <Typography color="primary" component="span">
+                                    Terms and Conditions
+                                  </Typography>{" "}
+                                  as set out by the user agreement.
+                                </Typography>
+                              }
+                            />
+                            {formik.errors.term && (
+                              <FormHelperText>
+                                {formik.errors.term}
+                              </FormHelperText>
+                            )}
+                          </FormControl>
                         </Box>
                       </Box>
+
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
-                          <Button fullWidth variant="contained" color="primary">
-                            <Typography px="1.5em" onClick={handleOpenClose}>
-                              Register Now
-                            </Typography>
+                          <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                          >
+                            <Typography px="1.5em">Register Now</Typography>
                           </Button>
                         </Box>
                         <Box>
@@ -291,7 +475,7 @@ const DriverRegister = ({ formik }) => {
                           <Typography>Become A Customer</Typography>
                         </Button>
                       </Box>
-                    </FormGroup>
+                    </Box>
                   </CardContent>
                 </Card>
               </Stack>
@@ -301,6 +485,8 @@ const DriverRegister = ({ formik }) => {
       </Box>
       <OTPDialogBox
         onClose={handleOpenClose}
+        email={formik.values.email}
+        registerFormik={formik}
         open={open}
         title="OTP Verification"
       />

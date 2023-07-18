@@ -4,6 +4,8 @@ import { Close } from "@mui/icons-material";
 import {
   Autocomplete,
   Box,
+  FormControl,
+  FormHelperText,
   InputAdornment,
   Stack,
   TextField,
@@ -19,22 +21,27 @@ export const OTPForm = ({ formik }) => {
       <Box sx={{ mt: 4 }} />
       <Box sx={{ my: 2 }}>
         <Box sx={{ width: "100%", textAlign: "center" }}>
-          <OTPInput
-            name={`otp`}
-            containerStyle={{ justifyContent: "center" }}
-            inputStyle={{
-              width: "50px",
-              height: "56px",
-              borderRadius: "10px",
-            }}
-            value={formik?.values?.otp}
-            onChange={(e) => formik.setFieldValue("otp", e)}
-            error={formik.touched.otp && formik.errors.otp}
-            helperText={formik.touched.otp && formik.errors.otp}
-            numInputs={4}
-            renderSeparator={<span style={{ marginRight: "5px" }}></span>}
-            renderInput={(props) => <input {...props} />}
-          />
+          <FormControl error={formik.errors.otp ? true : false}>
+            <OTPInput
+              name={`otp`}
+              containerStyle={{ justifyContent: "center" }}
+              inputStyle={{
+                width: "50px",
+                height: "56px",
+                borderRadius: "10px",
+              }}
+              value={formik?.values?.otp}
+              onChange={(e) => formik.setFieldValue("otp", e)}
+              error={formik.touched.otp && formik.errors.otp}
+              helperText={formik.touched.otp && formik.errors.otp}
+              numInputs={4}
+              renderSeparator={<span style={{ marginRight: "5px" }}></span>}
+              renderInput={(props) => <input {...props} />}
+            />
+            {formik.errors.otp && (
+              <FormHelperText>{formik.errors.otp}</FormHelperText>
+            )}
+          </FormControl>
         </Box>
       </Box>
     </React.Fragment>

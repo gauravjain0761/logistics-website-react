@@ -14,14 +14,26 @@ import {
 import { DialogHeader } from "./header";
 import { DialogForm } from "./form";
 import { useFormik } from "formik";
+import axiosInstance from "@/utils/axios";
+import { useSnackbar } from "notistack";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 const forgotimg = "/assets/images/auth/forgot.png";
 
-const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
+const OTPDialogBox = ({
+  keepMounted,
+  onClose,
+  open,
+  title,
+  email,
+  registerFormik,
+}) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const formik = useFormik({
     initialValues: {
+      email: "",
       otp: "",
     },
     validate: (values) => {
@@ -33,13 +45,83 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
 
       return errors;
     },
-    onSubmit: (values) => {
-      console.log("Appointment", values);
+    onSubmit: async (values) => {
+      let formData;
+      formData = {
+        email: email,
+        otp: values.otp,
+      };
+      await axiosInstance
+        .post("api/user/validate-otp", formData, { setErrors })
+        .then((response) => {
+          if (response?.status === 200) {
+            onClose();
+            formik.resetForm();
+            registerFormik.resetForm();
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+          } else {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          let status = [406, 404];
+          if (response.status === 422) {
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (status.includes(response?.status)) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
     },
   });
 
+  const resendOtp = async () => {
+    let formData;
+
+    formData = {
+      email: registerFormik?.values?.email,
+      type: registerFormik?.values?.user_type,
+    };
+
+    await axiosInstance
+      .post("api/user/resend-otp", formData)
+      .then((response) => {
+        if (response?.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+        let status = [406, 404];
+        if (status.includes(response?.status)) {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      });
+  };
+
   const handleClose = () => {
     formik.resetForm();
+    registerFormik.resetForm();
   };
   return (
     <div>
@@ -49,7 +131,10 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
         keepMounted={keepMounted}
         components="form"
         scroll="paper"
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          handleClose();
+        }}
         aria-describedby="alert-dialog-slide-description"
         sx={{
           "& .MuiPaper-rounded": {
@@ -59,7 +144,13 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
         maxWidth="xs"
       >
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
-        <DialogHeader onClose={onClose} title={title} />
+        <DialogHeader
+          onClose={() => {
+            onClose();
+            handleClose();
+          }}
+          title={title}
+        />
         <DialogContent dividers={"paper"}>
           <Stack textAlign={"left"} mt={2}>
             <Typography
@@ -82,8 +173,9 @@ const OTPDialogBox = ({ keepMounted, onClose, open, title }) => {
                 component="span"
                 fontWeight={700}
                 sx={{ cursor: "pointer", fontSize: "15px" }}
+                onClick={resendOtp}
               >
-                Resend OTP..
+                Resend OTP
               </Typography>
             </Typography>
           </Box>
