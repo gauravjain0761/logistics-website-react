@@ -16,10 +16,10 @@ const RegisterPage = () => {
   const formik = useFormik({
     initialValues: {
       user_name: "",
-      user_type: "",
+      user_type: "customer",
       email: "",
       mobile: "",
-      term: false,
+      term: "no",
       password: "",
       password_confirmation: "",
     },

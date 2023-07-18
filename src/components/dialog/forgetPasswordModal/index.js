@@ -12,9 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { DialogHeader } from "./header";
-import { DialogForm } from "./form";
+import { ForgetForm } from "./forgetForm";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
+import { OTPForm } from "./otpForm";
+import axiosInstance from "@/utils/axios";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
@@ -22,42 +24,76 @@ const forgotimg = "/assets/images/auth/forgot.png";
 
 const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const [showResend, setShowResend] = React.useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
       mobile: "",
       otp: "",
-      type: "",
+      type: "email",
     },
     validate: (values) => {
       const errors = {};
+      if (values.type === "mobile" && !values.email) {
+        errors.email = "Mobile no. is required";
+      } else if (
+        values.type === "mobile" &&
+        !/^[0-9]{10}$/.test(values.email)
+      ) {
+        errors.email = "Please enter valid number";
+      }
 
-      if (!values.mobile) {
-        errors.mobile = "Mobile number  is required";
+      if (values.type === "email" && !values.email) {
+        errors.email = "Email is required";
+      } else if (
+        values.type === "email" &&
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
       }
 
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
+      let url, formData;
+      if (!showResend) {
+        url = "/api/user/send-otp";
+        formData = {
+          email: values?.email,
+          mobile: values?.mobile,
+          type: values?.type,
+        };
+      } else {
+        url = "/api/user/validate-otp";
+        formData = {
+          email: values?.email,
+          otp: values?.otp,
+        };
+      }
+
       await axiosInstance
-        .post("/api/user/reset-password", values, { setErrors })
+        .post(url, formData, { setErrors })
         .then((response) => {
           if (response?.status === 200) {
-            onClose();
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            formik.resetForm();
+            setShowResend(true);
+            if (showResend) {
+              handleClose();
+              onClose();
+            }
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",
             });
+            setShowResend(false);
           }
         })
         .catch((error) => {
           const { response } = error;
+          let status = [406, 404];
           if (response.status === 422) {
-            console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key, value] of Object.entries(values)) {
               if (response.data.error[key]) {
@@ -65,7 +101,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
               }
             }
           }
-          if (response?.data?.status === 406) {
+          if (status.includes(response?.status)) {
             enqueueSnackbar(response.data.message, {
               variant: "error",
             });
@@ -76,7 +112,49 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
 
   const handleClose = () => {
     formik.resetForm();
+    setShowResend(false);
   };
+
+  const resendOtp = async () => {
+    let formData;
+
+    formData = {
+      email: formik?.values?.email,
+      type: formik?.values?.type,
+    };
+
+    await axiosInstance
+      .post("api/user/resend-otp", formData)
+      .then((response) => {
+        if (response?.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+        let status = [406, 404];
+        if (response.status === 422) {
+          // eslint-disable-next-line no-unused-vars
+          for (const [key, value] of Object.entries(formik.values)) {
+            if (response.data.error[key]) {
+              setErrors({ [key]: response.data.error[key][0] });
+            }
+          }
+        }
+        if (status.includes(response?.status)) {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      });
+  };
+  console.log("formik.values.type", formik.values.type);
   return (
     <>
       <Dialog
@@ -95,37 +173,55 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         }}
       >
         {/* <Box component="form" onSubmit={formik.handleSubmit}> */}
-        <DialogHeader onClose={onClose} title={title} />
+        <DialogHeader
+          onClose={onClose}
+          title={`${!showResend ? title : "OTP Verification"}`}
+          showResend={showResend}
+          handleClose={handleClose}
+        />
         <DialogContent dividers={"paper"}>
           <Stack textAlign={"center"} mt={2}>
-            <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
+            {!showResend && (
+              <Box m={"auto"} component="img" src={forgotimg} width={"6em"} />
+            )}
             <Typography
               variant="h4"
               fontWeight={300}
               sx={{ cursor: "pointer", fontSize: "16px", fontWeight: 500 }}
             >
-              Forget Password
+              {!showResend
+                ? "Forget Password"
+                : "Please Enter One Time OTP for Reset Your Password"}
             </Typography>
             <Typography sx={{ fontSize: "16px" }}>
-              Enter Your Registerd Email or Contact no & Well Send you a link to
-              reset your Password
+              {!showResend
+                ? "Enter Your Registerd Email or Contact no & Well Send you a link to reset your Password"
+                : `A Code has Been Sent To Your ${
+                    formik.values.type == "email" ? "Email" : "Mobile"
+                  }`}
             </Typography>
           </Stack>
-
-          <DialogForm formik={formik} />
-          <Box>
-            <Typography sx={{ fontSize: "16px" }}>
-              Didn{"'"}t receive OTP ?{" "}
-              <Typography
-                color="primary"
-                component="span"
-                fontWeight={700}
-                sx={{ cursor: "pointer", fontSize: "15px" }}
-              >
-                Resend OTP
+          {showResend ? (
+            <OTPForm formik={formik} />
+          ) : (
+            <ForgetForm formik={formik} />
+          )}
+          {showResend && (
+            <Box>
+              <Typography sx={{ fontSize: "16px" }}>
+                Didn{"'"}t receive OTP ?{" "}
+                <Typography
+                  color="primary"
+                  component="span"
+                  fontWeight={700}
+                  sx={{ cursor: "pointer", fontSize: "15px" }}
+                  onClick={resendOtp}
+                >
+                  Resend OTP
+                </Typography>
               </Typography>
-            </Typography>
-          </Box>
+            </Box>
+          )}
         </DialogContent>
         <Divider />
         <DialogActions>
