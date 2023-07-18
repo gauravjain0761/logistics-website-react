@@ -19,12 +19,8 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const Register = ({ formik }) => {
+const Register = ({ formik, open }) => {
   const router = useRouter();
-  const [open, setOpen] = React.useState(false);
-  const handleOpenClose = () => {
-    setOpen(!open);
-  };
 
   return (
     <React.Fragment>
@@ -206,10 +202,13 @@ const Register = ({ formik }) => {
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
                         <Box>
-                          <Button fullWidth variant="contained" color="primary">
-                            <Typography px="1.5em" onClick={handleOpenClose}>
-                              Register Now
-                            </Typography>
+                          <Button
+                            fullWidth
+                            variant="contained"
+                            type="submit"
+                            color="primary"
+                          >
+                            <Typography px="1.5em">Register Now</Typography>
                           </Button>
                         </Box>
                         <Box>

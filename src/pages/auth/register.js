@@ -8,6 +8,10 @@ import React from "react";
 
 const RegisterPage = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const [open, setOpen] = React.useState(false);
+  const handleOpenClose = () => {
+    setOpen(!open);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -73,6 +77,7 @@ const RegisterPage = () => {
         .post("/api/user/customer-register", values, { setErrors })
         .then((response) => {
           if (response?.status === 200) {
+            handleOpenClose();
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
@@ -103,7 +108,7 @@ const RegisterPage = () => {
     },
   });
 
-  return <Register formik={formik} />;
+  return <Register open={open} formik={formik} />;
 };
 
 RegisterPage.getLayout = function getLayout(page) {
