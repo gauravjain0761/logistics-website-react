@@ -14,34 +14,24 @@ import {
 import { DialogHeader } from "./header";
 import { DialogForm } from "./form";
 import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 const forgotimg = "/assets/images/auth/forgot.png";
 
-const DialogBox = ({ keepMounted, onClose, open, title }) => {
+const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
-      name: "",
       email: "",
       mobile: "",
-      password: "",
-      password_confirmation: "",
       otp: "",
+      type: "",
     },
     validate: (values) => {
       const errors = {};
 
-      if (!values.name) {
-        errors.name = "Name  is required";
-      }
-
-      if (!values.date) {
-        errors.date = "Date  is required";
-      }
-      if (!values.email) {
-        errors.email = "Email number  is required";
-      }
       if (!values.mobile) {
         errors.mobile = "Mobile number  is required";
       }
@@ -53,7 +43,7 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
         .post("/api/user/reset-password", values, { setErrors })
         .then((response) => {
           if (response?.status === 200) {
-            handleOpenClose();
+            onClose();
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
@@ -143,7 +133,6 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
             onClick={() => formik.handleSubmit()}
             variant="contained"
             color="primary"
-            type="submit"
           >
             Verify
           </Button>
@@ -163,4 +152,4 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
     </>
   );
 };
-export default DialogBox;
+export default ForgetPasswordDialogBox;

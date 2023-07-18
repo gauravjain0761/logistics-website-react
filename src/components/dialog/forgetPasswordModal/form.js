@@ -57,24 +57,19 @@ export const DialogForm = ({ formik }) => {
           size="small"
           fullWidth
           options={OTPSelect}
-          name={`otp`}
-          value={formik?.values?.otp}
-          onChange={formik.handleChange}
-          error={formik.touched.otp && formik.errors.otp}
-          helperText={formik.touched.otp && formik.errors.otp}
+          name={`type`}
+          value={formik?.values?.type}
+          onChange={(e, newValue) => {
+            formik.setFieldValue("type", newValue);
+          }}
+          error={formik.touched.type && formik.errors.type}
+          helperText={formik.touched.type && formik.errors.type}
           renderInput={(params) => (
             <TextField
               {...params}
               placeholder="Choose Option for Get OTP"
               InputProps={{
                 ...params.InputProps,
-                // startAdornment: (
-                //   <InputAdornment
-                //     sx={{ ml: 1, background: (theme) => theme.palette.grey[800], height:"100%" }}
-                //   >
-                //     <ArrowDropDownCircleIcon color="primary" fontSize="small" />
-                //   </InputAdornment>
-                // ),
               }}
             />
           )}

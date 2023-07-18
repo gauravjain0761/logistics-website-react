@@ -1,4 +1,4 @@
-import DialogBox from "@/components/dialog/appointmentModal";
+import ForgetPasswordDialogBox from "@/components/dialog/forgetPasswordModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
@@ -186,7 +186,7 @@ const Login = ({ formik }) => {
           </Grid>
         </Container>
       </Box>
-      <DialogBox
+      <ForgetPasswordDialogBox
         title="Forget Password"
         open={open}
         onClose={() => handleClose()}
