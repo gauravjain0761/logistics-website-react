@@ -14,31 +14,23 @@ import {
 import { DialogHeader } from "./header";
 import { DialogForm } from "./form";
 import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 const forgotimg = "/assets/images/auth/forgot.png";
 
-const DialogBox = ({ keepMounted, onClose, open, title }) => {
+const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
-      name: "",
-      date: "",
       email: "",
       mobile: "",
-      description: "",
       otp: "",
+      type: "",
     },
     validate: (values) => {
       const errors = {};
-
-      if (!values.name) {
-        errors.name = "Name  is required";
-      }
-
-      if (!values.date) {
-        errors.date = "Date  is required";
-      }
 
       if (!values.mobile) {
         errors.mobile = "Mobile number  is required";
@@ -46,8 +38,39 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
 
       return errors;
     },
-    onSubmit: (values) => {
-      console.log("Appointment", values);
+    onSubmit: async (values, { setErrors }) => {
+      await axiosInstance
+        .post("/api/user/reset-password", values, { setErrors })
+        .then((response) => {
+          if (response?.status === 200) {
+            onClose();
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            formik.resetForm();
+          } else {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          if (response.status === 422) {
+            console.log("response", response.data.error);
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
     },
   });
 
@@ -109,7 +132,6 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
             onClick={() => formik.handleSubmit()}
             variant="contained"
             color="primary"
-            type="submit"
           >
             Verify
           </Button>
@@ -129,4 +151,4 @@ const DialogBox = ({ keepMounted, onClose, open, title }) => {
     </div>
   );
 };
-export default DialogBox;
+export default ForgetPasswordDialogBox;
