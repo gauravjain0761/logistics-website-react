@@ -72,6 +72,7 @@ const Register = ({ formik }) => {
                       <Box>
                         <TextBox
                           fullWidth
+                          name="user_name"
                           placeholder={"Enter Your Full Name "}
                           value={formik.values.user_name}
                           onChange={formik.handleChange}
@@ -87,6 +88,7 @@ const Register = ({ formik }) => {
                       <Box>
                         <TextBox
                           fullWidth
+                          name="email"
                           placeholder={"Enter Your Email Address"}
                           value={formik.values.email}
                           onChange={formik.handleChange}
@@ -105,6 +107,7 @@ const Register = ({ formik }) => {
                       <Box>
                         <TextBox
                           fullWidth
+                          name="mobile"
                           value={formik.values.mobile}
                           onChange={formik.handleChange}
                           helperText={
@@ -138,6 +141,7 @@ const Register = ({ formik }) => {
                       </Box>
                       <Box>
                         <PasswordBox
+                          name="password_confirmation"
                           value={formik.values.password_confirmation}
                           onChange={formik.handleChange}
                           helperText={

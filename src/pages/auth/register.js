@@ -54,6 +54,13 @@ const RegisterPage = () => {
           "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
       }
 
+      if (
+        values.password &&
+        values.password_confirmation &&
+        values.password === values.password_confirmation
+      ) {
+        errors.password_confirmation = "Password didn't match.";
+      }
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
