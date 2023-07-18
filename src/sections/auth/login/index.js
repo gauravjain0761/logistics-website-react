@@ -16,8 +16,11 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+
 
 const Login = ({ formik }) => {
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -59,6 +62,7 @@ const Login = ({ formik }) => {
                 >
                   <CardContent sx={{ px: "3em" }}>
                     <Stack spacing={1} py={2}>
+                      <Form onSubmit={formik.handleSubmit}>
                       <Box>
                         <TextBox
                           fullWidth
@@ -67,19 +71,24 @@ const Login = ({ formik }) => {
                             <Iconify icon="mdi:user" color="#ff7534" />
                           }
                           size={"small"}
+                          onChange={formik.handleChange}
+                          value={formik.values.email}
+                          name="email"
+                          helperText={formik?.errors?.email}
                         />
                       </Box>
                       <Box>
                         <PasswordBox
-                          onChange={(e) => {
-                            e.target.value;
-                          }}
+                          onChange={formik.handleChange}
                           fullWidth
                           placeholder={"Enter Password"}
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
                           }
                           size={"small"}
+                          value={formik.values.password}
+                          name="password"
+                          helperText={formik?.errors?.password}
                         />
                       </Box>
                       <Box
@@ -111,9 +120,10 @@ const Login = ({ formik }) => {
                           fullWidth
                           variant="contained"
                           color="primary"
-                          onClick={() =>
-                            router.push("/dashboard/customer_dashboard")
-                          }
+                          // onClick={() =>
+                          //   router.push("/dashboard/customer_dashboard")
+                          // }
+                          type="submit"
                         >
                           <Typography>Login Now</Typography>
                         </Button>
@@ -178,6 +188,7 @@ const Login = ({ formik }) => {
                           </Button>
                         </Box>
                       </Box>
+                      </Form>
                     </Stack>
                   </CardContent>
                 </Card>
