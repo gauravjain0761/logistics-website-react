@@ -2,6 +2,7 @@ import { PrimaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
+import { isEqual } from "lodash";
 import { useSnackbar } from "notistack";
 import React from "react";
 
@@ -52,15 +53,14 @@ const RegisterPage = () => {
       } else if (!passwordRegex.test(values.password_confirmation)) {
         errors.password_confirmation =
           "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
-      }
-
-      if (
+      } else if (
         values.password &&
         values.password_confirmation &&
-        values.password === values.password_confirmation
+        values.password != values.password_confirmation
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
+
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
@@ -97,6 +97,10 @@ const RegisterPage = () => {
         });
     },
   });
+  console.log(
+    "formikpass",
+    !isEqual(formik.values.password, formik.values.password_confirmation)
+  );
   return <Register formik={formik} />;
 };
 
