@@ -168,12 +168,12 @@ const Register = ({ formik, open, handleOpenClose }) => {
                           >
                             <FormControlLabel
                               name="term"
-                              checked={formik.values.term}
+                              checked={formik.values.term == "yes"}
                               onChange={(e) => {
                                 if (e.target.checked) {
-                                  formik.setFieldValue("term", true);
+                                  formik.setFieldValue("term", "yes");
                                 } else {
-                                  formik.setFieldValue("term", false);
+                                  formik.setFieldValue("term", "no");
                                 }
                               }}
                               control={
