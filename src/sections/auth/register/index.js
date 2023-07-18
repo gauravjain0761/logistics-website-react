@@ -19,7 +19,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const Register = ({ formik, open }) => {
+const Register = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
 
   return (

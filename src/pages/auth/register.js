@@ -108,7 +108,9 @@ const RegisterPage = () => {
     },
   });
 
-  return <Register open={open} formik={formik} />;
+  return (
+    <Register open={open} handleOpenClose={handleOpenClose} formik={formik} />
+  );
 };
 
 RegisterPage.getLayout = function getLayout(page) {
