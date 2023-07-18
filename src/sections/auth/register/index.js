@@ -70,8 +70,8 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       <Box>
                         <TextBox
                           fullWidth
-                          name="user_name"
                           placeholder={"Enter Your Full Name "}
+                          name="user_name"
                           value={formik.values.user_name}
                           onChange={formik.handleChange}
                           helperText={
@@ -86,8 +86,8 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       <Box>
                         <TextBox
                           fullWidth
-                          name="email"
                           placeholder={"Enter Your Email Address"}
+                          name="email"
                           value={formik.values.email}
                           onChange={formik.handleChange}
                           helperText={
@@ -272,6 +272,8 @@ const Register = ({ formik, open, handleOpenClose }) => {
 
       <OTPDialogBox
         onClose={handleOpenClose}
+        email={formik.values.email}
+        registerFormik={formik}
         open={open}
         title="OTP Verification"
       />

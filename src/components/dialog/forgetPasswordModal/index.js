@@ -52,6 +52,10 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         errors.email = "Invalid email address";
       }
 
+      if (showResend && !values.otp) {
+        errors.otp = "OTP is Required";
+      }
+
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
@@ -139,14 +143,6 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
       .catch((error) => {
         const { response } = error;
         let status = [406, 404];
-        if (response.status === 422) {
-          // eslint-disable-next-line no-unused-vars
-          for (const [key, value] of Object.entries(formik.values)) {
-            if (response.data.error[key]) {
-              setErrors({ [key]: response.data.error[key][0] });
-            }
-          }
-        }
         if (status.includes(response?.status)) {
           enqueueSnackbar(response.data.message, {
             variant: "error",
