@@ -8,8 +8,10 @@ import {
   CardContent,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   Grid,
   Stack,
   Typography,
@@ -17,12 +19,13 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const Register = () => {
+const Register = ({ formik }) => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const handleOpenClose = () => {
     setOpen(!open);
   };
+
   return (
     <React.Fragment>
       <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
@@ -63,21 +66,37 @@ const Register = () => {
                   }}
                 >
                   <CardContent sx={{ p: 6 }}>
-                    <FormGroup>
+                    <Box
+                      component="form"
+                      noValidate
+                      onSubmit={formik.handleSubmit}
+                    >
                       <Box>
                         <TextBox
                           fullWidth
+                          name="user_name"
                           placeholder={"Enter Your Full Name "}
+                          value={formik.values.user_name}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.user_name && formik.errors.user_name
+                          }
                           startIcon={
                             <Iconify icon="mdi:user" color="#ff7534" />
                           }
-                          size={"small"}
+                          size="small"
                         />
                       </Box>
                       <Box>
                         <TextBox
                           fullWidth
+                          name="email"
                           placeholder={"Enter Your Email Address"}
+                          value={formik.values.email}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.email && formik.errors.email
+                          }
                           startIcon={
                             <Iconify
                               icon="fluent:mail-20-filled"
@@ -90,6 +109,12 @@ const Register = () => {
                       <Box>
                         <TextBox
                           fullWidth
+                          name="mobile"
+                          value={formik.values.mobile}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.mobile && formik.errors.mobile
+                          }
                           placeholder={"Enter Your Contact Number"}
                           startIcon={
                             <Iconify
@@ -102,10 +127,13 @@ const Register = () => {
                       </Box>
                       <Box>
                         <PasswordBox
-                          onChange={(e) => {
-                            e.target.value;
-                          }}
                           fullWidth
+                          name="password"
+                          value={formik.values.password}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.password && formik.errors.password
+                          }
                           placeholder={"Enter Password"}
                           startIcon={
                             <Iconify icon="solar:lock-bold" color="#ff7534" />
@@ -115,9 +143,13 @@ const Register = () => {
                       </Box>
                       <Box>
                         <PasswordBox
-                          onChange={(e) => {
-                            e.target.value;
-                          }}
+                          name="password_confirmation"
+                          value={formik.values.password_confirmation}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.password_confirmation &&
+                            formik.errors.password_confirmation
+                          }
                           fullWidth
                           placeholder={"Enter Confirm Password"}
                           startIcon={
@@ -134,20 +166,42 @@ const Register = () => {
                         }}
                       >
                         <Box my={2}>
-                          <FormControlLabel
-                            control={
-                              <Checkbox size="" sx={{ paddingBottom: "2em" }} />
-                            }
-                            label={
-                              <Typography textAlign="center">
-                                I agree to the{" "}
-                                <Typography color="primary" component="span">
-                                  Terms and Conditions
-                                </Typography>{" "}
-                                as set out by the user agreement.
-                              </Typography>
-                            }
-                          />
+                          <FormControl
+                            error={formik.errors.term ? true : false}
+                            fullWidth
+                          >
+                            <FormControlLabel
+                              name="term"
+                              checked={formik.values.term}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  formik.setFieldValue("term", true);
+                                } else {
+                                  formik.setFieldValue("term", false);
+                                }
+                              }}
+                              control={
+                                <Checkbox
+                                  size=""
+                                  sx={{ marginBottom: "1.6em" }}
+                                />
+                              }
+                              label={
+                                <Typography textAlign="center">
+                                  I agree to the{" "}
+                                  <Typography color="primary" component="span">
+                                    Terms and Conditions
+                                  </Typography>{" "}
+                                  as set out by the user agreement.
+                                </Typography>
+                              }
+                            />
+                            {formik.errors.term && (
+                              <FormHelperText>
+                                {formik.errors.term}
+                              </FormHelperText>
+                            )}
+                          </FormControl>
                         </Box>
                       </Box>
                       <Stack direction={"row"} justifyContent={"space-around"}>
@@ -208,7 +262,7 @@ const Register = () => {
                           <Typography>Want To Become A Driver</Typography>
                         </Button>
                       </Box>
-                    </FormGroup>
+                    </Box>
                   </CardContent>
                 </Card>
               </Stack>
