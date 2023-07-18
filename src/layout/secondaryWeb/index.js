@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./header";
 import Footer from "./footer";
-import { Fab, Toolbar } from "@mui/material";
+import { Box, Fab, Toolbar } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "./scrollTop";
 import useOffSetTop from "@/hooks/useOffSetTop";
@@ -19,7 +19,7 @@ const SecondaryWebLayout = (props) => {
   return (
     <>
       <Header />
-      <Toolbar id="back-to-top-anchor" />
+      <Box id="back-to-top-anchor" />
       {children}
       <Footer />
       <ScrollTop {...props}>
