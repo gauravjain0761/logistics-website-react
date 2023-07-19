@@ -64,8 +64,8 @@ const Blogs = ({ formik }) => {
                               </Typography>
                             </Box>
                             <Box>
-                              <Typography fontSize="14px">
-                                Comments 10
+                              <Typography fontSize="16x" fontWeight={700} color="primary">
+                                Category Name
                               </Typography>
                             </Box>
                             <Box>

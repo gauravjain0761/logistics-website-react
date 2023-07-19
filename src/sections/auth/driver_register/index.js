@@ -19,7 +19,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { BsX } from "react-icons/bs";
 import React from "react";
 import { Close } from "@mui/icons-material";
 
