@@ -19,6 +19,7 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          textAlign:"center",
           "&::before": {
             content: '""',
             backgroundImage:
