@@ -25,6 +25,10 @@ import Link from "next/link";
 import { navItems } from "./navConfig";
 import useOffSetTop from "@/hooks/useOffSetTop";
 import useResponsive from "@/hooks/useResponsive";
+import NavDesktop from "../nav/desktop/NavDesktop";
+import { HEADER } from "@/utils/config-global";
+import navConfig from "../nav/config-navigation";
+import { NavSectionHorizontal } from "@/components/nav-section";
 
 const drawerWidth = 240;
 
@@ -35,6 +39,7 @@ const Header = (props) => {
   const value = useOffSetTop(responsiveHeight, {
     offset: ["start end", "end end"],
   });
+  const isOffset = useOffSetTop(HEADER.H_MAIN_DESKTOP);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -118,8 +123,10 @@ const Header = (props) => {
                 }}
               />
             </Box>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems &&
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              
+            <NavSectionHorizontal isOffset={isOffset} data={navConfig} />
+              {/* {navItems &&
                 navItems.length &&
                 navItems.map((item) => (
                   <>
@@ -134,8 +141,8 @@ const Header = (props) => {
                       {item?.name}
                     </Button>
                   </>
-                ))}
-              
+                ))} */}
+
               <Button
                 component={Link}
                 href={"/auth/login"}
