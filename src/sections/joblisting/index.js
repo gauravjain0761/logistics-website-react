@@ -1,3 +1,4 @@
+import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import DashboardCard from "@/module/dashboard/dashboardCard";
 import {
@@ -5,369 +6,218 @@ import {
   Button,
   Card,
   CardContent,
+  Chip,
   Container,
+  DialogContent,
+  Drawer,
   Grid,
+  Pagination,
+  PaginationItem,
+  Rating,
   Stack,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
 const JobList = () => {
-  const [layout, setLayout] = useState(true);
-  const handleLayout = (key) => {
-    if (key === "list") {
-      setLayout(true);
-    } else {
-      setLayout(false);
-    }
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const [select, setSelect] = React.useState("new");
+  const [page, setPage] = React.useState(1);
+  const [pageCount, setPageCount] = React.useState(1);
+  const [pageSize, setPageSize] = React.useState(10);
+
+  const sortBy = [
+    {
+      label: "New",
+      value: "new",
+    },
+    {
+      label: "Last",
+      value: "last",
+    },
+  ];
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
+
   return (
     <React.Fragment>
-      <Box py={4} sx={{ background: "#ececec" }}>
+      <Box py={4} sx={{ background: " " }}>
         <Container>
-          <Box py={4}>
-            <Stack direction="row" justifyContent="space-between" py={3}>
-              <Stack direction="row" spacing={1} alignItems="center">
-                <Typography fontSize="1.75rem" fontWeight={700} color="primary">
-                  Total Bid{"'"}s
-                </Typography>
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Box>
-                  <Typography
-                    fontSize="1.3rem"
-                    fontWeight={700}
-                    backgroundColor={(theme) => theme.palette.primary.main}
-                    color="white"
-                    borderRadius="50%"
-                    py={0.3}
-                    px={0.6}
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<Iconify icon="lucide:filter" />}
+                    sx={{ mb: 2, px: 2, py: 1 }}
+                    onClick={() => setOpen(true)}
                   >
-                    05
-                  </Typography>
+                    Filters
+                  </Button>
+                </Box>
+                <Box>
+                  <SelectBox
+                    fullWidth
+                    size="small"
+                    value={select}
+                    onChange={(e) => setSelect(e.target.value)}
+                    options={sortBy}
+                  />
                 </Box>
               </Stack>
-              <Stack direction="row" spacing={2}>
-                <Button
-                  sx={{
-                    minWidth: "50px !important",
-                    background: (theme) => theme.palette.common.white,
-                  }}
-                  onClick={() => handleLayout("list")}
-                >
-                  <Iconify icon="ion:list-sharp" width={20} />
-                </Button>
-                <Button
-                  sx={{
-                    minWidth: "50px !important",
-                    background: (theme) => theme.palette.common.white,
-                  }}
-                  onClick={() => handleLayout("grid")}
-                >
-                  <Iconify icon="system-uicons:grid" width={20} />
-                </Button>
-              </Stack>
-            </Stack>
-            <Stack alignItems="center">
-              <Box
-                width="100%"
-                height="24em"
-                component="img"
-                src="/assets/images/dashboard/map.png"
-                alt="map"
-              />
-            </Stack>
-            {layout ? (
-              <Box py={4}>
-                {[...Array(3)].map((elem, index) => {
+              <Box>
+                <Box mb={2}>
+                  <Typography>1249 employers recommended for you</Typography>
+                </Box>
+                {[...Array(4)].map((elem, index) => {
                   return (
                     <Card
                       key={index}
                       sx={{
-                        mt: 2,
-                        borderRadius: "0.25rem",
-                        boxShadow: "3px 3px 2px 2px #b1b1b177",
+                        my: 2,
+                        borderRadius: "0px",
+                        ":hover": {
+                          borderColor: "#ff7534",
+                          cursor: "pointer",
+                          transition: " all 0.3s ease-in-out",
+                        },
                       }}
+                      variant="outlined"
                     >
-                      <Box
-                        p={2}
-                        backgroundColor="rgba(0,0,0,.03)"
-                        borderBottom="1px solid rgba(0,0,0,.125)"
-                      >
-                        <Stack direction="row" justifyContent="space-between">
-                          <Stack direction="row" spacing={1}>
-                            <Typography fontWeight={600}>
-                              Driver Name :{" "}
-                            </Typography>
-                            <Typography fontWeight={600} color="primary">
-                              Mr. Gaurav
-                            </Typography>
-                          </Stack>
-                          <Stack direction="row" spacing={1}>
-                            <Typography fontWeight={600}>
-                              Job Success Rate:{" "}
-                            </Typography>
-                            <Typography fontWeight={600} color="primary">
-                              98 %
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </Box>
                       <CardContent>
                         <Grid container spacing={2}>
                           <Grid item md={2}>
                             <Box
+                              component="img"
+                              src="/assets/images/dashboard/portfolio.jpeg"
                               sx={{
-                                border: 5,
-                                borderColor: (theme) =>
-                                  theme.palette.primary.main,
                                 borderRadius: "50%",
-                                width: "max-content",
+                                border: "3px solid #ff7534",
                               }}
-                            >
-                              <Box
-                                component="img"
-                                width={90}
-                                borderRadius="50%"
-                                src="/assets/images/dashboard/portfolio.jpeg"
-                                alt="profile"
-                              />
-                            </Box>
-                            <Stack direction="row" spacing={1} alignItems="center" mt={0.5}>
-                              <Typography fontWeight={600} fontSize="1.5rem">
-                                Bid :{" "}
-                              </Typography>
-                              <Typography
-                                fontWeight={700}
-                                fontSize="1.5rem"
-                                color="primary"
-                              >
-                                ₹ 500
+                            />
+                          </Grid>
+                          <Grid item md={8}>
+                            <Stack direction="column">
+                              <Box>
+                                <Typography fontSize={14} fontWeight={600}>
+                                  Job Success Rate: 98 %
+                                </Typography>
+                              </Box>
+                              <Box pb={0.3}>
+                                <Typography variant="h5" fontWeight={600}>
+                                  Mr. Gaurav
+                                </Typography>
+                              </Box>
+                              <Typography fontSize={14}>
+                                {" "}
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat.
                               </Typography>
                             </Stack>
                           </Grid>
-                          <Grid item md={8.2}>
-                            <Stack direction="row" spacing={5}>
-                              <Stack direction="row" spacing={1}>
-                                <Typography fontWeight={400}>
-                                  Earned:{" "}
-                                </Typography>
-                                <Typography
-                                  fontWeight={600}
-                                  fontSize="16px"
-                                  color="primary"
-                                >
-                                  ₹ 30K+
-                                </Typography>
-                              </Stack>
-                              <Stack direction="row" spacing={1}>
-                                <Typography fontWeight={400}>
-                                  Rating:{" "}
-                                </Typography>
-                                <Typography
-                                  fontWeight={600}
-                                  fontSize="16px"
-                                  color="primary"
-                                >
-                                  5 / 5
-                                </Typography>
-                              </Stack>
-                            </Stack>
-                            <Box mt={2}>
-                              <Typography>
-                                Note From Driver : Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat.
-                              </Typography>
-                            </Box>
-                          </Grid>
-                          <Grid item md={1.8}>
-                            <Stack spacing={0.5}>
-                              <Box>
-                                <Button
-                                  variant="contained"
-                                  startIcon={
-                                    <Iconify icon="majesticons:chat" />
-                                  }
-                                  color="dark"
-                                  fullWidth
-                                >
-                                  Open For Chat
-                                </Button>
-                              </Box>
-                              <Box>
-                                <Button
-                                  variant="contained"
-                                  startIcon={
-                                    <Iconify icon="material-symbols:check-circle" />
-                                  }
-                                  color="primary"
-                                  fullWidth
-                                >
-                                  Start Job
-                                </Button>
-                              </Box>
-                            </Stack>
+                          <Grid item md={2}>
+                            <Button variant="contained">Apply</Button>
                           </Grid>
                         </Grid>
+                        <Stack
+                          direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          pt={2}
+                        >
+                          <Stack direction="row" spacing={1}>
+                            <Chip label="Full-Time" />
+                            <Chip label="Remote" />
+                          </Stack>
+                          <Stack>
+                            <Rating value={4} readOnly size="small" />
+                          </Stack>
+                        </Stack>
                       </CardContent>
                     </Card>
                   );
                 })}
               </Box>
-            ) : (
               <Box>
-                <Grid container spacing={2}>
-                  {[...Array(4)].map((elem, index) => {
-                    return (
-                      <Grid item md={4} key={index} px={4} mt={5}>
-                        <Card
-                          sx={{
-                            borderRadius: "0.25rem",
-                            boxShadow: "3px 3px 2px 2px #b1b1b177",
-                          }}
-                        >
-                          <Box
-                            py={2}
-                            px={5}
-                            backgroundColor="rgba(0,0,0,.03)"
-                            borderBottom="1px solid rgba(0,0,0,.125)"
-                          >
-                            <Stack direction="row" spacing={1}>
-                              <Typography fontWeight={600}>
-                                Driver Name :{" "}
-                              </Typography>
-                              <Typography fontWeight={600} color="primary">
-                                Mr. Gaurav
-                              </Typography>
-                            </Stack>
-                            <Stack direction="row" spacing={1}>
-                              <Typography fontWeight={600}>
-                                Job Success Rate:{" "}
-                              </Typography>
-                              <Typography fontWeight={600} color="primary">
-                                98 %
-                              </Typography>
-                            </Stack>
-                          </Box>
-                          <CardContent>
-                            <Box>
-                              <Grid container spacing={0}>
-                                <Grid item md={5}>
-                                  <Box
-                                    sx={{
-                                      border: 5,
-                                      borderColor: (theme) =>
-                                        theme.palette.primary.main,
-                                      borderRadius: "50%",
-                                      width: "max-content",
-                                    }}
-                                  >
-                                    <Box
-                                      component="img"
-                                      width={90}
-                                      borderRadius="50%"
-                                      src="/assets/images/dashboard/portfolio.jpeg"
-                                      alt="profile"
-                                    />
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}></Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Box mb={4}>
-                                      <Stack direction="row" spacing={1}>
-                                        <Typography
-                                          fontWeight={400}
-                                          fontSize="1.5rem"
-                                        >
-                                          Bid :{" "}
-                                        </Typography>
-                                        <Typography
-                                          fontWeight={600}
-                                          fontSize="1.5rem"
-                                          color="primary"
-                                        >
-                                          ₹ 500
-                                        </Typography>
-                                      </Stack>
-                                    </Box>
-                                    <Stack direction="row" spacing={1}>
-                                      <Typography fontWeight={400}>
-                                        Earned:{" "}
-                                      </Typography>
-                                      <Typography
-                                        fontWeight={600}
-                                        fontSize="16px"
-                                        color="primary"
-                                      >
-                                        ₹ 30K+
-                                      </Typography>
-                                    </Stack>
-                                    <Stack direction="row" spacing={1}>
-                                      <Typography fontWeight={400}>
-                                        Rating:{" "}
-                                      </Typography>
-                                      <Typography
-                                        fontWeight={600}
-                                        fontSize="16px"
-                                        color="primary"
-                                      >
-                                        5 / 5
-                                      </Typography>
-                                    </Stack>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                              <Box py={2}>
-                                <Typography>
-                                  Note From Driver :Lorem ipsum dolor sit amet,
-                                  consectetur adipiscing elit, sed do eiusmod
-                                  tempor incididunt ut labore et dolore magna
-                                  aliqua. Ut enim ad minim veniam, quis nostrud
-                                  exercitation ullamco laboris nisi ut aliquip
-                                  ex ea commodo consequat.
-                                </Typography>
-                              </Box>
-                              <Stack spacing={0.5}>
-                                <Box>
-                                  <Button
-                                    variant="contained"
-                                    startIcon={
-                                      <Iconify icon="majesticons:chat" />
-                                    }
-                                    color="dark"
-                                    fullWidth
-                                  >
-                                    Open For Chat
-                                  </Button>
-                                </Box>
-                                <Box>
-                                  <Button
-                                    variant="contained"
-                                    startIcon={
-                                      <Iconify icon="material-symbols:check-circle" />
-                                    }
-                                    color="primary"
-                                    fullWidth
-                                  >
-                                    Start Job
-                                  </Button>
-                                </Box>
+                <Stack alignItems="center" justifyContent="center">
+                  <Pagination
+                    count={pageCount}
+                    color="primary"
+                    page={page}
+                    onChange={handlePageChange}
+                    variant="outlined"
+                    shape="rounded"
+                    renderItem={(item) => (
+                      <PaginationItem
+                        slots={{
+                          previous: () => {
+                            return (
+                              <Stack
+                                direction="row"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <NavigateBeforeIcon />
                               </Stack>
-                            </Box>
-                          </CardContent>
-                        </Card>
-                      </Grid>
-                    );
-                  })}
-                </Grid>
+                            );
+                          },
+                          next: () => {
+                            return (
+                              <Stack
+                                direction="row"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <NavigateNextIcon />
+                              </Stack>
+                            );
+                          },
+                        }}
+                        {...item}
+                      />
+                    )}
+                  />
+                </Stack>
               </Box>
-            )}
-          </Box>
+            </Grid>
+            <Grid item md={6}>
+              <Box sx={{ position: "sticky", top: 0, display: "block" }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14507.386011003215!2d73.68892634999999!3d24.628974799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1689852541239!5m2!1sen!2sin"
+                  width="600"
+                  height="600"
+                ></iframe>
+              </Box>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+        <DialogContent sx={{ pt: 4 }}>
+          <Typography>Search</Typography>
+          <TextBox
+            fullWidth
+            size="small"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </DialogContent>
+      </Drawer>
     </React.Fragment>
   );
 };
