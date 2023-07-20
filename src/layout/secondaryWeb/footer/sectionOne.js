@@ -1,24 +1,17 @@
 import { Heading } from "@/components/typography";
-import { Box, List, ListItemButton, ListItemText, Stack } from "@mui/material";
+import { Box, List, ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 import { StyledListItemText } from "./footerStyle";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+
 const SectionOne = () => {
   return (
     <>
-      <List>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <LocationOnIcon fontSize="large" />{" "}
-          <StyledListItemText
-            primary="United Kingdom"
-            sx={{
-              "& .MuiTypography-root": {
-                fontSize: "20px",
-              },
-            }}
-          />
-        </Stack>
-      </List>
+      <Box>
+        <Box component="img" src="/assets/images/logo/logo.jpg" />
+        <List sx={{ mt: 1 }}>
+          <StyledListItemText primary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor dunt labore et dolore magna aliqua." />
+        </List>
+      </Box>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import DriverRegister from "@/sections/auth/driver_register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
@@ -9,6 +9,10 @@ import React from "react";
 const DriverPage = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
+  const [open, setOpen] = React.useState(false);
+  const handleOpenClose = () => {
+    setOpen(!open);
+  };
   const formik = useFormik({
     initialValues: {
       user_name: "",
@@ -87,15 +91,20 @@ const DriverPage = () => {
         };
       } else {
         url = "/api/user/company-register";
-        formData = {
-          user_name: values?.user_name,
-          user_type: values?.user_type,
-          email: values?.email,
-          mobile: values?.mobile,
-          term: values?.term,
-          password: values?.password,
-          password_confirmation: values?.password_confirmation,
-        };
+        let formDatas = new FormData();
+        formDatas.append("user_name", values?.user_name);
+        formDatas.append("user_type", values?.user_type);
+        formDatas.append("email", values?.email);
+        formDatas.append("mobile", values?.mobile);
+        formDatas.append("term", values?.term);
+        formDatas.append("password", values?.password);
+        formDatas.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
+        formDatas.append("company_certificate", values?.company_certificate);
+        formDatas.append("company_vat", values?.company_vat);
+        formData = formDatas;
       }
       await axiosInstance
         .post(url, formData, { setErrors })
@@ -104,6 +113,7 @@ const DriverPage = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
+            // handleOpenClose();
             formik.resetForm();
             router.push("/auth/login");
           } else {
@@ -132,10 +142,16 @@ const DriverPage = () => {
     },
   });
 
-  return <DriverRegister formik={formik} />;
+  return (
+    <DriverRegister
+      open={open}
+      handleOpenClose={handleOpenClose}
+      formik={formik}
+    />
+  );
 };
 
 DriverPage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default DriverPage;

@@ -1,9 +1,9 @@
 import Head from "next/head";
-import ClickNewSend from "@/sections/clicksendnew";
-import { SecondaryWebLayout } from "@/layout";
+import PrimaryHomePage from "@/sections/primaryhomepage";
+import { PrimaryWebLayout } from "@/layout";
 
 HomePage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default function HomePage() {
   return (
@@ -14,8 +14,7 @@ export default function HomePage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <HomeSection /> */}
-      <ClickNewSend />
+      <PrimaryHomePage />
     </>
   );
 }

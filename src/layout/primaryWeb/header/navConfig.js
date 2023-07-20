@@ -2,29 +2,29 @@ export const navItems = [
   {
     name: "Home",
     link: "/",
+    isArrow: false,
   },
   {
-    name: "About us",
-    link: "/about",
+    name: "Company",
+    link: "/",
+    isArrow: true,
   },
   {
     name: "Jobs",
     link: "/jobs",
+    isArrow: false,
   },
-  {
-    name: "Testimonials",
-    link: "/testimonials",
-  },
-  {
-    name: "FAQ",
-    link: "/faqs",
-  },
-  {
-    name: "Blog",
-    link: "/blog",
-  },
+  // {
+  //   name: "Testimonials",
+  //   link: "/testimonials",
+  // },
+  // {
+  //   name: "FAQ",
+  //   link: "/contact",
+  // },
   {
     name: "Contact us",
     link: "/contact",
+    isArrow: false,
   },
 ];
