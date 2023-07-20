@@ -22,11 +22,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Close } from "@mui/icons-material";
 
-const DriverRegister = ({ formik }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpenClose = () => {
-    setOpen(!open);
-  };
+const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
   console.log("formik.values", formik.values);
   return (

@@ -6,7 +6,7 @@ import { StyledListItemText } from "./footerStyle";
 const SectionTwo = () => {
   return (
     <>
-      {/* <Heading
+      <Heading
         heading="Useful Links"
         isPositionLeft={true}
         sx={{
@@ -16,7 +16,7 @@ const SectionTwo = () => {
           color:"#555555!important"
 
         }}
-      /> */}
+      />
       <List>
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Jobs" />

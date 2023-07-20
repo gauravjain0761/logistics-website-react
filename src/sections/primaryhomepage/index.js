@@ -6,7 +6,7 @@ import ForCard from "./forcard";
 import HelpfulHome from "./helpfulhome";
 import NewTestimonial from "./newtestimonials";
 
-const ClickNewSend = () => {
+const PrimaryHomePage = () => {
   return (
     <React.Fragment>
       <NewBanner />
@@ -19,4 +19,4 @@ const ClickNewSend = () => {
   );
 };
 
-export default ClickNewSend;
+export default PrimaryHomePage;
