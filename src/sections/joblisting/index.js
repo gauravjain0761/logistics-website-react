@@ -9,6 +9,7 @@ import {
   Chip,
   Container,
   DialogContent,
+  Divider,
   Drawer,
   Grid,
   Pagination,
@@ -110,7 +111,11 @@ const JobList = () => {
                           <Grid item md={8}>
                             <Stack direction="column">
                               <Box>
-                                <Typography fontSize={14} fontWeight={600}>
+                                <Typography
+                                  color="primary"
+                                  fontSize={14}
+                                  fontWeight={600}
+                                >
                                   Job Success Rate: 98 %
                                 </Typography>
                               </Box>
@@ -148,6 +153,17 @@ const JobList = () => {
                             <Rating value={4} readOnly size="small" />
                           </Stack>
                         </Stack>
+                        <Divider sx={{ my: 2 }} />
+                        <Box>
+                          <Stack direction="row" justifyContent="space-between">
+                            <Typography variant="subtitle2">
+                              Bid: $500
+                            </Typography>
+                            <Typography variant="subtitle2">
+                              Earned: $30K+
+                            </Typography>
+                          </Stack>
+                        </Box>
                       </CardContent>
                     </Card>
                   );
