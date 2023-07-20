@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import CustomerDashboard from '@/sections/customerdashboard';
 import JobList from '@/sections/joblisting';
@@ -12,6 +12,6 @@ const JobListing = () => {
 };
 
 JobListing.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default JobListing;
