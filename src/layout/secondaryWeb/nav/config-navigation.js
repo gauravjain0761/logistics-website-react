@@ -26,15 +26,15 @@ const navConfig = [
       },
       {
         title: "About us",
-        path: "/about",
+        path: "#about",
       },
       {
         title: "Job",
-        path: "/jobs",
+        path: "#jobs",
       },
       {
         title: "Testimonials",
-        path: "/tesimonials",
+        path: "#tesimonials",
       },
       {
         title: "FAQ",

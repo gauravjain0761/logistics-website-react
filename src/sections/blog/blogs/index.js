@@ -64,13 +64,15 @@ const Blogs = ({ formik }) => {
                               </Typography>
                             </Box>
                             <Box>
-                              <Typography fontSize="16x" fontWeight={700} color="primary">
-                                Category Name
+                              <Typography
+                                fontSize="16x"
+                                fontWeight={700}
+                                color="primary"
+                              >
+                                Courier
                               </Typography>
                             </Box>
-                            <Box>
-                              <Typography fontSize="14px">Courier</Typography>
-                            </Box>
+                            <Box></Box>
                             <Box>
                               <Typography fontSize="15px">
                                 Auisy nostrud exercitation ullamc laboris
