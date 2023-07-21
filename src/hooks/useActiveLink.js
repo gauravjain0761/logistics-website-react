@@ -7,7 +7,7 @@ export default function useActiveLink(path, deep = true) {
 
   const checkPath = path && path?.startsWith("#");
 
-  const currentPath = path;
+  const currentPath = path === "/" ? false : path;
 
   const normalActive =
     (!checkPath && pathname === currentPath) ||
@@ -16,6 +16,7 @@ export default function useActiveLink(path, deep = true) {
   const deepActive =
     (!checkPath && pathname.includes(currentPath)) ||
     (!checkPath && asPath.includes(currentPath));
+  console.log("checkPath", checkPath, path);
 
   return {
     active: deep ? deepActive : normalActive,

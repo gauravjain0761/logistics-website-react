@@ -20,7 +20,6 @@ export const NavItem = forwardRef(
   ({ item, open, isOffset, active, subItem, isExternalLink, ...other }, ref) => {
     const { title, path, children } = item;
 
-    console.log("isExternalLink",isExternalLink)
 
     const renderContent = (
       <ListItem

@@ -125,7 +125,7 @@ const Header = (props) => {
             </Box>
             <Box sx={{ display: { xs: "none", sm: "flex" } }}>
               
-            <NavSectionHorizontal isOffset={isOffset} data={navConfig} />
+            <NavDesktop isOffset={isOffset} data={navConfig} />
               {/* {navItems &&
                 navItems.length &&
                 navItems.map((item) => (

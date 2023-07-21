@@ -21,11 +21,11 @@ NavList.propTypes = {
 export default function NavList({ item, isOffset }) {
   const { pathname } = useRouter();
 
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
 
   const { path, children } = item;
 
-  const { active, isExternalLink } = useActiveLink(path, false);
+  const { active, isExternalLink } = useActiveLink(path);
 
   useEffect(() => {
     if (openMenu) {
@@ -100,7 +100,7 @@ function NavSubList({ items, isDashboard, subheader, onClose }) {
       gridColumn={isDashboard ? "span 6" : "span 2"}
       alignItems="flex-start"
     >
-      <StyledSubheader disableSticky>{subheader}</StyledSubheader>
+      {/* <StyledSubheader disableSticky>{subheader}</StyledSubheader> */}
 
       {items &&
         items.length > 0 &&
