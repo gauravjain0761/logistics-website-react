@@ -1,4 +1,4 @@
-import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
@@ -147,6 +147,6 @@ const RegisterPage = () => {
 };
 
 RegisterPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default RegisterPage;

@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import ClickSend from '@/sections/work';
-import SecondaryWebLayout from '@/layout/primaryWeb';
-
-
+import ClickSend from "@/sections/work";
 
 const ClickAndSend = () => {
   const formik = useFormik({});
@@ -12,6 +9,6 @@ const ClickAndSend = () => {
 };
 
 ClickAndSend.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default ClickAndSend;

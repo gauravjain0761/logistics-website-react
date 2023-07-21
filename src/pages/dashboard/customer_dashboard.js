@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 import { useFormik } from "formik";
-import CustomerDashboard from '@/sections/customerdashboard';
-import { SecondaryWebLayout } from '@/layout';
-
-
+import CustomerDashboard from "@/sections/customerdashboard";
+import { PrimaryWebLayout } from "@/layout";
 
 const DashboardPage = () => {
   const formik = useFormik({});
@@ -11,6 +9,6 @@ const DashboardPage = () => {
 };
 
 DashboardPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default DashboardPage;

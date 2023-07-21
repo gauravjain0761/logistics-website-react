@@ -1,4 +1,4 @@
-import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import Login from "@/sections/auth/login";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
@@ -46,10 +46,10 @@ const LoginPage = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-           
+
             formik.resetForm();
             router.push("/dashboard/customer_dashboard");
-            localStorage.setItem("token",response.data.access_token)
+            localStorage.setItem("token", response.data.access_token);
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",
@@ -79,6 +79,6 @@ const LoginPage = () => {
 };
 
 LoginPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default LoginPage;
