@@ -1,7 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import BlogDetail from "@/sections/blogdetail";
+import BlogDetail from "@/sections/blog/blogdetail";
 const BlogDetailPage = () => {
   const formik = useFormik({});
   return <BlogDetail formik={formik} />;

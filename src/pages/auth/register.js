@@ -1,12 +1,14 @@
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
 import { isEqual } from "lodash";
+import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
   const handleOpenClose = () => {
@@ -106,7 +108,9 @@ const RegisterPage = () => {
               email: values.email,
               type: values.user_type,
             });
-            handleOpenClose();
+            // handleOpenClose();
+            formik.resetForm();
+            router.push("/auth/login");
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
@@ -143,6 +147,6 @@ const RegisterPage = () => {
 };
 
 RegisterPage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default RegisterPage;
