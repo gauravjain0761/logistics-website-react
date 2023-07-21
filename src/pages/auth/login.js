@@ -46,8 +46,10 @@ const LoginPage = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
+           
             formik.resetForm();
             router.push("/dashboard/customer_dashboard");
+            localStorage.setItem("token",response.data.access_token)
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",

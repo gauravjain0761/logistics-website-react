@@ -1,5 +1,7 @@
 // ----------------------------------------------------------------------
 
+import { Router } from "next/router";
+
 export default function localStorageAvailable() {
   try {
     // Incognito mode might reject access to the localStorage for security reasons.
@@ -16,10 +18,17 @@ export default function localStorageAvailable() {
   }
 }
 
-export const isShowMenu = (id) => {
-  if (Number(id) === Number(1)) {
+export const isAccessToken = () => {
+  if (typeof window != "undefined" && localStorage.getItem("token")) {
     return true;
   } else {
     return false;
   }
+};
+
+export const clearToken = () => {
+  if (typeof window != "undefined" && localStorage.getItem("token")) {
+    localStorage.removeItem("token");
+  }
+  // Router.push("/auth/login");
 };

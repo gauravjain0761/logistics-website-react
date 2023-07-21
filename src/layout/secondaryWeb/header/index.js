@@ -19,6 +19,7 @@ import {
   ListSubheader,
   Popover,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
@@ -30,11 +31,14 @@ import { HEADER } from "@/utils/config-global";
 import navConfig from "../nav/config-navigation";
 import { NavSectionHorizontal } from "@/components/nav-section";
 import NavMobile from "../nav/mobile/NavMobile";
+import { clearToken, isAccessToken } from "@/utils/localStorageAvailable";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
+  const token = isAccessToken();
+
   const isMobile = useResponsive("down", "md");
   const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(responsiveHeight, {
@@ -115,16 +119,35 @@ const Header = (props) => {
             >
               <NavDesktop isOffset={isOffset} data={navConfig} />
 
-              <Button
-                component={Link}
-                href={"/auth/login"}
-                sx={{ color: "#fff", ml: 1 }}
-                aria-owns="mouse-over-popover"
-                aria-haspopup="true"
-                variant="contained"
-              >
-                Sign in/ Sign up
-              </Button>
+              {token ? (
+                <Button
+                  onClick={() => {
+                    clearToken();
+                    router.push("/auth/login");
+                  }}
+                  sx={{ color: "#fff", ml: 1 }}
+                  aria-owns="mouse-over-popover"
+                  aria-haspopup="true"
+                  variant="contained"
+                >
+                  <Typography>Log out</Typography>
+                </Button>
+              ) : (
+                <div>
+                  <Button
+                    onClick={() => {
+                      // clearToken();
+                      router.push("/auth/login");
+                    }}
+                    sx={{ color: "#fff", ml: 1 }}
+                    aria-owns="mouse-over-popover"
+                    aria-haspopup="true"
+                    variant="contained"
+                  >
+                    Sign in/ Sign up
+                  </Button>
+                </div>
+              )}
             </Box>
 
             {isMobile && <NavMobile isOffset={isOffset} data={navConfig} />}
