@@ -67,8 +67,9 @@ export const ListItem = styled(ListItemButton, {
 
 // ----------------------------------------------------------------------
 
-export const StyledMenu = styled(Paper)(({ theme }) => ({
-  top: 95,
+export const StyledMenu = styled(Paper)(({ theme }) =>{  
+  return({
+  // top: 95,
   // left: 0,
   right: 300,
   // marginLeft: 'auto',
@@ -83,7 +84,7 @@ export const StyledMenu = styled(Paper)(({ theme }) => ({
   gridTemplateColumns: "repeat(3, 1fr)",
   borderRadius: Number(theme.shape.borderRadius) * 2,
   border: `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,
-}));
+})});
 
 // ----------------------------------------------------------------------
 
