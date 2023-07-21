@@ -15,6 +15,7 @@ import {
   Pagination,
   PaginationItem,
   Rating,
+  Slider,
   Stack,
   Typography,
 } from "@mui/material";
@@ -29,7 +30,7 @@ const JobList = () => {
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
-
+  const [filterPrice, setFilterPrice] = useState(10);
   const sortBy = [
     {
       label: "Sort(New)",
@@ -43,6 +44,10 @@ const JobList = () => {
 
   const handlePageChange = (event, value) => {
     setPage(value);
+  };
+
+  const handleInputChange = (event) => {
+    setFilterPrice(event.target.value);
   };
 
   return (
@@ -78,7 +83,6 @@ const JobList = () => {
                 </Box>
               </Stack>
               <Box>
-               
                 {[...Array(4)].map((elem, index) => {
                   return (
                     <Card
@@ -144,7 +148,11 @@ const JobList = () => {
                           pt={2}
                         >
                           <Stack direction="row" spacing={1}>
-                          <Chip label=" Job Success Rate: 98 %" variant="" color="primary" />
+                            <Chip
+                              label=" Job Success Rate: 98 %"
+                              variant=""
+                              color="primary"
+                            />
                             {/* <Chip label="Full-Time" variant="" color="primary" />
                             <Chip label="Remote" variant="" color="primary" /> */}
                           </Stack>
@@ -167,7 +175,7 @@ const JobList = () => {
                     </Card>
                   );
                 })}
-              </Box>  
+              </Box>
               <Box>
                 <Stack alignItems="center" justifyContent="center">
                   <Pagination
@@ -224,14 +232,52 @@ const JobList = () => {
       </Box>
       <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <DialogContent sx={{ pt: 4 }}>
-          <Typography>Search</Typography>
-          <TextBox
-            fullWidth
-            size="small"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <Stack direction="column" spacing={2}>
+            <Stack spacing={2}>
+              <Box>
+                <Typography>Search</Typography>
+                <TextBox
+                  fullWidth
+                  size="small"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <Box>
+                  <Typography variant="h6" fontWeight={400}>
+                    Price : ${filterPrice}
+                  </Typography>
+                </Box>
+                <Slider
+                  size="large"
+                  value={typeof filterPrice === "number" ? filterPrice : 0}
+                  onChange={handleInputChange}
+                />
+              </Box>
+              <Box>
+                <Box>
+                  <Typography variant="h6" fontWeight={400}>
+                    Rating
+                  </Typography>
+                </Box>
+                <Box>
+                  <Box>
+                    <Rating />
+                  </Box>
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
         </DialogContent>
+        <Stack direction="column" spacing={1} p={2}>
+          <Button variant="contained" fullWidth>
+            Apply
+          </Button>
+          <Button variant="outlined" fullWidth>
+            Clear All
+          </Button>
+        </Stack>
       </Drawer>
     </React.Fragment>
   );
