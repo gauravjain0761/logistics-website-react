@@ -1,5 +1,5 @@
 import React from "react";
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import BlogDetail from "@/sections/blog/blogdetail";
 const BlogDetailPage = () => {
@@ -8,6 +8,6 @@ const BlogDetailPage = () => {
 };
 
 BlogDetailPage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default BlogDetailPage;
