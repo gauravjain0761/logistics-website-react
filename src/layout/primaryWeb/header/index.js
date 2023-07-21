@@ -20,6 +20,7 @@ import {
   Popover,
   Stack,
   Toolbar,
+  Typography,
   alpha,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -28,11 +29,13 @@ import { navItems } from "./navConfig";
 import useOffSetTop from "@/hooks/useOffSetTop";
 import useResponsive from "@/hooks/useResponsive";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { clearToken, isAccessToken } from "@/utils/localStorageAvailable";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
+  const token = isAccessToken();
   const isMobile = useResponsive("down", "md");
   // const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(10, {
@@ -168,16 +171,37 @@ const Header = (props) => {
                     </Button>
                   </>
                 ))}
-              <Button
-                component={Link}
-                href={"/auth/login"}
-                sx={{ color: "#fff", ml: 1 }}
-                aria-owns="mouse-over-popover"
-                aria-haspopup="true"
-                variant="contained"
-              >
-                Sign in/ Sign up
-              </Button>
+              {token ? (
+                <Box component="div">
+                  <Button
+                    onClick={() => {
+                      clearToken();
+                      router.push("/auth/login");
+                    }}
+                    sx={{ color: "#fff", ml: 1 }}
+                    aria-owns="mouse-over-popover"
+                    aria-haspopup="true"
+                    variant="contained"
+                  >
+                    <Typography>Log out</Typography>
+                  </Button>
+                </Box>
+              ) : (
+                <Box component="div">
+                  <Button
+                    onClick={() => {
+                      // clearToken();
+                      router.push("/auth/login");
+                    }}
+                    sx={{ color: "#fff", ml: 1 }}
+                    aria-owns="mouse-over-popover"
+                    aria-haspopup="true"
+                    variant="contained"
+                  >
+                    Sign in/ Sign up
+                  </Button>
+                </Box>
+              )}
             </Stack>
             <IconButton
               color="inherit"

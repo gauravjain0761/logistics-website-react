@@ -32,11 +32,11 @@ const JobList = () => {
 
   const sortBy = [
     {
-      label: "New",
+      label: "Sort(New)",
       value: "new",
     },
     {
-      label: "Last",
+      label: "Sort(Last)",
       value: "last",
     },
   ];
@@ -78,9 +78,7 @@ const JobList = () => {
                 </Box>
               </Stack>
               <Box>
-                <Box mb={2}>
-                  <Typography>1249 employers recommended for you</Typography>
-                </Box>
+               
                 {[...Array(4)].map((elem, index) => {
                   return (
                     <Card
@@ -110,7 +108,7 @@ const JobList = () => {
                           </Grid>
                           <Grid item md={8}>
                             <Stack direction="column">
-                              <Box>
+                              {/* <Box>
                                 <Typography
                                   color="primary"
                                   fontSize={14}
@@ -118,7 +116,7 @@ const JobList = () => {
                                 >
                                   Job Success Rate: 98 %
                                 </Typography>
-                              </Box>
+                              </Box> */}
                               <Box pb={0.3}>
                                 <Typography variant="h5" fontWeight={600}>
                                   Mr. Gaurav
@@ -146,8 +144,9 @@ const JobList = () => {
                           pt={2}
                         >
                           <Stack direction="row" spacing={1}>
-                            <Chip label="Full-Time" />
-                            <Chip label="Remote" />
+                          <Chip label=" Job Success Rate: 98 %" variant="" color="primary" />
+                            {/* <Chip label="Full-Time" variant="" color="primary" />
+                            <Chip label="Remote" variant="" color="primary" /> */}
                           </Stack>
                           <Stack>
                             <Rating value={4} readOnly size="small" />
@@ -168,7 +167,7 @@ const JobList = () => {
                     </Card>
                   );
                 })}
-              </Box>
+              </Box>  
               <Box>
                 <Stack alignItems="center" justifyContent="center">
                   <Pagination

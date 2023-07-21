@@ -120,6 +120,7 @@ const Header = (props) => {
               <NavDesktop isOffset={isOffset} data={navConfig} />
 
               {token ? (
+                <Box component="div">
                 <Button
                   onClick={() => {
                     clearToken();
@@ -132,8 +133,9 @@ const Header = (props) => {
                 >
                   <Typography>Log out</Typography>
                 </Button>
+                </Box>
               ) : (
-                <div>
+                <Box component="div">
                   <Button
                     onClick={() => {
                       // clearToken();
@@ -146,7 +148,7 @@ const Header = (props) => {
                   >
                     Sign in/ Sign up
                   </Button>
-                </div>
+                </Box>
               )}
             </Box>
 
