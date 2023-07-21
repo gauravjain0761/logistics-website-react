@@ -23,7 +23,9 @@ const Login = ({ formik }) => {
   const handleClose = () => setOpen(false);
   return (
     <React.Fragment>
-      <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
+      <Box
+        sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}
+      >
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
             <Grid item md={5.4} sm={12} xs={12}>
