@@ -10,6 +10,8 @@ import { Stack, Fade, Portal } from "@mui/material";
 import { NavItem, NavItemDashboard } from "./NavItem";
 import { StyledSubheader, StyledMenu } from "./styles";
 import useActiveLink from "@/hooks/useActiveLink";
+import useOffSetTop from "@/hooks/useOffSetTop";
+import useResponsive from "@/hooks/useResponsive";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +29,12 @@ export default function NavList({ item, isOffset }) {
 
   const { active, isExternalLink } = useActiveLink(path);
 
+  const isMobile = useResponsive("down", "md");
+  const responsiveHeight = isMobile ? 78.5 : 52;
+  const value = useOffSetTop(responsiveHeight, {
+    offset: ["start end", "end end"],
+  });
+
   useEffect(() => {
     if (openMenu) {
       handleCloseMenu();
@@ -43,6 +51,8 @@ export default function NavList({ item, isOffset }) {
   const handleCloseMenu = () => {
     setOpenMenu(false);
   };
+
+  console.log("valuevaluevalue", value);
 
   return (
     <>
@@ -62,6 +72,10 @@ export default function NavList({ item, isOffset }) {
             <StyledMenu
               onMouseEnter={handleOpenMenu}
               onMouseLeave={handleCloseMenu}
+              value={value}
+              sx={{
+                top: value ? 42 : 95,
+              }}
             >
               {children.map((list) => (
                 <NavSubList
