@@ -1,5 +1,5 @@
 import React from "react";
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import FaqsPage from '@/sections/faqs';
 
@@ -9,6 +9,6 @@ const Faqs = () => {
 };
 
 Faqs.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default Faqs;

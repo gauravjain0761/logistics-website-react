@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimaryWebLayout } from "@/layout";
+import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import ContactSection from '@/sections/contact';
 const ContactUs = () => {
@@ -8,7 +8,7 @@ const ContactUs = () => {
 };
 
 ContactUs.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
 };
 export default ContactUs;
 
