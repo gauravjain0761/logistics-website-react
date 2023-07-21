@@ -18,41 +18,40 @@
 // ]
 const navConfig = [
   {
-    subheader: "Logistic",
-    items: [
+    title: "Home",
+    path: "/",
+  },
+  {
+    title: "About us",
+    path: "/aboutus",
+  },
+  {
+    title: "Job",
+    path: "#jobs",
+  },
+  {
+    title: "Testimonials",
+    path: "#tesimonials",
+  },
+  {
+    title: "FAQ",
+    path: "/faqs",
+  },
+  {
+    title: "Blog",
+    path: "/blog",
+    children: [
       {
-        title: "Home",
-        path: "/",
-      },
-      {
-        title: "About us",
-        path: "#about",
-      },
-      {
-        title: "Job",
-        path: "#jobs",
-      },
-      {
-        title: "Testimonials",
-        path: "#tesimonials",
-      },
-      {
-        title: "FAQ",
-        path: "/faqs",
-      },
-      {
-        title: "blog",
-        path: "/blog",
-        children: [
-          { title: "Blog", path: "/blogs" },
-          { title: "Blog Detail", path: "/blogdetail" },
+        items: [
+          { title: "Blog", path: "/blog/blogs" },
+          { title: "Blog Detail", path: "/blog/blogdetail" },
         ],
       },
-      {
-        title: "Contact Us",
-        path: "/contact",
-      },
     ],
+  },
+  {
+    title: "Contact Us",
+    path: "/contact",
   },
 ];
 
