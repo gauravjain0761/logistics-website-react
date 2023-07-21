@@ -68,7 +68,7 @@ export const ListItem = styled(ListItemButton, {
 // ----------------------------------------------------------------------
 
 export const StyledMenu = styled(Paper)(({ theme }) => ({
-  top: 85,
+  top: 95,
   // left: 0,
   right: 300,
   // marginLeft: 'auto',
@@ -77,7 +77,7 @@ export const StyledMenu = styled(Paper)(({ theme }) => ({
   position: "fixed",
   alignItems: "flex-start",
   zIndex: theme.zIndex.modal,
-  padding: theme.spacing(3, 1, 1, 3),
+  padding: theme.spacing(1, 1, 1, 3),
   boxShadow: theme.customShadows.dialog,
   // maxWidth: "150px",
   gridTemplateColumns: "repeat(3, 1fr)",

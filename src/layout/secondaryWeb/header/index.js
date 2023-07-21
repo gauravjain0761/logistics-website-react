@@ -123,25 +123,13 @@ const Header = (props) => {
                 }}
               />
             </Box>
-            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-              
-            <NavSectionHorizontal isOffset={isOffset} data={navConfig} />
-              {/* {navItems &&
-                navItems.length &&
-                navItems.map((item) => (
-                  <>
-                    <Button
-                      component={Link}
-                      href={item.link}
-                      key={item?.link}
-                      sx={{ color: "#000", mx: 1 }}
-                      aria-owns="mouse-over-popover"
-                      aria-haspopup="true"
-                    >
-                      {item?.name}
-                    </Button>
-                  </>
-                ))} */}
+            <Box
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                alignItems: "baseline",
+              }}
+            >
+              <NavDesktop isOffset={isOffset} data={navConfig} />
 
               <Button
                 component={Link}

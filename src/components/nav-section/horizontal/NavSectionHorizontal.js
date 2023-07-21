@@ -44,7 +44,9 @@ Items.propTypes = {
 function Items({ items }) {
   return (
     <>
-      {items.map((list) => {
+      {items &&
+        items?.length &&
+        items.map((list) => {
           return (
             <NavList
               key={list.title + list.path}
@@ -53,7 +55,7 @@ function Items({ items }) {
               hasChild={!!list.children}
             />
           );
-      })}
+        })}
     </>
   );
 }
