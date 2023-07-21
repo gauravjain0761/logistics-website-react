@@ -27,7 +27,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
   console.log("formik.values", formik.values);
   return (
     <React.Fragment>
-      <Box sx={{ py: 4, background: (theme) => theme.palette.grey[400] }}>
+      <Box sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
             <Grid item md={5.6} sm={12} xs={12}>

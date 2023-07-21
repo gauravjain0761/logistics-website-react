@@ -69,10 +69,10 @@ const JobPost = ({ formik }) => {
   const router = useRouter();
   return (
     <React.Fragment>
-      <Box sx={{ background: (theme) => theme.palette.grey[400] }}>
+      <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8 }}>
         <Container sx={{ py: 4 }}>
           <Stack spacing={4}>
-            <Box >
+            <Box>
               <Grid container spacing={2}>
                 <Grid item md={3}>
                   <Card sx={{ backgroundColor: "#ff7534" }}>
@@ -221,11 +221,11 @@ const JobPost = ({ formik }) => {
               </Grid>
             </Box>
             <Box>
-              <Card sx={{borderRadius:"0px"}}>
+              <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>
                   <Stack direction="row" spacing={1} py={2}>
                     <Iconify width="2em" icon="ion:briefcase" color="#ff7534" />
-                    <Typography variant="h4" color="primary" >
+                    <Typography variant="h4" color="primary">
                       {" "}
                       Post Your New Job
                     </Typography>
@@ -469,7 +469,9 @@ const JobPost = ({ formik }) => {
                             startIcon={<Iconify icon="ic:baseline-telegram" />}
                             variant="contained"
                             fullWidth
-                            onClick={()=> router.push("/dashboard/customer_dashboard_next")}
+                            onClick={() =>
+                              router.push("/dashboard/customer_dashboard_next")
+                            }
                           >
                             Send Request
                           </Button>

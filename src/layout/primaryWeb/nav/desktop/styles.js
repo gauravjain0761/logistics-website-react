@@ -52,14 +52,14 @@ export const ListItem = styled(ListItemButton, {
       "&::before": dotActive,
     }),
 
-    ...(!active &&
-      !value && {
-        color: `${theme.palette.common.white} !important`,
-      }),
-    ...(!active &&
-      value && {
-        color: `${theme.palette.common.black} !important`,
-      }),
+    // ...(!active &&
+    //   !value && {
+    //     color: `${theme.palette.common.white} !important`,
+    //   }),
+    // ...(!active &&
+    //   value && {
+    //     color: `${theme.palette.common.black} !important`,
+    //   }),
     // Active sub item
     ...(active &&
       subItem && {

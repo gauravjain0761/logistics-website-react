@@ -52,7 +52,7 @@ const JobList = () => {
 
   return (
     <React.Fragment>
-      <Box py={4} sx={{ background: " " }}>
+      <Box py={4} sx={{ mt: 10 }}>
         <Container>
           <Grid container spacing={2}>
             <Grid item md={6}>

@@ -114,7 +114,7 @@ const Header = (props) => {
           background: (theme) =>
             value
               ? theme.palette.common.white
-              : alpha(theme.palette.common.black, 0.3),
+              : theme.palette.common.white,
           transition: (theme) =>
             theme.transitions.create("background", {
               easing: theme.transitions.easing.sharp,

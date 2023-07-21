@@ -551,17 +551,54 @@ const DashboardJobPost = ({ formik }) => {
                                   </Stack>
                                 </Grid>
                                 <Grid item md={4}>
-                                  <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={1}>
+                                  <Stack
+                                    direction="row"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    spacing={1}
+                                  >
                                     <Chip
                                       label=" Job Success Rate: 98 %"
                                       variant=""
                                       color="primary"
                                     />
-                                  
-                                    <Button variant="contained">Apply</Button>
+                                    <Box>
+                                      <Box>
+                                        <Button
+                                          sx={{ mb: 1 }}
+                                          fullWidth
+                                          variant="contained"
+                                          startIcon={
+                                            <Iconify icon="material-symbols:star" />
+                                          }
+                                          onClick={() =>
+                                            router.push(
+                                              "/dashboard/job_listing"
+                                            )
+                                          }
+                                        >
+                                          View Bids
+                                        </Button>
+                                      </Box>
+                                      <Box>
+                                        <Button
+                                          color="dark"
+                                          fullWidth
+                                          variant="contained"
+                                          startIcon={
+                                            <Iconify icon="bxs:edit" />
+                                          }
+                                        >
+                                          Edit Job
+                                        </Button>
+                                      </Box>
+                                    </Box>
                                   </Stack>
-                                  <Stack mt={1} position="absolute" right={33}>
-                                  </Stack>
+                                  <Stack
+                                    mt={1}
+                                    position="absolute"
+                                    right={33}
+                                  ></Stack>
                                 </Grid>
                               </Grid>
 
