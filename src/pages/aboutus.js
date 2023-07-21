@@ -1,5 +1,5 @@
 import React from "react";
-import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import AboutUs from "@/sections/about";
 const AboutUsPage = () => {
@@ -8,6 +8,6 @@ const AboutUsPage = () => {
 };
 
 AboutUsPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default AboutUsPage;

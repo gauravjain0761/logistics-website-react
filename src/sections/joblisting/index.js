@@ -15,6 +15,7 @@ import {
   Pagination,
   PaginationItem,
   Rating,
+  Slider,
   Stack,
   Typography,
 } from "@mui/material";
@@ -29,20 +30,24 @@ const JobList = () => {
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
-
+  const [filterPrice, setFilterPrice] = useState(10);
   const sortBy = [
     {
-      label: "New",
+      label: "Sort(New)",
       value: "new",
     },
     {
-      label: "Last",
+      label: "Sort(Last)",
       value: "last",
     },
   ];
 
   const handlePageChange = (event, value) => {
     setPage(value);
+  };
+
+  const handleInputChange = (event) => {
+    setFilterPrice(event.target.value);
   };
 
   return (
@@ -78,9 +83,6 @@ const JobList = () => {
                 </Box>
               </Stack>
               <Box>
-                <Box mb={2}>
-                  <Typography>1249 employers recommended for you</Typography>
-                </Box>
                 {[...Array(4)].map((elem, index) => {
                   return (
                     <Card
@@ -110,7 +112,7 @@ const JobList = () => {
                           </Grid>
                           <Grid item md={8}>
                             <Stack direction="column">
-                              <Box>
+                              {/* <Box>
                                 <Typography
                                   color="primary"
                                   fontSize={14}
@@ -118,7 +120,7 @@ const JobList = () => {
                                 >
                                   Job Success Rate: 98 %
                                 </Typography>
-                              </Box>
+                              </Box> */}
                               <Box pb={0.3}>
                                 <Typography variant="h5" fontWeight={600}>
                                   Mr. Gaurav
@@ -146,8 +148,13 @@ const JobList = () => {
                           pt={2}
                         >
                           <Stack direction="row" spacing={1}>
-                            <Chip label="Full-Time" />
-                            <Chip label="Remote" />
+                            <Chip
+                              label=" Job Success Rate: 98 %"
+                              variant=""
+                              color="primary"
+                            />
+                            {/* <Chip label="Full-Time" variant="" color="primary" />
+                            <Chip label="Remote" variant="" color="primary" /> */}
                           </Stack>
                           <Stack>
                             <Rating value={4} readOnly size="small" />
@@ -225,14 +232,55 @@ const JobList = () => {
       </Box>
       <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <DialogContent sx={{ pt: 4 }}>
-          <Typography>Search</Typography>
-          <TextBox
-            fullWidth
-            size="small"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <Stack direction="column" spacing={2}>
+            <Stack spacing={2}>
+              <Box>
+                <Typography variant="body1" fontWeight={600}>
+                  Search
+                </Typography>
+                <TextBox
+                  fullWidth
+                  size="small"
+                  value={search}
+                  placeholder="Search"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <Box>
+                  <Typography variant="body1" fontWeight={600}>
+                    Price : ${filterPrice}
+                  </Typography>
+                </Box>
+                <Slider
+                  size="large"
+                  value={typeof filterPrice === "number" ? filterPrice : 0}
+                  onChange={handleInputChange}
+                />
+              </Box>
+              <Box>
+                <Box>
+                  <Typography variant="body1" fontWeight={600}>
+                    Rating
+                  </Typography>
+                </Box>
+                <Box>
+                  <Box>
+                    <Rating />
+                  </Box>
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
         </DialogContent>
+        <Stack direction="column" spacing={1} p={2}>
+          <Button variant="contained" fullWidth>
+            Apply
+          </Button>
+          <Button variant="outlined" fullWidth>
+            Clear All
+          </Button>
+        </Stack>
       </Drawer>
     </React.Fragment>
   );

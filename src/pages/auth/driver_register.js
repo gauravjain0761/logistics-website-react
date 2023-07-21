@@ -1,4 +1,4 @@
-import { PrimaryWebLayout, SecondaryWebLayout } from "@/layout";
+import { PrimaryWebLayout } from "@/layout";
 import DriverRegister from "@/sections/auth/driver_register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
@@ -152,6 +152,6 @@ const DriverPage = () => {
 };
 
 DriverPage.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default DriverPage;

@@ -1,6 +1,6 @@
 import React from "react";
 import MobileDrawer from "./drawer";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import {
   Accordion,
   AccordionDetails,
@@ -20,6 +20,7 @@ import {
   Popover,
   Stack,
   Toolbar,
+  Typography,
   alpha,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -28,16 +29,22 @@ import { navItems } from "./navConfig";
 import useOffSetTop from "@/hooks/useOffSetTop";
 import useResponsive from "@/hooks/useResponsive";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { clearToken, isAccessToken } from "@/utils/localStorageAvailable";
+import NavDesktop from "../nav/desktop/NavDesktop";
+import navConfig from "../nav/config-navigation";
+import { HEADER } from "@/utils/config-global";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
+  const token = isAccessToken();
   const isMobile = useResponsive("down", "md");
   // const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(10, {
     offset: ["start end", "end end"],
   });
+  const isOffset = useOffSetTop(HEADER.H_MAIN_DESKTOP);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -90,6 +97,8 @@ const Header = (props) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  console.log("router.pathname", router);
   return (
     <>
       <AppBar
@@ -105,7 +114,7 @@ const Header = (props) => {
           background: (theme) =>
             value
               ? theme.palette.common.white
-              : alpha(theme.palette.common.white, 0),
+              : alpha(theme.palette.common.black, 0.3),
           transition: (theme) =>
             theme.transitions.create("background", {
               easing: theme.transitions.easing.sharp,
@@ -141,43 +150,48 @@ const Header = (props) => {
             </Box>
             <Stack
               direction="row"
-              sx={{ display: { xs: "none", sm: "flex" } }}
-              spacing={1.5}
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                alignItems: "baseline",
+              }}
+              spacing={0}
             >
-              {navItems &&
-                navItems.length &&
-                navItems.map((item) => (
-                  <>
+              <NavDesktop value={value} isOffset={isOffset} data={navConfig} />
+              <div>
+                {token ? (
+                  <Box component="div">
                     <Button
-                      endIcon={item?.isArrow ? <KeyboardArrowDownIcon /> : ""}
-                      component={Link}
-                      href={item.link}
-                      key={item?.link}
-                      sx={{
-                        color: (theme) =>
-                          !value
-                            ? theme.palette.common.white
-                            : theme.palette.common.black,
-                        fontWeight: 500,
-                        fontSize: "15px",
+                      onClick={() => {
+                        clearToken();
+                        router.push("/auth/login");
                       }}
+                      sx={{ color: "#fff", ml: 1 }}
                       aria-owns="mouse-over-popover"
                       aria-haspopup="true"
+                      variant="contained"
                     >
-                      {item?.name}
+                      <Typography variant="subtitle2">Log out</Typography>
                     </Button>
-                  </>
-                ))}
-              <Button
-                component={Link}
-                href={"/auth/login"}
-                sx={{ color: "#fff", ml: 1 }}
-                aria-owns="mouse-over-popover"
-                aria-haspopup="true"
-                variant="contained"
-              >
-                Sign in/ Sign up
-              </Button>
+                  </Box>
+                ) : (
+                  <Box component="div">
+                    <Button
+                      onClick={() => {
+                        // clearToken();
+                        router.push("/auth/login");
+                      }}
+                      sx={{ color: "#fff", ml: 1 }}
+                      aria-owns="mouse-over-popover"
+                      aria-haspopup="true"
+                      variant="contained"
+                    >
+                      <Typography variant="subtitle2">
+                        Sign in/ Sign up
+                      </Typography>
+                    </Button>
+                  </Box>
+                )}
+              </div>
             </Stack>
             <IconButton
               color="inherit"

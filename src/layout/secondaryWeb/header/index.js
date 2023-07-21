@@ -112,42 +112,46 @@ const Header = (props) => {
               />
             </Box>
             <Box
+              component="div"
               sx={{
                 display: { xs: "none", sm: "flex" },
                 alignItems: "baseline",
               }}
             >
               <NavDesktop isOffset={isOffset} data={navConfig} />
-
-              {token ? (
-                <Button
-                  onClick={() => {
-                    clearToken();
-                    router.push("/auth/login");
-                  }}
-                  sx={{ color: "#fff", ml: 1 }}
-                  aria-owns="mouse-over-popover"
-                  aria-haspopup="true"
-                  variant="contained"
-                >
-                  <Typography>Log out</Typography>
-                </Button>
-              ) : (
-                <div>
-                  <Button
-                    onClick={() => {
-                      // clearToken();
-                      router.push("/auth/login");
-                    }}
-                    sx={{ color: "#fff", ml: 1 }}
-                    aria-owns="mouse-over-popover"
-                    aria-haspopup="true"
-                    variant="contained"
-                  >
-                    Sign in/ Sign up
-                  </Button>
-                </div>
-              )}
+              <div>
+                {token ? (
+                  <Box component="div">
+                    <Button
+                      onClick={() => {
+                        clearToken();
+                        router.push("/auth/login");
+                      }}
+                      sx={{ color: "#fff", ml: 1 }}
+                      aria-owns="mouse-over-popover"
+                      aria-haspopup="true"
+                      variant="contained"
+                    >
+                      <Typography>Log out</Typography>
+                    </Button>
+                  </Box>
+                ) : (
+                  <Box component="div">
+                    <Button
+                      onClick={() => {
+                        // clearToken();
+                        router.push("/auth/login");
+                      }}
+                      sx={{ color: "#fff", ml: 1 }}
+                      aria-owns="mouse-over-popover"
+                      aria-haspopup="true"
+                      variant="contained"
+                    >
+                      Sign in/ Sign up
+                    </Button>
+                  </Box>
+                )}
+              </div>
             </Box>
 
             {isMobile && <NavMobile isOffset={isOffset} data={navConfig} />}

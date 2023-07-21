@@ -1,9 +1,7 @@
-import React from 'react';
-import {  SecondaryWebLayout } from "@/layout";
+import React from "react";
+import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobPost from '@/sections/jobposter';
-
-
+import JobPost from "@/sections/jobposter";
 
 const PostJob = () => {
   const formik = useFormik({});
@@ -11,6 +9,6 @@ const PostJob = () => {
 };
 
 PostJob.getLayout = function getLayout(page) {
-  return <SecondaryWebLayout>{page}</SecondaryWebLayout>;
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default PostJob;
