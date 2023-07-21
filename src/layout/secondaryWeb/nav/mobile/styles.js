@@ -1,8 +1,9 @@
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { ListItemButton } from '@mui/material';
+import { NAV } from '@/utils/config-global';
 // config
-import { NAV } from '../../../../config-global';
+// import { NAV } from '../../../../config-global';
 
 // ----------------------------------------------------------------------
 

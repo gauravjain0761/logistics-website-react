@@ -29,6 +29,7 @@ import NavDesktop from "../nav/desktop/NavDesktop";
 import { HEADER } from "@/utils/config-global";
 import navConfig from "../nav/config-navigation";
 import { NavSectionHorizontal } from "@/components/nav-section";
+import NavMobile from "../nav/mobile/NavMobile";
 
 const drawerWidth = 240;
 
@@ -47,46 +48,29 @@ const Header = (props) => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const drawer = (
-    <Box sx={{ textAlign: "left" }}>
-      <Box sx={{ my: 2 }} component={Link} href="/">
-        <Box
-          component="img"
-          width={200}
-          height={50}
-          src="/assets/images/logo/logo.jpg"
-          alt="Logo"
-          loading="lazy"
-          sx={{
-            objectFit: "contain",
-            background: "transparent",
-            backgroundSize: "cover",
-          }}
-        />
-      </Box>
-      <Divider />
-      <List>
-        {navItems &&
-          navItems.length &&
-          navItems.map((item, index) => {
-            return (
-              <React.Fragment key={`parent-${index}`}>
-                <ListItem disablePadding onClick={handleDrawerToggle}>
-                  <ListItemButton
-                    LinkComponent={Link}
-                    href={item?.link}
-                    sx={{ textAlign: "left" }}
-                  >
-                    <ListItemText primary={item?.name} />
-                  </ListItemButton>
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            );
-          })}
-      </List>
-    </Box>
-  );
+  // const drawer = (
+  //   <Box sx={{ textAlign: "left" }}>
+  //     <Box sx={{ my: 2 }} component={Link} href="/">
+  //       <Box
+  //         component="img"
+  //         width={200}
+  //         height={50}
+  //         src="/assets/images/logo/logo.jpg"
+  //         alt="Logo"
+  //         loading="lazy"
+  //         sx={{
+  //           objectFit: "contain",
+  //           background: "transparent",
+  //           backgroundSize: "cover",
+  //         }}
+  //       />
+  //     </Box>
+  //     <Divider />
+  //     <List>
+  //       <NavMobile isOffset={isOffset} data={navConfig} />
+  //     </List>
+  //   </Box>
+  // );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -142,7 +126,9 @@ const Header = (props) => {
                 Sign in/ Sign up
               </Button>
             </Box>
-            <IconButton
+
+            {isMobile && <NavMobile isOffset={isOffset} data={navConfig} />}
+            {/* <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
@@ -150,17 +136,17 @@ const Header = (props) => {
               sx={{ ml: 2, display: { sm: "none" } }}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
         </Container>
       </AppBar>
-      <MobileDrawer
+      {/* <MobileDrawer
         drawer={drawer}
         handleDrawerToggle={handleDrawerToggle}
         mobileOpen={mobileOpen}
         drawerWidth={drawerWidth}
         container={container}
-      />
+      /> */}
     </>
   );
 };
