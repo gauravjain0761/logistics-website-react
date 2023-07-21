@@ -18,31 +18,28 @@ import {
   ListItemText,
   ListSubheader,
   Popover,
-  Stack,
   Toolbar,
-  alpha,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { navItems } from "./navConfig";
 import useOffSetTop from "@/hooks/useOffSetTop";
 import useResponsive from "@/hooks/useResponsive";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import NavDesktop from "@/layout/secondaryWeb/nav/desktop/NavDesktop";
+import NavDesktop from "../nav/desktop/NavDesktop";
 import { HEADER } from "@/utils/config-global";
-import navConfig from "@/layout/secondaryWeb/nav/config-navigation";
-import NavMobile from "@/layout/secondaryWeb/nav/mobile/NavMobile";
+import navConfig from "../nav/config-navigation";
+import { NavSectionHorizontal } from "@/components/nav-section";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
-  const isOffset = useOffSetTop(HEADER.MAIN_DESKTOP_HEIGHT);
   const router = useRouter();
   const isMobile = useResponsive("down", "md");
-  // const responsiveHeight = isMobile ? 78.5 : 52;
-  const value = useOffSetTop(10, {
+  const responsiveHeight = isMobile ? 78.5 : 52;
+  const value = useOffSetTop(responsiveHeight, {
     offset: ["start end", "end end"],
   });
+  const isOffset = useOffSetTop(HEADER.H_MAIN_DESKTOP);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -69,8 +66,7 @@ const Header = (props) => {
       </Box>
       <Divider />
       <List>
-      <NavMobile isOffset={isOffset} data={navConfig} />
-        {/* {navItems &&
+        {navItems &&
           navItems.length &&
           navItems.map((item, index) => {
             return (
@@ -87,12 +83,10 @@ const Header = (props) => {
                 <Divider />
               </React.Fragment>
             );
-          })} */}
+          })}
       </List>
     </Box>
   );
-
-  console.log("valuevalue", value);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -100,24 +94,8 @@ const Header = (props) => {
     <>
       <AppBar
         component="nav"
-        position={"fixed"}
+        position={value ? "fixed" : "relative"}
         color="inherit"
-        sx={{
-          "&.MuiAppBar-root": {
-            boxShadow: value
-              ? "0px 2px 4px -1px rgba(145, 158, 171, 0.2), 0px 4px 5px 0px rgba(145, 158, 171, 0.14), 0px 1px 10px 0px rgba(145, 158, 171, 0.12)"
-              : "none",
-          },
-          background: (theme) =>
-            value
-              ? theme.palette.common.white
-              : alpha(theme.palette.common.white, 0),
-          transition: (theme) =>
-            theme.transitions.create("background", {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.short,
-            }),
-        }}
       >
         <Container maxWidth>
           <Toolbar
@@ -145,10 +123,25 @@ const Header = (props) => {
                 }}
               />
             </Box>
-            <Box
-              sx={{ display: { sm: "none", md: "flex" }, alignItems: "baseline" }}
-            >
-              <NavDesktop isOffset={isOffset} data={navConfig} />
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              
+            <NavSectionHorizontal isOffset={isOffset} data={navConfig} />
+              {/* {navItems &&
+                navItems.length &&
+                navItems.map((item) => (
+                  <>
+                    <Button
+                      component={Link}
+                      href={item.link}
+                      key={item?.link}
+                      sx={{ color: "#000", mx: 1 }}
+                      aria-owns="mouse-over-popover"
+                      aria-haspopup="true"
+                    >
+                      {item?.name}
+                    </Button>
+                  </>
+                ))} */}
 
               <Button
                 component={Link}
@@ -160,16 +153,16 @@ const Header = (props) => {
               >
                 Sign in/ Sign up
               </Button>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ ml: 2, display: { sm: "none" } }}
-              >
-                <MenuIcon />
-              </IconButton>
             </Box>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ ml: 2, display: { sm: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>
