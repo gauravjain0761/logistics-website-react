@@ -235,17 +235,20 @@ const JobList = () => {
           <Stack direction="column" spacing={2}>
             <Stack spacing={2}>
               <Box>
-                <Typography>Search</Typography>
+                <Typography variant="body1" fontWeight={600}>
+                  Search
+                </Typography>
                 <TextBox
                   fullWidth
                   size="small"
                   value={search}
+                  placeholder="Search"
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </Box>
               <Box>
                 <Box>
-                  <Typography variant="h6" fontWeight={400}>
+                  <Typography variant="body1" fontWeight={600}>
                     Price : ${filterPrice}
                   </Typography>
                 </Box>
@@ -257,7 +260,7 @@ const JobList = () => {
               </Box>
               <Box>
                 <Box>
-                  <Typography variant="h6" fontWeight={400}>
+                  <Typography variant="body1" fontWeight={600}>
                     Rating
                   </Typography>
                 </Box>
