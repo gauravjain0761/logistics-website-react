@@ -27,7 +27,7 @@ export default function NavList({ item, isOffset }) {
 
   const { path, children } = item;
 
-  const { active, isExternalLink } = useActiveLink(path);
+  const { active, isExternalLink } = useActiveLink(path, false);
 
   const isMobile = useResponsive("down", "md");
   const responsiveHeight = isMobile ? 78.5 : 52;

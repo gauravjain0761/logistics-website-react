@@ -49,7 +49,7 @@ export const ListItem = styled(ListItemButton, {
     // Active
     ...(active && {
       color: `${theme.palette.primary.main} !important`,
-      "&::before": dotActive,
+      // "&::before": dotActive,
     }),
 
     // ...(!active &&
@@ -66,7 +66,7 @@ export const ListItem = styled(ListItemButton, {
         ...theme.typography.subtitle2,
         color: theme.palette.text.primary,
         "&::before": {
-          ...dotActive,
+          // ...dotActive,
           color: theme.palette.primary.main,
         },
       }),
