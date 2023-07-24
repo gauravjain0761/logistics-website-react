@@ -17,16 +17,16 @@ export const StyledLocBox = styled(Box)(({ theme }) => ({
 export const StyledImageBox = styled(Box)(({ theme }) => ({
   width: "6em",
 }));
-export const StyledBgTestBox = styled("div")(({ theme }) => ({
-  margin: "1em auto",
-  width: "100%",
-  height: "100%",
-  padding: "1em 0 2em 0",
-  backgroundImage: `url(/testbg.avif)`,
-  backgroundPosition: "center",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-}));
+// export const StyledBgTestBox = styled("div")(({ theme }) => ({
+//   margin: "1em auto",
+//   width: "100%",
+//   height: "100%",
+//   padding: "1em 0 2em 0",
+//   backgroundImage: `url(/testbg.avif)`,
+//   backgroundPosition: "center",
+//   backgroundSize: "cover",
+//   backgroundRepeat: "no-repeat",
+// }));
 export const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   margin: "1em 0",

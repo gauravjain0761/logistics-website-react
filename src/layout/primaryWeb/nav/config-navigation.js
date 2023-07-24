@@ -31,7 +31,7 @@ const navConfig = [
   },
   {
     title: "Testimonials",
-    path: "#tesimonials",
+    path: "/testimonials",
   },
   {
     title: "FAQ",

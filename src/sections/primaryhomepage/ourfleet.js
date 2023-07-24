@@ -10,11 +10,30 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Slider from "react-slick";
 
 const OurFleet = () => {
+  const ref = useRef();
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false,
+    adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+  };
+  const next = () => {
+    ref.current.slickNext();
+  };
+  const previous = () => {
+    ref.current.slickPrev();
+  };
   return (
     <React.Fragment>
       <Box py={8}>
@@ -39,99 +58,131 @@ const OurFleet = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item lg={2.6}>
-              <Stack justifyContent="center" direction="column">
-                <Box
-                  component="img"
-                  src="/assets/images/home/truck.png"
-                  alt="truck"
-                />
-                <Typography variant="h5">Pickup Truck</Typography>
-                <Typography color="grey" fontSize={15}>
-                  Extensive equipment and consolidation options
-                </Typography>
+            <Grid md={8}>
+              <Slider ref={ref} {...settings}>
                 <Box>
-                  <Button endIcon={<Iconify icon="ep:right" color="primary" />}>
-                    View All
-                  </Button>
-                </Box>
-                <Box sx={{ mt: 4 }}>
-                  <Stack direction="row" spacing={2}>
-                    <Card
-                      variant="outlined"
-                      sx={{
-                        borderRadius: "50%",
-                        borderColor: (theme) =>
-                          alpha(theme.palette.grey[900], 0.4),
-                      }}
-                    >
-                      <IconButton>
-                        <ArrowBackIcon
-                          sx={{
-                            color: (theme) =>
-                              alpha(theme.palette.common.black, 0.9),
-                            fontWeight: 700,
-                          }}
-                        />
-                      </IconButton>
-                    </Card>
-                    <Card
-                      variant="outlined"
-                      sx={{
-                        borderRadius: "50%",
-                        borderColor: (theme) =>
-                          alpha(theme.palette.grey[900], 0.4),
-                      }}
-                    >
-                      <IconButton>
-                        <ArrowForwardIcon
-                          sx={{
-                            color: (theme) =>
-                              alpha(theme.palette.common.black, 0.9),
-                            fontWeight: 700,
-                          }}
-                        />
-                      </IconButton>
-                    </Card>
+                  <Stack justifyContent="center" direction="column">
+                    <Box
+                      component="img"
+                      src="/assets/images/home/truck.png"
+                      alt="truck"
+                    />
+                    <Typography variant="h5">Pickup Truck</Typography>
+                    <Typography color="grey" fontSize={15}>
+                      Extensive equipment and consolidation options
+                    </Typography>
+                    <Box>
+                      <Button
+                        endIcon={<Iconify icon="ep:right" color="primary" />}
+                      >
+                        View All
+                      </Button>
+                    </Box>
                   </Stack>
                 </Box>
-              </Stack>
-            </Grid>
-            <Grid item lg={2.6}>
-              <Stack justifyContent="center" direction="column">
-                <Box
-                  component="img"
-                  src="/assets/images/home/refrigrato.png"
-                  alt="truck"
-                />
-                <Typography variant="h5">Refrigetro Truck</Typography>
-                <Typography color="grey" fontSize={15}>
-                  Extensive equipment and consolidation options
-                </Typography>
                 <Box>
-                  <Button endIcon={<Iconify icon="ep:right" color="primary" />}>
-                    View All
-                  </Button>
+                  <Stack justifyContent="center" direction="column">
+                    <Box
+                      component="img"
+                      src="/assets/images/home/refrigrato.png"
+                      alt="truck"
+                    />
+                    <Typography variant="h5">Refrigetro Truck</Typography>
+                    <Typography color="grey" fontSize={15}>
+                      Extensive equipment and consolidation options
+                    </Typography>
+                    <Box>
+                      <Button
+                        endIcon={<Iconify icon="ep:right" color="primary" />}
+                      >
+                        View All
+                      </Button>
+                    </Box>
+                  </Stack>
                 </Box>
-              </Stack>
-            </Grid>
-            <Grid item lg={2.6}>
-              <Stack justifyContent="center" direction="column">
-                <Box
-                  component="img"
-                  src="/assets/images/home/van.png"
-                  alt="truck"
-                />
-                <Typography variant="h5">Van</Typography>
-                <Typography color="grey" fontSize={15}>
-                  Extensive equipment and consolidation options
-                </Typography>
                 <Box>
-                  <Button endIcon={<Iconify icon="ep:right" color="primary" />}>
-                    View All
-                  </Button>
+                  <Stack justifyContent="center" direction="column">
+                    <Box
+                      component="img"
+                      src="/assets/images/home/van.png"
+                      alt="truck"
+                    />
+                    <Typography variant="h5">Van</Typography>
+                    <Typography color="grey" fontSize={15}>
+                      Extensive equipment and consolidation options
+                    </Typography>
+                    <Box>
+                      <Button
+                        endIcon={<Iconify icon="ep:right" color="primary" />}
+                      >
+                        View All
+                      </Button>
+                    </Box>
+                  </Stack>
                 </Box>
-              </Stack>
+                <Box>
+                  <Stack justifyContent="center" direction="column">
+                    <Box
+                      component="img"
+                      src="/assets/images/home/carfleet.png"
+                      alt="car"
+                    />
+                    <Typography variant="h5">Car</Typography>
+                    <Typography color="grey" fontSize={15}>
+                      Extensive equipment and consolidation options
+                    </Typography>
+                    <Box>
+                      <Button
+                        endIcon={<Iconify icon="ep:right" color="primary" />}
+                      >
+                        View All
+                      </Button>
+                    </Box>
+                  </Stack>
+                </Box>
+              </Slider>
+              <Box sx={{ mt: 4 }}>
+                <Stack direction="row" spacing={2}>
+                  <Card
+                    onClick={previous}
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "50%",
+                      borderColor: (theme) =>
+                        alpha(theme.palette.grey[900], 0.4),
+                    }}
+                  >
+                    <IconButton>
+                      <ArrowBackIcon
+                        sx={{
+                          color: (theme) =>
+                            alpha(theme.palette.common.black, 0.9),
+                          fontWeight: 700,
+                        }}
+                      />
+                    </IconButton>
+                  </Card>
+                  <Card
+                    onClick={next}
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "50%",
+                      borderColor: (theme) =>
+                        alpha(theme.palette.grey[900], 0.4),
+                    }}
+                  >
+                    <IconButton>
+                      <ArrowForwardIcon
+                        sx={{
+                          color: (theme) =>
+                            alpha(theme.palette.common.black, 0.9),
+                          fontWeight: 700,
+                        }}
+                      />
+                    </IconButton>
+                  </Card>
+                </Stack>
+              </Box>
             </Grid>
           </Grid>
         </Container>
