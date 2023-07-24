@@ -7,12 +7,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { m } from "framer-motion";
 import React from "react";
-
+import motion from "framer-motion";
+import { MotionViewport, varFade } from "@/components/animate";
 const NewBanner = () => {
   return (
     <React.Fragment>
-      <Box component="div">
+      <Box component={MotionViewport}>
         {/* <Container> */}
         <Grid container>
           <Grid item lg={6}>
@@ -26,52 +28,62 @@ const NewBanner = () => {
                           <Box>
                             <Stack spacing={4}>
                               <Box>
-                                <Box
-                                  component="img"
-                                  sx={{ width: "200px" }}
-                                  src="/assets/images/home/new/download-app.png"
-                                  alt="truck"
-                                />
+                                <m.div variants={varFade().inLeft}>
+                                  <Box
+                                    component="img"
+                                    sx={{ width: "200px" }}
+                                    src="/assets/images/home/new/download-app.png"
+                                    alt="truck"
+                                  />
+                                </m.div>
                               </Box>
                               <Box>
-                                <Box
-                                  component="img"
-                                  sx={{ width: "200px" }}
-                                  src="/assets/images/home/new/start-job.png"
-                                  alt="truck"
-                                />
+                                <m.div variants={varFade().inLeft}>
+                                  <Box
+                                    component="img"
+                                    sx={{ width: "200px" }}
+                                    src="/assets/images/home/new/start-job.png"
+                                    alt="truck"
+                                  />
+                                </m.div>
                               </Box>
                             </Stack>
                           </Box>
                           <Box sx={{ mt: 6 }}>
                             <Stack spacing={4}>
                               <Box>
-                                <Box
-                                  component="img"
-                                  sx={{ width: "200px" }}
-                                  src="/assets/images/home/new/place-bid.png"
-                                  alt="truck"
-                                />
+                                <m.div variants={varFade().inRight}>
+                                  <Box
+                                    component="img"
+                                    sx={{ width: "200px" }}
+                                    src="/assets/images/home/new/place-bid.png"
+                                    alt="truck"
+                                  />
+                                </m.div>
                               </Box>
                               <Box>
-                                <Box
-                                  component="img"
-                                  sx={{ width: "200px" }}
-                                  src="/assets/images/home/new/invoice.png"
-                                  alt="truck"
-                                />
+                                <m.div variants={varFade().inRight}>
+                                  <Box
+                                    component="img"
+                                    sx={{ width: "200px" }}
+                                    src="/assets/images/home/new/invoice.png"
+                                    alt="truck"
+                                  />
+                                </m.div>
                               </Box>
                             </Stack>
                           </Box>
                         </Stack>
                       </Box>
                       <Box sx={{ display: "flex", justifyContent: "center" }}>
-                        <Box
-                          component="img"
-                          sx={{ width: "400px" }}
-                          src="/assets/images/home/new/banner-image.jpg"
-                          alt="truck"
-                        />
+                        <m.div variants={varFade().inUp}>
+                          <Box
+                            component="img"
+                            sx={{ width: "400px" }}
+                            src="/assets/images/home/new/banner-image.jpg"
+                            alt="truck"
+                          />
+                        </m.div>
                       </Box>
                     </Stack>
                   </CardContent>
@@ -101,71 +113,81 @@ const NewBanner = () => {
             >
               <CardContent sx={{ px: 6, mb: 6 }}>
                 <Stack spacing={0} mb={15}>
-                  <Box>
-                    <Typography color="common.white" variant="h3">
-                      Your Logistic Solution
-                    </Typography>
-                    <Typography color="common.white" variant="h4">
-                      {" "}
-                      For Business, For Client &<br /> For Driver{"'"}s
-                    </Typography>
-                  </Box>
+                  <m.div variants={varFade().inRight}>
+                    <Box>
+                      <Typography color="common.white" variant="h3">
+                        Your Logistic Solution
+                      </Typography>
+                      <Typography color="common.white" variant="h4">
+                        {" "}
+                        For Business, For Client &<br /> For Driver{"'"}s
+                      </Typography>
+                    </Box>
+                  </m.div>
                 </Stack>
                 <Box>
                   <Stack direction="row" alignItemd="flex-end" height="100%">
                     <Box>
                       <Stack direction="row" alignItems={"center"}>
                         <Box>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            sx={{
-                              backgroundColor: "#000",
-                              ":hover": {
-                                backgroundColor: "#555555",
-                              },
-                            }}
-                          >
-                            <Typography fontWeight={500}>
-                              For Clients
-                            </Typography>
-                          </Button>
+                          <m.div variants={varFade().inUp}>
+                            <Button
+                              variant="contained"
+                              size="large"
+                              sx={{
+                                backgroundColor: "#000",
+                                ":hover": {
+                                  backgroundColor: "#555555",
+                                },
+                              }}
+                            >
+                              <Typography fontWeight={500}>
+                                For Clients
+                              </Typography>
+                            </Button>
+                          </m.div>
                         </Box>
                         <Box>
-                          <Button
-                            variant="outlined"
-                            size="large"
-                            color="inherit"
-                            sx={{
-                              margin: "12px",
-                              color: "#000",
-                              borderColor: "#555555",
-                              backgroundColor: "#ffffff",
-                              ":hover": {
+                          <m.div variants={varFade().inUp}>
+                            <Button
+                              variant="outlined"
+                              size="large"
+                              color="inherit"
+                              sx={{
+                                margin: "12px",
+                                color: "#000",
                                 borderColor: "#555555",
                                 backgroundColor: "#ffffff",
-                              },
-                            }}
-                          >
-                            <Typography fontWeight={500}>
-                              For Business
-                            </Typography>
-                          </Button>
+                                ":hover": {
+                                  borderColor: "#555555",
+                                  backgroundColor: "#ffffff",
+                                },
+                              }}
+                            >
+                              <Typography fontWeight={500}>
+                                For Business
+                              </Typography>
+                            </Button>
+                          </m.div>
                         </Box>
                         <Box>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            sx={{
-                              margin: "12px",
-                              backgroundColor: "#000",
-                              ":hover": {
-                                backgroundColor: "#555555",
-                              },
-                            }}
-                          >
-                            <Typography fontWeight={500}>For Driver</Typography>
-                          </Button>
+                          <m.div variants={varFade().inUp}>
+                            <Button
+                              variant="contained"
+                              size="large"
+                              sx={{
+                                margin: "12px",
+                                backgroundColor: "#000",
+                                ":hover": {
+                                  backgroundColor: "#555555",
+                                },
+                              }}
+                            >
+                              <Typography fontWeight={500}>
+                                For Driver
+                              </Typography>
+                            </Button>
+                          </m.div>
                         </Box>
                       </Stack>
                     </Box>

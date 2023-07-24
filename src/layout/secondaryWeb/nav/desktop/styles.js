@@ -46,17 +46,17 @@ export const ListItem = styled(ListItemButton, {
     // Active
     ...(active && {
       color: theme.palette.primary.main,
-      "&::before": dotActive,
+      // "&::before": dotActive,
     }),
     // Active sub item
     ...(active &&
       subItem && {
         ...theme.typography.subtitle2,
         color: theme.palette.text.primary,
-        "&::before": {
-          ...dotActive,
-          color: theme.palette.primary.main,
-        },
+        // "&::before": {
+        //   ...dotActive,
+        //   color: theme.palette.primary.main,
+        // },
       }),
     // Open
     ...(open && {
