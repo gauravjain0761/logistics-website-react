@@ -39,8 +39,7 @@ const SubscriptionsPage = () => {
                 return (
                   <Grid item md={4}>
                     <Card sx={{ borderRadius: "5px" }} key={index}>
-                      <CardContent>
-                        <Box sx={{ textAlign: "center", pb: 5 }}>
+                    <Box sx={{ textAlign: "center", py: 5, background:"#ff5d010f" }}>
                           <Box>
                             <Typography variant="h4">Basic</Typography>
                           </Box>
@@ -57,6 +56,8 @@ const SubscriptionsPage = () => {
                             </Typography>
                           </Stack>
                         </Box>
+                      <CardContent>
+                       
                         <Stack spacing={1}>
                           <Box>
                             <Box textAlign="center">
