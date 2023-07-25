@@ -15,14 +15,14 @@ export default function App(props) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <React.Fragment>
-      <MotionLazyContainer>
+      {/* <MotionLazyContainer> */}
         <ThemeProvider>
           <ProgressBar />
           <SnackbarProvider>
             {getLayout(<Component {...pageProps} />)}
           </SnackbarProvider>
         </ThemeProvider>
-      </MotionLazyContainer>
+      {/* </MotionLazyContainer> */}
     </React.Fragment>
   );
 }
