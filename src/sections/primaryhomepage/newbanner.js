@@ -41,8 +41,9 @@ const NewBanner = () => {
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1,
-                                  duration: 3.3,
+                                  delay: 0,
+                                 duration:4,
+                                 times: [0, 0.1, 0.9, 1],
                                   ease: "easeInOut",
                                 }}
                               >
@@ -62,8 +63,9 @@ const NewBanner = () => {
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1.1,
-                                  duration: 3.3,
+                                  delay: 0.1,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
                                   ease: "easeInOut",
                                 }}
                               >
@@ -87,8 +89,9 @@ const NewBanner = () => {
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1,
-                                  duration: 3.3,
+                                  delay: 0,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
                                   ease: "easeInOut",
                                 }}
                               >
@@ -108,8 +111,9 @@ const NewBanner = () => {
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1.1,
-                                  duration: 3.3,
+                                  delay: 0.1,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
                                   ease: "easeInOut",
                                 }}
                               >
@@ -182,6 +186,8 @@ const NewBanner = () => {
                       y: 0,
                     }}
                     transition={{
+                      type:"spring",
+                      stiffness: 500, damping: 10,
                       delay: 0,
                       duration: 1.2,
                       ease: "easeInOut",
