@@ -37,8 +37,8 @@ const SubscriptionsPage = () => {
             <Grid container spacing={6}>
               {[...Array(3)].map((elem, index) => {
                 return (
-                  <Grid item md={4}>
-                    <Card sx={{ borderRadius: "5px" }} key={index}>
+                  <Grid item md={4} key={index}>
+                    <Card sx={{ borderRadius: "5px" }} >
                     <Box sx={{ textAlign: "center", py: 5, background:"#ff5d010f" }}>
                           <Box>
                             <Typography variant="h4">Basic</Typography>
