@@ -1,18 +1,22 @@
 import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const DashboardCard = () => {
+  const router = useRouter();
   return (
     <React.Fragment>
-      {" "}
       <Box sx={{ mt: 8 }}>
         <Grid container spacing={2}>
           <Grid item md={3}>
-            <Card sx={{ backgroundColor: "#ff7534" }}>
+            <Card
+              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              onClick={() => router.push("/dashboard/job_list")}
+            >
               <CardContent>
                 <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
+                  direction="row"
+                  justifyContent="space-between"
                   spacing={1}
                 >
                   <Box
@@ -21,11 +25,11 @@ const DashboardCard = () => {
                     px={1.3}
                     py={0.8}
                     borderRadius={2}
-                    component={"img"}
+                    component="img"
                     src="/assets/images/dashboard/jobposted.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300} color={"#fff"}>
+                    <Typography variant="h6" fontWeight={300} color="#fff">
                       JOB POSTED
                     </Typography>
                     <Typography
@@ -41,9 +45,12 @@ const DashboardCard = () => {
             </Card>
           </Grid>
           <Grid item md={3}>
-            <Card sx={{ backgroundColor: "#ff7534" }}>
+            <Card
+              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              onClick={() => router.push("/dashboard/money_spend")}
+            >
               <CardContent>
-                <Stack direction={"row"} justifyContent={"space-between"}>
+                <Stack direction="row" justifyContent="space-between">
                   <Box
                     sx={{ backgroundColor: "#fff" }}
                     height="60px"
@@ -70,7 +77,10 @@ const DashboardCard = () => {
             </Card>
           </Grid>
           <Grid item md={3}>
-            <Card sx={{ backgroundColor: "#ff7534" }}>
+            <Card
+              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              onClick={() => router.push("/dashboard/job_history")}
+            >
               <CardContent>
                 <Stack
                   direction={"row"}
@@ -103,7 +113,10 @@ const DashboardCard = () => {
             </Card>
           </Grid>
           <Grid item md={3}>
-            <Card sx={{ backgroundColor: "#ff7534" }}>
+            <Card
+              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              onClick={() => router.push("/dashboard/subscription")}
+            >
               <CardContent>
                 <Stack
                   direction={"row"}
