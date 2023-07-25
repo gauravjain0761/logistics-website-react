@@ -34,9 +34,9 @@ const NewBanner = () => {
                             <Stack spacing={4}>
                               <Box
                                 component={motion.div}
-                                initial={{ x: 0, y: 0 }}
+                                initial={{ y: 0 }}
                                 animate={{
-                                  x: [-250, 0, 0, 0],
+                                  // x: [-250, 0, 0, 0],
                                   y: [0, 0, -250, -250],
                                 }}
                                 transition={{
@@ -55,9 +55,9 @@ const NewBanner = () => {
                               </Box>
                               <Box
                                 component={motion.div}
-                                initial={{ x: 0, y: 0 }}
+                                initial={{ y: 0 }}
                                 animate={{
-                                  x: [-250, 0, 0, 0],
+                                  // x: [-250, 0, 0, 0],
                                   y: [0, 0, -280, -280],
                                 }}
                                 transition={{
@@ -80,9 +80,9 @@ const NewBanner = () => {
                             <Stack spacing={4}>
                               <Box
                                 component={motion.div}
-                                initial={{ x: 0, y: 0 }}
+                                initial={{ y: 0 }}
                                 animate={{
-                                  x: [250, 0, 0, 0],
+                                  // x: [250, 0, 0, 0],
                                   y: [0, 0, -250, -250],
                                 }}
                                 transition={{
@@ -101,9 +101,9 @@ const NewBanner = () => {
                               </Box>
                               <Box
                                 component={motion.div}
-                                initial={{ x: 0, y: 0 }}
+                                initial={{ y: 0 }}
                                 animate={{
-                                  x: [250, 0, 0, 0],
+                                  // x: [250, 0, 0, 0],
                                   y: [0, 0, -300, -300],
                                 }}
                                 transition={{
