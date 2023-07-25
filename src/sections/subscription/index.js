@@ -66,7 +66,7 @@ const SubscriptionsPage = () => {
                                   <ListItemIcon>
                                     <Iconify
                                       icon="charm:square-tick"
-                                      color="blue"
+                                      color={(theme)=>theme.palette.success.main}
                                     />
                                   </ListItemIcon>
                                   <ListItemText
@@ -78,7 +78,7 @@ const SubscriptionsPage = () => {
                                   <ListItemIcon>
                                     <Iconify
                                       icon="charm:square-tick"
-                                      color="blue"
+                                      color={(theme)=>theme.palette.success.main}
                                     />
                                   </ListItemIcon>
                                   <ListItemText
@@ -102,7 +102,7 @@ const SubscriptionsPage = () => {
                                   <ListItemIcon>
                                     <Iconify
                                       icon="charm:square-tick"
-                                      color="blue"
+                                      color={(theme)=>theme.palette.success.main}
                                     />
                                   </ListItemIcon>
                                   <ListItemText
