@@ -470,7 +470,7 @@ const JobPost = ({ formik }) => {
                             variant="contained"
                             fullWidth
                             onClick={() =>
-                              router.push("/dashboard/customer_dashboard_next")
+                              router.push("/dashboard/job_list")
                             }
                           >
                             Send Request

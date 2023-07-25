@@ -34,16 +34,17 @@ const NewBanner = () => {
                             <Stack spacing={4}>
                               <Box
                                 component={motion.div}
-                                initial={{ y: 0 }}
+                                initial={{ x: -300, y: 0 }}
                                 animate={{
-                                  // x: [-250, 0, 0, 0],
+                                  x: [-300, 0, 0, 0],
                                   y: [0, 0, -250, -250],
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1,
-                                  duration: 3.3,
-                                  ease: "easeIn",
+                                  delay: 0,
+                                 duration:4,
+                                 times: [0, 0.1, 0.9, 1],
+                                  ease: "easeInOut",
                                 }}
                               >
                                 <Box
@@ -55,16 +56,17 @@ const NewBanner = () => {
                               </Box>
                               <Box
                                 component={motion.div}
-                                initial={{ y: 0 }}
+                                initial={{ x: -300, y: 0 }}
                                 animate={{
-                                  // x: [-250, 0, 0, 0],
+                                  x: [-300, 0, 0, 0],
                                   y: [0, 0, -280, -280],
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1.1,
-                                  duration: 3.3,
-                                  ease: "easeIn",
+                                  delay: 0.1,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
+                                  ease: "easeInOut",
                                 }}
                               >
                                 <Box
@@ -80,16 +82,17 @@ const NewBanner = () => {
                             <Stack spacing={4}>
                               <Box
                                 component={motion.div}
-                                initial={{ y: 0 }}
+                                initial={{ x: 300, y: 0 }}
                                 animate={{
-                                  // x: [250, 0, 0, 0],
+                                  x: [300, 0, 0, 0],
                                   y: [0, 0, -250, -250],
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1,
-                                  duration: 3.3,
-                                  ease: "easeIn",
+                                  delay: 0,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
+                                  ease: "easeInOut",
                                 }}
                               >
                                 <Box
@@ -101,16 +104,17 @@ const NewBanner = () => {
                               </Box>
                               <Box
                                 component={motion.div}
-                                initial={{ y: 0 }}
+                                initial={{ x: 300, y: 0 }}
                                 animate={{
-                                  // x: [250, 0, 0, 0],
+                                  x: [300, 0, 0, 0],
                                   y: [0, 0, -300, -300],
                                 }}
                                 transition={{
                                   repeat: Infinity,
-                                  delay: 1.1,
-                                  duration: 3.3,
-                                  ease: "easeIn",
+                                  delay: 0.1,
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
+                                  ease: "easeInOut",
                                 }}
                               >
                                 <Box
@@ -182,6 +186,8 @@ const NewBanner = () => {
                       y: 0,
                     }}
                     transition={{
+                      type:"spring",
+                      stiffness: 500, damping: 10,
                       delay: 0,
                       duration: 1.2,
                       ease: "easeInOut",
