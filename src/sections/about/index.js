@@ -1,16 +1,18 @@
+import { BannerSection } from "@/components/banner";  
 import axiosInstance from "@/utils/axios";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import  { useEffect, useState } from "react";
 
 const AboutUs = () => {
   const [readMore, setReadMore] = useState(false);
   const[data,setData] =useState("");
-
+  console.log(data);
  const AboutUsApi=async()=> await axiosInstance
-  .post("api/front/page-details/about-us")
+  .get("api/front/page-details/about-us")
   .then((response) => {
     if (response?.status === 200) {
-     console.log(response);
+     setData(response.data.view_data);
     } else {
 console.log("error");     
     }
@@ -19,9 +21,9 @@ console.log("error");
    console.log(error,"About Us Page");
   });
 
-  // useEffect(()=>{
-  //   AboutUs();
-  // },[])
+  useEffect(()=>{
+    AboutUsApi();
+  },[])
   const handleRead = (boolean) => {
     if (boolean === false) {
       setReadMore(true);
@@ -31,11 +33,16 @@ console.log("error");
   };
   return (
     <React.Fragment>
-      <Box py={8}>
+     <BannerSection
+        src="/assets/images/contact/contact-us-banner.jpg"
+        alt=""
+        title="About Us"
+      />
+      <Box py={6}>
         <Container>
           <Grid container spacing={1} alignItems="center">
             <Grid item md={6}>
-              <Box component="img" src="/aboutthumb.png" alt="thumbnail" />
+              <Box component="img" src={`${data.feature_img}`} alt="thumbnail" />
             </Grid>
             <Grid item md={6}>
               <Stack spacing={1.5}>

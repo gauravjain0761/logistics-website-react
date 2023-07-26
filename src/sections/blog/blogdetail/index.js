@@ -1,5 +1,6 @@
 import { BannerSection } from "@/components/banner";
 import Iconify from "@/components/iconify";
+import axiosInstance from "@/utils/axios";
 import {
   Box,
   Card,
@@ -9,9 +10,27 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const BlogDetail = () => {
+  const[data,setData] =useState("");
+  // console.log(data);
+  const BlogDetailApi=async()=> await axiosInstance
+   .get("api/front/blog-details/blogdetail")
+   .then((response) => {
+     if (response?.status === 200) {
+      setData(response.data.view_data);
+     } else {
+ console.log("error");     
+     }
+   })
+   .catch((error) => {
+    console.log(error,"Blog detail Page");
+   });
+ 
+   useEffect(()=>{
+    BlogDetailApi();
+   },[])
   return (
     <React.Fragment>
       <BannerSection
