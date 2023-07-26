@@ -83,6 +83,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
               variant: "success",
             });
             setShowResend(true);
+            formik.setFieldValue("otp", response?.data?.verification_code);
             if (showResend) {
               handleClose();
               onClose();
@@ -134,6 +135,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
+          formik.setFieldValue("otp", response?.data?.verification_code);
         } else {
           enqueueSnackbar(response.data.message, {
             variant: "error",
