@@ -48,7 +48,6 @@ export const BreadcrumbComponent = () => {
 
       {pathArray &&
         pathArray.map((path, index) => {
-          console.log("path", path);
           if (index == pathArray.length - 1) {
             return (
               <Typography
