@@ -42,7 +42,7 @@ console.log("error");
         <Container>
           <Grid container spacing={1} alignItems="center">
             <Grid item md={6}>
-              <Box component="img" src={`${data.feature_img}`} alt="thumbnail" />
+              <Box component="img" src={`${data && data.feature_img}`} alt="thumbnail" />
             </Grid>
             <Grid item md={6}>
               <Stack spacing={1.5}>
@@ -61,31 +61,7 @@ console.log("error");
                       height: readMore ? "auto" : "16em",
                     }}
                   >
-                    Far much that one rank beheld bluebird after outside ignobly
-                    allegedly more when oh arrogantly vehement irresistibly
-                    fussy penguin insect additionally wow absolutely crud
-                    meretriciously hastily dalmatian a glowered inset one
-                    echidna cassowary. Repeatedly dreamed alas opossum but
-                    dramatically despite expeditiously that jeepers loosely
-                    yikes that as or eel underneath kept and slept compactly far
-                    purred sure abidingly up above fitting to strident wiped set
-                    waywardly far the and pangolin horse approving paid chuckled
-                    cassowary oh above a much opposite far much hypnotically
-                    more therefore wasp less that hey apart well like while
-                    superbly orca and far hence one.
-                    <br />
-                    Far much that one rank beheld bluebird after outside ignobly
-                    allegedly more when oh arrogantly vehement irresistibly
-                    fussy penguin insect additionally wow absolutely crud
-                    meretriciously hastily dalmatian a glowered inset one
-                    echidna cassowary. Repeatedly dreamed alas opossum but
-                    dramatically despite expeditiously that jeepers loosely
-                    yikes that as or eel underneath kept and slept compactly far
-                    purred sure abidingly up above fitting to strident wiped set
-                    waywardly far the and pangolin horse approving paid chuckled
-                    cassowary oh above a much opposite far much hypnotically
-                    more therefore wasp less that hey apart well like while
-                    superbly orca and far hence one.
+                  <div dangerouslySetInnerHTML={{__html: `${data && data.body}`}}></div>
                   </Typography>
                 </Box>
                 <Box>
