@@ -1,8 +1,27 @@
+import axiosInstance from "@/utils/axios";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AboutUs = () => {
   const [readMore, setReadMore] = useState(false);
+  const[data,setData] =useState("");
+
+ const AboutUsApi=async()=> await axiosInstance
+  .post("api/front/page-details/about-us")
+  .then((response) => {
+    if (response?.status === 200) {
+     console.log(response);
+    } else {
+console.log("error");     
+    }
+  })
+  .catch((error) => {
+   console.log(error,"About Us Page");
+  });
+
+  // useEffect(()=>{
+  //   AboutUs();
+  // },[])
   const handleRead = (boolean) => {
     if (boolean === false) {
       setReadMore(true);

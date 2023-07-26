@@ -24,7 +24,6 @@ import { Close } from "@mui/icons-material";
 
 const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
-  console.log("formik.values", formik.values);
   return (
     <React.Fragment>
       <Box sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}>

@@ -93,12 +93,10 @@ const Header = (props) => {
     </Box>
   );
 
-  console.log("valuevalue", value);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  console.log("router.pathname", router);
   return (
     <>
       <AppBar

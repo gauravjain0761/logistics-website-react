@@ -101,7 +101,7 @@ const RegisterPage = () => {
     },
     onSubmit: async (values, { setErrors }) => {
       await axiosInstance
-        .post("/api/user/customer-register", values)
+        .post("/api/user/cust-register", values)
         .then((response) => {
           if (response?.status === 200) {
             sendOtp({
@@ -124,7 +124,6 @@ const RegisterPage = () => {
         .catch((error) => {
           const { response } = error;
           if (response.status === 422) {
-            console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key, value] of Object.entries(values)) {
               if (response.data.error[key]) {

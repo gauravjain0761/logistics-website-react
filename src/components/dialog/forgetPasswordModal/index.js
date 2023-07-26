@@ -150,7 +150,6 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         }
       });
   };
-  console.log("formik.values.type", formik.values.type);
   return (
     <>
       <Dialog

@@ -16,7 +16,6 @@ export default function useActiveLink(path, deep = true) {
   const deepActive =
     (!checkPath && pathname.includes(currentPath)) ||
     (!checkPath && asPath.includes(currentPath));
-  console.log("checkPath", checkPath, path);
 
   return {
     active: deep ? deepActive : normalActive,

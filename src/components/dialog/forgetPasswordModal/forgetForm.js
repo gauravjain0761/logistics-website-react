@@ -31,7 +31,6 @@ export const ForgetForm = ({ formik }) => {
     },
   ];
 
-  console.log("formik.values.type", formik);
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }} />

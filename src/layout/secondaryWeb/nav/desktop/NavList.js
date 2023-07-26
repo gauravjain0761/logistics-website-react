@@ -52,7 +52,6 @@ export default function NavList({ item, isOffset }) {
     setOpenMenu(false);
   };
 
-  console.log("valuevaluevalue", value);
 
   return (
     <>

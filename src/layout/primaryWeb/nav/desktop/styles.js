@@ -12,7 +12,6 @@ export const ListItem = styled(ListItemButton, {
     prop !== "subItem" &&
     prop !== "value",
 })(({ active, open, isOffset, subItem, theme, value }) => {
-  console.log("bilal23", value);
   const dotActive = {
     content: '""',
     borderRadius: "50%",

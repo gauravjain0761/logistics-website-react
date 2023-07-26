@@ -125,7 +125,6 @@ const DriverPage = () => {
         .catch((error) => {
           const { response } = error;
           if (response.status === 422) {
-            console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key, value] of Object.entries(values)) {
               if (response.data.error[key]) {
