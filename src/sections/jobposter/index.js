@@ -502,6 +502,7 @@ const JobPost = ({ formik }) => {
                             }}
                             variant="contained"
                             fullWidth
+                            onClick={()=>router.push("/dashboard/customer_dashboard")}
                           >
                             Close
                           </Button>

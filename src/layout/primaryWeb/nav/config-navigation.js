@@ -39,15 +39,7 @@ const navConfig = [
   },
   {
     title: "Blog",
-    path: "/blog",
-    children: [
-      {
-        items: [
-          { title: "Blog", path: "/blog/blogs" },
-          { title: "Blog Detail", path: "/blog/blogdetail" },
-        ],
-      },
-    ],
+    path: "/blog/blogs",
   },
   {
     title: "Contact Us",

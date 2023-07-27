@@ -10,27 +10,37 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import moment from "moment";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const BlogDetail = () => {
-  const[data,setData] =useState("");
-  // console.log(data);
-  const BlogDetailApi=async()=> await axiosInstance
-   .get("api/front/blog-details/blogdetail")
-   .then((response) => {
-     if (response?.status === 200) {
-      setData(response.data.view_data);
-     } else {
- console.log("error");     
-     }
-   })
-   .catch((error) => {
-    console.log(error,"Blog detail Page");
-   });
- 
-   useEffect(()=>{
+  const router = useRouter();
+  const { slug } = router.query;
+
+  const [data, setData] = useState("");
+  console.log(data);  
+  const BlogDetailApi = async () =>
+    await axiosInstance
+      .get(`/api/front/blog-details/${slug}`)
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response.data.view_data);
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((error) => {
+        console.log(error, "Blog detail Page");
+      });
+
+  useEffect(() => {
     BlogDetailApi();
-   },[])
+  }, []);
+
+
+  console.log("datadata", data);
+
   return (
     <React.Fragment>
       <BannerSection
@@ -42,7 +52,7 @@ const BlogDetail = () => {
         <Container>
           <Grid container spacing={2}>
             <Grid item md={8}>
-              <Box component="img" src="/serviceblog.jpg" />
+              <Box component="img" src={data.image} />
             </Grid>
             <Grid item md={4}>
               <Card sx={{ borderRadius: "5px" }}>
@@ -90,7 +100,7 @@ const BlogDetail = () => {
             <Stack spacing={2}>
               <Box>
                 <Typography variant="h3" fontWeight={900}>
-                  WordPress Plugin Development From Scratch Part-1
+                  {data.title}
                 </Typography>
               </Box>
               <Stack direction="row" spacing={2}>
@@ -111,34 +121,16 @@ const BlogDetail = () => {
                     width={16}
                   />
                   <Box>
-                    <Typography>April 10, 2018</Typography>
+                    <Typography>{moment(data?.created_at).format("DD / MMM / YYYY")}</Typography>
                   </Box>
                 </Stack>
               </Stack>
               <Box>
                 <Typography>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using {"'"}
-                  Content here, content here{"'"}, making it look like readable
-                  English.Many desktop publishing packages and web page editors
-                  now use Lorem Ipsum as their default model text, and a search
-                  for {"'"}lorem ipsum{"'"} will uncover many web sites still in
-                  their infancy.
+                 {data.description}
                 </Typography>
               </Box>
-              <Box>
-                <Typography>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don{"'"}t
-                  look even slightly believable. If you are going to use a
-                  passage of Lorem Ipsum, you need to be sure there isn{"'"}t
-                  anything embarrassing hidden in the middle of text. Various
-                  versions have evolved over the years, sometimes by accident.
-                </Typography>
-              </Box>
+              
               <Box>
                 <Card
                   sx={{ borderLeft: "5px solid #ff7534", borderRadius: "5px" }}
@@ -164,7 +156,7 @@ const BlogDetail = () => {
                   </CardContent>
                 </Card>
               </Box>
-              <Box>
+              {/* <Box>
                 <Typography>
                   There are many variations of passages of Lorem Ipsum
                   available, but the majority have suffered alteration in some
@@ -174,7 +166,7 @@ const BlogDetail = () => {
                   anything embarrassing hidden in the middle of text. Various
                   versions have evolved over the years, sometimes by accident.
                 </Typography>
-              </Box>
+              </Box> */}
             </Stack>
           </Box>
         </Container>
