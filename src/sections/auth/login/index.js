@@ -153,7 +153,7 @@ const Login = ({ formik }) => {
                                 color: "#fff",
                                 my: 1,
                                 ":hover": {
-                                  backgroundColor: "#2A4E95",
+                                  backgroundColor: "#2a4e95de",
                                 },
                               }}
                               startIcon={
@@ -175,7 +175,7 @@ const Login = ({ formik }) => {
                                 backgroundColor: "#CD2C2E",
                                 color: "#fff",
                                 ":hover": {
-                                  backgroundColor: "#CD2C2E",
+                                  backgroundColor: "#cd2c2edb",
                                 },
                               }}
                               startIcon={
@@ -187,6 +187,29 @@ const Login = ({ formik }) => {
                             >
                               <Typography fontSize={"15px"}>
                                 Continue with Google
+                              </Typography>
+                            </Button>
+                          </Box>
+                          <Box>
+                            <Button
+                              fullWidth
+                              sx={{
+                                backgroundColor: "#0f0f0f",
+                                color: "#fff",
+                                my: 1,
+                                ":hover": {
+                                  backgroundColor: "#0f0f0fba",
+                                },
+                              }}
+                              startIcon={
+                                <Iconify
+                                  icon="ic:baseline-apple"
+                                  color="white"
+                                />
+                              }
+                            >
+                              <Typography fontSize={"15px"}>
+                                Continue with Apple
                               </Typography>
                             </Button>
                           </Box>

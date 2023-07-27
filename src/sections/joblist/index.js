@@ -579,6 +579,9 @@ const DashboardJobPost = ({ formik }) => {
                                         fullWidth
                                         variant="contained"
                                         startIcon={<Iconify icon="bxs:edit" />}
+                                        onClick={() =>
+                                          router.push("/jobpost/post_your_job")
+                                        }
                                       >
                                         Edit Job
                                       </Button>

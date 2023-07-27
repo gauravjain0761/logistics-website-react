@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 
 const containerStyle = {
   width: "100%",
-  height: "700px",
+  height: "550px",
 };
 
 const center = {
