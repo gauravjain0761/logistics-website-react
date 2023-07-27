@@ -1,13 +1,13 @@
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import NextLink from "next/link";
 
 export const BreadcrumbComponent = () => {
-  const pathname = usePathname();
+  const { asPath } = useRouter();
 
-  const linkPath = pathname.split("/");
+  const linkPath = asPath.split("/");
   linkPath.shift();
 
   const pathArray = linkPath.map((path, i) => {

@@ -1,5 +1,4 @@
 import { BannerSection } from "@/components/banner";
-import Iconify from "@/components/iconify";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
@@ -11,10 +10,14 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const Blogs = ({ formik }) => {
+  const router = useRouter();
   const [data, setData] = useState("");
+
+  // Api Call
   const BlogApi = async () =>
     await axiosInstance
       .get("api/front/blogs")
@@ -33,7 +36,6 @@ const Blogs = ({ formik }) => {
     BlogApi();
   }, []);
 
-  console.log("datadata", data);
   return (
     <React.Fragment>
       <BannerSection
@@ -47,9 +49,13 @@ const Blogs = ({ formik }) => {
             {data &&
               data.length > 0 &&
               data.map((elem, index) => {
+              console.log(elem,"dattaa")
                 return (
                   <Grid item md={4} key={index}>
-                    <Card sx={{ borderRadius: "12px" }}>
+                    <Card
+                      sx={{ borderRadius: "12px", cursor: "pointer" }}
+                      onClick={() => router.push(`/blog/blog_detail/${elem.slug}`)}
+                    >
                       <Box component="img" src={elem?.image} alt="blog" />
                       <CardContent>
                         <Grid container spacing={2}>
