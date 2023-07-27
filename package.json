@@ -16,6 +16,7 @@
     "@mui/lab": "^5.0.0-alpha.135",
     "@mui/material": "^5.13.7",
     "@next/font": "^13.4.9",
+    "@react-google-maps/api": "^2.19.2",
     "axios": "^1.4.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
