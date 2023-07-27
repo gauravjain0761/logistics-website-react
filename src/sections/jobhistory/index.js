@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-const DashboardJobPost = ({ formik }) => {
+const JobHistory = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
@@ -35,6 +35,8 @@ const DashboardJobPost = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
+
+  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -118,7 +120,7 @@ const DashboardJobPost = ({ formik }) => {
                     fontWeight={700}
                     color="primary"
                   >
-                    Job Posted By You
+                    Job History By You
                   </Typography>
                   <Box>
                     <Typography
@@ -130,7 +132,7 @@ const DashboardJobPost = ({ formik }) => {
                       py={0.3}
                       px={0.6}
                     >
-                      02
+                      20
                     </Typography>
                   </Box>
                 </Stack>
@@ -147,7 +149,7 @@ const DashboardJobPost = ({ formik }) => {
                 </Box>
               </Grid>
               <Grid item md={3}>
-              <Box>
+                <Box>
                   <Stack direction="row" mb={1.3}>
                     <Box>
                       <Box
@@ -186,7 +188,12 @@ const DashboardJobPost = ({ formik }) => {
               </Grid>
               <Grid item md={2}>
                 <Box>
-                  <Button startIcon={<Add />} variant="contained" fullWidth onClick={()=>router.push("/jobpost/post_your_job")}>
+                  <Button
+                    startIcon={<Add />}
+                    variant="contained"
+                    fullWidth
+                    onClick={() => router.push("/jobpost/post_your_job")}
+                  >
                     Add New Post
                   </Button>
                 </Box>
@@ -360,7 +367,7 @@ const DashboardJobPost = ({ formik }) => {
                                 </Typography>
                               </Box>
                             </Stack>
-                            <Box sx={{ cursor: "pointer" }}>
+                            {/* <Box sx={{ cursor: "pointer" }}>
                               <Iconify
                                 icon="ic:baseline-delete"
                                 width="1.7em"
@@ -371,7 +378,7 @@ const DashboardJobPost = ({ formik }) => {
                                   p: 0.4,
                                 }}
                               />
-                            </Box>
+                            </Box> */}
                           </Stack>
                           <CardContent>
                             <Grid container spacing={2} alignItems="center">
@@ -381,7 +388,7 @@ const DashboardJobPost = ({ formik }) => {
                                   src="/assets/images/dashboard/portfolio.jpeg"
                                   sx={{
                                     width: "100px",
-                                    borderRadius:"50%",
+                                    borderRadius: "50%",
                                     border: "5px solid #ff7534",
                                   }}
                                 />
@@ -573,19 +580,16 @@ const DashboardJobPost = ({ formik }) => {
                                         View Bids
                                       </Button>
                                     </Box>
-                                    <Box>
+                                    {/* <Box>
                                       <Button
                                         color="dark"
                                         fullWidth
                                         variant="contained"
                                         startIcon={<Iconify icon="bxs:edit" />}
-                                        onClick={() =>
-                                          router.push("/jobpost/post_your_job")
-                                        }
                                       >
                                         Edit Job
                                       </Button>
-                                    </Box>
+                                    </Box> */}
                                   </Box>
                                 </Stack>
                                 <Stack
@@ -679,4 +683,4 @@ const DashboardJobPost = ({ formik }) => {
   );
 };
 
-export default DashboardJobPost;
+export default JobHistory;

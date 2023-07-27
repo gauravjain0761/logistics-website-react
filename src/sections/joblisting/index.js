@@ -12,6 +12,7 @@ import {
   Divider,
   Drawer,
   Grid,
+  LinearProgress,
   Pagination,
   PaginationItem,
   Rating,
@@ -111,7 +112,7 @@ const JobList = () => {
                               }}
                             />
                           </Grid>
-                          <Grid item md={8}>
+                          <Grid item md={10}>
                             <Stack direction="column">
                               {/* <Box>
                                 <Typography
@@ -122,10 +123,42 @@ const JobList = () => {
                                   Job Success Rate: 98 %
                                 </Typography>
                               </Box> */}
+
                               <Box pb={0.3}>
-                                <Typography variant="h5" fontWeight={600}>
-                                  Mr. Gaurav
-                                </Typography>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  justifyContent="space-between"
+                                >
+                                  <Box>
+                                    <Typography variant="h5" fontWeight={600}>
+                                      Mr. Gaurav
+                                    </Typography>
+                                  </Box>
+                                  <Stack>
+                                    <Stack direction="row" spacing={0.4}>
+                                      <Box>
+                                        <Typography fontWeight={600}>
+                                          Job Success Rate :
+                                        </Typography>
+                                      </Box>
+                                      <Box>
+                                        <Typography
+                                          color="primary"
+                                          fontWeight={600}
+                                        >
+                                          98 %
+                                        </Typography>
+                                      </Box>
+                                    </Stack>
+                                    <Box>
+                                      <LinearProgress
+                                        variant="determinate"
+                                        value={98}
+                                      />
+                                    </Box>
+                                  </Stack>
+                                </Stack>
                               </Box>
                               <Typography fontSize={14}>
                                 {" "}
@@ -138,9 +171,6 @@ const JobList = () => {
                               </Typography>
                             </Stack>
                           </Grid>
-                          <Grid item md={2}>
-                            <Button variant="contained">Apply</Button>
-                          </Grid>
                         </Grid>
                         <Stack
                           direction="row"
@@ -149,16 +179,12 @@ const JobList = () => {
                           pt={2}
                         >
                           <Stack direction="row" spacing={1}>
-                            <Chip
-                              label=" Job Success Rate: 98 %"
-                              variant=""
-                              color="primary"
-                            />
-                            {/* <Chip label="Full-Time" variant="" color="primary" />
-                            <Chip label="Remote" variant="" color="primary" /> */}
+                            
+                            <Chip label="Open For Chat" variant=""  />
+                            <Chip label="Start Job" variant=""  />
                           </Stack>
                           <Stack>
-                            <Rating value={4} readOnly size="small" />
+                            <Rating value={4} readOnly size="small" sx={{color:theme=>theme.palette.primary.main}}/>
                           </Stack>
                         </Stack>
                         <Divider sx={{ my: 2 }} />
@@ -263,7 +289,7 @@ const JobList = () => {
                 </Box>
                 <Box>
                   <Box>
-                    <Rating />
+                    <Rating sx={{color:theme=>theme.palette.primary.main}}/>
                   </Box>
                 </Box>
               </Box>

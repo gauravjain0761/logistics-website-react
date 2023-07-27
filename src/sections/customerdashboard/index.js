@@ -17,7 +17,7 @@ const CustomerDashboard = () => {
  
   return (
     <React.Fragment>
-      <Container sx={{ my: 4 }}>
+      <Container sx={{ my: 4,mt:10}}>
         <Stack spacing={4}>
          <DashboardCard/>
           <Box>

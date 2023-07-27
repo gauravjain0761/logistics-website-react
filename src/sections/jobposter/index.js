@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
 import { TextBox } from "@/components/form";
 import { ArrowDropDownCircle } from "@mui/icons-material";
+import DashboardCard from "@/module/dashboard/dashboardCard";
 
 const VehicleSelect = [
   // {
@@ -70,156 +71,11 @@ const JobPost = ({ formik }) => {
   return (
     <React.Fragment>
       <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8 }}>
-        <Container sx={{ py: 4 }}>
+        <Container sx={{ py: 3 }}>
           <Stack spacing={4}>
-            <Box>
-              <Grid container spacing={2}>
-                <Grid item md={3}>
-                  <Card sx={{ backgroundColor: "#ff7534" }}>
-                    <CardContent>
-                      <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        spacing={1}
-                      >
-                        <Box
-                          sx={{ backgroundColor: "#fff" }}
-                          height="60px"
-                          px={1.3}
-                          py={0.8}
-                          borderRadius={2}
-                          component={"img"}
-                          src="/assets/images/dashboard/jobposted.png"
-                        />
-                        <Box>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            color={"#fff"}
-                          >
-                            JOB POSTED
-                          </Typography>
-                          <Typography
-                            variant="h4"
-                            color={"#fff"}
-                            textAlign={"center"}
-                          >
-                            2
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item md={3}>
-                  <Card sx={{ backgroundColor: "#ff7534" }}>
-                    <CardContent>
-                      <Stack direction={"row"} justifyContent={"space-between"}>
-                        <Box
-                          sx={{ backgroundColor: "#fff" }}
-                          height="60px"
-                          px={1.3}
-                          py={0.8}
-                          borderRadius={2}
-                          component={"img"}
-                          src="/assets/images/dashboard/moneyspend.png"
-                        />
-                        <Box>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            color={"#fff"}
-                          >
-                            MONEY SPEND
-                          </Typography>
-                          <Typography
-                            variant="h4"
-                            color={"#fff"}
-                            textAlign={"center"}
-                          >
-                            $ 20000
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item md={3}>
-                  <Card sx={{ backgroundColor: "#ff7534" }}>
-                    <CardContent>
-                      <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        spacing={2}
-                      >
-                        <Box
-                          sx={{ backgroundColor: "#fff" }}
-                          height="60px"
-                          px={1.3}
-                          py={0.8}
-                          borderRadius={2}
-                          component={"img"}
-                          src="/assets/images/dashboard/jobhistory.png"
-                        />
-                        <Box>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            color={"#fff"}
-                          >
-                            JOB HISTORY
-                          </Typography>
-                          <Typography
-                            variant="h4"
-                            color={"#fff"}
-                            textAlign={"center"}
-                          >
-                            20
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item md={3}>
-                  <Card sx={{ backgroundColor: "#ff7534" }}>
-                    <CardContent>
-                      <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        spacing={2}
-                      >
-                        <Box
-                          sx={{ backgroundColor: "#fff" }}
-                          height="60px"
-                          px={1.3}
-                          py={0.8}
-                          borderRadius={2}
-                          component={"img"}
-                          src="/assets/images/dashboard/subscription.png"
-                        />
-                        <Box>
-                          <Typography
-                            variant="h6"
-                            fontWeight={300}
-                            color={"#fff"}
-                          >
-                            SUBSCRIPTION
-                          </Typography>
-                          <Typography
-                            variant="h4"
-                            color={"#fff"}
-                            textAlign={"center"}
-                          >
-                            3 Month
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </Grid>
-            </Box>
+          <Box >
+            <DashboardCard />
+          </Box>
             <Box>
               <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>

@@ -4,7 +4,12 @@ import { useFormik } from "formik";
 import DashboardJobPost from "@/sections/joblist";
 
 const DashboardPageNext = () => {
-  const formik = useFormik({});
+  const formik = useFormik({
+    initialValues: {
+      month: 0,
+    },
+   
+  });
   return <DashboardJobPost formik={formik} />;
 };
 

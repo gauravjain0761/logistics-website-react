@@ -1,16 +1,28 @@
 import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 
 const DashboardCard = () => {
   const router = useRouter();
+
   return (
     <React.Fragment>
-      <Box sx={{ mt: 8 }}>
+      <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
           <Grid item md={3}>
             <Card
-              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/job_list"
+                    ? "#ff7534"
+                    : "#fff",
+                border: "1px solid #ff7534",
+                color:
+                  router.pathname === "/dashboard/job_list"
+                    ? "#fff"
+                    : "#ff7534",
+                cursor: "pointer",
+              }}
               onClick={() => router.push("/dashboard/job_list")}
             >
               <CardContent>
@@ -20,7 +32,12 @@ const DashboardCard = () => {
                   spacing={1}
                 >
                   <Box
-                    sx={{ backgroundColor: "#fff" }}
+                     sx={{
+                      backgroundColor:
+                        router.pathname === "/dashboard/job_list"
+                          ? "#fff"
+                          : "#ff7b3c30",
+                    }}
                     height="60px"
                     px={1.3}
                     py={0.8}
@@ -29,14 +46,10 @@ const DashboardCard = () => {
                     src="/assets/images/dashboard/jobposted.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300} color="#fff">
+                    <Typography variant="h6" fontWeight={300}>
                       JOB POSTED
                     </Typography>
-                    <Typography
-                      variant="h4"
-                      color={"#fff"}
-                      textAlign={"center"}
-                    >
+                    <Typography variant="h4" textAlign="center">
                       2
                     </Typography>
                   </Box>
@@ -46,29 +59,42 @@ const DashboardCard = () => {
           </Grid>
           <Grid item md={3}>
             <Card
-              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              variant="outlined"
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/money_spend"
+                    ? "#ff7534"
+                    : "#fff",
+                border: "1px solid #ff7534",
+                color:
+                  router.pathname === "/dashboard/money_spend"
+                    ? "#fff"
+                    : "#ff7534",
+                cursor: "pointer",
+              }}
               onClick={() => router.push("/dashboard/money_spend")}
             >
               <CardContent>
                 <Stack direction="row" justifyContent="space-between">
                   <Box
-                    sx={{ backgroundColor: "#fff" }}
+                     sx={{
+                      backgroundColor:
+                        router.pathname === "/dashboard/money_spend"
+                          ? "#fff"
+                          : "#ff7b3c30",
+                    }}
                     height="60px"
                     px={1.3}
                     py={0.8}
                     borderRadius={2}
-                    component={"img"}
+                    component="img"
                     src="/assets/images/dashboard/moneyspend.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300} color={"#fff"}>
+                    <Typography variant="h6" fontWeight={300}>
                       MONEY SPEND
                     </Typography>
-                    <Typography
-                      variant="h4"
-                      color={"#fff"}
-                      textAlign={"center"}
-                    >
+                    <Typography variant="h4" textAlign="center">
                       $ 20000
                     </Typography>
                   </Box>
@@ -78,7 +104,18 @@ const DashboardCard = () => {
           </Grid>
           <Grid item md={3}>
             <Card
-              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/job_history"
+                    ? "#ff7534"
+                    : "#fff",
+                border: "1px solid #ff7534",
+                color:
+                  router.pathname === "/dashboard/job_history"
+                    ? "#fff"
+                    : "#ff7534",
+                cursor: "pointer",
+              }}
               onClick={() => router.push("/dashboard/job_history")}
             >
               <CardContent>
@@ -88,7 +125,12 @@ const DashboardCard = () => {
                   spacing={2}
                 >
                   <Box
-                    sx={{ backgroundColor: "#fff" }}
+                     sx={{
+                      backgroundColor:
+                        router.pathname === "/dashboard/job_history"
+                          ? "#fff"
+                          : "#ff7b3c30",
+                    }}
                     height="60px"
                     px={1.3}
                     py={0.8}
@@ -97,14 +139,10 @@ const DashboardCard = () => {
                     src="/assets/images/dashboard/jobhistory.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300} color={"#fff"}>
+                    <Typography variant="h6" fontWeight={300}>
                       JOB HISTORY
                     </Typography>
-                    <Typography
-                      variant="h4"
-                      color={"#fff"}
-                      textAlign={"center"}
-                    >
+                    <Typography variant="h4" textAlign={"center"}>
                       20
                     </Typography>
                   </Box>
@@ -114,7 +152,18 @@ const DashboardCard = () => {
           </Grid>
           <Grid item md={3}>
             <Card
-              sx={{ backgroundColor: "#ff7534", cursor: "pointer" }}
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/subscription"
+                    ? "#ff7534"
+                    : "#fff",
+                border: "1px solid #ff7534",
+                color:
+                  router.pathname === "/dashboard/subscription"
+                    ? "#fff"
+                    : "#ff7534",
+                cursor: "pointer",
+              }}
               onClick={() => router.push("/dashboard/subscription")}
             >
               <CardContent>
@@ -124,7 +173,12 @@ const DashboardCard = () => {
                   spacing={2}
                 >
                   <Box
-                    sx={{ backgroundColor: "#fff" }}
+                    sx={{
+                      backgroundColor:
+                        router.pathname === "/dashboard/subscription"
+                          ? "#fff"
+                          : "#ff7b3c30",
+                    }}
                     height="60px"
                     px={1.3}
                     py={0.8}
@@ -133,14 +187,10 @@ const DashboardCard = () => {
                     src="/assets/images/dashboard/subscription.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300} color={"#fff"}>
+                    <Typography variant="h6" fontWeight={300}>
                       SUBSCRIPTION
                     </Typography>
-                    <Typography
-                      variant="h4"
-                      color={"#fff"}
-                      textAlign={"center"}
-                    >
+                    <Typography variant="h4" textAlign={"center"}>
                       3 Month
                     </Typography>
                   </Box>

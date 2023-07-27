@@ -33,6 +33,7 @@ import { clearToken, isAccessToken } from "@/utils/localStorageAvailable";
 import NavDesktop from "../nav/desktop/NavDesktop";
 import navConfig from "../nav/config-navigation";
 import { HEADER } from "@/utils/config-global";
+import { filter } from "lodash";
 
 const drawerWidth = 240;
 
@@ -93,10 +94,14 @@ const Header = (props) => {
     </Box>
   );
 
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
+  // const isAccessToken =
+  //   typeof window !== "undefined" && localStorage.getItem("token")
+  //     ? true
+  //     : false;
 
+  console.log("tokentokentoken", token);
   return (
     <>
       <AppBar
@@ -110,9 +115,7 @@ const Header = (props) => {
               : "none",
           },
           background: (theme) =>
-            value
-              ? theme.palette.common.white
-              : theme.palette.common.white,
+            value ? theme.palette.common.white : theme.palette.common.white,
           transition: (theme) =>
             theme.transitions.create("background", {
               easing: theme.transitions.easing.sharp,
@@ -154,7 +157,16 @@ const Header = (props) => {
               }}
               spacing={0}
             >
-              <NavDesktop value={value} isOffset={isOffset} data={navConfig} />
+              <NavDesktop
+                value={value}
+                isOffset={isOffset}
+                data={
+                  navConfig &&
+                  filter(navConfig, (item) => {
+                    return item.token(token);
+                  })
+                }
+              />
               <div>
                 {token ? (
                   <Box component="div">
