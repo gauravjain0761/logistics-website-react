@@ -190,7 +190,7 @@ const Login = ({ formik }) => {
                               </Typography>
                             </Button>
                           </Box>
-                          <Box>
+                          {/* <Box>
                             <Button
                               fullWidth
                               sx={{
@@ -212,7 +212,7 @@ const Login = ({ formik }) => {
                                 Continue with Apple
                               </Typography>
                             </Button>
-                          </Box>
+                          </Box> */}
                         </Box>
                       </Box>
                     </Stack>

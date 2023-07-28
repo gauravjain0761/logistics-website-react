@@ -117,7 +117,7 @@ const DashboardJobPost = ({ formik }) => {
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography
                     fontSize="1.75rem"
-                    fontWeight={700}
+                    fontWeight={500}
                     color="primary"
                   >
                     Job Posted By You
@@ -125,14 +125,16 @@ const DashboardJobPost = ({ formik }) => {
 
                   <Box
                     borderRadius="50%"
-                    backgroundColor={(theme) => theme.palette.primary.main}
+                    border="1px solid"
+                    borderColor={(theme) => theme.palette.primary.main}
+                    color={(theme) => theme.palette.primary.main}
                     py={0.6}
                     px={1.8}
                   >
                     <Typography
                       fontSize="1.3rem"
                       fontWeight={700}
-                      color="white"
+                      color="primary"
                     >
                       <CountUp
                         start={0}
@@ -188,7 +190,7 @@ const DashboardJobPost = ({ formik }) => {
                 <Box>
                   <Button
                     startIcon={<Add />}
-                    variant="contained"
+                    variant="outlined"
                     fullWidth
                     onClick={() => router.push("/jobpost/post_your_job")}
                   >
@@ -259,7 +261,7 @@ const DashboardJobPost = ({ formik }) => {
                                             variant="h5"
                                             fontWeight={600}
                                           >
-                                            Mr. Gaurav
+                                            Mr. Alex
                                           </Typography>
                                         </Box>
                                         <Typography fontSize={14}>
@@ -333,7 +335,7 @@ const DashboardJobPost = ({ formik }) => {
                     <Card
                       sx={{
                         my: 2,
-                        borderRadius: "0px",
+                        // borderRadius: "10px",
                         ":hover": {
                           borderColor: "#ff7534",
                           transition: " all 0.3s ease-in-out",
@@ -347,8 +349,8 @@ const DashboardJobPost = ({ formik }) => {
                         px={2}
                         py={1.4}
                         alignItems="center"
-                        backgroundColor="#f5f5f5"
-                        sx={{ borderBottom: "1px solid lightgrey" }}
+                        // backgroundColor="#f5f5f5"
+                        // sx={{ borderBottom: "1px solid lightgrey" }}
                       >
                         <Stack direction="row" spacing={0.5}>
                           <Box>
@@ -367,6 +369,7 @@ const DashboardJobPost = ({ formik }) => {
                           <DeleteModal />
                         </Box>
                       </Stack>
+                      <Divider />
                       <CardContent>
                         <Grid container spacing={2} alignItems="center">
                           <Grid item md={2}>
@@ -376,13 +379,13 @@ const DashboardJobPost = ({ formik }) => {
                               sx={{
                                 width: "100px",
                                 borderRadius: "50%",
-                                border: "5px solid #ff7534",
+                                border: "2px solid #ff7534",
                               }}
                             />
                           </Grid>
                           <Grid item md={4}>
                             <Stack spacing={0.3}>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Pick-Up Date :
@@ -393,11 +396,11 @@ const DashboardJobPost = ({ formik }) => {
                                     color="primary"
                                     variant="subtitle1"
                                   >
-                                    09 - June - 2023
+                                    09/06/2023
                                   </Typography>
                                 </Box>
                               </Stack>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Pick-Up Time :
@@ -412,7 +415,7 @@ const DashboardJobPost = ({ formik }) => {
                                   </Typography>
                                 </Box>
                               </Stack>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={7.2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Material :
@@ -441,7 +444,7 @@ const DashboardJobPost = ({ formik }) => {
                                     </Box>
                                   <Box pb={0.3}>
                                     <Typography variant="h5" fontWeight={600}>
-                                      Mr. Gaurav
+                                      Mr. Alex
                                     </Typography>
                                   </Box>
                                   <Typography fontSize={14}>
@@ -467,7 +470,7 @@ const DashboardJobPost = ({ formik }) => {
                           </Grid>
                           <Grid item md={4}>
                             <Stack spacing={0.3}>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Drop-Out Date :
@@ -478,11 +481,11 @@ const DashboardJobPost = ({ formik }) => {
                                     color="primary"
                                     variant="subtitle1"
                                   >
-                                    12 - June - 2023
+                                    09/06/2023
                                   </Typography>
                                 </Box>
                               </Stack>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Drop-Out Time :
@@ -497,7 +500,7 @@ const DashboardJobPost = ({ formik }) => {
                                   </Typography>
                                 </Box>
                               </Stack>
-                              <Stack direction="row" spacing={0.5}>
+                              <Stack direction="row" spacing={13.2}>
                                 <Box>
                                   <Typography variant="subtitle1">
                                     Size :
@@ -525,9 +528,9 @@ const DashboardJobPost = ({ formik }) => {
                               <Box>
                                 <Box>
                                   <Button
-                                    sx={{ mb: 1 }}
+                                    sx={{ mb: 1, fontWeight: 500 }}
                                     fullWidth
-                                    variant="contained"
+                                    variant="outlined"
                                     startIcon={
                                       <Iconify icon="material-symbols:star" />
                                     }
@@ -542,11 +545,14 @@ const DashboardJobPost = ({ formik }) => {
                                   <Button
                                     color="dark"
                                     fullWidth
-                                    variant="contained"
+                                    variant="outlined"
                                     startIcon={<Iconify icon="bxs:edit" />}
                                     onClick={() =>
                                       router.push("/jobpost/post_your_job")
                                     }
+                                    sx={{
+                                      fontWeight: 500,
+                                    }}
                                   >
                                     Edit Job
                                   </Button>
@@ -664,9 +670,9 @@ const DeleteModal = () => {
             position: "absolute",
             top: "50%",
             left: "50%",
-            textAlign:"center",
+            textAlign: "center",
             transform: "translate(-50%, -50%)",
-            
+
             bgcolor: "background.paper",
             border: "1px solid #f5f5f5",
             boxShadow: 24,
@@ -677,8 +683,12 @@ const DeleteModal = () => {
             Are you sure you want to delete ?
           </Typography>
           <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="contained">Yes</Button>
-            <Button fullWidth variant="contained">No</Button>
+            <Button fullWidth variant="contained" onClick={handleClose}>
+              Yes
+            </Button>
+            <Button fullWidth variant="contained" onClick={handleClose}>
+              No
+            </Button>
           </Stack>
         </Box>
       </Modal>

@@ -259,7 +259,7 @@ const JobHistory = ({ formik }) => {
                                             variant="h5"
                                             fontWeight={600}
                                           >
-                                            Mr. Gaurav
+                                            Mr. Alex
                                           </Typography>
                                         </Box>
                                         <Typography fontSize={14}>
@@ -384,7 +384,7 @@ const JobHistory = ({ formik }) => {
                               sx={{
                                 width: "100px",
                                 borderRadius: "50%",
-                                border: "5px solid #ff7534",
+                                border: "2px solid #ff7534",
                               }}
                             />
                           </Grid>
@@ -449,7 +449,7 @@ const JobHistory = ({ formik }) => {
                                     </Box>
                                   <Box pb={0.3}>
                                     <Typography variant="h5" fontWeight={600}>
-                                      Mr. Gaurav
+                                      Mr. Alex
                                     </Typography>
                                   </Box>
                                   <Typography fontSize={14}>

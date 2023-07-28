@@ -72,7 +72,7 @@ function GoogleMaps() {
           <Stack>
             <Box>
               <Typography color="primary" fontSize={14} variant="subtitle1">
-                Mr. Gaurav
+                Mr. Alex
               </Typography>
             </Box>
             <Stack spacing={0.2} pb={0.8}>

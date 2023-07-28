@@ -24,8 +24,10 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import GoogleMaps from "@/module/map";
+import { useRouter } from "next/router";
 
 const JobList = () => {
+  const router =useRouter();  
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [select, setSelect] = React.useState(0);
@@ -99,7 +101,7 @@ const JobList = () => {
                         borderRadius: "0px",
                         ":hover": {
                           borderColor: "#ff7534",
-                          cursor: "pointer",
+                          // cursor: "pointer",
                           transition: " all 0.3s ease-in-out",
                         },
                       }}
@@ -137,7 +139,7 @@ const JobList = () => {
                                 >
                                   <Box>
                                     <Typography variant="h5" fontWeight={600}>
-                                      Mr. Gaurav
+                                      Mr. Alex
                                     </Typography>
                                   </Box>
                                   <Stack>
@@ -185,14 +187,17 @@ const JobList = () => {
                         >
                           <Stack direction="row" spacing={1}>
                             <Chip
+                              sx={{ cursor: "pointer" }}
                               icon={<Iconify icon="mdi:chat" />}
                               label="Open For Chat"
                               variant=""
                             />
                             <Chip
+                              sx={{ cursor: "pointer" }}
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
                               }
+                              onClick={()=>router.push("/dashboard/start_job")}
                               label="Start Job"
                               variant=""
                             />
