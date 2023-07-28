@@ -24,16 +24,22 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import GoogleMaps from "@/module/map";
+import { useRouter } from "next/router";
 
 const JobList = () => {
+  const router =useRouter();  
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
-  const [select, setSelect] = React.useState("new");
+  const [select, setSelect] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
   const sortBy = [
+    {
+      label: "Sort(Default)",
+      value: 0,
+    },
     {
       label: "Sort(New)",
       value: "new",
@@ -78,6 +84,7 @@ const JobList = () => {
                   <SelectBox
                     fullWidth
                     size="small"
+                    color="#fff"
                     value={select}
                     onChange={(e) => setSelect(e.target.value)}
                     options={sortBy}
@@ -94,7 +101,7 @@ const JobList = () => {
                         borderRadius: "0px",
                         ":hover": {
                           borderColor: "#ff7534",
-                          cursor: "pointer",
+                          // cursor: "pointer",
                           transition: " all 0.3s ease-in-out",
                         },
                       }}
@@ -132,7 +139,7 @@ const JobList = () => {
                                 >
                                   <Box>
                                     <Typography variant="h5" fontWeight={600}>
-                                      Mr. Gaurav
+                                      Mr. Alex
                                     </Typography>
                                   </Box>
                                   <Stack>
@@ -179,12 +186,31 @@ const JobList = () => {
                           pt={2}
                         >
                           <Stack direction="row" spacing={1}>
-                            
-                            <Chip label="Open For Chat" variant=""  />
-                            <Chip label="Start Job" variant=""  />
+                            <Chip
+                              sx={{ cursor: "pointer" }}
+                              icon={<Iconify icon="mdi:chat" />}
+                              label="Open For Chat"
+                              variant=""
+                            />
+                            <Chip
+                              sx={{ cursor: "pointer" }}
+                              icon={
+                                <Iconify icon="material-symbols:check-circle" />
+                              }
+                              onClick={()=>router.push("/dashboard/start_job")}
+                              label="Start Job"
+                              variant=""
+                            />
                           </Stack>
                           <Stack>
-                            <Rating value={4} readOnly size="small" sx={{color:theme=>theme.palette.primary.main}}/>
+                            <Rating
+                              value={4}
+                              readOnly
+                              size="small"
+                              sx={{
+                                color: (theme) => theme.palette.primary.main,
+                              }}
+                            />
                           </Stack>
                         </Stack>
                         <Divider sx={{ my: 2 }} />
@@ -246,7 +272,7 @@ const JobList = () => {
               </Box>
             </Grid>
             <Grid item md={6}>
-              <Box sx={{ position: "sticky", top: 0, display: "block" }}>
+              <Box sx={{ position: "sticky", top: 75, display: "block" }}>
                 <GoogleMaps />
               </Box>
             </Grid>
@@ -289,7 +315,9 @@ const JobList = () => {
                 </Box>
                 <Box>
                   <Box>
-                    <Rating sx={{color:theme=>theme.palette.primary.main}}/>
+                    <Rating
+                      sx={{ color: (theme) => theme.palette.primary.main }}
+                    />
                   </Box>
                 </Box>
               </Box>

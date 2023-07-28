@@ -45,9 +45,9 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
                         icon="majesticons:phone"
                         hFlip={true}
@@ -85,9 +85,9 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
                         icon="fluent:mail-20-filled"
                         width={70}
@@ -124,11 +124,11 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
-                        icon="majesticons:phone"
+                        icon="mdi:location"
                         hFlip={true}
                         width={70}
                       />

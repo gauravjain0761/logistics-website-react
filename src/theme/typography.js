@@ -1,4 +1,4 @@
-import { Public_Sans, Barlow } from '@next/font/google';
+import { Public_Sans, Barlow, Poppins } from '@next/font/google';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ export function responsiveFontSizes({ sm, md, lg }) {
   };
 }
 
-export const primaryFont = Public_Sans({
+export const primaryFont = Poppins({
   weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
   display: 'swap',
@@ -67,30 +67,30 @@ const typography = {
     ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1.5,
     fontSize: pxToRem(20),
     ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
   },
   h5: {
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1.5,
     fontSize: pxToRem(18),
     ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 28 / 18,
     fontSize: pxToRem(17),
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 1.5,
     fontSize: pxToRem(16),
   },
   subtitle2: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
   },
