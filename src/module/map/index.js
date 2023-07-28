@@ -16,8 +16,9 @@ import {
   Rating,
   Typography,
   styled,
+  Stack,
 } from "@mui/material";
-import { Stack } from "react-bootstrap";
+import Iconify from "@/components/iconify/Iconify";
 
 const containerStyle = {
   width: "100%",
@@ -54,16 +55,79 @@ function GoogleMaps() {
 
   const getGooglePopUp = () => {
     return (
-      <Box
-        component="img"
-        src="/assets/images/dashboard/portfolio.jpeg"
-        sx={{
-          borderRadius: "50%",
-          border: "3px solid #ff7534",
-          width: "100px",
-          height: "100px",
-        }}
-      />
+      <Box>
+        <Stack direction="row" spacing={2}>
+          <Box>
+            <Box
+              component="img"
+              src="/assets/images/dashboard/portfolio.jpeg"
+              sx={{
+                borderRadius: "50%",
+                border: "3px solid #ff7534",
+                width: "80px",
+                height: "80px",
+              }}
+            />
+          </Box>
+          <Stack>
+            <Box>
+              <Typography color="primary" fontSize={14} variant="subtitle1">
+                Mr. Gaurav
+              </Typography>
+            </Box>
+            <Stack spacing={0.2} pb={0.8}>
+              <Stack direction="row" spacing={0.4}>
+                <Box>
+                  <Typography fontWeight={400} fontSize={10}>
+                    Job Success Rate :
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography color="primary" fontWeight={500} fontSize={10}>
+                    98 %
+                  </Typography>
+                </Box>
+              </Stack>
+              <Box>
+                <LinearProgress variant="determinate" value={98} />
+              </Box>
+            </Stack>
+            <Box>
+              <Rating
+                value={4}
+                readOnly
+                size="small"
+                sx={{
+                  color: (theme) => theme.palette.primary.main,
+                  fontSize: "12px !important",
+                }}
+              />
+            </Box>
+          </Stack>
+        </Stack>
+        <Box py={1}>
+          <Stack direction="row" spacing={1}>
+            <Chip
+              icon={<Iconify icon="mdi:chat" />}
+              size="small"
+              label="Open For Chat"
+              variant=""
+            />
+            <Chip
+              icon={<Iconify icon="material-symbols:check-circle" />}
+              size="small"
+              label="Start Job"
+              variant=""
+            />
+          </Stack>
+        </Box>
+        <Divider />
+        <Box pt={1}>
+          <Typography fontSize={12} fontWeight={600}>
+            Bid: $500
+          </Typography>
+        </Box>
+      </Box>
     );
   };
 
@@ -73,8 +137,8 @@ function GoogleMaps() {
         mapContainerStyle={containerStyle}
         center={center}
         zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
+        // onLoad={onLoad}
+        // onUnmount={onUnmount}
       >
         <Marker
           //   key={index}
@@ -83,6 +147,7 @@ function GoogleMaps() {
           onClick={() => {
             setShowPopUp(1);
           }}
+          zoom={2}
         >
           {showPopUp == 1 && (
             <OverlayTrigger
