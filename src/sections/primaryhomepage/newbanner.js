@@ -180,7 +180,7 @@ const NewBanner = () => {
                 <Stack spacing={0} mb={15}>
                   <Box
                     component={motion.div}
-                    initial={{ x: 700, y: 0 }}
+                    initial={{ x: 500, y: 0 }}
                     animate={{
                       x: 0,
                       y: 0,

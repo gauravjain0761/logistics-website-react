@@ -133,7 +133,7 @@ const DashboardJobPost = ({ formik }) => {
                   >
                     <Typography
                       fontSize="1.3rem"
-                      fontWeight={700}
+                      fontWeight={500}
                       color="primary"
                     >
                       <CountUp
@@ -384,54 +384,83 @@ const DashboardJobPost = ({ formik }) => {
                             />
                           </Grid>
                           <Grid item md={4}>
-                            <Stack spacing={0.3}>
-                              <Stack direction="row" spacing={2}>
-                                <Box>
+                            
+                              
+                                <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                        Pick-Up Date 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Pick-Up Date :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                              <Stack direction="row" spacing={2}>
-                                <Box>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        09/06/2023
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                                <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                      Pick-Up Time 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Pick-Up Time :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                              <Stack direction="row" spacing={7.2}>
-                                <Box>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        10:10 AM
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                               
+                                <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                      Material 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Material :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    {" "}
-                                    Plastic Box
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                            </Stack>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        Plastic Box
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                             
+                          
                             {/* <Stack direction="column">
                                   <Box>
                                       <Typography
@@ -469,54 +498,81 @@ const DashboardJobPost = ({ formik }) => {
                                 </Stack> */}
                           </Grid>
                           <Grid item md={4}>
-                            <Stack spacing={0.3}>
-                              <Stack direction="row" spacing={2}>
-                                <Box>
+
+                          <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                      Drop-Out Date 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Drop-Out Date :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                              <Stack direction="row" spacing={2}>
-                                <Box>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        09/06/2023
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                                <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                      Drop-Out Time 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Drop-Out Time :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                              <Stack direction="row" spacing={13.2}>
-                                <Box>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        10:10 AM
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                               
+                                <Grid container >
+                                  <Grid item md={4.5}>
+                                    <Box>
+                                      <Typography variant="subtitle1">
+                                      Size 
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                  <Grid item md={1}>
                                   <Typography variant="subtitle1">
-                                    Size :
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    {" "}
-                                    5 x 2 x 3 inch
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                            </Stack>
+                                        :
+                                      </Typography>
+                                  </Grid>
+                                  <Grid item md={6}>
+                                    <Box>
+                                      <Typography
+                                        color="primary"
+                                        variant="subtitle1"
+                                      >
+                                        5 x 2 x 3 inch
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                            
                           </Grid>
                           <Grid item md={2}>
                             <Stack
@@ -683,10 +739,10 @@ const DeleteModal = () => {
             Are you sure you want to delete ?
           </Typography>
           <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="contained" onClick={handleClose}>
+            <Button fullWidth variant="outlined" onClick={handleClose}>
               Yes
             </Button>
-            <Button fullWidth variant="contained" onClick={handleClose}>
+            <Button fullWidth variant="outlined" onClick={handleClose}>
               No
             </Button>
           </Stack>

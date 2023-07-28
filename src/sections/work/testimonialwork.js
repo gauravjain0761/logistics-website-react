@@ -36,7 +36,7 @@ const TestimonialSlider = () => {
         <Container>
           <Typography
             variant="h3"
-            fontWeight={700}
+            fontWeight={500}
             color="#fff"
             textAlign="center"
           >

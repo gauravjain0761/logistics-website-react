@@ -15,6 +15,23 @@ import Iconify from "@/components/iconify";
 
 const FaqsPage = () => {
   const [expanded, setExpanded] = React.useState(false);
+  const[data,setData] =useState("");
+  const FaqApi=async()=> await axiosInstance
+   .get("api/front/page-details/about-us")
+   .then((response) => {
+     if (response?.status === 200) {
+      setData(response.data.view_data);
+     } else {
+ console.log("error");     
+     }
+   })
+   .catch((error) => {
+    console.log(error,"About Us Page");
+   });
+ 
+   useEffect(()=>{
+     FaqApi();
+   },[])
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

@@ -4,7 +4,11 @@ import { useFormik } from "formik";
 import StartJob from "@/sections/startjob";
 
 const StartJobPage = () => {
-  const formik = useFormik({});
+  const formik = useFormik({
+    initialValues: {
+      location: "",
+    },
+  });
   return <StartJob formik={formik} />;
 };
 

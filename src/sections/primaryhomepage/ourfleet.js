@@ -43,7 +43,7 @@ const OurFleet = () => {
               <Box>
                 <Typography
                   variant="h3"
-                  sx={{ fontSize: "28px !important", mb: 2, fontWeight: 700 }}
+                  sx={{ fontSize: "28px !important", mb: 2, fontWeight: 500 }}
                 >
                   Our Fleet
                 </Typography>
@@ -157,7 +157,7 @@ const OurFleet = () => {
                         sx={{
                           color: (theme) =>
                             alpha(theme.palette.common.black, 0.9),
-                          fontWeight: 700,
+                          fontWeight: 500,
                         }}
                       />
                     </IconButton>
@@ -176,7 +176,7 @@ const OurFleet = () => {
                         sx={{
                           color: (theme) =>
                             alpha(theme.palette.common.black, 0.9),
-                          fontWeight: 700,
+                          fontWeight: 500,
                         }}
                       />
                     </IconButton>

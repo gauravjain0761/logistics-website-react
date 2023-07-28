@@ -19,6 +19,7 @@ import {
   Stack,
 } from "@mui/material";
 import Iconify from "@/components/iconify/Iconify";
+import { useRouter } from "next/router";
 
 const containerStyle = {
   width: "100%",
@@ -33,6 +34,7 @@ const center = {
 const OverlayTrigger = styled(InfoWindow)(({ theme }) => ({}));
 
 function GoogleMaps() {
+  const router = useRouter();
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
@@ -64,14 +66,19 @@ function GoogleMaps() {
               sx={{
                 borderRadius: "50%",
                 border: "3px solid #ff7534",
-                width: "80px",
-                height: "80px",
+                width: "50px",
+                height: "50px",
               }}
             />
           </Box>
           <Stack>
             <Box>
-              <Typography color="primary" fontSize={14} variant="subtitle1">
+              <Typography
+                color="primary"
+                fontSize={14}
+                fontWeight={500}
+                variant="subtitle1"
+              >
                 Mr. Alex
               </Typography>
             </Box>
@@ -108,22 +115,25 @@ function GoogleMaps() {
         <Box py={1}>
           <Stack direction="row" spacing={1}>
             <Chip
-              icon={<Iconify icon="mdi:chat" />}
+              icon={<Iconify icon="mdi:chat" width={14} />}
               size="small"
-              label="Open For Chat"
-              variant=""
+              label="Send Message"
+              variant="outlined"
+              sx={{ fontSize: "10px", cursor: "pointer" }}
             />
             <Chip
-              icon={<Iconify icon="material-symbols:check-circle" />}
+              icon={<Iconify icon="material-symbols:check-circle" width={14} />}
               size="small"
               label="Start Job"
-              variant=""
+              variant="outlined"
+              onClick={() => router.push("/dashboard/start_job")}
+              sx={{ fontSize: "10px", cursor: "pointer" }}
             />
           </Stack>
         </Box>
         <Divider />
         <Box pt={1}>
-          <Typography fontSize={12} fontWeight={600}>
+          <Typography fontSize={12} fontWeight={400}>
             Bid: $500
           </Typography>
         </Box>
@@ -138,7 +148,7 @@ function GoogleMaps() {
         center={center}
         zoom={10}
         // onLoad={onLoad}
-        // onUnmount={onUnmount}
+        onUnmount={onUnmount}
       >
         <Marker
           //   key={index}
@@ -165,4 +175,4 @@ function GoogleMaps() {
   );
 }
 
-export default React.memo(GoogleMaps);
+export default GoogleMaps;

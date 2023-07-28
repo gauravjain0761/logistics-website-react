@@ -23,7 +23,7 @@ export default function Slider(theme) {
         },
         valueLabel: {
           borderRadius: 8,
-          backgroundColor: theme.palette.grey[isLight ? 800 : 700],
+          backgroundColor: theme.palette.grey[isLight ? 800 : 500],
         },
       },
     },
