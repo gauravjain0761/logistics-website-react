@@ -7,7 +7,6 @@ import  { useEffect, useState } from "react";
 const AboutUs = () => {
   const [readMore, setReadMore] = useState(false);
   const[data,setData] =useState("");
-  console.log(data);
  const AboutUsApi=async()=> await axiosInstance
   .get("api/front/page-details/about-us")
   .then((response) => {

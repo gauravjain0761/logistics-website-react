@@ -119,6 +119,7 @@ function GoogleMaps() {
               size="small"
               label="Send Message"
               variant="outlined"
+              color="primary"
               sx={{ fontSize: "10px", cursor: "pointer" }}
             />
             <Chip
