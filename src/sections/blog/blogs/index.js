@@ -73,14 +73,14 @@ const Blogs = ({ formik }) => {
                                 <Typography
                                   fontSize="30px"
                                   sx={{ lineHeight: "56px" }}
-                                  fontWeight={700}
+                                  fontWeight={500}
                                   color="primary"
                                 >
                                   {moment(elem?.created_at).format("DD")}
                                 </Typography>
                               </Box>
                               <Box py={1}>
-                                <Typography fontWeight={700} textAlign="center">
+                                <Typography fontWeight={500} textAlign="center">
                                   {moment(elem?.created_at).format("MMM")}
                                 </Typography>
                               </Box>
@@ -96,7 +96,7 @@ const Blogs = ({ formik }) => {
                               <Box>
                                 <Typography
                                   fontSize="16x"
-                                  fontWeight={700}
+                                  fontWeight={500}
                                   color="primary"
                                 >
                                   {elem?.category}
