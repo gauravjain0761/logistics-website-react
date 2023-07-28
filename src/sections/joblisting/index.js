@@ -13,6 +13,7 @@ import {
   Drawer,
   Grid,
   LinearProgress,
+  Modal,
   Pagination,
   PaginationItem,
   Rating,
@@ -27,7 +28,11 @@ import GoogleMaps from "@/module/map";
 import { useRouter } from "next/router";
 
 const JobList = () => {
-  const router =useRouter();  
+  const router = useRouter();
+  const [startChat, setStartChat] = React.useState("");
+  const handleOpen = () => setStartChat(true);
+  const handleClose = () => setStartChat(false);
+
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [select, setSelect] = React.useState(0);
@@ -98,7 +103,7 @@ const JobList = () => {
                       key={index}
                       sx={{
                         my: 2,
-                        borderRadius: "0px",
+
                         ":hover": {
                           borderColor: "#ff7534",
                           // cursor: "pointer",
@@ -138,14 +143,14 @@ const JobList = () => {
                                   justifyContent="space-between"
                                 >
                                   <Box>
-                                    <Typography variant="h5" fontWeight={600}>
+                                    <Typography variant="h5" fontWeight={500}>
                                       Mr. Alex
                                     </Typography>
                                   </Box>
                                   <Stack>
                                     <Stack direction="row" spacing={0.4}>
                                       <Box>
-                                        <Typography fontWeight={600}>
+                                        <Typography fontWeight={400}>
                                           Job Success Rate :
                                         </Typography>
                                       </Box>
@@ -190,16 +195,19 @@ const JobList = () => {
                               sx={{ cursor: "pointer" }}
                               icon={<Iconify icon="mdi:chat" />}
                               label="Open For Chat"
-                              variant=""
+                              variant="outlined"
                             />
                             <Chip
                               sx={{ cursor: "pointer" }}
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
                               }
-                              onClick={()=>router.push("/dashboard/start_job")}
+                              // onClick={() =>
+                              //   router.push("/dashboard/start_job")
+                              // }
                               label="Start Job"
-                              variant=""
+                              variant="outlined"
+                              onClick={() => setStartChat(true)}
                             />
                           </Stack>
                           <Stack>
@@ -333,6 +341,59 @@ const JobList = () => {
           </Button>
         </Stack>
       </Drawer>
+
+      <Box>
+        <Modal
+          open={startChat}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              textAlign: "center",
+              transform: "translate(-50%, -50%)",
+
+              bgcolor: "background.paper",
+              border: "1px solid #f5f5f5",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              pb={2}
+            >
+              Are you sure you want to Start The Job ?
+            </Typography>
+            <Stack direction="row" spacing={8}>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => {
+                  startChat
+                    ? router.push("/dashboard/start_job")
+                    : setStartChat(false);
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => setStartChat(false)}
+              >
+                No
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+      </Box>
     </React.Fragment>
   );
 };
