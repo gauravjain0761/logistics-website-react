@@ -23,7 +23,7 @@ const navConfig = [
   },
   {
     title: "About us",
-    path: "/aboutus",
+    path: "/aboutus/aboutus",
   },
   {
     title: "Job",

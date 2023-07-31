@@ -1,7 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import DashboardJobPost from "@/sections/joblist";
+import DashboardJobPost from "@/sections/dashboard/jobPost";
 
 const MoneySpendList = () => {
   const formik = useFormik({});

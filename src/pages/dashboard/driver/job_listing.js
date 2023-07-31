@@ -1,8 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import CustomerDashboard from "@/sections/customerdashboard";
-import JobList from "@/sections/joblisting";
+import JobList from "@/sections/dashboard/joblisting";
 
 const JobListing = () => {
   const formik = useFormik({});

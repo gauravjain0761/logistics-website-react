@@ -1,21 +1,19 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobHistory from "@/sections/jobhistory";
+import DashboardJobPost from "@/sections/dashboard/jobPost";
 
-const JobHistoryPage = () => {
+const DashboardPageNext = () => {
   const formik = useFormik({
     initialValues: {
       month: 0,
     },
    
   });
-
-  console.log("formikformik", formik);
-  return <JobHistory formik={formik} />;
+  return <DashboardJobPost formik={formik} />;
 };
 
-JobHistoryPage.getLayout = function getLayout(page) {
+DashboardPageNext.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default JobHistoryPage;
+export default DashboardPageNext;

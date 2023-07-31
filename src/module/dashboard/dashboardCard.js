@@ -13,17 +13,17 @@ const DashboardCard = () => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/job_list"
+                  router.pathname === "/dashboard/driver/job_post"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/job_list"
+                  router.pathname === "/dashboard/driver/job_post"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/job_list")}
+              onClick={() => router.push("/dashboard/driver/job_post")}
             >
               <CardContent>
                 <Stack
@@ -34,7 +34,7 @@ const DashboardCard = () => {
                   <Box
                      sx={{
                       backgroundColor:
-                        router.pathname === "/dashboard/job_list"
+                        router.pathname === "/dashboard/driver/job_post"
                           ? "#fff"
                           : "#ff7b3c30",
                     }}
@@ -62,24 +62,24 @@ const DashboardCard = () => {
               variant="outlined"
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/money_spend"
+                  router.pathname === "/dashboard/driver/money_spend"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/money_spend"
+                  router.pathname === "/dashboard/driver/money_spend"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/money_spend")}
+              onClick={() => router.push("/dashboard/driver/money_spend")}
             >
               <CardContent>
                 <Stack direction="row" justifyContent="space-between">
                   <Box
                      sx={{
                       backgroundColor:
-                        router.pathname === "/dashboard/money_spend"
+                        router.pathname === "/dashboard/driver/money_spend"
                           ? "#fff"
                           : "#ff7b3c30",
                     }}
@@ -106,17 +106,17 @@ const DashboardCard = () => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/job_history"
+                  router.pathname === "/dashboard/driver/job_history"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/job_history"
+                  router.pathname === "/dashboard/driver/job_history"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/job_history")}
+              onClick={() => router.push("/dashboard/driver/job_history")}
             >
               <CardContent>
                 <Stack
@@ -127,7 +127,7 @@ const DashboardCard = () => {
                   <Box
                      sx={{
                       backgroundColor:
-                        router.pathname === "/dashboard/job_history"
+                        router.pathname === "/dashboard/driver/job_history"
                           ? "#fff"
                           : "#ff7b3c30",
                     }}
@@ -154,17 +154,17 @@ const DashboardCard = () => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/subscription"
+                  router.pathname === "/dashboard/driver/subscription"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/subscription"
+                  router.pathname === "/dashboard/driver/subscription"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/subscription")}
+              onClick={() => router.push("/dashboard/driver/subscription")}
             >
               <CardContent>
                 <Stack
@@ -175,7 +175,7 @@ const DashboardCard = () => {
                   <Box
                     sx={{
                       backgroundColor:
-                        router.pathname === "/dashboard/subscription"
+                        router.pathname === "/dashboard/driver/subscription"
                           ? "#fff"
                           : "#ff7b3c30",
                     }}

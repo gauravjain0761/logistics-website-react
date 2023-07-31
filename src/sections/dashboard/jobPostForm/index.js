@@ -66,7 +66,7 @@ const MaterialSelect = [
     value: "Other",
   },
 ];
-const JobPost = ({ formik }) => {
+const JobPostForm = ({ formik }) => {
   const router = useRouter();
   return (
     <React.Fragment>
@@ -326,7 +326,7 @@ const JobPost = ({ formik }) => {
                             variant="contained"
                             fullWidth
                             onClick={() =>
-                              router.push("/dashboard/job_list")
+                              router.push("/dashboard/driver/job_post")
                             }
                           >
                             Send Request
@@ -358,7 +358,7 @@ const JobPost = ({ formik }) => {
                             }}
                             variant="contained"
                             fullWidth
-                            onClick={()=>router.push("/dashboard/customer_dashboard")}
+                            onClick={()=>router.push("/dashboard/driver")}
                           >
                             Close
                           </Button>
@@ -376,4 +376,4 @@ const JobPost = ({ formik }) => {
   );
 };
 
-export default JobPost;
+export default JobPostForm;
