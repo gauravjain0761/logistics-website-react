@@ -4,26 +4,15 @@ import {
   useJsApiLoader,
   Marker,
   InfoWindow,
+  DirectionsRenderer,
 } from "@react-google-maps/api";
-import {
-  Box,
-  Card,
-  CardContent,
-  Chip,
-  Divider,
-  Grid,
-  LinearProgress,
-  Rating,
-  Typography,
-  styled,
-  Stack,
-} from "@mui/material";
-import Iconify from "@/components/iconify/Iconify";
-import { useRouter } from "next/router";
+import { Box } from "@mui/material";
+import DirectionRenderComponent from "./directionRenderComponent";
+import DummyLocations from "@/utils/dummyLocations";
 
 const containerStyle = {
   width: "100%",
-  height: "550px",
+  height: "700px",
 };
 
 const center = {
@@ -31,144 +20,77 @@ const center = {
   lng: 150.644,
 };
 
-const OverlayTrigger = styled(InfoWindow)(({ theme }) => ({}));
-
 function GoogleMaps() {
-  const router = useRouter();
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
   });
 
+  const [state, setState] = React.useState({
+    defaultZoom: 5,
+    map: null,
+    center: {
+      lat: 23.217724,
+      lng: 72.667216,
+    },
+  });
+
   const [map, setMap] = React.useState(null);
   const [showPopUp, setShowPopUp] = React.useState(false);
 
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map);
-  }, []);
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
-
-  const getGooglePopUp = () => {
-    return (
-      <Box>
-        <Stack direction="row" spacing={2}>
-          <Box>
-            <Box
-              component="img"
-              src="/assets/images/dashboard//portfolio.jpeg"
-              sx={{
-                borderRadius: "50%",
-                border: "3px solid #ff7534",
-                width: "50px",
-                height: "50px",
-              }}
-            />
-          </Box>
-          <Stack>
-            <Box>
-              <Typography
-                color="primary"
-                fontSize={14}
-                fontWeight={500}
-                variant="subtitle1"
-              >
-                Mr. Alex
-              </Typography>
-            </Box>
-            <Stack spacing={0.2} pb={0.8}>
-              <Stack direction="row" spacing={0.4}>
-                <Box>
-                  <Typography fontWeight={400} fontSize={10}>
-                    Job Success Rate :
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography color="primary" fontWeight={500} fontSize={10}>
-                    98 %
-                  </Typography>
-                </Box>
-              </Stack>
-              <Box>
-                <LinearProgress variant="determinate" value={98} />
-              </Box>
-            </Stack>
-            <Box>
-              <Rating
-                value={4}
-                readOnly
-                size="small"
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  fontSize: "12px !important",
-                }}
-              />
-            </Box>
-          </Stack>
-        </Stack>
-        <Box py={1}>
-          <Stack direction="row" spacing={1}>
-            <Chip
-              icon={<Iconify icon="mdi:chat" width={14} />}
-              size="small"
-              label="Send Message"
-              variant="outlined"
-              color="primary"
-              sx={{ fontSize: "10px", cursor: "pointer" }}
-            />
-            <Chip
-              icon={<Iconify icon="material-symbols:check-circle" width={14} />}
-              size="small"
-              label="Start Job"
-              variant="outlined"
-              onClick={() => router.push("/dashboard/driver/start_job")}
-              sx={{ fontSize: "10px", cursor: "pointer" }}
-            />
-          </Stack>
-        </Box>
-        <Divider />
-        <Box pt={1}>
-          <Typography fontSize={12} fontWeight={400}>
-            Bid: $500
-          </Typography>
-        </Box>
-      </Box>
-    );
-  };
+  console.log("showPopUp", showPopUp);
 
   return isLoaded ? (
     <Box component="div" sx={{ position: "relative", width: "100%" }}>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        // onLoad={onLoad}
-        onUnmount={onUnmount}
+        center={new window.google.maps.LatLng(23.21632, 72.641219)}
+        zoom={state.defaultZoom}
       >
-        <Marker
+        {DummyLocations.map((elem, index) => {
+          return (
+            <DirectionRenderComponent
+              key={index}
+              index={index + 1}
+              strokeColor={elem.strokeColor}
+              from={elem.from}
+              to={elem.to}
+              onClickMarker={() => {
+                setShowPopUp(1);
+              }}
+              showPopUp={
+                <>
+                  {showPopUp == 1 && (
+                    <InfoWindow onCloseClick={() => setShowPopUp(false)}>
+                      <div>
+                        <div>nhà trọ cho thuê</div>
+                        <div>1.500.000đ</div>
+                      </div>
+                    </InfoWindow>
+                  )}
+                </>
+              }
+            />
+          );
+        })}
+
+        {/* <Marker
           //   key={index}
           //   options={{ icon: "https://i.imgur.com/9G5JOp8.png" }}
-          position={center}
+          position={state.center}
           onClick={() => {
             setShowPopUp(1);
           }}
-          zoom={2}
         >
           {showPopUp == 1 && (
-            <OverlayTrigger
-              options={{ maxWidth: 350, height: 150 }}
-              onCloseClick={() => setShowPopUp(false)}
-            >
-              <div>{getGooglePopUp()}</div>
-            </OverlayTrigger>
+            <InfoWindow onCloseClick={() => setShowPopUp(false)}>
+              <div>
+                <div>nhà trọ cho thuê</div>
+                <div>1.500.000đ</div>
+              </div>
+            </InfoWindow>
           )}
-        </Marker>
+        </Marker> */}
       </GoogleMap>
     </Box>
   ) : (
@@ -176,4 +98,4 @@ function GoogleMaps() {
   );
 }
 
-export default GoogleMaps;
+export default React.memo(GoogleMaps);
