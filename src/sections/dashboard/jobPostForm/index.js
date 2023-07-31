@@ -326,7 +326,7 @@ const JobPostForm = ({ formik }) => {
                             variant="contained"
                             fullWidth
                             onClick={() =>
-                              router.push("/dashboard/job_post")
+                              router.push("/dashboard/driver/job_post")
                             }
                           >
                             Send Request

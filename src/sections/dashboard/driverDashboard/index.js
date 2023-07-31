@@ -45,7 +45,7 @@ const DriverDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/dashboard/post_your_job")}
+                            onClick={()=> router.push("/dashboard/driver/post_your_job")}
                             color="inherit"
                             sx={{
                               py: 1.4,

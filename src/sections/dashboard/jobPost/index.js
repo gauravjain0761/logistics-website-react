@@ -1,6 +1,5 @@
 import { SelectBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import DashboardCard from "@/module/dashboard/dashboardCard";
 import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
@@ -27,6 +26,7 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
+import DashboardCard from "@/module/dashboard/dashboardCard";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -192,7 +192,7 @@ const DashboardJobPost = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/post_your_job")}
+                    onClick={() => router.push("/dashboard/driver/post_your_job")}
                   >
                     Add New Post
                   </Button>
@@ -325,42 +325,6 @@ const DashboardJobPost = ({ formik }) => {
                                 </Box>
                               </Grid>
                             </Grid>
-
-                            {/* <Stack direction="column">
-                                  <Box>
-                                      <Typography
-                                        color="primary"
-                                        fontSize={14}
-                                        fontWeight={600}
-                                      >
-                                        Job Success Rate: 98 %
-                                      </Typography>
-                                    </Box>
-                                  <Box pb={0.3}>
-                                    <Typography variant="h5" fontWeight={600}>
-                                      Mr. Alex
-                                    </Typography>
-                                  </Box>
-                                  <Typography fontSize={14}>
-                                    {" "}
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat.
-                                  </Typography>
-                                </Stack>
-                                <Stack
-                                  direction="row"
-                                  justifyContent="space-between"
-                                  alignItems="center"
-                                  pt={2}
-                                >
-                                  <Stack>
-                                    <Rating value={4} readOnly size="small" />
-                                  </Stack>
-                                </Stack> */}
                           </Grid>
                           <Grid item md={4}>
                             <Grid container>
@@ -441,14 +405,14 @@ const DashboardJobPost = ({ formik }) => {
                               <Stack spacing={1}>
                                 <Box>
                                   <Button
-                                    sx={{  fontWeight: 500 }}
+                                    sx={{ fontWeight: 500 }}
                                     fullWidth
                                     variant="outlined"
                                     startIcon={
                                       <Iconify icon="material-symbols:star" />
                                     }
                                     onClick={() =>
-                                      router.push("/dashboard/job_listing")
+                                      router.push("/dashboard/driver/job_listing")
                                     }
                                   >
                                     View Bids
@@ -461,7 +425,7 @@ const DashboardJobPost = ({ formik }) => {
                                     variant="outlined"
                                     startIcon={<Iconify icon="bxs:edit" />}
                                     onClick={() =>
-                                      router.push("/dashboard/post_your_job")
+                                      router.push("/dashboard/driver/post_your_job")
                                     }
                                     sx={{
                                       fontWeight: 500,
@@ -477,7 +441,7 @@ const DashboardJobPost = ({ formik }) => {
                                     variant="outlined"
                                     startIcon={<Iconify icon="bxs:edit" />}
                                     onClick={() =>
-                                      router.push("/dashboard/start_job")
+                                      router.push("/dashboard/driver/start_job")
                                     }
                                     sx={{
                                       fontWeight: 500,

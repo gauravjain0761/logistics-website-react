@@ -62,7 +62,7 @@ function GoogleMaps() {
           <Box>
             <Box
               component="img"
-              src="/assets/images/dashboard/portfolio.jpeg"
+              src="/assets/images/dashboard//portfolio.jpeg"
               sx={{
                 borderRadius: "50%",
                 border: "3px solid #ff7534",
@@ -127,7 +127,7 @@ function GoogleMaps() {
               size="small"
               label="Start Job"
               variant="outlined"
-              onClick={() => router.push("/dashboard/start_job")}
+              onClick={() => router.push("/dashboard/driver/start_job")}
               sx={{ fontSize: "10px", cursor: "pointer" }}
             />
           </Stack>

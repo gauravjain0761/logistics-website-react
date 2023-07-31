@@ -1,6 +1,5 @@
 import { SelectBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import DashboardCard from "@/module/dashboard/dashboardCard";
 import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
@@ -26,6 +25,7 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
+import DashboardCard from "@/module/dashboard/dashboardCard";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -193,7 +193,7 @@ const JobHistory = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/post_your_job")}
+                    onClick={() => router.push("/dashboard/driver/post_your_job")}
                   >
                     Add New Post
                   </Button>
@@ -248,7 +248,7 @@ const JobHistory = ({ formik }) => {
                                     <Grid item md={4}>
                                       <Box
                                         component="img"
-                                        src="/assets/images/dashboard/portfolio.jpeg"
+                                        src="/assets/images/dashboard//portfolio.jpeg"
                                         sx={{
                                           borderRadius: "50%",
                                           border: "3px solid #ff7534",
@@ -374,7 +374,7 @@ const JobHistory = ({ formik }) => {
                           <Grid item md={2}>
                             <Box
                               component="img"
-                              src="/assets/images/dashboard/portfolio.jpeg"
+                              src="/assets/images/dashboard//portfolio.jpeg"
                               sx={{
                                 width: "100px",
                                 borderRadius: "50%",
@@ -590,7 +590,7 @@ const JobHistory = ({ formik }) => {
                                       <Iconify icon="material-symbols:star" />
                                     }
                                     onClick={() =>
-                                      router.push("/dashboard/job_listing")
+                                      router.push("/dashboard/driver/job_listing")
                                     }
                                   >
                                     View Bids

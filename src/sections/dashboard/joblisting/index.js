@@ -1,6 +1,5 @@
 import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import DashboardCard from "@/module/dashboard/dashboardCard";
 import {
   Box,
   Button,
@@ -117,7 +116,7 @@ const JobList = () => {
                           <Grid item md={2}>
                             <Box
                               component="img"
-                              src="/assets/images/dashboard/portfolio.jpeg"
+                              src="/assets/images/dashboard//portfolio.jpeg"
                               sx={{
                                 borderRadius: "50%",
                                 border: "3px solid #ff7534",
@@ -203,7 +202,7 @@ const JobList = () => {
                                 <Iconify icon="material-symbols:check-circle" />
                               }
                               // onClick={() =>
-                              //   router.push("/dashboard/start_job")
+                              //   router.push("/dashboard/driver/start_job")
                               // }
                               label="Start Job"
                               variant="outlined"
@@ -377,7 +376,7 @@ const JobList = () => {
                 variant="outlined"
                 onClick={() => {
                   startChat
-                    ? router.push("/dashboard/job_post")
+                    ? router.push("/dashboard/driver/job_post")
                     : setStartChat(false);
                 }}
               >
