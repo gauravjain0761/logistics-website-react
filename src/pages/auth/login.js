@@ -47,7 +47,7 @@ const LoginPage = () => {
             });
 
             formik.resetForm();
-            router.push("/dashboard/customer_dashboard");
+            router.push("/dashboard/driver");
             localStorage.setItem("token", response.data.access_token);
           } else {
             enqueueSnackbar(response.data.message, {

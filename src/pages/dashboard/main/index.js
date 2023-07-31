@@ -1,11 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
-import CustomerDashboard from "@/sections/customerdashboard";
 import { PrimaryWebLayout } from "@/layout";
+import MainDashboard from "@/sections/dashboard/mainDashboard";
 
 const DashboardPage = () => {
   const formik = useFormik({});
-  return <CustomerDashboard formik={formik} />;
+  return <MainDashboard formik={formik} />;
 };
 
 DashboardPage.getLayout = function getLayout(page) {

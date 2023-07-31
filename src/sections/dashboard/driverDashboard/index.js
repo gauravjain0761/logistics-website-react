@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const CustomerDashboard = () => {
+const DriverDashboard = () => {
   const router = useRouter();
  
   return (
@@ -45,7 +45,7 @@ const CustomerDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/jobpost/post_your_job")}
+                            onClick={()=> router.push("/dashboard/post_your_job")}
                             color="inherit"
                             sx={{
                               py: 1.4,
@@ -73,4 +73,4 @@ const CustomerDashboard = () => {
   );
 };
 
-export default CustomerDashboard;
+export default DriverDashboard;

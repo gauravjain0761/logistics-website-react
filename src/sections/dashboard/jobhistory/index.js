@@ -13,7 +13,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  Modal,
   Pagination,
   PaginationItem,
   Rating,
@@ -27,7 +26,7 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-const DashboardJobPost = ({ formik }) => {
+const JobHistory = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
@@ -37,19 +36,21 @@ const DashboardJobPost = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
+
+  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-  // const sortBy = [
-  //   {
-  //     label: "Sort(New)",
-  //     value: "new",
-  //   },
-  //   {
-  //     label: "Sort(Last)",
-  //     value: "last",
-  //   },
-  // ];
+  const sortBy = [
+    {
+      label: "Sort(New)",
+      value: "new",
+    },
+    {
+      label: "Sort(Last)",
+      value: "last",
+    },
+  ];
   const MonthSelect = [
     {
       label: "Choose Month",
@@ -120,7 +121,7 @@ const DashboardJobPost = ({ formik }) => {
                     fontWeight={500}
                     color="primary"
                   >
-                    Job Posted By You
+                    Job History
                   </Typography>
 
                   <Box
@@ -139,7 +140,7 @@ const DashboardJobPost = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={2}
+                        end={20}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
@@ -192,7 +193,7 @@ const DashboardJobPost = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/jobpost/post_your_job")}
+                    onClick={() => router.push("/dashboard/post_your_job")}
                   >
                     Add New Post
                   </Button>
@@ -365,9 +366,7 @@ const DashboardJobPost = ({ formik }) => {
                             </Typography>
                           </Box>
                         </Stack>
-                        <Box>
-                          <DeleteModal />
-                        </Box>
+                       
                       </Stack>
                       <Divider />
                       <CardContent>
@@ -597,22 +596,7 @@ const DashboardJobPost = ({ formik }) => {
                                     View Bids
                                   </Button>
                                 </Box>
-                                <Box>
-                                  <Button
-                                    color="dark"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="bxs:edit" />}
-                                    onClick={() =>
-                                      router.push("/jobpost/post_your_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Edit Job
-                                  </Button>
-                                </Box>
+                               
                               </Box>
                             </Stack>
                             <Stack
@@ -700,54 +684,4 @@ const DashboardJobPost = ({ formik }) => {
   );
 };
 
-export default DashboardJobPost;
-const DeleteModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  return (
-    <Box>
-      <Button onClick={handleOpen}>
-        {" "}
-        <Iconify
-          icon="ic:outline-delete"
-          width="1.7em"
-          color={(theme) => theme.palette.primary.main}
-        />
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            textAlign: "center",
-            transform: "translate(-50%, -50%)",
-
-            bgcolor: "background.paper",
-            border: "1px solid #f5f5f5",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Typography id="modal-modal-title" variant="h6" component="h2" pb={2}>
-            Are you sure you want to delete ?
-          </Typography>
-          <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
-              Yes
-            </Button>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
-              No
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
-    </Box>
-  );
-};
+export default JobHistory;

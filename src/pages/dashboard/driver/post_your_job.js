@@ -1,11 +1,11 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobPost from "@/sections/jobposter";
+import JobPostForm from "@/sections/dashboard/jobPostForm";
 
 const PostJob = () => {
   const formik = useFormik({});
-  return <JobPost formik={formik} />;
+  return <JobPostForm formik={formik} />;
 };
 
 PostJob.getLayout = function getLayout(page) {
