@@ -5,7 +5,7 @@ export const navItems = [
   },
   {
     name: "About us",
-    link: "/about",
+    link: "/aboutus/aboutus",
   },
   {
     name: "Jobs",
@@ -13,7 +13,7 @@ export const navItems = [
   },
   {
     name: "Testimonials",
-    link: "/testimonials",
+    link: "/testimonial/testimonials",
   },
   {
     name: "FAQ",

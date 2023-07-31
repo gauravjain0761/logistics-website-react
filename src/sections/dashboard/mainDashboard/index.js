@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const CustomerDashboard = () => {
+const MainDashboard = () => {
   const router = useRouter();
  
   return (
@@ -27,7 +27,7 @@ const CustomerDashboard = () => {
                   <Grid item md={7}>
                     <Box
                       component={"img"}
-                      src="/assets/images/dashboard/logistic.png"
+                      src="/assets/images/dashboard//logistic.png"
                     />
                   </Grid>
                   <Grid item md={5}>
@@ -45,7 +45,7 @@ const CustomerDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/jobpost/post_your_job")}
+                            onClick={()=> router.push("/dashboard/driver/post_your_job")}
                             color="inherit"
                             sx={{
                               py: 1.4,
@@ -73,4 +73,4 @@ const CustomerDashboard = () => {
   );
 };
 
-export default CustomerDashboard;
+export default MainDashboard;

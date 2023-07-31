@@ -7,7 +7,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { Box } from "@mui/material";
-import DirectionRenderComponent from "./DirectionRenderComponent";
+import DirectionRenderComponent from "./directionRenderComponent";
 import DummyLocations from "@/utils/dummyLocations";
 
 const containerStyle = {
