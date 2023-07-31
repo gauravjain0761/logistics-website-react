@@ -171,7 +171,7 @@ const OTPDialogBox = ({
               <Typography
                 color="primary"
                 component="span"
-                fontWeight={700}
+                fontWeight={500}
                 sx={{ cursor: "pointer", fontSize: "15px" }}
                 onClick={resendOtp}
               >

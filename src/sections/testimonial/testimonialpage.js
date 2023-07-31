@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   Container,
+  Divider,
   Grid,
   Rating,
   Stack,
@@ -48,11 +49,22 @@ const TestimonialPage = () => {
                               </Typography>
                             </Box>
                           </Stack>
-                          <Box pb={9}>
+                          <Divider sx={{ mb: 2 }} />
+                          <Stack direction="row" justifyContent="space-between">
+                            <Box>
+                              <Box>
+                                <Typography color="primary" fontWeight={600}>
+                                  Jessica
+                                </Typography>
+                              </Box>
+
+                              <Box>
+                                <Rating value={4} readOnly />
+                              </Box>
+                            </Box>
                             <Box
                               sx={{
-                                position: "absolute",
-                                right: "25px",
+                                position: "relative",
                                 zIndex: "1",
                               }}
                             >
@@ -62,22 +74,8 @@ const TestimonialPage = () => {
                                 sx={{ width: 60, height: 60 }}
                               />
                             </Box>
-                          </Box>
-                          <Box>
-                            <Box>
-                              <Typography color="primary" fontWeight={600}>
-                                Jessica
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography>Photographer / Jessica</Typography>
-                            </Box>
-                            <Box>
-                              <Rating value={4} readOnly />
-                            </Box>
-                          </Box>
+                          </Stack>
                         </CardContent>
-                        <StyledLine />
                       </Card>
                     </Grid>
                   );

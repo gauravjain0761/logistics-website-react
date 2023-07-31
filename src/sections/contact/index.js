@@ -1,6 +1,7 @@
 import { BannerSection } from "@/components/banner";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify";
+import axiosInstance from "@/utils/axios";
 import {
   Box,
   Button,
@@ -11,9 +12,31 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ContactSection = ({ formik }) => {
+
+  // API Fetch
+  const [data, setData] = useState("");
+  const ContactFetchApi = async () =>
+    await axiosInstance
+      .get("/api/front/contact-details")
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response.data.view_data);
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((error) => {
+        console.log(error, "About Us Page");
+      });
+
+  useEffect(() => {
+    ContactFetchApi();
+  }, []);
+
+  // API Fetch End
   return (
     <React.Fragment>
       <BannerSection
@@ -45,9 +68,9 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
                         icon="majesticons:phone"
                         hFlip={true}
@@ -58,7 +81,7 @@ const ContactSection = ({ formik }) => {
                       <Typography fontWeight={600} variant="h5">
                         Call Us
                       </Typography>
-                      <Typography>+ 012 45687-875</Typography>
+                      <Typography>{data && data.mobile}</Typography>
                     </Stack>
                   </Stack>
                 </CardContent>
@@ -85,9 +108,9 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
                         icon="fluent:mail-20-filled"
                         width={70}
@@ -97,7 +120,7 @@ const ContactSection = ({ formik }) => {
                       <Typography fontWeight={600} variant="h5">
                         Email
                       </Typography>
-                      <Typography>test@test.com</Typography>
+                      <Typography>{data && data.email}</Typography>
                     </Stack>
                   </Stack>
                 </CardContent>
@@ -124,11 +147,11 @@ const ContactSection = ({ formik }) => {
                           color: (theme) => theme.palette.primary.contrastText,
                           borderRadius: "50%",
                           display: "inline-block",
-                          height: "120px",
-                          width: "120px",
-                          p: 3,
+                          height: "90px",
+                          width: "90px",
+                          p: 2,
                         }}
-                        icon="majesticons:phone"
+                        icon="mdi:location"
                         hFlip={true}
                         width={70}
                       />
@@ -138,7 +161,7 @@ const ContactSection = ({ formik }) => {
                         Address
                       </Typography>
                       <Typography>
-                        102,Street City, Yankee, New York, USA
+                        {data && data.address}
                       </Typography>
                     </Stack>
                   </Stack>
@@ -207,7 +230,9 @@ const ContactSection = ({ formik }) => {
                     />
                   </Grid>
                   <Grid item md={3}>
-                    <Button color="primary" variant="contained" >Send Message</Button>
+                    <Button color="primary" variant="contained">
+                      Send Message
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>

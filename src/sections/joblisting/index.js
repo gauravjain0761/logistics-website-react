@@ -12,6 +12,8 @@ import {
   Divider,
   Drawer,
   Grid,
+  LinearProgress,
+  Modal,
   Pagination,
   PaginationItem,
   Rating,
@@ -23,16 +25,26 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import GoogleMaps from "@/module/map";
+import { useRouter } from "next/router";
 
 const JobList = () => {
+  const router = useRouter();
+  const [startChat, setStartChat] = React.useState("");
+  const handleOpen = () => setStartChat(true);
+  const handleClose = () => setStartChat(false);
+
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
-  const [select, setSelect] = React.useState("new");
+  const [select, setSelect] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
   const sortBy = [
+    {
+      label: "Sort(Default)",
+      value: 0,
+    },
     {
       label: "Sort(New)",
       value: "new",
@@ -77,6 +89,7 @@ const JobList = () => {
                   <SelectBox
                     fullWidth
                     size="small"
+                    color="#fff"
                     value={select}
                     onChange={(e) => setSelect(e.target.value)}
                     options={sortBy}
@@ -90,10 +103,10 @@ const JobList = () => {
                       key={index}
                       sx={{
                         my: 2,
-                        borderRadius: "0px",
+
                         ":hover": {
                           borderColor: "#ff7534",
-                          cursor: "pointer",
+                          // cursor: "pointer",
                           transition: " all 0.3s ease-in-out",
                         },
                       }}
@@ -111,7 +124,7 @@ const JobList = () => {
                               }}
                             />
                           </Grid>
-                          <Grid item md={8}>
+                          <Grid item md={10}>
                             <Stack direction="column">
                               {/* <Box>
                                 <Typography
@@ -122,10 +135,42 @@ const JobList = () => {
                                   Job Success Rate: 98 %
                                 </Typography>
                               </Box> */}
+
                               <Box pb={0.3}>
-                                <Typography variant="h5" fontWeight={600}>
-                                  Mr. Gaurav
-                                </Typography>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  justifyContent="space-between"
+                                >
+                                  <Box>
+                                    <Typography variant="h5" fontWeight={500}>
+                                      Mr. Alex
+                                    </Typography>
+                                  </Box>
+                                  <Stack>
+                                    <Stack direction="row" spacing={0.4}>
+                                      <Box>
+                                        <Typography fontWeight={400}>
+                                          Job Success Rate :
+                                        </Typography>
+                                      </Box>
+                                      <Box>
+                                        <Typography
+                                          color="primary"
+                                          fontWeight={600}
+                                        >
+                                          98 %
+                                        </Typography>
+                                      </Box>
+                                    </Stack>
+                                    <Box>
+                                      <LinearProgress
+                                        variant="determinate"
+                                        value={98}
+                                      />
+                                    </Box>
+                                  </Stack>
+                                </Stack>
                               </Box>
                               <Typography fontSize={14}>
                                 {" "}
@@ -138,9 +183,6 @@ const JobList = () => {
                               </Typography>
                             </Stack>
                           </Grid>
-                          <Grid item md={2}>
-                            <Button variant="contained">Apply</Button>
-                          </Grid>
                         </Grid>
                         <Stack
                           direction="row"
@@ -150,15 +192,33 @@ const JobList = () => {
                         >
                           <Stack direction="row" spacing={1}>
                             <Chip
-                              label=" Job Success Rate: 98 %"
-                              variant=""
-                              color="primary"
+                              sx={{ cursor: "pointer" }}
+                              icon={<Iconify icon="mdi:chat" />}
+                              label="Open For Chat"
+                              variant="outlined"
                             />
-                            {/* <Chip label="Full-Time" variant="" color="primary" />
-                            <Chip label="Remote" variant="" color="primary" /> */}
+                            <Chip
+                              sx={{ cursor: "pointer" }}
+                              icon={
+                                <Iconify icon="material-symbols:check-circle" />
+                              }
+                              // onClick={() =>
+                              //   router.push("/dashboard/start_job")
+                              // }
+                              label="Start Job"
+                              variant="outlined"
+                              onClick={() => setStartChat(true)}
+                            />
                           </Stack>
                           <Stack>
-                            <Rating value={4} readOnly size="small" />
+                            <Rating
+                              value={4}
+                              readOnly
+                              size="small"
+                              sx={{
+                                color: (theme) => theme.palette.primary.main,
+                              }}
+                            />
                           </Stack>
                         </Stack>
                         <Divider sx={{ my: 2 }} />
@@ -220,7 +280,7 @@ const JobList = () => {
               </Box>
             </Grid>
             <Grid item md={6}>
-              <Box sx={{ position: "sticky", top: 0, display: "block" }}>
+              <Box sx={{ position: "sticky", top: 75, display: "block" }}>
                 <GoogleMaps />
               </Box>
             </Grid>
@@ -263,7 +323,9 @@ const JobList = () => {
                 </Box>
                 <Box>
                   <Box>
-                    <Rating />
+                    <Rating
+                      sx={{ color: (theme) => theme.palette.primary.main }}
+                    />
                   </Box>
                 </Box>
               </Box>
@@ -279,6 +341,59 @@ const JobList = () => {
           </Button>
         </Stack>
       </Drawer>
+
+      <Box>
+        <Modal
+          open={startChat}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              textAlign: "center",
+              transform: "translate(-50%, -50%)",
+
+              bgcolor: "background.paper",
+              border: "1px solid #f5f5f5",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              pb={2}
+            >
+              Are you sure you want to Start The Job ?
+            </Typography>
+            <Stack direction="row" spacing={8}>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => {
+                  startChat
+                    ? router.push("/dashboard/start_job")
+                    : setStartChat(false);
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => setStartChat(false)}
+              >
+                No
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+      </Box>
     </React.Fragment>
   );
 };

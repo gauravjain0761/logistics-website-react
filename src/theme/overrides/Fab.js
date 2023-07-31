@@ -41,7 +41,7 @@ export default function Fab(theme) {
             color: 'inherit',
             backgroundColor: theme.palette.grey[800],
             '&:hover': {
-              backgroundColor: theme.palette.grey[700],
+              backgroundColor: theme.palette.grey[500],
             },
           }),
         }),

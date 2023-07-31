@@ -65,7 +65,7 @@ const SubscriptionsPage = () => {
                         >
                           <Typography>$ </Typography>
                           <Typography variant="h3">15</Typography>
-                          <Typography fontSize={12} fontWeight={700}>
+                          <Typography fontSize={12} fontWeight={500}>
                             PER MONTH
                           </Typography>
                         </Stack>

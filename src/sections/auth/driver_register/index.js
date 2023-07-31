@@ -395,7 +395,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                               label={
                                 <Typography textAlign="center">
                                   I agree to the{" "}
-                                  <Typography color="primary" component="span">
+                                  <Typography color="primary" component="span" onClick={()=>router.push("/termandcondition")}>
                                     Terms and Conditions
                                   </Typography>{" "}
                                   as set out by the user agreement.
@@ -403,7 +403,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                               }
                             />
                             {formik.errors.term && (
-                              <FormHelperText>
+                              <FormHelperText  sx={{textAlign:"center"}}>
                                 {formik.errors.term}
                               </FormHelperText>
                             )}

@@ -93,7 +93,7 @@ const RegisterPage = () => {
         errors.password_confirmation = "Password didn't match.";
       }
 
-      if (!values.term == "no") {
+      if (values.term == "no") {
         errors.term = "T&C is required";
       }
 

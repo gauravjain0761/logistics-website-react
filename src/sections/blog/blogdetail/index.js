@@ -148,7 +148,7 @@ const BlogDetail = () => {
                       <Typography
                         fontStyle="italic"
                         fontSize="1.2rem"
-                        fontWeight="700"
+                        fontWeight="500"
                       >
                         - Mr.George William
                       </Typography>
