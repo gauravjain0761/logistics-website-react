@@ -20,7 +20,7 @@ const center = {
   lng: 150.644,
 };
 
-function GoogleMaps() {
+function TrackGoogleMaps() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
@@ -38,6 +38,8 @@ function GoogleMaps() {
   const [map, setMap] = React.useState(null);
   const [showPopUp, setShowPopUp] = React.useState(false);
 
+  console.log("showPopUp", showPopUp);
+
   return isLoaded ? (
     <Box component="div" sx={{ position: "relative", width: "100%" }}>
       <GoogleMap
@@ -53,6 +55,21 @@ function GoogleMaps() {
               strokeColor={elem.strokeColor}
               from={elem.from}
               to={elem.to}
+              onClickMarker={() => {
+                setShowPopUp(1);
+              }}
+              showPopUp={
+                <>
+                  {showPopUp == 1 && (
+                    <InfoWindow onCloseClick={() => setShowPopUp(false)}>
+                      <div>
+                        <div>nhà trọ cho thuê</div>
+                        <div>1.500.000đ</div>
+                      </div>
+                    </InfoWindow>
+                  )}
+                </>
+              }
             />
           );
         })}
@@ -81,4 +98,4 @@ function GoogleMaps() {
   );
 }
 
-export default React.memo(GoogleMaps);
+export default React.memo(TrackGoogleMaps);

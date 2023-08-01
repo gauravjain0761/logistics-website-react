@@ -1,11 +1,13 @@
-import Map from "@/module/map";
+import TrackGoogleMaps from "@/module/map/track_job";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Container,
   Divider,
   Grid,
+  Stack,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -15,155 +17,43 @@ const StartJob = ({ formik }) => {
     <React.Fragment>
       <Box mt={12}>
         <Container>
-          <Grid container spacing={6}>
-            <Grid item md={12}>
-              <Grid
-                container
-                spacing={2}
-                justifyContent="space-around"
-              >
-                <Grid item sm={12} md={4}>
-                  <Card
-                    sx={{
-                      border: "1px solid ",
-                      borderColor: (theme) => theme.palette.primary.main,
-                    }}
-                  >
-                    <CardContent>
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Pick-Up Date
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              09/06/2023
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Pick-Up Time
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              10:10 AM
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Material
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              Plastic Box
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item sm={12} md={4}>
-                  <Card
-                    sx={{
-                      border: "1px solid ",
-                      borderColor: (theme) => theme.palette.primary.main,
-                    }}
-                  >
-                    <CardContent>
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Drop-Out Date
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              09/06/2025.5
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Drop-Out Time
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              10:10 AM
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                      <Grid container>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography variant="subtitle1">Size</Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item md={1}>
-                          <Typography variant="subtitle1">:</Typography>
-                        </Grid>
-                        <Grid item md={5.5}>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              5 x 2 x 3 inch
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item sm={12} md={12}>
-              <Map />
-            </Grid>
-          </Grid>
+          <Box sx={{position:"relative"}}>
+            <TrackGoogleMaps />
+            <Box sx={{position:"absolute", top:"6em",left:"10px"}} >
+              <Card sx={{p:2}}>
+                  <Stack direction="row" alignItems="center" spacing={3}>
+                    <Stack>
+                      <Box>
+                        <Typography fontWeight={500}>Pickup</Typography>
+                      </Box>
+                      <Box>
+                        <Typography color="grey">123 Address Xyz, State</Typography>
+                      </Box>
+                    </Stack>
+                    <Box>
+                      <Button variant="outlined"  color="dark" size="small">View</Button>
+                    </Box>
+                  </Stack>
+              </Card>
+            </Box>
+            <Box sx={{position:"absolute", top:"11.5em",left:"10px"}} >
+              <Card sx={{p:2}}>
+                  <Stack direction="row" alignItems="center" spacing={3}>
+                    <Stack >
+                      <Box>
+                        <Typography fontWeight={500} >Drop off</Typography>
+                      </Box>
+                      <Box>
+                        <Typography color="grey">427 Address Xyz, State</Typography>
+                      </Box>
+                    </Stack>
+                    <Box>
+                      <Button variant="outlined"  color="dark" size="small">View</Button>
+                    </Box>
+                  </Stack>
+              </Card>
+            </Box>
+          </Box>
         </Container>
       </Box>
     </React.Fragment>

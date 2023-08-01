@@ -41,6 +41,7 @@ const LoginPage = () => {
       await axiosInstance
         .post("api/auth/login", data)
         .then((response) => {
+          console.log(response,"logintype");
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
               variant: "success",

@@ -441,7 +441,7 @@ const DashboardJobPost = ({ formik }) => {
                                     variant="outlined"
                                     startIcon={<Iconify icon="bxs:edit" />}
                                     onClick={() =>
-                                      router.push("/dashboard/driver/start_job")
+                                      router.push("/dashboard/driver/track_job")
                                     }
                                     sx={{
                                       fontWeight: 500,
