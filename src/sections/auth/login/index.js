@@ -38,14 +38,13 @@ const Login = ({ formik }) => {
                   }}
                 >
                   <CardContent>
-                    <Stack direction={"row"} justifyContent={"center"}>
+                    <Stack direction={"row"} justifyContent={"center"} alignItems="center">
                       <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
                       <Typography
                         color={"primary"}
                         variant="h4"
                         fontWeight={500}
-                        fontSize="1.75rem"
-                        sx={{ fontSize: "1.75rem!important" }}
+                        sx={{ fontSize: "1.95rem!important" }}
                       >
                         Hello Again!
                       </Typography>
