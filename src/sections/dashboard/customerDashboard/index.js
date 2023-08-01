@@ -1,4 +1,4 @@
-import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import {
   Box,
   Button,
@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const DriverDashboard = () => {
+const CustomerDashboard = () => {
   const router = useRouter();
  
   return (
@@ -27,7 +27,7 @@ const DriverDashboard = () => {
                   <Grid item md={7}>
                     <Box
                       component={"img"}
-                      src="/assets/images/dashboard/logistic.png"
+                      src="/assets/images/dashboard//logistic.png"
                     />
                   </Grid>
                   <Grid item md={5}>
@@ -73,4 +73,4 @@ const DriverDashboard = () => {
   );
 };
 
-export default DriverDashboard;
+export default CustomerDashboard;

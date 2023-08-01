@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
 import { TextBox } from "@/components/form";
 import { ArrowDropDownCircle } from "@mui/icons-material";
-import DashboardCard from "@/module/dashboard/dashboardCard";
+import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 
 const VehicleSelect = [
   // {
@@ -67,15 +67,16 @@ const MaterialSelect = [
   },
 ];
 const JobPostForm = ({ formik }) => {
+  
   const router = useRouter();
   return (
     <React.Fragment>
       <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8 }}>
         <Container sx={{ py: 3 }}>
           <Stack spacing={4}>
-          <Box >
-            <DashboardCard />
-          </Box>
+            <Box>
+              <DashboardCard />
+            </Box>
             <Box>
               <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>
@@ -104,11 +105,11 @@ const JobPostForm = ({ formik }) => {
                         <Typography>Pick-Up Address</Typography>
                         <TextBox
                           fullWidth
-                          placeholder={"Drop-Out Location"}
+                          placeholder="Pick-Up Location"
                           startIcon={
                             <Iconify icon="mdi:location" color="#ff7534" />
                           }
-                          size={"small"}
+                          size="small"
                         />
                       </Box>
                     </Grid>
@@ -235,7 +236,23 @@ const JobPostForm = ({ formik }) => {
                           startIcon={
                             <Iconify icon="uil:focus" color="#ff7534" />
                           }
-                          size={"small"}
+                          size="small"
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item md={6}>
+                      <Box>
+                        <Typography>Quantity</Typography>
+                        <TextBox
+                          fullWidth
+                          placeholder="Enter Quantity"
+                          startIcon={
+                            <Iconify
+                              icon="material-symbols:production-quantity-limits"
+                              color="#ff7534"
+                            />
+                          }
+                          size="small"
                         />
                       </Box>
                     </Grid>
@@ -251,7 +268,7 @@ const JobPostForm = ({ formik }) => {
                               color="#ff7534"
                             />
                           }
-                          size={"small"}
+                          size="small"
                         />
                       </Box>
                     </Grid>
@@ -358,7 +375,7 @@ const JobPostForm = ({ formik }) => {
                             }}
                             variant="contained"
                             fullWidth
-                            onClick={()=>router.push("/dashboard/driver")}
+                            onClick={() => router.push("/dashboard/driver")}
                           >
                             Close
                           </Button>

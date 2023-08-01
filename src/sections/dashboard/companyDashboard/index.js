@@ -1,4 +1,4 @@
-import DashboardCard from "@/module/dashboard/dashboardCard";
+import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 import {
   Box,
   Button,
@@ -12,14 +12,14 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const MainDashboard = () => {
+const CompanyDashboard = () => {
   const router = useRouter();
- 
+
   return (
     <React.Fragment>
-      <Container sx={{ my: 4,mt:10}}>
+      <Container sx={{ my: 4, mt: 10 }}>
         <Stack spacing={4}>
-         <DashboardCard/>
+          <DashboardCard />
           <Box>
             <Card sx={{ backgroundColor: "#ff7534" }}>
               <CardContent>
@@ -45,7 +45,9 @@ const MainDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/dashboard/driver/post_your_job")}
+                            onClick={() =>
+                              router.push("/dashboard/driver/post_your_job")
+                            }
                             color="inherit"
                             sx={{
                               py: 1.4,
@@ -73,4 +75,4 @@ const MainDashboard = () => {
   );
 };
 
-export default MainDashboard;
+export default CompanyDashboard;

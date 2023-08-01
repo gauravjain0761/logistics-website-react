@@ -30,9 +30,9 @@ const navConfig = [
     token: (token) => true,
   },
   {
-    title: "Job",
+    title: "My Profile",
     path: "#jobs",
-    token: (token) => true,
+    token: (token) => token,
   },
   {
     title: "Dashboard",

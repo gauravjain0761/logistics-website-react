@@ -35,21 +35,29 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       // call api
       const data = {
-        email: values.email,
+        email: values.email, 
         password: values.password,
       };
       await axiosInstance
         .post("api/auth/login", data)
         .then((response) => {
-          console.log(response,"logintype");
+          console.log(response.data.user.user_type,"logintype");
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
 
             formik.resetForm();
-            router.push("/dashboard/driver");
-            localStorage.setItem("token", response.data.access_token);
+            if(response.data.user.user_type === "customer"){
+              router.push("/dashboard/customer");
+              localStorage.setItem("token", response.data.access_token);
+            }else if(response.data.user.user_type === "driver"){
+              router.push("/dashboard/driver");
+              localStorage.setItem("token", response.data.access_token);
+            }else if(response.data.user.user_type === "company"){
+              router.push("/dashboard/company");
+              localStorage.setItem("token", response.data.access_token);
+            }
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",

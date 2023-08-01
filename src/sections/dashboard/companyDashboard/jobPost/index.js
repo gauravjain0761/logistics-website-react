@@ -26,7 +26,7 @@ import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-import DashboardCard from "@/module/dashboard/dashboardCard";
+import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
