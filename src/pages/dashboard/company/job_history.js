@@ -1,7 +1,8 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobHistory from "@/sections/dashboard/jobhistory";
+import JobHistory from "@/sections/dashboard/companyDashboard/jobhistory";
+// import JobHistory from "@/sections/dashboard/jobhistory";
 
 
 const JobHistoryPage = () => {

@@ -1,7 +1,8 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import StartJob from "@/sections/trackJob";
+import StartJob from "@/sections/dashboard/companyDashboard/trackJob";
+// import StartJob from "@/sections/trackJob";
 
 const StartJobPage = () => {
   const formik = useFormik({
