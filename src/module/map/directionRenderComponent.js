@@ -89,7 +89,7 @@ const getGooglePopUp = () => {
             size="small"
             label="Start Job"
             variant="outlined"
-            onClick={() => router.push("/dashboard/driver/start_job")}
+            onClick={() => router.push("/dashboard/driver/track_job")}
             sx={{ fontSize: "10px", cursor: "pointer" }}
           />
         </Stack>
@@ -168,31 +168,31 @@ const DirectionRenderComponent = (props) => {
         )}
       </Marker>
     );
-    destinationMarker = (
-      <Marker
-        label={props.index.toString()}
-        defaultIcon={null}
-        position={{
-          lat: parseFloat(props.to.lat),
-          lng: parseFloat(props.to.lng),
-        }}
-        onClick={() => {
-          setShowPopUp(1);
-        }}
-      >
-        {showPopUp == 1 && (
-          <InfoWindow onCloseClick={() => setShowPopUp(false)}>
-            {getGooglePopUp()}
-          </InfoWindow>
-        )}
-      </Marker>
-    );
+    // destinationMarker = (
+    //   <Marker
+    //     label={props.index.toString()}
+    //     defaultIcon={null}
+    //     position={{
+    //       lat: parseFloat(props.to.lat),
+    //       lng: parseFloat(props.to.lng),
+    //     }}
+    //     onClick={() => {
+    //       setShowPopUp(1);
+    //     }}
+    //   >
+    //     {showPopUp == 1 && (
+    //       <InfoWindow onCloseClick={() => setShowPopUp(false)}>
+    //         {getGooglePopUp()}
+    //       </InfoWindow>
+    //     )}
+    //   </Marker>
+    // );
   }
-  
+
   return (
     <div>
       {originMarker}
-      {destinationMarker}
+      {/* {destinationMarker}
       {state.directions && (
         <DirectionsRenderer
           directions={state.directions}
@@ -207,7 +207,7 @@ const DirectionRenderComponent = (props) => {
             icon: { scale: 3 },
           }}
         />
-      )}
+      )} */}
     </div>
   );
 };
