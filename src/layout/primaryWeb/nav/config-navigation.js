@@ -29,11 +29,7 @@ const navConfig = [
     path: "/aboutus/aboutus",
     token: (token) => true,
   },
-  {
-    title: "My Profile",
-    path: "#jobs",
-    token: (token) => token,
-  },
+ 
   {
     title: "Dashboard",
     path: "/dashboard/driver",
@@ -58,6 +54,11 @@ const navConfig = [
     title: "Contact Us",
     path: "/contact/contact",
     token: (token) => true,
+  },
+  {
+    title: "My Profile",
+    path: "#jobs",
+    token: (token) => token,
   },
 ];
 

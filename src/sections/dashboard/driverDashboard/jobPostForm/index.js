@@ -139,6 +139,7 @@ const JobPostForm = ({
                                     <Grid item md={12}>
                                       <Box>
                                         <Typography>Pick-Up Address</Typography>
+                                        
                                         <TextBox
                                           fullWidth
                                           placeholder="Pick-Up Location"
@@ -157,6 +158,7 @@ const JobPostForm = ({
                                         <Typography>Pick-Up Date</Typography>
                                         <TextBox
                                           fullWidth
+                                          format="MM/DD/YYYY"
                                           type="date"
                                           startIcon={
                                             <Iconify

@@ -27,7 +27,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
-const DashboardJobPost = ({ formik }) => {
+const DashboardJobRequest = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
@@ -40,70 +40,7 @@ const DashboardJobPost = ({ formik }) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-  // const sortBy = [
-  //   {
-  //     label: "Sort(New)",
-  //     value: "new",
-  //   },
-  //   {
-  //     label: "Sort(Last)",
-  //     value: "last",
-  //   },
-  // ];
-  const MonthSelect = [
-    {
-      label: "Choose Month",
-      value: 0,
-    },
-    {
-      label: "January",
-      value: "January",
-    },
-    {
-      label: "February",
-      value: "February",
-    },
-    {
-      label: "March",
-      value: "March",
-    },
-    {
-      label: "April",
-      value: "April",
-    },
-    {
-      label: "May",
-      value: "May",
-    },
-    {
-      label: "June",
-      value: "June",
-    },
-    {
-      label: "July",
-      value: "July",
-    },
-    {
-      label: "August",
-      value: "August",
-    },
-    {
-      label: "September",
-      value: "September",
-    },
-    {
-      label: "October",
-      value: "October",
-    },
-    {
-      label: "November",
-      value: "November",
-    },
-    {
-      label: "December",
-      value: "December",
-    },
-  ];
+ 
   return (
     <React.Fragment>
       <Box py={3}>
@@ -113,14 +50,14 @@ const DashboardJobPost = ({ formik }) => {
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
-              <Grid item md={7}>
+              <Grid item md={12}>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography
                     fontSize="1.75rem"
                     fontWeight={500}
                     color="primary"
                   >
-                    Job Posted By You
+                    Job Requests For You
                   </Typography>
 
                   <Box
@@ -139,64 +76,13 @@ const DashboardJobPost = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={2}
+                        end={5}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
                     </Typography>
                   </Box>
                 </Stack>
-              </Grid>
-
-              <Grid item md={3}>
-                <Box>
-                  <Stack direction="row" mb={1.3}>
-                    <Box>
-                      <Box
-                        sx={{
-                          ml: 0,
-                          background: (theme) => theme.palette.grey[100],
-                          border: "1px solid",
-                          borderColor: (theme) =>
-                            alpha(theme.palette.grey[500], 0.32),
-                          padding: ".63rem 0.76rem",
-                          borderRadius: ".25rem",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Iconify
-                          icon="mingcute:calendar-fill"
-                          color="#ff7534"
-                        />
-                      </Box>
-                    </Box>
-                    <SelectBox
-                      sx={{ mb: 0 }}
-                      size="small"
-                      fullWidth
-                      options={MonthSelect}
-                      name={`month`}
-                      value={formik?.values?.month}
-                      onChange={formik.handleChange}
-                      error={formik.touched.month && formik.errors.month}
-                      helperText={formik.touched.month && formik.errors.month}
-                    />
-                  </Stack>
-                </Box>
-              </Grid>
-              <Grid item md={2}>
-                <Box>
-                  <Button
-                    startIcon={<Add />}
-                    variant="outlined"
-                    fullWidth
-                    onClick={() => router.push("/dashboard/driver/post_your_job")}
-                  >
-                    Add New Post
-                  </Button>
-                </Box>
               </Grid>
             </Grid>
           </Box>
@@ -209,7 +95,6 @@ const DashboardJobPost = ({ formik }) => {
                     <Card
                       sx={{
                         my: 2,
-                        // borderRadius: "10px",
                         ":hover": {
                           borderColor: "#ff7534",
                           transition: " all 0.3s ease-in-out",
@@ -217,35 +102,33 @@ const DashboardJobPost = ({ formik }) => {
                       }}
                       variant="outlined"
                     >
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        px={2}
-                        py={1.4}
-                        alignItems="center"
-                        // backgroundColor="#f5f5f5"
-                        // sx={{ borderBottom: "1px solid lightgrey" }}
-                      >
-                        <Stack direction="row" spacing={0.5}>
-                          <Box>
-                            <Typography variant="subtitle1">
-                              Job Title :{" "}
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              {" "}
-                              Mxq Android Box
-                            </Typography>
-                          </Box>
-                        </Stack>
-                        <Box>
-                          <DeleteModal />
-                        </Box>
-                      </Stack>
-                      <Divider />
                       <CardContent>
-                        <Grid container spacing={2} alignItems="center">
+                        <Stack
+                          direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Stack direction="row" mb={1} spacing={0.5}>
+                            <Box>
+                              <Typography variant="subtitle1">
+                                Job Title :{" "}
+                              </Typography>
+                            </Box>
+                            <Box>
+                              <Typography color="primary" variant="subtitle1">
+                                {" "}
+                                Mxq Android Box
+                              </Typography>
+                            </Box>
+                          </Stack>
+                        </Stack>
+                        <Divider />
+                        <Grid
+                          container
+                          mt={0.5}
+                          spacing={2}
+                          alignItems="center"
+                        >
                           <Grid item md={2}>
                             <Box
                               component="img"
@@ -409,47 +292,22 @@ const DashboardJobPost = ({ formik }) => {
                                     fullWidth
                                     variant="outlined"
                                     startIcon={
-                                      <Iconify icon="material-symbols:star" />
+                                      <Iconify icon="carbon:view-filled" />
                                     }
                                     onClick={() =>
-                                      router.push("/dashboard/driver/job_listing")
+                                      router.push(
+                                        "/dashboard/driver/view_job"
+                                      )
                                     }
                                   >
-                                    View Bids
+                                    View Job
                                   </Button>
                                 </Box>
                                 <Box>
-                                  <Button
-                                    color="dark"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="bxs:edit" />}
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/post_your_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Edit Job
-                                  </Button>
+                               
+                                  <ApplyJobModal/>
                                 </Box>
-                                <Box>
-                                  <Button
-                                    color="info"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="bxs:edit" />}
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/track_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Track Job
-                                  </Button>
-                                </Box>
+                                
                               </Stack>
                             </Stack>
                             <Stack
@@ -486,8 +344,6 @@ const DashboardJobPost = ({ formik }) => {
                   </Grid>
                 );
               })}
-
-              {/* )} */}
             </Grid>
             <Box>
               <Stack alignItems="center" justifyContent="center">
@@ -530,6 +386,17 @@ const DashboardJobPost = ({ formik }) => {
                 />
               </Stack>
             </Box>
+            <Stack alignItems="center">
+              <Box>
+                <Typography variant="h5">No Active Jobs.....</Typography>
+              </Box>
+              <Box
+                component="img"
+                sx={{ width: "400px" }}
+                src="/assets/images/home/new/banner-image.jpg"
+                alt="truck"
+              />
+            </Stack>
           </Box>
         </Container>
       </Box>
@@ -537,20 +404,24 @@ const DashboardJobPost = ({ formik }) => {
   );
 };
 
-export default DashboardJobPost;
-const DeleteModal = () => {
+export default DashboardJobRequest;
+const ApplyJobModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <Box>
-      <Button onClick={handleOpen}>
-        {" "}
-        <Iconify
-          icon="ic:outline-delete"
-          width="1.7em"
-          color={(theme) => theme.palette.primary.main}
-        />
+      <Button
+        color="dark"
+        fullWidth
+        variant="outlined"
+        startIcon={<Iconify icon="icon-park:check-correct" />}
+        onClick={handleOpen}
+        sx={{
+          fontWeight: 500,
+        }}
+      >
+        Apply Job
       </Button>
       <Modal
         open={open}
@@ -573,7 +444,7 @@ const DeleteModal = () => {
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2" pb={2}>
-            Are you sure you want to delete ?
+            Are you sure you want to Apply for the Job ?
           </Typography>
           <Stack direction="row" spacing={8}>
             <Button fullWidth variant="outlined" onClick={handleClose}>

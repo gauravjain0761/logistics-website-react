@@ -9,23 +9,23 @@ const DashboardCard = () => {
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={3}>
+          <Grid item md={2.4}>
             <Card
               sx={{
+                p:1.5,
                 backgroundColor:
-                  router.pathname === "/dashboard/driver/job_post"
+                  router.pathname === "/dashboard/driver/active_jobs"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/driver/job_post"
+                  router.pathname === "/dashboard/driver/active_jobs"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/driver/job_post")}
+              onClick={() => router.push("/dashboard/driver/active_jobs")}
             >
-              <CardContent>
                 <Stack
                   direction="row"
                   justifyContent="space-between"
@@ -39,72 +39,117 @@ const DashboardCard = () => {
                           : "#ff7b3c30",
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
+                    py={0.5}
+
                     borderRadius={2}
                     component="img"
                     src="/assets/images/dashboard/jobposted.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300}>
-                      JOB POSTED
+                    <Typography fontSize={16} fontWeight={300}>
+                      ACTIVE JOBS
                     </Typography>
-                    <Typography variant="h4" textAlign="center">
+                    <Typography variant="h5" textAlign="center">
                       2
                     </Typography>
                   </Box>
                 </Stack>
-              </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={2.4}>
             <Card
-              variant="outlined"
               sx={{
+                p:1.5,
                 backgroundColor:
-                  router.pathname === "/dashboard/driver/money_spend"
+                  router.pathname === "/dashboard/driver/job_request"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/driver/money_spend"
+                  router.pathname === "/dashboard/driver/job_request"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/driver/money_spend")}
+              onClick={() => router.push("/dashboard/driver/job_request")}
             >
-              <CardContent>
-                <Stack direction="row" justifyContent="space-between">
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  spacing={1}
+                >
                   <Box
                      sx={{
                       backgroundColor:
-                        router.pathname === "/dashboard/driver/money_spend"
+                        router.pathname === "/dashboard/driver/job_request"
                           ? "#fff"
                           : "#ff7b3c30",
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
+                    py={0.5}
+
+                    borderRadius={2}
+                    component="img"
+                    src="/assets/images/dashboard/request.png"
+                  />
+                  <Box>
+                    <Typography fontSize={16} fontWeight={300}>
+                       JOB REQUESTS
+                    </Typography>
+                    <Typography variant="h5" textAlign="center">
+                      5
+                    </Typography>
+                  </Box>
+                </Stack>
+            </Card>
+          </Grid>
+          <Grid item md={2.4}>
+            <Card
+              variant="outlined"
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/driver/money_earned"
+                    ? "#ff7534"
+                    : "#fff",
+                border: "1px solid #ff7534",
+                color:
+                  router.pathname === "/dashboard/driver/money_earned"
+                    ? "#fff"
+                    : "#ff7534",
+                cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/driver/money_earned")}
+            >
+                <Stack direction="row" p={1.5} spacing={1} justifyContent="space-between">
+                  <Box
+                     sx={{
+                      backgroundColor:
+                        router.pathname === "/dashboard/driver/money_earned"
+                          ? "#fff"
+                          : "#ff7b3c30",
+                    }}
+                    height="60px"
+                    py={0.5}
+                    
                     borderRadius={2}
                     component="img"
                     src="/assets/images/dashboard/moneyspend.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300}>
-                      MONEY SPEND
+                    <Typography fontSize={16} fontWeight={300}>
+                      MONEY EARNED
                     </Typography>
-                    <Typography variant="h4" textAlign="center">
-                      $ 20000
+                    <Typography   variant="h5" textAlign="center">
+                      $ 10000
                     </Typography>
                   </Box>
                 </Stack>
-              </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={2.4}>
             <Card
               sx={{
+                p:1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/job_history"
                     ? "#ff7534"
@@ -118,7 +163,6 @@ const DashboardCard = () => {
               }}
               onClick={() => router.push("/dashboard/driver/job_history")}
             >
-              <CardContent>
                 <Stack
                   direction={"row"}
                   justifyContent={"space-between"}
@@ -132,27 +176,26 @@ const DashboardCard = () => {
                           : "#ff7b3c30",
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
+                    py={0.5}
                     borderRadius={2}
                     component={"img"}
                     src="/assets/images/dashboard/jobhistory.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300}>
+                    <Typography fontSize={16} fontWeight={300}>
                       JOB HISTORY
                     </Typography>
-                    <Typography variant="h4" textAlign={"center"}>
+                    <Typography variant="h5" textAlign={"center"}>
                       20
                     </Typography>
                   </Box>
                 </Stack>
-              </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={2.4}>
             <Card
               sx={{
+                p:1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/subscription"
                     ? "#ff7534"
@@ -166,7 +209,6 @@ const DashboardCard = () => {
               }}
               onClick={() => router.push("/dashboard/driver/subscription")}
             >
-              <CardContent>
                 <Stack
                   direction={"row"}
                   justifyContent={"space-between"}
@@ -180,24 +222,23 @@ const DashboardCard = () => {
                           : "#ff7b3c30",
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
+                    py={0.5}
                     borderRadius={2}
                     component={"img"}
                     src="/assets/images/dashboard/subscription.png"
                   />
                   <Box>
-                    <Typography variant="h6" fontWeight={300}>
+                    <Typography fontSize={16} fontWeight={300}>
                       SUBSCRIPTION
                     </Typography>
-                    <Typography variant="h4" textAlign={"center"}>
+                    <Typography variant="h5" textAlign="center">
                       3 Month
                     </Typography>
                   </Box>
                 </Stack>
-              </CardContent>
             </Card>
           </Grid>
+          
         </Grid>
       </Box>
     </React.Fragment>

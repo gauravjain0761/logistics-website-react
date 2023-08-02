@@ -52,7 +52,7 @@ const LoginPage = () => {
               router.push("/dashboard/customer");
               localStorage.setItem("token", response.data.access_token);
             }else if(response.data.user.user_type === "driver"){
-              router.push("/dashboard/driver");
+              router.push("/dashboard/driver/active_jobs");
               localStorage.setItem("token", response.data.access_token);
             }else if(response.data.user.user_type === "company"){
               router.push("/dashboard/company");

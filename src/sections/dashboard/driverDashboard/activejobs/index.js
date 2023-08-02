@@ -12,6 +12,7 @@ import {
   Divider,
   Grid,
   IconButton,
+  Modal,
   Pagination,
   PaginationItem,
   Rating,
@@ -26,7 +27,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
-const JobHistory = ({ formik }) => {
+const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
@@ -36,8 +37,6 @@ const JobHistory = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
-
-  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -51,14 +50,14 @@ const JobHistory = ({ formik }) => {
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
-              <Grid item md={7}>
+              <Grid item md={12}>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography
                     fontSize="1.75rem"
                     fontWeight={500}
                     color="primary"
                   >
-                    Job History
+                    Active Jobs For You
                   </Typography>
 
                   <Box
@@ -77,7 +76,7 @@ const JobHistory = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={20}
+                        end={2}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
@@ -85,15 +84,11 @@ const JobHistory = ({ formik }) => {
                   </Box>
                 </Stack>
               </Grid>
-
-            
             </Grid>
           </Box>
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-          
-
               {[...Array(4)].map((elem, index) => {
                 return (
                   <Grid item md={12} key={index}>
@@ -309,7 +304,22 @@ const JobHistory = ({ formik }) => {
                                   </Button>
                                 </Box>
                                
-                               
+                                <Box>
+                                  <Button
+                                    color="info"
+                                    fullWidth
+                                    variant="outlined"
+                                    startIcon={<Iconify icon="gg:track" />}
+                                    onClick={() =>
+                                      router.push("/dashboard/driver/track_job")
+                                    }
+                                    sx={{
+                                      fontWeight: 500,
+                                    }}
+                                  >
+                                    Track Job
+                                  </Button>
+                                </Box>
                               </Stack>
                             </Stack>
                             <Stack
@@ -346,8 +356,6 @@ const JobHistory = ({ formik }) => {
                   </Grid>
                 );
               })}
-
-              {/* )} */}
             </Grid>
             <Box>
               <Stack alignItems="center" justifyContent="center">
@@ -390,6 +398,17 @@ const JobHistory = ({ formik }) => {
                 />
               </Stack>
             </Box>
+            <Stack alignItems="center">
+              <Box>
+                <Typography variant="h5">No Active Jobs.....</Typography>
+              </Box>
+              <Box
+                component="img"
+                sx={{ width: "400px" }}
+                src="/assets/images/home/new/banner-image.jpg"
+                alt="truck"
+              />
+            </Stack>
           </Box>
         </Container>
       </Box>
@@ -397,4 +416,4 @@ const JobHistory = ({ formik }) => {
   );
 };
 
-export default JobHistory;
+export default DashboardJobPost;
