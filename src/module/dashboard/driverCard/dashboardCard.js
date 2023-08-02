@@ -94,7 +94,7 @@ const DashboardCard = () => {
                   />
                   <Box>
                     <Typography fontSize={16} fontWeight={300}>
-                       JOB REQUESTS
+                       JOB ALERT
                     </Typography>
                     <Typography variant="h5" textAlign="center">
                       5
