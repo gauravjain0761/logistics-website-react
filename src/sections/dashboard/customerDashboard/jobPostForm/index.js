@@ -5,8 +5,11 @@ import {
   Button,
   Card,
   CardContent,
+  CardHeader,
   Container,
+  Divider,
   Grid,
+  IconButton,
   Stack,
   TextField,
   Typography,
@@ -15,8 +18,8 @@ import {
 import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
 import { TextBox } from "@/components/form";
-import { ArrowDropDownCircle } from "@mui/icons-material";
-import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
+import { ArrowDropDownCircle, Close } from "@mui/icons-material";
+import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 
 const VehicleSelect = [
   // {
@@ -66,8 +69,13 @@ const MaterialSelect = [
     value: "Other",
   },
 ];
-const JobPostForm = ({ formik }) => {
-  
+const JobPostForm = ({
+  formik,
+  addPickupAddress,
+  removePickupAddress,
+  addDeliveryAddress,
+  removeDeliveryAddress,
+}) => {
   const router = useRouter();
   return (
     <React.Fragment>
@@ -100,50 +108,276 @@ const JobPostForm = ({ formik }) => {
                         />
                       </Box>
                     </Grid>
-                    <Grid item md={12}>
-                      <Box>
-                        <Typography>Pick-Up Address</Typography>
-                        <TextBox
-                          fullWidth
-                          placeholder="Pick-Up Location"
-                          startIcon={
-                            <Iconify icon="mdi:location" color="#ff7534" />
-                          }
-                          size="small"
-                        />
+                    <Grid md={12}>
+                      <Box sx={{ my: 4 }}>
+                        <Box sx={{ textAlign: "right" }}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={addPickupAddress}
+                          >
+                            Add Pick Up Address
+                          </Button>
+                        </Box>
+                        {formik?.values?.pick_up_address &&
+                          formik?.values?.pick_up_address?.length > 0 &&
+                          formik.values.pick_up_address.map((item, index) => (
+                            <Box key={index} sx={{ mt: 1 }}>
+                              <Card>
+                                <CardHeader
+                                  subheader={`Pickup Address-${index + 1}`}
+                                  action={
+                                    <IconButton
+                                      onClick={() => removePickupAddress(index)}
+                                    >
+                                      <Close />
+                                    </IconButton>
+                                  }
+                                />
+                                <CardContent>
+                                  <Grid container columnSpacing={2}>
+                                    <Grid item md={12}>
+                                      <Box>
+                                        <Typography>Pick-Up Address</Typography>
+
+                                        <TextBox
+                                          fullWidth
+                                          placeholder="Pick-Up Location"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mdi:location"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size="small"
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>Pick-Up Date</Typography>
+                                        <TextBox
+                                          fullWidth
+                                          format="MM/DD/YYYY"
+                                          type="date"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mingcute:calendar-fill"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size={"small"}
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>Pick-Up Time</Typography>
+                                        <TextBox
+                                          fullWidth
+                                          type="time"
+                                          placeholder="Drop-Out Location"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mdi:clock"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size={"small"}
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>
+                                          Pick-Up Quantity
+                                        </Typography>
+                                        <TextBox
+                                          fullWidth
+                                          placeholder="Enter Quantity"
+                                          startIcon={
+                                            <Iconify
+                                              icon="material-symbols:production-quantity-limits"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size="small"
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>Image</Typography>
+                                        <TextBox
+                                          fullWidth
+                                          type="file"
+                                          // placeholder="Enter Quantity"
+                                          startIcon={
+                                            <Iconify
+                                              icon="material-symbols:image-outline"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size="small"
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                    <Typography>Choose Material</Typography>
+                                      <Box>
+                                        <Stack direction="row" mb={1.3}>
+                                          <Box
+                                            sx={{
+                                              ml: 0,
+                                              background: (theme) =>
+                                                theme.palette.grey[100],
+                                              border: "1px solid",
+                                              borderColor: (theme) =>
+                                                alpha(
+                                                  theme.palette.grey[500],
+                                                  0.32
+                                                ),
+                                              padding: ".375rem .75rem",
+                                              borderRadius: ".25rem",
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                            }}
+                                          >
+                                            <Iconify
+                                              icon="ooui:lab-flask"
+                                              color="#ff7534"
+                                            />
+                                          </Box>
+                                          <Autocomplete
+                                            sx={{ mb: 0 }}
+                                            size="small"
+                                            fullWidth
+                                            options={MaterialSelect}
+                                            name={`Material`}
+                                            value={formik?.values?.otp}
+                                            onChange={formik.handleChange}
+                                            error={
+                                              formik.touched.otp &&
+                                              formik.errors.otp
+                                            }
+                                            helperText={
+                                              formik.touched.otp &&
+                                              formik.errors.otp
+                                            }
+                                            renderInput={(params) => (
+                                              <TextField
+                                                {...params}
+                                                placeholder="Choose Material"
+                                                InputProps={{
+                                                  ...params.InputProps,
+                                                }}
+                                              />
+                                            )}
+                                          />
+                                        </Stack>
+                                      </Box>
+                                    </Grid>
+                                  </Grid>
+                                </CardContent>
+                              </Card>
+                            </Box>
+                          ))}
+                        <Divider sx={{ mt: 2 }} />
                       </Box>
                     </Grid>
-                    <Grid item md={6}>
-                      <Box>
-                        <Typography>Pick-Up Date</Typography>
-                        <TextBox
-                          fullWidth
-                          type="date"
-                          startIcon={
-                            <Iconify
-                              icon="mingcute:calendar-fill"
-                              color="#ff7534"
-                            />
-                          }
-                          size={"small"}
-                        />
+
+                    <Grid md={12}>
+                      <Box sx={{ my: 4 }}>
+                        <Box sx={{ textAlign: "right" }}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={addDeliveryAddress}
+                          >
+                            Add Delivery Address
+                          </Button>
+                        </Box>
+                        {formik?.values?.delivery_address &&
+                          formik?.values?.delivery_address?.length > 0 &&
+                          formik.values.delivery_address.map((item, index) => (
+                            <Box key={index} sx={{ mt: 1 }}>
+                              <Card>
+                                <CardHeader
+                                  subheader={`Delivery Address-${index + 1}`}
+                                  action={
+                                    <IconButton
+                                      onClick={() =>
+                                        removeDeliveryAddress(index)
+                                      }
+                                    >
+                                      <Close />
+                                    </IconButton>
+                                  }
+                                />
+                                <CardContent>
+                                  <Grid container columnSpacing={2}>
+                                    <Grid item md={12}>
+                                      <Box>
+                                        <Typography>
+                                          Delivery Address
+                                        </Typography>
+                                        <TextBox
+                                          fullWidth
+                                          placeholder="Delivery Address"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mdi:location"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size="small"
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>Delivery Date</Typography>
+                                        <TextBox
+                                          fullWidth
+                                          type="date"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mingcute:calendar-fill"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size={"small"}
+                                        />
+                                      </Box>
+                                    </Grid>
+                                    <Grid item md={6}>
+                                      <Box>
+                                        <Typography>Delivery Time</Typography>
+                                        <TextBox
+                                          fullWidth
+                                          type="time"
+                                          placeholder="Drop-Out Location"
+                                          startIcon={
+                                            <Iconify
+                                              icon="mdi:clock"
+                                              color="#ff7534"
+                                            />
+                                          }
+                                          size={"small"}
+                                        />
+                                      </Box>
+                                    </Grid>
+                                  </Grid>
+                                </CardContent>
+                              </Card>
+                            </Box>
+                          ))}
+                        <Divider sx={{ mt: 2 }} />
                       </Box>
                     </Grid>
-                    <Grid item md={6}>
-                      <Box>
-                        <Typography>Pick-Up Time</Typography>
-                        <TextBox
-                          fullWidth
-                          type="time"
-                          placeholder="Drop-Out Location"
-                          startIcon={
-                            <Iconify icon="mdi:clock" color="#ff7534" />
-                          }
-                          size={"small"}
-                        />
-                      </Box>
-                    </Grid>
-                    <Grid item md={12}>
+
+                    {/* <Grid item md={12}>
                       <Box>
                         <Typography>Delivery Address</Typography>
                         <TextBox
@@ -185,50 +419,10 @@ const JobPostForm = ({ formik }) => {
                           size={"small"}
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
+
                     <Grid item md={6}>
-                      <Box>
-                        <Stack direction="row" mb={1.3}>
-                          <Box
-                            sx={{
-                              ml: 0,
-                              background: (theme) => theme.palette.grey[100],
-                              border: "1px solid",
-                              borderColor: (theme) =>
-                                alpha(theme.palette.grey[500], 0.32),
-                              padding: ".375rem .75rem",
-                              borderRadius: ".25rem",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Iconify icon="ooui:lab-flask" color="#ff7534" />
-                          </Box>
-                          <Autocomplete
-                            sx={{ mb: 0 }}
-                            size="small"
-                            fullWidth
-                            options={MaterialSelect}
-                            name={`Material`}
-                            value={formik?.values?.otp}
-                            onChange={formik.handleChange}
-                            error={formik.touched.otp && formik.errors.otp}
-                            helperText={formik.touched.otp && formik.errors.otp}
-                            renderInput={(params) => (
-                              <TextField
-                                {...params}
-                                placeholder="Choose Material"
-                                InputProps={{
-                                  ...params.InputProps,
-                                }}
-                              />
-                            )}
-                          />
-                        </Stack>
-                      </Box>
-                    </Grid>
-                    <Grid item md={6}>
+                    <Typography>Size</Typography>
                       <Box>
                         <TextBox
                           fullWidth
@@ -240,23 +434,8 @@ const JobPostForm = ({ formik }) => {
                         />
                       </Box>
                     </Grid>
-                    <Grid item md={6}>
-                      <Box>
-                        <Typography>Quantity</Typography>
-                        <TextBox
-                          fullWidth
-                          placeholder="Enter Quantity"
-                          startIcon={
-                            <Iconify
-                              icon="material-symbols:production-quantity-limits"
-                              color="#ff7534"
-                            />
-                          }
-                          size="small"
-                        />
-                      </Box>
-                    </Grid>
-                    <Grid item md={6}>
+
+                    {/* <Grid item md={6}>
                       <Box>
                         <Typography>Product Image</Typography>
                         <TextBox
@@ -271,7 +450,7 @@ const JobPostForm = ({ formik }) => {
                           size="small"
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                     <Grid item md={6}>
                       <Box>
                         <Typography>Vehicle Requirement</Typography>
@@ -343,7 +522,7 @@ const JobPostForm = ({ formik }) => {
                             variant="contained"
                             fullWidth
                             onClick={() =>
-                              router.push("/dashboard/driver/job_post")
+                              router.push("/dashboard/customer/job_post")
                             }
                           >
                             Send Request
@@ -375,7 +554,7 @@ const JobPostForm = ({ formik }) => {
                             }}
                             variant="contained"
                             fullWidth
-                            onClick={() => router.push("/dashboard/driver")}
+                            onClick={() => router.push("/dashboard/customer")}
                           >
                             Close
                           </Button>

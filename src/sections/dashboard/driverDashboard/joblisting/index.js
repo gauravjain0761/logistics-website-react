@@ -376,7 +376,7 @@ const JobList = () => {
                 variant="outlined"
                 onClick={() => {
                   startChat
-                    ? router.push("/dashboard/driver/job_post")
+                    ? router.push("/dashboard/driver/active_jobs")
                     : setStartChat(false);
                 }}
               >

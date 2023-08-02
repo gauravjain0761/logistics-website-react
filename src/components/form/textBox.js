@@ -14,6 +14,7 @@ const TextBox = (props) => {
   const {
     name,
     label,
+    format,
     variant,
     type,
     InputLabelProps,
@@ -78,6 +79,7 @@ const TextBox = (props) => {
           onKeyDown={onKeyDown}
           placeholder={placeholder}
           size={size}
+          format={format}
           rows={rows}
           multiline={multiline}
           required={required}
@@ -133,6 +135,7 @@ TextBox.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
+  format: PropTypes.string,
   variant: PropTypes.string,
   type: PropTypes.string,
   InputLabelProps: PropTypes.string,
