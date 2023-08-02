@@ -57,7 +57,7 @@ const DashboardJobRequest = ({ formik }) => {
                     fontWeight={500}
                     color="primary"
                   >
-                    Job Requests For You
+                    Jobs For You
                   </Typography>
 
                   <Box
