@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
 import { TextBox } from "@/components/form";
 import { ArrowDropDownCircle, Close } from "@mui/icons-material";
-import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 
 const VehicleSelect = [
   // {

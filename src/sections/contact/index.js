@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 
 const ContactSection = ({ formik }) => {
 
+
   // API Fetch
   const [data, setData] = useState("");
   const ContactFetchApi = async () =>
@@ -175,7 +176,7 @@ const ContactSection = ({ formik }) => {
                 <Box component="img" src="/contactus.png" alt="Contact" />
               </Grid>
               <Grid item md={6}>
-                <Grid container spacing={1}>
+                <Grid container spacing={1} >
                   <Grid item md={6}>
                     <TextBox
                       size="small"
@@ -186,8 +187,8 @@ const ContactSection = ({ formik }) => {
                       placeholder="Enter your Name"
                       value={formik?.values?.name}
                       onChange={formik.handleChange}
-                      error={formik.touched.email && formik.errors.email}
-                      helperText={formik.touched.email && formik.errors.email}
+                      error={formik.touched.name && formik.errors.name}
+                      helperText={formik.touched.name && formik.errors.name}
                     />
                   </Grid>
                   <Grid item md={6}>
@@ -210,13 +211,13 @@ const ContactSection = ({ formik }) => {
                       fullWidth
                       start
                       // label="Email"
-                      name={`subject`}
-                      placeholder="Subject"
-                      value={formik?.values?.subject}
+                      name='address'
+                      placeholder="Address"
+                      value={formik?.values?.address}
                       onChange={formik.handleChange}
-                      error={formik.touched.subject && formik.errors.subject}
+                      error={formik.touched.address && formik.errors.address}
                       helperText={
-                        formik.touched.subject && formik.errors.subject
+                        formik.touched.address && formik.errors.address
                       }
                     />
                   </Grid>
@@ -230,7 +231,7 @@ const ContactSection = ({ formik }) => {
                     />
                   </Grid>
                   <Grid item md={3}>
-                    <Button color="primary" variant="contained">
+                    <Button color="primary" variant="contained"  >
                       Send Message
                     </Button>
                   </Grid>

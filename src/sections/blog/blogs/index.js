@@ -49,14 +49,20 @@ const Blogs = ({ formik }) => {
             {data &&
               data.length > 0 &&
               data.map((elem, index) => {
-              console.log(elem,"dattaa")
+                console.log(elem, "dattaa");
                 return (
                   <Grid item md={4} key={index}>
                     <Card
                       sx={{ borderRadius: "12px", cursor: "pointer" }}
-                      onClick={() => router.push(`/blog/blog_detail/${elem.slug}`)}
+                      onClick={() =>
+                        router.push(`/blog/blog_detail/${elem.slug}`)
+                      }
                     >
-                      <Box component="img" src={elem?.image} alt="blog" />
+                      <Box
+                        component="img"
+                        src={`${elem?.base_url}${elem?.image}`}
+                        alt="blog"
+                      />
                       <CardContent>
                         <Grid container spacing={2}>
                           <Grid item md={4}>
