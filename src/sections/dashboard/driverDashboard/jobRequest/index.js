@@ -1,4 +1,4 @@
-import { SelectBox } from "@/components/form";
+import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { Add } from "@mui/icons-material";
 import {
@@ -40,7 +40,7 @@ const DashboardJobRequest = ({ formik }) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
- 
+
   return (
     <React.Fragment>
       <Box py={3}>
@@ -295,19 +295,15 @@ const DashboardJobRequest = ({ formik }) => {
                                       <Iconify icon="carbon:view-filled" />
                                     }
                                     onClick={() =>
-                                      router.push(
-                                        "/dashboard/driver/view_job"
-                                      )
+                                      router.push("/dashboard/driver/view_job")
                                     }
                                   >
                                     View Job
                                   </Button>
                                 </Box>
                                 <Box>
-                               
-                                  <ApplyJobModal/>
+                                  <ApplyJobModal />
                                 </Box>
-                                
                               </Stack>
                             </Stack>
                             <Stack
@@ -443,9 +439,34 @@ const ApplyJobModal = () => {
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2" pb={2}>
-            Are you sure you want to Apply for the Job ?
-          </Typography>
+          <Stack spacing={2}>
+            <Box>
+              <TextBox
+                fullWidth
+                size="small"
+                label="Bid Price"
+                placeholder="Bidding Price"
+              />
+            </Box>
+            <Box>
+              <TextBox
+                fullWidth
+                size="small"
+                multiline={true}
+                rows={4}
+                label="Note"
+                placeholder="Note For Customer"
+              />
+            </Box>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              pb={2}
+            >
+              Are you sure you want to Apply for the Job ?
+            </Typography>
+          </Stack>
           <Stack direction="row" spacing={8}>
             <Button fullWidth variant="outlined" onClick={handleClose}>
               Yes

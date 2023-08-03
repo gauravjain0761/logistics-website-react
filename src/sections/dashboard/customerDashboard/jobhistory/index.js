@@ -193,7 +193,7 @@ const JobHistory = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/driver/post_your_job")}
+                    onClick={() => router.push("/dashboard/customer/post_your_job")}
                   >
                     Add New Post
                   </Button>

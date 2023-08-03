@@ -1,5 +1,7 @@
+import Iconify from "@/components/iconify/Iconify";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -13,17 +15,20 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 
 const ViewJobDetail = () => {
+  const router = useRouter();
   return (
     <React.Fragment>
       <Box mt={10}>
         <Container>
           <Box my={4}>
+          <Button sx={{my:2}} onClick={()=>router.push("/dashboard/driver/job_request")} ><Iconify icon="icon-park-outline:back" width={30} /></Button>
             <Card>
               <CardContent>
-                <Typography textAlign="center" variant="h4" my={2}>
+                <Typography textAlign="center" variant="h3" color={(theme=>theme.palette.grey[700])} my={2}>
                   Job Detail
                 </Typography>
                 <Box>
@@ -51,10 +56,10 @@ const ViewJobDetail = () => {
                           <Typography>Truck</Typography>
                         </Grid>
                         <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>Pick-Up </Typography>
+                          <Typography fontWeight={500}>Pick Up Address :-</Typography>
                         </Grid>
                         <Grid item md={12}>
-                          <TableContainer>
+                          <TableContainer sx={{borderRadius:"10px",border:"1px solid",borderColor:(theme)=>theme.palette.primary.main}}>
                             <Table aria-label="simple table">
                               <TableHead>
                                 <TableRow>
@@ -91,7 +96,9 @@ const ViewJobDetail = () => {
                                   <TableCell align="center">
                                     <Box>
                                       <Box
+                                     
                                         component="img"
+                                        m="auto"
                                         src="/serviceblog.jpg"
                                         width={80}
                                       />
@@ -126,6 +133,7 @@ const ViewJobDetail = () => {
                                     <Box>
                                       <Box
                                         component="img"
+                                        m="auto"
                                         src="/serviceblog.jpg"
                                         width={80}
                                       />
@@ -140,16 +148,19 @@ const ViewJobDetail = () => {
                           </TableContainer>
                         </Grid>
                         <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>Delivery </Typography>
+                          <Typography fontWeight={500}>Delivery Address :-</Typography>
                         </Grid>
                         <Grid item md={12}>
-                          <TableContainer>
-                            <Table aria-label="simple table">
+                          <TableContainer sx={{borderRadius:"10px",border:"1px solid",borderColor:(theme)=>theme.palette.primary.main}}>
+                          <Table aria-label="simple table">
                               <TableHead>
                                 <TableRow>
                                   <TableCell>Address</TableCell>
                                   <TableCell align="center">Date</TableCell>
                                   <TableCell align="center">Time</TableCell>
+                                  <TableCell align="center">Quantity</TableCell>
+                                  <TableCell align="center">Image</TableCell>
+                                  <TableCell align="center">Material</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -171,6 +182,23 @@ const ViewJobDetail = () => {
                                   <TableCell align="center">
                                     <Typography>10:00 A.M.</Typography>
                                   </TableCell>
+                                  <TableCell align="center">
+                                    <Typography>6</Typography>
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    <Box>
+                                      <Box
+                                     
+                                        component="img"
+                                        m="auto"
+                                        src="/serviceblog.jpg"
+                                        width={80}
+                                      />
+                                    </Box>
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    <Typography>Material</Typography>
+                                  </TableCell>
                                 </TableRow>
                                 <TableRow
                                   sx={{
@@ -189,6 +217,22 @@ const ViewJobDetail = () => {
                                   </TableCell>
                                   <TableCell align="center">
                                     <Typography>10:00 A.M.</Typography>
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    <Typography>6</Typography>
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    <Box>
+                                      <Box
+                                        component="img"
+                                        m="auto"
+                                        src="/serviceblog.jpg"
+                                        width={80}
+                                      />
+                                    </Box>
+                                  </TableCell>
+                                  <TableCell align="center">
+                                    <Typography>Material</Typography>
                                   </TableCell>
                                 </TableRow>
                               </TableBody>
