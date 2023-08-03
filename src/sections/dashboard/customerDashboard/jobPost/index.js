@@ -192,7 +192,7 @@ const DashboardJobPost = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/driver/post_your_job")}
+                    onClick={() => router.push("/dashboard/customer/post_your_job")}
                   >
                     Add New Post
                   </Button>
@@ -425,7 +425,7 @@ const DashboardJobPost = ({ formik }) => {
                                     variant="outlined"
                                     startIcon={<Iconify icon="bxs:edit" />}
                                     onClick={() =>
-                                      router.push("/dashboard/driver/post_your_job")
+                                      router.push("/dashboard/customer/post_your_job")
                                     }
                                     sx={{
                                       fontWeight: 500,

@@ -1,47 +1,53 @@
-import { BannerSection } from "@/components/banner";  
+import { BannerSection } from "@/components/banner";
 import axiosInstance from "@/utils/axios";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const AboutUs = () => {
   const [readMore, setReadMore] = useState(false);
-  const[data,setData] =useState("");
- const AboutUsApi=async()=> await axiosInstance
-  .get("api/front/page-details/about-us")
-  .then((response) => {
-    if (response?.status === 200) {
-     setData(response.data.view_data);
-    } else {
-console.log("error");     
-    }
-  })
-  .catch((error) => {
-   console.log(error,"About Us Page");
-  });
+  const [data, setData] = useState("");
+  console.log(data, "aboutus");
+  const AboutUsApi = async () =>
+    await axiosInstance
+      .get("api/front/page-details/about-us")
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response.data.view_data);
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((error) => {
+        console.log(error, "About Us Page");
+      });
 
-  useEffect(()=>{
+  useEffect(() => {
     AboutUsApi();
-  },[])
+  }, []);
   const handleRead = (boolean) => {
     if (boolean === false) {
       setReadMore(true);
-    }else{
-        setReadMore(false)
+    } else {
+      setReadMore(false);
     }
   };
   return (
     <React.Fragment>
-     <BannerSection
+      <BannerSection
         src="/assets/images/contact/contact-us-banner.jpg"
         alt=""
         title="About Us"
       />
       <Box py={6}>
         <Container>
-          <Grid container spacing={1} alignItems="center">
-            <Grid item md={6}>
-              <Box component="img" src={`${data && data.feature_img}`} alt="thumbnail" />
+          <Grid container spacing={1} >
+            <Grid item md={6} mt={8}>
+              <Box
+                component="img"
+                src={`${data?.base_url}${data?.feature_img}`}
+                alt="About us Thumb"
+              />
             </Grid>
             <Grid item md={6}>
               <Stack spacing={1.5}>
@@ -60,7 +66,11 @@ console.log("error");
                       height: readMore ? "auto" : "16em",
                     }}
                   >
-                  <div dangerouslySetInnerHTML={{__html: `${data && data.body}`}}></div>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: `${data && data.body}`,
+                      }}
+                    ></div>
                   </Typography>
                 </Box>
                 <Box>

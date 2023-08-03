@@ -332,10 +332,10 @@ const DashboardJobRequest = ({ formik }) => {
                         <Box>
                           <Stack direction="row" justifyContent="space-between">
                             <Typography variant="subtitle2">
-                              Bid: $500
+                              Drop Budget: $500
                             </Typography>
                             <Typography variant="subtitle2">
-                              Earned: $30K+
+                              Customer Spend: $30K+
                             </Typography>
                           </Stack>
                         </Box>
