@@ -15,8 +15,6 @@ import {
 import React, { useEffect, useState } from "react";
 
 const ContactSection = ({ formik }) => {
-
-
   // API Fetch
   const [data, setData] = useState("");
   const ContactFetchApi = async () =>
@@ -161,9 +159,7 @@ const ContactSection = ({ formik }) => {
                       <Typography fontWeight={600} variant="h5">
                         Address
                       </Typography>
-                      <Typography>
-                        {data && data.address}
-                      </Typography>
+                      <Typography>{data && data.address}</Typography>
                     </Stack>
                   </Stack>
                 </CardContent>
@@ -176,66 +172,76 @@ const ContactSection = ({ formik }) => {
                 <Box component="img" src="/contactus.png" alt="Contact" />
               </Grid>
               <Grid item md={6}>
-                <Grid container spacing={1} >
-                  <Grid item md={6}>
-                    <TextBox
-                      size="small"
-                      fullWidth
-                      start
-                      // label="Email"
-                      name={`name`}
-                      placeholder="Enter your Name"
-                      value={formik?.values?.name}
-                      onChange={formik.handleChange}
-                      error={formik.touched.name && formik.errors.name}
-                      helperText={formik.touched.name && formik.errors.name}
-                    />
+                <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+                  <Grid container spacing={1}>
+                    <Grid item md={6}>
+                      <TextBox
+                        size="small"
+                        fullWidth
+                        start
+                        // label="Email"
+                        name={`name`}
+                        placeholder="Enter your Name"
+                        value={formik?.values?.name}
+                        onChange={formik.handleChange}
+                        error={formik.touched.name && formik.errors.name}
+                        helperText={formik.touched.name && formik.errors.name}
+                      />
+                    </Grid>
+                    <Grid item md={6}>
+                      <TextBox
+                        size="small"
+                        fullWidth
+                        start
+                        // label="Email"
+                        name={`email`}
+                        placeholder="Enter your Email"
+                        value={formik?.values?.email}
+                        onChange={formik.handleChange}
+                        error={formik.touched.email && formik.errors.email}
+                        helperText={formik.touched.email && formik.errors.email}
+                      />
+                    </Grid>
+                    <Grid item md={12}>
+                      <TextBox
+                        size="small"
+                        fullWidth
+                        start
+                        // label="Email"
+                        name="subject"
+                        placeholder="Enter Subject"
+                        value={formik?.values?.subject}
+                        onChange={formik.handleChange}
+                        error={formik.touched.subject && formik.errors.subject}
+                        helperText={
+                          formik.touched.subject && formik.errors.subject
+                        }
+                      />
+                    </Grid>
+                    <Grid item md={12}>
+                      <TextBox
+                        fullWidth
+                        name="message"
+
+                        placeholder="Your Message"
+                        value={formik?.values?.message}
+                        onChange={formik.handleChange}
+                        error={formik.touched.message && formik.errors.message}
+                        helperText={
+                          formik.touched.message && formik.errors.message
+                        }
+                        size={"small"}
+                        multiline={true}
+                        rows={3}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                      <Button type="submit" color="primary" variant="contained">
+                        Send Message
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item md={6}>
-                    <TextBox
-                      size="small"
-                      fullWidth
-                      start
-                      // label="Email"
-                      name={`email`}
-                      placeholder="Enter your Email"
-                      value={formik?.values?.email}
-                      onChange={formik.handleChange}
-                      error={formik.touched.email && formik.errors.email}
-                      helperText={formik.touched.email && formik.errors.email}
-                    />
-                  </Grid>
-                  <Grid item md={12}>
-                    <TextBox
-                      size="small"
-                      fullWidth
-                      start
-                      // label="Email"
-                      name='address'
-                      placeholder="Address"
-                      value={formik?.values?.address}
-                      onChange={formik.handleChange}
-                      error={formik.touched.address && formik.errors.address}
-                      helperText={
-                        formik.touched.address && formik.errors.address
-                      }
-                    />
-                  </Grid>
-                  <Grid item md={12}>
-                    <TextBox
-                      fullWidth
-                      placeholder="Your Message"
-                      size={"small"}
-                      multiline={true}
-                      rows={3}
-                    />
-                  </Grid>
-                  <Grid item md={3}>
-                    <Button color="primary" variant="contained"  >
-                      Send Message
-                    </Button>
-                  </Grid>
-                </Grid>
+                </Box>
               </Grid>
             </Grid>
           </Box>
