@@ -221,9 +221,9 @@ const ContactSection = ({ formik }) => {
                     <Grid item md={12}>
                       <TextBox
                         fullWidth
+                        placeholder="Your Message"
                         name="message"
 
-                        placeholder="Your Message"
                         value={formik?.values?.message}
                         onChange={formik.handleChange}
                         error={formik.touched.message && formik.errors.message}

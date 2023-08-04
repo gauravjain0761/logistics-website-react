@@ -52,7 +52,7 @@ const BlogDetail = () => {
         <Container>
           <Grid container spacing={2}>
             <Grid item md={8}>
-              <Box component="img" src={data.image} />
+              <Box component="img" src={`${data.base_url}${data.image}`} />
             </Grid>
             <Grid item md={4}>
               <Card sx={{ borderRadius: "5px" }}>

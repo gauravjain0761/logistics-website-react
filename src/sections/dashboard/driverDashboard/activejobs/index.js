@@ -290,9 +290,10 @@ const DashboardJobPost = ({ formik }) => {
                                   <Button
                                     sx={{ fontWeight: 500 }}
                                     fullWidth
+                                    color="success"
                                     variant="outlined"
                                     startIcon={
-                                      <Iconify icon="carbon:view-filled" />
+                                      <Iconify icon="carbon:task-complete" />
                                     }
                                     onClick={() =>
                                       router.push(
@@ -300,13 +301,13 @@ const DashboardJobPost = ({ formik }) => {
                                       )
                                     }
                                   >
-                                    View Bids
+                                    Complete Job
                                   </Button>
                                 </Box>
                                
                                 <Box>
                                   <Button
-                                    color="info"
+                                    color="secondary"
                                     fullWidth
                                     variant="outlined"
                                     startIcon={<Iconify icon="gg:track" />}
@@ -344,10 +345,10 @@ const DashboardJobPost = ({ formik }) => {
                         <Box>
                           <Stack direction="row" justifyContent="space-between">
                             <Typography variant="subtitle2">
-                              Bid: $500
+                              Job Budget: $500
                             </Typography>
                             <Typography variant="subtitle2">
-                              Earned: $30K+
+                              Customer Spend: $30K+
                             </Typography>
                           </Stack>
                         </Box>
