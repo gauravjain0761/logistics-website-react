@@ -48,7 +48,9 @@ const SelectBox = (props) => {
           name: name,
         }}
         placeholder={placeholder}
-        renderInput={(params) => <TextField {...params} label="10,000 options" />}
+        renderInput={(params) => (
+          <TextField {...params} label="10,000 options" />
+        )}
         InputProps={{
           endAdornment: (
             <InputAdornment position={inputEndAdornmentPosition}>

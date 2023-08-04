@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { useSnackbar } from "notistack";
+import { setSession } from "@/utils/localStorageAvailable";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -35,28 +36,36 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       // call api
       const data = {
-        email: values.email, 
+        email: values.email,
         password: values.password,
       };
       await axiosInstance
         .post("api/auth/login", data)
         .then((response) => {
-          console.log(response.data.user.user_type,"logintype");
+          console.log(response.data.user.user_type, "logintype");
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
 
-            formik.resetForm();
-            if(response.data.user.user_type === "customer"){
+            // formik.resetForm();
+            console.log("response.data", response.data);
+
+            if (response.data.user.user_type === "customer") {
               router.push("/dashboard/customer");
-              localStorage.setItem("token", response.data.access_token);
-            }else if(response.data.user.user_type === "driver"){
+              setSession(response.data.access_token);
+
+              // localStorage.setItem("token", response.data.access_token);
+            } else if (response.data.user.user_type === "driver") {
               router.push("/dashboard/driver/active_jobs");
-              localStorage.setItem("token", response.data.access_token);
-            }else if(response.data.user.user_type === "company"){
+              setSession(response.data.access_token);
+
+              // localStorage.setItem("token", response.data.access_token);
+            } else if (response.data.user.user_type === "company") {
               router.push("/dashboard/company");
-              localStorage.setItem("token", response.data.access_token);
+              setSession(response.data.access_token);
+
+              // localStorage.setItem("token", response.data.access_token);
             }
           } else {
             enqueueSnackbar(response.data.message, {

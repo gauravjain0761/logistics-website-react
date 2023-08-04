@@ -301,11 +301,11 @@ const JobHistory = ({ formik }) => {
                                     }
                                     onClick={() =>
                                       router.push(
-                                        "/dashboard/driver/job_listing"
+                                        "/dashboard/driver/view_job"
                                       )
                                     }
                                   >
-                                    View Bids
+                                    View Detail
                                   </Button>
                                 </Box>
                                
@@ -334,10 +334,10 @@ const JobHistory = ({ formik }) => {
                         <Box>
                           <Stack direction="row" justifyContent="space-between">
                             <Typography variant="subtitle2">
-                              Bid: $500
+                              Job Budget: $500
                             </Typography>
                             <Typography variant="subtitle2">
-                              Earned: $30K+
+                              Customer Spend: $30K+
                             </Typography>
                           </Stack>
                         </Box>

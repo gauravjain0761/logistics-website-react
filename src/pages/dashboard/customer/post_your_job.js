@@ -4,112 +4,138 @@ import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
 import { reject } from "lodash";
+import axiosInstance from "@/utils/axios";
+import { useSnackbar } from "notistack";
 
 const PostJob = () => {
-  const defaultPickupAddressValues = {
-    address: "",
-    date: "",
-    time: "",
-    quantity: "",
-    image: "",
+  const { enqueueSnackbar } = useSnackbar();
+  const product = {
+    product: {
+      job_title: "",
+      image: "",
+      image_url: "",
+      size: "",
+      quantity: "",
+      material: "",
+      pickup_date: "",
+      pickup_time: "",
+      drop_date: "",
+      drop_time: "",
+      vehicle_type: "",
+    },
+    address: [],
   };
-
-  const defaultDeliveryAddressValues = {
+  const address = {
     address: "",
-    date: "",
-    time: "",
+    drop_date: "",
+    drop_time: "",
+
+    lat: 3434.34,
+    long: 23423,
+    type: "drop or pickup",
   };
 
   const formik = useFormik({
     initialValues: {
-      pick_up_address: [],
-      delivery_address: [],
+      name: "",
+      vehicle: "",
+      items: [],
+      description: "",
     },
+
     validate: (values) => {
       const errors = {};
-      if (!values.title) {
-        errors.title = "title is required";
+      if (!values.name) {
+        errors.name = "Name is required";
+      }
+
+      if (!values.vehicle) {
+        errors.vehicle = "Vehicle is required";
+      }
+
+      if (!values.description) {
+        errors.description = "Description is required";
       }
       return errors;
     },
-    onSubmit: async (values, { setErrors }) => {
-      // await apiAdminConfig
-      //   .post("/api/auth/master/page/update/faq", values)
-      //   .then((response) => {
-      //     if (response?.status === 200) {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "success",
-      //       });
-      //       formik.resetForm();
-      //       bindData();
-      //     } else {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "error",
-      //       });
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     const { response } = error;
-      //     if (response.status === 422) {
-      //       console.log("response", response.data.error);
-      //       // eslint-disable-next-line no-unused-vars
-      //       for (const [key, value] of Object.entries(values)) {
-      //         if (response.data.error[key]) {
-      //           setErrors({ [key]: response.data.error[key][0] });
-      //         }
-      //       }
-      //     }
-      //     if (response?.data?.status === 406) {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "success",
-      //       });
-      //     }
-      //   });
+    onSubmit: async (values) => {
+      // let formData = new FormData();
+
+      // formData.append("job_title", values?.job_title);
+      // formData.append("image", values?.image);
+      // formData.append("size", values?.size);
+      // formData.append("quantity", values?.quantity);
+      console.log("valuesvalues", values);
+
+      await axiosInstance
+        .post("/api/auth/master/jobs/add", values)
+        .then((response) => {
+          if (response?.status === 200) {
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            formik.resetForm();
+          } else {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          if (response.status === 422) {
+            console.log("response", response.data.error);
+            // eslint-disable-next-line no-unused-vars
+            for (const [key] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
     },
   });
-
-  const addPickupAddress = () => {
-    formik.setFieldValue("pick_up_address", [
-      ...(formik.values.pick_up_address || []),
-      defaultPickupAddressValues,
-    ]);
+  const addProduct = () => {
+    formik.setFieldValue("items", [...(formik.values.items || []), product]);
   };
 
-  const removePickupAddress = (index) => {
-    if (formik?.values?.pick_up_address) {
-      const data = formik.values.pick_up_address.splice(index, 1);
-      formik.setFieldValue(
-        "pick_up_address",
-        reject(formik.values.pick_up_address, data)
-      );
+  const addAddress = ({ productItem, productIndex }) => {
+    formik.setFieldValue(`items[${productIndex}].address`, [
+      ...(productItem.address || []),
+      address,
+    ]);
+  };
+  const removeProduct = (index) => {
+    if (formik?.values?.items) {
+      const data = formik.values.items.splice(index, 1);
+      formik.setFieldValue("items", reject(formik.values.items, data));
     }
   };
-  const addDeliveryAddress = () => {
-    formik.setFieldValue("delivery_address", [
-      ...(formik.values.delivery_address || []),
-      defaultDeliveryAddressValues,
-    ]);
-  };
 
-  const removeDeliveryAddress = (index) => {
-    if (formik?.values?.delivery_address) {
-      const data = formik.values.delivery_address.splice(index, 1);
+  const removeAddress = (productIndex, addressIndex) => {
+    if (formik?.values?.items) {
+      const data = formik.values.items[productIndex]?.address.splice(
+        addressIndex,
+        1
+      );
       formik.setFieldValue(
-        "delivery_address",
-        reject(formik.values.delivery_address, data)
+        `items[${productIndex}].address`,
+        reject(formik.values.items[productIndex]?.address, data)
       );
     }
   };
 
   return (
     <JobPostForm
-      addPickupAddress={addPickupAddress}
-      removePickupAddress={removePickupAddress}
-      addDeliveryAddress={addDeliveryAddress}
-      removeDeliveryAddress={removeDeliveryAddress}
+      addProduct={addProduct}
+      removeProduct={removeProduct}
+      addAddress={addAddress}
+      removeAddress={removeAddress}
       formik={formik}
     />
   );

@@ -1,4 +1,5 @@
 import Iconify from "@/components/iconify/Iconify";
+import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import {
   Box,
   Button,
@@ -23,12 +24,24 @@ const ViewJobDetail = () => {
   return (
     <React.Fragment>
       <Box mt={10}>
-        <Container>
+        <Container >
           <Box my={4}>
-          <Button sx={{my:2}} onClick={()=>router.push("/dashboard/driver/job_request")} ><Iconify icon="icon-park-outline:back" width={30} /></Button>
-            <Card>
+            <Button
+            variant="outlined"
+              sx={{ my: 2 }}
+              onClick={() => router.push("/dashboard/driver/job_request")}
+            >
+            {/* <Iconify icon="ep:back" /> */}
+             Back
+            </Button>
+            <Card sx={{position:"relative"}}>
               <CardContent>
-                <Typography textAlign="center" variant="h3" color={(theme=>theme.palette.grey[700])} my={2}>
+                <Typography
+                  textAlign="center"
+                  variant="h3"
+                  color={(theme) => theme.palette.grey[700]}
+                  my={2}
+                >
                   Job Detail
                 </Typography>
                 <Box>
@@ -56,10 +69,19 @@ const ViewJobDetail = () => {
                           <Typography>Truck</Typography>
                         </Grid>
                         <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>Pick Up Address :-</Typography>
+                          <Typography fontWeight={500}>
+                            Pick Up Address :-
+                          </Typography>
                         </Grid>
                         <Grid item md={12}>
-                          <TableContainer sx={{borderRadius:"10px",border:"1px solid",borderColor:(theme)=>theme.palette.primary.main}}>
+                          <TableContainer
+                            sx={{
+                              borderRadius: "10px",
+                              border: "1px solid",
+                              borderColor: (theme) =>
+                                theme.palette.primary.main,
+                            }}
+                          >
                             <Table aria-label="simple table">
                               <TableHead>
                                 <TableRow>
@@ -96,7 +118,6 @@ const ViewJobDetail = () => {
                                   <TableCell align="center">
                                     <Box>
                                       <Box
-                                     
                                         component="img"
                                         m="auto"
                                         src="/serviceblog.jpg"
@@ -148,11 +169,20 @@ const ViewJobDetail = () => {
                           </TableContainer>
                         </Grid>
                         <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>Delivery Address :-</Typography>
+                          <Typography fontWeight={500}>
+                            Delivery Address :-
+                          </Typography>
                         </Grid>
                         <Grid item md={12}>
-                          <TableContainer sx={{borderRadius:"10px",border:"1px solid",borderColor:(theme)=>theme.palette.primary.main}}>
-                          <Table aria-label="simple table">
+                          <TableContainer
+                            sx={{
+                              borderRadius: "10px",
+                              border: "1px solid",
+                              borderColor: (theme) =>
+                                theme.palette.primary.main,
+                            }}
+                          >
+                            <Table aria-label="simple table">
                               <TableHead>
                                 <TableRow>
                                   <TableCell>Address</TableCell>
@@ -188,7 +218,6 @@ const ViewJobDetail = () => {
                                   <TableCell align="center">
                                     <Box>
                                       <Box
-                                     
                                         component="img"
                                         m="auto"
                                         src="/serviceblog.jpg"
@@ -239,12 +268,14 @@ const ViewJobDetail = () => {
                             </Table>
                           </TableContainer>
                         </Grid>
-                        
                       </Grid>
                     </Grid>
                   </Grid>
                 </Box>
               </CardContent>
+              <Box sx={{position:"absolute",right:"30px",top:"200px"}}>
+              <ApplyJobModal/>
+              </Box>
             </Card>
           </Box>
         </Container>

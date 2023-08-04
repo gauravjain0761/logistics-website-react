@@ -27,7 +27,7 @@ const CustomerDashboard = () => {
                   <Grid item md={7}>
                     <Box
                       component={"img"}
-                      src="/assets/images/dashboard//logistic.png"
+                      src="/assets/images/dashboard/logistic.png"
                     />
                   </Grid>
                   <Grid item md={5}>
@@ -45,7 +45,7 @@ const CustomerDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/dashboard/driver/post_your_job")}
+                            onClick={()=> router.push("/dashboard/customer/post_your_job")}
                             color="inherit"
                             sx={{
                               py: 1.4,
