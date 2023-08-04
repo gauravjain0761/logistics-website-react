@@ -1,4 +1,5 @@
 import Iconify from "@/components/iconify/Iconify";
+import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import {
   Box,
   Button,
@@ -23,7 +24,7 @@ const ViewJobDetail = () => {
   return (
     <React.Fragment>
       <Box mt={10}>
-        <Container>
+        <Container >
           <Box my={4}>
             <Button
             variant="outlined"
@@ -33,7 +34,7 @@ const ViewJobDetail = () => {
             {/* <Iconify icon="ep:back" /> */}
              Back
             </Button>
-            <Card>
+            <Card sx={{position:"relative"}}>
               <CardContent>
                 <Typography
                   textAlign="center"
@@ -272,6 +273,9 @@ const ViewJobDetail = () => {
                   </Grid>
                 </Box>
               </CardContent>
+              <Box sx={{position:"absolute",right:"30px",top:"200px"}}>
+              <ApplyJobModal/>
+              </Box>
             </Card>
           </Box>
         </Container>

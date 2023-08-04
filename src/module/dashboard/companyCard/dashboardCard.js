@@ -1,4 +1,5 @@
-import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import Iconify from "@/components/iconify/Iconify";
+import { Box, Card, CardContent, Grid, Stack, Typography, alpha } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -9,42 +10,42 @@ const DashboardCard = () => {
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={3}>
+        <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/company/job_post"
+                  router.pathname === "/dashboard/customer/job_post"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/company/job_post"
+                  router.pathname === "/dashboard/customer/job_post"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/company/job_post")}
+              onClick={() => router.push("/dashboard/customer/job_post")}
             >
               <CardContent>
                 <Stack
                   direction="row"
-                  justifyContent="space-between"
-                  spacing={1}
+                  justifyContent="space-around"
+                spacing={0}
+                alignItems="center"
                 >
                   <Box
                      sx={{
-                      backgroundColor:
-                        router.pathname === "/dashboard/company/job_post"
-                          ? "#fff"
-                          : "#ff7b3c30",
+                      backgroundColor:(theme) =>
+                        router.pathname === "/dashboard/customer/job_post"
+                        ? theme.palette.primary.main
+                        : alpha(theme.palette.primary.main, 0.1),
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
+                    px={1}
+                    py={0.5}
                     borderRadius={2}
-                    component="img"
-                    src="/assets/images/dashboard/jobposted.png"
-                  />
+                    component="div"
+                  ><Iconify icon="material-symbols:post-add" width={55}/></Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
                       JOB POSTED
@@ -62,34 +63,35 @@ const DashboardCard = () => {
               variant="outlined"
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/company/money_spend"
+                  router.pathname === "/dashboard/customer/money_spend"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/company/money_spend"
+                  router.pathname === "/dashboard/customer/money_spend"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/company/money_spend")}
+              onClick={() => router.push("/dashboard/customer/money_spend")}
             >
               <CardContent>
-                <Stack direction="row" justifyContent="space-between">
+                <Stack direction="row" justifyContent="space-around"
+                alignItems="center"
+                spacing={0}>
                   <Box
                      sx={{
-                      backgroundColor:
-                        router.pathname === "/dashboard/company/money_spend"
-                          ? "#fff"
-                          : "#ff7b3c30",
+                      backgroundColor:(theme)=>
+                        router.pathname === "/dashboard/customer/money_spend"
+                        ? theme.palette.primary.main
+                        : alpha(theme.palette.primary.main, 0.1),
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
-                    borderRadius={2}
-                    component="img"
-                    src="/assets/images/dashboard/moneyspend.png"
-                  />
+                    px={1}
+                    py={0.5}
+                  borderRadius={2}
+                  component="div"
+                  > <Iconify icon="ph:money-fill" width={55} /></Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
                       MONEY SPEND
@@ -106,38 +108,38 @@ const DashboardCard = () => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/company/job_history"
+                  router.pathname === "/dashboard/customer/job_history"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/company/job_history"
+                  router.pathname === "/dashboard/customer/job_history"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/company/job_history")}
+              onClick={() => router.push("/dashboard/customer/job_history")}
             >
               <CardContent>
                 <Stack
                   direction={"row"}
-                  justifyContent={"space-between"}
-                  spacing={2}
+                  justifyContent="space-around"
+                alignItems="center"
+                spacing={0}
                 >
                   <Box
                      sx={{
-                      backgroundColor:
-                        router.pathname === "/dashboard/company/job_history"
-                          ? "#fff"
-                          : "#ff7b3c30",
+                      backgroundColor:(theme)=>
+                        router.pathname === "/dashboard/customer/job_history"
+                        ? theme.palette.primary.main
+                        : alpha(theme.palette.primary.main, 0.1),
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
-                    borderRadius={2}
-                    component={"img"}
-                    src="/assets/images/dashboard/jobhistory.png"
-                  />
+                    px={1}
+                    py={0.5}
+                  borderRadius={2}
+                  component="div"
+                  ><Iconify icon="ri:history-fill" width={55} /></Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
                       JOB HISTORY
@@ -154,38 +156,38 @@ const DashboardCard = () => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/company/subscription"
+                  router.pathname === "/dashboard/customer/subscription"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/company/subscription"
+                  router.pathname === "/dashboard/customer/subscription"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/company/subscription")}
+              onClick={() => router.push("/dashboard/customer/subscription")}
             >
               <CardContent>
                 <Stack
                   direction={"row"}
-                  justifyContent={"space-between"}
-                  spacing={2}
+                  justifyContent="space-around"
+                spacing={0}
+                alignItems="center"
                 >
                   <Box
                     sx={{
-                      backgroundColor:
-                        router.pathname === "/dashboard/company/subscription"
-                          ? "#fff"
-                          : "#ff7b3c30",
+                      backgroundColor:(theme)=>
+                        router.pathname === "/dashboard/customer/subscription"
+                        ? theme.palette.primary.main
+                        : alpha(theme.palette.primary.main, 0.1),
                     }}
                     height="60px"
-                    px={1.3}
-                    py={0.8}
-                    borderRadius={2}
-                    component={"img"}
-                    src="/assets/images/dashboard/subscription.png"
-                  />
+                    px={1}
+                    py={0.5}
+                  borderRadius={2}
+                  component="div"
+                  ><Iconify icon="material-symbols:subscriptions-outline" width={55}/></Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
                       SUBSCRIPTION

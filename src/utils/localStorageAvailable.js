@@ -1,6 +1,8 @@
 // ----------------------------------------------------------------------
 
+import axios from "axios";
 import { Router } from "next/router";
+import axiosInstance from "./axios";
 
 export default function localStorageAvailable() {
   try {
@@ -31,4 +33,21 @@ export const clearToken = () => {
     localStorage.removeItem("token");
   }
   // Router.push("/auth/login");
+};
+
+export const setSession = (accessToken) => {
+  console.log("accessToken", accessToken);
+  if (accessToken) {
+    localStorage.setItem("token", accessToken);
+
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
+    // This function below will handle when token is expired
+    // const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
+    // tokenExpired(exp);
+  } else {
+    localStorage.removeItem("accessToken");
+
+    delete axios.defaults.headers.common.Authorization;
+  }
 };

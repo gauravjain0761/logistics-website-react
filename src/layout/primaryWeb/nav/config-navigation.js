@@ -32,7 +32,7 @@ const navConfig = [
  
   {
     title: "Dashboard",
-    path: "/dashboard/driver",
+    path: "/dashboard/driver/active_jobs",
     token: (token) => token,
   },
   {
@@ -57,7 +57,7 @@ const navConfig = [
   },
   {
     title: "My Profile",
-    path: "#jobs",
+    path: "/profile",
     token: (token) => token,
   },
 ];
