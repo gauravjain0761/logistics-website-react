@@ -60,6 +60,9 @@ const Blogs = ({ formik }) => {
                     >
                       <Box
                         component="img"
+                        width="100%"
+                        height={200}
+                        sx={{ objectFit: "cover" }}
                         src={`${elem?.base_url}${elem?.image}`}
                         alt="blog"
                       />
@@ -109,7 +112,7 @@ const Blogs = ({ formik }) => {
                                 </Typography>
                               </Box>
                               <Box></Box>
-                              <Box>
+                              <Box sx={{ height:"12em"}}>
                                 <Typography fontSize="15px">
                                   {elem?.description}
                                 </Typography>

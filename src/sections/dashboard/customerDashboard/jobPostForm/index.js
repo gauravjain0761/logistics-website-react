@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
-import { SelectBox, TextBox } from "@/components/form";
+import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
 import { ArrowDropDownCircle, Close, LocationOn } from "@mui/icons-material";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { BsX } from "react-icons/bs";
@@ -135,8 +135,7 @@ const JobPostForm = ({
                               (productItem, productIndex) => {
                                 console.log(
                                   "productItem?.image_url",
-                                  productItem?.image_url,
-                                  productItem?.image
+                                  productItem
                                 );
                                 return (
                                   <Box key={productIndex} sx={{ mt: 1 }}>
@@ -218,6 +217,7 @@ const JobPostForm = ({
                                               </Typography>
                                               <TextBox
                                                 fullWidth
+                                                
                                                 type="time"
                                                 value={productItem?.pickup_time}
                                                 name={`items[${productIndex}].product.pickup_time`}
@@ -265,7 +265,23 @@ const JobPostForm = ({
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
-                                            <Box>
+                                            <UploadFileBox
+                                              fullWidth
+                                              // label="Image"
+                                              url="api/auth/master/jobs/item-image"
+                                              accept="image/jpeg,image/png"
+                                              icon="upload"
+                                              disabled={true}
+                                              value={productItem?.product?.image}
+                                              name={`items[${productIndex}].product.image`}
+                                              onChange={(e) => {
+                                                formik.setFieldValue(
+                                                  `items[${productIndex}].product.image`,
+                                                  e
+                                                );
+                                              }}
+                                            />
+                                            {/* <Box>
                                               <Typography>Image</Typography>
                                               {!productItem?.image && (
                                                 <TextBox
@@ -344,7 +360,7 @@ const JobPostForm = ({
                                                   </Button>
                                                 </div>
                                               </Box>
-                                            )}
+                                            )} */}
                                           </Grid>
                                           <Grid item md={6}>
                                             <Typography>
@@ -366,6 +382,7 @@ const JobPostForm = ({
                                                     padding: ".375rem .75rem",
                                                     borderRadius: ".25rem",
                                                     display: "flex",
+                                                    height:"40px",
                                                     alignItems: "center",
                                                     justifyContent: "center",
                                                   }}
@@ -378,6 +395,7 @@ const JobPostForm = ({
 
                                                 <SelectBox
                                                   fullWidth
+                                                  size="small"
                                                   value={productItem?.material}
                                                   name={`items[${productIndex}].product.material`}
                                                   onChange={(e) => {
