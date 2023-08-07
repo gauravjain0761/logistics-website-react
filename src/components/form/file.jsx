@@ -1,9 +1,12 @@
 import {
+  Box,
   CircularProgress,
   FormHelperText,
   Icon,
   InputAdornment,
+  Stack,
   TextField,
+  alpha,
 } from "@mui/material";
 import axiosInstance from "@/utils/axios";
 import React from "react";
@@ -21,11 +24,14 @@ const UploadFileBox = (props) => {
     accept,
     icon,
     value,
+    size,
     required,
     inputAdornmentPosition,
     fullWidth,
     helperText,
     disabled,
+    startIcon,
+    endIcon,
   } = props;
 
   const fileUpload = async (e) => {
@@ -81,28 +87,66 @@ const UploadFileBox = (props) => {
         fullWidth={fullWidth}
         required={required}
       >
-        <TextField
-          error={helperText || error ? true : false}
-          success={error ? false : true}
-          name={name}
-          label={label}
-          type="url"
-          readOnly={disabled}
-          required={required}
-          disabled={disabled}
-          value={value}
-          onChange={(e) => props.onChange(e.target.value)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position={inputAdornmentPosition}>
-                {loading && <CircularProgress size={25} />}
-                <label htmlFor="document-file">
-                  {!loading && <Icon>{icon}</Icon>}
-                </label>
-              </InputAdornment>
-            ),
-          }}
-        />
+        <Stack direction="row" width="100%">
+          {startIcon && (
+            <Box
+              sx={{
+                ml: 0,
+                background: (theme) => theme.palette.grey[100],
+                border: "1px solid",
+                borderColor: (theme) => alpha(theme.palette.grey[500], 0.32),
+                padding: ".375rem .75rem",
+                borderRadius: ".25rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {startIcon}
+            </Box>
+          )}
+          <TextField
+            fullWidth={fullWidth}
+            error={helperText || error ? true : false}
+            success={error ? false : true}
+            name={name}
+            label={label}
+            type="url"
+            readOnly={disabled}
+            size={size}
+            required={required}
+            disabled={disabled}
+            value={value}
+            onChange={(e) => props.onChange(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position={inputAdornmentPosition}>
+                  {loading && <CircularProgress size={25} />}
+                  <label htmlFor="document-file">
+                    {!loading && <Icon>{icon}</Icon>}
+                  </label>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {endIcon && (
+            <Box
+              sx={{
+                ml: 0,
+                background: (theme) => theme.palette.grey[100],
+                border: "1px solid",
+                borderColor: (theme) => alpha(theme.palette.grey[500], 0.32),
+                padding: ".375rem .75rem",
+                borderRadius: ".25rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {endIcon}
+            </Box>
+          )}
+        </Stack>
 
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
         {error && <FormHelperText>{error}</FormHelperText>}

@@ -13,15 +13,14 @@ const PostJob = () => {
     product: {
       job_title: "",
       image: "",
-      image_url: "",
-      size: "",
+      // size: "",
       quantity: "",
-      material: "",
+      material: 0,
       pickup_date: "",
       pickup_time: "",
       drop_date: "",
       drop_time: "",
-      vehicle_type: "",
+      // vehicle_type: "",
     },
     address: [],
   };
@@ -38,7 +37,7 @@ const PostJob = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      vehicle: "",
+      vehicle: 0,
       items: [],
       description: "",
     },

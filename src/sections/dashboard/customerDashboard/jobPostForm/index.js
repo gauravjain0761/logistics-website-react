@@ -25,10 +25,10 @@ import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { BsX } from "react-icons/bs";
 
 const VehicleSelect = [
-  // {
-  //   label: "Choose Option for Get OTP",
-  //   value: 0,
-  // },
+  {
+    label: "Choose Vehicle",
+    value: 0,
+  },
   {
     label: "Bike",
     value: "Bike",
@@ -47,10 +47,10 @@ const VehicleSelect = [
   },
 ];
 const MaterialSelect = [
-  // {
-  //   label: "Choose Option for Get OTP",
-  //   value: 0,
-  // },
+  {
+    label: "Choose Material",
+    value: 0,
+  },
   {
     label: "Liquid",
     value: "Liquid",
@@ -133,10 +133,7 @@ const JobPostForm = ({
                             formik?.values?.items?.length > 0 &&
                             formik.values.items.map(
                               (productItem, productIndex) => {
-                                console.log(
-                                  "productItem?.image_url",
-                                  productItem
-                                );
+                              
                                 return (
                                   <Box key={productIndex} sx={{ mt: 1 }}>
                                     <Card>
@@ -165,7 +162,10 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 placeholder="Pick-Up Location"
-                                                value={productItem?.job_title}
+                                                value={
+                                                  productItem?.product
+                                                    ?.job_title
+                                                }
                                                 name={`items[${productIndex}].product.job_title`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -192,7 +192,10 @@ const JobPostForm = ({
                                                 fullWidth
                                                 format="MM/DD/YYYY"
                                                 type="date"
-                                                value={productItem?.pickup_date}
+                                                value={
+                                                  productItem?.product
+                                                    ?.pickup_date
+                                                }
                                                 name={`items[${productIndex}].product.pickup_date`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -217,9 +220,11 @@ const JobPostForm = ({
                                               </Typography>
                                               <TextBox
                                                 fullWidth
-                                                
                                                 type="time"
-                                                value={productItem?.pickup_time}
+                                                value={
+                                                  productItem?.product
+                                                    ?.pickup_time
+                                                }
                                                 name={`items[${productIndex}].product.pickup_time`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -246,7 +251,10 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 placeholder="Enter Quantity"
-                                                value={productItem?.quantity}
+                                                value={
+                                                  productItem?.product
+                                                    ?.quantity
+                                                }
                                                 name={`items[${productIndex}].product.quantity`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -265,25 +273,33 @@ const JobPostForm = ({
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
-                                            <UploadFileBox
-                                              fullWidth
-                                              // label="Image"
-                                              url="api/auth/master/jobs/item-image"
-                                              accept="image/jpeg,image/png"
-                                              icon="upload"
-                                              disabled={true}
-                                              value={productItem?.product?.image}
-                                              name={`items[${productIndex}].product.image`}
-                                              onChange={(e) => {
-                                                formik.setFieldValue(
-                                                  `items[${productIndex}].product.image`,
-                                                  e
-                                                );
-                                              }}
-                                            />
+                                            <Box>
+                                              <Typography>Image</Typography>
+                                              <UploadFileBox
+                                                fullWidth
+                                                url="api/auth/master/jobs/item-image"
+                                                accept="image/jpeg,image/png"
+                                                icon="upload"
+                                                disabled={true}
+                                                size="small"
+                                                value={
+                                                  productItem?.product?.image
+                                                }
+                                                startIcon={
+                                                  <Iconify icon="solar:gallery-bold" color="#ff7533" />
+                                                }
+                                                name={`items[${productIndex}].product.image`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.image`,
+                                                    e
+                                                  );
+                                                }}
+                                              />
+                                            </Box>
                                             {/* <Box>
                                               <Typography>Image</Typography>
-                                              {!productItem?.image && (
+                                              {!productItem?.product?.image && (
                                                 <TextBox
                                                   fullWidth
                                                   type="file"
@@ -294,7 +310,7 @@ const JobPostForm = ({
                                                       color="primary"
                                                     />
                                                   }
-                                                  value={productItem?.image}
+                                                  value={productItem?.product?.image}
                                                   name={`items[${productIndex}].product.image`}
                                                   onChange={(e) => {
                                                     formik.setFieldValue(
@@ -312,7 +328,7 @@ const JobPostForm = ({
                                                 />
                                               )}
                                             </Box>
-                                            {productItem?.image_url && (
+                                            {productItem?.product?.image_url && (
                                               <Box sx={{ display: "flex" }}>
                                                 <div
                                                   style={{
@@ -323,8 +339,8 @@ const JobPostForm = ({
                                                   <Box
                                                     component="img"
                                                     style={{ margin: "10px" }}
-                                                    src={productItem?.image_url}
-                                                    alt={productItem?.image_url}
+                                                    src={productItem?.product?.image_url}
+                                                    alt={productItem?.product?.image_url}
                                                     width="150px"
                                                     thumbnail
                                                   />
@@ -382,7 +398,7 @@ const JobPostForm = ({
                                                     padding: ".375rem .75rem",
                                                     borderRadius: ".25rem",
                                                     display: "flex",
-                                                    height:"40px",
+                                                    height: "40px",
                                                     alignItems: "center",
                                                     justifyContent: "center",
                                                   }}
@@ -396,7 +412,10 @@ const JobPostForm = ({
                                                 <SelectBox
                                                   fullWidth
                                                   size="small"
-                                                  value={productItem?.material}
+                                                  value={
+                                                    productItem?.product
+                                                      ?.material
+                                                  }
                                                   name={`items[${productIndex}].product.material`}
                                                   onChange={(e) => {
                                                     formik.setFieldValue(
@@ -435,7 +454,7 @@ const JobPostForm = ({
                                                   <TextField
                                                     {...params}
                                                     value={
-                                                      productItem?.material
+                                                      productItem?.product?.material
                                                     }
                                                     name={`items[${productIndex}].product.material`}
                                                     onChange={(e) => {

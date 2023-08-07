@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Container,
+  Divider,
   Modal,
   Stack,
   Typography,
@@ -20,17 +21,21 @@ const Profile = () => {
         <Box mt={8}>
           <Container>
             <Stack alignItems="center" spacing={4} py={4}>
+            <Card>
+              <CardContent>
               <Box>
-                <Box>
-                  <Typography fontWeight={500} fontSize={36}>
+                <Box textAlign="center" pb={3}>
+                  <Divider/>
+                  <Typography fontWeight={400} fontSize={36}>
                     Profile
                   </Typography>
+                  <Divider/>
                 </Box>
                 {/* <Box>
                   <Typography>I am a Driver</Typography>
                 </Box> */}
               </Box>
-              <Stack direction="row" spacing={12}>
+              <Stack direction="row" spacing={8}>
                 <Box>
                   <Box
                     component="img"
@@ -68,6 +73,9 @@ const Profile = () => {
                   </Box>
                 </Stack>
               </Stack>
+              </CardContent>
+            </Card>
+              
             </Stack>
           </Container>
         </Box>
