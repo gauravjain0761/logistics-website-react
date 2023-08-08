@@ -123,6 +123,14 @@ const ChangePasswordModal = () => {
       if (!values.new_password_confirmation) {
         errors.new_password_confirmation = "Confirm password is required";
       }
+      if (
+        values.new_password_confirmation &&
+        values.new_password &&
+        values.new_password_confirmation !== values.new_password
+      ) {
+        errors.new_password_confirmation =
+          "Confirm password didn't match with new password";
+      }
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
