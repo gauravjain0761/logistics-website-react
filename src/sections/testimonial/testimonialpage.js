@@ -127,7 +127,7 @@ const TestimonialPage = () => {
                                 >
                                   <Box
                                     component="img"
-                                    src={`${elem?.base_url}${elem?.image}`}
+                                    src={"/r1.png"}
                                     width="30px"
                                     height="22px"
                                     alt="testimonial icon"
