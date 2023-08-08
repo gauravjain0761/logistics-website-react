@@ -16,7 +16,7 @@ import { StyledBgTest, StyledLine } from "./testimonialStyled";
 import axiosInstance from "@/utils/axios";
 
 const TestimonialPage = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   const [loadingCard, setLoadingCard] = useState(false);
   const fetchTestApi = async () => {
     setLoadingCard(true);
@@ -41,6 +41,8 @@ const TestimonialPage = () => {
   useEffect(() => {
     fetchTestApi();
   }, []);
+
+  console.log("datadatadata", data);
   return (
     <React.Fragment>
       <StyledBgTest>
@@ -53,29 +55,35 @@ const TestimonialPage = () => {
               </Typography>
             </Stack>
             <Box py={6}>
-              <Grid container spacing={6} justifyContent={loadingCard?"center":"left"}>
+              <Grid
+                container
+                spacing={6}
+                justifyContent={loadingCard ? "center" : "left"}
+              >
                 {loadingCard ? (
                   <Box mt={4}>
                     <Container maxWidth>
-                      <Grid container spacing={8} >
+                      <Grid container spacing={8}>
                         {[...Array(3)].map((index) => {
                           return (
                             <Grid item md={4} key={index}>
-                             
                               <Skeleton
                                 variant="rectangular"
                                 width={300}
                                 height={230}
                               />
-                              
-                              <Stack direction="row" alignItems="center" spacing={1}>
+
+                              <Stack
+                                direction="row"
+                                alignItems="center"
+                                spacing={1}
+                              >
                                 <Skeleton
                                   variant="text"
                                   width="100%"
                                   sx={{ fontSize: "3rem" }}
                                 />
                                 <Skeleton
-
                                   variant="circular"
                                   width={50}
                                   height={50}
@@ -119,7 +127,7 @@ const TestimonialPage = () => {
                                 >
                                   <Box
                                     component="img"
-                                    src="/r1.png"
+                                    src={`${elem?.base_url}${elem?.image}`}
                                     width="30px"
                                     height="22px"
                                     alt="testimonial icon"
