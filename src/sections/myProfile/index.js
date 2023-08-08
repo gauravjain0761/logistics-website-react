@@ -46,7 +46,7 @@ const Profile = ({ data, formik }) => {
                         component="img"
                         src={
                           data?.profile?.profile_img
-                            ? data?.profile?.profile_img
+                            ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
                             : "/assets/images/dashboard/portfolio.jpeg"
                         }
                         sx={{
