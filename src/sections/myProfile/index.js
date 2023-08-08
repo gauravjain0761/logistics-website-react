@@ -175,7 +175,7 @@ const ChangePasswordModal = () => {
       <Button
         // color="dark"
         fullWidth
-        // variant="outlined"
+        variant="contained"
         startIcon={<Iconify icon="carbon:password" />}
         onClick={handleOpen}
         sx={{
@@ -237,7 +237,7 @@ const ChangePasswordModal = () => {
                 name="new_password_confirmation"
                 value={formik.values.new_password_confirmation}
                 onChange={formik.handleChange}
-                placeholder="Enter New Confirm Password"
+                placeholder="Enter Confirm Password"
                 helperText={formik?.errors?.new_password_confirmation}
               />
             </Box>
