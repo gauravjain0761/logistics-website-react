@@ -46,7 +46,7 @@ const CompanyDashboard = () => {
                           <Button
                             variant="contained"
                             onClick={() =>
-                              router.push("/dashboard/customer/post_your_job")
+                              router.push("/dashboard/customer/job_post/create")
                             }
                             color="inherit"
                             sx={{
