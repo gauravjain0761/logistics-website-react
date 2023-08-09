@@ -71,6 +71,7 @@ const PostJob = () => {
         .post("/api/auth/master/jobs/add", values)
         .then((response) => {
           if (response?.status === 200) {
+            router.push("/dashboard/customer/job_posted");
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
