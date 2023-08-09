@@ -26,71 +26,95 @@ const Profile = ({ data, formik }) => {
         <Box mt={8}>
           <Container>
             <Stack alignItems="center" spacing={4} py={4}>
-              <Card>
-                <CardContent>
-                  <Box>
-                    <Box textAlign="center" pb={3}>
-                      <Divider />
-                      <Typography fontWeight={400} fontSize={36}>
-                        Profile
+              <Box>
+                <Card
+                  sx={{
+                    // borderRadius: 0,
+                    boxShadow: 0,
+                    background: (theme) => theme.palette.grey[100],
+                    width: "100%",
+                    mb: 2,
+                  }}
+                >
+                  <CardContent>
+                    <Stack
+                      direction={"row"}
+                      justifyContent={"center"}
+                      alignItems="center"
+                    >
+                      <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
+                      <Typography
+                        color={"primary"}
+                        variant="h4"
+                        fontWeight={500}
+                        sx={{ fontSize: "1.95rem!important" }}
+                      >
+                        My Profile
                       </Typography>
-                      <Divider />
-                    </Box>
-                    {/* <Box>
-                  <Typography>I am a Driver</Typography>
-                </Box> */}
-                  </Box>
-                  <Stack direction="row" spacing={8}>
-                    <Box>
-                      <Box
-                        component="img"
-                        src={
-                          data?.profile?.profile_img
-                            ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
-                            : "/assets/images/dashboard/portfolio.jpeg"
-                        }
-                        sx={{
-                          width: "130px",
-                          borderRadius: "50%",
-                          border: "2px solid #ff7534",
-                        }}
-                      />
-                    </Box>
-                    <Stack>
-                      <Box>
-                        <TextBox
-                          size="small"
-                          fullWidth
-                          value={data?.profile?.user_name}
-                          disabled
-                        />
-                      </Box>
-                      <Box>
-                        <TextBox
-                          size="small"
-                          placeholder="xyz@gmail.com"
-                          fullWidth
-                          disabled
-                          value={data?.email}
-                        />
-                      </Box>
-
-                      <Box>
-                        <TextBox
-                          size="small"
-                          placeholder="8726263731"
-                          fullWidth
-                          disabled
-                          value={data?.mobile}
-                        />
-                      </Box>
-                      <Box>
-                        <ChangePasswordModal />
-                      </Box>
                     </Stack>
-                  </Stack>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent>
+                    <Stack direction="row" spacing={8}>
+                      <Box>
+                        <Box
+                          component="img"
+                          src={
+                            data?.profile?.profile_img
+                              ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
+                              : "/assets/images/dashboard/portfolio.jpeg"
+                          }
+                          sx={{
+                            width: "130px",
+                            borderRadius: "50%",
+                            border: "2px solid #ff7534",
+                          }}
+                        />
+                      </Box>
+                      <Stack>
+                        <Box>
+                          <TextBox
+                            size="small"
+                            fullWidth
+                            value={data?.profile?.user_name}
+                            disabled
+                          />
+                        </Box>
+                        <Box>
+                          <TextBox
+                            size="small"
+                            placeholder="xyz@gmail.com"
+                            fullWidth
+                            disabled
+                            value={data?.email}
+                          />
+                        </Box>
+
+                        <Box>
+                          <TextBox
+                            size="small"
+                            placeholder="8726263731"
+                            fullWidth
+                            disabled
+                            value={data?.mobile}
+                          />
+                        </Box>
+                        <Stack direction="row" justifyContent="space-between">
+                          <Box>
+                            <Button variant="contained" type="submit">
+                              Update Profile
+                            </Button>
+                          </Box>
+                          <Box>
+                            <ChangePasswordModal />
+                          </Box>
+                        </Stack>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Box>
             </Stack>
           </Container>
         </Box>
@@ -175,7 +199,7 @@ const ChangePasswordModal = () => {
       <Button
         // color="dark"
         fullWidth
-        variant="contained"
+        variant="outlined"
         startIcon={<Iconify icon="carbon:password" />}
         onClick={handleOpen}
         sx={{

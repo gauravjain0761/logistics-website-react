@@ -328,7 +328,7 @@ const JobPostForm = ({
                           fullWidth
                           placeholder="Drop-Out Location"
                           startIcon={
-                            <Iconify icon="mdi:location" color="#ff7534" />
+                            <Iconify icon="mdi:location" coXyz,Address ,city,12122lor="#ff7534" />
                           }
                           size={"small"}
                         />

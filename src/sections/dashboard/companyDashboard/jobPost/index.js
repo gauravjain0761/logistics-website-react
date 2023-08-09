@@ -29,6 +29,7 @@ import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
+import SkeletonLoader from "@/components/skeleton";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -41,21 +42,24 @@ const DashboardJobPost = ({ formik }) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-
+  const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState([]);
 
   const getData = async () => {
+    setLoader(true);
     await axiosInstance
       .get("api/auth/master/jobs/search", {
         params: { page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
         if (response?.status === 200) {
+          setLoader(false);
           setData(response?.data?.view_data?.data);
           setPageCount(response?.data?.view_data?.meta?.last_page);
         }
       })
       .catch((error) => {
+        setLoader(false);
         console.log("DriverJob", error);
       });
   };
@@ -137,95 +141,99 @@ const DashboardJobPost = ({ formik }) => {
             <DashboardCard jobPost={data?.length} />
           </Box>
           <Box py={2}>
-            <Grid container spacing={2}>
-              <Grid item md={7}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Typography
-                    fontSize="1.75rem"
-                    fontWeight={500}
-                    color="primary"
-                  >
-                    Job Posted By You
-                  </Typography>
-
-                  <Box
-                    borderRadius="50%"
-                    border="1px solid"
-                    borderColor={(theme) => theme.palette.primary.main}
-                    color={(theme) => theme.palette.primary.main}
-                    py={0.6}
-                    px={1.8}
-                  >
+            {loader ? (
+              <SkeletonLoader />
+            ) : (
+              <Grid container spacing={2}>
+                <Grid item md={7}>
+                  <Stack direction="row" spacing={1} alignItems="center">
                     <Typography
-                      fontSize="1.3rem"
+                      fontSize="1.75rem"
                       fontWeight={500}
                       color="primary"
                     >
-                      <CountUp
-                        start={0}
-                        duration={1}
-                        end={data?.length}
-                        enableScrollSpy={true}
-                        scrollSpyDelay={200}
-                      />
+                      Job Posted By You
                     </Typography>
-                  </Box>
-                </Stack>
-              </Grid>
 
-              <Grid item md={3}>
-                <Box>
-                  <Stack direction="row" mb={1.3}>
-                    <Box>
-                      <Box
-                        sx={{
-                          ml: 0,
-                          background: (theme) => theme.palette.grey[100],
-                          border: "1px solid",
-                          borderColor: (theme) =>
-                            alpha(theme.palette.grey[500], 0.32),
-                          padding: ".63rem 0.76rem",
-                          borderRadius: ".25rem",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+                    <Box
+                      borderRadius="50%"
+                      border="1px solid"
+                      borderColor={(theme) => theme.palette.primary.main}
+                      color={(theme) => theme.palette.primary.main}
+                      py={0.6}
+                      px={1.8}
+                    >
+                      <Typography
+                        fontSize="1.3rem"
+                        fontWeight={500}
+                        color="primary"
                       >
-                        <Iconify
-                          icon="mingcute:calendar-fill"
-                          color="#ff7534"
+                        <CountUp
+                          start={0}
+                          duration={1}
+                          end={data?.length}
+                          enableScrollSpy={true}
+                          scrollSpyDelay={200}
                         />
-                      </Box>
+                      </Typography>
                     </Box>
-                    <SelectBox
-                      sx={{ mb: 0 }}
-                      size="small"
-                      fullWidth
-                      options={MonthSelect}
-                      name={`month`}
-                      value={formik?.values?.month}
-                      onChange={formik.handleChange}
-                      error={formik.touched.month && formik.errors.month}
-                      helperText={formik.touched.month && formik.errors.month}
-                    />
                   </Stack>
-                </Box>
+                </Grid>
+
+                <Grid item md={3}>
+                  <Box>
+                    <Stack direction="row" mb={1.3}>
+                      <Box>
+                        <Box
+                          sx={{
+                            ml: 0,
+                            background: (theme) => theme.palette.grey[100],
+                            border: "1px solid",
+                            borderColor: (theme) =>
+                              alpha(theme.palette.grey[500], 0.32),
+                            padding: ".63rem 0.76rem",
+                            borderRadius: ".25rem",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Iconify
+                            icon="mingcute:calendar-fill"
+                            color="#ff7534"
+                          />
+                        </Box>
+                      </Box>
+                      <SelectBox
+                        sx={{ mb: 0 }}
+                        size="small"
+                        fullWidth
+                        options={MonthSelect}
+                        name={`month`}
+                        value={formik?.values?.month}
+                        onChange={formik.handleChange}
+                        error={formik.touched.month && formik.errors.month}
+                        helperText={formik.touched.month && formik.errors.month}
+                      />
+                    </Stack>
+                  </Box>
+                </Grid>
+                <Grid item md={2}>
+                  <Box>
+                    <Button
+                      startIcon={<Add />}
+                      variant="outlined"
+                      fullWidth
+                      onClick={() =>
+                        router.push("/dashboard/driver/post_your_job")
+                      }
+                    >
+                      Add New Post
+                    </Button>
+                  </Box>
+                </Grid>
               </Grid>
-              <Grid item md={2}>
-                <Box>
-                  <Button
-                    startIcon={<Add />}
-                    variant="outlined"
-                    fullWidth
-                    onClick={() =>
-                      router.push("/dashboard/driver/post_your_job")
-                    }
-                  >
-                    Add New Post
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
+            )}
           </Box>
 
           <Box py={2} sx={{ background: " " }}>
