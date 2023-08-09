@@ -139,14 +139,11 @@ const PostJob = () => {
           if (response?.data?.view_data) {
             let newData = response?.data?.view_data;
             for (const [key] of Object.entries(formik.values)) {
-              if (key === "items") {
-                formik.setFieldValue(
-                  "items",
-                  newData?.jobitems || newData?.items
-                );
-              } else {
+              // if (key === "items") {
+              //   formik.setFieldValue("items", newData?.items);
+              // } else {
                 formik.setFieldValue([key], newData[key]);
-              }
+              // }
             }
           }
         }

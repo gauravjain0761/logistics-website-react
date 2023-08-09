@@ -23,6 +23,7 @@ import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
 import { ArrowDropDownCircle, Close, LocationOn } from "@mui/icons-material";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { BsX } from "react-icons/bs";
+import moment from "moment";
 
 const VehicleSelect = [
   {
@@ -189,7 +190,6 @@ const JobPostForm = ({
                                               </Typography>
                                               <TextBox
                                                 fullWidth
-                                                format="MM/DD/YYYY"
                                                 type="date"
                                                 value={
                                                   productItem?.product
@@ -247,7 +247,6 @@ const JobPostForm = ({
                                               <Typography>Drop Date</Typography>
                                               <TextBox
                                                 fullWidth
-                                                format="MM/DD/YYYY"
                                                 type="date"
                                                 value={
                                                   productItem?.product
@@ -275,11 +274,10 @@ const JobPostForm = ({
                                               <Typography>Drop Time</Typography>
                                               <TextBox
                                                 fullWidth
-                                                format="MM/DD/YYYY"
                                                 type="date"
                                                 value={
-                                                  productItem?.product
-                                                    ?.drop_time
+                                                  moment(productItem?.product
+                                                    ?.drop_time).format("YYYY/MM/DD")
                                                 }
                                                 name={`items[${productIndex}].product.drop_time`}
                                                 onChange={(e) => {
@@ -381,9 +379,7 @@ const JobPostForm = ({
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>
-                                                Height
-                                              </Typography>
+                                              <Typography>Height</Typography>
                                               <TextBox
                                                 fullWidth
                                                 placeholder="Enter Product Height"
