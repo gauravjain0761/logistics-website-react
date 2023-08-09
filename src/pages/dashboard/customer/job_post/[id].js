@@ -71,6 +71,7 @@ const PostJob = () => {
         .post("/api/auth/master/jobs/add", values)
         .then((response) => {
           if (response?.status === 200) {
+            router.push("/dashboard/customer/job_posted");
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
@@ -138,14 +139,11 @@ const PostJob = () => {
           if (response?.data?.view_data) {
             let newData = response?.data?.view_data;
             for (const [key] of Object.entries(formik.values)) {
-              if (key === "items") {
-                formik.setFieldValue(
-                  "items",
-                  newData?.jobitems || newData?.items
-                );
-              } else {
+              // if (key === "items") {
+              //   formik.setFieldValue("items", newData?.items);
+              // } else {
                 formik.setFieldValue([key], newData[key]);
-              }
+              // }
             }
           }
         }
@@ -153,7 +151,7 @@ const PostJob = () => {
   };
 
   React.useEffect(() => {
-    if (id !== "create") {
+    if (id && id !== "create") {
       bindData();
     }
   }, [id]);

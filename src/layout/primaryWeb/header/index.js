@@ -173,29 +173,57 @@ const Header = (props) => {
                   })
                 }
               />
-              {isAuthenticated && (
-                <Typography
-                  sx={{
-                    mr: 1.1,
-                    color: (theme) => theme.palette.text.primary,
-                    ...theme.typography.subtitle2,
-                    textDecoration: "none",
-                  }}
-                  component={Link}
-                  href={
-                    user?.user_type === "driver"
-                      ? `/dashboard/${user?.user_type}/active_jobs`
-                      : `/dashboard/${user?.user_type}`
-                  }
-                >
-                  Dashboard
-                </Typography>
-              )}
+              {isAuthenticated &&
+                (user?.user_type !== "driver" ? (
+                  <Typography
+                    sx={{
+                      mr: 1.1,
+                      color: (theme) =>
+                        router.asPath === `/dashboard/${user?.user_type}`
+                          ? theme.palette.primary.main
+                          : theme.palette.text.primary,
+                      ...theme.typography.subtitle2,
+                      textDecoration: "none",
+                    }}
+                    component={Link}
+                    href={
+                      user?.user_type === "driver"
+                        ? `/dashboard/${user?.user_type}/active_jobs`
+                        : `/dashboard/${user?.user_type}`
+                    }
+                  >
+                    Dashboard
+                  </Typography>
+                ) : (
+                  <Typography
+                    sx={{
+                      mr: 1.1,
+                      color: (theme) =>
+                        router.asPath ===
+                        `/dashboard/${user?.user_type}/active_jobs`
+                          ? theme.palette.primary.main
+                          : theme.palette.text.primary,
+                      ...theme.typography.subtitle2,
+                      textDecoration: "none",
+                    }}
+                    component={Link}
+                    href={
+                      user?.user_type === "driver"
+                        ? `/dashboard/${user?.user_type}/active_jobs`
+                        : `/dashboard/${user?.user_type}`
+                    }
+                  >
+                    Dashboard
+                  </Typography>
+                ))}
               {isAuthenticated && (
                 <Typography
                   sx={{
                     mr: 2,
-                    color: (theme) => theme.palette.text.primary,
+                    color: (theme) =>
+                      router.asPath === `/dashboard/${user?.user_type}/profile`
+                        ? theme.palette.primary.main
+                        : theme.palette.text.primary,
                     ...theme.typography.subtitle2,
                     textDecoration: "none",
                   }}

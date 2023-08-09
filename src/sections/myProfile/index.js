@@ -241,14 +241,14 @@ const ChangePasswordModal = () => {
                 helperText={formik?.errors?.new_password_confirmation}
               />
             </Box>
-            <Typography
+            {/* <Typography
               id="modal-modal-title"
               variant="h6"
               component="h2"
               pb={2}
             >
               Are you sure you want to Change Password ?
-            </Typography>
+            </Typography> */}
           </Stack>
           <Stack direction="row" spacing={8}>
             <Button
@@ -257,10 +257,10 @@ const ChangePasswordModal = () => {
               variant="outlined"
               // onClick={handleClose}
             >
-              Yes
+              Submit
             </Button>
             <Button fullWidth variant="outlined" onClick={handleClose}>
-              No
+              Cancel
             </Button>
           </Stack>
         </Box>
