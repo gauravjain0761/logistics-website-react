@@ -1,5 +1,5 @@
 // routes
-import { PATH_AUTH } from "../routes/paths";
+// import { PATH_AUTH } from "../routes/paths";
 import axiosInstance from "../utils/axios";
 // utils
 
@@ -47,7 +47,7 @@ export const tokenExpired = (exp) => {
 
     localStorage.removeItem("accessToken");
 
-    window.location.href = PATH_AUTH.login;
+    // window.location.href = PATH_AUTH.login;
   }, timeLeft);
 };
 
