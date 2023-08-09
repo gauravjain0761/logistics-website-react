@@ -27,7 +27,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 // import DashboardCard from "@/module/dashboard/dashboardCard";
-const JobHistory = ({ formik }) => {
+const JobHistory = () => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
@@ -37,8 +37,6 @@ const JobHistory = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
-
-  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };

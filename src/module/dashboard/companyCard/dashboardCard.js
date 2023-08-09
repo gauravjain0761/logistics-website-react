@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const DashboardCard = () => {
+const DashboardCard = ({ jobPost }) => {
   const router = useRouter();
 
   return (
