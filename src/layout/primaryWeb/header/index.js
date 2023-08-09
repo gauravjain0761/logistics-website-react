@@ -34,12 +34,14 @@ import NavDesktop from "../nav/desktop/NavDesktop";
 import navConfig from "../nav/config-navigation";
 import { HEADER } from "@/utils/config-global";
 import { filter } from "lodash";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
   const token = isAccessToken();
+  const { user, isAuthenticated, logout } = useAuthContext();
   const isMobile = useResponsive("down", "md");
   // const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(10, {
@@ -49,6 +51,13 @@ const Header = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const handleAuth = () => {
+    if (isAuthenticated) {
+      logout();
+    } else {
+      router.push("/auth/login");
+    }
+  };
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -96,12 +105,7 @@ const Header = (props) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  // const isAccessToken =
-  //   typeof window !== "undefined" && localStorage.getItem("token")
-  //     ? true
-  //     : false;
 
-  console.log("tokentokentoken", token);
   return (
     <>
       <AppBar
@@ -168,7 +172,10 @@ const Header = (props) => {
                 }
               />
               <div>
-                {token ? (
+                <Button variant="contained" onClick={handleAuth}>
+                  {isAuthenticated ? "Log Out" : "Sign in/ Sign up"}
+                </Button>
+                {/* {token ? (
                   <Box component="div">
                     <Button
                       onClick={() => {
@@ -200,7 +207,7 @@ const Header = (props) => {
                       </Typography>
                     </Button>
                   </Box>
-                )}
+                )} */}
               </div>
             </Stack>
             <IconButton
