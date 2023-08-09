@@ -182,7 +182,11 @@ const Header = (props) => {
                     textDecoration: "none",
                   }}
                   component={Link}
-                  href={`/dashboard/${user?.user_type}`}
+                  href={
+                    user?.user_type === "driver"
+                      ? `/dashboard/${user?.user_type}/active_jobs`
+                      : `/dashboard/${user?.user_type}`
+                  }
                 >
                   Dashboard
                 </Typography>

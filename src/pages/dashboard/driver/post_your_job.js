@@ -3,6 +3,7 @@ import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/driverDashboard/jobPostForm";
 import { reject } from "lodash";
+import AuthGuard from "@/auth/AuthGuard";
 
 const PostJob = () => {
   const defaultPickupAddressValues = {
@@ -104,13 +105,15 @@ const PostJob = () => {
   };
 
   return (
-    <JobPostForm
-      addPickupAddress={addPickupAddress}
-      removePickupAddress={removePickupAddress}
-      addDeliveryAddress={addDeliveryAddress}
-      removeDeliveryAddress={removeDeliveryAddress}
-      formik={formik}
-    />
+    <AuthGuard>
+      <JobPostForm
+        addPickupAddress={addPickupAddress}
+        removePickupAddress={removePickupAddress}
+        addDeliveryAddress={addDeliveryAddress}
+        removeDeliveryAddress={removeDeliveryAddress}
+        formik={formik}
+      />
+    </AuthGuard>
   );
 };
 

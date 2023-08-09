@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
+import AuthGuard from "@/auth/AuthGuard";
 
 const MyProfilePage = () => {
   const [data, setData] = React.useState({});
@@ -23,7 +24,11 @@ const MyProfilePage = () => {
     getProfile();
   }, []);
   console.log("datadata", data);
-  return <Profile formik={formik} data={data} />;
+  return (
+    <AuthGuard>
+      <Profile formik={formik} data={data} />
+    </AuthGuard>
+  );
 };
 
 MyProfilePage.getLayout = function getLayout(page) {

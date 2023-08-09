@@ -2,6 +2,7 @@ import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import TrackJob from "@/sections/dashboard/driverDashboard/trackJob";
+import AuthGuard from "@/auth/AuthGuard";
 
 const StartJobPage = () => {
   const formik = useFormik({
@@ -9,7 +10,11 @@ const StartJobPage = () => {
       location: "",
     },
   });
-  return <TrackJob formik={formik} />;
+  return (
+    <AuthGuard>
+      <TrackJob formik={formik} />
+    </AuthGuard>
+  );
 };
 
 StartJobPage.getLayout = function getLayout(page) {

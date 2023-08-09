@@ -2,10 +2,15 @@ import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import SubscriptionsPage from "@/sections/dashboard/customerDashboard/subscription";
+import AuthGuard from "@/auth/AuthGuard";
 
 const SubscriptionPage = () => {
   const formik = useFormik({});
-  return <SubscriptionsPage formik={formik} />;
+  return (
+    <AuthGuard>
+      <SubscriptionsPage formik={formik} />
+    </AuthGuard>
+  );
 };
 
 SubscriptionPage.getLayout = function getLayout(page) {

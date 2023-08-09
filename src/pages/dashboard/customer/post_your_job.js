@@ -6,6 +6,7 @@ import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 import { reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
+import AuthGuard from "@/auth/AuthGuard";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -127,13 +128,15 @@ const PostJob = () => {
   };
 
   return (
-    <JobPostForm
-      addProduct={addProduct}
-      removeProduct={removeProduct}
-      addAddress={addAddress}
-      removeAddress={removeAddress}
-      formik={formik}
-    />
+    <AuthGuard>
+      <JobPostForm
+        addProduct={addProduct}
+        removeProduct={removeProduct}
+        addAddress={addAddress}
+        removeAddress={removeAddress}
+        formik={formik}
+      />
+    </AuthGuard>
   );
 };
 
