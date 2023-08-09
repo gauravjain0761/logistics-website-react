@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const DashboardCard = () => {
+const DashboardCard = ({ jobalert }) => {
   const router = useRouter();
 
   return (
@@ -65,7 +65,7 @@ const DashboardCard = () => {
                     JOB ALERT
                   </Typography>
                   <Typography variant="h5" textAlign="center">
-                    5
+                    {jobalert}
                   </Typography>
                 </Box>
               </Stack>
@@ -147,9 +147,9 @@ const DashboardCard = () => {
               >
                 <Box
                   sx={{
-                    backgroundColor:(theme)=>
+                    backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/money_earned"
-                      ? theme.palette.primary.main
+                        ? theme.palette.primary.main
                         : alpha(theme.palette.primary.main, 0.1),
                   }}
                   height="60px"
@@ -196,9 +196,9 @@ const DashboardCard = () => {
               >
                 <Box
                   sx={{
-                    backgroundColor:(theme)=>
+                    backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/job_history"
-                      ? theme.palette.primary.main
+                        ? theme.palette.primary.main
                         : alpha(theme.palette.primary.main, 0.1),
                   }}
                   height="60px"
@@ -206,8 +206,9 @@ const DashboardCard = () => {
                   px={1}
                   borderRadius={2}
                   component="div"
-                 
-                ><Iconify icon="ri:history-fill" width={45}/> </Box>
+                >
+                  <Iconify icon="ri:history-fill" width={45} />{" "}
+                </Box>
                 <Box>
                   <Typography fontSize={16} fontWeight={300}>
                     JOB HISTORY
@@ -244,9 +245,9 @@ const DashboardCard = () => {
               >
                 <Box
                   sx={{
-                    backgroundColor:(theme)=>
+                    backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/subscription"
-                      ? theme.palette.primary.main
+                        ? theme.palette.primary.main
                         : alpha(theme.palette.primary.main, 0.1),
                   }}
                   height="60px"
@@ -254,8 +255,12 @@ const DashboardCard = () => {
                   px={1}
                   borderRadius={2}
                   component="div"
-                  
-                ><Iconify icon="material-symbols:subscriptions-outline" width={45}/></Box>
+                >
+                  <Iconify
+                    icon="material-symbols:subscriptions-outline"
+                    width={45}
+                  />
+                </Box>
                 <Box>
                   <Typography fontSize={16} fontWeight={300}>
                     SUBSCRIPTION
