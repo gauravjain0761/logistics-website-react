@@ -30,11 +30,11 @@ const navConfig = [
     token: (token) => true,
   },
 
-  {
-    title: "Dashboard",
-    path: "/dashboard/customer/job_post",
-    token: (token) => token,
-  },
+  // {
+  //   title: "Dashboard",
+  //   path: "/dashboard/customer/job_post",
+  //   token: (token) => token,
+  // },
   {
     title: "Testimonials",
     path: "/testimonial/testimonials",
@@ -55,11 +55,11 @@ const navConfig = [
     path: "/contact/contact",
     token: (token) => true,
   },
-  {
-    title: "My Profile",
-    path: "/dashboard/customer/profile",
-    token: (token) => token,
-  },
+  // {
+  //   title: "My Profile",
+  //   path: "/dashboard/customer/profile",
+  //   token: (token) => token,
+  // },
 ];
 
 export default navConfig;

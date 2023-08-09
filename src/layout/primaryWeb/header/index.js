@@ -22,6 +22,7 @@ import {
   Toolbar,
   Typography,
   alpha,
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
@@ -105,6 +106,7 @@ const Header = (props) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+  const theme = useTheme();
 
   return (
     <>
@@ -167,10 +169,34 @@ const Header = (props) => {
                 data={
                   navConfig &&
                   filter(navConfig, (item) => {
-                    return item.token(token);
+                    return item.token(isAuthenticated);
                   })
                 }
               />
+              <Typography
+                sx={{
+                  mr: 1.1,
+                  color: (theme) => theme.palette.text.primary,
+                  ...theme.typography.subtitle2,
+                  textDecoration: "none",
+                }}
+                component={Link}
+                href={`/dashboard/${user?.user_type}`}
+              >
+                Dashboard
+              </Typography>
+              <Typography
+                sx={{
+                  mr: 2,
+                  color: (theme) => theme.palette.text.primary,
+                  ...theme.typography.subtitle2,
+                  textDecoration: "none",
+                }}
+                component={Link}
+                href={`/dashboard/${user?.user_type}/profile`}
+              >
+                My Profile
+              </Typography>
               <div>
                 <Button variant="contained" onClick={handleAuth}>
                   {isAuthenticated ? "Log Out" : "Sign in/ Sign up"}
