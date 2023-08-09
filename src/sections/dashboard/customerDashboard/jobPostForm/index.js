@@ -859,7 +859,7 @@ const JobPostForm = ({
                             </Button>
                           </Box>
                         </Grid>
-                        <Grid item md={1}>
+                        {/* <Grid item md={1}>
                           <Box>
                             <Button
                               startIcon={
@@ -875,7 +875,7 @@ const JobPostForm = ({
                               Reset
                             </Button>
                           </Box>
-                        </Grid>
+                        </Grid> */}
                         <Grid item md={1}>
                           <Box>
                             <Button

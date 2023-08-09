@@ -29,6 +29,7 @@ import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import axiosInstance from "@/utils/axios";
+import SkeletonLoader from "@/components/skeleton";
 const DashboardJobRequest = () => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -42,21 +43,24 @@ const DashboardJobRequest = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-
+  const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState([]);
 
   const getData = async () => {
+    setLoader(true);
     await axiosInstance
       .get("api/auth/master/jobs/search", {
         params: { page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
+        setLoader(false);
         if (response?.status === 200) {
           setData(response?.data?.view_data?.data);
           setPageCount(response?.data?.view_data?.meta?.last_page);
         }
       })
       .catch((error) => {
+        setLoader(false);
         console.log("DriverJob", error);
       });
   };
@@ -75,42 +79,46 @@ const DashboardJobRequest = () => {
             <DashboardCard jobalert={data?.length} />
           </Box>
           <Box py={2}>
-            <Grid container spacing={2}>
-              <Grid item md={12}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Typography
-                    fontSize="1.75rem"
-                    fontWeight={500}
-                    color="primary"
-                  >
-                    Jobs For You
-                  </Typography>
-
-                  <Box
-                    borderRadius="50%"
-                    border="1px solid"
-                    borderColor={(theme) => theme.palette.primary.main}
-                    color={(theme) => theme.palette.primary.main}
-                    py={0.6}
-                    px={1.8}
-                  >
+            {loader ? (
+              <SkeletonLoader />
+            ) : (
+              <Grid container spacing={2}>
+                <Grid item md={12}>
+                  <Stack direction="row" spacing={1} alignItems="center">
                     <Typography
-                      fontSize="1.3rem"
+                      fontSize="1.75rem"
                       fontWeight={500}
                       color="primary"
                     >
-                      <CountUp
-                        start={0}
-                        duration={1}
-                        end={data?.length}
-                        enableScrollSpy={true}
-                        scrollSpyDelay={200}
-                      />
+                      Jobs For You
                     </Typography>
-                  </Box>
-                </Stack>
+
+                    <Box
+                      borderRadius="50%"
+                      border="1px solid"
+                      borderColor={(theme) => theme.palette.primary.main}
+                      color={(theme) => theme.palette.primary.main}
+                      py={0.6}
+                      px={1.8}
+                    >
+                      <Typography
+                        fontSize="1.3rem"
+                        fontWeight={500}
+                        color="primary"
+                      >
+                        <CountUp
+                          start={0}
+                          duration={1}
+                          end={data?.length}
+                          enableScrollSpy={true}
+                          scrollSpyDelay={200}
+                        />
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
           </Box>
 
           <Box py={2} sx={{ background: " " }}>
@@ -328,7 +336,7 @@ const DashboardJobRequest = () => {
                                       }
                                       onClick={() =>
                                         router.push(
-                                          "/dashboard/driver/view_job"
+                                          `/dashboard/driver/view_job/${item?.id}`
                                         )
                                       }
                                     >
