@@ -28,6 +28,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
+import { useSnackbar } from "notistack";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -259,7 +260,7 @@ const DashboardJobPost = ({ formik }) => {
                             </Box>
                           </Stack>
                           <Box>
-                            <DeleteModal />
+                            <DeleteModal id={item?.id} getData={getData} />
                           </Box>
                         </Stack>
                         <Divider />
@@ -562,10 +563,32 @@ const DashboardJobPost = ({ formik }) => {
 };
 
 export default DashboardJobPost;
-const DeleteModal = () => {
+
+const DeleteModal = ({ id, getData }) => {
   const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const deleteData = async () => {
+    await axiosInstance
+      .delete(`api/auth/master/jobs/delete/${id}`)
+      .then((response) => {
+        if (response?.status === 200) {
+          handleClose();
+          getData();
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+        enqueueSnackbar(response.data.message, {
+          variant: "error",
+        });
+      });
+  };
   return (
     <Box>
       <Button onClick={handleOpen}>
@@ -600,7 +623,7 @@ const DeleteModal = () => {
             Are you sure you want to delete ?
           </Typography>
           <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
+            <Button fullWidth variant="outlined" onClick={deleteData}>
               Yes
             </Button>
             <Button fullWidth variant="outlined" onClick={handleClose}>
