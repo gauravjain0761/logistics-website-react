@@ -37,8 +37,6 @@ const JobHistory = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
-
-  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -203,7 +201,7 @@ const JobHistory = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/customer/post_your_job")}
+                    onClick={() => router.push("/dashboard/customer/job_post/create")}
                   >
                     Add New Post
                   </Button> */}

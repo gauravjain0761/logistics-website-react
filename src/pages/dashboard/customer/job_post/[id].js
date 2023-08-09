@@ -6,10 +6,13 @@ import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 import { reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
+import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
+  const { id } = router.query;
   const product = {
     product: {
       image: "",
@@ -126,6 +129,34 @@ const PostJob = () => {
       );
     }
   };
+
+  const bindData = async () => {
+    await axiosInstance
+      .get(`/api/auth/master/jobs/edit/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          if (response?.data?.view_data) {
+            let newData = response?.data?.view_data;
+            for (const [key] of Object.entries(formik.values)) {
+              if (key === "items") {
+                formik.setFieldValue(
+                  "items",
+                  newData?.jobitems || newData?.items
+                );
+              } else {
+                formik.setFieldValue([key], newData[key]);
+              }
+            }
+          }
+        }
+      });
+  };
+
+  React.useEffect(() => {
+    if (id !== "create") {
+      bindData();
+    }
+  }, [id]);
 
   return (
     <AuthGuard>

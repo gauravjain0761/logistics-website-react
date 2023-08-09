@@ -139,7 +139,7 @@ const JobPostForm = ({
                                     <Grid item md={12}>
                                       <Box>
                                         <Typography>Pick-Up Address</Typography>
-                                        
+
                                         <TextBox
                                           fullWidth
                                           placeholder="Pick-Up Location"
@@ -538,7 +538,9 @@ const JobPostForm = ({
                             }}
                             variant="contained"
                             fullWidth
-                            onClick={() => router.push("/dashboard/driver")}
+                            onClick={() =>
+                              router.push("/dashboard/driver/active_jobs")
+                            }
                           >
                             Close
                           </Button>

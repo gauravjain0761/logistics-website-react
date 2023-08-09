@@ -376,7 +376,7 @@ const JobPostForm = ({ formik }) => {
                             }}
                             variant="contained"
                             fullWidth
-                            onClick={() => router.push("/dashboard/driver")}
+                            onClick={() => router.push("/dashboard/driver/active_jobs")}
                           >
                             Close
                           </Button>

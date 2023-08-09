@@ -27,19 +27,44 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
+import axiosInstance from "@/utils/axios";
+import { useSnackbar } from "notistack";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
-  const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
-
-  const [pageCount, setPageCount] = React.useState(1);
+  const [pageCount, setPageCount] = React.useState(0);
+  const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  const [data, setData] = React.useState([]);
+
+  const getData = async () => {
+    await axiosInstance
+      .get("api/auth/master/jobs/search", {
+        params: { page: Number(page), pageSize: pageSize },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response?.data?.view_data?.data);
+          setPageCount(response?.data?.view_data?.meta?.last_page);
+        }
+      })
+      .catch((error) => {
+        console.log("DriverJob", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, [page]);
+
+  console.log("datadata", data);
   // const sortBy = [
   //   {
   //     label: "Sort(New)",
@@ -109,7 +134,7 @@ const DashboardJobPost = ({ formik }) => {
       <Box py={3}>
         <Container>
           <Box py={5}>
-            <DashboardCard />
+            <DashboardCard jobPost={data?.length} />
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
@@ -139,7 +164,7 @@ const DashboardJobPost = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={2}
+                        end={data?.length}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
@@ -192,7 +217,9 @@ const DashboardJobPost = ({ formik }) => {
                     startIcon={<Add />}
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.push("/dashboard/driver/post_your_job")}
+                    onClick={() =>
+                      router.push("/dashboard/driver/post_your_job")
+                    }
                   >
                     Add New Post
                   </Button>
@@ -203,289 +230,296 @@ const DashboardJobPost = ({ formik }) => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-              {[...Array(4)].map((elem, index) => {
-                return (
-                  <Grid item md={12} key={index}>
-                    <Card
-                      sx={{
-                        my: 2,
-                        // borderRadius: "10px",
-                        ":hover": {
-                          borderColor: "#ff7534",
-                          transition: " all 0.3s ease-in-out",
-                        },
-                      }}
-                      variant="outlined"
-                    >
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        px={2}
-                        py={1.4}
-                        alignItems="center"
-                        // backgroundColor="#f5f5f5"
-                        // sx={{ borderBottom: "1px solid lightgrey" }}
+              {data &&
+                data?.length > 0 &&
+                data.map((item, index) => {
+                  return (
+                    <Grid item md={12} key={index}>
+                      <Card
+                        sx={{
+                          my: 2,
+                          // borderRadius: "10px",
+                          ":hover": {
+                            borderColor: "#ff7534",
+                            transition: " all 0.3s ease-in-out",
+                          },
+                        }}
+                        variant="outlined"
                       >
-                        <Stack direction="row" spacing={0.5}>
+                        <Stack
+                          direction="row"
+                          justifyContent="space-between"
+                          px={2}
+                          py={1.4}
+                          alignItems="center"
+                          // backgroundColor="#f5f5f5"
+                          // sx={{ borderBottom: "1px solid lightgrey" }}
+                        >
+                          <Stack direction="row" spacing={0.5}>
+                            <Box>
+                              <Typography variant="subtitle1">
+                                Job Title :{" "}
+                              </Typography>
+                            </Box>
+                            <Box>
+                              <Typography color="primary" variant="subtitle1">
+                                {" "}
+                                {item?.name}
+                              </Typography>
+                            </Box>
+                          </Stack>
                           <Box>
-                            <Typography variant="subtitle1">
-                              Job Title :{" "}
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Typography color="primary" variant="subtitle1">
-                              {" "}
-                              Mxq Android Box
-                            </Typography>
+                            <DeleteModal id={item?.id} getData={getData} />
                           </Box>
                         </Stack>
-                        <Box>
-                          <DeleteModal />
-                        </Box>
-                      </Stack>
-                      <Divider />
-                      <CardContent>
-                        <Grid container spacing={2} alignItems="center">
-                          <Grid item md={2}>
-                            <Box
-                              component="img"
-                              src="/assets/images/dashboard/portfolio.jpeg"
-                              sx={{
-                                width: "100px",
-                                borderRadius: "50%",
-                                border: "2px solid #ff7534",
-                              }}
-                            />
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
-                              </Grid>
+                        <Divider />
+                        <CardContent>
+                          <Grid container spacing={2} alignItems="center">
+                            <Grid item md={2}>
+                              <Box
+                                component="img"
+                                src="/assets/images/dashboard/portfolio.jpeg"
+                                sx={{
+                                  width: "100px",
+                                  borderRadius: "50%",
+                                  border: "2px solid #ff7534",
+                                }}
+                              />
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      09/06/2023
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      10:10 AM
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Material
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    Plastic Box
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Material
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      Plastic Box
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      09/06/2023
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      10:10 AM
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Size
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    5 x 2 x 3 inch
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Size
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      5 x 2 x 3 inch
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
+                            <Grid item md={2}>
+                              <Stack
+                                direction="row"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                spacing={1}
+                              >
+                                <Stack spacing={1}>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="material-symbols:star" />
+                                      }
+                                      onClick={() =>
+                                        router.push(
+                                          "/dashboard/driver/job_listing"
+                                        )
+                                      }
+                                    >
+                                      View Bids
+                                    </Button>
+                                  </Box>
+                                  <Box>
+                                    <Button
+                                      color="dark"
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={<Iconify icon="bxs:edit" />}
+                                      onClick={() =>
+                                        router.push(
+                                          `/dashboard/company/job_post/${item?.id}`
+                                        )
+                                      }
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      Edit Job
+                                    </Button>
+                                  </Box>
+                                  <Box>
+                                    <Button
+                                      color="info"
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={<Iconify icon="bxs:edit" />}
+                                      onClick={() =>
+                                        router.push(
+                                          "/dashboard/driver/track_job"
+                                        )
+                                      }
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      Track Job
+                                    </Button>
+                                  </Box>
+                                </Stack>
+                              </Stack>
+                              <Stack
+                                mt={1}
+                                position="absolute"
+                                right={33}
+                              ></Stack>
+                            </Grid>
                           </Grid>
-                          <Grid item md={2}>
+                          <Box pt={2}>
+                            <Typography fontSize={14}>
+                              {" "}
+                              {item?.description}
+                            </Typography>
+                          </Box>
+
+                          <Divider sx={{ my: 2 }} />
+                          <Box>
                             <Stack
                               direction="row"
                               justifyContent="space-between"
-                              alignItems="center"
-                              spacing={1}
                             >
-                              <Stack spacing={1}>
-                                <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={
-                                      <Iconify icon="material-symbols:star" />
-                                    }
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/job_listing")
-                                    }
-                                  >
-                                    View Bids
-                                  </Button>
-                                </Box>
-                                <Box>
-                                  <Button
-                                    color="dark"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="bxs:edit" />}
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/post_your_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Edit Job
-                                  </Button>
-                                </Box>
-                                <Box>
-                                  <Button
-                                    color="info"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="bxs:edit" />}
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/track_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Track Job
-                                  </Button>
-                                </Box>
-                              </Stack>
+                              <Typography variant="subtitle2">
+                                Bid: $500
+                              </Typography>
+                              <Typography variant="subtitle2">
+                                Earned: $30K+
+                              </Typography>
                             </Stack>
-                            <Stack
-                              mt={1}
-                              position="absolute"
-                              right={33}
-                            ></Stack>
-                          </Grid>
-                        </Grid>
-                        <Box pt={2}>
-                          <Typography fontSize={14}>
-                            {" "}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat.
-                          </Typography>
-                        </Box>
-
-                        <Divider sx={{ my: 2 }} />
-                        <Box>
-                          <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="subtitle2">
-                              Bid: $500
-                            </Typography>
-                            <Typography variant="subtitle2">
-                              Earned: $30K+
-                            </Typography>
-                          </Stack>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              })}
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                })}
 
               {/* )} */}
             </Grid>
@@ -538,10 +572,31 @@ const DashboardJobPost = ({ formik }) => {
 };
 
 export default DashboardJobPost;
-const DeleteModal = () => {
+const DeleteModal = ({ id, getData }) => {
   const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const deleteData = async () => {
+    await axiosInstance
+      .delete(`api/auth/master/jobs/delete/${id}`)
+      .then((response) => {
+        if (response?.status === 200) {
+          handleClose();
+          getData();
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+        enqueueSnackbar(response.data.message, {
+          variant: "error",
+        });
+      });
+  };
   return (
     <Box>
       <Button onClick={handleOpen}>
@@ -576,7 +631,7 @@ const DeleteModal = () => {
             Are you sure you want to delete ?
           </Typography>
           <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
+            <Button fullWidth variant="outlined" onClick={deleteData}>
               Yes
             </Button>
             <Button fullWidth variant="outlined" onClick={handleClose}>

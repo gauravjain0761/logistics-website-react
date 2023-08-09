@@ -28,26 +28,51 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
-const DashboardJobRequest = ({ formik }) => {
+import axiosInstance from "@/utils/axios";
+const DashboardJobRequest = () => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
-  const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
-  const [pageCount, setPageCount] = React.useState(1);
+  const [pageCount, setPageCount] = React.useState(0);
+  const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
+  const [data, setData] = React.useState([]);
+
+  const getData = async () => {
+    await axiosInstance
+      .get("api/auth/master/jobs/search", {
+        params: { page: Number(page), pageSize: pageSize },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response?.data?.view_data?.data);
+          setPageCount(response?.data?.view_data?.meta?.last_page);
+        }
+      })
+      .catch((error) => {
+        console.log("DriverJob", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, [page]);
+
+  console.log("datadata", data);
+
   return (
     <React.Fragment>
       <Box py={3}>
         <Container>
           <Box py={5}>
-            <DashboardCard />
+            <DashboardCard jobalert={data?.length} />
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
@@ -77,7 +102,7 @@ const DashboardJobRequest = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={5}
+                        end={data?.length}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
@@ -90,262 +115,269 @@ const DashboardJobRequest = ({ formik }) => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-              {[...Array(4)].map((elem, index) => {
-                return (
-                  <Grid item md={12} key={index}>
-                    <Card
-                      sx={{
-                        my: 2,
-                        ":hover": {
-                          borderColor: "#ff7534",
-                          transition: " all 0.3s ease-in-out",
-                        },
-                      }}
-                      variant="outlined"
-                    >
-                      <CardContent>
-                        <Stack
-                          direction="row"
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <Stack direction="row" mb={1} spacing={0.5}>
-                            <Box>
-                              <Typography variant="subtitle1">
-                                Job Title :{" "}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="primary" variant="subtitle1">
-                                {" "}
-                                Mxq Android Box
-                              </Typography>
-                            </Box>
+              {data &&
+                data?.length > 0 &&
+                data.map((item, index) => {
+                  return (
+                    <Grid item md={12} key={index}>
+                      <Card
+                        sx={{
+                          my: 2,
+                          ":hover": {
+                            borderColor: "#ff7534",
+                            transition: " all 0.3s ease-in-out",
+                          },
+                        }}
+                        variant="outlined"
+                      >
+                        <CardContent>
+                          <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Stack direction="row" mb={1} spacing={0.5}>
+                              <Box>
+                                <Typography variant="subtitle1">
+                                  Job Title :{" "}
+                                </Typography>
+                              </Box>
+                              <Box>
+                                <Typography color="primary" variant="subtitle1">
+                                  {" "}
+                                  {item?.name}
+                                </Typography>
+                              </Box>
+                            </Stack>
                           </Stack>
-                        </Stack>
-                        <Divider />
-                        <Grid
-                          container
-                          mt={0.5}
-                          spacing={2}
-                          alignItems="center"
-                        >
-                          <Grid item md={2}>
-                            <Box
-                              component="img"
-                              src="/assets/images/dashboard/portfolio.jpeg"
-                              sx={{
-                                width: "100px",
-                                borderRadius: "50%",
-                                border: "2px solid #ff7534",
-                              }}
-                            />
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
-                              </Grid>
+                          <Divider />
+                          <Grid
+                            container
+                            mt={0.5}
+                            spacing={2}
+                            alignItems="center"
+                          >
+                            <Grid item md={2}>
+                              <Box
+                                component="img"
+                                src={
+                                  item?.image
+                                    ? `${item?.base_url}${item?.image}`
+                                    : "/assets/images/dashboard/portfolio.jpeg"
+                                }
+                                sx={{
+                                  width: "100px",
+                                  borderRadius: "50%",
+                                  border: "2px solid #ff7534",
+                                }}
+                              />
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      09/06/2023
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      10:10 AM
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Material
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    Plastic Box
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Material
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      Plastic Box
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      09/06/2023
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      10:10 AM
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Size
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    5 x 2 x 3 inch
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Size
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      5 x 2 x 3 inch
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
+                            <Grid item md={2}>
+                              <Stack
+                                direction="row"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                spacing={1}
+                              >
+                                <Stack spacing={1}>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:view-filled" />
+                                      }
+                                      onClick={() =>
+                                        router.push(
+                                          "/dashboard/driver/view_job"
+                                        )
+                                      }
+                                    >
+                                      View Job
+                                    </Button>
+                                  </Box>
+                                  <Box>
+                                    <ApplyJobModal />
+                                  </Box>
+                                </Stack>
+                              </Stack>
+                              <Stack
+                                mt={1}
+                                position="absolute"
+                                right={33}
+                              ></Stack>
+                            </Grid>
                           </Grid>
-                          <Grid item md={2}>
+                          <Box pt={2}>
+                            <Typography fontSize={14}>
+                              {" "}
+                              {item?.description}
+                            </Typography>
+                          </Box>
+
+                          <Divider sx={{ my: 2 }} />
+                          <Box>
                             <Stack
                               direction="row"
                               justifyContent="space-between"
-                              alignItems="center"
-                              spacing={1}
                             >
-                              <Stack spacing={1}>
-                                <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={
-                                      <Iconify icon="carbon:view-filled" />
-                                    }
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/view_job")
-                                    }
-                                  >
-                                    View Job
-                                  </Button>
-                                </Box>
-                                <Box>
-                                  <ApplyJobModal />
-                                </Box>
-                              </Stack>
+                              <Typography variant="subtitle2">
+                                Job Budget: $500
+                              </Typography>
+                              <Typography variant="subtitle2">
+                                Customer Spend: $30K+
+                              </Typography>
                             </Stack>
-                            <Stack
-                              mt={1}
-                              position="absolute"
-                              right={33}
-                            ></Stack>
-                          </Grid>
-                        </Grid>
-                        <Box pt={2}>
-                          <Typography fontSize={14}>
-                            {" "}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat.
-                          </Typography>
-                        </Box>
-
-                        <Divider sx={{ my: 2 }} />
-                        <Box>
-                          <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="subtitle2">
-                              Job Budget: $500
-                            </Typography>
-                            <Typography variant="subtitle2">
-                              Customer Spend: $30K+
-                            </Typography>
-                          </Stack>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              })}
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                })}
             </Grid>
             <Box>
               <Stack alignItems="center" justifyContent="center">
                 <Pagination
-                  count={pageCount}
+                  count={Number(pageCount)}
                   color="primary"
                   page={page}
                   onChange={handlePageChange}
@@ -383,7 +415,7 @@ const DashboardJobRequest = ({ formik }) => {
                 />
               </Stack>
             </Box>
-            <Stack alignItems="center">
+            {/* <Stack alignItems="center">
               <Box>
                 <Typography variant="h5">No Active Jobs.....</Typography>
               </Box>
@@ -393,7 +425,7 @@ const DashboardJobRequest = ({ formik }) => {
                 src="/assets/images/home/new/banner-image.jpg"
                 alt="truck"
               />
-            </Stack>
+            </Stack> */}
           </Box>
         </Container>
       </Box>
