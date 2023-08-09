@@ -37,8 +37,6 @@ const JobHistory = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
-
-  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
