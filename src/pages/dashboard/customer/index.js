@@ -2,10 +2,15 @@ import React from "react";
 import { useFormik } from "formik";
 import { PrimaryWebLayout } from "@/layout";
 import CustomerDashboard from "@/sections/dashboard/customerDashboard";
+import AuthGuard from "@/auth/AuthGuard";
 
 const DashboardPage = () => {
   const formik = useFormik({});
-  return <CustomerDashboard formik={formik} />;
+  return (
+    <AuthGuard>
+      <CustomerDashboard formik={formik} />
+    </AuthGuard>
+  );
 };
 
 DashboardPage.getLayout = function getLayout(page) {
