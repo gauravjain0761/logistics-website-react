@@ -195,7 +195,7 @@ const JobList = () => {
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
                               }
-                              label="Accept Driver Bid"
+                              label="Accepted Driver Bid"
                               variant="outlined"
                             />
                             {/* <Chip
