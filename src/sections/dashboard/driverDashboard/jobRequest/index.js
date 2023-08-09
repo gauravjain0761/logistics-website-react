@@ -126,6 +126,8 @@ const DashboardJobRequest = () => {
               {data &&
                 data?.length > 0 &&
                 data.map((item, index) => {
+                  let productDetail =
+                    item?.items && item?.items?.length > 0 && item?.items[0];
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -198,7 +200,7 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      09/06/2023
+                                      {productDetail?.product?.pickup_date || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -220,7 +222,7 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      10:10 AM
+                                      {productDetail?.product?.pickup_time || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -243,7 +245,7 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      Plastic Box
+                                      {productDetail?.product?.material || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -267,7 +269,7 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      09/06/2023
+                                      {productDetail?.product?.drop_date || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -289,30 +291,7 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      10:10 AM
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Size
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      5 x 2 x 3 inch
+                                      {productDetail?.product?.pickup_time || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
