@@ -192,11 +192,13 @@ const JobList = () => {
                           <Stack direction="row" spacing={1}>
                             <Chip
                               sx={{ cursor: "pointer" }}
-                              icon={<Iconify icon="mdi:chat" />}
-                              label="Open For Chat"
+                              icon={
+                                <Iconify icon="material-symbols:check-circle" />
+                              }
+                              label="Accept Driver Bid"
                               variant="outlined"
                             />
-                            <Chip
+                            {/* <Chip
                               sx={{ cursor: "pointer" }}
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
@@ -207,7 +209,7 @@ const JobList = () => {
                               label="Start Job"
                               variant="outlined"
                               onClick={() => setStartChat(true)}
-                            />
+                            /> */}
                           </Stack>
                           <Stack>
                             <Rating

@@ -425,7 +425,7 @@ const DashboardJobPost = ({ formik }) => {
                                       }
                                       onClick={() =>
                                         router.push(
-                                          "/dashboard/driver/job_listing"
+                                          "/dashboard/customer/job_listing"
                                         )
                                       }
                                     >
