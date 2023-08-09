@@ -32,7 +32,7 @@ const DashboardCard = ({ jobPost }) => {
                     : "#ff7534",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/customer/job_post")}
+              onClick={() => router.push("/dashboard/customer/job_posted")}
             >
               <CardContent>
                 <Stack
