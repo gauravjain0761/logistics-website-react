@@ -22,12 +22,12 @@ const DashboardCard = ({ jobPost }) => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/customer/job_post"
+                  router.pathname === "/dashboard/customer/job_posted"
                     ? "#ff7534"
                     : "#fff",
                 border: "1px solid #ff7534",
                 color:
-                  router.pathname === "/dashboard/customer/job_post"
+                  router.pathname === "/dashboard/customer/job_posted"
                     ? "#fff"
                     : "#ff7534",
                 cursor: "pointer",
