@@ -154,7 +154,7 @@ const PostJob = () => {
   };
 
   React.useEffect(() => {
-    if (id !== "create") {
+    if (id && id !== "create") {
       bindData();
     }
   }, [id]);
