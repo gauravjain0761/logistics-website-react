@@ -1,6 +1,5 @@
 import Iconify from "@/components/iconify/Iconify";
 import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
-import MapModal from "@/module/dashboard/driverCard/mapModel";
 import {
   Box,
   Button,
@@ -9,7 +8,6 @@ import {
   Container,
   Grid,
   List,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -21,22 +19,22 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const ViewJobDetail = () => {
+const ViewJobHistory = () => {
   const router = useRouter();
   return (
     <React.Fragment>
       <Box mt={10}>
-        <Container>
+        <Container >
           <Box my={4}>
             <Button
-              variant="outlined"
+            variant="outlined"
               sx={{ my: 2 }}
-              onClick={() => router.push("/dashboard/driver/job_request")}
+              onClick={() => router.push("/dashboard/driver/job_history")}
             >
-              <Iconify icon="ion:play-back" sx={{mr:"7px"}} width={14} />
-              Back
+       <Iconify icon="ion:play-back" sx={{mr:"7px"}} width={14} />
+             Back
             </Button>
-            <Card sx={{ position: "relative" }}>
+            <Card sx={{position:"relative"}}>
               <CardContent>
                 <Typography
                   textAlign="center"
@@ -275,12 +273,7 @@ const ViewJobDetail = () => {
                   </Grid>
                 </Box>
               </CardContent>
-              <Box sx={{ position: "absolute", right: "30px", top: "190px" }}>
-                <Stack spacing={1}>
-                  <MapModal />
-                  <ApplyJobModal />
-                </Stack>
-              </Box>
+             
             </Card>
           </Box>
         </Container>
@@ -289,4 +282,4 @@ const ViewJobDetail = () => {
   );
 };
 
-export default ViewJobDetail;
+export default ViewJobHistory;

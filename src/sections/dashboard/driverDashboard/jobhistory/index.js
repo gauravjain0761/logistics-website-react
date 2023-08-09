@@ -301,7 +301,7 @@ const JobHistory = ({ formik }) => {
                                     }
                                     onClick={() =>
                                       router.push(
-                                        "/dashboard/driver/view_job"
+                                        "/dashboard/driver/job_history_detail"
                                       )
                                     }
                                   >

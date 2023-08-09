@@ -11,25 +11,20 @@ const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
   const product = {
     product: {
-      job_title: "",
       image: "",
-      image_url: "",
-      size: "",
-      quantity: "",
+      height: "",
+      length: "",
+      width: "",
       material: "",
       pickup_date: "",
       pickup_time: "",
       drop_date: "",
       drop_time: "",
-      vehicle_type: "",
     },
     address: [],
   };
   const address = {
     address: "",
-    drop_date: "",
-    drop_time: "",
-
     lat: 3434.34,
     long: 23423,
     type: "drop or pickup",
@@ -38,7 +33,7 @@ const PostJob = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      vehicle: "",
+      vehicle: 0,
       items: [],
       description: "",
     },
@@ -59,6 +54,7 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values) => {
+      values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
       // formData.append("job_title", values?.job_title);

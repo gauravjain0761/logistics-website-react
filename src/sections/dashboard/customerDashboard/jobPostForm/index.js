@@ -19,16 +19,16 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
-import { SelectBox, TextBox } from "@/components/form";
+import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
 import { ArrowDropDownCircle, Close, LocationOn } from "@mui/icons-material";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { BsX } from "react-icons/bs";
 
 const VehicleSelect = [
-  // {
-  //   label: "Choose Option for Get OTP",
-  //   value: 0,
-  // },
+  {
+    label: "Choose Vehicle",
+    value: 0,
+  },
   {
     label: "Bike",
     value: "Bike",
@@ -47,10 +47,10 @@ const VehicleSelect = [
   },
 ];
 const MaterialSelect = [
-  // {
-  //   label: "Choose Option for Get OTP",
-  //   value: 0,
-  // },
+  {
+    label: "Choose Material",
+    value: 0,
+  },
   {
     label: "Liquid",
     value: "Liquid",
@@ -133,11 +133,6 @@ const JobPostForm = ({
                             formik?.values?.items?.length > 0 &&
                             formik.values.items.map(
                               (productItem, productIndex) => {
-                                console.log(
-                                  "productItem?.image_url",
-                                  productItem?.image_url,
-                                  productItem?.image
-                                );
                                 return (
                                   <Box key={productIndex} sx={{ mt: 1 }}>
                                     <Card>
@@ -166,7 +161,10 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 placeholder="Pick-Up Location"
-                                                value={productItem?.job_title}
+                                                value={
+                                                  productItem?.product
+                                                    ?.job_title
+                                                }
                                                 name={`items[${productIndex}].product.job_title`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -193,7 +191,10 @@ const JobPostForm = ({
                                                 fullWidth
                                                 format="MM/DD/YYYY"
                                                 type="date"
-                                                value={productItem?.pickup_date}
+                                                value={
+                                                  productItem?.product
+                                                    ?.pickup_date
+                                                }
                                                 name={`items[${productIndex}].product.pickup_date`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -219,7 +220,10 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 type="time"
-                                                value={productItem?.pickup_time}
+                                                value={
+                                                  productItem?.product
+                                                    ?.pickup_time
+                                                }
                                                 name={`items[${productIndex}].product.pickup_time`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -240,13 +244,71 @@ const JobPostForm = ({
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
+                                              <Typography>Drop Date</Typography>
+                                              <TextBox
+                                                fullWidth
+                                                format="MM/DD/YYYY"
+                                                type="date"
+                                                value={
+                                                  productItem?.product
+                                                    ?.drop_date
+                                                }
+                                                name={`items[${productIndex}].product.drop_date`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.drop_date`,
+                                                    e.target.value
+                                                  );
+                                                }}
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="mingcute:calendar-fill"
+                                                    color="#ff7534"
+                                                  />
+                                                }
+                                                size={"small"}
+                                              />
+                                            </Box>
+                                          </Grid>
+                                          <Grid item md={6}>
+                                            <Box>
+                                              <Typography>Drop Time</Typography>
+                                              <TextBox
+                                                fullWidth
+                                                format="MM/DD/YYYY"
+                                                type="date"
+                                                value={
+                                                  productItem?.product
+                                                    ?.drop_time
+                                                }
+                                                name={`items[${productIndex}].product.drop_time`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.drop_time`,
+                                                    e.target.value
+                                                  );
+                                                }}
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="mingcute:calendar-fill"
+                                                    color="#ff7534"
+                                                  />
+                                                }
+                                                size={"small"}
+                                              />
+                                            </Box>
+                                          </Grid>
+                                          <Grid item md={6}>
+                                            <Box>
                                               <Typography>
                                                 Pick-Up Quantity
                                               </Typography>
                                               <TextBox
                                                 fullWidth
                                                 placeholder="Enter Quantity"
-                                                value={productItem?.quantity}
+                                                value={
+                                                  productItem?.product?.quantity
+                                                }
                                                 name={`items[${productIndex}].product.quantity`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -264,10 +326,118 @@ const JobPostForm = ({
                                               />
                                             </Box>
                                           </Grid>
+
+                                          <Grid item md={6}>
+                                            <Box>
+                                              <Typography>Length</Typography>
+                                              <TextBox
+                                                fullWidth
+                                                placeholder="Enter Product Length"
+                                                value={
+                                                  productItem?.product?.length
+                                                }
+                                                name={`items[${productIndex}].product.length`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.length`,
+                                                    e.target.value
+                                                  );
+                                                }}
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="teenyicons:box-outline"
+                                                    color="#ff7534"
+                                                  />
+                                                }
+                                                size="small"
+                                              />
+                                            </Box>
+                                          </Grid>
+                                          <Grid item md={6}>
+                                            <Box>
+                                              <Typography>Width</Typography>
+                                              <TextBox
+                                                fullWidth
+                                                placeholder="Enter Product Width"
+                                                value={
+                                                  productItem?.product?.width
+                                                }
+                                                name={`items[${productIndex}].product.width`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.width`,
+                                                    e.target.value
+                                                  );
+                                                }}
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="teenyicons:box-outline"
+                                                    color="#ff7534"
+                                                  />
+                                                }
+                                                size="small"
+                                              />
+                                            </Box>
+                                          </Grid>
+                                          <Grid item md={6}>
+                                            <Box>
+                                              <Typography>
+                                                Height
+                                              </Typography>
+                                              <TextBox
+                                                fullWidth
+                                                placeholder="Enter Product Height"
+                                                value={
+                                                  productItem?.product?.height
+                                                }
+                                                name={`items[${productIndex}].product.height`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.height`,
+                                                    e.target.value
+                                                  );
+                                                }}
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="teenyicons:box-outline"
+                                                    color="#ff7534"
+                                                  />
+                                                }
+                                                size="small"
+                                              />
+                                            </Box>
+                                          </Grid>
                                           <Grid item md={6}>
                                             <Box>
                                               <Typography>Image</Typography>
-                                              {!productItem?.image && (
+                                              <UploadFileBox
+                                                fullWidth
+                                                url="api/auth/master/jobs/item-image"
+                                                accept="image/jpeg,image/png"
+                                                icon="upload"
+                                                disabled={true}
+                                                size="small"
+                                                value={
+                                                  productItem?.product?.image
+                                                }
+                                                startIcon={
+                                                  <Iconify
+                                                    icon="solar:gallery-bold"
+                                                    color="#ff7533"
+                                                  />
+                                                }
+                                                name={`items[${productIndex}].product.image`}
+                                                onChange={(e) => {
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.image`,
+                                                    e
+                                                  );
+                                                }}
+                                              />
+                                            </Box>
+                                            {/* <Box>
+                                              <Typography>Image</Typography>
+                                              {!productItem?.product?.image && (
                                                 <TextBox
                                                   fullWidth
                                                   type="file"
@@ -278,7 +448,7 @@ const JobPostForm = ({
                                                       color="primary"
                                                     />
                                                   }
-                                                  value={productItem?.image}
+                                                  value={productItem?.product?.image}
                                                   name={`items[${productIndex}].product.image`}
                                                   onChange={(e) => {
                                                     formik.setFieldValue(
@@ -296,7 +466,7 @@ const JobPostForm = ({
                                                 />
                                               )}
                                             </Box>
-                                            {productItem?.image_url && (
+                                            {productItem?.product?.image_url && (
                                               <Box sx={{ display: "flex" }}>
                                                 <div
                                                   style={{
@@ -307,8 +477,8 @@ const JobPostForm = ({
                                                   <Box
                                                     component="img"
                                                     style={{ margin: "10px" }}
-                                                    src={productItem?.image_url}
-                                                    alt={productItem?.image_url}
+                                                    src={productItem?.product?.image_url}
+                                                    alt={productItem?.product?.image_url}
                                                     width="150px"
                                                     thumbnail
                                                   />
@@ -344,7 +514,7 @@ const JobPostForm = ({
                                                   </Button>
                                                 </div>
                                               </Box>
-                                            )}
+                                            )} */}
                                           </Grid>
                                           <Grid item md={6}>
                                             <Typography>
@@ -366,6 +536,7 @@ const JobPostForm = ({
                                                     padding: ".375rem .75rem",
                                                     borderRadius: ".25rem",
                                                     display: "flex",
+                                                    height: "40px",
                                                     alignItems: "center",
                                                     justifyContent: "center",
                                                   }}
@@ -378,7 +549,11 @@ const JobPostForm = ({
 
                                                 <SelectBox
                                                   fullWidth
-                                                  value={productItem?.material}
+                                                  size="small"
+                                                  value={
+                                                    productItem?.product
+                                                      ?.material
+                                                  }
                                                   name={`items[${productIndex}].product.material`}
                                                   onChange={(e) => {
                                                     formik.setFieldValue(
@@ -417,7 +592,7 @@ const JobPostForm = ({
                                                   <TextField
                                                     {...params}
                                                     value={
-                                                      productItem?.material
+                                                      productItem?.product?.material
                                                     }
                                                     name={`items[${productIndex}].product.material`}
                                                     onChange={(e) => {
@@ -509,7 +684,7 @@ const JobPostForm = ({
                                                             />
                                                           </Box>
                                                         </Grid>
-                                                        <Grid item md={6}>
+                                                        {/* <Grid item md={6}>
                                                           <Box>
                                                             <Typography>
                                                               Delivery Date
@@ -565,7 +740,7 @@ const JobPostForm = ({
                                                               size={"small"}
                                                             />
                                                           </Box>
-                                                        </Grid>
+                                                        </Grid> */}
                                                       </Grid>
                                                     </CardContent>
                                                   </Card>

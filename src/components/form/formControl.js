@@ -1,5 +1,5 @@
 import MuiFormControl from "@mui/material/FormControl";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material";
 
 const FormControl = styled(MuiFormControl)(({ fullWidth }) => ({
   marginBottom: 10,

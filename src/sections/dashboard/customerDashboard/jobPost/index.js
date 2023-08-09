@@ -476,9 +476,9 @@ const DashboardJobPost = ({ formik }) => {
                             <Typography variant="subtitle2">
                               Bid: $500
                             </Typography>
-                            <Typography variant="subtitle2">
+                            {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
-                            </Typography>
+                            </Typography> */}
                           </Stack>
                         </Box>
                       </CardContent>
