@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/auth/JwtContext";
 import { MotionLazyContainer } from "@/components/animate";
 import ProgressBar from "@/components/progressBar";
 import SnackbarProvider from "@/components/snackbar/SnackbarProvider";
@@ -15,14 +16,12 @@ export default function App(props) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <React.Fragment>
-      {/* <MotionLazyContainer> */}
-        <ThemeProvider>
-          <ProgressBar />
-          <SnackbarProvider>
-            {getLayout(<Component {...pageProps} />)}
-          </SnackbarProvider>
-        </ThemeProvider>
-      {/* </MotionLazyContainer> */}
+      <ThemeProvider>
+        <ProgressBar />
+        <SnackbarProvider>
+          <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
     </React.Fragment>
   );
 }

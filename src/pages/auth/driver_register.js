@@ -1,3 +1,4 @@
+import GuestGuard from "@/auth/GuestGuard";
 import { PrimaryWebLayout } from "@/layout";
 import DriverRegister from "@/sections/auth/driver_register";
 import axiosInstance from "@/utils/axios";
@@ -142,11 +143,13 @@ const DriverPage = () => {
   });
 
   return (
-    <DriverRegister
-      open={open}
-      handleOpenClose={handleOpenClose}
-      formik={formik}
-    />
+    <GuestGuard>
+      <DriverRegister
+        open={open}
+        handleOpenClose={handleOpenClose}
+        formik={formik}
+      />
+    </GuestGuard>
   );
 };
 

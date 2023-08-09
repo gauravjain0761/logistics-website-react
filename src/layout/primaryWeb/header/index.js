@@ -22,6 +22,7 @@ import {
   Toolbar,
   Typography,
   alpha,
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
@@ -34,12 +35,14 @@ import NavDesktop from "../nav/desktop/NavDesktop";
 import navConfig from "../nav/config-navigation";
 import { HEADER } from "@/utils/config-global";
 import { filter } from "lodash";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const drawerWidth = 240;
 
 const Header = (props) => {
   const router = useRouter();
   const token = isAccessToken();
+  const { user, isAuthenticated, logout } = useAuthContext();
   const isMobile = useResponsive("down", "md");
   // const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(10, {
@@ -49,6 +52,13 @@ const Header = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const handleAuth = () => {
+    if (isAuthenticated) {
+      logout();
+    } else {
+      router.push("/auth/login");
+    }
+  };
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -96,12 +106,8 @@ const Header = (props) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  // const isAccessToken =
-  //   typeof window !== "undefined" && localStorage.getItem("token")
-  //     ? true
-  //     : false;
+  const theme = useTheme();
 
-  console.log("tokentokentoken", token);
   return (
     <>
       <AppBar
@@ -163,12 +169,39 @@ const Header = (props) => {
                 data={
                   navConfig &&
                   filter(navConfig, (item) => {
-                    return item.token(token);
+                    return item.token(isAuthenticated);
                   })
                 }
               />
+              <Typography
+                sx={{
+                  mr: 1.1,
+                  color: (theme) => theme.palette.text.primary,
+                  ...theme.typography.subtitle2,
+                  textDecoration: "none",
+                }}
+                component={Link}
+                href={`/dashboard/${user?.user_type}`}
+              >
+                Dashboard
+              </Typography>
+              <Typography
+                sx={{
+                  mr: 2,
+                  color: (theme) => theme.palette.text.primary,
+                  ...theme.typography.subtitle2,
+                  textDecoration: "none",
+                }}
+                component={Link}
+                href={`/dashboard/${user?.user_type}/profile`}
+              >
+                My Profile
+              </Typography>
               <div>
-                {token ? (
+                <Button variant="contained" onClick={handleAuth}>
+                  {isAuthenticated ? "Log Out" : "Sign in/ Sign up"}
+                </Button>
+                {/* {token ? (
                   <Box component="div">
                     <Button
                       onClick={() => {
@@ -200,7 +233,7 @@ const Header = (props) => {
                       </Typography>
                     </Button>
                   </Box>
-                )}
+                )} */}
               </div>
             </Stack>
             <IconButton

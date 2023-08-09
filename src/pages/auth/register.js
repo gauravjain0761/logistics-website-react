@@ -1,3 +1,5 @@
+import GuestGuard from "@/auth/GuestGuard";
+import { useAuthContext } from "@/auth/useAuthContext";
 import { PrimaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import axiosInstance from "@/utils/axios";
@@ -9,6 +11,7 @@ import React from "react";
 
 const RegisterPage = () => {
   const router = useRouter();
+  const { register } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
   const handleOpenClose = () => {
@@ -100,48 +103,52 @@ const RegisterPage = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
-      await axiosInstance
-        .post("/api/user/cust-register", values)
-        .then((response) => {
-          if (response?.status === 200) {
-            sendOtp({
-              email: values.email,
-              type: values.user_type,
-            });
-            // handleOpenClose();
-            formik.resetForm();
-            router.push("/auth/login");
-            enqueueSnackbar(response.data.message, {
-              variant: "success",
-            });
-            // formik.resetForm();
-          } else {
-            enqueueSnackbar(response.data.message, {
-              variant: "error",
-            });
-          }
-        })
-        .catch((error) => {
-          const { response } = error;
-          if (response.status === 422) {
-            // eslint-disable-next-line no-unused-vars
-            for (const [key, value] of Object.entries(values)) {
-              if (response.data.error[key]) {
-                setErrors({ [key]: response.data.error[key][0] });
-              }
-            }
-          }
-          if (response?.data?.status === 406) {
-            enqueueSnackbar(response.data.message, {
-              variant: "error",
-            });
-          }
-        });
+      console.log("test 13", values);
+      register("/api/user/cust-register", values);
+      // await axiosInstance
+      //   .post("/api/user/cust-register", values)
+      //   .then((response) => {
+      //     if (response?.status === 200) {
+      //       sendOtp({
+      //         email: values.email,
+      //         type: values.user_type,
+      //       });
+      //       // handleOpenClose();
+      //       formik.resetForm();
+      //       router.push("/auth/login");
+      //       enqueueSnackbar(response.data.message, {
+      //         variant: "success",
+      //       });
+      //       // formik.resetForm();
+      //     } else {
+      //       enqueueSnackbar(response.data.message, {
+      //         variant: "error",
+      //       });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     const { response } = error;
+      //     if (response.status === 422) {
+      //       // eslint-disable-next-line no-unused-vars
+      //       for (const [key, value] of Object.entries(values)) {
+      //         if (response.data.error[key]) {
+      //           setErrors({ [key]: response.data.error[key][0] });
+      //         }
+      //       }
+      //     }
+      //     if (response?.data?.status === 406) {
+      //       enqueueSnackbar(response.data.message, {
+      //         variant: "error",
+      //       });
+      //     }
+      //   });
     },
   });
 
   return (
-    <Register open={open} handleOpenClose={handleOpenClose} formik={formik} />
+    <GuestGuard>
+      <Register open={open} handleOpenClose={handleOpenClose} formik={formik} />
+    </GuestGuard>
   );
 };
 
