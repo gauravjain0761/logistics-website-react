@@ -27,7 +27,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 // import DashboardCard from "@/module/dashboard/dashboardCard";
-const JobHistory = () => {
+const JobHistory = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
