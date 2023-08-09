@@ -173,30 +173,34 @@ const Header = (props) => {
                   })
                 }
               />
-              <Typography
-                sx={{
-                  mr: 1.1,
-                  color: (theme) => theme.palette.text.primary,
-                  ...theme.typography.subtitle2,
-                  textDecoration: "none",
-                }}
-                component={Link}
-                href={`/dashboard/${user?.user_type}`}
-              >
-                Dashboard
-              </Typography>
-              <Typography
-                sx={{
-                  mr: 2,
-                  color: (theme) => theme.palette.text.primary,
-                  ...theme.typography.subtitle2,
-                  textDecoration: "none",
-                }}
-                component={Link}
-                href={`/dashboard/${user?.user_type}/profile`}
-              >
-                My Profile
-              </Typography>
+              {isAuthenticated && (
+                <Typography
+                  sx={{
+                    mr: 1.1,
+                    color: (theme) => theme.palette.text.primary,
+                    ...theme.typography.subtitle2,
+                    textDecoration: "none",
+                  }}
+                  component={Link}
+                  href={`/dashboard/${user?.user_type}`}
+                >
+                  Dashboard
+                </Typography>
+              )}
+              {isAuthenticated && (
+                <Typography
+                  sx={{
+                    mr: 2,
+                    color: (theme) => theme.palette.text.primary,
+                    ...theme.typography.subtitle2,
+                    textDecoration: "none",
+                  }}
+                  component={Link}
+                  href={`/dashboard/${user?.user_type}/profile`}
+                >
+                  My Profile
+                </Typography>
+              )}
               <div>
                 <Button variant="contained" onClick={handleAuth}>
                   {isAuthenticated ? "Log Out" : "Sign in/ Sign up"}
