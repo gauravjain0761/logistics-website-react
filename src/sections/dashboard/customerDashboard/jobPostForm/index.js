@@ -758,7 +758,7 @@ const JobPostForm = ({
                         <Divider sx={{ my: 3 }} />
                       </Grid>
 
-                      <Grid item md={6}>
+                      {/* <Grid item md={6}>
                         <Typography>Size</Typography>
                         <Box>
                           <TextBox
@@ -776,9 +776,9 @@ const JobPostForm = ({
                             size="small"
                           />
                         </Box>
-                      </Grid>
+                      </Grid> */}
 
-                      <Grid item md={6}>
+                      <Grid item md={12}>
                         <Box>
                           <Typography>Vehicle Requirement</Typography>
                           <Stack direction="row" mb={1.3}>
