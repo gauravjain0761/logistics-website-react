@@ -95,8 +95,9 @@ const TextBox = (props) => {
             maxLength: isMaxLenght ? isMaxLenght : null,
             min: min,
             readOnly: readOnly,
+            onKeyDown: onKeyDown,
           }}
-          onSelect={(e) => props.onSelect(e)}
+          // onKeyDown={}
           InputProps={{
             readOnly: readOnly,
             min: min,

@@ -214,9 +214,12 @@ const JobPostForm = ({
                                                   );
                                                   formik.setFieldValue(
                                                     `items[${productIndex}].product.drop_date`,
-                                                    e.target.value
+                                                    ""
                                                   );
                                                 }}
+                                                onKeyDown={(event) =>
+                                                  event.preventDefault()
+                                                }
                                                 startIcon={
                                                   <Iconify
                                                     icon="mingcute:calendar-fill"
@@ -286,6 +289,9 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
+                                                onKeyDown={(event) =>
+                                                  event.preventDefault()
+                                                }
                                                 startIcon={
                                                   <Iconify
                                                     icon="mingcute:calendar-fill"
