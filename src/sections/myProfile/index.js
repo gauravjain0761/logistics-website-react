@@ -3,6 +3,7 @@ import Iconify from "@/components/iconify/Iconify";
 import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import { clearToken } from "@/utils/localStorageAvailable";
+import { Close } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -10,6 +11,7 @@ import {
   CardContent,
   Container,
   Divider,
+  IconButton,
   Modal,
   Stack,
   Typography,
@@ -64,67 +66,82 @@ const Profile = ({ data, formik, loader }) => {
                       </Stack>
                     </CardContent>
                   </Card>
-
-                  <Card>
-                    <CardContent>
-                      <Stack direction="row" spacing={8}>
-                        <Box>
-                          <Box
-                            component="img"
-                            src={
-                              data?.profile?.profile_img
-                                ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
-                                : "/assets/images/dashboard/portfolio.jpeg"
-                            }
-                            sx={{
-                              width: "130px",
-                              borderRadius: "50%",
-                              border: "2px solid #ff7534",
-                            }}
-                          />
-                        </Box>
-                        <Stack>
+                  <Box
+                    component="form"
+                    noValidate
+                    onSubmit={formik.handleSubmit}
+                  >
+                    <Card>
+                      <CardContent>
+                        <Stack direction="row" spacing={8}>
                           <Box>
-                            <TextBox
-                              size="small"
-                              fullWidth
-                              value={data?.profile?.user_name}
-                              disabled
+                            <Box
+                              component="img"
+                              src={
+                                formik.values?.profile_img
+                                  ? formik.values?.profile_img
+                                  : "/assets/images/dashboard/portfolio.jpeg"
+                              }
+                              sx={{
+                                width: "130px",
+                                borderRadius: "50%",
+                                border: "2px solid #ff7534",
+                              }}
                             />
                           </Box>
-                          <Box>
-                            <TextBox
-                              size="small"
-                              placeholder="xyz@gmail.com"
-                              fullWidth
-                              disabled
-                              value={data?.email}
-                            />
-                          </Box>
-
-                          <Box>
-                            <TextBox
-                              size="small"
-                              placeholder="8726263731"
-                              fullWidth
-                              disabled
-                              value={data?.mobile}
-                            />
-                          </Box>
-                          <Stack direction="row" justifyContent="space-between">
+                          <Stack spacing={1}>
                             <Box>
-                              <Button variant="contained" type="submit">
-                                Update Profile
-                              </Button>
+                              <TextBox
+                                size="small"
+                                fullWidth
+                                value={formik.values?.user_name}
+                                name="user_name"
+                                onChange={formik.handleChange}
+                                placeholder="Enter Name"
+                              />
                             </Box>
                             <Box>
-                              <ChangePasswordModal />
+                              <TextBox
+                                size="small"
+                                placeholder="Enter email"
+                                fullWidth
+                                disabled
+                                value={formik.values?.email}
+                                name="email"
+                                onChange={formik.handleChange}
+                              />
                             </Box>
+
+                            <Box>
+                              <TextBox
+                                size="small"
+                                placeholder="Enter number"
+                                fullWidth
+                                disabled
+                                value={formik.values?.mobile}
+                                name="mobile"
+                                onChange={formik.handleChange}
+                              />
+                            </Box>
+                            <Stack direction="column" spacing={2}>
+                              <Box>
+                                <Button
+                                  fullWidth
+                                  variant="contained"
+                                  type="submit"
+                                >
+                                  Update Profile
+                                </Button>
+                              </Box>
+                              <Box>
+                                <ChangePasswordModal />
+                              </Box>
+                            </Stack>
                           </Stack>
                         </Stack>
-                      </Stack>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  </Box>
                 </Box>
               </Stack>
             )}
@@ -243,7 +260,30 @@ const ChangePasswordModal = () => {
           noValidate
           onSubmit={formik.handleSubmit}
         >
-          <Stack spacing={2}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            mb={2}
+          >
+            <Typography component="h5" variant="h5">
+              Change Password
+            </Typography>
+            <Box>
+              <Card sx={{ borderRadius: "50%" }}>
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    handleClose();
+                    formik.resetForm();
+                  }}
+                >
+                  <Close fontSize="small" />
+                </IconButton>
+              </Card>
+            </Box>
+          </Stack>
+          <Stack spacing={1}>
             <Box>
               <PasswordBox
                 fullWidth
@@ -286,7 +326,7 @@ const ChangePasswordModal = () => {
               Are you sure you want to Change Password ?
             </Typography> */}
           </Stack>
-          <Stack direction="row" spacing={8}>
+          <Stack direction="row" mt={2}>
             <Button
               type="submit"
               fullWidth
@@ -294,9 +334,6 @@ const ChangePasswordModal = () => {
               // onClick={handleClose}
             >
               Submit
-            </Button>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
-              Cancel
             </Button>
           </Stack>
         </Box>

@@ -12,9 +12,10 @@ const MyProfilePage = () => {
   const [data, setData] = React.useState({});
   const formik = useFormik({
     initialValues: {
-      name: "",
+      user_name: "",
       email: "",
       phone: "",
+      profile_img: "",
     },
     validate: (values) => {},
     onSubmit: async (values) => {
@@ -25,7 +26,7 @@ const MyProfilePage = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            formik.resetForm();
+            getProfile();
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",
@@ -52,7 +53,7 @@ const MyProfilePage = () => {
     },
   });
 
-  const getProfile = async () => {
+  async function getProfile() {
     setLoader(true);
     await axiosInstance
       .get("api/auth/profile/my-profile")
@@ -61,8 +62,20 @@ const MyProfilePage = () => {
           setLoader(false);
           setData(response?.data?.view_data);
           let newData = response?.data?.view_data;
+          console.log("newDatanewData", newData);
           for (const [key] of Object.entries(formik.values)) {
-            formik.setFieldValue([key], newData[key]);
+            if (key == "user_name") {
+              formik.setFieldValue("user_name", newData?.profile?.user_name);
+            } else if (key == "email") {
+              formik.setFieldValue("email", newData?.email);
+            } else if (key == "mobile") {
+              formik.setFieldValue("mobile", newData?.mobile);
+            } else if (key == "profile_img") {
+              formik.setFieldValue(
+                "profile_img",
+                `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
+              );
+            }
           }
         }
       })
@@ -70,7 +83,7 @@ const MyProfilePage = () => {
         setLoader(false);
         console.log("ProfileError", error);
       });
-  };
+  }
   React.useEffect(() => {
     getProfile();
   }, []);
