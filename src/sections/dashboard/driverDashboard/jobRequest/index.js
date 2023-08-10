@@ -30,6 +30,7 @@ import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import axiosInstance from "@/utils/axios";
 import SkeletonLoader from "@/components/skeleton";
+import { JobSekelton } from "@/components/not-found";
 const DashboardJobRequest = () => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -68,8 +69,6 @@ const DashboardJobRequest = () => {
   React.useEffect(() => {
     getData();
   }, [page]);
-
-  console.log("datadata", data);
 
   return (
     <React.Fragment>
@@ -123,8 +122,7 @@ const DashboardJobRequest = () => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-              {data &&
-                data?.length > 0 &&
+              {data && data?.length > 0 ? (
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
@@ -200,7 +198,8 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {productDetail?.product?.pickup_date || "N/A"}
+                                      {productDetail?.product?.pickup_date ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -222,7 +221,8 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {productDetail?.product?.pickup_time || "N/A"}
+                                      {productDetail?.product?.pickup_time ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -245,7 +245,8 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {productDetail?.product?.material || "N/A"}
+                                      {productDetail?.product?.material ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -269,7 +270,8 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {productDetail?.product?.drop_date || "N/A"}
+                                      {productDetail?.product?.drop_date ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -291,7 +293,8 @@ const DashboardJobRequest = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {productDetail?.product?.pickup_time || "N/A"}
+                                      {productDetail?.product?.pickup_time ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -359,7 +362,10 @@ const DashboardJobRequest = () => {
                       </Card>
                     </Grid>
                   );
-                })}
+                })
+              ) : (
+                <>{!loader && <JobSekelton title="No active Jobs..." />}</>
+              )}
             </Grid>
             <Box>
               <Stack alignItems="center" justifyContent="center">
@@ -402,17 +408,6 @@ const DashboardJobRequest = () => {
                 />
               </Stack>
             </Box>
-            {/* <Stack alignItems="center">
-              <Box>
-                <Typography variant="h5">No Active Jobs.....</Typography>
-              </Box>
-              <Box
-                component="img"
-                sx={{ width: "400px" }}
-                src="/assets/images/home/new/banner-image.jpg"
-                alt="truck"
-              />
-            </Stack> */}
           </Box>
         </Container>
       </Box>

@@ -30,6 +30,7 @@ import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import SkeletonLoader from "@/components/skeleton";
+import { JobSekelton } from "@/components/not-found";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -229,8 +230,7 @@ const DashboardJobPost = ({ formik }) => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-              {data &&
-                data?.length > 0 &&
+              {data && data?.length > 0 ? (
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
@@ -502,7 +502,10 @@ const DashboardJobPost = ({ formik }) => {
                       </Card>
                     </Grid>
                   );
-                })}
+                })
+              ) : (
+                <>{!loader && <JobSekelton title="No active Jobs..." />}</>
+              )}
 
               {/* )} */}
             </Grid>
