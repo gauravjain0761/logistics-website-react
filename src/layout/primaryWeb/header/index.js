@@ -179,7 +179,7 @@ const Header = (props) => {
                     sx={{
                       mr: 1.1,
                       color: (theme) =>
-                        router.asPath === `/dashboard/${user?.user_type}`
+                        router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
                           : theme.palette.text.primary,
                       ...theme.typography.subtitle2,
@@ -199,8 +199,7 @@ const Header = (props) => {
                     sx={{
                       mr: 1.1,
                       color: (theme) =>
-                        router.asPath ===
-                        `/dashboard/${user?.user_type}/active_jobs`
+                        router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
                           : theme.palette.text.primary,
                       ...theme.typography.subtitle2,
