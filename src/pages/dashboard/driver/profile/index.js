@@ -16,6 +16,7 @@ const MyProfilePage = () => {
       email: "",
       phone: "",
       profile_img: "",
+      plan: "",
     },
     validate: (values) => {},
     onSubmit: async (values) => {
@@ -75,6 +76,8 @@ const MyProfilePage = () => {
                 "profile_img",
                 `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
               );
+            } else if (key == "plan") {
+              formik.setFieldValue("plan", newData?.plan);
             }
           }
         }

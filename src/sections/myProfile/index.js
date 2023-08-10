@@ -91,6 +91,20 @@ const Profile = ({ data, formik, loader }) => {
                           </Box>
                           <Stack spacing={1}>
                             <Box>
+                              <Stack
+                                direction="row"
+                                spacing={2}
+                                alignItems="center"
+                              >
+                                <Typography component="body1" fontWeight={500}>
+                                  Plan Name:
+                                </Typography>
+                                <Typography component="body2">
+                                  {formik.values.plan || "N/A"}
+                                </Typography>
+                              </Stack>
+                            </Box>
+                            <Box>
                               <TextBox
                                 size="small"
                                 fullWidth
