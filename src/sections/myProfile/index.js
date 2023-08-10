@@ -97,7 +97,7 @@ const Profile = ({ data, formik, loader }) => {
                                 alignItems="center"
                               >
                                 <Typography component="body1" fontWeight={500}>
-                                  Plan Name:
+                                  Plan Type:
                                 </Typography>
                                 <Typography component="body2">
                                   {formik.values.plan || "N/A"}

@@ -8,11 +8,14 @@ import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const { id } = router.query;
+  const { user } = useAuthContext();
+  console.log("useruseruser", user);
   const product = {
     product: {
       image: "",
@@ -36,6 +39,7 @@ const PostJob = () => {
 
   const formik = useFormik({
     initialValues: {
+      user_id: user?.id,
       name: "",
       vehicle: 0,
       items: [],
@@ -101,6 +105,10 @@ const PostJob = () => {
         });
     },
   });
+
+  React.useEffect(() => {
+    formik.setFieldValue("user_id", user?.id);
+  }, [user, user?.id]);
   const addProduct = () => {
     formik.setFieldValue("items", [...(formik.values.items || []), product]);
   };
@@ -142,7 +150,7 @@ const PostJob = () => {
               // if (key === "items") {
               //   formik.setFieldValue("items", newData?.items);
               // } else {
-                formik.setFieldValue([key], newData[key]);
+              formik.setFieldValue([key], newData[key]);
               // }
             }
           }
