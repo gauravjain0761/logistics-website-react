@@ -14,7 +14,7 @@ const MyProfilePage = () => {
     initialValues: {
       user_name: "",
       email: "",
-      phone: "",
+      mobile: "",
       profile_img: "",
     },
     validate: (values) => {},
