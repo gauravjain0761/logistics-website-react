@@ -37,7 +37,7 @@ const Profile = ({ data, formik, loader }) => {
                 <Box>
                   <Card
                     sx={{
-                      // borderRadius: 0,
+                      borderRadius: 0,
                       boxShadow: 0,
                       background: (theme) => theme.palette.grey[100],
                       width: "100%",
@@ -71,7 +71,13 @@ const Profile = ({ data, formik, loader }) => {
                     noValidate
                     onSubmit={formik.handleSubmit}
                   >
-                    <Card>
+                    <Card
+                      sx={{
+                        borderRadius: 0,
+                        boxShadow: 0,
+                        background: (theme) => theme.palette.grey[100],
+                      }}
+                    >
                       <CardContent>
                         <Stack direction="row" spacing={8}>
                           <Box>
