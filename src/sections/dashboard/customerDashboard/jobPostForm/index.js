@@ -217,6 +217,9 @@ const JobPostForm = ({
                                                     ""
                                                   );
                                                 }}
+                                                onKeyDown={(event) =>
+                                                  event.preventDefault()
+                                                }
                                                 startIcon={
                                                   <Iconify
                                                     icon="mingcute:calendar-fill"
@@ -269,9 +272,9 @@ const JobPostForm = ({
                                                 ).format("YYYY-MM-DD")}
                                                 min={
                                                   productItem?.product
-                                                    ?.pickup_date
+                                                    ?.drop_date
                                                     ? new Date(
-                                                        productItem?.product?.pickup_date
+                                                        productItem?.product?.drop_date
                                                       )
                                                         .toISOString()
                                                         .split("T")[0]
@@ -286,6 +289,9 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
+                                                onKeyDown={(event) =>
+                                                  event.preventDefault()
+                                                }
                                                 startIcon={
                                                   <Iconify
                                                     icon="mingcute:calendar-fill"

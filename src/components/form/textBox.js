@@ -37,6 +37,8 @@ const TextBox = (props) => {
     formSx,
     placeholder,
     min,
+    readOnly,
+    onSelect,
   } = props;
 
   return (
@@ -89,8 +91,15 @@ const TextBox = (props) => {
           autoComplete={"false"}
           value={value}
           onChange={(e) => props.onChange(e)}
-          inputProps={{ maxLength: isMaxLenght ? isMaxLenght : null, min: min }}
+          inputProps={{
+            maxLength: isMaxLenght ? isMaxLenght : null,
+            min: min,
+            readOnly: readOnly,
+            onKeyDown: onKeyDown,
+          }}
+          // onKeyDown={}
           InputProps={{
+            readOnly: readOnly,
             min: min,
             // endAdornment: (
             //   <InputAdornment position={inputEndAdornmentPosition}>
