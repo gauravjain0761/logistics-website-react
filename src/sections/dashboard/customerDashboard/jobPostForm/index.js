@@ -199,8 +199,7 @@ const JobPostForm = ({
                                                 type="date"
                                                 value={moment(
                                                   productItem?.product
-                                                    ?.pickup_date,
-                                                  "DD-MM-YYYY"
+                                                    ?.pickup_date
                                                 ).format("YYYY-MM-DD")}
                                                 min={
                                                   new Date()
@@ -212,6 +211,10 @@ const JobPostForm = ({
                                                   formik.setFieldValue(
                                                     `items[${productIndex}].product.pickup_date`,
                                                     e.target.value
+                                                  );
+                                                  formik.setFieldValue(
+                                                    `items[${productIndex}].product.drop_date`,
+                                                    ""
                                                   );
                                                 }}
                                                 startIcon={
@@ -262,8 +265,7 @@ const JobPostForm = ({
                                                 type="date"
                                                 value={moment(
                                                   productItem?.product
-                                                    ?.drop_date,
-                                                  "DD-MM-YYYY"
+                                                    ?.drop_date
                                                 ).format("YYYY-MM-DD")}
                                                 min={
                                                   productItem?.product

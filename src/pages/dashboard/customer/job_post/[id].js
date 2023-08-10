@@ -58,7 +58,7 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      values["items"] = JSON.stringify(values?.items);
+      // values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
       // formData.append("job_title", values?.job_title);
