@@ -36,6 +36,7 @@ const TextBox = (props) => {
     size,
     formSx,
     placeholder,
+    min,
   } = props;
 
   return (
@@ -81,29 +82,29 @@ const TextBox = (props) => {
           size={size}
           format={format}
           rows={rows}
+          min={min}
           multiline={multiline}
           required={required}
           disabled={disabled}
           autoComplete={"false"}
           value={value}
           onChange={(e) => props.onChange(e)}
-          inputProps={{ maxLength: isMaxLenght ? isMaxLenght : null }}
-          InputProps={
-            {
-              // endAdornment: (
-              //   <InputAdornment position={inputEndAdornmentPosition}>
-              //     {/* <Icon>{icon}</Icon> */}
-              //     {endIcon}
-              //   </InputAdornment>
-              // ),
-              // startAdornment: (
-              //   <InputAdornment position={inputStartAdornmentPosition}>
-              //     {/* <Icon>{icon}</Icon> */}
-              //     {startIcon}
-              //   </InputAdornment>
-              // ),
-            }
-          }
+          inputProps={{ maxLength: isMaxLenght ? isMaxLenght : null, min: min }}
+          InputProps={{
+            min: min,
+            // endAdornment: (
+            //   <InputAdornment position={inputEndAdornmentPosition}>
+            //     {/* <Icon>{icon}</Icon> */}
+            //     {endIcon}
+            //   </InputAdornment>
+            // ),
+            // startAdornment: (
+            //   <InputAdornment position={inputStartAdornmentPosition}>
+            //     {/* <Icon>{icon}</Icon> */}
+            //     {startIcon}
+            //   </InputAdornment>
+            // ),
+          }}
         />
         {endIcon && (
           <Box
