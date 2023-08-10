@@ -214,7 +214,7 @@ const JobPostForm = ({
                                                   );
                                                   formik.setFieldValue(
                                                     `items[${productIndex}].product.drop_date`,
-                                                    ""
+                                                    e.target.value
                                                   );
                                                 }}
                                                 startIcon={
@@ -269,9 +269,9 @@ const JobPostForm = ({
                                                 ).format("YYYY-MM-DD")}
                                                 min={
                                                   productItem?.product
-                                                    ?.pickup_date
+                                                    ?.drop_date
                                                     ? new Date(
-                                                        productItem?.product?.pickup_date
+                                                        productItem?.product?.drop_date
                                                       )
                                                         .toISOString()
                                                         .split("T")[0]
