@@ -7,6 +7,9 @@ import LoadingScreen from "../components/loading-screen";
 //
 import { useAuthContext } from "./useAuthContext";
 import Login from "@/sections/auth/login";
+import { PrimaryWebLayout } from "@/layout";
+import SkeletonLoader from "@/components/skeleton";
+import { Box, Container } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +34,16 @@ export default function AuthGuard({ children }) {
   }, [isAuthenticated, pathname, push, requestedLocation]);
 
   if (!isInitialized) {
-    return <LoadingScreen />;
+    return (
+      <PrimaryWebLayout>
+        <Box mt={10}>
+          <Container>
+            <SkeletonLoader />
+          </Container>
+        </Box>
+        {/* <LoadingScreen /> */}
+      </PrimaryWebLayout>
+    );
   }
 
   if (!isAuthenticated) {

@@ -134,6 +134,12 @@ const JobPostForm = ({
                             formik?.values?.items?.length > 0 &&
                             formik.values.items.map(
                               (productItem, productIndex) => {
+                                console.log(
+                                  "log123",
+                                  moment(
+                                    productItem?.product?.drop_time
+                                  ).format("HH:MM")
+                                );
                                 return (
                                   <Box key={productIndex} sx={{ mt: 1 }}>
                                     <Card>
@@ -153,7 +159,7 @@ const JobPostForm = ({
                                       />
                                       <CardContent>
                                         <Grid container spacing={3}>
-                                          <Grid item md={12}>
+                                          {/* <Grid item md={12}>
                                             <Box>
                                               <Typography>
                                                 Pick-Up Address
@@ -182,7 +188,7 @@ const JobPostForm = ({
                                                 size="small"
                                               />
                                             </Box>
-                                          </Grid>
+                                          </Grid> */}
                                           <Grid item md={6}>
                                             <Box>
                                               <Typography>
@@ -191,9 +197,15 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 type="date"
-                                                value={
+                                                value={moment(
                                                   productItem?.product
-                                                    ?.pickup_date
+                                                    ?.pickup_date,
+                                                  "DD-MM-YYYY"
+                                                ).format("YYYY-MM-DD")}
+                                                min={
+                                                  new Date()
+                                                    .toISOString()
+                                                    .split("T")[0]
                                                 }
                                                 name={`items[${productIndex}].product.pickup_date`}
                                                 onChange={(e) => {
@@ -248,9 +260,22 @@ const JobPostForm = ({
                                               <TextBox
                                                 fullWidth
                                                 type="date"
-                                                value={
+                                                value={moment(
                                                   productItem?.product
-                                                    ?.drop_date
+                                                    ?.drop_date,
+                                                  "DD-MM-YYYY"
+                                                ).format("YYYY-MM-DD")}
+                                                min={
+                                                  productItem?.product
+                                                    ?.pickup_date
+                                                    ? new Date(
+                                                        productItem?.product?.pickup_date
+                                                      )
+                                                        .toISOString()
+                                                        .split("T")[0]
+                                                    : new Date()
+                                                        .toISOString()
+                                                        .split("T")[0]
                                                 }
                                                 name={`items[${productIndex}].product.drop_date`}
                                                 onChange={(e) => {
@@ -274,10 +299,10 @@ const JobPostForm = ({
                                               <Typography>Drop Time</Typography>
                                               <TextBox
                                                 fullWidth
-                                                type="date"
+                                                type="time"
                                                 value={
-                                                  moment(productItem?.product
-                                                    ?.drop_time).format("YYYY/MM/DD")
+                                                  productItem?.product
+                                                    ?.drop_time
                                                 }
                                                 name={`items[${productIndex}].product.drop_time`}
                                                 onChange={(e) => {
