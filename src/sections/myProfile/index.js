@@ -1,5 +1,6 @@
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import { clearToken } from "@/utils/localStorageAvailable";
 import {
@@ -18,104 +19,115 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";
 
-const Profile = ({ data, formik }) => {
-  console.log("datadata", data);
+const Profile = ({ data, formik, loader }) => {
+  console.log("loaderloader", loader);
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: (theme) => theme.palette.grey[300] }}>
         <Box mt={8}>
           <Container>
-            <Stack alignItems="center" spacing={4} py={4}>
-              <Box>
-                <Card
-                  sx={{
-                    // borderRadius: 0,
-                    boxShadow: 0,
-                    background: (theme) => theme.palette.grey[100],
-                    width: "100%",
-                    mb: 2,
-                  }}
-                >
-                  <CardContent>
-                    <Stack
-                      direction={"row"}
-                      justifyContent={"center"}
-                      alignItems="center"
-                    >
-                      <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
-                      <Typography
-                        color={"primary"}
-                        variant="h4"
-                        fontWeight={500}
-                        sx={{ fontSize: "1.95rem!important" }}
+            {loader ? (
+              <Box sx={{ py: 4 }}>
+                <SkeletonLoader />
+              </Box>
+            ) : (
+              <Stack alignItems="center" spacing={4} py={4}>
+                <Box>
+                  <Card
+                    sx={{
+                      // borderRadius: 0,
+                      boxShadow: 0,
+                      background: (theme) => theme.palette.grey[100],
+                      width: "100%",
+                      mb: 2,
+                    }}
+                  >
+                    <CardContent>
+                      <Stack
+                        direction={"row"}
+                        justifyContent={"center"}
+                        alignItems="center"
                       >
-                        My Profile
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent>
-                    <Stack direction="row" spacing={8}>
-                      <Box>
-                        <Box
-                          component="img"
-                          src={
-                            data?.profile?.profile_img
-                              ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
-                              : "/assets/images/dashboard/portfolio.jpeg"
-                          }
-                          sx={{
-                            width: "130px",
-                            borderRadius: "50%",
-                            border: "2px solid #ff7534",
-                          }}
+                        <Iconify
+                          icon="uis:unlock"
+                          width="30px"
+                          color="#ff7534"
                         />
-                      </Box>
-                      <Stack>
-                        <Box>
-                          <TextBox
-                            size="small"
-                            fullWidth
-                            value={data?.profile?.user_name}
-                            disabled
-                          />
-                        </Box>
-                        <Box>
-                          <TextBox
-                            size="small"
-                            placeholder="xyz@gmail.com"
-                            fullWidth
-                            disabled
-                            value={data?.email}
-                          />
-                        </Box>
+                        <Typography
+                          color={"primary"}
+                          variant="h4"
+                          fontWeight={500}
+                          sx={{ fontSize: "1.95rem!important" }}
+                        >
+                          My Profile
+                        </Typography>
+                      </Stack>
+                    </CardContent>
+                  </Card>
 
+                  <Card>
+                    <CardContent>
+                      <Stack direction="row" spacing={8}>
                         <Box>
-                          <TextBox
-                            size="small"
-                            placeholder="8726263731"
-                            fullWidth
-                            disabled
-                            value={data?.mobile}
+                          <Box
+                            component="img"
+                            src={
+                              data?.profile?.profile_img
+                                ? `${data?.profile?.base_url}${data?.profile?.profile_img}`
+                                : "/assets/images/dashboard/portfolio.jpeg"
+                            }
+                            sx={{
+                              width: "130px",
+                              borderRadius: "50%",
+                              border: "2px solid #ff7534",
+                            }}
                           />
                         </Box>
-                        <Stack direction="row" justifyContent="space-between">
+                        <Stack>
                           <Box>
-                            <Button variant="contained" type="submit">
-                              Update Profile
-                            </Button>
+                            <TextBox
+                              size="small"
+                              fullWidth
+                              value={data?.profile?.user_name}
+                              disabled
+                            />
                           </Box>
                           <Box>
-                            <ChangePasswordModal />
+                            <TextBox
+                              size="small"
+                              placeholder="xyz@gmail.com"
+                              fullWidth
+                              disabled
+                              value={data?.email}
+                            />
                           </Box>
+
+                          <Box>
+                            <TextBox
+                              size="small"
+                              placeholder="8726263731"
+                              fullWidth
+                              disabled
+                              value={data?.mobile}
+                            />
+                          </Box>
+                          <Stack direction="row" justifyContent="space-between">
+                            <Box>
+                              <Button variant="contained" type="submit">
+                                Update Profile
+                              </Button>
+                            </Box>
+                            <Box>
+                              <ChangePasswordModal />
+                            </Box>
+                          </Stack>
                         </Stack>
                       </Stack>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </Box>
-            </Stack>
+                    </CardContent>
+                  </Card>
+                </Box>
+              </Stack>
+            )}
           </Container>
         </Box>
       </Box>

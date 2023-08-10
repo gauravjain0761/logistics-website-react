@@ -14,6 +14,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { StyledBgTest, StyledLine } from "./testimonialStyled";
 import axiosInstance from "@/utils/axios";
+import SkeletonLoader from "@/components/skeleton";
+import { JobSekelton } from "@/components/not-found";
 
 const TestimonialPage = () => {
   const [data, setData] = useState([]);
@@ -55,69 +57,24 @@ const TestimonialPage = () => {
               </Typography>
             </Stack>
             <Box py={6}>
-              <Grid
-                container
-                spacing={6}
-                justifyContent={loadingCard ? "center" : "left"}
-              >
-                {loadingCard ? (
-                  <Box mt={4}>
-                    <Container maxWidth>
-                      <Grid container spacing={8}>
-                        {[...Array(3)].map((index) => {
-                          return (
-                            <Grid item md={4} key={index}>
-                              <Skeleton
-                                variant="rectangular"
-                                width={300}
-                                height={230}
-                              />
-
-                              <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={1}
-                              >
-                                <Skeleton
-                                  variant="text"
-                                  width="100%"
-                                  sx={{ fontSize: "3rem" }}
-                                />
-                                <Skeleton
-                                  variant="circular"
-                                  width={50}
-                                  height={50}
-                                />
-                              </Stack>
-                            </Grid>
-                          );
-                        })}
-                      </Grid>
-                    </Container>
-                  </Box>
-                ) : (
+              {loadingCard ? (
+                <SkeletonLoader />
+              ) : (
+                <Grid
+                  container
+                  spacing={6}
+                  justifyContent={loadingCard ? "center" : "left"}
+                >
                   <>
-                    {!loadingCard && data.length <= 0 && (
-                      <Grid container justifyContent="center">
-                        <Grid item md={12}>
-                          <Stack
-                            alignItems="center"
-                            justifyContent="center"
-                            py={5}
-                          >
-                            <Typography variant="h4" textAlign="center">
-                              There is no testimonial
-                            </Typography>
-                          </Stack>
-                        </Grid>
-                      </Grid>
-                    )}
-                    {data &&
+                    {data && data.length > 0 ? (
                       data.map((elem, index) => {
                         return (
                           <Grid item sm={12} md={4} key={index}>
                             <Card
-                              sx={{ borderRadius: "0px", position: "relative" }}
+                              sx={{
+                                borderRadius: "0px",
+                                position: "relative",
+                              }}
                             >
                               <CardContent>
                                 <Stack
@@ -171,10 +128,17 @@ const TestimonialPage = () => {
                             </Card>
                           </Grid>
                         );
-                      })}
+                      })
+                    ) : (
+                      <>
+                        {!loadingCard && data.length <= 0 && (
+                          <JobSekelton title="No Testimonials" />
+                        )}
+                      </>
+                    )}
                   </>
-                )}
-              </Grid>
+                </Grid>
+              )}
             </Box>
           </Box>
         </Container>

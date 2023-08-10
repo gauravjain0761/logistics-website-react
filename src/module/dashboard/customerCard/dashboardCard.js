@@ -1,4 +1,5 @@
 import Iconify from "@/components/iconify/Iconify";
+import axiosInstance from "@/utils/axios";
 import {
   Box,
   Card,
@@ -13,6 +14,28 @@ import React from "react";
 
 const DashboardCard = ({ jobPost }) => {
   const router = useRouter();
+
+  const [data, setData] = React.useState([]);
+
+  const getData = async () => {
+    await axiosInstance
+      .get("api/auth/master/jobs/search", {
+        params: { page: 1, pageSize: "10" },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response?.data?.view_data?.data);
+          setPageCount(response?.data?.view_data?.meta?.last_page);
+        }
+      })
+      .catch((error) => {
+        console.log("DriverJob", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <React.Fragment>
@@ -61,7 +84,7 @@ const DashboardCard = ({ jobPost }) => {
                       JOB POSTED
                     </Typography>
                     <Typography variant="h4" textAlign="center">
-                      {jobPost}
+                      {data?.length}
                     </Typography>
                   </Box>
                 </Stack>
