@@ -1,6 +1,7 @@
 import { BannerSection } from "@/components/banner";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify";
+import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
@@ -16,20 +17,26 @@ import React, { useEffect, useState } from "react";
 
 const ContactSection = ({ formik }) => {
   // API Fetch
+  const [loader, setLoader] = React.useState(false);
   const [data, setData] = useState("");
-  const ContactFetchApi = async () =>
+  const ContactFetchApi = async () => {
+    setLoader(true);
     await axiosInstance
       .get("/api/front/contact-details")
       .then((response) => {
         if (response?.status === 200) {
+          setLoader(false);
           setData(response.data.view_data);
         } else {
+          setLoader(false);
           console.log("error");
         }
       })
       .catch((error) => {
+        setLoader(false);
         console.log(error, "About Us Page");
       });
+  };
 
   useEffect(() => {
     ContactFetchApi();
@@ -45,127 +52,138 @@ const ContactSection = ({ formik }) => {
       />
       <Box sx={{ py: 5 }}>
         <Container>
-          <Grid container spacing={4}>
-            <Grid item md={4}>
-              <Card sx={{ py: 5, borderRadius: "5px" }}>
-                <CardContent>
-                  <Stack alignItems="center">
-                    <Box
-                      sx={{
-                        borderRight: "5px dashed #ff7534",
-                        borderBottom: "5px solid #ff7532",
-                        display: "inline-block",
-                        marginBottom: "30px",
-                        padding: "8px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <Iconify
-                        sx={{
-                          backgroundColor: (theme) =>
-                            theme.palette.primary.main,
-                          color: (theme) => theme.palette.primary.contrastText,
-                          borderRadius: "50%",
-                          display: "inline-block",
-                          height: "90px",
-                          width: "90px",
-                          p: 2,
-                        }}
-                        icon="majesticons:phone"
-                        hFlip={true}
-                        width={70}
-                      />
-                    </Box>
+          {loader ? (
+            <SkeletonLoader />
+          ) : (
+            <Grid container spacing={4}>
+              <Grid item md={4}>
+                <Card sx={{ py: 5, borderRadius: "5px" }}>
+                  <CardContent>
                     <Stack alignItems="center">
-                      <Typography fontWeight={600} variant="h5">
-                        Call Us
-                      </Typography>
-                      <Typography>{data && data.mobile}</Typography>
-                    </Stack>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item md={4}>
-              <Card sx={{ py: 5, borderRadius: "5px" }}>
-                <CardContent>
-                  <Stack alignItems="center">
-                    <Box
-                      sx={{
-                        borderRight: "5px dashed #ff7534",
-                        borderBottom: "5px solid #ff7532",
-                        display: "inline-block",
-                        marginBottom: "30px",
-                        padding: "8px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <Iconify
+                      <Box
                         sx={{
-                          backgroundColor: (theme) =>
-                            theme.palette.primary.main,
-                          color: (theme) => theme.palette.primary.contrastText,
-                          borderRadius: "50%",
+                          borderRight: "5px dashed #ff7534",
+                          borderBottom: "5px solid #ff7532",
                           display: "inline-block",
-                          height: "90px",
-                          width: "90px",
-                          p: 2,
+                          marginBottom: "30px",
+                          padding: "8px",
+                          borderRadius: "50%",
                         }}
-                        icon="fluent:mail-20-filled"
-                        width={70}
-                      />
-                    </Box>
-                    <Stack alignItems="center">
-                      <Typography fontWeight={600} variant="h5">
-                        Email
-                      </Typography>
-                      <Typography>{data && data.email}</Typography>
+                      >
+                        <Iconify
+                          sx={{
+                            backgroundColor: (theme) =>
+                              theme.palette.primary.main,
+                            color: (theme) =>
+                              theme.palette.primary.contrastText,
+                            borderRadius: "50%",
+                            display: "inline-block",
+                            height: "90px",
+                            width: "90px",
+                            p: 2,
+                          }}
+                          icon="majesticons:phone"
+                          hFlip={true}
+                          width={70}
+                        />
+                      </Box>
+                      <Stack alignItems="center">
+                        <Typography fontWeight={600} variant="h5">
+                          Call Us
+                        </Typography>
+                        <Typography>
+                          {(data && data.mobile) || "N/A"}
+                        </Typography>
+                      </Stack>
                     </Stack>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item md={4}>
-              <Card sx={{ py: 5, borderRadius: "5px" }}>
-                <CardContent>
-                  <Stack alignItems="center">
-                    <Box
-                      sx={{
-                        borderRight: "5px dashed #ff7534",
-                        borderBottom: "5px solid #ff7532",
-                        display: "inline-block",
-                        marginBottom: "30px",
-                        padding: "8px",
-                        borderRadius: "50%",
-                      }}
-                    >
-                      <Iconify
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item md={4}>
+                <Card sx={{ py: 5, borderRadius: "5px" }}>
+                  <CardContent>
+                    <Stack alignItems="center">
+                      <Box
                         sx={{
-                          backgroundColor: (theme) =>
-                            theme.palette.primary.main,
-                          color: (theme) => theme.palette.primary.contrastText,
-                          borderRadius: "50%",
+                          borderRight: "5px dashed #ff7534",
+                          borderBottom: "5px solid #ff7532",
                           display: "inline-block",
-                          height: "90px",
-                          width: "90px",
-                          p: 2,
+                          marginBottom: "30px",
+                          padding: "8px",
+                          borderRadius: "50%",
                         }}
-                        icon="mdi:location"
-                        hFlip={true}
-                        width={70}
-                      />
-                    </Box>
-                    <Stack alignItems="center">
-                      <Typography fontWeight={600} variant="h5">
-                        Address
-                      </Typography>
-                      <Typography>{data && data.address}</Typography>
+                      >
+                        <Iconify
+                          sx={{
+                            backgroundColor: (theme) =>
+                              theme.palette.primary.main,
+                            color: (theme) =>
+                              theme.palette.primary.contrastText,
+                            borderRadius: "50%",
+                            display: "inline-block",
+                            height: "90px",
+                            width: "90px",
+                            p: 2,
+                          }}
+                          icon="fluent:mail-20-filled"
+                          width={70}
+                        />
+                      </Box>
+                      <Stack alignItems="center">
+                        <Typography fontWeight={600} variant="h5">
+                          Email
+                        </Typography>
+                        <Typography>{(data && data.email) || "N/A"}</Typography>
+                      </Stack>
                     </Stack>
-                  </Stack>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item md={4}>
+                <Card sx={{ py: 5, borderRadius: "5px" }}>
+                  <CardContent>
+                    <Stack alignItems="center">
+                      <Box
+                        sx={{
+                          borderRight: "5px dashed #ff7534",
+                          borderBottom: "5px solid #ff7532",
+                          display: "inline-block",
+                          marginBottom: "30px",
+                          padding: "8px",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <Iconify
+                          sx={{
+                            backgroundColor: (theme) =>
+                              theme.palette.primary.main,
+                            color: (theme) =>
+                              theme.palette.primary.contrastText,
+                            borderRadius: "50%",
+                            display: "inline-block",
+                            height: "90px",
+                            width: "90px",
+                            p: 2,
+                          }}
+                          icon="mdi:location"
+                          hFlip={true}
+                          width={70}
+                        />
+                      </Box>
+                      <Stack alignItems="center">
+                        <Typography fontWeight={600} variant="h5">
+                          Address
+                        </Typography>
+                        <Typography>
+                          {(data && data.address) || "N/A"}
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
+          )}
           <Box py={4}>
             <Grid container spacing={3}>
               <Grid item md={6}>
@@ -223,7 +241,6 @@ const ContactSection = ({ formik }) => {
                         fullWidth
                         placeholder="Your Message"
                         name="message"
-
                         value={formik?.values?.message}
                         onChange={formik.handleChange}
                         error={formik.touched.message && formik.errors.message}

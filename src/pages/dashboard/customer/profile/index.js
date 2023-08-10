@@ -6,6 +6,7 @@ import axiosInstance from "@/utils/axios";
 import AuthGuard from "@/auth/AuthGuard";
 
 const MyProfilePage = () => {
+  const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState({});
   const formik = useFormik({
     initialValues: {},
@@ -14,19 +15,27 @@ const MyProfilePage = () => {
   });
 
   const getProfile = async () => {
-    await axiosInstance.get("api/auth/profile/my-profile").then((response) => {
-      if (response.status === 200) {
-        setData(response?.data?.view_data);
-      }
-    });
+    setLoader(true);
+    await axiosInstance
+      .get("api/auth/profile/my-profile")
+      .then((response) => {
+        if (response.status === 200) {
+          setLoader(false);
+          setData(response?.data?.view_data);
+        }
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log("ProfileError", error);
+      });
   };
   React.useEffect(() => {
     getProfile();
   }, []);
-  console.log("datadata", data);
+  console.log("datadata", loader);
   return (
     <AuthGuard>
-      <Profile formik={formik} data={data} />
+      <Profile formik={formik} data={data} loader={loader} />
     </AuthGuard>
   );
 };

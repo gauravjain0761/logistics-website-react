@@ -3,7 +3,7 @@ import React from "react";
 
 const SkeletonLoader = () => {
   return (
-    <Card sx={{ maxWidth: "100%", my: 2 }}>
+    <Card sx={{ maxWidth: "100%", my: 4 }}>
       <CardHeader
         avatar={
           <Skeleton
