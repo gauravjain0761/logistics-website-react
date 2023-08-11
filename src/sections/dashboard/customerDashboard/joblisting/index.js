@@ -20,18 +20,19 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import GoogleMaps from "@/module/map";
 import { useRouter } from "next/router";
+import axiosInstance from "@/utils/axios";
 
 const JobList = () => {
   const router = useRouter();
+  const[data,setData]= useState([]);
   const [startChat, setStartChat] = React.useState("");
   const handleOpen = () => setStartChat(true);
   const handleClose = () => setStartChat(false);
-
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [select, setSelect] = React.useState(0);
@@ -53,6 +54,24 @@ const JobList = () => {
       value: "last",
     },
   ];
+
+  // Api Fetch
+  const fetchApi = async () => {
+    await axiosInstance
+      .get(`api/auth/jobs/job-bids/${router.query.id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setData(response.data?.view_data)
+          console.log(response.data,"bidlist")
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
+  };
+  useEffect(()=>{
+    fetchApi();
+  },[])
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -96,7 +115,7 @@ const JobList = () => {
                 </Box>
               </Stack>
               <Box>
-                {[...Array(4)].map((elem, index) => {
+                {data && data.length > 0 && data.map((elem, index) => {
                   return (
                     <Card
                       key={index}
@@ -143,7 +162,7 @@ const JobList = () => {
                                 >
                                   <Box>
                                     <Typography variant="h5" fontWeight={500}>
-                                      Mr. Alex
+                                      {elem.name}
                                     </Typography>
                                   </Box>
                                   <Stack>
@@ -173,12 +192,7 @@ const JobList = () => {
                               </Box>
                               <Typography fontSize={14}>
                                 {" "}
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
+                                {elem.description}
                               </Typography>
                             </Stack>
                           </Grid>
@@ -195,7 +209,7 @@ const JobList = () => {
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
                               }
-                              label="Accepted Driver Bid"
+                              label="Accept Driver Bid"
                               variant="outlined"
                             />
                             {/* <Chip
