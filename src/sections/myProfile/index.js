@@ -350,7 +350,7 @@ const ChangePasswordModal = () => {
             <Button
               type="submit"
               fullWidth
-              variant="outlined"
+              variant="contained"
               // onClick={handleClose}
             >
               Submit
