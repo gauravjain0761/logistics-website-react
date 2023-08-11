@@ -5,11 +5,13 @@ import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
 import AuthGuard from "@/auth/AuthGuard";
 import { useSnackbar } from "notistack";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const MyProfilePage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState({});
+  const { user } = useAuthContext();
   const formik = useFormik({
     initialValues: {
       user_name: "",
@@ -21,11 +23,11 @@ const MyProfilePage = () => {
     validate: (values) => {},
     onSubmit: async (values) => {
       let formData = new FormData();
-      formData.append("user_name",values?.user_name);
-      formData.append("email",values?.email);
-      formData.append("mobile",values?.mobile);
-      formData.append("profile_img",values?.profile_img);
-      formData.append("plan",values?.plan);
+      formData.append("user_name", values?.user_name);
+      formData.append("email", values?.email);
+      formData.append("mobile", values?.mobile);
+      formData.append("profile_img", values?.profile_img);
+      formData.append("plan", values?.plan);
 
       await axiosInstance
         .post("/api/auth/profile/update-profile", formData)
@@ -100,7 +102,7 @@ const MyProfilePage = () => {
   }
   React.useEffect(() => {
     getProfile();
-  }, []);
+  }, [user, user?.id]);
 
   console.log("datadata", loader);
   return (
