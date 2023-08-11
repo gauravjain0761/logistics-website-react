@@ -65,6 +65,16 @@ const PostJob = () => {
       values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
+      let url, method;
+
+      if (id === "create") {
+        url = "/api/auth/master/jobs/add";
+        method = "POST";
+      } else {
+        url = `/api/auth/master/jobs/update/${id}`;
+        method = "POST";
+      }
+
       // formData.append("job_title", values?.job_title);
       // formData.append("image", values?.image);
       // formData.append("size", values?.size);
@@ -72,7 +82,11 @@ const PostJob = () => {
       // console.log("valuesvalues", values);
 
       await axiosInstance
-        .post("/api/auth/master/jobs/add", values)
+        .request({
+          url: url,
+          method: method,
+          data: values,
+        })
         .then((response) => {
           if (response?.status === 200) {
             router.push("/dashboard/customer/job_posted");
