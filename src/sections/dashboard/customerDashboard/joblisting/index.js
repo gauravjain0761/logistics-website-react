@@ -29,7 +29,7 @@ import axiosInstance from "@/utils/axios";
 
 const JobList = () => {
   const router = useRouter();
-  const[data,setData]= useState([]);
+  const [data, setData] = useState([]);
   const [startChat, setStartChat] = React.useState("");
   const handleOpen = () => setStartChat(true);
   const handleClose = () => setStartChat(false);
@@ -61,17 +61,17 @@ const JobList = () => {
       .get(`api/auth/jobs/job-bids/${router.query.id}`)
       .then((response) => {
         if (response.status === 200) {
-          setData(response.data?.view_data)
-          console.log(response.data,"bidlist")
+          setData(response.data?.view_data);
+          console.log(response.data, "bidlist");
         }
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error);
       });
   };
-  useEffect(()=>{
+  useEffect(() => {
     fetchApi();
-  },[])
+  }, []);
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -115,36 +115,39 @@ const JobList = () => {
                 </Box>
               </Stack>
               <Box>
-                {data && data.length > 0 && data.map((elem, index) => {
-                  return (
-                    <Card
-                      key={index}
-                      sx={{
-                        my: 2,
+                {data &&
+                  data.length > 0 &&
+                  data.map((elem, index) => {
+                    return (
+                      <Card
+                        key={index}
+                        sx={{
+                          my: 2,
 
-                        ":hover": {
-                          borderColor: "#ff7534",
-                          // cursor: "pointer",
-                          transition: " all 0.3s ease-in-out",
-                        },
-                      }}
-                      variant="outlined"
-                    >
-                      <CardContent>
-                        <Grid container spacing={2}>
-                          <Grid item md={2}>
-                            <Box
-                              component="img"
-                              src="/assets/images/dashboard//portfolio.jpeg"
-                              sx={{
-                                borderRadius: "50%",
-                                border: "3px solid #ff7534",
-                              }}
-                            />
-                          </Grid>
-                          <Grid item md={10}>
-                            <Stack direction="column">
-                              {/* <Box>
+                          ":hover": {
+                            borderColor: "#ff7534",
+                            // cursor: "pointer",
+                            transition: " all 0.3s ease-in-out",
+                          },
+                        }}
+                        variant="outlined"
+                      >
+                        <CardContent>
+                          <Grid container spacing={2}>
+                            <Grid item md={2}>
+                              <Box
+                                component="img"
+                                alt={elem.driver.profile_img}
+                                src={`${elem.driver.base_url}${elem.driver.profile_img}`}
+                                sx={{
+                                  borderRadius: "50%",
+                                  border: "3px solid #ff7534",
+                                }}
+                              />
+                            </Grid>
+                            <Grid item md={10}>
+                              <Stack direction="column">
+                                {/* <Box>
                                 <Typography
                                   color="primary"
                                   fontSize={14}
@@ -154,65 +157,65 @@ const JobList = () => {
                                 </Typography>
                               </Box> */}
 
-                              <Box pb={0.3}>
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  justifyContent="space-between"
-                                >
-                                  <Box>
-                                    <Typography variant="h5" fontWeight={500}>
-                                      {elem.name}
-                                    </Typography>
-                                  </Box>
-                                  <Stack>
-                                    <Stack direction="row" spacing={0.4}>
+                                <Box pb={0.3}>
+                                  <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                  >
+                                    <Box>
+                                      <Typography variant="h5" fontWeight={500}>
+                                        {elem.driver.user_name}
+                                      </Typography>
+                                    </Box>
+                                    <Stack>
+                                      <Stack direction="row" spacing={0.4}>
+                                        <Box>
+                                          <Typography fontWeight={400}>
+                                            Job Success Rate :
+                                          </Typography>
+                                        </Box>
+                                        <Box>
+                                          <Typography
+                                            color="primary"
+                                            fontWeight={600}
+                                          >
+                                            98 %
+                                          </Typography>
+                                        </Box>
+                                      </Stack>
                                       <Box>
-                                        <Typography fontWeight={400}>
-                                          Job Success Rate :
-                                        </Typography>
-                                      </Box>
-                                      <Box>
-                                        <Typography
-                                          color="primary"
-                                          fontWeight={600}
-                                        >
-                                          98 %
-                                        </Typography>
+                                        <LinearProgress
+                                          variant="determinate"
+                                          value={98}
+                                        />
                                       </Box>
                                     </Stack>
-                                    <Box>
-                                      <LinearProgress
-                                        variant="determinate"
-                                        value={98}
-                                      />
-                                    </Box>
                                   </Stack>
-                                </Stack>
-                              </Box>
-                              <Typography fontSize={14}>
-                                {" "}
-                                {elem.description}
-                              </Typography>
-                            </Stack>
+                                </Box>
+                                <Typography fontSize={14}>
+                                  {" "}
+                                  {elem.description}
+                                </Typography>
+                              </Stack>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                        <Stack
-                          direction="row"
-                          justifyContent="space-between"
-                          alignItems="center"
-                          pt={2}
-                        >
-                          <Stack direction="row" spacing={1}>
-                            <Chip
-                              sx={{ cursor: "pointer" }}
-                              icon={
-                                <Iconify icon="material-symbols:check-circle" />
-                              }
-                              label="Accept Driver Bid"
-                              variant="outlined"
-                            />
-                            {/* <Chip
+                          <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            pt={2}
+                          >
+                            <Stack direction="row" spacing={1}>
+                              <Chip
+                                sx={{ cursor: "pointer" }}
+                                icon={
+                                  <Iconify icon="material-symbols:check-circle" />
+                                }
+                                label="Accept Driver Bid"
+                                variant="outlined"
+                              />
+                              {/* <Chip
                               sx={{ cursor: "pointer" }}
                               icon={
                                 <Iconify icon="material-symbols:check-circle" />
@@ -224,33 +227,36 @@ const JobList = () => {
                               variant="outlined"
                               onClick={() => setStartChat(true)}
                             /> */}
+                            </Stack>
+                            <Stack>
+                              <Rating
+                                value={4}
+                                readOnly
+                                size="small"
+                                sx={{
+                                  color: (theme) => theme.palette.primary.main,
+                                }}
+                              />
+                            </Stack>
                           </Stack>
-                          <Stack>
-                            <Rating
-                              value={4}
-                              readOnly
-                              size="small"
-                              sx={{
-                                color: (theme) => theme.palette.primary.main,
-                              }}
-                            />
-                          </Stack>
-                        </Stack>
-                        <Divider sx={{ my: 2 }} />
-                        <Box>
-                          <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="subtitle2">
-                              Bid: $500
-                            </Typography>
-                            <Typography variant="subtitle2">
-                              Earned: $30K+
-                            </Typography>
-                          </Stack>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                          <Divider sx={{ my: 2 }} />
+                          <Box>
+                            <Stack
+                              direction="row"
+                              justifyContent="space-between"
+                            >
+                              <Typography variant="subtitle2">
+                                Bid: ${elem.ammount}
+                              </Typography>
+                              <Typography variant="subtitle2">
+                                Earned: $30K+
+                              </Typography>
+                            </Stack>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
               </Box>
               <Box>
                 <Stack alignItems="center" justifyContent="center">
