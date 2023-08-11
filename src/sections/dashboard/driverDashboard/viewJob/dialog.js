@@ -37,26 +37,26 @@ const JobDialog = ({ addressOpen = [], onClose }) => {
             <TableRow>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: "100%" }} aria-label="simple table">
-                  <thead>
-                    <tr style={{ width: "100%" }}>
-                      <th>Sr no.</th>
-                      <th>Address</th>
+                  <TableHead>
+                    <TableRow style={{ width: "100%" }}>
+                      <TableCell>Sr no.</TableCell>
+                      <TableCell>Address</TableCell>
                       {/* <th>Latitude</th>
                       <th>Longitude</th> */}
                       {/* <th>Type</th> */}
-                    </tr>
-                  </thead>
-                  <tbody style={{ textAlign: "left", fontSize: "14px" }}>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody style={{ textAlign: "left", fontSize: "14px" }}>
                     {addressOpen?.address &&
                       addressOpen?.address?.length > 0 &&
                       addressOpen?.address.map((addressItem, addressIndex) => (
-                        <tr key={`Address-${addressIndex}`}>
-                          <td style={{ verticalAlign: "middle" }}>
+                        <TableRow key={`Address-${addressIndex}`}>
+                          <TableCell style={{ verticalAlign: "middle" }}>
                             {addressIndex + 1}
-                          </td>
-                          <td style={{ verticalAlign: "middle" }}>
+                          </TableCell>
+                          <TableCell style={{ verticalAlign: "middle" }}>
                             {addressItem.address}
-                          </td>
+                          </TableCell>
                           {/* <td style={{ verticalAlign: "middle" }}>
                               {addressItem.lat}
                             </td>
@@ -66,9 +66,9 @@ const JobDialog = ({ addressOpen = [], onClose }) => {
                             <td style={{ verticalAlign: "middle" }}>
                               {addressItem.type}
                             </td> */}
-                        </tr>
+                        </TableRow>
                       ))}
-                  </tbody>
+                  </TableBody>
                 </Table>
               </TableContainer>
             </TableRow>

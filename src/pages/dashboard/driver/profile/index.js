@@ -16,12 +16,20 @@ const MyProfilePage = () => {
       email: "",
       mobile: "",
       profile_img: "",
+      profile_img_url: "",
       plan: "",
     },
     validate: (values) => {},
     onSubmit: async (values) => {
+      let formData = new FormData();
+      formData.append("user_name",values?.user_name);
+      formData.append("email",values?.email);
+      formData.append("mobile",values?.mobile);
+      formData.append("profile_img",values?.profile_img);
+      formData.append("plan",values?.plan);
+
       await axiosInstance
-        .post("/api/auth/profile/update-profile", values)
+        .post("/api/auth/profile/update-profile", formData)
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
@@ -76,8 +84,12 @@ const MyProfilePage = () => {
                 "profile_img",
                 `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
               );
+              formik.setFieldValue(
+                "profile_img_url",
+                `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
+              );
             } else if (key == "plan") {
-              formik.setFieldValue("plan", newData?.plan);
+              formik.setFieldValue("plan", newData?.plan?.plan_id);
             }
           }
         }

@@ -41,6 +41,12 @@ const DashboardJobRequest = () => {
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
+
+  const [applyOpen, setApplyopen] = React.useState(false);
+
+  const handleOpen = (id) => setApplyopen(id);
+  const handleClose = () => setApplyopen(false);
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -326,7 +332,20 @@ const DashboardJobRequest = () => {
                                     </Button>
                                   </Box>
                                   <Box>
-                                    <ApplyJobModal />
+                                    <Button
+                                      color="dark"
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="icon-park:check-correct" />
+                                      }
+                                      onClick={() => handleOpen(item?.id)}
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      Apply Job
+                                    </Button>
                                   </Box>
                                 </Stack>
                               </Stack>
@@ -410,6 +429,14 @@ const DashboardJobRequest = () => {
             </Box>
           </Box>
         </Container>
+
+        <Box>
+          <ApplyJobModal
+            handleClose={handleClose}
+            job_id={applyOpen}
+            applyOpen={applyOpen}
+          />
+        </Box>
       </Box>
     </React.Fragment>
   );
