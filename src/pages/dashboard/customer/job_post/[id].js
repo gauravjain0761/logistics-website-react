@@ -62,14 +62,14 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      // values["items"] = JSON.stringify(values?.items);
+      values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
       // formData.append("job_title", values?.job_title);
       // formData.append("image", values?.image);
       // formData.append("size", values?.size);
       // formData.append("quantity", values?.quantity);
-      console.log("valuesvalues", values);
+      // console.log("valuesvalues", values);
 
       await axiosInstance
         .post("/api/auth/master/jobs/add", values)
