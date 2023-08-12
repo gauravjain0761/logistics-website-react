@@ -8,6 +8,9 @@ import { PATH_DASHBOARD } from "../routes/paths";
 import LoadingScreen from "../components/loading-screen";
 //
 import { useAuthContext } from "./useAuthContext";
+import { Box, Container } from "@mui/material";
+import SkeletonLoader from "@/components/skeleton";
+import { PrimaryWebLayout } from "@/layout";
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +39,15 @@ export default function GuestGuard({ children }) {
   }, [isAuthenticated]);
 
   if (isInitialized === isAuthenticated) {
-    return <LoadingScreen />;
+    return (
+      <PrimaryWebLayout>
+        <Box mt={10}>
+          <Container>
+            <SkeletonLoader />
+          </Container>
+        </Box>
+      </PrimaryWebLayout>
+    );
   }
 
   return <> {children} </>;

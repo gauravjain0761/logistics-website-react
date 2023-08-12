@@ -1,4 +1,4 @@
-export const digitRegex = /^\d+$/;
+export const digitRegex = /^[0-9]{5}$/;
 
 const convertTolatLng = (latLng, title) => {
   return {
