@@ -204,9 +204,10 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                           size={"small"}
                         />
                       </Box>
-                      <Box textAlign="center">
+                      {formik.values.user_type === "driver"? <Box textAlign="center">
                       <DocumentModal formik={formik}/>
-                      </Box>
+                      </Box>:""}
+                     
                       {formik.values.user_type === "company" ? (
                         <Box>
                           <Stack textAlign={"center"}>
@@ -236,6 +237,10 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                                     URL.createObjectURL(e.target.files[0])
                                   );
                                 }}
+                                helperText={
+                      formik.touched.company_certificate &&
+                      formik.errors.company_certificate
+                    }
                               />
                             )}
 
@@ -313,6 +318,10 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                                     URL.createObjectURL(e.target.files[0])
                                   );
                                 }}
+                                helperText={
+                      formik.touched.company_vat &&
+                      formik.errors.company_vat
+                    }
                               />
                             )}
 
