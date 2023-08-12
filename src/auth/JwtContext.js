@@ -12,6 +12,7 @@ import localStorageAvailable from "../utils/localStorageAvailable";
 //
 import { isValidToken, setSession } from "./utils";
 import { useSnackbar } from "notistack";
+import { useRouter } from "next/router";
 
 // ----------------------------------------------------------------------
 
@@ -72,7 +73,7 @@ AuthProvider.propTypes = {
 
 export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const router = useRouter();
   const storageAvailable = localStorageAvailable();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -171,6 +172,7 @@ export function AuthProvider({ children }) {
       enqueueSnackbar(response.data.message, {
         variant: "success",
       });
+      router.push("/auth/login");
       setSession(null);
       dispatch({
         type: "LOGOUT",
