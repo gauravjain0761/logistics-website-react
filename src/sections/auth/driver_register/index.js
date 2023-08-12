@@ -21,6 +21,7 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import { Close } from "@mui/icons-material";
+import DocumentModal from "@/module/driverDocument/driverDocumentmodal";
 
 const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
@@ -202,6 +203,9 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                           }
                           size={"small"}
                         />
+                      </Box>
+                      <Box textAlign="center">
+                      <DocumentModal formik={formik}/>
                       </Box>
                       {formik.values.user_type === "company" ? (
                         <Box>

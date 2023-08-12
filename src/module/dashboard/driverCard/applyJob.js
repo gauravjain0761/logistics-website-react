@@ -12,7 +12,6 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
 
-  console.log(user, "auththth");
   const formik = useFormik({
     initialValues: {
       job_id: job_id,
