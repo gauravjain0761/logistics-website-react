@@ -184,6 +184,11 @@ const Register = ({ formik, open, handleOpenClose }) => {
                                     URL.createObjectURL(e.target.files[0])
                                   );
                                 }}
+                                 helperText={
+                      formik.touched.company_certificate &&
+                      formik.errors.company_certificate
+                    }
+                                
                               />
                             )}
 
@@ -261,6 +266,10 @@ const Register = ({ formik, open, handleOpenClose }) => {
                                     URL.createObjectURL(e.target.files[0])
                                   );
                                 }}
+                                helperText={
+                      formik.touched.company_vat &&
+                      formik.errors.company_vat
+                    }
                               />
                             )}
 
