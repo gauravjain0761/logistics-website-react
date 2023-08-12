@@ -102,8 +102,8 @@ const SubscriptionsPage = () => {
                             <Box>
                               <Box textAlign="center">
                                 <List>
-                                  <ListItem>
-                                    <ListItemIcon>
+                                  <ListItem sx={{ position: "relative" }}>
+                                    <ListItemIcon sx={{ position: "absolute" }}>
                                       <Iconify
                                         icon="charm:square-tick"
                                         color={(theme) =>
@@ -112,12 +112,12 @@ const SubscriptionsPage = () => {
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      sx={{ ml: 7 }}
+                                      sx={{ textAlign: "center" }}
                                       primary="Online System"
                                     />
                                   </ListItem>
-                                  <ListItem>
-                                    <ListItemIcon>
+                                  <ListItem sx={{ position: "relative" }}>
+                                    <ListItemIcon sx={{ position: "absolute" }}>
                                       <Iconify
                                         icon="charm:square-tick"
                                         color={(theme) =>
@@ -126,24 +126,24 @@ const SubscriptionsPage = () => {
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      sx={{ ml: 8.5 }}
+                                      sx={{ textAlign: "center" }}
                                       primary=" Free apps"
                                     />
                                   </ListItem>
-                                  <ListItem>
-                                    <ListItemIcon>
+                                  <ListItem sx={{ position: "relative" }}>
+                                    <ListItemIcon sx={{ position: "absolute" }}>
                                       <Iconify
                                         icon="system-uicons:cross"
                                         color="red"
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      sx={{ ml: 8.5 }}
+                                      sx={{ textAlign: "center" }}
                                       primary=" Free apps"
                                     />
                                   </ListItem>
-                                  <ListItem>
-                                    <ListItemIcon>
+                                  <ListItem sx={{ position: "relative" }}>
+                                    <ListItemIcon sx={{ position: "absolute" }}>
                                       <Iconify
                                         icon="charm:square-tick"
                                         color={(theme) =>
@@ -152,19 +152,19 @@ const SubscriptionsPage = () => {
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      sx={{ ml: 8 }}
+                                      sx={{ textAlign: "center" }}
                                       primary="live preview"
                                     />
                                   </ListItem>
-                                  <ListItem>
-                                    <ListItemIcon>
+                                  <ListItem sx={{ position: "relative" }}>
+                                    <ListItemIcon sx={{ position: "absolute" }}>
                                       <Iconify
                                         icon="system-uicons:cross"
                                         color="red"
                                       />
                                     </ListItemIcon>
                                     <ListItemText
-                                      sx={{ ml: 5 }}
+                                      sx={{ textAlign: "center" }}
                                       primary="Support unlimited"
                                     />
                                   </ListItem>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // next
 import { useRouter } from "next/router";
 // components
-import LoadingScreen from "../components/loading-screen";
+// import LoadingScreen from "../components/loading-screen";
 //
 import { useAuthContext } from "./useAuthContext";
 import Login from "@/sections/auth/login";

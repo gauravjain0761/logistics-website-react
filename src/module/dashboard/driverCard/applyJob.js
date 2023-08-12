@@ -27,7 +27,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
       if (!values.ammount) {
         errors.ammount = "Amount is required";
       } else if (!digitRegex.test(values.ammount)) {
-        errors.ammount = "Enter valid number";
+        errors.ammount = "Enter valid number (Max 5 Digit)";
       }
       return errors;
     },
@@ -85,6 +85,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
                 fullWidth
                 size="small"
                 name="ammount"
+                
                 value={formik.values.ammount}
                 onChange={formik.handleChange}
                 label="Bid Price"
