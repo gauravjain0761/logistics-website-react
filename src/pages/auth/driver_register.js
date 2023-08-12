@@ -93,6 +93,39 @@ const DriverPage = () => {
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
+      if (!values.profile_img) {
+        errors.profile_img = "Driver Photo is required";
+      }
+      if (!values.licence_front) {
+        errors.licence_front = "Driver Licence is required";
+      }
+      if (!values.licence_back) {
+        errors.licence_back = "Driver Licence is required";
+      }
+      if (!values.address_proof) {
+        errors.address_proof = "Address proof is required";
+      }
+      if (!values.insurance_cert) {
+        errors.insurance_cert = "Insurance Certificate is required";
+      }
+      if (!values.transit_cert) {
+        errors.transit_cert = "Transit Certificate is required";
+      }
+      if (!values.liability_cert) {
+        errors.liability_cert = "Liability Certificate is required";
+      }
+      if (!values.vehicle_cert) {
+        errors.vehicle_cert = "Vehicle Certificate is required";
+      }
+      if (!values.v5c_cert) {
+        errors.v5c_cert = "V5C Certificate is required";
+      }
+      if (!values.dvia_cert) {
+        errors.dvia_cert = "Dvia Certificate is required";
+      }
+      if (!values.nationality_cert) {
+        errors.nationality_cert = "Nationality Proof is required";
+      }
 
       if (values.term == "no") {
         errors.term = "T&C is required";
@@ -101,7 +134,7 @@ const DriverPage = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
-      let url;
+      let url, formData;
       if (values.user_type === "driver") {
         url = "api/user/driver-register";
         let driverFormData = new FormData();
@@ -112,7 +145,10 @@ const DriverPage = () => {
         driverFormData.append("term", values?.term);
         driverFormData.append("password", values?.password);
         driverFormData.append("driver_type", values?.driver_type);
-        driverFormData.append("password_confirmation", values?.password_confirmation);
+        driverFormData.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
         driverFormData.append("profile_img", values?.profile_img);
         driverFormData.append("licence_front", values?.licence_front);
         driverFormData.append("licence_back", values?.licence_back);

@@ -46,14 +46,14 @@ const DocumentModal = ({ formik }) => {
             top: "50%",
             left: "50%",
             width: "70%",
-            height:"70%",
-            overflow:"hidden",
-            overflowY:"scroll",
+            height: "70%",
+            overflow: "hidden",
+            overflowY: "scroll",
             textAlign: "center",
             transform: "translate(-50%, -50%)",
             bgcolor: "background.paper",
             border: "1px solid #f5f5f5",
-            borderRadius:"10px",
+            borderRadius: "10px",
             boxShadow: 24,
             p: 2,
           }}
@@ -75,15 +75,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="profile_img"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "profile_img",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("profile_img", e.target.files[0]);
                       formik.setFieldValue(
                         "profile_img_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.profile_img && formik.errors.profile_img
+                    }
                   />
                 )}
 
@@ -108,10 +108,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("profile_img", "");
-                              formik.setFieldValue(
-                                "profile_img_url",
-                                ""
-                              );
+                              formik.setFieldValue("profile_img_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -135,7 +132,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Driver Licence Front
+                  Driver Licence Front
                 </Typography>
                 {!formik.values.licence_front && (
                   <TextBox
@@ -148,15 +145,16 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="licence_front"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "licence_front",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("licence_front", e.target.files[0]);
                       formik.setFieldValue(
                         "licence_front_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.licence_front &&
+                      formik.errors.licence_front
+                    }
                   />
                 )}
 
@@ -181,10 +179,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("licence_front", "");
-                              formik.setFieldValue(
-                                "licence_front_url",
-                                ""
-                              );
+                              formik.setFieldValue("licence_front_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -208,7 +203,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Driver Licence Back
+                  Driver Licence Back
                 </Typography>
                 {!formik.values.licence_back && (
                   <TextBox
@@ -221,15 +216,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="licence_back"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "licence_back",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("licence_back", e.target.files[0]);
                       formik.setFieldValue(
                         "licence_back_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.licence_back && formik.errors.licence_back
+                    }
                   />
                 )}
 
@@ -254,10 +249,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("licence_back", "");
-                              formik.setFieldValue(
-                                "licence_back_url",
-                                ""
-                              );
+                              formik.setFieldValue("licence_back_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -281,7 +273,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Address Proof
+                  Address Proof
                 </Typography>
                 {!formik.values.address_proof && (
                   <TextBox
@@ -294,15 +286,16 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="address_proof"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "address_proof",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("address_proof", e.target.files[0]);
                       formik.setFieldValue(
                         "address_proof_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.address_proof &&
+                      formik.errors.address_proof
+                    }
                   />
                 )}
 
@@ -327,10 +320,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("address_proof", "");
-                              formik.setFieldValue(
-                                "address_proof_url",
-                                ""
-                              );
+                              formik.setFieldValue("address_proof_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -354,7 +344,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Insurance Certificate
+                  Insurance Certificate
                 </Typography>
                 {!formik.values.insurance_cert && (
                   <TextBox
@@ -367,15 +357,16 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="insurance_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "insurance_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("insurance_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "insurance_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.insurance_cert &&
+                      formik.errors.insurance_cert
+                    }
                   />
                 )}
 
@@ -400,10 +391,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("insurance_cert", "");
-                              formik.setFieldValue(
-                                "insurance_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("insurance_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -424,11 +412,10 @@ const DocumentModal = ({ formik }) => {
                 )}
               </Stack>
             </Grid>
-           
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Transit Certificate
+                  Transit Certificate
                 </Typography>
                 {!formik.values.transit_cert && (
                   <TextBox
@@ -441,15 +428,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="transit_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "transit_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("transit_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "transit_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.transit_cert && formik.errors.transit_cert
+                    }
                   />
                 )}
 
@@ -474,10 +461,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("transit_cert", "");
-                              formik.setFieldValue(
-                                "transit_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("transit_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -501,7 +485,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Liability Certificate
+                  Liability Certificate
                 </Typography>
                 {!formik.values.liability_cert && (
                   <TextBox
@@ -514,15 +498,16 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="liability_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "liability_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("liability_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "liability_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.liability_cert &&
+                      formik.errors.liability_cert
+                    }
                   />
                 )}
 
@@ -547,10 +532,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("liability_cert", "");
-                              formik.setFieldValue(
-                                "liability_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("liability_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -574,7 +556,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Vehicle Certificate
+                  Vehicle Certificate
                 </Typography>
                 {!formik.values.vehicle_cert && (
                   <TextBox
@@ -587,15 +569,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="vehicle_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "vehicle_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("vehicle_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "vehicle_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.vehicle_cert && formik.errors.vehicle_cert
+                    }
                   />
                 )}
 
@@ -620,10 +602,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("vehicle_cert", "");
-                              formik.setFieldValue(
-                                "vehicle_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("vehicle_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -647,7 +626,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                V5c Certificate
+                  V5c Certificate
                 </Typography>
                 {!formik.values.v5c_cert && (
                   <TextBox
@@ -660,15 +639,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="v5c_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "v5c_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("v5c_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "v5c_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.v5c_cert && formik.errors.v5c_cert
+                    }
                   />
                 )}
 
@@ -693,10 +672,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("v5c_cert", "");
-                              formik.setFieldValue(
-                                "v5c_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("v5c_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -720,7 +696,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Dvia Certificate
+                  Dvia Certificate
                 </Typography>
                 {!formik.values.dvia_cert && (
                   <TextBox
@@ -733,15 +709,15 @@ const DocumentModal = ({ formik }) => {
                     value=""
                     name="dvia_cert"
                     onChange={(e) => {
-                      formik.setFieldValue(
-                        "dvia_cert",
-                        e.target.files[0]
-                      );
+                      formik.setFieldValue("dvia_cert", e.target.files[0]);
                       formik.setFieldValue(
                         "dvia_cert_url",
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.dvia_cert && formik.errors.dvia_cert
+                    }
                   />
                 )}
 
@@ -766,10 +742,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("dvia_cert", "");
-                              formik.setFieldValue(
-                                "dvia_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("dvia_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -793,7 +766,7 @@ const DocumentModal = ({ formik }) => {
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
-                Nationality Proof Certificate
+                  Nationality Proof Certificate
                 </Typography>
                 {!formik.values.nationality_cert && (
                   <TextBox
@@ -815,6 +788,10 @@ const DocumentModal = ({ formik }) => {
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
+                    helperText={
+                      formik.touched.nationality_cert &&
+                      formik.errors.nationality_cert
+                    }
                   />
                 )}
 
@@ -839,10 +816,7 @@ const DocumentModal = ({ formik }) => {
                             size="small"
                             onClick={() => {
                               formik.setFieldValue("nationality_cert", "");
-                              formik.setFieldValue(
-                                "nationality_cert_url",
-                                ""
-                              );
+                              formik.setFieldValue("nationality_cert_url", "");
                             }}
                           >
                             <Close fontSize="small" />
@@ -864,6 +838,23 @@ const DocumentModal = ({ formik }) => {
               </Stack>
             </Grid>
           </Grid>
+          <Stack
+            alignItems="end"
+            justifyContent="flex-end"
+            direction="row"
+            spacing={1}
+          >
+            <Box>
+              <Button variant="outlined" onClick={handleClose}>
+                Done
+              </Button>
+            </Box>
+            <Box>
+              <Button color="dark" variant="outlined" onClick={handleClose}>
+                Cancel
+              </Button>
+            </Box>
+          </Stack>
         </Box>
       </Modal>
     </Box>
