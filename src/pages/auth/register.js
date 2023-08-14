@@ -52,6 +52,10 @@ const RegisterPage = () => {
       term: "no",
       password: "",
       password_confirmation: "",
+      company_certificate: "",
+      company_certificate_url: "",
+      company_vat: "",
+      company_vat_url: "",
     },
     validate: (values) => {
       const errors = {};
@@ -95,7 +99,12 @@ const RegisterPage = () => {
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
-
+      if (!values.company_certificate) {
+        errors.company_certificate = "Company Certificate is required";
+      }
+      if (!values.company_vat) {
+        errors.company_vat = "Company Vat is required";
+      }
       if (values.term == "no") {
         errors.term = "T&C is required";
       }
@@ -105,8 +114,21 @@ const RegisterPage = () => {
     onSubmit: async (values, { setErrors }) => {
       // console.log("test 13", values);
       // register("/api/user/cust-register", values);
+      let formData = new FormData();
+      formData.append("user_name", values?.user_name);
+      formData.append("user_type", values?.user_type);
+      formData.append("email", values?.email);
+      formData.append("mobile", values?.mobile);
+      formData.append("term", values?.term);
+      formData.append("password", values?.password);
+      formData.append(
+        "password_confirmation",
+        values?.password_confirmation
+      );
+      formData.append("company_certificate", values?.company_certificate);
+      formData.append("company_vat", values?.company_vat);
       await axiosInstance
-        .post("/api/user/cust-register", values)
+        .post("/api/user/cust-register", formData)
         .then((response) => {
           if (response?.status === 200) {
             // sendOtp({

@@ -142,6 +142,12 @@ const DriverPage = () => {
       ) {
         errors.document = "Document is required";
       }
+      if (!values.company_certificate) {
+        errors.company_certificate = "Company Certificate is required";
+      }
+      if (!values.company_vat) {
+        errors.company_vat = "Company Vat is required";
+      }
 
       if (values.term == "no") {
         errors.term = "T&C is required";
