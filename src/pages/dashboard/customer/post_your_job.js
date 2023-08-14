@@ -35,6 +35,7 @@ const PostJob = () => {
     initialValues: {
       name: "",
       vehicle: 0,
+      created_by:"customer",
       items: [],
       description: "",
     },
