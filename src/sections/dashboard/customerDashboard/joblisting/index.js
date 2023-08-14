@@ -26,6 +26,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import GoogleMaps from "@/module/map";
 import { useRouter } from "next/router";
 import axiosInstance from "@/utils/axios";
+import { useSnackbar } from "notistack";
 
 const JobList = () => {
   const router = useRouter();
@@ -54,6 +55,7 @@ const JobList = () => {
       value: "last",
     },
   ];
+  const { enqueueSnackbar } = useSnackbar();
 
   // Api Fetch
   const fetchApi = async () => {
@@ -62,7 +64,6 @@ const JobList = () => {
       .then((response) => {
         if (response.status === 200) {
           setData(response.data?.view_data);
-          console.log(response.data, "bidlist");
         }
       })
       .catch((error) => {
@@ -73,6 +74,29 @@ const JobList = () => {
     fetchApi();
   }, []);
 
+  // Accept Bid Api
+  const fetchBidApi = async (id) => {
+    await axiosInstance
+      .get(`api/auth/jobs/accept-bid/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          router.push("/dashboard/customer/job_posted");
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+        } else {
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Bid Api End
+  
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -214,19 +238,8 @@ const JobList = () => {
                                 }
                                 label="Accept Driver Bid"
                                 variant="outlined"
+                                onClick={() => setStartChat(elem.id)}
                               />
-                              {/* <Chip
-                              sx={{ cursor: "pointer" }}
-                              icon={
-                                <Iconify icon="material-symbols:check-circle" />
-                              }
-                              // onClick={() =>
-                              //   router.push("/dashboard/driver/track_job")
-                              // }
-                              label="Start Job"
-                              variant="outlined"
-                              onClick={() => setStartChat(true)}
-                            /> */}
                             </Stack>
                             <Stack>
                               <Rating
@@ -390,17 +403,13 @@ const JobList = () => {
               component="h2"
               pb={2}
             >
-              Are you sure you want to Start The Job ?
+              Are you sure you want to Accept Bid?
             </Typography>
             <Stack direction="row" spacing={8}>
               <Button
                 fullWidth
                 variant="outlined"
-                onClick={() => {
-                  startChat
-                    ? router.push("/dashboard/driver/job_post")
-                    : setStartChat(false);
-                }}
+                onClick={() => fetchBidApi(startChat)}
               >
                 Yes
               </Button>
