@@ -90,7 +90,7 @@ const MyProfilePage = () => {
                 `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
               );
             } else if (key == "plan") {
-              formik.setFieldValue("plan", newData?.plan?.plan_id);
+              formik.setFieldValue("plan", newData?.plan?.plan_name);
             }
           }
         }

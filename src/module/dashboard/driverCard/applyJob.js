@@ -22,10 +22,12 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
     },
     validate: (values) => {
       const errors = {};
-
+      if (!values.description) {
+        errors.description = "Note is required";
+      }
       if (!values.ammount) {
         errors.ammount = "Amount is required";
-      } else if (!digitRegex.test(values.ammount)) {
+      } else if (values.ammount.length >= 6) {
         errors.ammount = "Enter valid number (Max 5 Digit)";
       }
       return errors;
@@ -84,9 +86,19 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
                 fullWidth
                 size="small"
                 name="ammount"
-                
+                // type="number"
                 value={formik.values.ammount}
-                onChange={formik.handleChange}
+                isMaxLenght={5}
+                onChange={(e) => {
+                  if (e) {
+                    console.log("Ok.", e.target.value.replace(/\D/gm, ""));
+                    formik.setFieldValue(
+                      "ammount",
+                      e.target.value.replace(/\D/gm, "")
+                    );
+                  }
+                  // formik.handleChange;
+                }}
                 label="Bid Price"
                 placeholder="Bidding Price"
                 helperText={formik.touched.ammount && formik.errors.ammount}
@@ -103,6 +115,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
                 onChange={formik.handleChange}
                 label="Note"
                 placeholder="Note For Customer"
+                helperText={formik.touched.description && formik.errors.description}
               />
             </Box>
             <Typography

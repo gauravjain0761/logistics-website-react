@@ -38,7 +38,6 @@ function TrackGoogleMaps() {
   const [map, setMap] = React.useState(null);
   const [showPopUp, setShowPopUp] = React.useState(false);
 
-  console.log("showPopUp", showPopUp);
 
   return isLoaded ? (
     <Box component="div" sx={{ position: "relative", width: "100%" }}>
