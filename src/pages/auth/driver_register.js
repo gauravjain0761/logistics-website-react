@@ -50,6 +50,7 @@ const DriverPage = () => {
       dvia_cert_url: "",
       nationality_cert: "",
       nationality_cert_url: "",
+      document: "",
     },
     validate: (values) => {
       const errors = {};
@@ -125,6 +126,21 @@ const DriverPage = () => {
       }
       if (!values.nationality_cert) {
         errors.nationality_cert = "Nationality Proof is required";
+      }
+      if (
+        !values.profile_img ||
+        !values.licence_front ||
+        !values.licence_back ||
+        !values.address_proof ||
+        !values.insurance_cert ||
+        !values.transit_cert ||
+        !values.liability_cert ||
+        !values.vehicle_cert ||
+        !values.v5c_cert ||
+        !values.dvia_cert ||
+        !values.nationality_cert
+      ) {
+        errors.document = "Document is required";
       }
 
       if (values.term == "no") {
@@ -212,6 +228,8 @@ const DriverPage = () => {
         });
     },
   });
+
+  console.log("documentdocument", formik);
 
   return (
     <GuestGuard>

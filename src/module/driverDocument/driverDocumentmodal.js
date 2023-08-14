@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   CardContent,
+  FormHelperText,
   Grid,
   IconButton,
   Modal,
@@ -19,11 +20,59 @@ import React from "react";
 const DocumentModal = ({ formik }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    formik.setFieldValue("profile_img", "");
+    formik.setFieldValue("licence_front", "");
+    formik.setFieldValue("licence_back", "");
+    formik.setFieldValue("address_proof", "");
+    formik.setFieldValue("insurance_cert", "");
+    formik.setFieldValue("transit_cert", "");
+    formik.setFieldValue("liability_cert", "");
+    formik.setFieldValue("vehicle_cert", "");
+    formik.setFieldValue("v5c_cert", "");
+    formik.setFieldValue("dvia_cert", "");
+    formik.setFieldValue("nationality_cert", "");
+    formik.setFieldValue("profile_img_url", "");
+    formik.setFieldValue("licence_front_url", "");
+    formik.setFieldValue("licence_back_url", "");
+    formik.setFieldValue("address_proof_url", "");
+    formik.setFieldValue("insurance_cert_url", "");
+    formik.setFieldValue("transit_cert_url", "");
+    formik.setFieldValue("liability_cert_url", "");
+    formik.setFieldValue("vehicle_cert_url", "");
+    formik.setFieldValue("v5c_cert_url", "");
+    formik.setFieldValue("dvia_cert_url", "");
+    formik.setFieldValue("nationality_cert_url", "");
+  };
+
+  const addImage = () => {
+    setOpen(false);
+    if (
+      formik.values.profile_img &&
+      formik.values.licence_front &&
+      formik.values.licence_back &&
+      formik.values.address_proof &&
+      formik.values.insurance_cert &&
+      formik.values.transit_cert &&
+      formik.values.liability_cert &&
+      formik.values.vehicle_cert &&
+      formik.values.v5c_cert &&
+      formik.values.dvia_cert &&
+      formik.values.nationality_cert
+    ) {
+      formik.setFieldTouched("document", false);
+      formik.setFieldError("document", "");
+    }
+  };
   return (
     <Box>
       <Button
-        color="secondary"
+        color={
+          formik.touched.document && formik.errors.document
+            ? "error"
+            : "secondary"
+        }
         fullWidth
         variant="outlined"
         startIcon={<Iconify icon="flat-color-icons:gallery" />}
@@ -34,6 +83,12 @@ const DocumentModal = ({ formik }) => {
       >
         Add Documents
       </Button>
+      {formik.errors.document && (
+        <FormHelperText error={formik.errors.document}>
+          Document is required
+        </FormHelperText>
+      )}
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -845,7 +900,7 @@ const DocumentModal = ({ formik }) => {
             spacing={1}
           >
             <Box>
-              <Button variant="outlined" onClick={handleClose}>
+              <Button variant="outlined" onClick={addImage}>
                 Done
               </Button>
             </Box>
