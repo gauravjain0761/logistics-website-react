@@ -27,7 +27,9 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
   return (
     <React.Fragment>
-      <Box sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}>
+      <Box
+        sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}
+      >
         <Container>
           <Grid sx={{ justifyContent: "center" }} container>
             <Grid item md={5.6} sm={12} xs={12}>
@@ -204,10 +206,14 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                           size={"small"}
                         />
                       </Box>
-                      {formik.values.user_type === "driver"? <Box textAlign="center">
-                      <DocumentModal formik={formik}/>
-                      </Box>:""}
-                     
+                      {formik.values.user_type === "driver" ? (
+                        <Box textAlign="center">
+                          <DocumentModal formik={formik} />
+                        </Box>
+                      ) : (
+                        ""
+                      )}
+
                       {formik.values.user_type === "company" ? (
                         <Box>
                           <Stack textAlign={"center"}>
@@ -238,9 +244,9 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                                   );
                                 }}
                                 helperText={
-                      formik.touched.company_certificate &&
-                      formik.errors.company_certificate
-                    }
+                                  formik.touched.company_certificate &&
+                                  formik.errors.company_certificate
+                                }
                               />
                             )}
 
@@ -319,9 +325,9 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                                   );
                                 }}
                                 helperText={
-                      formik.touched.company_vat &&
-                      formik.errors.company_vat
-                    }
+                                  formik.touched.company_vat &&
+                                  formik.errors.company_vat
+                                }
                               />
                             )}
 
@@ -408,15 +414,21 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                               label={
                                 <Typography textAlign="center">
                                   I agree to the{" "}
-                                  <Typography color="primary" component="span" onClick={()=>router.push("/termandcondition")}>
+                                  <Typography
+                                    color="primary"
+                                    component="span"
+                                    onClick={() =>
+                                      router.push("/termandcondition")
+                                    }
+                                  >
                                     Terms and Conditions
                                   </Typography>{" "}
                                   as set out by the user agreement.
                                 </Typography>
                               }
                             />
-                            {formik.errors.term && (
-                              <FormHelperText  sx={{textAlign:"center"}}>
+                            {formik.touched.term && formik.errors.term && (
+                              <FormHelperText sx={{ textAlign: "center" }}>
                                 {formik.errors.term}
                               </FormHelperText>
                             )}

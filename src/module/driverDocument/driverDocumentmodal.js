@@ -83,7 +83,7 @@ const DocumentModal = ({ formik }) => {
       >
         Add Documents
       </Button>
-      {formik.errors.document && (
+      {formik.touched.document && formik.errors.document && (
         <FormHelperText error={formik.errors.document}>
           Document is required
         </FormHelperText>
