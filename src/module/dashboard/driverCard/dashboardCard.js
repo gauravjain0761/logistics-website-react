@@ -12,15 +12,15 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 
-const DashboardCard = ({ jobalert }) => {
+const DashboardCard = ({ jobalert,activeJob }) => {
   const router = useRouter();
 
   const [data, setData] = React.useState([]);
 
   const getData = async () => {
     await axiosInstance
-      .get("api/auth/master/jobs/search", {
-        params: { page: 1, pageSize: "10" },
+      .get("api/auth/jobs/list", {
+        params: {status:1, page: 1, pageSize: "10" },
       })
       .then((response) => {
         if (response?.status === 200) {
@@ -137,7 +137,7 @@ const DashboardCard = ({ jobalert }) => {
                     ACTIVE JOBS
                   </Typography>
                   <Typography variant="h5" textAlign="center">
-                    2
+                    {activeJob?.length}
                   </Typography>
                 </Box>
               </Stack>

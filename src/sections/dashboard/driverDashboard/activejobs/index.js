@@ -30,7 +30,7 @@ import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
-const DashboardJobPost = ({ formik }) => {
+const DashboardJobPost = () => {
   const router = useRouter();
   const { user } = useAuthContext();
 
@@ -55,9 +55,35 @@ const DashboardJobPost = ({ formik }) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+  const [loader, setLoader] = React.useState(false);
+  const [data, setData] = React.useState([]);
+
+  const getData = async () => {
+    setLoader(true);
+    await axiosInstance
+      .get("api/auth/jobs/list", {
+        params: { status: 2, page: Number(page), pageSize: pageSize },
+      })
+      .then((response) => {
+        setLoader(false);
+        if (response?.status === 200) {
+          setData(response?.data?.view_data?.data);
+          setPageCount(response?.data?.view_data?.meta?.last_page);
+        }
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log("Active Job", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, [page]);
+
   const formData = useFormik({
     initialValues: {
-      id: 1,
+      id: 8,
       driver_id: 84,
     },
   });
@@ -67,6 +93,7 @@ const DashboardJobPost = ({ formik }) => {
       .then((response) => {
         if (response.status === 200) {
           setReviewOpen(true);
+          getData();
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
@@ -77,6 +104,44 @@ const DashboardJobPost = ({ formik }) => {
         console.log(error);
       });
   };
+
+  const formik = useFormik({
+    initialValues: {
+      job_id: 27,
+      user_id:82,
+      given_by: "Driver",
+      rating: "",
+      review: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.review) {
+        errors.review = "Note is required";
+      }
+      if (!values.rating) {
+        errors.rating = "Rating is required";
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      await axiosInstance
+        .post("api/auth/rating/add", formik.values)
+        .then((response) => {
+          if (response.status === 200) {
+            setReviewOpen(false)
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            getData();
+            handleClose(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  });
+
   // useEffect(() => {
   //   formik.setFieldValue("id", startOpen);
   // }, [startOpen]);
@@ -88,7 +153,7 @@ const DashboardJobPost = ({ formik }) => {
       <Box py={3}>
         <Container>
           <Box py={5}>
-            <DashboardCard />
+            <DashboardCard activeJob={data} />
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
@@ -118,7 +183,7 @@ const DashboardJobPost = ({ formik }) => {
                       <CountUp
                         start={0}
                         duration={1}
-                        end={2}
+                        end={data.length}
                         enableScrollSpy={true}
                         scrollSpyDelay={200}
                       />
@@ -131,218 +196,222 @@ const DashboardJobPost = ({ formik }) => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
-              {[...Array(4)].map((elem, index) => {
-                return (
-                  <Grid item md={12} key={index}>
-                    <Card
-                      sx={{
-                        my: 2,
-                        ":hover": {
-                          borderColor: "#ff7534",
-                          transition: " all 0.3s ease-in-out",
-                        },
-                      }}
-                      variant="outlined"
-                    >
-                      <CardContent>
-                        <Stack
-                          direction="row"
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <Stack direction="row" mb={1} spacing={0.5}>
-                            <Box>
-                              <Typography variant="subtitle1">
-                                Job Title :{" "}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="primary" variant="subtitle1">
-                                {" "}
-                                Mxq Android Box
-                              </Typography>
-                            </Box>
+              {data &&
+                data.length > 0 &&
+                data.map((elem, index) => {
+                  return (
+                    <Grid item md={12} key={index}>
+                      <Card
+                        sx={{
+                          my: 2,
+                          ":hover": {
+                            borderColor: "#ff7534",
+                            transition: " all 0.3s ease-in-out",
+                          },
+                        }}
+                        variant="outlined"
+                      >
+                        <CardContent>
+                          <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Stack direction="row" mb={1} spacing={0.5}>
+                              <Box>
+                                <Typography variant="subtitle1">
+                                  Job Title :{" "}
+                                </Typography>
+                              </Box>
+                              <Box>
+                                <Typography color="primary" variant="subtitle1">
+                                  {" "}
+                                  {elem.name}
+                                </Typography>
+                              </Box>
+                            </Stack>
                           </Stack>
-                        </Stack>
-                        <Divider />
-                        <Grid
-                          container
-                          mt={0.5}
-                          spacing={2}
-                          alignItems="center"
-                        >
-                          <Grid item md={2}>
-                            <Box
-                              component="img"
-                              src="/assets/images/dashboard/portfolio.jpeg"
-                              sx={{
-                                width: "100px",
-                                borderRadius: "50%",
-                                border: "2px solid #ff7534",
-                              }}
-                            />
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
-                              </Grid>
+                          <Divider />
+                          <Grid
+                            container
+                            mt={0.5}
+                            spacing={2}
+                            alignItems="center"
+                          >
+                            <Grid item md={2}>
+                              <Box
+                                component="img"
+                                src="/assets/images/dashboard/portfolio.jpeg"
+                                sx={{
+                                  width: "100px",
+                                  borderRadius: "50%",
+                                  border: "2px solid #ff7534",
+                                }}
+                              />
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Pick-Up Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.pickup_date}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Pick-Up Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.pickup_time}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Material
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    Plastic Box
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                          <Grid item md={4}>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Date
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    09/06/2023
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Material
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.material}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Drop-Out Time
-                                  </Typography>
-                                </Box>
+                            <Grid item md={4}>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Date
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.drop_date}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Drop-Out Time
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.drop_time}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    10:10 AM
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
 
-                            <Grid container>
-                              <Grid item md={4.5}>
-                                <Box>
-                                  <Typography variant="subtitle1">
-                                    Size
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={1}>
-                                <Typography variant="subtitle1">:</Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Box>
-                                  <Typography
-                                    color="primary"
-                                    variant="subtitle1"
-                                  >
-                                    5 x 2 x 3 inch
-                                  </Typography>
-                                </Box>
+                              <Grid container>
+                                <Grid item md={4.5}>
+                                  <Box>
+                                    <Typography variant="subtitle1">
+                                      Size
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                                <Grid item md={1}>
+                                  <Typography variant="subtitle1">:</Typography>
+                                </Grid>
+                                <Grid item md={6}>
+                                  <Box>
+                                    <Typography
+                                      color="primary"
+                                      variant="subtitle1"
+                                    >
+                                      {elem.items[0].product.length} x{" "}
+                                      {elem.items[0].product.width} x{" "}
+                                      {elem.items[0].product.height} inch
+                                    </Typography>
+                                  </Box>
+                                </Grid>
                               </Grid>
                             </Grid>
-                          </Grid>
-                          <Grid item md={2}>
-                            <Stack
-                              direction="row"
-                              justifyContent="space-between"
-                              alignItems="center"
-                              spacing={1}
-                            >
-                              <Stack spacing={1}>
-                                <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    color="success"
-                                    variant="outlined"
-                                    startIcon={
-                                      <Iconify icon="carbon:task-complete" />
-                                    }
-                                    onClick={() => handleStartOpen(1)}
-                                  >
-                                    Complete Job
-                                  </Button>
-                                </Box>
-                                {/* <Box>
+                            <Grid item md={2}>
+                              <Stack
+                                direction="row"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                spacing={1}
+                              >
+                                <Stack spacing={1}>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      color="success"
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:task-complete" />
+                                      }
+                                      onClick={() => handleStartOpen(1)}
+                                    >
+                                      Complete Job
+                                    </Button>
+                                  </Box>
+                                  {/* <Box>
                                   <Button
                                     sx={{ fontWeight: 500 }}
                                     fullWidth
@@ -354,65 +423,66 @@ const DashboardJobPost = ({ formik }) => {
                                     Give Review
                                   </Button>
                                 </Box> */}
-                                <Box>
-                                  <Button
-                                    color="secondary"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="gg:track" />}
-                                    onClick={() =>
-                                      router.push("/dashboard/driver/track_job")
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Track Job
-                                  </Button>
-                                </Box>
+                                  <Box>
+                                    <Button
+                                      color="secondary"
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={<Iconify icon="gg:track" />}
+                                      onClick={() =>
+                                        router.push(
+                                          "/dashboard/driver/track_job"
+                                        )
+                                      }
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      Track Job
+                                    </Button>
+                                  </Box>
+                                </Stack>
                               </Stack>
-                            </Stack>
-                            <Stack
-                              mt={1}
-                              position="absolute"
-                              right={33}
-                            ></Stack>
+                              <Stack
+                                mt={1}
+                                position="absolute"
+                                right={33}
+                              ></Stack>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                        <Box pt={2}>
-                          <Typography fontSize={14}>
-                            {" "}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat.
-                          </Typography>
-                        </Box>
+                          <Box pt={2}>
+                            <Typography fontSize={14}>
+                              {" "}
+                              {elem.review}
+                            </Typography>
+                          </Box>
 
-                        <Divider sx={{ my: 2 }} />
-                        <Box>
-                          <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="subtitle2">
-                              Job Budget: $500
-                            </Typography>
-                            <Typography variant="subtitle2">
-                              Customer Spend: $30K+
-                            </Typography>
-                          </Stack>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                );
-              })}
+                          <Divider sx={{ my: 2 }} />
+                          <Box>
+                            <Stack
+                              direction="row"
+                              justifyContent="space-between"
+                            >
+                              <Typography variant="subtitle2">
+                                Job Budget: $500
+                              </Typography>
+                              <Typography variant="subtitle2">
+                                Customer Spend: $30K+
+                              </Typography>
+                            </Stack>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                })}
             </Grid>
             <Box>
               <Modal
                 open={startOpen}
                 onClose={handleStartClose}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-describedby="modal-modal-review"
               >
                 <Box
                   sx={{
@@ -503,7 +573,7 @@ const DashboardJobPost = ({ formik }) => {
                 open={reviewOpen}
                 onClose={handleReviewOpen}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-describedby="modal-modal-review"
               >
                 <Box
                   sx={{
@@ -520,21 +590,35 @@ const DashboardJobPost = ({ formik }) => {
                   }}
                   component="form"
                   noValidate
+                  onSubmit={formik.handleSubmit}
                 >
                   <Typography mb={2} variant="subtitle1">
                     Review
                   </Typography>
                   <Stack spacing={1}>
                     <Box>
-                      <Rating value={4} />
+                      <Rating
+                        value={formik.values.rating}
+                        onChange={formik.handleChange}
+                        name="rating"
+                        helperText={
+                          formik.touched.rating && formik.errors.rating
+                        }
+                      />
                     </Box>
                     <Box>
                       <TextBox
                         size="small"
+                        name="review"
                         label="Review"
                         fullWidth
                         multiline={true}
                         rows="4"
+                        value={formik.values.review}
+                        onChange={formik.handleChange}
+                        helperText={
+                          formik.touched.review && formik.errors.review
+                        }
                       />
                     </Box>
                   </Stack>
@@ -542,13 +626,14 @@ const DashboardJobPost = ({ formik }) => {
                     <Button
                       fullWidth
                       variant="outlined"
-                      onClick={() => {
-                        setReviewOpen(false);
-                      }}
+                      // onClick={() => {
+                      //   setReviewOpen(false);
+                      // }}
+                      type="submit"
                     >
-                      Yes
+                      Submit
                     </Button>
-                    <Button
+                    {/* <Button
                       fullWidth
                       variant="outlined"
                       onClick={() => {
@@ -556,7 +641,7 @@ const DashboardJobPost = ({ formik }) => {
                       }}
                     >
                       No
-                    </Button>
+                    </Button> */}
                   </Stack>
                 </Box>
               </Modal>
