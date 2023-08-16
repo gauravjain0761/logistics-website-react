@@ -59,7 +59,7 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      // values["items"] = JSON.stringify(values?.items);
+      values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
       // formData.append("job_title", values?.job_title);
@@ -72,6 +72,7 @@ const PostJob = () => {
         .post("/api/auth/master/jobs/add", values)
         .then((response) => {
           if (response?.status === 200) {
+                    
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
