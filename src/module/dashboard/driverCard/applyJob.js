@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 
-const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
+const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -40,6 +40,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
+            getData();
             handleClose(true);
           }
         })
@@ -114,7 +115,9 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
                 onChange={formik.handleChange}
                 label="Note"
                 placeholder="Note For Customer"
-                helperText={formik.touched.description && formik.errors.description}
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
               />
             </Box>
             <Typography
