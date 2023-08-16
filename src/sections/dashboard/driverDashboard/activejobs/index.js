@@ -483,7 +483,7 @@ const DashboardJobPost = ({ formik }) => {
                 />
               </Stack>
             </Box>
-            <Stack alignItems="center">
+            {/* <Stack alignItems="center">
               <Box>
                 <Typography variant="h5">No Active Jobs.....</Typography>
               </Box>
@@ -493,7 +493,7 @@ const DashboardJobPost = ({ formik }) => {
                 src="/assets/images/home/new/banner-image.jpg"
                 alt="truck"
               />
-            </Stack>
+            </Stack> */}
           </Box>
         </Container>
       </Box>
