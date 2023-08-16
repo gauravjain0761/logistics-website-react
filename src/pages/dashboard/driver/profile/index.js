@@ -19,7 +19,7 @@ const MyProfilePage = () => {
       mobile: "",
       profile_img: "",
       profile_img_url: "",
-      plan: "",
+      plan_name: "",
     },
     validate: (values) => {},
     onSubmit: async (values) => {
@@ -28,7 +28,7 @@ const MyProfilePage = () => {
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
-      formData.append("plan", values?.plan);
+      formData.append("plan_name", values?.plan_name);
 
       await axiosInstance
         .post("/api/auth/profile/update-profile", formData)
@@ -90,8 +90,8 @@ const MyProfilePage = () => {
                 "profile_img_url",
                 `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
               );
-            } else if (key == "plan") {
-              formik.setFieldValue("plan", newData?.plan?.plan_name);
+            } else if (key == "plan_name") {
+              formik.setFieldValue("plan_name", newData?.plan_name);
             }
           }
         }

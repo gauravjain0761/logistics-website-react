@@ -91,7 +91,6 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose }) => {
                 isMaxLenght={5}
                 onChange={(e) => {
                   if (e) {
-                    console.log("Ok.", e.target.value.replace(/\D/gm, ""));
                     formik.setFieldValue(
                       "ammount",
                       e.target.value.replace(/\D/gm, "")

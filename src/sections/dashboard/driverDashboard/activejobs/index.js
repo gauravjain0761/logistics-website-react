@@ -22,13 +22,18 @@ import {
   alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import axiosInstance from "@/utils/axios";
+import { useAuthContext } from "@/auth/useAuthContext";
+import { useFormik } from "formik";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
+  const { user } = useAuthContext();
+
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
@@ -37,10 +42,40 @@ const DashboardJobPost = ({ formik }) => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
+
+  const [startOpen, setCompleteOpen] = React.useState(false);
+  const handleStartOpen = (id) => setCompleteOpen(id);
+  const handleStartClose = () => setCompleteOpen(false);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
- 
+  const formData = useFormik({
+    initialValues: {
+      id: 1,
+      driver_id: 84,
+    },
+  });
+  const completeJobApi = async () => {
+    await axiosInstance
+      .post("api/auth/jobs/complete-job", formData.values)
+      .then((response) => {
+        if (response.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          handleClose(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  // useEffect(() => {
+  //   formik.setFieldValue("id", startOpen);
+  // }, [startOpen]);
+  // useEffect(() => {
+  //   formik.setFieldValue("driver_id", user?.id);
+  // }, [user, user?.id]);
   return (
     <React.Fragment>
       <Box py={3}>
@@ -296,10 +331,8 @@ const DashboardJobPost = ({ formik }) => {
                                       <Iconify icon="carbon:task-complete" />
                                     }
                                     onClick={() =>
-                                      router.push(
-                                        "/dashboard/driver/job_listing"
-                                      )
-                                    }
+                                          handleStartOpen(1)
+                                        }
                                   >
                                     Complete Job
                                   </Button>
@@ -358,6 +391,57 @@ const DashboardJobPost = ({ formik }) => {
                 );
               })}
             </Grid>
+            <Box>
+            <Modal
+              open={startOpen}
+              onClose={handleStartClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  textAlign: "center",
+                  transform: "translate(-50%, -50%)",
+
+                  bgcolor: "background.paper",
+                  border: "1px solid #f5f5f5",
+                  boxShadow: 24,
+                  p: 4,
+                }}
+                component="form"
+                noValidate
+              >
+                <Typography mb={2}>
+                  Are you sure you have completed the job?
+                </Typography>
+                <Stack direction="row" spacing={8}>
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    onClick={() => {
+                      completeJobApi();
+                      // getData();
+                      setCompleteOpen(false);
+                    }}
+                  >
+                    Yes
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    onClick={() => {
+                      handleStartClose();
+                    }}
+                  >
+                    No
+                  </Button>
+                </Stack>
+              </Box>
+            </Modal>
+          </Box>
             <Box>
               <Stack alignItems="center" justifyContent="center">
                 <Pagination
