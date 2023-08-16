@@ -33,9 +33,11 @@ import SkeletonLoader from "@/components/skeleton";
 import { JobSekelton } from "@/components/not-found";
 import { useFormik } from "formik";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { useSnackbar } from "notistack";
 const DashboardJobRequest = () => {
   const router = useRouter();
   const { user } = useAuthContext();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -62,8 +64,8 @@ const DashboardJobRequest = () => {
   const getData = async () => {
     setLoader(true);
     await axiosInstance
-      .get("api/auth/master/jobs/search", {
-        params: { page: Number(page), pageSize: pageSize },
+      .get("api/auth/jobs/list", {
+        params: {status:1, page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
         setLoader(false);
@@ -103,8 +105,8 @@ const DashboardJobRequest = () => {
       .catch((error) => {
         const { response } = error;
 
-        enqueueSnackbar(response.data.message, {
-          variant: "success",
+        enqueueSnackbar(response.data.error, {
+          variant: "error",
         });
         console.log(error);
       });
@@ -520,7 +522,6 @@ const DashboardJobRequest = () => {
                     variant="outlined"
                     onClick={() => {
                       startJobApi();
-                      getData();
                       setStartopen(false);
                     }}
                   >
