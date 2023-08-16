@@ -86,8 +86,8 @@ const DashboardJobRequest = () => {
 
   const formik = useFormik({
     initialValues: {
-      id: 1,
-      driver_id: user?.id,
+      id: "",
+      driver_id: "",
     },
   });
   const startJobApi = async () => {
