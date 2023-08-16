@@ -39,7 +39,7 @@ const PostJob = () => {
       vehicle: 0,
       created_by:"customer",
       items: [],
-      user_id:user?.id,
+      user_id:"",
       description: "",
     },
 
