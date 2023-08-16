@@ -86,6 +86,7 @@ const PostJob = () => {
         .catch((error) => {
           const { response } = error;
           if (response.status === 422) {
+            values["items"] = JSON.parse(values?.items);
             console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key] of Object.entries(values)) {
