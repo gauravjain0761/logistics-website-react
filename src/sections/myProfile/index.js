@@ -173,7 +173,7 @@ const Profile = ({ data, formik, loader }) => {
                                   Plan Type:
                                 </Typography>
                                 <Typography component="body2">
-                                  {formik.values.plan || "N/A"}
+                                  {formik.values.plan_name || "N/A"}
                                 </Typography>
                               </Stack>
                             </Box>

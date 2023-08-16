@@ -7,9 +7,11 @@ import { reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import AuthGuard from "@/auth/AuthGuard";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const {user}= useAuthContext();
   const product = {
     product: {
       image: "",
@@ -37,6 +39,7 @@ const PostJob = () => {
       vehicle: 0,
       created_by:"customer",
       items: [],
+      user_id:user?.id,
       description: "",
     },
 
@@ -56,7 +59,7 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      values["items"] = JSON.stringify(values?.items);
+      // values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
       // formData.append("job_title", values?.job_title);

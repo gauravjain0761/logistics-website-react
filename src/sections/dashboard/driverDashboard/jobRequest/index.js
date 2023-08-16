@@ -22,7 +22,7 @@ import {
   alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
@@ -31,8 +31,12 @@ import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import axiosInstance from "@/utils/axios";
 import SkeletonLoader from "@/components/skeleton";
 import { JobSekelton } from "@/components/not-found";
+import { useFormik } from "formik";
+import { useAuthContext } from "@/auth/useAuthContext";
 const DashboardJobRequest = () => {
   const router = useRouter();
+  const { user } = useAuthContext();
+
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
@@ -44,7 +48,6 @@ const DashboardJobRequest = () => {
 
   const [applyOpen, setApplyopen] = React.useState(false);
   const [startOpen, setStartopen] = React.useState(false);
-
   const handleStartOpen = (id) => setStartopen(id);
   const handleStartClose = () => setStartopen(false);
   const handleOpen = (id) => setApplyopen(id);
@@ -79,6 +82,33 @@ const DashboardJobRequest = () => {
     getData();
   }, [page]);
 
+  const formik = useFormik({
+    initialValues: {
+      id: 1,
+      driver_id: user?.id,
+    },
+  });
+  const startJobApi = async () => {
+    await axiosInstance
+      .post("api/auth/jobs/start-job", formik.values)
+      .then((response) => {
+        if (response.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          handleClose(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    formik.setFieldValue("id", startOpen);
+  }, [startOpen]);
+  useEffect(() => {
+    formik.setFieldValue("driver_id", user?.id);
+  }, [user, user?.id]);
   return (
     <React.Fragment>
       <Box py={3}>
@@ -344,7 +374,7 @@ const DashboardJobRequest = () => {
                                           <Iconify icon="icon-park:check-correct" />
                                         }
                                         onClick={() =>
-                                          handleStartOpen(item?.id)
+                                          handleStartOpen(item?.bid_id)
                                         }
                                         sx={{
                                           fontWeight: 500,
@@ -483,6 +513,7 @@ const DashboardJobRequest = () => {
                     fullWidth
                     variant="outlined"
                     onClick={() => {
+                      startJobApi();
                       getData();
                       setStartopen(false);
                     }}
