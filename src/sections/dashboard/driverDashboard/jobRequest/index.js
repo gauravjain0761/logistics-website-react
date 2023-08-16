@@ -96,10 +96,16 @@ const DashboardJobRequest = () => {
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
+          getData();
           handleClose(true);
         }
       })
       .catch((error) => {
+        const { response } = error;
+
+        enqueueSnackbar(response.data.message, {
+          variant: "success",
+        });
         console.log(error);
       });
   };
@@ -539,6 +545,7 @@ const DashboardJobRequest = () => {
             handleClose={handleClose}
             job_id={applyOpen}
             applyOpen={applyOpen}
+            getData={getData}
           />
         </Box>
       </Box>
