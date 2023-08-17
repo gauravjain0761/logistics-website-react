@@ -1,28 +1,22 @@
-import { SelectBox, TextBox } from "@/components/form";
+import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add } from "@mui/icons-material";
 import {
-  Autocomplete,
   Box,
   Button,
   Card,
   CardContent,
-  Chip,
   Container,
   Divider,
   Grid,
-  IconButton,
   Modal,
   Pagination,
   PaginationItem,
   Rating,
   Stack,
-  TextField,
   Typography,
-  alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
