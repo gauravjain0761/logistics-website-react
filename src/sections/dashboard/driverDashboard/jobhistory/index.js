@@ -26,6 +26,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import axiosInstance from "@/utils/axios";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const [layout, setLayout] = useState(false);
@@ -41,6 +42,27 @@ const JobHistory = ({ formik }) => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+  const [data, setData] = React.useState([]);
+
+  const getHistoryData = async () => {
+    await axiosInstance
+      .get("api/auth/jobs/list", {
+        params: { status: 3, page: Number(page), pageSize: pageSize },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setData(response?.data?.view_data?.data);
+          setPageCount(response?.data?.view_data?.meta?.last_page);
+        }
+      })
+      .catch((error) => {
+        console.log("Job History", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getHistoryData();
+  }, [page]);
  
   return (
     <React.Fragment>
