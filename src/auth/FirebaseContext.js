@@ -13,9 +13,11 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   GoogleAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
 // config
 import { FIREBASE_API } from "../config-global";
+import { result } from "lodash";
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +57,8 @@ console.log("firebaseApp", firebaseApp);
 const AUTH = getAuth(firebaseApp);
 
 const GOOGLE_PROVIDER = new GoogleAuthProvider();
+
+const FACEBOOK_PROVIDER = new FacebookAuthProvider();
 
 AuthFirebaseContext.propTypes = {
   children: PropTypes.node,
@@ -97,12 +101,35 @@ export function AuthFirebaseProvider({ children }) {
   }, [initialize]);
 
   const loginWithGoogle = useCallback(() => {
-    signInWithPopup(AUTH, GOOGLE_PROVIDER);
+    signInWithPopup(AUTH, GOOGLE_PROVIDER)
+      .then((response) => {
+        console.log("loginWithGoogle", response);
+      })
+      .catch((error) => {
+        console.log("Error Google Login", error);
+      });
+  }, []);
+
+  const loginWithFacebook = useCallback(() => {
+    signInWithPopup(AUTH, FACEBOOK_PROVIDER)
+      .then((response) => {
+        console.log("loginWithFacebook", response);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log("Error Facebook Login", errorMessage);
+      });
   }, []);
 
   // LOGOUT
   const logout = useCallback(() => {
-    signOut(AUTH);
+    signOut(AUTH)
+      .then((response) => {
+        console.log("logout", response);
+      })
+      .catch((error) => {
+        console.log("Firebase logout", error);
+      });
   }, []);
 
   const memoizedValue = useMemo(
@@ -113,6 +140,7 @@ export function AuthFirebaseProvider({ children }) {
       method: "firebase",
       loginWithGoogle,
       logout,
+      loginWithFacebook,
     }),
     [
       state.isAuthenticated,
@@ -120,6 +148,7 @@ export function AuthFirebaseProvider({ children }) {
       state.user,
       loginWithGoogle,
       logout,
+      loginWithFacebook,
     ]
   );
 
