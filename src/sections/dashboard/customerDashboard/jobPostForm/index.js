@@ -73,6 +73,20 @@ const MaterialSelect = [
     value: "Other",
   },
 ];
+const DropTypeSelect = [
+  {
+    label: "Choose Address Type",
+    value: 0,
+  },
+  {
+    label: "Pickup",
+    value: "Pickup",
+  },
+  {
+    label: "Drop",
+    value: "Drop",
+  },
+];
 const JobPostForm = ({
   formik,
   addProduct,
@@ -80,7 +94,6 @@ const JobPostForm = ({
   addAddress,
   removeAddress,
 }) => {
-  console.log("formikformik", formik.values.items);
   const router = useRouter();
   return (
     <React.Fragment>
@@ -688,11 +701,97 @@ const JobPostForm = ({
                                                         <Grid item md={12}>
                                                           <Box>
                                                             <Typography>
-                                                              Delivery Address
+                                                              Select Address
+                                                              Type
+                                                            </Typography>
+                                                            <Stack
+                                                              direction="row"
+                                                              mb={1.3}
+                                                            >
+                                                              <Box
+                                                                sx={{
+                                                                  ml: 0,
+                                                                  background: (
+                                                                    theme
+                                                                  ) =>
+                                                                    theme
+                                                                      .palette
+                                                                      .grey[100],
+                                                                  border:
+                                                                    "1px solid",
+                                                                  borderColor: (
+                                                                    theme
+                                                                  ) =>
+                                                                    alpha(
+                                                                      theme
+                                                                        .palette
+                                                                        .grey[500],
+                                                                      0.32
+                                                                    ),
+                                                                  padding:
+                                                                    ".15rem .75rem",
+                                                                  height:
+                                                                    "40px",
+                                                                  borderRadius:
+                                                                    ".25rem",
+                                                                  display:
+                                                                    "flex",
+                                                                  alignItems:
+                                                                    "center",
+                                                                  justifyContent:
+                                                                    "center",
+                                                                }}
+                                                              >
+                                                                <Iconify
+                                                                  icon="mdi:location"
+                                                                  color="#ff7534"
+                                                                />
+                                                              </Box>
+                                                              <SelectBox
+                                                                fullWidth
+                                                                placeholder="Enter Pickup or Drop"
+                                                                options={
+                                                                  DropTypeSelect
+                                                                }
+                                                                value={
+                                                                  addressItem?.type
+                                                                }
+                                                                name={`items[${productIndex}].address[${addressIndex}].type`}
+                                                                onChange={(
+                                                                  e
+                                                                ) => {
+                                                                  formik.setFieldValue(
+                                                                    `items[${productIndex}].address[${addressIndex}].type`,
+                                                                    e.target
+                                                                      .value
+                                                                  );
+                                                                }}
+                                                                helperText={
+                                                                  formik.touched
+                                                                    .type &&
+                                                                  formik.errors
+                                                                    .type
+                                                                }
+                                                                size="small"
+                                                                startIcon={
+                                                                  <Iconify
+                                                                    icon="uil:focus"
+                                                                    color="#ff7534"
+                                                                  />
+                                                                }
+                                                                type="small"
+                                                              />
+                                                            </Stack>
+                                                          </Box>
+                                                        </Grid>
+                                                        <Grid item md={12}>
+                                                          <Box>
+                                                            <Typography>
+                                                              Address
                                                             </Typography>
                                                             <TextBox
                                                               fullWidth
-                                                              placeholder="Delivery Address"
+                                                              placeholder="Address"
                                                               value={
                                                                 addressItem?.address
                                                               }

@@ -34,12 +34,13 @@ const PostJob = () => {
     address: "",
     lat: 3434.34,
     long: 23423,
-    type: "drop or pickup",
+    type: "pickup",
   };
 
   const formik = useFormik({
     initialValues: {
       user_id: user?.id,
+      created_by:"customer",
       name: "",
       vehicle: 0,
       items: [],
@@ -68,7 +69,7 @@ const PostJob = () => {
       let url, method;
 
       if (id === "create") {
-        url = "/api/auth/master/jobs/add";
+        url = "/api/auth/jobs/add";
         method = "POST";
       } else {
         url = `/api/auth/master/jobs/update/${id}`;

@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 // slices
-import productReducer from "./slices/product";
+import driverJobReducer from "./slices/job/driver";
 
 // ----------------------------------------------------------------------
 
@@ -23,22 +23,15 @@ export const storage =
     ? createWebStorage("local")
     : createNoopStorage();
 
-export const rootPersistConfig = {
-  key: "root",
-  storage,
-  keyPrefix: "redux-",
-  whitelist: [],
-};
-
-export const productPersistConfig = {
-  key: "product",
+export const driverJobPersistConfig = {
+  key: "driverJob",
   storage,
   keyPrefix: "redux-",
   whitelist: [],
 };
 
 const rootReducer = combineReducers({
-  product: persistReducer(productPersistConfig, productReducer),
+  product: persistReducer(driverJobPersistConfig, driverJobReducer),
 });
 
 export default rootReducer;

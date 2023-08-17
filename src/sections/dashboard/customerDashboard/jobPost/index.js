@@ -51,7 +51,7 @@ const DashboardJobPost = ({ formik }) => {
     setLoader(true);
     await axiosInstance
       .get("api/auth/master/jobs/search", {
-        params: { page: Number(page), pageSize: pageSize },
+        params: {status:"post", page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
         if (response?.status === 200) {
