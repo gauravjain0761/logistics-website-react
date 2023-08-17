@@ -8,8 +8,6 @@ const initialState = {
   jobAlertError: null,
   jobAlert: {
     data: [],
-    page: 1,
-    pageSize: 10,
     pageCount: 0,
     dataCount: 0,
   },
@@ -49,11 +47,12 @@ export const { startJobAlertLoading } = slice.actions;
 // ----------------------------------------------------------------------
 
 export function getJobAlert({ page = 1, pageSize = 10 }) {
+  console.log("pagepage", page, pageSize);
   return async (dispatch) => {
     dispatch(slice.actions.startJobAlertLoading());
     try {
-      const response = await axiosInstance.get("/api/products", {
-        params: { status: 1, page: Number(page), pageSize: pageSize },
+      const response = await axiosInstance.get("api/auth/jobs/list", {
+        params: { status: "pending", page: Number(page), pageSize: pageSize },
       });
       dispatch(slice.actions.setJobAlert(response?.data?.view_data));
     } catch (error) {

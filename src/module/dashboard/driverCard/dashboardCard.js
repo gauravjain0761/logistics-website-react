@@ -11,26 +11,28 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch, useSelector } from "@/redux/store";
+import { getJobAlert } from "@/redux/slices/job/driver";
 
 const DashboardCard = ({ jobalert,activeJob }) => {
   const router = useRouter();
-
-  const [data, setData] = React.useState([]);
+  const {jobAlert: { pageCount, data }} = useSelector((state) => state.driverJob);
+  // const [data, setData] = React.useState([]);
 
   const getData = async () => {
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {status:1, page: 1, pageSize: "10" },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        console.log("DriverJob", error);
-      });
+    // await axiosInstance
+    //   .get("api/auth/jobs/list", {
+    //     params: {status:1, page: 1, pageSize: "10" },
+    //   })
+    //   .then((response) => {
+    //     if (response?.status === 200) {
+    //       setData(response?.data?.view_data?.data);
+    //       setPageCount(response?.data?.view_data?.meta?.last_page);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("DriverJob", error);
+    //   });
   };
 
   React.useEffect(() => {
