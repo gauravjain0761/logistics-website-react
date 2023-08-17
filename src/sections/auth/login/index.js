@@ -1,4 +1,5 @@
 import { useAuthContext } from "@/auth/useAuthContext";
+import { useFirebaseContext } from "@/auth/useFirebaseContext";
 import ForgetPasswordDialogBox from "@/components/dialog/forgetPasswordModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
@@ -25,6 +26,21 @@ const Login = () => {
   const handleClose = () => setOpen(false);
 
   const { login } = useAuthContext();
+
+  const { loginWithGoogle, user } = useFirebaseContext();
+
+  console.log("firebaseAppuser", user);
+
+  const handleGoogleLogin = async () => {
+    try {
+      if (loginWithGoogle) {
+        loginWithGoogle();
+      }
+      console.log("GOOGLE LOGIN");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -274,6 +290,7 @@ const Login = () => {
                                   color="white"
                                 />
                               }
+                              onClick={() => handleGoogleLogin()}
                             >
                               <Typography fontSize={"15px"}>
                                 Continue with Google

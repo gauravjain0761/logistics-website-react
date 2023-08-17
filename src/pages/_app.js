@@ -1,3 +1,4 @@
+import { AuthFirebaseProvider } from "@/auth/FirebaseContext";
 import { AuthProvider } from "@/auth/JwtContext";
 import { MotionLazyContainer } from "@/components/animate";
 import ProgressBar from "@/components/progressBar";
@@ -25,7 +26,9 @@ export default function App(props) {
           <ProgressBar />
           <SnackbarProvider>
             <AuthProvider>
-              {getLayout(<Component {...pageProps} />)}
+              <AuthFirebaseProvider>
+                {getLayout(<Component {...pageProps} />)}
+              </AuthFirebaseProvider>
             </AuthProvider>
           </SnackbarProvider>
         </ThemeProvider>
