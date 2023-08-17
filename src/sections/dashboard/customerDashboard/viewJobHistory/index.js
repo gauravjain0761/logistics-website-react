@@ -42,12 +42,13 @@ const ViewJobHistory = () => {
         console.log("RatignList", error);
       });
   };
-  // End
+
   React.useEffect(() => {
     if (id) {
       getRatingList();
     }
   }, [id]);
+  // End
   return (
     <React.Fragment>
       <Box mt={10}>
@@ -56,7 +57,7 @@ const ViewJobHistory = () => {
             <Button
             variant="outlined"
               sx={{ my: 2 }}
-              onClick={() => router.push("/dashboard/driver/job_history")}
+              onClick={() => router.push("/dashboard/customer/job_history")}
             >
        <Iconify icon="ion:play-back" sx={{mr:"7px"}} width={14} />
              Back

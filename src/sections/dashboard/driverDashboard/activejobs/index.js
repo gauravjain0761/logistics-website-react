@@ -189,9 +189,9 @@ const DashboardJobPost = () => {
           </Box>
 
           <Box py={2} sx={{ background: " " }}>
-            <Grid container rowSpacing={0}>
+            <Grid container rowSpacing={0} justifyContent="center">
               {data &&
-                data.length > 0 &&
+                data.length > 0 ?
                 data.map((elem, index) => {
                   return (
                     <Grid item md={12} key={index}>
@@ -469,7 +469,9 @@ const DashboardJobPost = () => {
                       </Card>
                     </Grid>
                   );
-                })}
+                }):<Box my={6}>
+                  <Typography   variant="h4">No Active Jobs</Typography>
+                </Box>}
             </Grid>
             <Box>
               <Modal
