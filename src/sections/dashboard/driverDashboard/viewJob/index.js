@@ -36,7 +36,6 @@ const ViewJobDetail = () => {
   const [data, setData] = React.useState([]);
   const [addressOpen, setAddressopen] = React.useState(false);
 
-  const [rating, setRating] = useState([]);
   const getData = async () => {
     setLoader(true);
     await axiosInstance
@@ -56,27 +55,10 @@ const ViewJobDetail = () => {
   React.useEffect(() => {
     if (id) {
       getData();
-      getRatingList();
     }
   }, [id]);
 
-  // Rating list api
-  const getRatingList = async () => {
-    setLoader(true);
-    await axiosInstance
-      .get(`api/auth/rating/list/${id}`)
-      .then((response) => {
-        setLoader(false);
-        if (response?.status === 200) {
-          setRating(response?.data?.view_data);
-        }
-      })
-      .catch((error) => {
-        setLoader(false);
-        console.log("RatignList", error);
-      });
-  };
-  // End
+ 
   return (
     <React.Fragment>
       <Box mt={10}>
@@ -234,38 +216,7 @@ const ViewJobDetail = () => {
                       </Grid>
                     </Grid>
                   </Box>
-                  <Box my={4}>
-                  <Divider/>
-                    <Box my={3}>
-                      <Typography textAlign="center" variant="h4">
-                        Rating & Reviews
-                      </Typography>
-                    </Box>
-                    <Stack spacing={3} direction="row">
-                      <Box
-                        component="img"
-                        src="/testimonialimage.png"
-                        width={60}
-                        height={60}
-                      />
-                      <Stack direction="column">
-                        <Box>
-                          <Typography variant="subtitle1" color="primary">Name</Typography>
-                        </Box>
-                        <Box>
-                          <Rating value={4} readOnly size="small" />
-                        </Box>
-                        <Box>
-                          <Typography fontSize={14}>
-                            In publishing and graphic design, Lorem ipsum is a
-                            placeholder text commonly used to demonstrate the
-                            visual form of a document or a typeface without
-                            relying
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </Stack>
-                  </Box>
+                
                 </CardContent>
                 <Box sx={{ position: "absolute", right: "30px", top: "150px" }}>
                   <Stack spacing={1}>
