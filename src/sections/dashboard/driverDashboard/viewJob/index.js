@@ -10,9 +10,11 @@ import {
   Card,
   CardContent,
   Container,
+  Divider,
   Grid,
   IconButton,
   List,
+  Rating,
   Stack,
   Table,
   TableBody,
@@ -23,7 +25,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import JobDialog from "./dialog";
 
 const ViewJobDetail = () => {
@@ -34,6 +36,7 @@ const ViewJobDetail = () => {
   const [data, setData] = React.useState([]);
   const [addressOpen, setAddressopen] = React.useState(false);
 
+  const [rating, setRating] = useState([]);
   const getData = async () => {
     setLoader(true);
     await axiosInstance
@@ -53,10 +56,27 @@ const ViewJobDetail = () => {
   React.useEffect(() => {
     if (id) {
       getData();
+      getRatingList();
     }
   }, [id]);
 
-  console.log("datadata", data);
+  // Rating list api
+  const getRatingList = async () => {
+    setLoader(true);
+    await axiosInstance
+      .get(`api/auth/rating/list/${id}`)
+      .then((response) => {
+        setLoader(false);
+        if (response?.status === 200) {
+          setRating(response?.data?.view_data);
+        }
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log("RatignList", error);
+      });
+  };
+  // End
   return (
     <React.Fragment>
       <Box mt={10}>
@@ -210,113 +230,41 @@ const ViewJobDetail = () => {
                               </Table>
                             </TableContainer>
                           </Grid>
-                          {/* <Grid item md={12} mt={2}>
-                            <Typography fontWeight={500}>
-                              Delivery Address :-
-                            </Typography>
-                          </Grid>
-                          <Grid item md={12}>
-                            <TableContainer
-                              sx={{
-                                borderRadius: "10px",
-                                border: "1px solid",
-                                borderColor: (theme) =>
-                                  theme.palette.primary.main,
-                              }}
-                            >
-                              <Table aria-label="simple table">
-                                <TableHead>
-                                  <TableRow>
-                                    <TableCell>Address</TableCell>
-                                    <TableCell align="center">Date</TableCell>
-                                    <TableCell align="center">Time</TableCell>
-                                    <TableCell align="center">
-                                      Quantity
-                                    </TableCell>
-                                    <TableCell align="center">Image</TableCell>
-                                    <TableCell align="center">
-                                      Material
-                                    </TableCell>
-                                  </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                  <TableRow
-                                    sx={{
-                                      "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                      },
-                                    }}
-                                  >
-                                    <TableCell component="th" scope="row">
-                                      <Typography>
-                                        Xyz,Address ,city,12122
-                                      </Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>06/02/2000</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>10:00 A.M.</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>6</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Box>
-                                        <Box
-                                          component="img"
-                                          m="auto"
-                                          src="/serviceblog.jpg"
-                                          width={80}
-                                        />
-                                      </Box>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>Material</Typography>
-                                    </TableCell>
-                                  </TableRow>
-                                  <TableRow
-                                    sx={{
-                                      "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                      },
-                                    }}
-                                  >
-                                    <TableCell component="th" scope="row">
-                                      <Typography>
-                                        Xyz,Address ,city,12122
-                                      </Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>06/02/2000</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>10:00 A.M.</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>6</Typography>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Box>
-                                        <Box
-                                          component="img"
-                                          m="auto"
-                                          src="/serviceblog.jpg"
-                                          width={80}
-                                        />
-                                      </Box>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      <Typography>Material</Typography>
-                                    </TableCell>
-                                  </TableRow>
-                                </TableBody>
-                              </Table>
-                            </TableContainer>
-                          </Grid> */}
                         </Grid>
                       </Grid>
                     </Grid>
+                  </Box>
+                  <Box my={4}>
+                  <Divider/>
+                    <Box my={3}>
+                      <Typography textAlign="center" variant="h4">
+                        Rating & Reviews
+                      </Typography>
+                    </Box>
+                    <Stack spacing={3} direction="row">
+                      <Box
+                        component="img"
+                        src="/testimonialimage.png"
+                        width={60}
+                        height={60}
+                      />
+                      <Stack direction="column">
+                        <Box>
+                          <Typography variant="subtitle1" color="primary">Name</Typography>
+                        </Box>
+                        <Box>
+                          <Rating value={4} readOnly size="small" />
+                        </Box>
+                        <Box>
+                          <Typography fontSize={14}>
+                            In publishing and graphic design, Lorem ipsum is a
+                            placeholder text commonly used to demonstrate the
+                            visual form of a document or a typeface without
+                            relying
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </Stack>
                   </Box>
                 </CardContent>
                 <Box sx={{ position: "absolute", right: "30px", top: "150px" }}>
@@ -328,6 +276,7 @@ const ViewJobDetail = () => {
               </Card>
             </Box>
           )}
+
           <JobDialog addressOpen={addressOpen} onClose={setAddressopen} />
         </Container>
       </Box>{" "}
