@@ -23,6 +23,13 @@ export const storage =
     ? createWebStorage("local")
     : createNoopStorage();
 
+export const rootPersistConfig = {
+  key: "root",
+  storage,
+  keyPrefix: "redux-",
+  whitelist: [],
+};
+
 export const driverJobPersistConfig = {
   key: "driverJob",
   storage,
@@ -31,7 +38,7 @@ export const driverJobPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  product: persistReducer(driverJobPersistConfig, driverJobReducer),
+  driverJob: persistReducer(driverJobPersistConfig, driverJobReducer),
 });
 
 export default rootReducer;
