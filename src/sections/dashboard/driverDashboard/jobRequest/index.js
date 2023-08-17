@@ -34,7 +34,10 @@ import { JobSekelton } from "@/components/not-found";
 import { useFormik } from "formik";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "@/redux/store";
 const DashboardJobRequest = () => {
+  const dispatch = useDispatch();
+  const { jobAlert } = useSelector((state) => state.driverJob);
   const router = useRouter();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
@@ -65,7 +68,7 @@ const DashboardJobRequest = () => {
     setLoader(true);
     await axiosInstance
       .get("api/auth/jobs/list", {
-        params: {status:1, page: Number(page), pageSize: pageSize },
+        params: { status: "pending", page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
         setLoader(false);
@@ -90,6 +93,8 @@ const DashboardJobRequest = () => {
       driver_id: "",
     },
   });
+
+  console.log("jobAlert", jobAlert);
   const startJobApi = async () => {
     await axiosInstance
       .post("api/auth/jobs/start-job", formik.values)

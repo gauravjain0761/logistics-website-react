@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
@@ -11,7 +11,7 @@ import { useAuthContext } from "@/auth/useAuthContext";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const {user}= useAuthContext();
+  const { user } = useAuthContext();
   const product = {
     product: {
       image: "",
@@ -30,17 +30,17 @@ const PostJob = () => {
     address: "",
     lat: 3434.34,
     long: 23423,
-    type: "drop or pickup",
+    type: "pickup",
   };
 
   const formik = useFormik({
     initialValues: {
       name: "",
+      created_by: "customer",
+      user_id: user?.id,
       vehicle: 0,
-      created_by:"customer",
-      items: [],
-      user_id:"",
       description: "",
+      items: [],
     },
 
     validate: (values) => {
@@ -58,7 +58,7 @@ const PostJob = () => {
       }
       return errors;
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setFieldValue }) => {
       values["items"] = JSON.stringify(values?.items);
       // let formData = new FormData();
 
@@ -69,24 +69,25 @@ const PostJob = () => {
       console.log("valuesvalues", values);
 
       await axiosInstance
-        .post("/api/auth/master/jobs/add", values)
+        .post("api/auth/jobs/add", values)
         .then((response) => {
           if (response?.status === 200) {
-                    
+            setFieldValue("items", JSON.parse(values?.items));
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
             formik.resetForm();
           } else {
+            setFieldValue("items", JSON.parse(values?.items));
             enqueueSnackbar(response.data.message, {
               variant: "error",
             });
           }
         })
         .catch((error) => {
+          setFieldValue("items", JSON.parse(values?.items));
           const { response } = error;
           if (response.status === 422) {
-            values["items"] = JSON.parse(values?.items);
             console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key] of Object.entries(values)) {
@@ -103,6 +104,9 @@ const PostJob = () => {
         });
     },
   });
+  useEffect(() => {
+    formik.setFieldValue("user_id", user?.id);
+  }, [user, user?.id]);
   const addProduct = () => {
     formik.setFieldValue("items", [...(formik.values.items || []), product]);
   };
