@@ -388,24 +388,7 @@ const DashboardJobRequest = () => {
                                     </Button>
                                   </Box>
                                   <Box>
-                                    {/* {item.bid_id && item.bid_id != null ? (
-                                      <Button
-                                        color="success"
-                                        fullWidth
-                                        variant="outlined"
-                                        startIcon={
-                                          <Iconify icon="icon-park:check-correct" />
-                                        }
-                                        onClick={() =>
-                                          handleStartOpen(item?.bid_id)
-                                        }
-                                        sx={{
-                                          fontWeight: 500,
-                                        }}
-                                      >
-                                        Start Job
-                                      </Button>
-                                    ) : ( */}
+                                  
                                     <Button
                                       color={
                                         !some(item?.job_requests, {
@@ -530,58 +513,7 @@ const DashboardJobRequest = () => {
             </Box>
           </Box>
         </Container>
-        <Box>
-          <Box>
-            <Modal
-              open={startOpen}
-              onClose={handleStartClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  textAlign: "center",
-                  transform: "translate(-50%, -50%)",
-
-                  bgcolor: "background.paper",
-                  border: "1px solid #f5f5f5",
-                  boxShadow: 24,
-                  p: 4,
-                }}
-                component="form"
-                noValidate
-              >
-                <Typography mb={2}>
-                  Are you sure you want to start the job?
-                </Typography>
-                <Stack direction="row" spacing={8}>
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    onClick={() => {
-                      startJobApi();
-                      setStartopen(false);
-                    }}
-                  >
-                    Yes
-                  </Button>
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    onClick={() => {
-                      handleStartClose();
-                    }}
-                  >
-                    No
-                  </Button>
-                </Stack>
-              </Box>
-            </Modal>
-          </Box>
-        </Box>
+       
         <Box>
           <ApplyJobModal
             handleClose={handleClose}

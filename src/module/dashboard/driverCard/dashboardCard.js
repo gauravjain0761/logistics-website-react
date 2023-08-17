@@ -43,7 +43,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -96,7 +96,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
               </Stack>
             </Card>
           </Grid>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -146,7 +146,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
             </Card>
           </Grid>
 
-          <Grid item md={2.4}>
+          {/* <Grid item md={2.4}>
             <Card
               variant="outlined"
               sx={{
@@ -195,8 +195,8 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                 </Box>
               </Stack>
             </Card>
-          </Grid>
-          <Grid item md={2.4}>
+          </Grid> */}
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -245,7 +245,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
               </Stack>
             </Card>
           </Grid>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,

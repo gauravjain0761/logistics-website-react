@@ -47,7 +47,7 @@ const JobHistory = ({ formik }) => {
   const getHistoryData = async () => {
     await axiosInstance
       .get("api/auth/jobs/list", {
-        params: { status: 3, page: Number(page), pageSize: pageSize },
+        params: { status: "history", page: Number(page), pageSize: pageSize },
       })
       .then((response) => {
         if (response?.status === 200) {
@@ -113,10 +113,10 @@ const JobHistory = ({ formik }) => {
           </Box>
 
           <Box py={2} sx={{ background: " " }}>
-            <Grid container rowSpacing={0}>
+            <Grid container rowSpacing={0} justifyContent="center">
           
 
-              {[...Array(4)].map((elem, index) => {
+              {data && data.length > 0 ? data.map((elem, index) => {
                 return (
                   <Grid item md={12} key={index}>
                     <Card
@@ -367,7 +367,7 @@ const JobHistory = ({ formik }) => {
                     </Card>
                   </Grid>
                 );
-              })}
+              }):<Box my={4}><Typography variant="h4">No Job History</Typography></Box>}
 
               {/* )} */}
             </Grid>
