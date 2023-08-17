@@ -1,6 +1,8 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import { getJobAlert } from "@/redux/slices/job/driver";
+import { useDispatch } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import { digitRegex } from "@/utils/constant";
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
@@ -9,6 +11,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 
 const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
+  const dispatch = useDispatch();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -40,12 +43,16 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            getData();
+            dispatch(getJobAlert());
             handleClose(true);
           }
         })
         .catch((error) => {
           console.log(error);
+          const { response } = error;
+          enqueueSnackbar(response.data.error, {
+            variant: "error",
+          });
         });
     },
   });

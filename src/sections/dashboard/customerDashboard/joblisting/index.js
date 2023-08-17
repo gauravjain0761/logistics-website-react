@@ -96,7 +96,7 @@ const JobList = () => {
   };
 
   // Bid Api End
-  
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -236,9 +236,15 @@ const JobList = () => {
                                 icon={
                                   <Iconify icon="material-symbols:check-circle" />
                                 }
-                                label="Accept Driver Bid"
+                                label={
+                                  elem?.status === 1
+                                    ? "Accepted"
+                                    : "Accept Driver Bid"
+                                }
                                 variant="outlined"
-                                onClick={() => setStartChat(elem.id)}
+                                onClick={() =>
+                                  elem?.status !== 1 && setStartChat(elem.id)
+                                }
                               />
                             </Stack>
                             <Stack>

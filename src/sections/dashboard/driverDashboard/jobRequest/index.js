@@ -35,9 +35,14 @@ import { useFormik } from "formik";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "@/redux/store";
+import { getJobAlert } from "@/redux/slices/job/driver";
+import { includes, some } from "lodash";
 const DashboardJobRequest = () => {
   const dispatch = useDispatch();
-  const { jobAlert } = useSelector((state) => state.driverJob);
+  const {
+    jobAlert: { pageCount, data },
+  } = useSelector((state) => state.driverJob);
+
   const router = useRouter();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
@@ -46,7 +51,7 @@ const DashboardJobRequest = () => {
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
-  const [pageCount, setPageCount] = React.useState(0);
+  // const [pageCount, setPageCount] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
@@ -62,25 +67,29 @@ const DashboardJobRequest = () => {
     setPage(value);
   };
   const [loader, setLoader] = React.useState(false);
-  const [data, setData] = React.useState([]);
+  // const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    dispatch(getJobAlert({ page: page, pageSize: pageSize }));
+  }, [page]);
 
   const getData = async () => {
-    setLoader(true);
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: { status: "pending", page: Number(page), pageSize: pageSize },
-      })
-      .then((response) => {
-        setLoader(false);
-        if (response?.status === 200) {
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        setLoader(false);
-        console.log("DriverJob", error);
-      });
+    // setLoader(true);
+    // await axiosInstance
+    //   .get("api/auth/jobs/list", {
+    //     params: { status: "pending", page: Number(page), pageSize: pageSize },
+    //   })
+    //   .then((response) => {
+    //     setLoader(false);
+    //     if (response?.status === 200) {
+    //       setData(response?.data?.view_data?.data);
+    //       setPageCount(response?.data?.view_data?.meta?.last_page);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setLoader(false);
+    //     console.log("DriverJob", error);
+    //   });
   };
 
   React.useEffect(() => {
@@ -94,7 +103,6 @@ const DashboardJobRequest = () => {
     },
   });
 
-  console.log("jobAlert", jobAlert);
   const startJobApi = async () => {
     await axiosInstance
       .post("api/auth/jobs/start-job", formik.values)
@@ -119,9 +127,11 @@ const DashboardJobRequest = () => {
   useEffect(() => {
     formik.setFieldValue("id", startOpen);
   }, [startOpen]);
+
   useEffect(() => {
     formik.setFieldValue("driver_id", user?.id);
   }, [user, user?.id]);
+
   return (
     <React.Fragment>
       <Box py={3}>
@@ -378,7 +388,7 @@ const DashboardJobRequest = () => {
                                     </Button>
                                   </Box>
                                   <Box>
-                                    {item.bid_id && item.bid_id != null ? (
+                                    {/* {item.bid_id && item.bid_id != null ? (
                                       <Button
                                         color="success"
                                         fullWidth
@@ -395,22 +405,48 @@ const DashboardJobRequest = () => {
                                       >
                                         Start Job
                                       </Button>
-                                    ) : (
-                                      <Button
-                                        color="dark"
-                                        fullWidth
-                                        variant="outlined"
-                                        startIcon={
-                                          <Iconify icon="icon-park:check-correct" />
-                                        }
-                                        onClick={() => handleOpen(item?.id)}
-                                        sx={{
-                                          fontWeight: 500,
-                                        }}
-                                      >
-                                        Apply Job
-                                      </Button>
-                                    )}
+                                    ) : ( */}
+                                    <Button
+                                      color={
+                                        !some(item?.job_requests, {
+                                          job_id: item?.id,
+                                        })
+                                          ? "dark"
+                                          : "warning"
+                                      }
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify
+                                          sx={{
+                                            "& svg, g": {
+                                              stroke: (theme) =>
+                                                !some(item?.job_requests, {
+                                                  job_id: item?.id,
+                                                })
+                                                  ? theme?.palette.dark.main
+                                                  : theme?.palette.warning.main,
+                                            },
+                                          }}
+                                          icon="icon-park:check-correct"
+                                        />
+                                      }
+                                      onClick={() => {
+                                        !some(item?.job_requests, {
+                                          job_id: item?.id,
+                                        }) && handleOpen(item?.id);
+                                      }}
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      {some(item?.job_requests, {
+                                        job_id: item?.id,
+                                      })
+                                        ? "Pending"
+                                        : "Apply Job"}
+                                    </Button>
+                                    {/* )} */}
                                   </Box>
                                 </Stack>
                               </Stack>
