@@ -332,6 +332,7 @@ const ViewJobHistory = () => {
                       </Stack>
                     </Stack>
                   </Box>
+                    <Divider/>
               </CardContent>
              
             </Card>
