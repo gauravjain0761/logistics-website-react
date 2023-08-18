@@ -218,10 +218,11 @@ const Login = () => {
                             alignItems: "center",
                           }}
                         >
-                          <Box>
+                          <Box >
                             <FormControlLabel
                               control={<Checkbox size="" defaultChecked />}
                               label="Remember me"
+                              
                             />
                           </Box>
                           <Box>

@@ -448,7 +448,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                           </Button>
                         </Box>
                         <Box>
-                          <Button fullWidth variant="contained" color="dark">
+                          <Button fullWidth variant="contained" color="dark" onClick={formik.resetForm}>
                             <Typography px="2.1em">Reset Now</Typography>
                           </Button>
                         </Box>
