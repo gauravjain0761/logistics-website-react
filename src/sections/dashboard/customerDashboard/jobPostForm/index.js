@@ -80,11 +80,11 @@ const DropTypeSelect = [
   },
   {
     label: "Pickup",
-    value: "Pickup",
+    value: "pickup",
   },
   {
     label: "Drop",
-    value: "Drop",
+    value: "drop",
   },
 ];
 const JobPostForm = ({

@@ -1,4 +1,5 @@
 import { useAuthContext } from "@/auth/useAuthContext";
+import { useFirebaseContext } from "@/auth/useFirebaseContext";
 import ForgetPasswordDialogBox from "@/components/dialog/forgetPasswordModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
@@ -25,6 +26,32 @@ const Login = () => {
   const handleClose = () => setOpen(false);
 
   const { login } = useAuthContext();
+
+  const { loginWithGoogle, user, loginWithFacebook } = useFirebaseContext();
+
+  console.log("firebaseAppuser", user);
+
+  const handleGoogleLogin = async () => {
+    try {
+      if (loginWithGoogle) {
+        loginWithGoogle();
+      }
+      console.log("GOOGLE LOGIN");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      if (loginWithFacebook) {
+        loginWithFacebook();
+      }
+      console.log("FACEBOOK LOGIN");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -191,10 +218,11 @@ const Login = () => {
                             alignItems: "center",
                           }}
                         >
-                          <Box>
+                          <Box >
                             <FormControlLabel
                               control={<Checkbox size="" defaultChecked />}
                               label="Remember me"
+                              
                             />
                           </Box>
                           <Box>
@@ -252,6 +280,7 @@ const Login = () => {
                                   color="white"
                                 />
                               }
+                              onClick={() => handleFacebookLogin()}
                             >
                               <Typography fontSize={"15px"}>
                                 Continue with Facebook
@@ -274,6 +303,7 @@ const Login = () => {
                                   color="white"
                                 />
                               }
+                              onClick={() => handleGoogleLogin()}
                             >
                               <Typography fontSize={"15px"}>
                                 Continue with Google

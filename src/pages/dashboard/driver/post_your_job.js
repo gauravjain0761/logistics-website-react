@@ -1,9 +1,10 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobPostForm from "@/sections/dashboard/driverDashboard/jobPostForm";
+// import JobPostForm from "@/sections/dashboard/driverDashboard/jobPostForm";
 import { reject } from "lodash";
 import AuthGuard from "@/auth/AuthGuard";
+import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
 const PostJob = () => {
   const defaultPickupAddressValues = {
@@ -106,13 +107,14 @@ const PostJob = () => {
 
   return (
     <AuthGuard>
-      <JobPostForm
+    <p>not found</p>
+      {/* <JobPostForm
         addPickupAddress={addPickupAddress}
         removePickupAddress={removePickupAddress}
         addDeliveryAddress={addDeliveryAddress}
         removeDeliveryAddress={removeDeliveryAddress}
         formik={formik}
-      />
+      /> */}
     </AuthGuard>
   );
 };

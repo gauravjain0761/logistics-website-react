@@ -26,7 +26,7 @@ const navConfig = [
   },
   {
     title: "About us",
-    path: "/aboutus/aboutus",
+    path: "/aboutus",
     token: (token) => true,
   },
 
@@ -42,17 +42,17 @@ const navConfig = [
   },
   {
     title: "FAQ",
-    path: "/faq/faqs",
+    path: "/faqs",
     token: (token) => true,
   },
   {
     title: "Blog",
-    path: "/blog/blogs",
+    path: "/blogs",
     token: (token) => true,
   },
   {
     title: "Contact Us",
-    path: "/contact/contact",
+    path: "/contact_us",
     token: (token) => true,
   },
   // {
