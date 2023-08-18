@@ -43,8 +43,14 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            dispatch(getJobAlert());
-            handleClose(true);
+            dispatch(
+              getJobAlert({
+                page: 1,
+                userId: user?.id,
+                pageSize: 10,
+              })
+            );
+            handleClose(false);
           }
         })
         .catch((error) => {

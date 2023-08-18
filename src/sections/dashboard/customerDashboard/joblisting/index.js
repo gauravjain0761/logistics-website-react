@@ -236,6 +236,7 @@ const JobList = () => {
                                 icon={
                                   <Iconify icon="material-symbols:check-circle" />
                                 }
+                                disabled={elem?.status === 4}
                                 label={
                                   elem?.status === 1
                                     ? "Accepted"

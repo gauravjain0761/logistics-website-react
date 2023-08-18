@@ -41,8 +41,9 @@ const DashboardJobPost = () => {
   const [startOpen, setStartOpen] = React.useState(false);
   const handleStartOpen = (id) => setStartOpen(id);
   const handleStartClose = () => setStartOpen(false);
+
   const [completeOpen, setCompleteOpen] = React.useState(false);
-  console.log(completeOpen,"uiudsiusd");
+  console.log(completeOpen, "uiudsiusd");
   const handleCompleteOpen = (id) => setCompleteOpen(id);
   const handleCompleteClose = () => setCompleteOpen(false);
 
@@ -61,7 +62,13 @@ const DashboardJobPost = () => {
     setLoader(true);
     await axiosInstance
       .get("api/auth/jobs/list", {
-        params: { status: "active", page: Number(page), pageSize: pageSize },
+        params: {
+          status: "active",
+          page: Number(page),
+          pageSize: pageSize,
+          type: "driver",
+          user_id: user?.id,
+        },
       })
       .then((response) => {
         setLoader(false);
@@ -82,14 +89,14 @@ const DashboardJobPost = () => {
 
   const formData = useFormik({
     initialValues: {
-      id: completeOpen,
+      id: "",
       driver_id: user?.id,
     },
   });
   // Start Job Api
   const startJobApi = async () => {
     await axiosInstance
-      .post("api/auth/jobs/start-job", formik.values)
+      .post("api/auth/jobs/start-job", formData.values)
       .then((response) => {
         if (response.status === 200) {
           enqueueSnackbar(response.data.message, {
@@ -109,12 +116,8 @@ const DashboardJobPost = () => {
         console.log(error);
       });
   };
-  useEffect(() => {
-    formik.setFieldValue("id", startOpen);
-  }, [startOpen]);
-  useEffect(() => {
-    formik.setFieldValue("id", completeOpen);
-  }, [completeOpen]);
+  
+
   useEffect(() => {
     formik.setFieldValue("driver_id", user?.id);
   }, [user, user?.id]);
@@ -440,9 +443,13 @@ const DashboardJobPost = () => {
                                         startIcon={
                                           <Iconify icon="icon-park:check-correct" />
                                         }
-                                        onClick={() =>
-                                          handleStartOpen(elem?.bid_id)
-                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          setStartOpen(true);
+                                        }}
                                         sx={{
                                           fontWeight: 500,
                                         }}
@@ -458,10 +465,13 @@ const DashboardJobPost = () => {
                                         startIcon={
                                           <Iconify icon="carbon:task-complete" />
                                         }
-                                        onClick={() =>{
-                                          handleCompleteOpen(elem?.bid_id)
-                                         }
-                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          setCompleteOpen(true);
+                                        }}
                                       >
                                         Complete Job
                                       </Button>
