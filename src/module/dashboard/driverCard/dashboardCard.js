@@ -13,11 +13,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "@/redux/store";
 import { getJobAlert } from "@/redux/slices/job/driver";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const DashboardCard = ({ jobalert,activeJob }) => {
   const router = useRouter();
+  const {user}= useAuthContext();
   const {jobAlert: { pageCount, data }} = useSelector((state) => state.driverJob);
-  // const [data, setData] = React.useState([]);
+  const [historyData, setHistoryData] = React.useState([]);
 
   const getData = async () => {
     // await axiosInstance
@@ -38,6 +40,34 @@ const DashboardCard = ({ jobalert,activeJob }) => {
   React.useEffect(() => {
     getData();
   }, []);
+
+
+
+  const getHistoryData = async () => {
+    await axiosInstance
+      .get("api/auth/jobs/list", {
+        params: {
+          status: "history",
+          type: "driver",
+          user_id: user?.id,
+          page: 1,
+          pageSize: 10,
+        },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setHistoryData(response?.data?.view_data?.data)
+        }
+      })
+      .catch((error) => {
+        console.log("Job History", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getHistoryData();
+  }, [ user, user?.id]);
+
 
   return (
     <React.Fragment>
@@ -239,7 +269,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                     JOB HISTORY
                   </Typography>
                   <Typography variant="h5" textAlign={"center"}>
-                    20
+                    {historyData.length}
                   </Typography>
                 </Box>
               </Stack>

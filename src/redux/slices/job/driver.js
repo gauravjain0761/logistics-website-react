@@ -20,7 +20,6 @@ const initialState = {
   },
 };
 
-
 const slice = createSlice({
   name: "driverJob",
   initialState,
@@ -44,7 +43,6 @@ const slice = createSlice({
       state.jobAlert.pageCount = action.payload.meta?.last_page;
     },
   },
- 
 });
 const sliceActive = createSlice({
   name: "driverActiveJob",
@@ -69,7 +67,6 @@ const sliceActive = createSlice({
       state.JobActiveAlert.pageCount = action.payload.meta?.last_page;
     },
   },
-  
 });
 
 // Reducer
@@ -82,20 +79,26 @@ export const { startJobActiveAlertLoading } = sliceActive.actions;
 
 // ----------------------------------------------------------------------
 
-export function getJobAlert({ page = 1, pageSize = 10 }) {
+export const getJobAlert = ({ page = 1, pageSize = 10, userId }) => {
   console.log("pagepage", page, pageSize);
   return async (dispatch) => {
     dispatch(slice.actions.startJobAlertLoading());
     try {
       const response = await axiosInstance.get("api/auth/jobs/list", {
-        params: { status: "pending", page: Number(page), pageSize: pageSize },
+        params: {
+          status: "pending",
+          page: Number(page),
+          pageSize: pageSize,
+          type: "driver",
+          user_id: userId,
+        },
       });
       dispatch(slice.actions.setJobAlert(response?.data?.view_data));
     } catch (error) {
       dispatch(slice.actions.hasJobAlertError(error));
     }
   };
-}
+};
 export function getJobActiveAlert({ page = 1, pageSize = 10 }) {
   console.log("pafgee", page, pageSize);
   return async (dispatch) => {
@@ -104,7 +107,9 @@ export function getJobActiveAlert({ page = 1, pageSize = 10 }) {
       const response = await axiosInstance.get("api/auth/jobs/list", {
         params: { status: "active", page: Number(page), pageSize: pageSize },
       });
-      dispatch(sliceActive.actions.setJobActiveAlert(response?.data?.view_data));
+      dispatch(
+        sliceActive.actions.setJobActiveAlert(response?.data?.view_data)
+      );
     } catch (error) {
       dispatch(sliceActive.actions.hasJobActiveAlertError(error));
     }

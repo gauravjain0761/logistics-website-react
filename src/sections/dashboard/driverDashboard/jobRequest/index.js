@@ -70,7 +70,7 @@ const DashboardJobRequest = () => {
   // const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    dispatch(getJobAlert({ page: page, pageSize: pageSize }));
+    dispatch(getJobAlert({ page: page, pageSize: pageSize, userId: user?.id }));
   }, [page]);
 
   const getData = async () => {
@@ -388,11 +388,13 @@ const DashboardJobRequest = () => {
                                     </Button>
                                   </Box>
                                   <Box>
-                                  
                                     <Button
                                       color={
                                         !some(item?.job_requests, {
                                           job_id: item?.id,
+                                        }) &&
+                                        !some(item?.job_requests, {
+                                          driver_id: user?.id,
                                         })
                                           ? "dark"
                                           : "warning"
@@ -406,6 +408,9 @@ const DashboardJobRequest = () => {
                                               stroke: (theme) =>
                                                 !some(item?.job_requests, {
                                                   job_id: item?.id,
+                                                }) &&
+                                                !some(item?.job_requests, {
+                                                  driver_id: user?.id,
                                                 })
                                                   ? theme?.palette.dark.main
                                                   : theme?.palette.warning.main,
@@ -417,17 +422,24 @@ const DashboardJobRequest = () => {
                                       onClick={() => {
                                         !some(item?.job_requests, {
                                           job_id: item?.id,
-                                        }) && handleOpen(item?.id);
+                                        }) &&
+                                          !some(item?.job_requests, {
+                                            driver_id: user?.id,
+                                          }) &&
+                                          handleOpen(item?.id);
                                       }}
                                       sx={{
                                         fontWeight: 500,
                                       }}
                                     >
-                                      {some(item?.job_requests, {
+                                      {!some(item?.job_requests, {
                                         job_id: item?.id,
+                                      }) &&
+                                      !some(item?.job_requests, {
+                                        driver_id: user?.id,
                                       })
-                                        ? "Pending"
-                                        : "Apply Job"}
+                                        ? "Apply Job"
+                                        : "Pending"}
                                     </Button>
                                     {/* )} */}
                                   </Box>
@@ -513,7 +525,7 @@ const DashboardJobRequest = () => {
             </Box>
           </Box>
         </Container>
-       
+
         <Box>
           <ApplyJobModal
             handleClose={handleClose}

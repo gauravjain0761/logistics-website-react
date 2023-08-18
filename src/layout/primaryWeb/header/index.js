@@ -197,7 +197,7 @@ const Header = (props) => {
                 ) : (
                   <Typography
                     sx={{
-                      mr: 1.1,
+                      mx: 1,
                       color: (theme) =>
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
@@ -218,7 +218,8 @@ const Header = (props) => {
               {isAuthenticated && (
                 <Typography
                   sx={{
-                    mr: 2,
+                    mx: 1,
+                    pr:1,
                     color: (theme) =>
                       router.asPath === `/dashboard/${user?.user_type}/profile`
                         ? theme.palette.primary.main

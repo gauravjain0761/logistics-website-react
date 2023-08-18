@@ -53,7 +53,7 @@ const TextBox = (props) => {
           <Box
             sx={{
               ml: 0,
-              background: (theme) => theme.palette.grey[100],
+              background: (theme) => theme.palette.common.white,
               border: "1px solid",
               borderColor: (theme) => alpha(theme.palette.grey[500], 0.32),
               padding: ".375rem .75rem",
@@ -72,6 +72,8 @@ const TextBox = (props) => {
           variant={variant}
           name={name}
           sx={{
+            background: (theme) => theme.palette.common.white,
+
             "&.MuiOutlinedInput-input": {
               background: (theme) => theme.palette.common.white,
             },
