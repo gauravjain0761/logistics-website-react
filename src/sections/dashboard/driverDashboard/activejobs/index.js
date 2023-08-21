@@ -30,7 +30,6 @@ import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { PDFViewer } from "@react-pdf/renderer";
-import dynamic from "next/dynamic";
 import InvoicePDF from "./InvoicePDF";
 
 

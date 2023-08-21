@@ -252,8 +252,9 @@ const BidList = () => {
                                 }
                                 variant="outlined"
                                 onClick={() =>
-                                  elem?.status !== 1 ||
-                                  (elem.status !== 4 && setStartChat(elem.id))
+                                  elem?.status !== 1 &&
+                                  elem.status !== 4 &&
+                                  setStartChat(elem.id)
                                 }
                               />
                             </Stack>
