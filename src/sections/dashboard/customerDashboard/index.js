@@ -45,7 +45,7 @@ const CustomerDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/dashboard/customer/job_post/create")}
+                            onClick={()=> router.push("/dashboard/customer/job_post_form/create")}
                             color="inherit"
                             sx={{
                               py: 1.4,

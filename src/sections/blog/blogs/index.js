@@ -3,7 +3,9 @@ import { JobSekelton } from "@/components/not-found";
 import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
+  Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -46,9 +48,12 @@ const Blogs = ({ formik }) => {
   return (
     <React.Fragment>
       <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
+        src="/blog_banner.png"
         alt=""
-        title="Blog"
+        title="Welcome to Our "
+        titleLastWord="Blogs"
+        subTitle="Here are some Informational Blogs to enhance
+your understanding of of our website."
       />
       <Box py={9}>
         <Container>
@@ -62,10 +67,11 @@ const Blogs = ({ formik }) => {
                   return (
                     <Grid item md={4} key={index}>
                       <Card
-                        sx={{ borderRadius: "12px", cursor: "pointer" }}
-                        onClick={() =>
-                          router.push(`/blog/blog_detail/${elem.slug}`)
-                        }
+                        sx={{
+                          borderRadius: "5px",
+                          height: "430px",
+                        }}
+                     
                       >
                         <Box
                           component="img"
@@ -76,9 +82,14 @@ const Blogs = ({ formik }) => {
                           alt="blog"
                         />
                         <CardContent>
-                          <Grid container spacing={2}>
-                            <Grid item md={4}>
-                              <Stack alignItems="center">
+                          <Stack spacing={1}>
+                            <Box>
+                              <Typography fontSize={18} fontWeight={600}>
+                                {elem?.title}
+                              </Typography>
+                            </Box>
+
+                          {/* <Stack alignItems="center">
                                 <Box
                                   sx={{
                                     border: "2px solid #e1e1e1",
@@ -105,33 +116,48 @@ const Blogs = ({ formik }) => {
                                     {moment(elem?.created_at).format("MMM")}
                                   </Typography>
                                 </Box>
-                              </Stack>
-                            </Grid>
-                            <Grid item md={8}>
-                              <Stack spacing={0.6}>
-                                <Box>
-                                  <Typography variant="h4">
-                                    {elem?.title}
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    fontSize="16x"
-                                    fontWeight={500}
-                                    color="primary"
-                                  >
-                                    {elem?.category}
-                                  </Typography>
-                                </Box>
-                                <Box></Box>
-                                <Box sx={{ height: "12em" }}>
-                                  <Typography fontSize="15px">
+                              </Stack> */}
+                          <Stack
+                            spacing={1}
+                            direction="row"
+                            alignItems="center"
+                          >
+                            <Box>
+                              <Avatar />
+                            </Box>
+                            <Box>
+                              <Typography
+                                component="h2"
+                                fontSize={18}
+                                fontWeight={500}
+                              >
+                                User Name
+                              </Typography>
+                            </Box>
+                            <Box>
+                              <Typography
+                                fontWeight={400}
+                                fontSize={14}
+                                component="h6"
+                                ml={5}
+                                color={(theme) => theme.palette.grey[500]}
+                              >
+                                {moment(elem?.created_at).format("MMM-DD-YYYY")}
+                              </Typography>
+                            </Box>
+                          </Stack>
+                          <Box >
+                                  <Typography fontSize={14} color={(theme) => theme.palette.grey[500]}>
                                     {elem?.description}
                                   </Typography>
                                 </Box>
-                              </Stack>
-                            </Grid>
-                          </Grid>
+                          </Stack>
+
+                          <Box>
+                            <Button variant="outlined"    onClick={() =>
+                          router.push(`/blogs/blog_detail/${elem.slug}`)
+                        }>View Blog</Button>
+                          </Box>
                         </CardContent>
                       </Card>
                     </Grid>

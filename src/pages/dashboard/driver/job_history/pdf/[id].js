@@ -2,13 +2,12 @@ import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import AuthGuard from "@/auth/AuthGuard";
-import ViewJobHistory from "@/sections/dashboard/customerDashboard/viewJobHistory";
+import ViewHistoryPDF from "@/sections/dashboard/driverDashboard/jobHistory/pdf";
 
 const ViewJobPage = () => {
-  const formik = useFormik({});
   return (
     <AuthGuard>
-      <ViewJobHistory formik={formik} />
+      <ViewHistoryPDF />
     </AuthGuard>
   );
 };

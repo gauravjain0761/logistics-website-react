@@ -191,7 +191,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_date}
+                                      {elem?.items[0]?.product?.pickup_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -213,7 +213,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_time}
+                                      {elem?.items[0]?.product?.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -236,7 +236,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.material}
+                                      {elem?.items[0]?.product.material}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -260,7 +260,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_date}
+                                      {elem?.items[0]?.product.drop_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -282,7 +282,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_time}
+                                      {elem?.items[0]?.product.drop_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -305,9 +305,9 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.length} x{" "}
-                                      {elem.items[0].product.width} x{" "}
-                                      {elem.items[0].product.height} inch
+                                      {elem?.items[0]?.product.length} x{" "}
+                                      {elem?.items[0]?.product.width} x{" "}
+                                      {elem?.items[0]?.product.height} inch
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -320,25 +320,23 @@ const JobHistory = ({ formik }) => {
                                 alignItems="center"
                                 spacing={1}
                               >
-                                <Stack spacing={1}>
-                                  <Box>
-                                    <Button
-                                      sx={{ fontWeight: 500 }}
-                                      fullWidth
-                                      variant="outlined"
-                                      startIcon={
-                                        <Iconify icon="carbon:view-filled" />
-                                      }
-                                      onClick={() =>
-                                        router.push(
-                                          `/dashboard/customer/job_history/detail/${elem.id}`
-                                        )
-                                      }
-                                    >
-                                      View Detail
-                                    </Button>
-                                  </Box>
-                                </Stack>
+                                <Box>
+                                  <Button
+                                    sx={{ fontWeight: 500 }}
+                                    fullWidth
+                                    variant="outlined"
+                                    startIcon={
+                                      <Iconify icon="carbon:view-filled" />
+                                    }
+                                    onClick={() =>
+                                      router.push(
+                                        `/dashboard/customer/job_history/detail/${elem.id}`
+                                      )
+                                    }
+                                  >
+                                    View Detail
+                                  </Button>
+                                </Box>
                               </Stack>
                               <Stack
                                 mt={1}
