@@ -6,13 +6,17 @@ import {
   Card,
   CardContent,
   Container,
+  Dialog,
+  DialogActions,
   Divider,
   Grid,
+  IconButton,
   Modal,
   Pagination,
   PaginationItem,
   Rating,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -25,6 +29,11 @@ import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
+import { PDFViewer } from "@react-pdf/renderer";
+import dynamic from "next/dynamic";
+import InvoicePDF from "./InvoicePDF";
+
+
 const DashboardJobPost = () => {
   const router = useRouter();
   const { user } = useAuthContext();
@@ -32,6 +41,7 @@ const DashboardJobPost = () => {
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   const [pageCount, setPageCount] = React.useState(1);
@@ -116,7 +126,6 @@ const DashboardJobPost = () => {
         console.log(error);
       });
   };
-  
 
   useEffect(() => {
     formik.setFieldValue("driver_id", user?.id);
@@ -304,7 +313,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_date}
+                                      {elem?.items[0]?.product?.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -326,7 +335,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_time}
+                                      {elem?.items[0]?.product.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -349,7 +358,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.material}
+                                      {elem?.items[0]?.product.material}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -373,7 +382,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_date}
+                                      {elem?.items[0]?.product.drop_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -395,7 +404,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_time}
+                                      {elem?.items[0]?.product.drop_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -418,9 +427,9 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.length} x{" "}
-                                      {elem.items[0].product.width} x{" "}
-                                      {elem.items[0].product.height} inch
+                                      {elem?.items[0]?.product.length} x{" "}
+                                      {elem?.items[0]?.product.width} x{" "}
+                                      {elem?.items[0]?.product.height} inch
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -505,6 +514,19 @@ const DashboardJobPost = () => {
                                       }}
                                     >
                                       Track Job
+                                    </Button>
+                                  </Box>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:view-filled" />
+                                      }
+                                      onClick={() => setOpenPDF(true)}
+                                    >
+                                      View PDF
                                     </Button>
                                   </Box>
                                 </Stack>
@@ -764,6 +786,34 @@ const DashboardJobPost = () => {
           </Box>
         </Container>
       </Box>
+      <Dialog fullScreen open={openPDf}>
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <DialogActions
+            sx={{
+              zIndex: 9,
+              padding: "12px !important",
+              boxShadow: (theme) => theme.customShadows.z8,
+            }}
+          >
+            <Tooltip title="Close">
+              <IconButton color="inherit" onClick={() => setOpenPDF(false)}>
+                <Iconify icon="eva:close-fill" />
+              </IconButton>
+            </Tooltip>
+          </DialogActions>
+          <Box sx={{ flexGrow: 1, height: "100%", overflow: "hidden" }}>
+            <PDFViewer
+              fileName={`Test-Name`}
+              width="100%"
+              height="100%"
+              style={{ border: "none" }}
+              showToolbar={false}
+            >
+              <InvoicePDF />
+            </PDFViewer>
+          </Box>
+        </Box>
+      </Dialog>
     </React.Fragment>
   );
 };

@@ -191,7 +191,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_date}
+                                      {elem?.items[0]?.product?.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -213,7 +213,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_time}
+                                      {elem?.items[0]?.product.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -236,7 +236,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.material}
+                                      {elem?.items[0]?.product.material}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -260,7 +260,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_date}
+                                      {elem?.items[0]?.product.drop_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -282,7 +282,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_time}
+                                      {elem?.items[0]?.product.drop_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -305,9 +305,9 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.length} x{" "}
-                                      {elem.items[0].product.width} x{" "}
-                                      {elem.items[0].product.height} inch
+                                      {elem?.items[0]?.product.length} x{" "}
+                                      {elem?.items[0]?.product.width} x{" "}
+                                      {elem?.items[0]?.product.height} inch
                                     </Typography>
                                   </Box>
                                 </Grid>
