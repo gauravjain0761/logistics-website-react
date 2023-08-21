@@ -71,7 +71,6 @@ your understanding of of our website."
                           borderRadius: "5px",
                           height: "430px",
                         }}
-                     
                       >
                         <Box
                           component="img"
@@ -89,7 +88,7 @@ your understanding of of our website."
                               </Typography>
                             </Box>
 
-                          {/* <Stack alignItems="center">
+                            {/* <Stack alignItems="center">
                                 <Box
                                   sx={{
                                     border: "2px solid #e1e1e1",
@@ -117,46 +116,56 @@ your understanding of of our website."
                                   </Typography>
                                 </Box>
                               </Stack> */}
-                          <Stack
-                            spacing={1}
-                            direction="row"
-                            alignItems="center"
-                          >
-                            <Box>
-                              <Avatar />
-                            </Box>
+                            <Stack
+                              spacing={1}
+                              direction="row"
+                              alignItems="center"
+                            >
+                              <Box>
+                                <Avatar />
+                              </Box>
+                              <Box>
+                                <Typography
+                                  component="h2"
+                                  fontSize={18}
+                                  fontWeight={500}
+                                >
+                                  User Name
+                                </Typography>
+                              </Box>
+                              <Box>
+                                <Typography
+                                  fontWeight={400}
+                                  fontSize={14}
+                                  component="h6"
+                                  ml={5}
+                                  color={(theme) => theme.palette.grey[500]}
+                                >
+                                  {moment(elem?.created_at).format(
+                                    "MMM-DD-YYYY"
+                                  )}
+                                </Typography>
+                              </Box>
+                            </Stack>
                             <Box>
                               <Typography
-                                component="h2"
-                                fontSize={18}
-                                fontWeight={500}
-                              >
-                                User Name
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography
-                                fontWeight={400}
                                 fontSize={14}
-                                component="h6"
-                                ml={5}
                                 color={(theme) => theme.palette.grey[500]}
                               >
-                                {moment(elem?.created_at).format("MMM-DD-YYYY")}
+                                {elem?.description}
                               </Typography>
                             </Box>
-                          </Stack>
-                          <Box >
-                                  <Typography fontSize={14} color={(theme) => theme.palette.grey[500]}>
-                                    {elem?.description}
-                                  </Typography>
-                                </Box>
                           </Stack>
 
                           <Box>
-                            <Button variant="outlined"    onClick={() =>
-                          router.push(`/blogs/blog_detail/${elem.slug}`)
-                        }>View Blog</Button>
+                            <Button
+                              variant="outlined"
+                              onClick={() =>
+                                router.push(`/blogs/blog_detail/${elem.slug}`)
+                              }
+                            >
+                              View Blog
+                            </Button>
                           </Box>
                         </CardContent>
                       </Card>

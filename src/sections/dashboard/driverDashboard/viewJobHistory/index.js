@@ -325,31 +325,41 @@ const ViewJobHistory = () => {
                   {jobDetail?.ratings &&
                     jobDetail?.ratings?.length > 0 &&
                     jobDetail?.ratings.map((item, index) => {
-                      <Stack spacing={3} direction="row">
-                        <Box
-                          component="img"
-                          src={`${item?.base_url}${item?.image}`}
-                          width={60}
-                          height={60}
-                        />
-                        <Stack direction="column">
-                          <Box>
-                            <Typography variant="subtitle1" color="primary">
-                              {item?.name}
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Rating
-                              value={item?.rating}
-                              readOnly
-                              size="small"
+                      return (
+                        <React.Fragment key={`jobDetail-${index}`}>
+                          <Stack spacing={3} direction="row">
+                            <Box
+                              component="img"
+                              src={`${item?.base_url}${item?.image}`}
+                              width={60}
+                              height={60}
                             />
+                            <Stack direction="column" spacing={2}>
+                              {/* <Box>
+                                <Typography variant="subtitle1" color="primary">
+                                  {item?.name}
+                                </Typography>
+                              </Box> */}
+                              <Box>
+                                <Rating
+                                  value={item?.rating}
+                                  readOnly
+                                  size="small"
+                                />
+                                <Divider />
+                              </Box>
+                              <Box>
+                                <Typography fontSize={14}>
+                                  {item?.review}
+                                </Typography>
+                              </Box>
+                            </Stack>
+                          </Stack>
+                          <Box sx={{ my: 3 }}>
+                            <Divider />
                           </Box>
-                          <Box>
-                            <Typography fontSize={14}>{item?.text}</Typography>
-                          </Box>
-                        </Stack>
-                      </Stack>;
+                        </React.Fragment>
+                      );
                     })}
                 </Box>
                 <Divider />

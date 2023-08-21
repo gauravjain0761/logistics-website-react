@@ -28,7 +28,7 @@ import CountUp from "react-countup";
 // import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
-import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
+import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const { user } = useAuthContext();
