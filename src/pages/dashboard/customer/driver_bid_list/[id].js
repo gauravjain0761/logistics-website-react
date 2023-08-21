@@ -1,14 +1,14 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobList from "@/sections/dashboard/customerDashboard/joblisting";
 import AuthGuard from "@/auth/AuthGuard";
+import BidList from "@/sections/dashboard/customerDashboard/driverBidList";
 
 const JobListing = () => {
   const formik = useFormik({});
   return (
     <AuthGuard>
-      <JobList formik={formik} />
+      <BidList formik={formik} />
     </AuthGuard>
   );
 };

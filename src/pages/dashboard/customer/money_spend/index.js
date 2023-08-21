@@ -1,7 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import DashboardJobPost from "@/sections/dashboard/customerDashboard/jobPost";
+import DashboardJobPost from "@/sections/dashboard/customerDashboard/jobPosted";
 import { Box, Card, CardContent, Container, Typography } from "@mui/material";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 

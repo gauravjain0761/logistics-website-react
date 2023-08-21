@@ -15,7 +15,6 @@ const PostJob = () => {
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuthContext();
-  console.log("useruseruser", user);
   const product = {
     product: {
       image: "",

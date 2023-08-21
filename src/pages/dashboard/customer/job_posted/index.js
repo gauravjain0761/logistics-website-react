@@ -1,7 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import DashboardJobPost from "@/sections/dashboard/customerDashboard/jobPost";
+import DashboardJobPost from "@/sections/dashboard/customerDashboard/jobPosted";
 import AuthGuard from "@/auth/AuthGuard";
 
 const DashboardPageNext = () => {

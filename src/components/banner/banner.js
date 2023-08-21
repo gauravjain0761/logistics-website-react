@@ -2,7 +2,15 @@ import { Box, CardContent, Stack, Typography } from "@mui/material";
 import React from "react";
 import { BreadcrumbComponent } from "../breadcrumb";
 
-const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
+const BannerSection = ({
+  title,
+  alt,
+  src,
+  srcWidth,
+  imgSx,
+  subTitle,
+  titleLastWord,
+}) => {
   return (
     <React.Fragment>
       <Box
@@ -10,7 +18,7 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           position: "relative",
           overflow: "hidden",
           width: "100%",
-          height: { lg: "300px", md: "300px", sm: "100%", xs: "100%" },
+          height: { lg: "350px", md: "350px", sm: "100%", xs: "100%" },
           backgroundImage: `url(../../../${src})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -19,11 +27,11 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          textAlign:"center",
+          textAlign: "center",
           "&::before": {
             content: '""',
             backgroundImage:
-              "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 100%)",
+              "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
             position: "absolute",
             top: 0,
             left: 0,
@@ -33,6 +41,11 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
           },
         }}
       >
+        <Stack
+          sx={{ zIndex: 8, position: "absolute", left: "8em", top: "5em" }}
+        >
+          <BreadcrumbComponent />
+        </Stack>
         <CardContent
           sx={{
             paddingTop: {
@@ -49,23 +62,39 @@ const BannerSection = ({ title, alt, src, srcWidth, imgSx }) => {
             },
             position: "relative",
             zIndex: 9,
-            
           }}
         >
           {/* <CardContentOverlay> */}
 
           <Typography
             gutterBottom
-            variant="h2"
+            fontSize={44}
             component="h1"
-            sx={{ fontFamily: "Rufina-Bold" }}
+            fontWeight={600}
             color="white"
           >
             {title}
+            <Typography
+              component="span"
+              gutterBottom
+              fontSize={44}
+              fontWeight={600}
+              color="primary"
+            >
+              {titleLastWord}
+            </Typography>
           </Typography>
-          <Stack  alignItems="center">
-            <BreadcrumbComponent />
-          </Stack>
+          <Typography
+            gutterBottom
+            component="p"
+            fontWeight={400}
+            width={400}
+            fontSize={16}
+            color="white"
+            m="auto"
+          >
+            {subTitle}
+          </Typography>
 
           {/* </CardContentOverlay> */}
         </CardContent>

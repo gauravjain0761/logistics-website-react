@@ -225,7 +225,7 @@ const DashboardJobPost = ({ formik }) => {
                       variant="outlined"
                       fullWidth
                       onClick={() =>
-                        router.push("/dashboard/customer/job_post/create")
+                        router.push("/dashboard/customer/job_post_form/create")
                       }
                     >
                       Add New Post
@@ -448,7 +448,7 @@ const DashboardJobPost = ({ formik }) => {
                                       startIcon={<Iconify icon="bxs:edit" />}
                                       onClick={() =>
                                         router.push(
-                                          `/dashboard/customer/job_post/${item?.id}`
+                                          `/dashboard/customer/job_post_form/${item?.id}`
                                         )
                                       }
                                       sx={{

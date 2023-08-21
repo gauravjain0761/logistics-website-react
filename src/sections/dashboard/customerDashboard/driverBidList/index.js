@@ -28,7 +28,7 @@ import { useRouter } from "next/router";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 
-const JobList = () => {
+const BidList = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [startChat, setStartChat] = React.useState("");
@@ -165,6 +165,9 @@ const JobList = () => {
                                 src={`${elem.driver.base_url}${elem.driver.profile_img}`}
                                 sx={{
                                   borderRadius: "50%",
+                                  width: "65px",
+                                  objectFit: "cover",
+                                  height: "65px",
                                   border: "3px solid #ff7534",
                                 }}
                               />
@@ -232,11 +235,16 @@ const JobList = () => {
                           >
                             <Stack direction="row" spacing={1}>
                               <Chip
-                                sx={{ cursor: "pointer" }}
+                                sx={{
+                                  cursor:
+                                    elem?.status === 4
+                                      ? "not-allowed"
+                                      : "pointer",
+                                }}
                                 icon={
                                   <Iconify icon="material-symbols:check-circle" />
                                 }
-                                disabled={elem?.status === 4}
+                                // disabled={elem?.status === 4}
                                 label={
                                   elem?.status === 1
                                     ? "Accepted"
@@ -244,7 +252,8 @@ const JobList = () => {
                                 }
                                 variant="outlined"
                                 onClick={() =>
-                                  elem?.status !== 1 && setStartChat(elem.id)
+                                  elem?.status !== 1 ||
+                                  (elem.status !== 4 && setStartChat(elem.id))
                                 }
                               />
                             </Stack>
@@ -435,4 +444,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default BidList;
