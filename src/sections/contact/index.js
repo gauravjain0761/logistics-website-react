@@ -83,13 +83,15 @@ const ContactSection = ({ formik }) => {
             <Breadcrumbs aria-label="breadcrumb">
               <Box
                 component={Link}
-                sx={{ textDecoration: "none" }}
+                sx={{ textDecoration: "none", fontSize: "14px" }}
                 color="inherit"
                 href="/"
               >
                 Home
               </Box>
-              <Typography color="common.black">Contact Us</Typography>
+              <Typography fontSize={14} color="common.black">
+                Contact Us
+              </Typography>
             </Breadcrumbs>
           </Box>
           <Grid container spacing={10}>
