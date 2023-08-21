@@ -1,6 +1,14 @@
 import { BannerSection } from "@/components/banner";
 import Iconify from "@/components/iconify";
+import { CustomTooltip } from "@/components/tooltip/customTooltip";
 import axiosInstance from "@/utils/axios";
+import {
+  Facebook,
+  Instagram,
+  Pinterest,
+  Twitter,
+  YouTube,
+} from "@mui/icons-material";
 import {
   Box,
   Card,
@@ -9,6 +17,7 @@ import {
   Grid,
   Stack,
   Typography,
+  alpha,
 } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/router";
@@ -19,7 +28,7 @@ const BlogDetail = () => {
   const { slug } = router.query;
 
   const [data, setData] = useState("");
-  console.log(data);  
+  console.log(data);
   const BlogDetailApi = async () =>
     await axiosInstance
       .get(`/api/front/blog-details/${slug}`)
@@ -38,7 +47,6 @@ const BlogDetail = () => {
     BlogDetailApi();
   }, []);
 
-
   console.log("datadata", data);
 
   return (
@@ -50,50 +58,58 @@ const BlogDetail = () => {
       />
       <Box py={5}>
         <Container>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
+            <Grid item md={2}>
+              <Stack spacing={2}>
+                <Box>
+                  <Typography sx={{ fontSize: "28px" }}>966</Typography>
+                  <Typography
+                    sx={{ fontSize: "16px" }}
+                    color={(theme) => alpha(theme.palette.grey[500], 0.5)}
+                  >
+                    Shares
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <CustomTooltip title="528" placement="right">
+                    <Facebook />
+                  </CustomTooltip>
+                </Box>
+              </Stack>
+            </Grid>
             <Grid item md={8}>
               <Box component="img" src={`${data.base_url}${data.image}`} />
             </Grid>
-            <Grid item md={4}>
-              <Card sx={{ borderRadius: "5px" }}>
-                <CardContent>
-                  <Box borderBottom="2px solid rgba(224, 224, 224, 0.5)">
-                    <Typography variant="h5" fontWeight={500} pb={1.5}>
-                      Recent Post
-                    </Typography>
+            <Grid item md={2}>
+              <Box>
+                <Stack direction="row" spacing={2}>
+                  <Box textAlign="center">
+                    <Facebook />
+                    <Typography sx={{ fontSize: "15.1px" }}>10</Typography>
                   </Box>
-                  {[...Array(3)].map((elem, index) => {
-                    return (
-                      <Stack direction="row" spacing={3} my={3} key={index}>
-                        <Box
-                          component="img"
-                          src="/postrecent.jpg"
-                          alt="avatar"
-                          borderRadius="5px"
-                        />
-                        <Stack spacing={1} pr={1}>
-                          <Box>
-                            <Typography fontWeight={600}>
-                              Free Ui Design & Icon Packs.
-                            </Typography>
-                          </Box>
-                          <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={1}
-                          >
-                            <Iconify
-                              icon="mdi:clock-outline"
-                              color={(theme) => theme.palette.primary.main}
-                            />
-                            <Typography>April 10, 2019</Typography>
-                          </Stack>
-                        </Stack>
-                      </Stack>
-                    );
-                  })}
-                </CardContent>
-              </Card>
+
+                  <Box textAlign="center">
+                    <Twitter />
+                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                  </Box>
+
+                  <Box textAlign="center">
+                    <Instagram />
+                    <Typography sx={{ fontSize: "15.1px" }}>45</Typography>
+                  </Box>
+
+                  <Box textAlign="center">
+                    <Pinterest />
+                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                  </Box>
+
+                  <Box textAlign="center">
+                    <YouTube />
+                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                  </Box>
+                </Stack>
+              </Box>
             </Grid>
           </Grid>
           <Box py={3}>
@@ -121,16 +137,16 @@ const BlogDetail = () => {
                     width={16}
                   />
                   <Box>
-                    <Typography>{moment(data?.created_at).format("DD / MMM / YYYY")}</Typography>
+                    <Typography>
+                      {moment(data?.created_at).format("DD / MMM / YYYY")}
+                    </Typography>
                   </Box>
                 </Stack>
               </Stack>
               <Box>
-                <Typography>
-                 {data.description}
-                </Typography>
+                <Typography>{data.description}</Typography>
               </Box>
-              
+
               <Box>
                 <Card
                   sx={{ borderLeft: "5px solid #ff7534", borderRadius: "5px" }}
