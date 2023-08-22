@@ -2,11 +2,14 @@ import * as React from "react";
 import {
   Box,
   Button,
+  Card,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   Divider,
+  IconButton,
+  Modal,
   Slide,
   Stack,
   Typography,
@@ -17,6 +20,10 @@ import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { OTPForm } from "./otpForm";
 import axiosInstance from "@/utils/axios";
+import { PasswordBox } from "@/components/form";
+import { Close } from "@mui/icons-material";
+import Iconify from "@/components/iconify/Iconify";
+import { useRouter } from "next/router";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
@@ -25,6 +32,11 @@ const forgotimg = "/assets/images/auth/forgot.png";
 const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [showResend, setShowResend] = React.useState(false);
+
+  const [openPassword, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handlePasswordClose = () => setOpen(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -84,6 +96,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
             });
             setShowResend(true);
             formik.setFieldValue("otp", response?.data?.verification_code);
+            setOpen(true);
             if (showResend) {
               handleClose();
               onClose();
@@ -135,6 +148,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
+
           formik.setFieldValue("otp", response?.data?.verification_code);
         } else {
           enqueueSnackbar(response.data.message, {
@@ -152,6 +166,68 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         }
       });
   };
+  const router = useRouter();
+  const formData = useFormik({
+    initialValues: {
+      email:formik.values.email,
+      otp:"",
+      new_password: "",
+      new_password_confirmation: "",
+    },
+    validate: (values) => {
+      const errors = {};
+
+      if (!values.new_password) {
+        errors.new_password = "New password is required";
+      }
+
+      if (!values.new_password_confirmation) {
+        errors.new_password_confirmation = "Confirm password is required";
+      }
+      if (
+        values.new_password_confirmation &&
+        values.new_password &&
+        values.new_password_confirmation !== values.new_password
+      ) {
+        errors.new_password_confirmation =
+          "Confirm password didn't match with new password";
+      }
+      return errors;
+    },
+    onSubmit: async (values, { setErrors }) => {
+      await axiosInstance
+        .post("api/user/reset-password", values)
+        .then((response) => {
+          if (response.status === 200) {
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            handleClose();
+            clearToken();
+            router.push("/auth/login");
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+          if (response.status === 422) {
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
+    },
+  });
   return (
     <>
       <Dialog
@@ -242,6 +318,114 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         </DialogActions>
         {/* </Box> */}
       </Dialog>
+      {/* --------------------- */}
+      <Box>
+        {/* <Button
+        // color="dark"
+        fullWidth
+        variant="outlined"
+        startIcon={<Iconify icon="carbon:password" />}
+        onClick={handleOpen}
+        sx={{
+          fontWeight: 500,
+        }}
+      >
+        Change Password
+      </Button> */}
+        <Modal
+          open={openPassword}
+          onClose={handlePasswordClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              textAlign: "center",
+              transform: "translate(-50%, -50%)",
+              borderRadius:"10px",
+              bgcolor: "background.paper",
+              border: "1px solid #f5f5f5",
+              boxShadow: 24,
+              p: 4,
+            }}
+            component="form"
+            noValidate
+            onSubmit={formData.handleSubmit}
+          >
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Typography component="h5" variant="h5">
+                Change Password
+              </Typography>
+              <Box>
+                <Card sx={{ borderRadius: "50%" }}>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      handlePasswordClose();
+                      formData.resetForm();
+                    }}
+                  >
+                    <Close fontSize="small" />
+                  </IconButton>
+                </Card>
+              </Box>
+            </Stack>
+            <Stack spacing={1}>
+              {/* <Box>
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="password"
+                  value={formData.values.password}
+                  onChange={formData.handleChange}
+                  placeholder="Enter Current Password"
+                  helperText={formData?.errors?.password}
+                />
+              </Box> */}
+              <Box>
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="new_password"
+                  value={formData.values.new_password}
+                  onChange={formData.handleChange}
+                  placeholder="Enter New Password"
+                  helperText={formData?.errors?.new_password}
+                />
+              </Box>
+              <Box>
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="new_password_confirmation"
+                  value={formData.values.new_password_confirmation}
+                  onChange={formData.handleChange}
+                  placeholder="Enter Confirm Password"
+                  helperText={formData?.errors?.new_password_confirmation}
+                />
+              </Box>
+            </Stack>
+            <Stack direction="row" mt={2}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                // onClick={handlePasswordClose}
+              >
+                Submit
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+      </Box>
     </>
   );
 };

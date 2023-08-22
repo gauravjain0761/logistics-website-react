@@ -71,8 +71,10 @@ const BidList = () => {
       });
   };
   useEffect(() => {
-    fetchApi();
-  }, []);
+    if (router.query.id) {
+      fetchApi();
+    }
+  }, [router.query.id]);
 
   // Accept Bid Api
   const fetchBidApi = async (id) => {
@@ -161,8 +163,8 @@ const BidList = () => {
                             <Grid item md={2}>
                               <Box
                                 component="img"
-                                alt={elem.driver.profile_img}
-                                src={`${elem.driver.base_url}${elem.driver.profile_img}`}
+                                alt={elem?.driver?.profile_img}
+                                src={`${elem?.driver?.base_url}${elem?.driver?.profile_img}`}
                                 sx={{
                                   borderRadius: "50%",
                                   width: "65px",
@@ -192,7 +194,7 @@ const BidList = () => {
                                   >
                                     <Box>
                                       <Typography variant="h5" fontWeight={500}>
-                                        {elem.driver.user_name}
+                                        {elem?.driver?.user_name}
                                       </Typography>
                                     </Box>
                                     <Stack>
@@ -222,7 +224,7 @@ const BidList = () => {
                                 </Box>
                                 <Typography fontSize={14}>
                                   {" "}
-                                  {elem.description}
+                                  {elem?.description}
                                 </Typography>
                               </Stack>
                             </Grid>
@@ -248,13 +250,15 @@ const BidList = () => {
                                 label={
                                   elem?.status === 1
                                     ? "Accepted"
+                                    : elem?.status === 4
+                                    ? "Declined"
                                     : "Accept Driver Bid"
                                 }
                                 variant="outlined"
                                 onClick={() =>
                                   elem?.status !== 1 &&
-                                  elem.status !== 4 &&
-                                  setStartChat(elem.id)
+                                  elem?.status !== 4 &&
+                                  setStartChat(elem?.id)
                                 }
                               />
                             </Stack>
@@ -276,7 +280,7 @@ const BidList = () => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Bid: ${elem.ammount}
+                                Bid: ${elem?.ammount}
                               </Typography>
                               <Typography variant="subtitle2">
                                 Earned: $30K+

@@ -17,7 +17,7 @@ const NewBanner = () => {
       {/* <Box component={MotionViewport}> */}
       <Box>
         {/* <Container> */}
-        <Grid container>
+        <Grid container direction="row-reverse">
           <Grid item lg={6}>
             <Container sx={{ mt: 8 }}>
               <CardContent>
@@ -42,8 +42,8 @@ const NewBanner = () => {
                                 transition={{
                                   repeat: Infinity,
                                   delay: 0,
-                                 duration:4,
-                                 times: [0, 0.1, 0.9, 1],
+                                  duration: 4,
+                                  times: [0, 0.1, 0.9, 1],
                                   ease: "easeInOut",
                                 }}
                               >
@@ -144,8 +144,8 @@ const NewBanner = () => {
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
                           <Box
                             component="img"
-                            sx={{ width: "400px" }}
-                            src="/assets/images/home/new/banner-image.jpg"
+                            sx={{ width: "500px" }}
+                            src="/home/hometruck.png"
                             alt="truck"
                           />
                         </Box>
@@ -159,10 +159,11 @@ const NewBanner = () => {
           <Grid item lg={6} sx={{ position: "relative" }}>
             <Box
               sx={{
-                background: (theme) => theme.palette.primary.main,
+                backgroundImage: `url(/home/bgHomeBanner.png)`,
                 position: "absolute",
                 top: 0,
                 left: 0,
+                backgroundRepeat: "no-repeat",
                 right: 0,
                 bottom: 0,
                 height: "100%",
@@ -171,13 +172,13 @@ const NewBanner = () => {
             />
             <Stack
               spacing={6}
-              alignItems="flex-end"
+              alignItems="center"
               direction="row"
-              justifyContent="left"
+              justifyContent="center"
               height="100%"
             >
-              <CardContent sx={{ px: 6, mb: 6 }}>
-                <Stack spacing={0} mb={15}>
+              <CardContent sx={{}}>
+                <Stack spacing={0} mb={5}>
                   <Box
                     component={motion.div}
                     initial={{ x: 500, y: 0 }}
@@ -186,26 +187,39 @@ const NewBanner = () => {
                       y: 0,
                     }}
                     transition={{
-                      type:"spring",
-                      stiffness: 500, damping: 10,
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 10,
                       delay: 0,
                       duration: 1.2,
                       ease: "easeInOut",
                     }}
                   >
-                    <Typography color="common.white" variant="h3">
-                      Your Logistic Solution
+                    <Typography
+                      color="common.black"
+                      fontSize={63}
+                      fontWeight={500}
+                      eigh
+                    >
+                      Your Logistic
                     </Typography>
-                    <Typography color="common.white" variant="h4">
-                      {" "}
-                      For Business, For Client &<br /> For Driver{"'"}s
+                    <Typography
+                      color="primary"
+                      fontSize={63}
+                      fontWeight={500}
+                      eigh
+                    >
+                      Solution
+                    </Typography>
+                    <Typography color="common.black" fontSize={25}>
+                      For Business, For Client & For Driver{"'"}s
                     </Typography>
                   </Box>
                 </Stack>
                 <Box>
                   <Stack direction="row" alignItemd="flex-end" height="100%">
                     <Box>
-                      <Stack direction="row" alignItems={"center"}>
+                      <Stack direction="row" alignItems={"center"} spacing={2}>
                         <Box
                           component={motion.div}
                           initial={{ scale: 0 }}
@@ -246,22 +260,12 @@ const NewBanner = () => {
                           }}
                         >
                           <Button
-                            variant="outlined"
+                            variant="contained"
                             size="large"
-                            color="inherit"
-                            sx={{
-                              margin: "12px",
-                              color: "#000",
-                              borderColor: "#555555",
-                              backgroundColor: "#ffffff",
-                              ":hover": {
-                                borderColor: "#555555",
-                                backgroundColor: "#ffffff",
-                              },
-                            }}
+                            color="primary"
                           >
                             <Typography fontWeight={500}>
-                              For Business
+                              For Businesses
                             </Typography>
                           </Button>
                         </Box>
@@ -277,17 +281,7 @@ const NewBanner = () => {
                             ease: "easeInOut",
                           }}
                         >
-                          <Button
-                            variant="contained"
-                            size="large"
-                            sx={{
-                              margin: "12px",
-                              backgroundColor: "#000",
-                              ":hover": {
-                                backgroundColor: "#555555",
-                              },
-                            }}
-                          >
+                          <Button variant="outlined" color="dark" size="large">
                             <Typography fontWeight={500}>For Driver</Typography>
                           </Button>
                         </Box>

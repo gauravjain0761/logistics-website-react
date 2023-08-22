@@ -15,8 +15,8 @@ const TotalDrivers = () => {
     <React.Fragment>
       <Box
         sx={{
-          backgroundColor: (theme) => theme.palette.primary.main,
-          color: "#fff",
+          backgroundColor: "#FFF8F4",
+          color: "common.black",
         }}
       >
         <Container sx={{ py: 5 }}>
@@ -35,7 +35,9 @@ const TotalDrivers = () => {
             }
             justifyContent="center"
           >
+         
             <Box>
+          <Box component="img"  src="/home/Accountuser.png"/>
               <Typography variant="h3">
                 <CountUp
                   start={978}
@@ -49,6 +51,7 @@ const TotalDrivers = () => {
               <Typography>Total User</Typography>
             </Box>
             <Box>
+            <Box component="img"  src="/home/Driver.png"/>
               <Typography variant="h3">
                 <CountUp
                   start={5894}
@@ -62,6 +65,7 @@ const TotalDrivers = () => {
               <Typography>Total Drivers</Typography>
             </Box>
             <Box>
+            <Box component="img"  src="/home/jobs.png"/>
               <Typography variant="h3">
                 <CountUp
                   start={25878}
@@ -75,6 +79,7 @@ const TotalDrivers = () => {
               <Typography>Total Jobs</Typography>
             </Box>
             <Box>
+            <Box component="img"  src="/home/Business.png"/>
               <Typography variant="h3">
                 <CountUp
                   start={978}

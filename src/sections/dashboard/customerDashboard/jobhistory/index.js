@@ -53,7 +53,7 @@ const JobHistory = ({ formik }) => {
       .get("api/auth/jobs/list", {
         params: {
           status: "history",
-          type: "driver",
+          type: "customer",
           user_id: user?.id,
           page: Number(page),
           pageSize: pageSize,
