@@ -44,7 +44,7 @@ const DashboardCard = ({ jobPost }) => {
                   <Box
                     sx={{
                       backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/customer/job_post"
+                        router.pathname === "/dashboard/customer/job_post_form"
                           ? theme.palette.primary.main
                           : alpha(theme.palette.primary.main, 0.1),
                     }}

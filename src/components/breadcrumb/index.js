@@ -52,15 +52,19 @@ export const BreadcrumbComponent = () => {
             return (
               <Typography
                 key={`breadcrumb-${index}`}
+                
                 sx={{
                   textTransform: "capitalize",
+                  
                   color: (theme) => theme.palette.common.white,
+                  
                   fontSize: {
                     lg: "1rem!important",
                     md: "1rem!important",
                     sm: "0.7rem!important",
                     xs: "0.7rem!important",
                   },
+                
                 }}
                 color="text.secondary"
               >

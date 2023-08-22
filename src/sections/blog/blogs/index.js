@@ -1,12 +1,17 @@
 import { BannerSection } from "@/components/banner";
 import { JobSekelton } from "@/components/not-found";
 import SkeletonLoader from "@/components/skeleton";
+import TextMaxLine from "@/components/text-max-line/TextMaxLine";
+import CommonBlog from "@/sections/common/blog";
 import axiosInstance from "@/utils/axios";
 import {
+  Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Container,
+  Divider,
   Grid,
   Stack,
   Typography,
@@ -46,9 +51,12 @@ const Blogs = ({ formik }) => {
   return (
     <React.Fragment>
       <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
+        src="/blog_banner.png"
         alt=""
-        title="Blog"
+        title="Welcome to Our "
+        titleLastWord="Blogs"
+        subTitle="Here are some Informational Blogs to enhance
+your understanding of of our website."
       />
       <Box py={9}>
         <Container>
@@ -57,86 +65,7 @@ const Blogs = ({ formik }) => {
           ) : (
             <Grid container spacing={4}>
               {data && data.length > 0 ? (
-                data.map((elem, index) => {
-                  console.log(elem, "dattaa");
-                  return (
-                    <Grid item md={4} key={index}>
-                      <Card
-                        sx={{ borderRadius: "12px", cursor: "pointer" }}
-                        onClick={() =>
-                          router.push(`/blog/blog_detail/${elem.slug}`)
-                        }
-                      >
-                        <Box
-                          component="img"
-                          width="100%"
-                          height={200}
-                          sx={{ objectFit: "cover" }}
-                          src={`${elem?.base_url}${elem?.image}`}
-                          alt="blog"
-                        />
-                        <CardContent>
-                          <Grid container spacing={2}>
-                            <Grid item md={4}>
-                              <Stack alignItems="center">
-                                <Box
-                                  sx={{
-                                    border: "2px solid #e1e1e1",
-                                    textAlign: "center",
-                                    borderRadius: "10px",
-                                    width: "60px",
-                                    height: "60px",
-                                  }}
-                                >
-                                  <Typography
-                                    fontSize="30px"
-                                    sx={{ lineHeight: "56px" }}
-                                    fontWeight={500}
-                                    color="primary"
-                                  >
-                                    {moment(elem?.created_at).format("DD")}
-                                  </Typography>
-                                </Box>
-                                <Box py={1}>
-                                  <Typography
-                                    fontWeight={500}
-                                    textAlign="center"
-                                  >
-                                    {moment(elem?.created_at).format("MMM")}
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                            </Grid>
-                            <Grid item md={8}>
-                              <Stack spacing={0.6}>
-                                <Box>
-                                  <Typography variant="h4">
-                                    {elem?.title}
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    fontSize="16x"
-                                    fontWeight={500}
-                                    color="primary"
-                                  >
-                                    {elem?.category}
-                                  </Typography>
-                                </Box>
-                                <Box></Box>
-                                <Box sx={{ height: "12em" }}>
-                                  <Typography fontSize="15px">
-                                    {elem?.description}
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                            </Grid>
-                          </Grid>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  );
-                })
+                <CommonBlog data={data} />
               ) : (
                 <>
                   {!loader && data.length <= 0 && (

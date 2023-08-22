@@ -85,7 +85,7 @@ const DARK = {
   lighter: "#C1C1C1",
   light: "#797979",
   main: "#242424",
-  dark: "#656565",
+  dark: "#121416",
   darker: "#454545",
   contrastText: "#fff",
 };

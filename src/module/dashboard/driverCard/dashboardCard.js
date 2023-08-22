@@ -13,11 +13,13 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "@/redux/store";
 import { getJobAlert } from "@/redux/slices/job/driver";
+import { useAuthContext } from "@/auth/useAuthContext";
 
 const DashboardCard = ({ jobalert,activeJob }) => {
   const router = useRouter();
+  const {user}= useAuthContext();
   const {jobAlert: { pageCount, data }} = useSelector((state) => state.driverJob);
-  // const [data, setData] = React.useState([]);
+  const [historyData, setHistoryData] = React.useState([]);
 
   const getData = async () => {
     // await axiosInstance
@@ -39,11 +41,39 @@ const DashboardCard = ({ jobalert,activeJob }) => {
     getData();
   }, []);
 
+
+
+  const getHistoryData = async () => {
+    await axiosInstance
+      .get("api/auth/jobs/list", {
+        params: {
+          status: "history",
+          type: "driver",
+          user_id: user?.id,
+          page: 1,
+          pageSize: 10,
+        },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setHistoryData(response?.data?.view_data?.data)
+        }
+      })
+      .catch((error) => {
+        console.log("Job History", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getHistoryData();
+  }, [ user, user?.id]);
+
+
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -96,7 +126,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
               </Stack>
             </Card>
           </Grid>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -146,7 +176,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
             </Card>
           </Grid>
 
-          <Grid item md={2.4}>
+          {/* <Grid item md={2.4}>
             <Card
               variant="outlined"
               sx={{
@@ -195,8 +225,8 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                 </Box>
               </Stack>
             </Card>
-          </Grid>
-          <Grid item md={2.4}>
+          </Grid> */}
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
@@ -239,13 +269,13 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                     JOB HISTORY
                   </Typography>
                   <Typography variant="h5" textAlign={"center"}>
-                    20
+                    {historyData.length}
                   </Typography>
                 </Box>
               </Stack>
             </Card>
           </Grid>
-          <Grid item md={2.4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,

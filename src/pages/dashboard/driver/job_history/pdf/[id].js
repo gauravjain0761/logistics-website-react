@@ -1,19 +1,18 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobList from "@/sections/dashboard/customerDashboard/joblisting";
 import AuthGuard from "@/auth/AuthGuard";
+import ViewHistoryPDF from "@/sections/dashboard/driverDashboard/jobHistory/pdf";
 
-const JobListing = () => {
-  const formik = useFormik({});
+const ViewJobPage = () => {
   return (
     <AuthGuard>
-      <JobList formik={formik} />
+      <ViewHistoryPDF />
     </AuthGuard>
   );
 };
 
-JobListing.getLayout = function getLayout(page) {
+ViewJobPage.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default JobListing;
+export default ViewJobPage;

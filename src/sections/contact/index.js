@@ -5,6 +5,7 @@ import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
+  Breadcrumbs,
   Button,
   Card,
   CardContent,
@@ -13,7 +14,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ContactForm from "./form";
+import ContactMap from "./map";
 
 const ContactSection = ({ formik }) => {
   // API Fetch
@@ -45,145 +49,186 @@ const ContactSection = ({ formik }) => {
   // API Fetch End
   return (
     <React.Fragment>
-      <BannerSection
+      {/* <BannerSection
         src="/assets/images/contact/contact-us-banner.jpg"
         alt=""
         title="Contact Us"
-      />
-      <Box sx={{ py: 5 }}>
+      /> */}
+      <Box sx={{ pt: 13, position: "relative", pb: 10 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            zIndex: -1,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <Container sx={{ width: "100%", height: "100%" }}>
+            <Grid container sx={{ width: "100%", height: "100%" }}>
+              <Grid item md={8}></Grid>
+              <Grid
+                item
+                md={4}
+                sx={{ background: (theme) => theme.palette.common.black }}
+              ></Grid>
+            </Grid>
+          </Container>
+        </Box>
         <Container>
-          {loader ? (
-            <SkeletonLoader />
-          ) : (
-            <Grid container spacing={4}>
-              <Grid item md={4}>
-                <Card sx={{ py: 5, borderRadius: "5px" }}>
-                  <CardContent>
-                    <Stack alignItems="center">
-                      <Box
-                        sx={{
-                          borderRight: "5px dashed #ff7534",
-                          borderBottom: "5px solid #ff7532",
-                          display: "inline-block",
-                          marginBottom: "30px",
-                          padding: "8px",
-                          borderRadius: "50%",
-                        }}
-                      >
-                        <Iconify
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.primary.main,
-                            color: (theme) =>
-                              theme.palette.primary.contrastText,
-                            borderRadius: "50%",
-                            display: "inline-block",
-                            height: "90px",
-                            width: "90px",
-                            p: 2,
-                          }}
-                          icon="majesticons:phone"
-                          hFlip={true}
-                          width={70}
+          <Box sx={{ mb: 6 }}>
+            <Breadcrumbs aria-label="breadcrumb">
+              <Box
+                component={Link}
+                sx={{ textDecoration: "none", fontSize: "14px" }}
+                color="inherit"
+                href="/"
+              >
+                Home
+              </Box>
+              <Typography fontSize={14} color="common.black">
+                Contact Us
+              </Typography>
+            </Breadcrumbs>
+          </Box>
+          <Grid container spacing={10}>
+            <Grid item md={5}>
+              <Box sx={{ mb: 4 }}>
+                <Typography
+                  component="h4"
+                  sx={{
+                    fontSize: "34.24px",
+                  }}
+                  fontWeight={700}
+                >
+                  Get in{" "}
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontSize: "34.24px",
+                    }}
+                    fontWeight={700}
+                    color="primary"
+                  >
+                    Touch
+                  </Typography>
+                </Typography>
+
+                <Typography
+                  component="h4"
+                  sx={{
+                    fontSize: "10.04px",
+                    letterSpacing: "1px !important",
+                  }}
+                  fontWeight={400}
+                >
+                  Enim tempor eget pharetra facilisis sed maecenas adipiscing.
+                  Eu leo molestie vel, ornare non id blandit netus.
+                </Typography>
+              </Box>
+              <ContactForm formik={formik} />
+              <Box sx={{ mt: 4 }}>
+                {loader ? (
+                  <SkeletonLoader />
+                ) : (
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    spacing={2}
+                    justifyContent="space-between"
+                  >
+                    <Stack alignItems="center" direction="row" spacing={1}>
+                      <Box>
+                        <Box
+                          component="img"
+                          src="/assets/icon/phone.png"
+                          width="auto"
+                          height="auto"
                         />
                       </Box>
-                      <Stack alignItems="center">
-                        <Typography fontWeight={600} variant="h5">
+                      <Stack spacing={0.2}>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                        >
                           Call Us
                         </Typography>
-                        <Typography>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                          color="primary"
+                        >
                           {(data && data.mobile) || "N/A"}
                         </Typography>
                       </Stack>
                     </Stack>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item md={4}>
-                <Card sx={{ py: 5, borderRadius: "5px" }}>
-                  <CardContent>
-                    <Stack alignItems="center">
-                      <Box
-                        sx={{
-                          borderRight: "5px dashed #ff7534",
-                          borderBottom: "5px solid #ff7532",
-                          display: "inline-block",
-                          marginBottom: "30px",
-                          padding: "8px",
-                          borderRadius: "50%",
-                        }}
-                      >
-                        <Iconify
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.primary.main,
-                            color: (theme) =>
-                              theme.palette.primary.contrastText,
-                            borderRadius: "50%",
-                            display: "inline-block",
-                            height: "90px",
-                            width: "90px",
-                            p: 2,
-                          }}
-                          icon="fluent:mail-20-filled"
-                          width={70}
+
+                    <Stack alignItems="center" direction="row" spacing={1}>
+                      <Box>
+                        <Box
+                          component="img"
+                          src="/assets/icon/email.png"
+                          width="auto"
+                          height="auto"
                         />
                       </Box>
-                      <Stack alignItems="center">
-                        <Typography fontWeight={600} variant="h5">
+                      <Stack spacing={0.2}>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                        >
                           Email
                         </Typography>
-                        <Typography>{(data && data.email) || "N/A"}</Typography>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                          color="primary"
+                        >
+                          {(data && data.email) || "N/A"}
+                        </Typography>
                       </Stack>
                     </Stack>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item md={4}>
-                <Card sx={{ py: 5, borderRadius: "5px" }}>
-                  <CardContent>
-                    <Stack alignItems="center">
-                      <Box
-                        sx={{
-                          borderRight: "5px dashed #ff7534",
-                          borderBottom: "5px solid #ff7532",
-                          display: "inline-block",
-                          marginBottom: "30px",
-                          padding: "8px",
-                          borderRadius: "50%",
-                        }}
-                      >
-                        <Iconify
-                          sx={{
-                            backgroundColor: (theme) =>
-                              theme.palette.primary.main,
-                            color: (theme) =>
-                              theme.palette.primary.contrastText,
-                            borderRadius: "50%",
-                            display: "inline-block",
-                            height: "90px",
-                            width: "90px",
-                            p: 2,
-                          }}
-                          icon="mdi:location"
-                          hFlip={true}
-                          width={70}
+
+                    <Stack alignItems="center" direction="row" spacing={1}>
+                      <Box>
+                        <Box
+                          component="img"
+                          src="/assets/icon/fax.png"
+                          width="auto"
+                          height="auto"
                         />
                       </Box>
-                      <Stack alignItems="center">
-                        <Typography fontWeight={600} variant="h5">
+                      <Stack spacing={0.2}>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                        >
                           Address
                         </Typography>
-                        <Typography>
+                        <Typography
+                          fontWeight={500}
+                          sx={{ fontSize: "10.37px" }}
+                          color="primary"
+                        >
                           {(data && data.address) || "N/A"}
                         </Typography>
                       </Stack>
                     </Stack>
-                  </CardContent>
-                </Card>
-              </Grid>
+                  </Stack>
+                )}
+              </Box>
             </Grid>
-          )}
+            <Grid item md={7}>
+              <ContactMap />
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+      {/* <Box sx={{ py: 5 }}>
+        <Container>
           <Box py={4}>
             <Grid container spacing={3}>
               <Grid item md={6}>
@@ -263,7 +308,7 @@ const ContactSection = ({ formik }) => {
             </Grid>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </React.Fragment>
   );
 };

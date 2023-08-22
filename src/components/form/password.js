@@ -39,7 +39,7 @@ const PasswordBox = (props) => {
           <Box
             sx={{
               ml: 0,
-              background: (theme) => theme.palette.grey[100],
+              background: (theme) => theme.palette.common.white,
               border: "1px solid",
               borderColor: (theme) => alpha(theme.palette.grey[500], 0.32),
               padding: ".375rem .75rem",
@@ -62,6 +62,13 @@ const PasswordBox = (props) => {
           type={showPassword ? "text" : "password"}
           required={required}
           value={value}
+          sx={{
+            background: (theme) => theme.palette.common.white,
+
+            "&.MuiOutlinedInput-input": {
+              background: (theme) => theme.palette.common.white,
+            },
+          }}
           disabled={disabled}
           // autoComplete={"false"} //MUI pickUp the string value on autoComplete
           autoComplete="new-password"

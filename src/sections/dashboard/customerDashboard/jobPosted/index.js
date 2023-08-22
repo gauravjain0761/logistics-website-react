@@ -31,8 +31,10 @@ import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import SkeletonLoader from "@/components/skeleton";
 import { JobSekelton } from "@/components/not-found";
+import { useAuthContext } from "@/auth/useAuthContext";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
+  const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
@@ -50,8 +52,14 @@ const DashboardJobPost = ({ formik }) => {
   const getData = async () => {
     setLoader(true);
     await axiosInstance
-      .get("api/auth/master/jobs/search", {
-        params: {status:"post", page: Number(page), pageSize: pageSize },
+      .get("api/auth/jobs/list", {
+        params: {
+          status: "post",
+          page: Number(page),
+          pageSize: pageSize,
+          user_id: user?.id,
+          type: "customer",
+        },
       })
       .then((response) => {
         if (response?.status === 200) {
@@ -68,7 +76,7 @@ const DashboardJobPost = ({ formik }) => {
 
   React.useEffect(() => {
     getData();
-  }, [page]);
+  }, [page, user, user?.id]);
 
   console.log("datadata", data);
   const MonthSelect = [
@@ -217,7 +225,7 @@ const DashboardJobPost = ({ formik }) => {
                       variant="outlined"
                       fullWidth
                       onClick={() =>
-                        router.push("/dashboard/customer/job_post/create")
+                        router.push("/dashboard/customer/job_post_form/create")
                       }
                     >
                       Add New Post
@@ -440,7 +448,7 @@ const DashboardJobPost = ({ formik }) => {
                                       startIcon={<Iconify icon="bxs:edit" />}
                                       onClick={() =>
                                         router.push(
-                                          `/dashboard/customer/job_post/${item?.id}`
+                                          `/dashboard/customer/job_post_form/${item?.id}`
                                         )
                                       }
                                       sx={{

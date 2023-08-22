@@ -1,3 +1,4 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
 import axiosInstance from "@/utils/axios";
 import {
@@ -14,13 +15,19 @@ import React from "react";
 
 const DashboardCard = ({ jobPost }) => {
   const router = useRouter();
-
+  const { user } = useAuthContext();
   const [data, setData] = React.useState([]);
-
+  const [historyData, setHistoryData] = React.useState([]);
   const getData = async () => {
     await axiosInstance
-      .get("api/auth/master/jobs/search", {
-        params: { page: 1, pageSize: "10" },
+      .get("api/auth/jobs/list", {
+        params: {
+          status: "post",
+          page: 1,
+          pageSize: "10",
+          user_id: user?.id,
+          type: "customer",
+        },
       })
       .then((response) => {
         if (response?.status === 200) {
@@ -35,13 +42,38 @@ const DashboardCard = ({ jobPost }) => {
 
   React.useEffect(() => {
     getData();
-  }, []);
+  }, [user, user?.id]);
+
+  const getHistoryData = async () => {
+    await axiosInstance
+      .get("api/auth/jobs/list", {
+        params: {
+          status: "history",
+          type: "driver",
+          user_id: user?.id,
+          page: 1,
+          pageSize: 10,
+        },
+      })
+      .then((response) => {
+        if (response?.status === 200) {
+          setHistoryData(response?.data?.view_data?.data);
+        }
+      })
+      .catch((error) => {
+        console.log("Job History", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getHistoryData();
+  }, [user, user?.id]);
 
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={3}>
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:
@@ -67,7 +99,7 @@ const DashboardCard = ({ jobPost }) => {
                   <Box
                     sx={{
                       backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/customer/job_post"
+                        router.pathname === "/dashboard/customer/job_post_form"
                           ? theme.palette.primary.main
                           : alpha(theme.palette.primary.main, 0.1),
                     }}
@@ -91,7 +123,7 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          {/* <Grid item md={4}>
             <Card
               variant="outlined"
               sx={{
@@ -142,8 +174,8 @@ const DashboardCard = ({ jobPost }) => {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item md={3}>
+          </Grid> */}
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:
@@ -186,14 +218,14 @@ const DashboardCard = ({ jobPost }) => {
                       JOB HISTORY
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      20
+                      {historyData?.length}
                     </Typography>
                   </Box>
                 </Stack>
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:

@@ -90,11 +90,13 @@ export function AuthProvider({ children }) {
 
         const user = response?.data?.view_data;
 
+        console.log("useruser", user);
+
         dispatch({
           type: "INITIAL",
           payload: {
             isAuthenticated: true,
-            user,
+            user: user,
           },
         });
       } else {

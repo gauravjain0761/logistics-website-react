@@ -5,10 +5,9 @@ import AuthGuard from "@/auth/AuthGuard";
 import ViewJobHistory from "@/sections/dashboard/customerDashboard/viewJobHistory";
 
 const ViewJobPage = () => {
-  const formik = useFormik({});
   return (
     <AuthGuard>
-      <ViewJobHistory formik={formik} />
+      <ViewJobHistory />
     </AuthGuard>
   );
 };

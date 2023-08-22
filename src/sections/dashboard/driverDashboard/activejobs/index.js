@@ -6,17 +6,21 @@ import {
   Card,
   CardContent,
   Container,
+  Dialog,
+  DialogActions,
   Divider,
   Grid,
+  IconButton,
   Modal,
   Pagination,
   PaginationItem,
   Rating,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
@@ -24,22 +28,33 @@ import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import { PDFViewer } from "@react-pdf/renderer";
+import InvoicePDF from "./InvoicePDF";
+
+
 const DashboardJobPost = () => {
   const router = useRouter();
   const { user } = useAuthContext();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [layout, setLayout] = useState(false);
   const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
 
-  const [startOpen, setCompleteOpen] = React.useState(false);
-  const handleStartOpen = (id) => setCompleteOpen(id);
-  const handleStartClose = () => setCompleteOpen(false);
+  const [startOpen, setStartOpen] = React.useState(false);
+  const handleStartOpen = (id) => setStartOpen(id);
+  const handleStartClose = () => setStartOpen(false);
+
+  const [completeOpen, setCompleteOpen] = React.useState(false);
+  console.log(completeOpen, "uiudsiusd");
+  const handleCompleteOpen = (id) => setCompleteOpen(id);
+  const handleCompleteClose = () => setCompleteOpen(false);
 
   // Rating
   const [reviewOpen, setReviewOpen] = React.useState(false);
@@ -56,7 +71,13 @@ const DashboardJobPost = () => {
     setLoader(true);
     await axiosInstance
       .get("api/auth/jobs/list", {
-        params: { status: 2, page: Number(page), pageSize: pageSize },
+        params: {
+          status: "active",
+          page: Number(page),
+          pageSize: pageSize,
+          type: "driver",
+          user_id: user?.id,
+        },
       })
       .then((response) => {
         setLoader(false);
@@ -77,15 +98,45 @@ const DashboardJobPost = () => {
 
   const formData = useFormik({
     initialValues: {
-      id: 8,
-      driver_id: 84,
+      id: "",
+      driver_id: user?.id,
     },
   });
+  // Start Job Api
+  const startJobApi = async () => {
+    await axiosInstance
+      .post("api/auth/jobs/start-job", formData.values)
+      .then((response) => {
+        if (response.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          setStartOpen(false);
+          getData();
+          handleClose(true);
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+
+        // enqueueSnackbar(response.data.error, {
+        //   variant: "error",
+        // });
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    formik.setFieldValue("driver_id", user?.id);
+  }, [user, user?.id]);
+
+  // Complete Job Api
   const completeJobApi = async () => {
     await axiosInstance
       .post("api/auth/jobs/complete-job", formData.values)
       .then((response) => {
         if (response.status === 200) {
+          setCompleteOpen(false);
           setReviewOpen(true);
           getData();
           enqueueSnackbar(response.data.message, {
@@ -102,7 +153,7 @@ const DashboardJobPost = () => {
   const formik = useFormik({
     initialValues: {
       job_id: 27,
-      user_id:82,
+      user_id: 82,
       given_by: "Driver",
       rating: "",
       review: "",
@@ -122,7 +173,7 @@ const DashboardJobPost = () => {
         .post("api/auth/rating/add", formik.values)
         .then((response) => {
           if (response.status === 200) {
-            setReviewOpen(false)
+            setReviewOpen(false);
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
@@ -190,9 +241,9 @@ const DashboardJobPost = () => {
 
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0} justifyContent="center">
-              {data &&
-                data.length > 0 ?
+              {data && data.length > 0 ? (
                 data.map((elem, index) => {
+                  console.log("datatta", elem);
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -261,7 +312,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_date}
+                                      {elem?.items[0]?.product?.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -283,7 +334,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.pickup_time}
+                                      {elem?.items[0]?.product.pickup_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -306,7 +357,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.material}
+                                      {elem?.items[0]?.product.material}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -330,7 +381,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_date}
+                                      {elem?.items[0]?.product.drop_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -352,7 +403,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.drop_time}
+                                      {elem?.items[0]?.product.drop_time}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -375,9 +426,9 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem.items[0].product.length} x{" "}
-                                      {elem.items[0].product.width} x{" "}
-                                      {elem.items[0].product.height} inch
+                                      {elem?.items[0]?.product.length} x{" "}
+                                      {elem?.items[0]?.product.width} x{" "}
+                                      {elem?.items[0]?.product.height} inch
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -392,18 +443,47 @@ const DashboardJobPost = () => {
                               >
                                 <Stack spacing={1}>
                                   <Box>
-                                    <Button
-                                      sx={{ fontWeight: 500 }}
-                                      fullWidth
-                                      color="success"
-                                      variant="outlined"
-                                      startIcon={
-                                        <Iconify icon="carbon:task-complete" />
-                                      }
-                                      onClick={() => handleStartOpen(1)}
-                                    >
-                                      Complete Job
-                                    </Button>
+                                    {elem.status === 1 ? (
+                                      <Button
+                                        color="success"
+                                        fullWidth
+                                        variant="outlined"
+                                        startIcon={
+                                          <Iconify icon="icon-park:check-correct" />
+                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          setStartOpen(true);
+                                        }}
+                                        sx={{
+                                          fontWeight: 500,
+                                        }}
+                                      >
+                                        Start Job
+                                      </Button>
+                                    ) : (
+                                      <Button
+                                        sx={{ fontWeight: 500 }}
+                                        fullWidth
+                                        color="success"
+                                        variant="outlined"
+                                        startIcon={
+                                          <Iconify icon="carbon:task-complete" />
+                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          setCompleteOpen(true);
+                                        }}
+                                      >
+                                        Complete Job
+                                      </Button>
+                                    )}
                                   </Box>
                                   {/* <Box>
                                   <Button
@@ -433,6 +513,19 @@ const DashboardJobPost = () => {
                                       }}
                                     >
                                       Track Job
+                                    </Button>
+                                  </Box>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:view-filled" />
+                                      }
+                                      onClick={() => setOpenPDF(true)}
+                                    >
+                                      View PDF
                                     </Button>
                                   </Box>
                                 </Stack>
@@ -469,14 +562,17 @@ const DashboardJobPost = () => {
                       </Card>
                     </Grid>
                   );
-                }):<Box my={6}>
-                  <Typography   variant="h4">No Active Jobs</Typography>
-                </Box>}
+                })
+              ) : (
+                <Box my={6}>
+                  <Typography variant="h4">No Active Jobs</Typography>
+                </Box>
+              )}
             </Grid>
             <Box>
               <Modal
-                open={startOpen}
-                onClose={handleStartClose}
+                open={completeOpen}
+                onClose={handleCompleteClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-review"
               >
@@ -505,7 +601,55 @@ const DashboardJobPost = () => {
                       variant="outlined"
                       onClick={() => {
                         completeJobApi();
-                        setCompleteOpen(false);
+                      }}
+                    >
+                      Yes
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        handleCompleteClose();
+                      }}
+                    >
+                      No
+                    </Button>
+                  </Stack>
+                </Box>
+              </Modal>
+            </Box>
+            <Box>
+              <Modal
+                open={startOpen}
+                onClose={handleStartClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    textAlign: "center",
+                    transform: "translate(-50%, -50%)",
+
+                    bgcolor: "background.paper",
+                    border: "1px solid #f5f5f5",
+                    boxShadow: 24,
+                    p: 4,
+                  }}
+                  component="form"
+                  noValidate
+                >
+                  <Typography mb={2}>
+                    Are you sure you want to start the job?
+                  </Typography>
+                  <Stack direction="row" spacing={8}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        startJobApi();
                       }}
                     >
                       Yes
@@ -564,6 +708,7 @@ const DashboardJobPost = () => {
                 />
               </Stack>
             </Box>
+            <Box></Box>
             <Box>
               <Modal
                 open={reviewOpen}
@@ -619,25 +764,9 @@ const DashboardJobPost = () => {
                     </Box>
                   </Stack>
                   <Stack direction="row" spacing={8}>
-                    <Button
-                      fullWidth
-                      variant="outlined"
-                      // onClick={() => {
-                      //   setReviewOpen(false);
-                      // }}
-                      type="submit"
-                    >
+                    <Button fullWidth variant="outlined" type="submit">
                       Submit
                     </Button>
-                    {/* <Button
-                      fullWidth
-                      variant="outlined"
-                      onClick={() => {
-                        handleReviewClose();
-                      }}
-                    >
-                      No
-                    </Button> */}
                   </Stack>
                 </Box>
               </Modal>
@@ -656,6 +785,34 @@ const DashboardJobPost = () => {
           </Box>
         </Container>
       </Box>
+      <Dialog fullScreen open={openPDf}>
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <DialogActions
+            sx={{
+              zIndex: 9,
+              padding: "12px !important",
+              boxShadow: (theme) => theme.customShadows.z8,
+            }}
+          >
+            <Tooltip title="Close">
+              <IconButton color="inherit" onClick={() => setOpenPDF(false)}>
+                <Iconify icon="eva:close-fill" />
+              </IconButton>
+            </Tooltip>
+          </DialogActions>
+          <Box sx={{ flexGrow: 1, height: "100%", overflow: "hidden" }}>
+            <PDFViewer
+              fileName={`Test-Name`}
+              width="100%"
+              height="100%"
+              style={{ border: "none" }}
+              showToolbar={false}
+            >
+              <InvoicePDF />
+            </PDFViewer>
+          </Box>
+        </Box>
+      </Dialog>
     </React.Fragment>
   );
 };
