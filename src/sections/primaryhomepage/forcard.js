@@ -15,7 +15,7 @@ const ForCard = () => {
     <React.Fragment>
       <Box py={4}>
         <Container>
-          <Grid container>
+          <Grid container spacing={3}>
             {/* <Grid item lg={6}>
               <CardContent>
                 <CardContent>
@@ -28,7 +28,7 @@ const ForCard = () => {
                 </CardContent>
               </CardContent>
             </Grid> */}
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -54,7 +54,9 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
-              <Grid item lg={3}>
+            </Grid>
+
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -80,8 +82,8 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
-              </Grid>
-              <Grid item lg={3}></Grid>
+            </Grid>
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -107,7 +109,6 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
-              
             </Grid>
           </Grid>
         </Container>

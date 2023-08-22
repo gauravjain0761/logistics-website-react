@@ -33,9 +33,77 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [showResend, setShowResend] = React.useState(false);
 
-  const [openPassword, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handlePasswordClose = () => setOpen(false);
+  const [openPassword, setPasswordOpen] = React.useState(false);
+  const handleOpen = () => setPasswordOpen(true);
+  const handlePasswordClose = () => {
+    onClose();
+    setShowResend(false);
+    setPasswordOpen(false);
+  };
+
+  const Resetformik = useFormik({
+    initialValues: {
+      email: "",
+      otp: "",
+      password: "",
+      password_confirmation: "",
+    },
+    validate: (values) => {
+      const errors = {};
+
+      if (!values.password) {
+        errors.password = "New password is required";
+      }
+
+      if (!values.password_confirmation) {
+        errors.password_confirmation = "Confirm password is required";
+      }
+      if (
+        values.password_confirmation &&
+        values.password &&
+        values.password_confirmation !== values.password
+      ) {
+        errors.password_confirmation =
+          "Confirm password didn't match with new password";
+      }
+      return errors;
+    },
+    onSubmit: async (values, { setErrors }) => {
+      await axiosInstance
+        .post("api/user/reset-password", values)
+        .then((response) => {
+          if (response.status === 200) {
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            handleClose();
+            handlePasswordClose();
+            clearToken();
+            setPasswordOpen(false);
+            router.push("/auth/login");
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          enqueueSnackbar(response.data.message, {
+            variant: "error",
+          });
+          if (response.status === 422) {
+            // eslint-disable-next-line no-unused-vars
+            for (const [key, value] of Object.entries(values)) {
+              if (response.data.error[key]) {
+                setErrors({ [key]: response.data.error[key][0] });
+              }
+            }
+          }
+          if (response?.data?.status === 406) {
+            enqueueSnackbar(response.data.message, {
+              variant: "error",
+            });
+          }
+        });
+    },
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -94,8 +162,17 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
+            if (showResend) {
+              handleClose();
+              onClose();
+              setPasswordOpen(true);
+            }
             setShowResend(true);
+            console.log("Resetformik", response);
             formik.setFieldValue("otp", response?.data?.verification_code);
+            Resetformik.setFieldValue("otp", values?.otp);
+            Resetformik.setFieldValue("email", values?.email);
+
             setOpen(true);
             if (showResend) {
               handleClose();
@@ -127,6 +204,8 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
         });
     },
   });
+
+  console.log("Resetformik", Resetformik.values);
 
   const handleClose = () => {
     formik.resetForm();
@@ -167,67 +246,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
       });
   };
   const router = useRouter();
-  const formData = useFormik({
-    initialValues: {
-      email:formik.values.email,
-      otp:"",
-      new_password: "",
-      new_password_confirmation: "",
-    },
-    validate: (values) => {
-      const errors = {};
 
-      if (!values.new_password) {
-        errors.new_password = "New password is required";
-      }
-
-      if (!values.new_password_confirmation) {
-        errors.new_password_confirmation = "Confirm password is required";
-      }
-      if (
-        values.new_password_confirmation &&
-        values.new_password &&
-        values.new_password_confirmation !== values.new_password
-      ) {
-        errors.new_password_confirmation =
-          "Confirm password didn't match with new password";
-      }
-      return errors;
-    },
-    onSubmit: async (values, { setErrors }) => {
-      await axiosInstance
-        .post("api/user/reset-password", values)
-        .then((response) => {
-          if (response.status === 200) {
-            enqueueSnackbar(response.data.message, {
-              variant: "success",
-            });
-            handleClose();
-            clearToken();
-            router.push("/auth/login");
-          }
-        })
-        .catch((error) => {
-          const { response } = error;
-          enqueueSnackbar(response.data.message, {
-            variant: "error",
-          });
-          if (response.status === 422) {
-            // eslint-disable-next-line no-unused-vars
-            for (const [key, value] of Object.entries(values)) {
-              if (response.data.error[key]) {
-                setErrors({ [key]: response.data.error[key][0] });
-              }
-            }
-          }
-          if (response?.data?.status === 406) {
-            enqueueSnackbar(response.data.message, {
-              variant: "error",
-            });
-          }
-        });
-    },
-  });
   return (
     <>
       <Dialog
@@ -345,7 +364,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
               left: "50%",
               textAlign: "center",
               transform: "translate(-50%, -50%)",
-              borderRadius:"10px",
+              borderRadius: "10px",
               bgcolor: "background.paper",
               border: "1px solid #f5f5f5",
               boxShadow: 24,
@@ -353,7 +372,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
             }}
             component="form"
             noValidate
-            onSubmit={formData.handleSubmit}
+            onSubmit={Resetformik.handleSubmit}
           >
             <Stack
               direction="row"
@@ -362,7 +381,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
               mb={2}
             >
               <Typography component="h5" variant="h5">
-                Change Password
+                Reset Password
               </Typography>
               <Box>
                 <Card sx={{ borderRadius: "50%" }}>
@@ -370,7 +389,7 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
                     size="small"
                     onClick={() => {
                       handlePasswordClose();
-                      formData.resetForm();
+                      Resetformik.resetForm();
                     }}
                   >
                     <Close fontSize="small" />
@@ -384,32 +403,32 @@ const ForgetPasswordDialogBox = ({ keepMounted, onClose, open, title }) => {
                   fullWidth
                   size="small"
                   name="password"
-                  value={formData.values.password}
-                  onChange={formData.handleChange}
+                  value={Resetformik.values.password}
+                  onChange={Resetformik.handleChange}
                   placeholder="Enter Current Password"
-                  helperText={formData?.errors?.password}
+                  helperText={Resetformik?.errors?.password}
                 />
               </Box> */}
               <Box>
                 <PasswordBox
                   fullWidth
                   size="small"
-                  name="new_password"
-                  value={formData.values.new_password}
-                  onChange={formData.handleChange}
+                  name="password"
+                  value={Resetformik.values.password}
+                  onChange={Resetformik.handleChange}
                   placeholder="Enter New Password"
-                  helperText={formData?.errors?.new_password}
+                  helperText={Resetformik?.errors?.password}
                 />
               </Box>
               <Box>
                 <PasswordBox
                   fullWidth
                   size="small"
-                  name="new_password_confirmation"
-                  value={formData.values.new_password_confirmation}
-                  onChange={formData.handleChange}
+                  name="password_confirmation"
+                  value={Resetformik.values.password_confirmation}
+                  onChange={Resetformik.handleChange}
                   placeholder="Enter Confirm Password"
-                  helperText={formData?.errors?.new_password_confirmation}
+                  helperText={Resetformik?.errors?.password_confirmation}
                 />
               </Box>
             </Stack>
