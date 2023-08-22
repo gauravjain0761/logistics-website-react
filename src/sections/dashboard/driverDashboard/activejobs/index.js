@@ -32,7 +32,6 @@ import { useSnackbar } from "notistack";
 import { PDFViewer } from "@react-pdf/renderer";
 import InvoicePDF from "./InvoicePDF";
 
-
 const DashboardJobPost = () => {
   const router = useRouter();
   const { user } = useAuthContext();
@@ -127,7 +126,7 @@ const DashboardJobPost = () => {
   };
 
   useEffect(() => {
-    formik.setFieldValue("driver_id", user?.id);
+    formik.setFieldValue("user_id", user?.id);
   }, [user, user?.id]);
 
   // Complete Job Api
@@ -152,8 +151,8 @@ const DashboardJobPost = () => {
 
   const formik = useFormik({
     initialValues: {
-      job_id: 27,
-      user_id: 82,
+      job_id: "",
+      user_id: "",
       given_by: "Driver",
       rating: "",
       review: "",
@@ -477,6 +476,10 @@ const DashboardJobPost = () => {
                                           formData.setFieldValue(
                                             "id",
                                             elem?.bid_id
+                                          );
+                                          formik.setFieldValue(
+                                            "job_id",
+                                            elem?.id
                                           );
                                           setCompleteOpen(true);
                                         }}

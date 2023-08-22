@@ -16,7 +16,7 @@ const ForCard = () => {
       <Box py={4}>
         <Container>
           <Grid container>
-            <Grid item lg={6}>
+            {/* <Grid item lg={6}>
               <CardContent>
                 <CardContent>
                   <Box
@@ -27,8 +27,8 @@ const ForCard = () => {
                   />
                 </CardContent>
               </CardContent>
-            </Grid>
-            <Grid item lg={6}>
+            </Grid> */}
+            <Grid item lg={3}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -54,6 +54,7 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
+              <Grid item lg={3}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -79,6 +80,8 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
+              </Grid>
+              <Grid item lg={3}></Grid>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -104,6 +107,7 @@ const ForCard = () => {
                   </Stack>
                 </CardContent>
               </Card>
+              
             </Grid>
           </Grid>
         </Container>

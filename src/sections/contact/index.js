@@ -95,7 +95,7 @@ const ContactSection = ({ formik }) => {
             </Breadcrumbs>
           </Box>
           <Grid container spacing={10}>
-            <Grid item md={5}>
+            <Grid item md={6}>
               <Box sx={{ mb: 4 }}>
                 <Typography
                   component="h4"
@@ -120,7 +120,7 @@ const ContactSection = ({ formik }) => {
                 <Typography
                   component="h4"
                   sx={{
-                    fontSize: "10.04px",
+                    fontSize: "12px",
                     letterSpacing: "1px !important",
                   }}
                   fontWeight={400}
@@ -137,7 +137,7 @@ const ContactSection = ({ formik }) => {
                   <Stack
                     direction="row"
                     alignItems="center"
-                    spacing={2}
+                    spacing={0}
                     justifyContent="space-between"
                   >
                     <Stack alignItems="center" direction="row" spacing={1}>
@@ -152,13 +152,13 @@ const ContactSection = ({ formik }) => {
                       <Stack spacing={0.2}>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                         >
                           Call Us
                         </Typography>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                           color="primary"
                         >
                           {(data && data.mobile) || "N/A"}
@@ -178,13 +178,13 @@ const ContactSection = ({ formik }) => {
                       <Stack spacing={0.2}>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                         >
                           Email
                         </Typography>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                           color="primary"
                         >
                           {(data && data.email) || "N/A"}
@@ -204,13 +204,13 @@ const ContactSection = ({ formik }) => {
                       <Stack spacing={0.2}>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                         >
                           Address
                         </Typography>
                         <Typography
                           fontWeight={500}
-                          sx={{ fontSize: "10.37px" }}
+                          sx={{ fontSize: "14px" }}
                           color="primary"
                         >
                           {(data && data.address) || "N/A"}
@@ -221,7 +221,7 @@ const ContactSection = ({ formik }) => {
                 )}
               </Box>
             </Grid>
-            <Grid item md={7}>
+            <Grid item md={6}>
               <ContactMap />
             </Grid>
           </Grid>
