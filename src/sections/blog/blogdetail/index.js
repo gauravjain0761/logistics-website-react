@@ -1,6 +1,8 @@
 import { BannerSection } from "@/components/banner";
 import Iconify from "@/components/iconify";
+import SkeletonLoader from "@/components/skeleton";
 import { CustomTooltip } from "@/components/tooltip/customTooltip";
+import CommonBlog from "@/sections/common/blog";
 import axiosInstance from "@/utils/axios";
 import {
   Facebook,
@@ -25,6 +27,7 @@ import React, { useEffect, useState } from "react";
 
 const BlogDetail = () => {
   const router = useRouter();
+  const [loader, setLoader] = React.useState(false);
   const { slug } = router.query;
 
   const [data, setData] = useState("");
@@ -44,148 +47,177 @@ const BlogDetail = () => {
       });
 
   useEffect(() => {
-    BlogDetailApi();
-  }, []);
+    if (slug) {
+      BlogDetailApi();
+    }
+  }, [slug]);
 
   console.log("datadata", data);
+
+  const [recentBlog, setRecentBlog] = useState("");
+
+  // Api Call
+  const BlogApi = async () => {
+    setLoader(true);
+    await axiosInstance
+      .get("api/front/blogs")
+      .then((response) => {
+        if (response?.status === 200) {
+          setLoader(false);
+          setRecentBlog(response.data.view_data?.data);
+        } else {
+          setLoader(false);
+          console.log("error");
+        }
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log(error, "Blog Page");
+      });
+  };
+  useEffect(() => {
+    BlogApi();
+  }, []);
 
   return (
     <React.Fragment>
       <BannerSection
         src="/assets/images/contact/contact-us-banner.jpg"
         alt=""
-        title="Blog"
+        title="Blog Detail"
       />
       <Box py={5}>
-        <Container>
-          <Grid container spacing={4}>
-            <Grid item md={2}>
-              <Stack spacing={2}>
-                <Box>
-                  <Typography sx={{ fontSize: "28px" }}>966</Typography>
-                  <Typography
-                    sx={{ fontSize: "16px" }}
-                    color={(theme) => alpha(theme.palette.grey[500], 0.5)}
-                  >
-                    Shares
-                  </Typography>
-                </Box>
-
-                <Box>
-                  <CustomTooltip title="528" placement="right">
-                    <Facebook />
-                  </CustomTooltip>
-                </Box>
-              </Stack>
-            </Grid>
-            <Grid item md={8}>
-              <Box component="img" src={`${data.base_url}${data.image}`} />
-            </Grid>
-            <Grid item md={2}>
-              <Box>
-                <Stack direction="row" spacing={2}>
-                  <Box textAlign="center">
-                    <Facebook />
-                    <Typography sx={{ fontSize: "15.1px" }}>10</Typography>
-                  </Box>
-
-                  <Box textAlign="center">
-                    <Twitter />
-                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
-                  </Box>
-
-                  <Box textAlign="center">
-                    <Instagram />
-                    <Typography sx={{ fontSize: "15.1px" }}>45</Typography>
-                  </Box>
-
-                  <Box textAlign="center">
-                    <Pinterest />
-                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
-                  </Box>
-
-                  <Box textAlign="center">
-                    <YouTube />
-                    <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
-                  </Box>
-                </Stack>
-              </Box>
-            </Grid>
-          </Grid>
-          <Box py={3}>
-            <Stack spacing={2}>
-              <Box>
-                <Typography variant="h3" fontWeight={900}>
-                  {data.title}
-                </Typography>
-              </Box>
-              <Stack direction="row" spacing={2}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Iconify
-                    icon="teenyicons:user-outline"
-                    color={(theme) => theme.palette.primary.main}
-                    width={15}
-                  />
+        {loader ? (
+          <Container>
+            <SkeletonLoader />
+          </Container>
+        ) : (
+          <Container>
+            <Grid container spacing={4}>
+              <Grid item md={2}>
+                <Stack spacing={2}>
                   <Box>
-                    <Typography>By Admin</Typography>
-                  </Box>
-                </Stack>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Iconify
-                    icon="mdi:clock-outline"
-                    color={(theme) => theme.palette.primary.main}
-                    width={16}
-                  />
-                  <Box>
-                    <Typography>
-                      {moment(data?.created_at).format("DD / MMM / YYYY")}
+                    <Typography sx={{ fontSize: "28px" }}>966</Typography>
+                    <Typography
+                      sx={{ fontSize: "16px" }}
+                      color={(theme) => alpha(theme.palette.grey[500], 0.5)}
+                    >
+                      Shares
                     </Typography>
                   </Box>
-                </Stack>
-              </Stack>
-              <Box>
-                <Typography>{data.description}</Typography>
-              </Box>
 
-              <Box>
-                <Card
-                  sx={{ borderLeft: "5px solid #ff7534", borderRadius: "5px" }}
+                  <Box>
+                    <CustomTooltip title="528" placement="right">
+                      <Box
+                        component="img"
+                        src="/assets/icon/Facebook.png"
+                        width="auto"
+                        height="auto"
+                      />
+                    </CustomTooltip>
+                  </Box>
+
+                  <Box>
+                    <CustomTooltip title="528" placement="right">
+                      <Box
+                        component="img"
+                        src="/assets/icon/Twitter.png"
+                        width="auto"
+                        height="auto"
+                      />
+                    </CustomTooltip>
+                  </Box>
+
+                  <Box>
+                    <CustomTooltip title="528" placement="right">
+                      <Box
+                        component="img"
+                        src="/assets/icon/Pinterest.png"
+                        width="auto"
+                        height="auto"
+                      />
+                    </CustomTooltip>
+                  </Box>
+
+                  <Box>
+                    <CustomTooltip title="528" placement="right">
+                      <Box
+                        component="img"
+                        src="/assets/icon/Gmail.png"
+                        width="auto"
+                        height="auto"
+                      />
+                    </CustomTooltip>
+                  </Box>
+                </Stack>
+              </Grid>
+              <Grid item md={8}>
+                <Box component="img" src={`${data.base_url}${data.image}`} />
+                <Typography
+                  component="h4"
+                  sx={{ fontSize: "25px", mt: 3 }}
+                  fontWeight={600}
                 >
-                  <CardContent>
-                    <Stack spacing={2}>
-                      <Typography fontStyle="italic" fontSize="1.2rem">
-                        {"'"}It is a long established fact that a reader will be
-                        distracted by the readable content of a page when
-                        looking at its layout. The point of using Lorem Ipsum is
-                        that it has a more-or-less normal distribution of
-                        letters, as opposed to using {"'"}Content here, content
-                        here{"'"}, making it look like readable English.{"'"}
-                      </Typography>
-                      <Typography
-                        fontStyle="italic"
-                        fontSize="1.2rem"
-                        fontWeight="500"
-                      >
-                        - Mr.George William
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </Box>
-              {/* <Box>
-                <Typography>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don{"'"}t
-                  look even slightly believable. If you are going to use a
-                  passage of Lorem Ipsum, you need to be sure there isn{"'"}t
-                  anything embarrassing hidden in the middle of text. Various
-                  versions have evolved over the years, sometimes by accident.
+                  {data.title}
                 </Typography>
-              </Box> */}
-            </Stack>
-          </Box>
-        </Container>
+                <Typography
+                  component="h4"
+                  sx={{ fontSize: "13px" }}
+                  fontWeight={400}
+                >
+                  {data.description}
+                </Typography>
+              </Grid>
+              <Grid item md={2}>
+                <Box>
+                  <Stack direction="row" spacing={2}>
+                    <Box textAlign="center">
+                      <Facebook />
+                      <Typography sx={{ fontSize: "15.1px" }}>10</Typography>
+                    </Box>
+
+                    <Box textAlign="center">
+                      <Twitter />
+                      <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                    </Box>
+
+                    <Box textAlign="center">
+                      <Instagram />
+                      <Typography sx={{ fontSize: "15.1px" }}>45</Typography>
+                    </Box>
+
+                    <Box textAlign="center">
+                      <Pinterest />
+                      <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                    </Box>
+
+                    <Box textAlign="center">
+                      <YouTube />
+                      <Typography sx={{ fontSize: "15.1px" }}>69k</Typography>
+                    </Box>
+                  </Stack>
+                </Box>
+              </Grid>
+            </Grid>
+            <Box sx={{ mt: 6 }}>
+              <Stack spacing={2}>
+                <Typography
+                  component="h4"
+                  fontWeight={700}
+                  sx={{ fontSize: "26.56px" }}
+                >
+                  Read more blogs like this
+                </Typography>
+
+                <Box sx={{ mt: 3 }}>
+                  <Grid container spacing={4}>
+                    <CommonBlog data={recentBlog} />
+                  </Grid>
+                </Box>
+              </Stack>
+            </Box>
+          </Container>
+        )}
       </Box>
     </React.Fragment>
   );
