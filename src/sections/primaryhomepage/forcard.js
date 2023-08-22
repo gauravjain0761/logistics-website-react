@@ -15,7 +15,7 @@ const ForCard = () => {
     <React.Fragment>
       <Box py={4}>
         <Container>
-          <Grid container>
+          <Grid container spacing={3}>
             {/* <Grid item lg={6}>
               <CardContent>
                 <CardContent>
@@ -28,7 +28,7 @@ const ForCard = () => {
                 </CardContent>
               </CardContent>
             </Grid> */}
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -39,22 +39,16 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Signup as a Driver
                       </Button>
                     </Box>
                   </Stack>
                 </CardContent>
               </Card>
-              <Grid item lg={3}>
+            </Grid>
+
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -65,23 +59,15 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Login to ship Manager
                       </Button>
                     </Box>
                   </Stack>
                 </CardContent>
               </Card>
-              </Grid>
-              <Grid item lg={3}></Grid>
+            </Grid>
+            <Grid item lg={4}>
               <Card variant="outlined" sx={{ my: 3 }}>
                 <CardContent>
                   <Stack spacing={1}>
@@ -92,22 +78,13 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Login to Driver
                       </Button>
                     </Box>
                   </Stack>
                 </CardContent>
               </Card>
-              
             </Grid>
           </Grid>
         </Container>
