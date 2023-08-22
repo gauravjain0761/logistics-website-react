@@ -79,18 +79,15 @@ export const { startJobActiveAlertLoading } = sliceActive.actions;
 
 // ----------------------------------------------------------------------
 
-export const getJobAlert = ({ page = 1, pageSize = 10, userId }) => {
-  console.log("pagepage", page, pageSize);
+export const getJobAlert = (params) => {
   return async (dispatch) => {
     dispatch(slice.actions.startJobAlertLoading());
     try {
       const response = await axiosInstance.get("api/auth/jobs/list", {
         params: {
           status: "pending",
-          page: Number(page),
-          pageSize: pageSize,
           type: "driver",
-          user_id: userId,
+          ...params,
         },
       });
       dispatch(slice.actions.setJobAlert(response?.data?.view_data));

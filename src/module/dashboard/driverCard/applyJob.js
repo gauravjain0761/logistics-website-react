@@ -46,7 +46,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
             dispatch(
               getJobAlert({
                 page: 1,
-                userId: user?.id,
+                user_id: user?.id,
                 pageSize: 10,
               })
             );

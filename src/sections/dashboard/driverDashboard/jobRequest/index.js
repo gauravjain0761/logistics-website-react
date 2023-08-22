@@ -70,7 +70,9 @@ const DashboardJobRequest = () => {
   // const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    dispatch(getJobAlert({ page: page, pageSize: pageSize, userId: user?.id }));
+    dispatch(
+      getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
+    );
   }, [page]);
 
   const getData = async () => {
