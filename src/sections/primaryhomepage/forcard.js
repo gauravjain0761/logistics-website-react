@@ -39,15 +39,7 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Signup as a Driver
                       </Button>
                     </Box>
@@ -67,15 +59,7 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Login to ship Manager
                       </Button>
                     </Box>
@@ -94,15 +78,7 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          backgroundColor: "#000",
-                          ":hover": {
-                            backgroundColor: "#000",
-                          },
-                        }}
-                      >
+                      <Button variant="contained" color="primary">
                         Login to Driver
                       </Button>
                     </Box>
