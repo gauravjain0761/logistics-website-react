@@ -5,6 +5,8 @@ import TotalDrivers from "./totaldrivers";
 import ForCard from "./forcard";
 import HelpfulHome from "./helpfulhome";
 import NewTestimonial from "./newtestimonials";
+import Faqs from "./faqs";
+import Testimonials from "./testimonials";
 
 const PrimaryHomePage = () => {
   return (
@@ -14,7 +16,9 @@ const PrimaryHomePage = () => {
       <TotalDrivers />
       <ForCard />
       <HelpfulHome />
-      <NewTestimonial />
+      <Faqs/>
+      <Testimonials/>
+      {/* <NewTestimonial /> */}
     </React.Fragment>
   );
 };

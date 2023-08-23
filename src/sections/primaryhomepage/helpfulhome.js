@@ -5,16 +5,16 @@ import React from "react";
 const HelpfulHome = () => {
   return (
     <React.Fragment>
-      <Box py={4} sx={{ backgroundColor: "#000000" }}>
+      <Box  >
         <Container>
           <Container>
-            <Grid container spacing={8} borderBottom="1px solid grey" py={4}>
-              <Grid item lg={6}>
+            <Grid container spacing={8} alignItems="center" py={4}>
+              <Grid item  sm={12} md={6} lg={6}>
                 <CardContent>
-                  <Box component="img" src="/box.png" alt="truck" />
+                  <Box component="img" src="/home/screens.png" alt="screen" />
                 </CardContent>
               </Grid>
-              <Grid item lg={6}>
+              <Grid item  sm={12} md={6} lg={6}>
                 <Grid container rowSpacing={6} columnSpacing={10}>
                   <Grid item sm={6} md={6} lg={6}>
                     <Box>
@@ -28,7 +28,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         Help Center
                       </Typography>
@@ -54,7 +54,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         Business
                       </Typography>
@@ -80,7 +80,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         Ship Online Now
                       </Typography>
@@ -106,7 +106,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         Company
                       </Typography>
@@ -133,7 +133,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         News
                       </Typography>
@@ -159,7 +159,7 @@ const HelpfulHome = () => {
                       <Typography
                         variant="h6"
                         sx={{ fontSize: "16px !important" }}
-                        color="#fff"
+                        color="common.black"
                       >
                         Our Blog
                       </Typography>
