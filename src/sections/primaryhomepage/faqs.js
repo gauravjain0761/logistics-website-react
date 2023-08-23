@@ -1,22 +1,20 @@
+import { BannerSection } from "@/components/banner";
+import Iconify from "@/components/iconify/Iconify";
+import { JobSekelton } from "@/components/not-found";
+import SkeletonLoader from "@/components/skeleton";
+import axiosInstance from "@/utils/axios";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
-  Card,
-  CardContent,
+  Container,
   Grid,
   Typography,
 } from "@mui/material";
-import { Container } from "@mui/system";
-import { BannerSection } from "@/components/banner";
 import React, { useEffect, useState } from "react";
-import Iconify from "@/components/iconify";
-import axiosInstance from "@/utils/axios";
-import SkeletonLoader from "@/components/skeleton";
-import { JobSekelton } from "@/components/not-found";
 
-const FaqsPage = () => {
+const Faqs = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [data, setData] = useState("");
   const [loading, setLoading] = React.useState(false);
@@ -47,13 +45,31 @@ const FaqsPage = () => {
   };
   return (
     <React.Fragment>
-      <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
-        alt=""
-        title="FAQs"
-      />
-      <Box py={8}>
+      <Box mb={6}>
         <Container>
+          <Box textAlign="center" mb={6}>
+            <Box>
+              <Typography fontSize={28} fontWeight={600}>
+                Frequently Asked{" "}
+                <Typography
+                  fontSize={28}
+                  fontWeight={600}
+                  color="primary"
+                  component="span"
+                >
+                  {" "}
+                  Questions
+                </Typography>
+              </Typography>
+            </Box>
+            <Box my={1}>
+              <Typography fontSize={14}>
+                Here are some frequently asked questions to enhance your
+                understanding of of our website.
+              </Typography>
+            </Box>
+          </Box>
+
           {loading ? (
             <SkeletonLoader />
           ) : (
@@ -133,4 +149,4 @@ const FaqsPage = () => {
   );
 };
 
-export default FaqsPage;
+export default Faqs;

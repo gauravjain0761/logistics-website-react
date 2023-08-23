@@ -29,7 +29,16 @@ const ForCard = () => {
               </CardContent>
             </Grid> */}
             <Grid item lg={4}>
-              <Card variant="outlined" sx={{ my: 3 }}>
+              <Card
+                variant="outlined"
+                sx={{
+                  my: 3,
+                  cursor: "pointer",
+                  ":hover": {
+                    borderColor: (theme) => theme.palette.primary.main,
+                  },
+                }}
+              >
                 <CardContent>
                   <Stack spacing={1}>
                     <Typography color="primary">For Driver</Typography>
@@ -49,7 +58,16 @@ const ForCard = () => {
             </Grid>
 
             <Grid item lg={4}>
-              <Card variant="outlined" sx={{ my: 3 }}>
+              <Card
+                variant="outlined"
+                sx={{
+                  my: 3,
+                  cursor: "pointer",
+                  ":hover": {
+                    borderColor: (theme) => theme.palette.primary.main,
+                  },
+                }}
+              >
                 <CardContent>
                   <Stack spacing={1}>
                     <Typography color="primary">For Clients</Typography>
@@ -68,7 +86,16 @@ const ForCard = () => {
               </Card>
             </Grid>
             <Grid item lg={4}>
-              <Card variant="outlined" sx={{ my: 3 }}>
+              <Card
+                variant="outlined"
+                sx={{
+                  my: 3,
+                  cursor: "pointer",
+                  ":hover": {
+                    borderColor: (theme) => theme.palette.primary.main,
+                  },
+                }}
+              >
                 <CardContent>
                   <Stack spacing={1}>
                     <Typography color="primary">For Clients</Typography>
