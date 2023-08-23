@@ -10,13 +10,26 @@ const initialState = {
     data: [],
     pageCount: 0,
     dataCount: 0,
+    page: 1,
+    pageSize: 10,
   },
-  isJobActiveAlertLoading: false,
-  jobActiveAlertError: null,
-  jobActiveAlert: {
+  isJobActiveLoading: false,
+  jobActiveError: null,
+  jobActive: {
     data: [],
     pageCount: 0,
     dataCount: 0,
+    page: 1,
+    pageSize: 10,
+  },
+  isJobHistoryLoading: false,
+  jobHistoryError: null,
+  jobHistory: {
+    data: [],
+    pageCount: 0,
+    dataCount: 0,
+    page: 1,
+    pageSize: 10,
   },
 };
 
@@ -29,43 +42,74 @@ const slice = createSlice({
       state.isJobAlertLoading = true;
     },
 
-    // HAS ERROR
+    startJobActiveLoading(state) {
+      state.isJobActiveLoading = true;
+    },
+      startJobHistoryLoading(state) {
+      state.isJobActiveLoading = true;
+    },
+
+    // HAS ERROR START
     hasJobAlertError(state, action) {
       state.isJobAlertLoading = false;
       state.error = action.payload;
     },
 
+    hasJobActiveError(state, action) {
+      state.isJobActiveLoading = false;
+      state.error = action.payload;
+    },
+    hasJobHistoryError(state, action) {
+      state.isJobActiveLoading = false;
+      state.error = action.payload;
+    },
+
+    // HAS ERROR END
+
     // SET JOB ALERT
     setJobAlert(state, action) {
-      state.isLoading = false;
+      state.isJobAlertLoading = false;
       state.jobAlert.data = action.payload.data;
       state.jobAlert.dataCount = action.payload.data.length;
       state.jobAlert.pageCount = action.payload.meta?.last_page;
     },
-  },
-});
-const sliceActive = createSlice({
-  name: "driverActiveJob",
-  initialState,
-  reducers: {
-    // START LOADING
-    startJobActiveAlertLoading(state) {
-      state.isJobActiveAlertLoading = true;
-    },
 
-    // HAS ERROR
-    hasJobActiveAlertError(state, action) {
-      state.isJobActiveAlertLoading = false;
-      state.error = action.payload;
+    setJobAlertPage(state, action) {
+      state.jobAlert.page = action.payload;
     },
+    // SET JOB END
+
+    // ====================================================
 
     // SET JOB ALERT
-    setJobActiveAlert(state, action) {
-      state.isLoading = false;
-      state.JobActiveAlert.data = action.payload.data;
-      state.JobActiveAlert.dataCount = action.payload.data.length;
-      state.JobActiveAlert.pageCount = action.payload.meta?.last_page;
+    setJobActive(state, action) {
+      state.isJobActiveLoading = false;
+      state.jobActive.data = action.payload.data;
+      state.jobActive.dataCount = action.payload.data.length;
+      state.jobActive.pageCount = action.payload.meta?.last_page;
     },
+
+    setJobActivePage(state, action) {
+      state.jobActive.page = action.payload;
+    },
+    // SET JOB END
+
+    // =====================================================
+
+    // SET JOB hISTORY
+    setJobHistory(state, action) {
+      state.isJobHistoryLoading = false;
+      state.jobHistory.data = action.payload.data;
+      state.jobHistory.dataCount = action.payload.data.length;
+      state.jobHistory.pageCount = action.payload.meta?.last_page;
+    },
+
+    setJobHistoryPage(state, action) {
+      state.jobHistory.page = action.payload;
+    },
+    // SET JOB HISTORY END
+
+    // ========================================================
   },
 });
 
@@ -74,23 +118,20 @@ export default slice.reducer;
 // export default{ sliceActive.reducer};
 
 // Actions
-export const { startJobAlertLoading } = slice.actions;
-export const { startJobActiveAlertLoading } = sliceActive.actions;
+export const { startJobAlertLoading, setJobAlertPage, setJobActivePage ,setJobHistoryPage} =
+  slice.actions;
 
 // ----------------------------------------------------------------------
 
-export const getJobAlert = ({ page = 1, pageSize = 10, userId }) => {
-  console.log("pagepage", page, pageSize);
+export const getJobAlert = (params) => {
   return async (dispatch) => {
     dispatch(slice.actions.startJobAlertLoading());
     try {
       const response = await axiosInstance.get("api/auth/jobs/list", {
         params: {
           status: "pending",
-          page: Number(page),
-          pageSize: pageSize,
           type: "driver",
-          user_id: userId,
+          ...params,
         },
       });
       dispatch(slice.actions.setJobAlert(response?.data?.view_data));
@@ -99,19 +140,39 @@ export const getJobAlert = ({ page = 1, pageSize = 10, userId }) => {
     }
   };
 };
-export function getJobActiveAlert({ page = 1, pageSize = 10 }) {
-  console.log("pafgee", page, pageSize);
+
+export const getJobActive = (params) => {
   return async (dispatch) => {
-    dispatch(sliceActive.actions.startJobActiveAlertLoading());
+    dispatch(slice.actions.startJobActiveLoading());
     try {
       const response = await axiosInstance.get("api/auth/jobs/list", {
-        params: { status: "active", page: Number(page), pageSize: pageSize },
+        params: {
+          status: "active",
+          type: "driver",
+          ...params,
+        },
       });
-      dispatch(
-        sliceActive.actions.setJobActiveAlert(response?.data?.view_data)
-      );
+      dispatch(slice.actions.setJobActive(response?.data?.view_data));
     } catch (error) {
-      dispatch(sliceActive.actions.hasJobActiveAlertError(error));
+      dispatch(slice.actions.hasJobActiveError(error));
     }
   };
-}
+};
+export const getJobHistory = (params) => {
+  return async (dispatch) => {
+    dispatch(slice.actions.startJobHistoryLoading());
+    try {
+      const response = await axiosInstance.get("api/auth/jobs/list", {
+        params: {
+          status: "history",
+          type: "driver",
+          ...params,
+        },
+      });
+      dispatch(slice.actions.setJobHistory(response?.data?.view_data));
+    } catch (error) {
+      dispatch(slice.actions.hasJobHistoryError(error));
+    }
+  };
+};
+

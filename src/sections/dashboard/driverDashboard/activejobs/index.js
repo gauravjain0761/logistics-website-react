@@ -31,19 +31,34 @@ import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { PDFViewer } from "@react-pdf/renderer";
 import InvoicePDF from "./InvoicePDF";
+import { useDispatch, useSelector } from "@/redux/store";
+import { getJobActive, setJobActivePage } from "@/redux/slices/job/driver";
 
 const DashboardJobPost = () => {
+  const dispatch = useDispatch();
+  const {
+    jobActive: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.driverJob);
+
+  const handlePageChange = (event, value) => {
+    dispatch(setJobActivePage(value));
+  };
+
+  React.useEffect(() => {
+    dispatch(
+      getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+    );
+  }, [page]);
   const router = useRouter();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const [layout, setLayout] = useState(false);
-  const [page, setPage] = React.useState(1);
+  const [setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
-  const [pageCount, setPageCount] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10);
+ 
   const [pageData, setPageData] = React.useState({});
 
   const [startOpen, setStartOpen] = React.useState(false);
@@ -59,41 +74,9 @@ const DashboardJobPost = () => {
   const [reviewOpen, setReviewOpen] = React.useState(false);
   const handleReviewOpen = (id) => setReviewOpen(id);
   const handleReviewClose = () => setReviewOpen(false);
-  // Ratign End
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
+  
   const [loader, setLoader] = React.useState(false);
-  const [data, setData] = React.useState([]);
-
-  const getData = async () => {
-    setLoader(true);
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "active",
-          page: Number(page),
-          pageSize: pageSize,
-          type: "driver",
-          user_id: user?.id,
-        },
-      })
-      .then((response) => {
-        setLoader(false);
-        if (response?.status === 200) {
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        setLoader(false);
-        console.log("Active Job", error);
-      });
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, [page]);
+ 
 
   const formData = useFormik({
     initialValues: {
