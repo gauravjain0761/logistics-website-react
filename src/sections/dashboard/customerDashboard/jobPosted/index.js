@@ -32,53 +32,29 @@ import { useSnackbar } from "notistack";
 import SkeletonLoader from "@/components/skeleton";
 import { JobSekelton } from "@/components/not-found";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { dispatch, useDispatch, useSelector } from "@/redux/store";
+import { getJobPost, setJobPostPage } from "@/redux/slices/job/customer";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const {
+    jobPost: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.customerJob);
+
+  const handlePageChange = (event, value) => {
+    dispatch(setJobPostPage(value));
+  };
+
+  React.useEffect(() => {
+    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
+  }, [page, pageSize]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
-  const [pageCount, setPageCount] = React.useState(0);
-  const [page, setPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10);
-  const [pageData, setPageData] = React.useState({});
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
   const [loader, setLoader] = React.useState(false);
-  const [data, setData] = React.useState([]);
 
-  const getData = async () => {
-    setLoader(true);
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "post",
-          page: Number(page),
-          pageSize: pageSize,
-          user_id: user?.id,
-          type: "customer",
-        },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setLoader(false);
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        setLoader(false);
-        console.log("DriverJob", error);
-      });
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, [page, user, user?.id]);
-
-  console.log("datadata", data);
   const MonthSelect = [
     {
       label: "Choose Month",
@@ -278,7 +254,7 @@ const DashboardJobPost = ({ formik }) => {
                             </Box>
                           </Stack>
                           <Box>
-                            <DeleteModal id={item?.id} getData={getData} />
+                            <DeleteModal id={item?.id}  />
                           </Box>
                         </Stack>
                         <Divider />
@@ -567,19 +543,25 @@ const DashboardJobPost = ({ formik }) => {
 
 export default DashboardJobPost;
 
-const DeleteModal = ({ id, getData }) => {
+const DeleteModal = ({ id }) => {
   const [open, setOpen] = React.useState(false);
+  const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+  const {
+    jobPost: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.customerJob);
 
+ 
   const deleteData = async () => {
     await axiosInstance
       .delete(`api/auth/master/jobs/delete/${id}`)
       .then((response) => {
         if (response?.status === 200) {
           handleClose();
-          getData();
+          dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });

@@ -10,7 +10,7 @@ import {
   alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobActive,
@@ -29,10 +29,8 @@ const DashboardCard = () => {
   const {
     jobAlert: { pageCount, data, page, pageSize },
     jobActive,
-    jobHistory
+    jobHistory,
   } = useSelector((state) => state.driverJob);
-  
-  
 
   const handlePageChange = (event, value) => {
     dispatch(setJobAlertPage(value));
@@ -41,17 +39,27 @@ const DashboardCard = () => {
   };
   React.useEffect(() => {
     dispatch(
+      getJobActive({
+        page: jobActive?.page,
+        pageSize: jobActive?.pageSize,
+        user_id: user?.id,
+      })
+    );
+  }, [jobActive?.page, jobActive?.pageSize]);
+  useEffect(() => {
+    dispatch(
       getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
     );
+  }, [page, pageSize]);
+  useEffect(() => {
     dispatch(
-      getJobActive({ page: jobActive?.page, pageSize: jobActive?.pageSize, user_id: user?.id })
+      getJobHistory({
+        page: jobHistory?.page,
+        pageSize: jobHistory?.pageSize,
+        user_id: user?.id,
+      })
     );
-    dispatch(
-      getJobHistory({ page: jobHistory?.page, pageSize: jobHistory?.pageSize, user_id: user?.id })
-    );
-  }, [jobActive?.page,jobActive?.pageSize]);
-
- 
+  }, [jobHistory?.page, jobHistory?.pageSize]);
 
   return (
     <React.Fragment>
