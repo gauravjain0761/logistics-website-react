@@ -101,7 +101,7 @@ export const getJobPost = (params) => {
     try {
       const response = await axiosInstance.get("api/auth/jobs/list", {
         params: {
-          status: "pending",
+          status: "post",
           type: "customer",
           ...params,
         },

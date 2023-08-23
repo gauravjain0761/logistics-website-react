@@ -14,16 +14,25 @@ import React from "react";
 
 const CustomerDashboard = () => {
   const router = useRouter();
- 
+
   return (
     <React.Fragment>
-      <Container sx={{ my: 4,mt:10}}>
+      <Container sx={{ my: 4, mt: 10 }}>
         <Stack spacing={4}>
-         <DashboardCard/>
+          <DashboardCard />
           <Box>
-            <Card sx={{ backgroundImage:"url(/customerDashboard.png)"}}>
+            <Card
+              sx={{
+                backgroundImage: "url(/customerDashboard.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize:"cover",
+                py:6,
+                px:6
+                
+              }}
+            >
               <CardContent>
-                <Grid container >
+                <Grid container>
                   {/* <Grid item md={7}>
                     <Box
                       component={"img"}
@@ -33,7 +42,11 @@ const CustomerDashboard = () => {
                   <Grid item md={5}>
                     <Stack direction={"row"} alignItems="center" height="100%">
                       <Stack spacing={2}>
-                        <Typography variant="h3" fontWeight={600} color="common.black">
+                        <Typography
+                          variant="h3"
+                          fontWeight={600}
+                          color="common.black"
+                        >
                           Lorem ipsum
                         </Typography>
                         <Typography color="common.black">
@@ -45,7 +58,11 @@ const CustomerDashboard = () => {
                         <Box>
                           <Button
                             variant="contained"
-                            onClick={()=> router.push("/dashboard/customer/job_post_form/create")}
+                            onClick={() =>
+                              router.push(
+                                "/dashboard/customer/job_post_form/create"
+                              )
+                            }
                             color="dark"
                             // sx={{
                             //   py: 1.4,

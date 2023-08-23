@@ -1,5 +1,11 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
+import {
+  getJobHistory,
+  getJobPost,
+  setJobPostPage,
+} from "@/redux/slices/job/customer";
+import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
@@ -11,64 +17,31 @@ import {
   alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 
 const DashboardCard = ({ jobPost }) => {
   const router = useRouter();
   const { user } = useAuthContext();
-  const [data, setData] = React.useState([]);
-  const [historyData, setHistoryData] = React.useState([]);
-  const getData = async () => {
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "post",
-          page: 1,
-          pageSize: "10",
-          user_id: user?.id,
-          type: "customer",
-        },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        console.log("DriverJob", error);
-      });
+  const dispatch = useDispatch();
+  const {
+    jobPost: { pageCount, data, page, pageSize },
+    jobHistory,
+  } = useSelector((state) => state.customerJob);
+
+  const handlePageChange = (event, value) => {
+    dispatch(setJobPostPage(value));
   };
+  useEffect(() => {
+    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
+  }, [page, pageSize]);
 
   React.useEffect(() => {
-    getData();
-  }, [user, user?.id]);
-
-  const getHistoryData = async () => {
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "history",
-          type: "driver",
-          user_id: user?.id,
-          page: 1,
-          pageSize: 10,
-        },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setHistoryData(response?.data?.view_data?.data);
-        }
-      })
-      .catch((error) => {
-        console.log("Job History", error);
-      });
-  };
-
-  React.useEffect(() => {
-    getHistoryData();
-  }, [user, user?.id]);
-
+    dispatch(getJobHistory({
+      page: jobHistory?.page,
+      pageSize: jobHistory?.pageSize,
+      user_id: user?.id,
+    }));
+  }, [jobHistory?.page, jobHistory?.pageSize]);
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
@@ -100,7 +73,7 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/job_posted"
-                          ?"#246678"
+                          ? "#246678"
                           : alpha("#145365", 0.1),
                     }}
                     height="60px"
@@ -218,7 +191,7 @@ const DashboardCard = ({ jobPost }) => {
                       JOB HISTORY
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      {historyData?.length}
+                      {jobHistory?.dataCount}
                     </Typography>
                   </Box>
                 </Stack>
@@ -252,7 +225,7 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/subscription"
-                          ?"#FECA3C"
+                          ? "#FECA3C"
                           : alpha("#FECA3C", 0.1),
                     }}
                     height="60px"
