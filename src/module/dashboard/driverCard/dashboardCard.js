@@ -12,62 +12,46 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "@/redux/store";
-import { getJobAlert } from "@/redux/slices/job/driver";
+import {
+  getJobActive,
+  getJobAlert,
+  getJobHistory,
+  setJobActivePage,
+  setJobAlertPage,
+  setJobHistoryPage,
+} from "@/redux/slices/job/driver";
 import { useAuthContext } from "@/auth/useAuthContext";
 
-const DashboardCard = ({ jobalert,activeJob }) => {
+const DashboardCard = () => {
   const router = useRouter();
-  const {user}= useAuthContext();
-  const {jobAlert: { pageCount, data }} = useSelector((state) => state.driverJob);
-  const [historyData, setHistoryData] = React.useState([]);
+  const dispatch = useDispatch();
+  const { user } = useAuthContext();
+  const {
+    jobAlert: { pageCount, data, page, pageSize },
+    jobActive,
+    jobHistory
+  } = useSelector((state) => state.driverJob);
+  
+  
 
-  const getData = async () => {
-    // await axiosInstance
-    //   .get("api/auth/jobs/list", {
-    //     params: {status:1, page: 1, pageSize: "10" },
-    //   })
-    //   .then((response) => {
-    //     if (response?.status === 200) {
-    //       setData(response?.data?.view_data?.data);
-    //       setPageCount(response?.data?.view_data?.meta?.last_page);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("DriverJob", error);
-    //   });
+  const handlePageChange = (event, value) => {
+    dispatch(setJobAlertPage(value));
+    dispatch(setJobActivePage(value));
+    dispatch(setJobHistoryPage(value));
   };
-
   React.useEffect(() => {
-    getData();
-  }, []);
+    dispatch(
+      getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
+    );
+    dispatch(
+      getJobActive({ page: jobActive?.page, pageSize: jobActive?.pageSize, user_id: user?.id })
+    );
+    dispatch(
+      getJobHistory({ page: jobHistory?.page, pageSize: jobHistory?.pageSize, user_id: user?.id })
+    );
+  }, [jobActive?.page,jobActive?.pageSize]);
 
-
-
-  const getHistoryData = async () => {
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "history",
-          type: "driver",
-          user_id: user?.id,
-          page: 1,
-          pageSize: 10,
-        },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setHistoryData(response?.data?.view_data?.data)
-        }
-      })
-      .catch((error) => {
-        console.log("Job History", error);
-      });
-  };
-
-  React.useEffect(() => {
-    getHistoryData();
-  }, [ user, user?.id]);
-
+ 
 
   return (
     <React.Fragment>
@@ -169,7 +153,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                     ACTIVE JOBS
                   </Typography>
                   <Typography variant="h5" textAlign="center">
-                    {activeJob?.length}
+                    {jobActive?.dataCount}
                   </Typography>
                 </Box>
               </Stack>
@@ -269,7 +253,7 @@ const DashboardCard = ({ jobalert,activeJob }) => {
                     JOB HISTORY
                   </Typography>
                   <Typography variant="h5" textAlign={"center"}>
-                    {historyData.length}
+                    {jobHistory?.dataCount}
                   </Typography>
                 </Box>
               </Stack>

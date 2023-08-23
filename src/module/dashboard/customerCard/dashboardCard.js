@@ -78,13 +78,13 @@ const DashboardCard = ({ jobPost }) => {
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/job_posted"
-                    ? "#ff7534"
+                    ? "#145365"
                     : "#fff",
-                border: "1px solid #ff7534",
+                border: "1px solid #145365",
                 color:
                   router.pathname === "/dashboard/customer/job_posted"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#145365",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/job_posted")}
@@ -99,9 +99,9 @@ const DashboardCard = ({ jobPost }) => {
                   <Box
                     sx={{
                       backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/customer/job_post_form"
-                          ? theme.palette.primary.main
-                          : alpha(theme.palette.primary.main, 0.1),
+                        router.pathname === "/dashboard/customer/job_posted"
+                          ?"#246678"
+                          : alpha("#145365", 0.1),
                     }}
                     height="60px"
                     px={1}
@@ -180,13 +180,13 @@ const DashboardCard = ({ jobPost }) => {
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/job_history"
-                    ? "#ff7534"
+                    ? "#FD9B3D"
                     : "#fff",
-                border: "1px solid #ff7534",
+                border: "1px solid #FD9B3D",
                 color:
                   router.pathname === "/dashboard/customer/job_history"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#FD9B3D",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/job_history")}
@@ -202,7 +202,7 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/job_history"
-                          ? theme.palette.primary.main
+                          ? "#ffa54e"
                           : alpha(theme.palette.primary.main, 0.1),
                     }}
                     height="60px"
@@ -230,13 +230,13 @@ const DashboardCard = ({ jobPost }) => {
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/subscription"
-                    ? "#ff7534"
+                    ? "#FECA3C"
                     : "#fff",
-                border: "1px solid #ff7534",
+                border: "1px solid #FECA3C",
                 color:
                   router.pathname === "/dashboard/customer/subscription"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#FECA3C",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/subscription")}
@@ -252,8 +252,8 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/subscription"
-                          ? theme.palette.primary.main
-                          : alpha(theme.palette.primary.main, 0.1),
+                          ?"#FECA3C"
+                          : alpha("#FECA3C", 0.1),
                     }}
                     height="60px"
                     px={1}

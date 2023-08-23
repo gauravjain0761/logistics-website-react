@@ -29,50 +29,41 @@ import CountUp from "react-countup";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import { useDispatch, useSelector } from "@/redux/store";
+import { getJobHistory, setJobActivePage, setJobHistoryPage } from "@/redux/slices/job/driver";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
-  const { user } = useAuthContext();
-  const [layout, setLayout] = useState(false);
-  const [page, setPage] = React.useState(1);
-  const [open, setOpen] = React.useState(false);
-  const [select, setSelect] = React.useState("new");
+  const dispatch = useDispatch();
+  const {
+    jobHistory: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.driverJob);
 
-  const [pageCount, setPageCount] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10);
-  const [pageData, setPageData] = React.useState({});
-
-  console.log("formikerr", formik);
   const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-  const [data, setData] = React.useState([]);
-
-  console.log("useruser", user);
-  const getHistoryData = async () => {
-    await axiosInstance
-      .get("api/auth/jobs/list", {
-        params: {
-          status: "history",
-          type: "driver",
-          user_id: user?.id,
-          page: Number(page),
-          pageSize: pageSize,
-        },
-      })
-      .then((response) => {
-        if (response?.status === 200) {
-          setData(response?.data?.view_data?.data);
-          setPageCount(response?.data?.view_data?.meta?.last_page);
-        }
-      })
-      .catch((error) => {
-        console.log("Job History", error);
-      });
+    dispatch(setJobHistoryPage(value));
   };
 
   React.useEffect(() => {
-    getHistoryData();
-  }, [page, user, user?.id]);
+    dispatch(
+      getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
+    );
+  }, [page,pageSize]);
+  const { user } = useAuthContext();
+  const [layout, setLayout] = useState(false);
+  // const [page, setPage] = React.useState(1);
+  const [open, setOpen] = React.useState(false);
+  const [select, setSelect] = React.useState("new");
+
+  // const [pageCount, setPageCount] = React.useState(1);
+  // const [pageSize, setPageSize] = React.useState(10);
+  const [pageData, setPageData] = React.useState({});
+
+  // const handlePageChange = (event, value) => {
+  //   setPage(value);
+  // };
+  // const [data, setData] = React.useState([]);
+
+  
+
 
   return (
     <React.Fragment>

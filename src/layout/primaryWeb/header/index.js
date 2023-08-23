@@ -221,14 +221,14 @@ const Header = (props) => {
                     mx: 1,
                     pr:1,
                     color: (theme) =>
-                      router.asPath === `/dashboard/${user?.user_type}/profile`
+                      router.asPath === `/${user?.user_type}/profile`
                         ? theme.palette.primary.main
                         : theme.palette.text.primary,
                     ...theme.typography.subtitle2,
                     textDecoration: "none",
                   }}
                   component={Link}
-                  href={`/dashboard/${user?.user_type}/profile`}
+                  href={`/${user?.user_type}/profile`}
                 >
                   My Profile
                 </Typography>

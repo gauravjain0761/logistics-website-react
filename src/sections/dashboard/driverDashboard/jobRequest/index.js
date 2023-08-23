@@ -35,12 +35,12 @@ import { useFormik } from "formik";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "@/redux/store";
-import { getJobAlert } from "@/redux/slices/job/driver";
+import { getJobAlert, setJobAlertPage } from "@/redux/slices/job/driver";
 import { includes, some } from "lodash";
 const DashboardJobRequest = () => {
   const dispatch = useDispatch();
   const {
-    jobAlert: { pageCount, data },
+    jobAlert: { pageCount, data, page, pageSize },
   } = useSelector((state) => state.driverJob);
 
   const router = useRouter();
@@ -52,8 +52,8 @@ const DashboardJobRequest = () => {
   const [select, setSelect] = React.useState("new");
 
   // const [pageCount, setPageCount] = React.useState(0);
-  const [page, setPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(10);
+  const [setPage] = React.useState(1);
+  // const [pageSize, setPageSize] = React.useState(10);
   const [pageData, setPageData] = React.useState({});
 
   const [applyOpen, setApplyopen] = React.useState(false);
@@ -62,18 +62,20 @@ const DashboardJobRequest = () => {
   const handleStartClose = () => setStartopen(false);
   const handleOpen = (id) => setApplyopen(id);
   const handleClose = () => setApplyopen(false);
-
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
+  
   const [loader, setLoader] = React.useState(false);
+  const handlePageChange = (event, value) => {
+    dispatch(setJobAlertPage(value));
+  };
   // const [data, setData] = React.useState([]);
-
+  
   React.useEffect(() => {
     dispatch(
       getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
     );
   }, [page]);
+
+  console.log("pagepage", page);
 
   const getData = async () => {
     // setLoader(true);
