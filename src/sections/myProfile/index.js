@@ -35,37 +35,6 @@ const Profile = ({ data, formik, loader }) => {
             ) : (
               <Stack alignItems="center" spacing={4} py={4}>
                 <Box>
-                  <Card
-                    sx={{
-                      borderRadius: 0,
-                      boxShadow: 0,
-                      background: (theme) => theme.palette.grey[100],
-                      width: "100%",
-                      mb: 2,
-                    }}
-                  >
-                    <CardContent>
-                      <Stack
-                        direction={"row"}
-                        justifyContent={"center"}
-                        alignItems="center"
-                      >
-                        <Iconify
-                          icon="uis:unlock"
-                          width="30px"
-                          color="#ff7534"
-                        />
-                        <Typography
-                          color={"primary"}
-                          variant="h4"
-                          fontWeight={500}
-                          sx={{ fontSize: "1.95rem!important" }}
-                        >
-                          My Profile
-                        </Typography>
-                      </Stack>
-                    </CardContent>
-                  </Card>
                   <Box
                     component="form"
                     noValidate
@@ -73,95 +42,93 @@ const Profile = ({ data, formik, loader }) => {
                   >
                     <Card
                       sx={{
-                        borderRadius: 0,
+                        borderRadius: "20px",
                         boxShadow: 0,
-                        background: (theme) => theme.palette.grey[100],
+                        background: (theme) => theme.palette.common.white,
                       }}
                     >
                       <CardContent>
-                        <Stack direction="row" spacing={8}>
-                          <Box sx={{ position: "relative" }}>
-                            <input
-                              type="file"
-                              hidden
-                              accept=".png,.jpg,.jpeg"
-                              id="actual-btn"
-                              name="profile_img"
-                              onChange={(e) => {
-                                formik.setFieldValue(
-                                  "profile_img",
-                                  e.target.files[0]
-                                );
-                                formik.setFieldValue(
-                                  "profile_img_url",
-                                  URL.createObjectURL(e.target.files[0])
-                                );
-                              }}
-                            />
+                      
+                        <Box sx={{ position: "relative" }}>
+                          <input
+                            type="file"
+                            hidden
+                            accept=".png,.jpg,.jpeg"
+                            id="actual-btn"
+                            name="profile_img"
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                "profile_img",
+                                e.target.files[0]
+                              );
+                              formik.setFieldValue(
+                                "profile_img_url",
+                                URL.createObjectURL(e.target.files[0])
+                              );
+                            }}
+                          />
 
-                            <label for="actual-btn">
-                              {!formik.values.profile_img && (
-                                <Stack
-                                  alignItems="center"
-                                  justifyContent="center"
+                          <label for="actual-btn">
+                            {!formik.values.profile_img && (
+                              <Stack
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{
+                                  position: "relative",
+                                  backgroundColor: "#f1f1f1",
+                                  width: "150px",
+                                  height: "150px",
+                                  borderRadius: "50%",
+                                  border: "2px solid #fff",
+                                }}
+                              >
+                                <Iconify icon="et:profile-male" width="110px" />
+                                <Box
                                   sx={{
-                                    position: "relative",
-                                    backgroundColor: "#f1f1f1",
-                                    width: "150px",
-                                    height: "150px",
-                                    borderRadius: "50%",
-                                    border: "2px solid #ff7534",
+                                    position: "absolute",
+                                    bottom: "0px",
+                                    right: "0px",
                                   }}
                                 >
                                   <Iconify
-                                    icon="et:profile-male"
-                                    width="110px"
+                                    width={30}
+                                    icon="carbon:add-filled"
                                   />
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      bottom: "0px",
-                                      right: "0px",
-                                    }}
-                                  >
-                                    <Iconify
-                                      width={30}
-                                      icon="carbon:add-filled"
-                                    />
-                                  </Box>
-                                </Stack>
-                              )}
-                              {formik.values.profile_img_url && (
-                                <Box sx={{ position: "relative" }} >
-                                  <Box
-                                    component="img"
-                                    src={formik.values.profile_img_url}
-                                    sx={{
-                                      width: "150px",
-                                      height: "150px",
-                                      objectFit: "contain",
-                                      borderRadius: "50%",
-                                      border: "2px solid #ff7534",
-                                      cursor:"pointer"
-                                    }}
-                                  />
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      bottom: "0px",
-                                      right: "4px",
-                                      cursor:"pointer"
-                                    }}
-                                  >
-                                    <Iconify
-                                      width={30}
-                                      icon="carbon:add-filled"
-                                    />
-                                  </Box>
                                 </Box>
-                              )}
-                            </label>
-                          </Box>
+                              </Stack>
+                            )}
+                            {formik.values.profile_img_url && (
+                              <Box sx={{ position: "relative" }}>
+                                <Box
+                                  component="img"
+                                  src={formik.values.profile_img_url}
+                                  sx={{
+                                    width: "150px",
+                                    height: "150px",
+                                    objectFit: "contain",
+                                    borderRadius: "50%",
+                                    border: "2px solid #fff",
+                                    cursor: "pointer",
+                                  }}
+                                />
+                                <Box
+                                  sx={{
+                                    position: "absolute",
+                                    bottom: "0px",
+                                    right: "4px",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <Iconify
+                                    width={30}
+                                    icon="ion:camera-sharp"
+                                  />
+                                </Box>
+                              </Box>
+                            )}
+                          </label>
+                        </Box>
+                        <Stack direction="row" spacing={8}>
                           <Stack spacing={1}>
                             <Box>
                               <Stack

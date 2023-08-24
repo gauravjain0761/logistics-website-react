@@ -10,7 +10,7 @@ const MoneyEarnedList = () => {
   return (
     <AuthGuard>
       <Box mt={2} mb={4}>
-        <Container maxWidth>
+        <Container >
           <Box py={5}>
             <DashboardCard />
           </Box>

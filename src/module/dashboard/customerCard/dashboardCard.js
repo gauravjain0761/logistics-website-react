@@ -48,7 +48,7 @@ const DashboardCard = ({ jobPost }) => {
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={3}>
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:
@@ -98,7 +98,7 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          {/* <Grid item md={4}>
             <Card
               variant="outlined"
               sx={{
@@ -149,8 +149,8 @@ const DashboardCard = ({ jobPost }) => {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item md={3}>
+          </Grid> */}
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:
@@ -200,7 +200,7 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={3}>
+          <Grid item md={4}>
             <Card
               sx={{
                 backgroundColor:

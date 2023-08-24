@@ -9,7 +9,7 @@ const MoneySpendList = () => {
   const formik = useFormik({});
   return (
     <Box mt={10} mb={4}>
-      <Container maxWidth>
+      <Container >
         <Box py={5}>
           <DashboardCard />
         </Box>

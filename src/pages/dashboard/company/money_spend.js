@@ -8,7 +8,7 @@ const MoneySpendList = () => {
   const formik = useFormik({});
   return (
     <Box mt={10} mb={4}>
-      <Container maxWidth>
+      <Container >
         <Card>
           <CardContent>
             <Typography variant="h3" component="h3" textAlign="center">
