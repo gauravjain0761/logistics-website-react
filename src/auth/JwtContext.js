@@ -144,7 +144,7 @@ export function AuthProvider({ children }) {
       });
     } catch (error) {
       const { response } = error;
-      
+
       enqueueSnackbar(response.data.message, {
         variant: "error",
       });
@@ -182,7 +182,7 @@ export function AuthProvider({ children }) {
       });
     } catch (error) {
       const { response } = error;
-      enqueueSnackbar(response.data.error, {
+      enqueueSnackbar(response?.data?.error, {
         variant: "error",
       });
     }

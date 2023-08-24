@@ -107,10 +107,10 @@ const JobPostForm = ({
               <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>
                   <Stack direction="row" spacing={1} py={2}>
-                    <Iconify width="2em" icon="ion:briefcase" color="#ff7534" />
-                    <Typography variant="h4" color="primary">
+                    {/* <Iconify width="2em" icon="ion:briefcase" color="#ff7534" /> */}
+                    <Typography fontWeight={500} fontSize={24}>
                       {" "}
-                      Post Your New Job
+                      Post Your Job
                     </Typography>
                   </Stack>
                   <Box component="form" onSubmit={formik.handleSubmit}>
@@ -119,10 +119,8 @@ const JobPostForm = ({
                         <Box>
                           <TextBox
                             fullWidth
-                            placeholder={"Enter Job Title"}
-                            startIcon={
-                              <Iconify icon="tabler:heading" color="#ff7534" />
-                            }
+                            placeholder={"Job Title"}
+                            label="Job Title"
                             size={"small"}
                             value={formik.values.name}
                             name={`name`}
@@ -135,13 +133,6 @@ const JobPostForm = ({
                       </Grid>
                       <Grid item md={12}>
                         <Divider sx={{ my: 3 }} />
-                        <Button
-                          variant="contained"
-                          onClick={() => addProduct()}
-                        >
-                          Add Pick Up Address
-                        </Button>
-
                         <Box>
                           {formik?.values?.items &&
                             formik?.values?.items?.length > 0 &&
@@ -157,7 +148,7 @@ const JobPostForm = ({
                                   <Box key={productIndex} sx={{ mt: 1 }}>
                                     <Card>
                                       <CardHeader
-                                        subheader={`Pick up Address-${
+                                        subheader={`Add Pickup Address-${
                                           productIndex + 1
                                         }`}
                                         action={
@@ -172,44 +163,12 @@ const JobPostForm = ({
                                       />
                                       <CardContent>
                                         <Grid container spacing={3}>
-                                          {/* <Grid item md={12}>
-                                            <Box>
-                                              <Typography>
-                                                Pick-Up Address
-                                              </Typography>
-
-                                              <TextBox
-                                                fullWidth
-                                                placeholder="Pick-Up Location"
-                                                value={
-                                                  productItem?.product
-                                                    ?.job_title
-                                                }
-                                                name={`items[${productIndex}].product.job_title`}
-                                                onChange={(e) => {
-                                                  formik.setFieldValue(
-                                                    `items[${productIndex}].product.job_title`,
-                                                    e.target.value
-                                                  );
-                                                }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="mdi:location"
-                                                    color="#ff7534"
-                                                  />
-                                                }
-                                                size="small"
-                                              />
-                                            </Box>
-                                          </Grid> */}
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>
-                                                Pick-Up Date
-                                              </Typography>
                                               <TextBox
                                                 fullWidth
                                                 type="date"
+                                                label="Pickup Date"
                                                 value={moment(
                                                   productItem?.product
                                                     ?.pickup_date
@@ -233,28 +192,23 @@ const JobPostForm = ({
                                                 onKeyDown={(event) =>
                                                   event.preventDefault()
                                                 }
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="mingcute:calendar-fill"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size={"small"}
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>
-                                                Pick-Up Time
-                                              </Typography>
                                               <TextBox
                                                 fullWidth
                                                 type="time"
+                                                label="Pickup Time"
                                                 value={
                                                   productItem?.product
                                                     ?.pickup_time
                                                 }
+                                                InputLabelProps={{
+                                                  shrink: true,
+                                                }}
                                                 name={`items[${productIndex}].product.pickup_time`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -262,23 +216,16 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                placeholder="Drop-Out Location"
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="mdi:clock"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size={"small"}
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Drop Date</Typography>
                                               <TextBox
                                                 fullWidth
                                                 type="date"
+                                                label="Drop Date"
                                                 value={moment(
                                                   productItem?.product
                                                     ?.drop_date
@@ -305,19 +252,12 @@ const JobPostForm = ({
                                                 onKeyDown={(event) =>
                                                   event.preventDefault()
                                                 }
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="mingcute:calendar-fill"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size={"small"}
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Drop Time</Typography>
                                               <TextBox
                                                 fullWidth
                                                 type="time"
@@ -325,6 +265,10 @@ const JobPostForm = ({
                                                   productItem?.product
                                                     ?.drop_time
                                                 }
+                                                label="Drop Time"
+                                                InputLabelProps={{
+                                                  shrink: true,
+                                                }}
                                                 name={`items[${productIndex}].product.drop_time`}
                                                 onChange={(e) => {
                                                   formik.setFieldValue(
@@ -332,23 +276,15 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="mingcute:calendar-fill"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size={"small"}
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>
-                                                Pick-Up Quantity
-                                              </Typography>
                                               <TextBox
                                                 fullWidth
+                                                label="Quantity"
                                                 placeholder="Enter Quantity"
                                                 value={
                                                   productItem?.product?.quantity
@@ -360,12 +296,6 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="material-symbols:production-quantity-limits"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size="small"
                                               />
                                             </Box>
@@ -373,9 +303,9 @@ const JobPostForm = ({
 
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Length</Typography>
                                               <TextBox
                                                 fullWidth
+                                                label="Length"
                                                 placeholder="Enter Product Length"
                                                 value={
                                                   productItem?.product?.length
@@ -387,21 +317,15 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="teenyicons:box-outline"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size="small"
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Width</Typography>
                                               <TextBox
                                                 fullWidth
+                                                label="Width"
                                                 placeholder="Enter Product Width"
                                                 value={
                                                   productItem?.product?.width
@@ -413,21 +337,15 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="teenyicons:box-outline"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size="small"
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Height</Typography>
                                               <TextBox
                                                 fullWidth
+                                                label="Height"
                                                 placeholder="Enter Product Height"
                                                 value={
                                                   productItem?.product?.height
@@ -439,21 +357,18 @@ const JobPostForm = ({
                                                     e.target.value
                                                   );
                                                 }}
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="teenyicons:box-outline"
-                                                    color="#ff7534"
-                                                  />
-                                                }
                                                 size="small"
                                               />
                                             </Box>
                                           </Grid>
                                           <Grid item md={6}>
                                             <Box>
-                                              <Typography>Image</Typography>
+                                              <Typography>
+                                                Image Upload
+                                              </Typography>
                                               <UploadFileBox
                                                 fullWidth
+                                                label="Choose File"
                                                 url="api/auth/master/jobs/item-image"
                                                 accept="image/jpeg,image/png"
                                                 icon="upload"
@@ -461,12 +376,6 @@ const JobPostForm = ({
                                                 size="small"
                                                 value={
                                                   productItem?.product?.image
-                                                }
-                                                startIcon={
-                                                  <Iconify
-                                                    icon="solar:gallery-bold"
-                                                    color="#ff7533"
-                                                  />
                                                 }
                                                 name={`items[${productIndex}].product.image`}
                                                 onChange={(e) => {
@@ -477,86 +386,6 @@ const JobPostForm = ({
                                                 }}
                                               />
                                             </Box>
-                                            {/* <Box>
-                                              <Typography>Image</Typography>
-                                              {!productItem?.product?.image && (
-                                                <TextBox
-                                                  fullWidth
-                                                  type="file"
-                                                  accept=".png, .jpg, .jpeg"
-                                                  startIcon={
-                                                    <LocationOn
-                                                      fontSize="small"
-                                                      color="primary"
-                                                    />
-                                                  }
-                                                  value={productItem?.product?.image}
-                                                  name={`items[${productIndex}].product.image`}
-                                                  onChange={(e) => {
-                                                    formik.setFieldValue(
-                                                      `items[${productIndex}].product.image`,
-                                                      e.target.files[0]
-                                                    );
-                                                    formik.setFieldValue(
-                                                      `items[${productIndex}].product.image_url`,
-                                                      URL.createObjectURL(
-                                                        e.target.files[0]
-                                                      )
-                                                    );
-                                                  }}
-                                                  size="small"
-                                                />
-                                              )}
-                                            </Box>
-                                            {productItem?.product?.image_url && (
-                                              <Box sx={{ display: "flex" }}>
-                                                <div
-                                                  style={{
-                                                    position: "relative",
-                                                    display: "inline-block",
-                                                  }}
-                                                >
-                                                  <Box
-                                                    component="img"
-                                                    style={{ margin: "10px" }}
-                                                    src={productItem?.product?.image_url}
-                                                    alt={productItem?.product?.image_url}
-                                                    width="150px"
-                                                    thumbnail
-                                                  />
-
-                                                  <Button
-                                                    variant="link"
-                                                    style={{
-                                                      position: "absolute",
-                                                      top: "5px",
-                                                      right: "-5px",
-                                                      backgroundColor:
-                                                        "transparent",
-                                                      border: "none",
-                                                    }}
-                                                    onClick={() => {
-                                                      formik.setFieldValue(
-                                                        `items[${productIndex}].product.image`,
-                                                        ""
-                                                      );
-                                                      formik.setFieldValue(
-                                                        `items[${productIndex}].product.image_url`,
-                                                        ""
-                                                      );
-                                                    }}
-                                                  >
-                                                    <BsX
-                                                      style={{
-                                                        color: "#ff0000",
-                                                        fontSize: "25px",
-                                                        fontWeight: "bold",
-                                                      }}
-                                                    />
-                                                  </Button>
-                                                </div>
-                                              </Box>
-                                            )} */}
                                           </Grid>
                                           <Grid item md={6}>
                                             <Typography>
@@ -564,33 +393,9 @@ const JobPostForm = ({
                                             </Typography>
                                             <Box>
                                               <Stack direction="row" mb={1.3}>
-                                                <Box
-                                                  sx={{
-                                                    ml: 0,
-                                                    background: (theme) =>
-                                                      theme.palette.grey[100],
-                                                    border: "1px solid",
-                                                    borderColor: (theme) =>
-                                                      alpha(
-                                                        theme.palette.grey[500],
-                                                        0.32
-                                                      ),
-                                                    padding: ".375rem .75rem",
-                                                    borderRadius: ".25rem",
-                                                    display: "flex",
-                                                    height: "40px",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                  }}
-                                                >
-                                                  <Iconify
-                                                    icon="ooui:lab-flask"
-                                                    color="#ff7534"
-                                                  />
-                                                </Box>
-
                                                 <SelectBox
                                                   fullWidth
+                                                  placeholder="Select"
                                                   size="small"
                                                   value={
                                                     productItem?.product
@@ -603,14 +408,7 @@ const JobPostForm = ({
                                                       e.target.value
                                                     );
                                                   }}
-                                                  placeholder="Choose Material"
                                                   options={MaterialSelect}
-                                                  startIcon={
-                                                    <Iconify
-                                                      icon="uil:focus"
-                                                      color="#ff7534"
-                                                    />
-                                                  }
                                                   vehicle="small"
                                                 />
 
@@ -656,17 +454,6 @@ const JobPostForm = ({
                                         </Grid>
 
                                         <Box sx={{ my: 4 }}>
-                                          <Button
-                                            variant="outlined"
-                                            onClick={() =>
-                                              addAddress({
-                                                productItem,
-                                                productIndex,
-                                              })
-                                            }
-                                          >
-                                            Add Delivery Address
-                                          </Button>
                                           {productItem?.address &&
                                             productItem?.address?.length > 0 &&
                                             productItem?.address.map(
@@ -708,45 +495,6 @@ const JobPostForm = ({
                                                               direction="row"
                                                               mb={1.3}
                                                             >
-                                                              <Box
-                                                                sx={{
-                                                                  ml: 0,
-                                                                  background: (
-                                                                    theme
-                                                                  ) =>
-                                                                    theme
-                                                                      .palette
-                                                                      .grey[100],
-                                                                  border:
-                                                                    "1px solid",
-                                                                  borderColor: (
-                                                                    theme
-                                                                  ) =>
-                                                                    alpha(
-                                                                      theme
-                                                                        .palette
-                                                                        .grey[500],
-                                                                      0.32
-                                                                    ),
-                                                                  padding:
-                                                                    ".15rem .75rem",
-                                                                  height:
-                                                                    "40px",
-                                                                  borderRadius:
-                                                                    ".25rem",
-                                                                  display:
-                                                                    "flex",
-                                                                  alignItems:
-                                                                    "center",
-                                                                  justifyContent:
-                                                                    "center",
-                                                                }}
-                                                              >
-                                                                <Iconify
-                                                                  icon="mdi:location"
-                                                                  color="#ff7534"
-                                                                />
-                                                              </Box>
                                                               <SelectBox
                                                                 fullWidth
                                                                 placeholder="Enter Pickup or Drop"
@@ -786,12 +534,10 @@ const JobPostForm = ({
                                                         </Grid>
                                                         <Grid item md={12}>
                                                           <Box>
-                                                            <Typography>
-                                                              Address
-                                                            </Typography>
                                                             <TextBox
                                                               fullWidth
-                                                              placeholder="Address"
+                                                              placeholder="Type Address"
+                                                              label="Address"
                                                               value={
                                                                 addressItem?.address
                                                               }
@@ -802,12 +548,6 @@ const JobPostForm = ({
                                                                   e.target.value
                                                                 );
                                                               }}
-                                                              startIcon={
-                                                                <Iconify
-                                                                  icon="mdi:location"
-                                                                  color="#ff7534"
-                                                                />
-                                                              }
                                                               size="small"
                                                             />
                                                           </Box>
@@ -875,6 +615,19 @@ const JobPostForm = ({
                                                 </Box>
                                               )
                                             )}
+                                          <Box sx={{ mt: 2 }}>
+                                            <Button
+                                              variant="outlined"
+                                              onClick={() =>
+                                                addAddress({
+                                                  productItem,
+                                                  productIndex,
+                                                })
+                                              }
+                                            >
+                                              + Add Another
+                                            </Button>
+                                          </Box>
                                         </Box>
                                       </CardContent>
                                     </Card>
@@ -883,6 +636,13 @@ const JobPostForm = ({
                               }
                             )}
                         </Box>
+                        <Divider sx={{ my: 3 }} />
+                        <Button
+                          variant="contained"
+                          onClick={() => addProduct()}
+                        >
+                          Add Pick Up Address
+                        </Button>
                         <Divider sx={{ my: 3 }} />
                       </Grid>
 
@@ -908,31 +668,13 @@ const JobPostForm = ({
 
                       <Grid item md={12}>
                         <Box>
-                          <Typography>Vehicle Requirement</Typography>
+                          <Typography fontSize={15} mb={2}>
+                            Vehicle Requirement
+                          </Typography>
                           <Stack direction="row" mb={1.3}>
-                            <Box
-                              sx={{
-                                ml: 0,
-                                background: (theme) => theme.palette.grey[100],
-                                border: "1px solid",
-                                borderColor: (theme) =>
-                                  alpha(theme.palette.grey[500], 0.32),
-                                padding: ".15rem .75rem",
-                                height: "40px",
-                                borderRadius: ".25rem",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <Iconify
-                                icon="solar:gallery-bold"
-                                color="#ff7534"
-                              />
-                            </Box>
                             <SelectBox
                               fullWidth
-                              placeholder="Enter Size Eg: l x w x h Inch"
+                              label="Vehicle"
                               value={formik.values?.vehicle}
                               name={`vehicle`}
                               options={VehicleSelect}
@@ -941,9 +683,6 @@ const JobPostForm = ({
                                 formik.touched.vehicle && formik.errors.vehicle
                               }
                               size="small"
-                              startIcon={
-                                <Iconify icon="uil:focus" color="#ff7534" />
-                              }
                               vehicle="small"
                             />
                           </Stack>
@@ -957,15 +696,9 @@ const JobPostForm = ({
                             name={`description`}
                             value={formik?.values?.description}
                             onChange={formik.handleChange}
-                            startIcon={
-                              <Iconify
-                                icon="material-symbols:note"
-                                color="#ff7534"
-                              />
-                            }
                             size={"small"}
                             multiline={true}
-                            rows={5}
+                            rows={7}
                             helperText={
                               formik.touched.description &&
                               formik.errors.description
@@ -973,13 +706,26 @@ const JobPostForm = ({
                           />
                         </Box>
                       </Grid>
-                      <Grid container spacing={1}>
+                      <Grid
+                        container
+                        spacing={2}
+                        alignItems="center"
+                        justifyContent="center"
+                      >
                         <Grid item md={2}>
                           <Box>
                             <Button
-                              startIcon={
-                                <Iconify icon="ic:baseline-telegram" />
-                              }
+                              variant="outlined"
+                              fullWidth
+                              onClick={() => router.push("/dashboard/customer")}
+                            >
+                              Cancel
+                            </Button>
+                          </Box>
+                        </Grid>
+                        <Grid item md={2}>
+                          <Box sx={{ width: "180px" }}>
+                            <Button
                               variant="contained"
                               fullWidth
                               type="submit"
@@ -987,43 +733,11 @@ const JobPostForm = ({
                               //   router.push("/dashboard/customer/job_post")
                               // }
                             >
-                              Send Request
+                              Save
                             </Button>
                           </Box>
                         </Grid>
-                        {/* <Grid item md={1}>
-                          <Box>
-                            <Button
-                              startIcon={
-                                <Iconify icon="material-symbols:sync" />
-                              }
-                              sx={{
-                                backgroundColor: "#343a40",
-                                ":hover": { backgroundColor: "#343a40" },
-                              }}
-                              variant="contained"
-                              fullWidth
-                            >
-                              Reset
-                            </Button>
-                          </Box>
-                        </Grid> */}
-                        <Grid item md={1}>
-                          <Box>
-                            <Button
-                              startIcon={<Iconify icon="carbon:close-filled" />}
-                              sx={{
-                                backgroundColor: "#343a40",
-                                ":hover": { backgroundColor: "#343a40" },
-                              }}
-                              variant="contained"
-                              fullWidth
-                              onClick={() => router.push("/dashboard/customer")}
-                            >
-                              Close
-                            </Button>
-                          </Box>
-                        </Grid>
+                       
                       </Grid>
                     </Grid>
                   </Box>
