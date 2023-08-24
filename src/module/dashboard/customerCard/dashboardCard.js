@@ -36,28 +36,30 @@ const DashboardCard = ({ jobPost }) => {
   }, [page, pageSize]);
 
   React.useEffect(() => {
-    dispatch(getJobHistory({
-      page: jobHistory?.page,
-      pageSize: jobHistory?.pageSize,
-      user_id: user?.id,
-    }));
+    dispatch(
+      getJobHistory({
+        page: jobHistory?.page,
+        pageSize: jobHistory?.pageSize,
+        user_id: user?.id,
+      })
+    );
   }, [jobHistory?.page, jobHistory?.pageSize]);
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/job_posted"
                     ? "#145365"
-                    : "#fff",
+                    : "#145365",
                 border: "1px solid #145365",
                 color:
                   router.pathname === "/dashboard/customer/job_posted"
                     ? "#fff"
-                    : "#145365",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/job_posted")}
@@ -74,15 +76,15 @@ const DashboardCard = ({ jobPost }) => {
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/job_posted"
                           ? "#246678"
-                          : alpha("#145365", 0.1),
+                          : "#246678",
                     }}
-                    height="60px"
-                    px={1}
-                    py={0.5}
-                    borderRadius={2}
+                    height="80px"
+                    p={2}
+                    width="80px"
+                    borderRadius="50%"
                     component="div"
                   >
-                    <Iconify icon="material-symbols:post-add" width={55} />
+                    <Iconify icon="basil:bag-solid" width={48} />
                   </Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
@@ -96,19 +98,19 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          {/* <Grid item md={4}>
+          <Grid item md={3}>
             <Card
               variant="outlined"
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/money_spend"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
+                    ? "#ff7533"
+                    : "#ff7533",
+                border: "1px solid #ff7533",
                 color:
                   router.pathname === "/dashboard/customer/money_spend"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/money_spend")}
@@ -124,17 +126,17 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/money_spend"
-                          ? theme.palette.primary.main
-                          : alpha(theme.palette.primary.main, 0.1),
+                          ? "#ff884f"
+                          : "#ff884f",
                     }}
-                    height="60px"
-                    px={1}
-                    py={0.5}
-                    borderRadius={2}
+                    height="80px"
+                    p={2}
+                    width="80px"
+                    borderRadius="50%"
                     component="div"
                   >
                     {" "}
-                    <Iconify icon="ph:money-fill" width={55} />
+                    <Iconify icon="ph:money-fill" width={48} />
                   </Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
@@ -147,19 +149,19 @@ const DashboardCard = ({ jobPost }) => {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid> */}
-          <Grid item md={4}>
+          </Grid>
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/job_history"
                     ? "#FD9B3D"
-                    : "#fff",
+                    : "#FD9B3D",
                 border: "1px solid #FD9B3D",
                 color:
                   router.pathname === "/dashboard/customer/job_history"
                     ? "#fff"
-                    : "#FD9B3D",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/job_history")}
@@ -176,15 +178,15 @@ const DashboardCard = ({ jobPost }) => {
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/job_history"
                           ? "#ffa54e"
-                          : alpha(theme.palette.primary.main, 0.1),
+                          : "#ffa54e",
                     }}
-                    height="60px"
-                    px={1}
-                    py={0.5}
-                    borderRadius={2}
+                    height="80px"
+                    p={2}
+                    width="80px"
+                    borderRadius="50%"
                     component="div"
                   >
-                    <Iconify icon="ri:history-fill" width={55} />
+                    <Iconify icon="ri:history-fill" width={48} />
                   </Box>
                   <Box>
                     <Typography variant="h6" fontWeight={300}>
@@ -198,18 +200,18 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
                   router.pathname === "/dashboard/customer/subscription"
                     ? "#FECA3C"
-                    : "#fff",
+                    : "#FECA3C",
                 border: "1px solid #FECA3C",
                 color:
                   router.pathname === "/dashboard/customer/subscription"
                     ? "#fff"
-                    : "#FECA3C",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/subscription")}
@@ -225,18 +227,18 @@ const DashboardCard = ({ jobPost }) => {
                     sx={{
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/subscription"
-                          ? "#FECA3C"
-                          : alpha("#FECA3C", 0.1),
+                          ? "#ffd768"
+                          : "#ffd768"
                     }}
-                    height="60px"
-                    px={1}
-                    py={0.5}
-                    borderRadius={2}
+                    height="80px"
+                    p={2}
+                    width="80px"
+                    borderRadius="50%"
                     component="div"
                   >
                     <Iconify
                       icon="material-symbols:subscriptions-outline"
-                      width={55}
+                      width={48}
                     />
                   </Box>
                   <Box>

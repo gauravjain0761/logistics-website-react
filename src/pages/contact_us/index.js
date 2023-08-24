@@ -26,8 +26,11 @@ const ContactUs = () => {
       ) {
         errors.email = "Invalid email address";
       }
+    
       if (!values.subject) {
-        errors.subject = "Address is Required";
+        errors.subject = "Number is required";
+      } else if (values.subject.length >= 11) {
+        errors.subject = "Enter valid number (Max 10 Digit)";
       }
       if (!values.message) {
         errors.message = "Name is Required";
