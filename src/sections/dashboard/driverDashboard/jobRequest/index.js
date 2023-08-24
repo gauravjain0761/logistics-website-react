@@ -62,13 +62,13 @@ const DashboardJobRequest = () => {
   const handleStartClose = () => setStartopen(false);
   const handleOpen = (id) => setApplyopen(id);
   const handleClose = () => setApplyopen(false);
-  
+
   const [loader, setLoader] = React.useState(false);
   const handlePageChange = (event, value) => {
     dispatch(setJobAlertPage(value));
   };
   // const [data, setData] = React.useState([]);
-  
+
   React.useEffect(() => {
     dispatch(
       getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
@@ -115,7 +115,9 @@ const DashboardJobRequest = () => {
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
-          getData();
+          dispatch(
+            getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
           handleClose(true);
         }
       })

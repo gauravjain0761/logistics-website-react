@@ -2,7 +2,7 @@ import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { getJobAlert } from "@/redux/slices/job/driver";
-import { useDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import { digitRegex } from "@/utils/constant";
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
@@ -14,6 +14,9 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
   const dispatch = useDispatch();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
+  const {
+    jobAlert: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.driverJob);
 
   const formik = useFormik({
     initialValues: {
@@ -44,11 +47,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
               variant: "success",
             });
             dispatch(
-              getJobAlert({
-                page: 1,
-                user_id: user?.id,
-                pageSize: 10,
-              })
+              getJobAlert({ page: page, pageSize: pageSize, user_id: user?.id })
             );
             handleClose(false);
           }
@@ -66,6 +65,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
   useEffect(() => {
     formik.setFieldValue("job_id", job_id);
   }, [job_id]);
+
   useEffect(() => {
     formik.setFieldValue("driver_id", user?.id);
   }, [user, user?.id]);
