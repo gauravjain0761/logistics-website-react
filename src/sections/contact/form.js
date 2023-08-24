@@ -43,7 +43,15 @@ const ContactForm = ({ formik }) => {
             name="subject"
             placeholder="Enter phone number"
             value={formik?.values?.subject}
-            onChange={formik.handleChange}
+            isMaxLenght={10}
+            onChange={(e) => {
+              if (e) {
+                formik.setFieldValue(
+                  "subject",
+                  e.target.value.replace(/\D/gm, "")
+                );
+              }
+            }}
             error={formik.touched.subject && formik.errors.subject}
             helperText={formik.touched.subject && formik.errors.subject}
           />

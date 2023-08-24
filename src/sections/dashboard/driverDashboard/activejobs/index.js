@@ -136,7 +136,7 @@ const DashboardJobPost = () => {
     initialValues: {
       job_id: "",
       user_id: "",
-      given_by: "Driver",
+      given_by: "driver",
       rating: "",
       review: "",
     },
