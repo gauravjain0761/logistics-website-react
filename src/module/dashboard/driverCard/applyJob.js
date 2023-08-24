@@ -65,6 +65,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
   useEffect(() => {
     formik.setFieldValue("job_id", job_id);
   }, [job_id]);
+
   useEffect(() => {
     formik.setFieldValue("driver_id", user?.id);
   }, [user, user?.id]);
