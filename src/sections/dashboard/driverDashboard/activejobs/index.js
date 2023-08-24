@@ -58,7 +58,6 @@ const DashboardJobPost = () => {
   const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
- 
   const [pageData, setPageData] = React.useState({});
 
   const [startOpen, setStartOpen] = React.useState(false);
@@ -74,9 +73,8 @@ const DashboardJobPost = () => {
   const [reviewOpen, setReviewOpen] = React.useState(false);
   const handleReviewOpen = (id) => setReviewOpen(id);
   const handleReviewClose = () => setReviewOpen(false);
-  
+
   const [loader, setLoader] = React.useState(false);
- 
 
   const formData = useFormik({
     initialValues: {
@@ -94,7 +92,9 @@ const DashboardJobPost = () => {
             variant: "success",
           });
           setStartOpen(false);
-          getData();
+          dispatch(
+            getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
           handleClose(true);
         }
       })
@@ -120,7 +120,9 @@ const DashboardJobPost = () => {
         if (response.status === 200) {
           setCompleteOpen(false);
           setReviewOpen(true);
-          getData();
+          dispatch(
+            getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
           enqueueSnackbar(response.data.message, {
             variant: "success",
           });
@@ -159,7 +161,13 @@ const DashboardJobPost = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            getData();
+            dispatch(
+              getJobActive({
+                page: page,
+                pageSize: pageSize,
+                user_id: user?.id,
+              })
+            );
             handleClose(true);
           }
         })
