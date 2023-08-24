@@ -131,6 +131,7 @@ const Profile = ({ data, formik, loader }) => {
                                     objectFit: "contain",
                                     borderRadius: "50%",
                                     border: "2px solid #fff",
+                                    backgroundColor: "#fff",
                                     cursor: "pointer",
                                     m: "auto",
                                   }}
@@ -149,8 +150,15 @@ const Profile = ({ data, formik, loader }) => {
                             )}
                           </label>
                         </Box>
-                        <Box>
-                       <TextBox size="small"  label="User Name" value={formik.value} onChange={formik.handleChange}/>
+                        <Box py={2}>
+                          <TextBox
+                            size="small"
+                            fullWidth
+                            label="User Name"
+                            name="user_name"
+                            value={formik.values.user_name}
+                            onChange={formik.handleChange}
+                          />
                         </Box>
                         <Stack direction="row" spacing={8} width="100%">
                           <Stack spacing={1} width="100%">
