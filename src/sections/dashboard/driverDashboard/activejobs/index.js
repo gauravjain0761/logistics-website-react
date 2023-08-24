@@ -32,12 +32,17 @@ import { useSnackbar } from "notistack";
 import { PDFViewer } from "@react-pdf/renderer";
 import InvoicePDF from "./InvoicePDF";
 import { useDispatch, useSelector } from "@/redux/store";
-import { getJobActive, setJobActivePage } from "@/redux/slices/job/driver";
+import {
+  getJobActive,
+  getJobHistory,
+  setJobActivePage,
+} from "@/redux/slices/job/driver";
 
 const DashboardJobPost = () => {
   const dispatch = useDispatch();
   const {
     jobActive: { pageCount, data, page, pageSize },
+    jobHistory,
   } = useSelector((state) => state.driverJob);
 
   const handlePageChange = (event, value) => {
@@ -122,6 +127,13 @@ const DashboardJobPost = () => {
           setReviewOpen(true);
           dispatch(
             getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
+          dispatch(
+            getJobHistory({
+              page: jobHistory?.page,
+              pageSize: jobHistory?.pageSize,
+              user_id: user?.id,
+            })
           );
           enqueueSnackbar(response.data.message, {
             variant: "success",
