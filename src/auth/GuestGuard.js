@@ -27,12 +27,14 @@ export default function GuestGuard({ children }) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (user.user_type === "customer") {
-        push("/dashboard/customer");
-      } else if (user.user_type === "driver") {
-        push("/dashboard/driver/active_jobs");
-      } else if (user.user_type === "company") {
-        push("/dashboard/company");
+      if (user && user?.user_type) {
+        if (user?.user_type === "customer") {
+          push("/dashboard/customer");
+        } else if (user.user_type === "driver") {
+          push("/dashboard/driver/active_jobs");
+        } else if (user.user_type === "company") {
+          push("/dashboard/company");
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +48,6 @@ export default function GuestGuard({ children }) {
             <SkeletonLoader />
           </Container>
         </Box>
-        {/* <LoadingScreen /> */}
       </PrimaryWebLayout>
     );
   }
