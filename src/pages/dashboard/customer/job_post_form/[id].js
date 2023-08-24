@@ -15,6 +15,20 @@ const PostJob = () => {
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuthContext();
+  const PickupAddress = {
+    address: "",
+    lat: 3434.34,
+    long: 23423,
+    type: "pickup",
+  };
+
+  const DropAddress = {
+    address: "",
+    lat: 3434.34,
+    long: 23423,
+    type: "drop",
+  };
+
   const product = {
     product: {
       image: "",
@@ -27,13 +41,7 @@ const PostJob = () => {
       drop_date: "",
       drop_time: "",
     },
-    address: [],
-  };
-  const address = {
-    address: "",
-    lat: 3434.34,
-    long: 23423,
-    type: "pickup",
+    address: [PickupAddress, DropAddress],
   };
 
   const formik = useFormik({
@@ -42,7 +50,7 @@ const PostJob = () => {
       created_by: "customer",
       name: "",
       vehicle: 0,
-      items: [],
+      items: [product],
       description: "",
     },
 
@@ -107,7 +115,6 @@ const PostJob = () => {
           setFieldValue("items", JSON.parse(values?.items));
           const { response } = error;
           if (response.status === 422) {
-           
             console.log("response", response.data.error);
             // eslint-disable-next-line no-unused-vars
             for (const [key] of Object.entries(values)) {
