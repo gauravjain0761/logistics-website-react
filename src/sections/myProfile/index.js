@@ -12,6 +12,10 @@ import {
   Container,
   Divider,
   IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Modal,
   Stack,
   Typography,
@@ -91,7 +95,7 @@ const Profile = ({ data, formik, loader }) => {
                           />
 
                           <label for="actual-btn">
-                            {!formik.values.profile_img && (
+                            {!formik.values.profile_img_url && (
                               <Stack
                                 alignItems="center"
                                 justifyContent="center"
@@ -383,7 +387,7 @@ const ChangePasswordModal = () => {
             left: "50%",
             textAlign: "center",
             transform: "translate(-50%, -50%)",
-
+            width: "417px",
             bgcolor: "background.paper",
             border: "1px solid #f5f5f5",
             boxShadow: 24,
@@ -399,9 +403,10 @@ const ChangePasswordModal = () => {
             alignItems="center"
             mb={2}
           >
-            <Typography component="h5" variant="h5">
+            <Typography component="h5" fontSize={25} fontWeight={600}>
               Change Password
             </Typography>
+
             <Box>
               <Card sx={{ borderRadius: "50%" }}>
                 <IconButton
@@ -416,12 +421,42 @@ const ChangePasswordModal = () => {
               </Card>
             </Box>
           </Stack>
+          <Box>
+            <Typography textAlign="left" fontSize={12}>
+              In order to protect your account, make sure your password:
+            </Typography>
+          </Box>
+          <Box>
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <Iconify icon="radix-icons:dot-filled" />
+                </ListItemIcon>
+                <Typography fontSize={12}>
+                  Is longer than 7 characters{" "}
+                </Typography>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <Iconify icon="radix-icons:dot-filled" />
+                </ListItemIcon>
+                <Typography fontSize={12}>
+                  Does not match or significantly contain your username, e.g. do
+                  not use {"‘"}username123{"’"}.
+                </Typography>
+              </ListItem>
+            </List>
+          </Box>
           <Stack spacing={1}>
             <Box>
+              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+                Current Password
+              </Typography>
               <PasswordBox
                 fullWidth
                 size="small"
                 name="password"
+                label="Current Password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 placeholder="Enter Current Password"
@@ -429,10 +464,14 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
+              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+                New Password
+              </Typography>
               <PasswordBox
                 fullWidth
                 size="small"
                 name="new_password"
+                label="New Password"
                 value={formik.values.new_password}
                 onChange={formik.handleChange}
                 placeholder="Enter New Password"
@@ -440,9 +479,13 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
+              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+                Confirm New Password
+              </Typography>
               <PasswordBox
                 fullWidth
                 size="small"
+                label="New Password Confirm"
                 name="new_password_confirmation"
                 value={formik.values.new_password_confirmation}
                 onChange={formik.handleChange}

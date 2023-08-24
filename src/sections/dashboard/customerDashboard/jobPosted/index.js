@@ -124,8 +124,8 @@ const DashboardJobPost = ({ formik }) => {
                 <Grid item md={7}>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <Typography
-                      fontSize="1.75rem"
-                      fontWeight={500}
+                      fontSize={28}
+                      fontWeight={600}
                       color="primary"
                     >
                       Job Posted By You
@@ -198,13 +198,13 @@ const DashboardJobPost = ({ formik }) => {
                   <Box>
                     <Button
                       startIcon={<Add />}
-                      variant="outlined"
+                      variant="contained"
                       fullWidth
                       onClick={() =>
                         router.push("/dashboard/customer/job_post_form/create")
                       }
                     >
-                      Add New Post
+                      Add New Job
                     </Button>
                   </Box>
                 </Grid>
@@ -223,7 +223,7 @@ const DashboardJobPost = ({ formik }) => {
                       <Card
                         sx={{
                           my: 2,
-                          // borderRadius: "10px",
+                          borderWidth:"2px",
                           ":hover": {
                             borderColor: "#ff7534",
                             transition: " all 0.3s ease-in-out",
@@ -241,13 +241,13 @@ const DashboardJobPost = ({ formik }) => {
                           // sx={{ borderBottom: "1px solid lightgrey" }}
                         >
                           <Stack direction="row" spacing={0.5}>
-                            <Box>
+                            {/* <Box>
                               <Typography variant="subtitle1">
                                 Job Title :{" "}
                               </Typography>
-                            </Box>
+                            </Box> */}
                             <Box>
-                              <Typography color="primary" variant="subtitle1">
+                              <Typography color="common.black" fontSize={17} fontWeight={600}>
                                 {" "}
                                 {item?.name}
                               </Typography>
@@ -579,7 +579,7 @@ const DeleteModal = ({ id }) => {
       <Button onClick={handleOpen}>
         {" "}
         <Iconify
-          icon="ic:outline-delete"
+          icon="fluent:delete-12-regular"
           width="1.7em"
           color={(theme) => theme.palette.primary.main}
         />
