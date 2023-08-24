@@ -144,7 +144,8 @@ export function AuthProvider({ children }) {
       });
     } catch (error) {
       const { response } = error;
-      enqueueSnackbar(response.data.error, {
+      
+      enqueueSnackbar(response.data.message, {
         variant: "error",
       });
     }

@@ -44,12 +44,34 @@ const Profile = ({ data, formik, loader }) => {
                       sx={{
                         borderRadius: "20px",
                         boxShadow: 0,
+                        width: "518px",
+                        height: "560px",
+                        position: "relative",
                         background: (theme) => theme.palette.common.white,
                       }}
                     >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          zIndex: -1,
+                        }}
+                      >
+                        <Box
+                          component="img"
+                          src="/profile/profilebg.png"
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            backgroundRepeat: "no-repeat",
+                            objectFit: "contain",
+                          }}
+                        />
+                      </Box>
                       <CardContent>
-                      
-                        <Box sx={{ position: "relative" }}>
+                        <Box sx={{ position: "relative", mt: 3 }}>
                           <input
                             type="file"
                             hidden
@@ -76,10 +98,11 @@ const Profile = ({ data, formik, loader }) => {
                                 sx={{
                                   position: "relative",
                                   backgroundColor: "#f1f1f1",
-                                  width: "150px",
-                                  height: "150px",
+                                  width: "138px",
+                                  height: "138px",
                                   borderRadius: "50%",
                                   border: "2px solid #fff",
+                                  m: "auto",
                                 }}
                               >
                                 <Iconify icon="et:profile-male" width="110px" />
@@ -87,7 +110,7 @@ const Profile = ({ data, formik, loader }) => {
                                   sx={{
                                     position: "absolute",
                                     bottom: "0px",
-                                    right: "0px",
+                                    right: "11em",
                                   }}
                                 >
                                   <Iconify
@@ -103,82 +126,133 @@ const Profile = ({ data, formik, loader }) => {
                                   component="img"
                                   src={formik.values.profile_img_url}
                                   sx={{
-                                    width: "150px",
-                                    height: "150px",
+                                    width: "138px",
+                                    height: "138px",
                                     objectFit: "contain",
                                     borderRadius: "50%",
                                     border: "2px solid #fff",
                                     cursor: "pointer",
+                                    m: "auto",
                                   }}
                                 />
                                 <Box
                                   sx={{
                                     position: "absolute",
                                     bottom: "0px",
-                                    right: "4px",
+                                    right: "11em",
                                     cursor: "pointer",
                                   }}
                                 >
-                                  <Iconify
-                                    width={30}
-                                    icon="ion:camera-sharp"
-                                  />
+                                  <Iconify width={30} icon="ion:camera-sharp" />
                                 </Box>
                               </Box>
                             )}
                           </label>
                         </Box>
-                        <Stack direction="row" spacing={8}>
-                          <Stack spacing={1}>
+                        <Box>
+                       <TextBox size="small"  label="User Name" value={formik.value} onChange={formik.handleChange}/>
+                        </Box>
+                        <Stack direction="row" spacing={8} width="100%">
+                          <Stack spacing={1} width="100%">
                             <Box>
                               <Stack
                                 direction="row"
                                 spacing={2}
                                 alignItems="center"
                               >
-                                <Typography component="body1" fontWeight={500}>
-                                  Plan Type:
-                                </Typography>
-                                <Typography component="body2">
+                                <Box
+                                  sx={{
+                                    backgroundColor: "#FFEBE2",
+                                    p: "8px",
+                                  }}
+                                  height="35px"
+                                  width="35px"
+                                  borderRadius="50%"
+                                  component="div"
+                                >
+                                  <Iconify
+                                    icon="material-symbols:subscriptions-outline"
+                                    width={18}
+                                    color={(theme) =>
+                                      theme.palette.primary.main
+                                    }
+                                  />
+                                </Box>
+                                <Typography component="body2" fontSize={15}>
                                   {formik.values.plan_name || "N/A"}
                                 </Typography>
                               </Stack>
                             </Box>
-                            <Box>
-                              <TextBox
-                                size="small"
-                                fullWidth
-                                value={formik.values?.user_name}
-                                name="user_name"
-                                onChange={formik.handleChange}
-                                placeholder="Enter Name"
-                              />
+                            <Box py={2}>
+                              <Stack
+                                direction="row"
+                                spacing={2}
+                                alignItems="center"
+                              >
+                                <Box
+                                  sx={{
+                                    backgroundColor: "#FFEBE2",
+                                    p: "8px",
+                                  }}
+                                  height="35px"
+                                  width="35px"
+                                  borderRadius="50%"
+                                  component="div"
+                                >
+                                  <Iconify
+                                    icon="tabler:mail"
+                                    width={18}
+                                    color={(theme) =>
+                                      theme.palette.primary.main
+                                    }
+                                  />
+                                </Box>
+                                <Typography component="body2" fontSize={15}>
+                                  {formik.values.email || "N/A"}
+                                </Typography>
+                              </Stack>
                             </Box>
                             <Box>
-                              <TextBox
-                                size="small"
-                                placeholder="Enter email"
-                                fullWidth
-                                disabled
-                                value={formik.values?.email}
-                                name="email"
-                                onChange={formik.handleChange}
-                              />
+                              <Stack
+                                direction="row"
+                                spacing={2}
+                                alignItems="center"
+                              >
+                                <Box
+                                  sx={{
+                                    backgroundColor: "#FFEBE2",
+                                    p: "8px",
+                                  }}
+                                  height="35px"
+                                  width="35px"
+                                  borderRadius="50%"
+                                  component="div"
+                                >
+                                  <Iconify
+                                    icon="material-symbols:call-outline"
+                                    width={18}
+                                    color={(theme) =>
+                                      theme.palette.primary.main
+                                    }
+                                  />
+                                </Box>
+                                <Typography component="body2" fontSize={15}>
+                                  {formik.values.mobile || "N/A"}
+                                </Typography>
+                              </Stack>
                             </Box>
 
-                            <Box>
-                              <TextBox
-                                size="small"
-                                placeholder="Enter number"
-                                fullWidth
-                                disabled
-                                value={formik.values?.mobile}
-                                name="mobile"
-                                onChange={formik.handleChange}
-                              />
-                            </Box>
-                            <Stack direction="column" spacing={2}>
-                              <Box>
+                            <Stack
+                              direction="row"
+                              // justifyContent="space-between"
+                              width="100%"
+                              spacing={2}
+                              sx={{ pt: 6 }}
+                            >
+                              <Box width="100%">
+                                <ChangePasswordModal />
+                              </Box>
+                              <Box width="100%">
                                 <Button
                                   fullWidth
                                   variant="contained"
@@ -186,9 +260,6 @@ const Profile = ({ data, formik, loader }) => {
                                 >
                                   Update Profile
                                 </Button>
-                              </Box>
-                              <Box>
-                                <ChangePasswordModal />
                               </Box>
                             </Stack>
                           </Stack>
