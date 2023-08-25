@@ -447,9 +447,9 @@ const ChangePasswordModal = () => {
               </ListItem>
             </List>
           </Box>
-          <Stack spacing={1}>
+          <Stack spacing={1} mt={1}>
             <Box>
-              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
                 Current Password
               </Typography>
               <PasswordBox
@@ -463,7 +463,7 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
-              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
                 New Password
               </Typography>
               <PasswordBox
@@ -477,7 +477,7 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
-              <Typography fontSize={12} textAlign="left" fontWeight={500}>
+              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
                 Confirm New Password
               </Typography>
               <PasswordBox
@@ -506,7 +506,7 @@ const ChangePasswordModal = () => {
               variant="contained"
               // onClick={handleClose}
             >
-              Submit
+              Change Password
             </Button>
           </Stack>
         </Box>

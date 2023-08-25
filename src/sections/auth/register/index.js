@@ -105,7 +105,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       fullWidth
                       placeholder={"Enter Your Full Name "}
                       name="user_name"
-                      label="username"
+                      label="Username"
                       value={formik.values.user_name}
                       onChange={formik.handleChange}
                       helperText={
@@ -142,6 +142,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                     <PasswordBox
                       fullWidth
                       name="password"
+                      variant="standard"
                       label="Password"
                       value={formik.values.password}
                       onChange={formik.handleChange}
@@ -156,6 +157,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                     <PasswordBox
                       name="password_confirmation"
                       label="Confirm Password"
+                      variant="standard"
                       value={formik.values.password_confirmation}
                       onChange={formik.handleChange}
                       helperText={
