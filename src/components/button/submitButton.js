@@ -8,7 +8,7 @@ const CircularProgress = styled(MuiCircularProgress)(() => ({
 }));
 
 const SubmitButton = ({ title, loading, variant, disabled = false }) =>
-  <Button disabled={disabled} variant={variant} type="submit">
+  <Button fullWidth  disabled={disabled} variant={variant} type="submit">
     {title}
     {loading && <CircularProgress color="inherit" size={20} />}
   </Button>;

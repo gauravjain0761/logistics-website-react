@@ -102,6 +102,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                 <Box component="form" noValidate onSubmit={formik.handleSubmit}>
                   <Box>
                     <TextBox
+                    variant="standard"
                       fullWidth
                       placeholder={"Enter Your Full Name "}
                       name="user_name"
@@ -116,6 +117,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                   </Box>
                   <Box>
                     <TextBox
+                    variant="standard"
                       fullWidth
                       placeholder={"Enter Your Email Address"}
                       name="email"
@@ -128,6 +130,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                   </Box>
                   <Box>
                     <TextBox
+                    variant="standard"
                       fullWidth
                       name="mobile"
                       label="Contact Number"
@@ -176,6 +179,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       </Typography>
                       {!formik.values.company_certificate && (
                         <TextBox
+                        variant="standard"
                           fullWidth
                           type="file"
                           size="small"
@@ -251,6 +255,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       </Typography>
                       {!formik.values.company_vat && (
                         <TextBox
+                        variant="standard"
                           fullWidth
                           type="file"
                           size="small"
