@@ -59,7 +59,9 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
   return (
     <>
       <Divider sx={{ my: 3 }} />
-      <Typography fontSize={16}>Add Pickup Address</Typography>
+      <Typography fontSize={16} fontWeight={500}>
+        Add Pickup Address
+      </Typography>
       <Box sx={{ mb: 3 }}>
         {formik?.values?.items &&
           formik?.values?.items?.length > 0 &&
@@ -293,8 +295,6 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             options={MaterialSelect}
                             vehicle="small"
                           />
-
-                        
                         </Stack>
                       </Box>
                     </Grid>
@@ -326,62 +326,58 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               boxShadow: "none",
                             }}
                           >
-                        
-                           
-                              <Grid container spacing={3}>
-                                <Grid item md={12}>
-                                  <Box>
-                                    <Typography fontSize={14}>
-                                      Address Type
-                                    </Typography>
-                                    <Stack direction="row" mb={1.3}>
-                                      <TextBox
-                                        fullWidth
-                                        disabled
-                                        placeholder="Enter Pickup or Drop"
-                                        options={DropTypeSelect}
-                                        value={addressItem?.type}
-                                        name={`items[${productIndex}].address[${addressIndex}].type`}
-                                        onChange={(e) => {
-                                          formik.setFieldValue(
-                                            `items[${productIndex}].address[${addressIndex}].type`,
-                                            e.target.value
-                                          );
-                                        }}
-                                        helperText={
-                                          formik.touched.type &&
-                                          formik.errors.type
-                                        }
-                                        size="small"
-                                        type="small"
-                                      />
-                                    </Stack>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={12}>
-                                  <Box>
+                            <Grid container spacing={3}>
+                              <Grid item md={12}>
+                                <Box>
+                                  <Typography fontSize={14}>
+                                    Address Type
+                                  </Typography>
+                                  <Stack direction="row" mb={1.3}>
                                     <TextBox
                                       fullWidth
-                                      placeholder="Type Address"
-                                      label="Address"
-                                      value={addressItem?.address}
-                                      name={`items[${productIndex}].address[${addressIndex}].address`}
+                                      disabled
+                                      placeholder="Enter Pickup or Drop"
+                                      options={DropTypeSelect}
+                                      value={addressItem?.type}
+                                      name={`items[${productIndex}].address[${addressIndex}].type`}
                                       onChange={(e) => {
                                         formik.setFieldValue(
-                                          `items[${productIndex}].address[${addressIndex}].address`,
+                                          `items[${productIndex}].address[${addressIndex}].type`,
                                           e.target.value
                                         );
                                       }}
+                                      helperText={
+                                        formik.touched.type &&
+                                        formik.errors.type
+                                      }
                                       size="small"
+                                      type="small"
                                     />
-                                  </Box>
-                                </Grid>
-                              
+                                  </Stack>
+                                </Box>
                               </Grid>
+                              <Grid item md={12}>
+                                <Box>
+                                  <TextBox
+                                    fullWidth
+                                    placeholder="Type Address"
+                                    label="Address"
+                                    value={addressItem?.address}
+                                    name={`items[${productIndex}].address[${addressIndex}].address`}
+                                    onChange={(e) => {
+                                      formik.setFieldValue(
+                                        `items[${productIndex}].address[${addressIndex}].address`,
+                                        e.target.value
+                                      );
+                                    }}
+                                    size="small"
+                                  />
+                                </Box>
+                              </Grid>
+                            </Grid>
                           </Card>
                         </Box>
                       ))}
-                 
                   </Box>
                 </Card>
               </Box>
