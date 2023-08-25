@@ -69,7 +69,7 @@ const TextBox = (props) => {
         <TextField
           fullWidth={fullWidth}
           error={helperText ? true : false}
-          variant="standard"
+          variant={variant}
           name={name}
           sx={{
             background: (theme) => theme.palette.common.white,

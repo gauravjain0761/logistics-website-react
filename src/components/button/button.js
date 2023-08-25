@@ -8,7 +8,7 @@ const CircularProgress = styled(MuiCircularProgress)(() => ({
 }));
 
 const CustomeButton = ({ title, loading, variant, color, onClick, disabled = false }) => (
-  <Button disabled={disabled} color={color} variant={variant} type="button" onClick={onClick}>
+  <Button fullWidth disabled={disabled} color={color} variant={variant} type="button" onClick={onClick}>
     {title}
     {loading && <CircularProgress color="inherit" size={20} />}
   </Button>

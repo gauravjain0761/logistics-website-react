@@ -3,6 +3,7 @@ import { AuthProvider } from "@/auth/JwtContext";
 import { MotionLazyContainer } from "@/components/animate";
 import ProgressBar from "@/components/progressBar";
 import SnackbarProvider from "@/components/snackbar/SnackbarProvider";
+import { StepperProvider } from "@/components/stepper/stepperContext";
 import { store } from "@/redux/store";
 import "@/styles/globals.css";
 import ThemeProvider from "@/theme";
@@ -27,7 +28,9 @@ export default function App(props) {
           <SnackbarProvider>
             <AuthProvider>
               <AuthFirebaseProvider>
-                {getLayout(<Component {...pageProps} />)}
+                <StepperProvider>
+                  {getLayout(<Component {...pageProps} />)}
+                </StepperProvider>
               </AuthFirebaseProvider>
             </AuthProvider>
           </SnackbarProvider>

@@ -172,6 +172,7 @@ const Login = () => {
                     <Stack spacing={2}>
                       <Box>
                         <TextBox
+                        variant="standard"
                           fullWidth
                           label="Email"
                           placeholder="Enter Your Email Address"
@@ -209,7 +210,7 @@ const Login = () => {
                             label="Remember me"
                             sx={{
                               fontSize: 14,
-                              "&..MuiFormControlLabel-label":{
+                              "&..MuiFormControlLabel-label": {
                                 fontSize: "4px",
                               },
                             }}
@@ -261,7 +262,13 @@ const Login = () => {
                           component="span"
                           color="primary"
                           onClick={() => router.push("/auth/register")}
-                          sx={{ cursor: "pointer", fontSize:12, ml: 0.5 ,borderBottom:"1px solid" ,fontWeight:600}}
+                          sx={{
+                            cursor: "pointer",
+                            fontSize: 12,
+                            ml: 0.5,
+                            borderBottom: "1px solid",
+                            fontWeight: 600,
+                          }}
                         >
                           SIGNUP
                         </Typography>
