@@ -115,7 +115,7 @@ const JobPostForm = ({
                     {/* <Iconify width="2em" icon="ion:briefcase" color="#ff7534" /> */}
                     <Typography fontWeight={500} fontSize={24}>
                       {" "}
-                      Post Your Job
+                      {id === "create" ? "Post Your Job" : "Edit Your Job"}
                     </Typography>
                   </Stack>
                   <Box component="form" onSubmit={formik.handleSubmit}>
@@ -527,8 +527,7 @@ const JobPostForm = ({
                                                             <Typography
                                                               fontSize={14}
                                                             >
-                                                              Address
-                                                              Type
+                                                              Address Type
                                                             </Typography>
                                                             <Stack
                                                               direction="row"
