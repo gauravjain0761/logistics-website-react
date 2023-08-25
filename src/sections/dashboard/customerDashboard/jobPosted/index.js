@@ -350,46 +350,45 @@ const DashboardJobPost = ({ formik }) => {
                               </Stack>
                             </Grid>
                             <Grid item md={3}>
-                            <Box mb={4}>
-
-                              <Box>
-                                <Typography fontSize={13} fontWeight={600}>
-                                  Pick up Date
-                                </Typography>
-                              </Box>
-                              <Stack
-                                direction="row"
-                                spacing={1}
-                                alignItems="center"
-                              >
-                                <Box
-                                  sx={{
-                                    backgroundColor: "#FEE6BB",
-                                    width: "28px",
-                                    height: "28px",
-                                    borderRadius: "50%",
-                                    p: "5px",
-                                  }}
-                                >
-                                  <Iconify
-                                    color={(theme) =>
-                                      theme.palette.primary.main
-                                    }
-                                    icon="majesticons:calendar-line"
-                                  />
-                                </Box>
+                              <Box mb={4}>
                                 <Box>
-                                  <Typography
-                                    color="grey"
-                                    fontWeight={400}
-                                    fontSize={13}
-                                  >
-                                    {productDetail?.product?.pickup_date ||
-                                      "N/A"}
+                                  <Typography fontSize={13} fontWeight={600}>
+                                    Pick up Date
                                   </Typography>
                                 </Box>
-                              </Stack>
-                            </Box>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  alignItems="center"
+                                >
+                                  <Box
+                                    sx={{
+                                      backgroundColor: "#FEE6BB",
+                                      width: "28px",
+                                      height: "28px",
+                                      borderRadius: "50%",
+                                      p: "5px",
+                                    }}
+                                  >
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      icon="majesticons:calendar-line"
+                                    />
+                                  </Box>
+                                  <Box>
+                                    <Typography
+                                      color="grey"
+                                      fontWeight={400}
+                                      fontSize={13}
+                                    >
+                                      {productDetail?.product?.pickup_date ||
+                                        "N/A"}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
+                              </Box>
 
                               <Box>
                                 <Typography fontSize={13} fontWeight={600}>
@@ -430,43 +429,44 @@ const DashboardJobPost = ({ formik }) => {
                               </Stack>
                             </Grid>
                             <Grid item md={3}>
-                            <Box  mb={4}>
-                              <Box>
-                                <Typography fontSize={13} fontWeight={600}>
-                                  Drop out Date
-                                </Typography>
-                              </Box>
-                              <Stack
-                                direction="row"
-                                spacing={1}
-                                alignItems="center"
-                              >
-                                <Box
-                                  sx={{
-                                    backgroundColor: "#FEE6BB",
-                                    width: "28px",
-                                    height: "28px",
-                                    borderRadius: "50%",
-                                    p: "5px",
-                                  }}
-                                >
-                                  <Iconify
-                                    color={(theme) =>
-                                      theme.palette.primary.main
-                                    }
-                                    icon="majesticons:calendar-line"
-                                  />
-                                </Box>
+                              <Box mb={4}>
                                 <Box>
-                                  <Typography
-                                    color="grey"
-                                    fontWeight={400}
-                                    fontSize={13}
-                                  >
-                                    {productDetail?.product?.drop_date || "N/A"}
+                                  <Typography fontSize={13} fontWeight={600}>
+                                    Drop out Date
                                   </Typography>
                                 </Box>
-                              </Stack>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  alignItems="center"
+                                >
+                                  <Box
+                                    sx={{
+                                      backgroundColor: "#FEE6BB",
+                                      width: "28px",
+                                      height: "28px",
+                                      borderRadius: "50%",
+                                      p: "5px",
+                                    }}
+                                  >
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      icon="majesticons:calendar-line"
+                                    />
+                                  </Box>
+                                  <Box>
+                                    <Typography
+                                      color="grey"
+                                      fontWeight={400}
+                                      fontSize={13}
+                                    >
+                                      {productDetail?.product?.drop_date ||
+                                        "N/A"}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
                               </Box>
                               <Box>
                                 <Typography fontSize={13} fontWeight={600}>
@@ -927,16 +927,35 @@ const DeleteModal = ({ id }) => {
             left: "50%",
             textAlign: "center",
             transform: "translate(-50%, -50%)",
-            borderRadius:"8px",
+            borderRadius: "8px",
             bgcolor: "background.paper",
             border: "1px solid #f5f5f5",
             boxShadow: 24,
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" fontweight={600} fontSize={20} component="h2" pb={2}>
-          Sure you want to delete?  
-          </Typography>
+          <Stack spacing={1} sx={{ mb: 4 }}>
+            <Typography
+              id="modal-modal-title"
+              fontweight={600}
+              fontSize={20}
+              component="p"
+            >
+              Sure you want to delete?
+            </Typography>
+
+            <Typography
+              id="modal-modal-title"
+              fontweight={400}
+              fontSize={14}
+              component="p"
+              sx={{
+                color: "#54595E",
+              }}
+            >
+              Are you sure you want to delete this?
+            </Typography>
+          </Stack>
           <Stack direction="row" spacing={3}>
             <Button fullWidth variant="outlined" onClick={handleClose}>
               No, cancel
