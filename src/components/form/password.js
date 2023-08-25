@@ -78,7 +78,7 @@ const PasswordBox = (props) => {
               <InputAdornment position={inputAdornmentPosition || "end"}>
                 <Icon
                   onClick={() => setShowPassword(!showPassword)}
-                  color= "#d3d3d3"
+                  color= "#cdcdcd"
                   fontSize="small"
                 >
                   {showPassword ? "visibility" : "visibility_off"}

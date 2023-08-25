@@ -26,413 +26,389 @@ const Register = ({ formik, open, handleOpenClose }) => {
 
   return (
     <React.Fragment>
-      <Box sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}>
+      <Box sx={{ pb: 4, pt: 12 }}>
         <Container>
-          <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={5.6} sm={12} xs={12}>
-              <Stack spacing={0.9}>
-                <Card
-                  sx={{
-                    borderRadius: 0,
-                    boxShadow: 0,
-                    background: (theme) => theme.palette.grey[100],
-                  }}
+          <Grid sx={{ justifyContent: "center" }} spacing={0} container>
+            <Grid item md={6}>
+              <Box>
+                <Box src="/login/bro.png" component="img" />
+              </Box>
+            </Grid>
+            <Grid item md={4} sm={12} xs={12}>
+              <Stack spacing={3}>
+                <Box textAlign="center">
+                  <Typography fontSize={20} fontWeight={600}>
+                    Welcome to Click & Send
+                  </Typography>
+                </Box>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <CardContent>
-                    <Stack direction="row" justifyContent="center">
-                      <Iconify
-                        icon="solar:lock-bold"
-                        width="32px"
-                        color="#ff7534"
-                      />
-                      <Typography
-                        color={"primary"}
-                        variant="h4"
-                        fontWeight={500}
-                        sx={{ fontSize: "1.75rem!important" }}
-                      >
-                        Registration
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-                <Card
-                  sx={{
-                    borderRadius: 0,
-                    boxShadow: 0,
-                    background: (theme) => theme.palette.grey[100],
-                  }}
-                >
-                  <CardContent sx={{ p: 6 }}>
-                    <Box
-                      component="form"
-                      noValidate
-                      onSubmit={formik.handleSubmit}
+                  <Box>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.grey[100],
+                        border: (theme) =>
+                          `1px solid ${theme.palette.grey[300]}`,
+                        borderRadius: "20px",
+                        px: 2,
+                        color: "#fff",
+                        ":hover": {
+                          backgroundColor: (theme) => theme.palette.grey[400],
+                        },
+                      }}
+                      startIcon={<Iconify icon="flat-color-icons:google" />}
+                      // onClick={() => handleGoogleLogin()}
                     >
-                      <Box>
-                        <TextBox
-                          fullWidth
-                          placeholder={"Enter Your Full Name "}
-                          name="user_name"
-                          value={formik.values.user_name}
-                          onChange={formik.handleChange}
-                          helperText={
-                            formik.touched.user_name && formik.errors.user_name
-                          }
-                          startIcon={
-                            <Iconify icon="mdi:user" color="#ff7534" />
-                          }
-                          size="small"
-                        />
-                      </Box>
-                      <Box>
-                        <TextBox
-                          fullWidth
-                          placeholder={"Enter Your Email Address"}
-                          name="email"
-                          value={formik.values.email}
-                          onChange={formik.handleChange}
-                          helperText={
-                            formik.touched.email && formik.errors.email
-                          }
-                          startIcon={
-                            <Iconify
-                              icon="fluent:mail-20-filled"
-                              color="#ff7534"
-                            />
-                          }
-                          size={"small"}
-                        />
-                      </Box>
-                      <Box>
-                        <TextBox
-                          fullWidth
-                          name="mobile"
-                          value={formik.values.mobile}
-                          onChange={formik.handleChange}
-                          helperText={
-                            formik.touched.mobile && formik.errors.mobile
-                          }
-                          placeholder={"Enter Your Contact Number"}
-                          startIcon={
-                            <Iconify
-                              icon="material-symbols:call"
-                              color="#ff7534"
-                            />
-                          }
-                          size={"small"}
-                        />
-                      </Box>
-                      <Box>
-                        <PasswordBox
-                          fullWidth
-                          name="password"
-                          value={formik.values.password}
-                          onChange={formik.handleChange}
-                          helperText={
-                            formik.touched.password && formik.errors.password
-                          }
-                          placeholder={"Enter Password"}
-                          startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
-                          }
-                          size={"small"}
-                        />
-                      </Box>
-                      <Box>
-                        <PasswordBox
-                          name="password_confirmation"
-                          value={formik.values.password_confirmation}
-                          onChange={formik.handleChange}
-                          helperText={
-                            formik.touched.password_confirmation &&
-                            formik.errors.password_confirmation
-                          }
-                          fullWidth
-                          placeholder={"Enter Confirm Password"}
-                          startIcon={
-                            <Iconify icon="solar:lock-bold" color="#ff7534" />
-                          }
-                          size="small"
-                        />
-                      </Box>
-                      <Box>
-                          <Stack textAlign={"center"}>
-                            <Typography textAlign="left" variant="p">
-                              Company Certificate
-                            </Typography>
-                            {!formik.values.company_certificate && (
-                              <TextBox
-                                fullWidth
-                                startIcon={
-                                  <Iconify
-                                    icon="solar:file-bold"
-                                    color="#ff7534"
-                                  />
-                                }
-                                type="file"
-                                size="small"
-                                value=""
-                                name="company_certificate"
-                                onChange={(e) => {
-                                  formik.setFieldValue(
-                                    "company_certificate",
-                                    e.target.files[0]
-                                  );
-                                  formik.setFieldValue(
-                                    "company_certificate_url",
-                                    URL.createObjectURL(e.target.files[0])
-                                  );
-                                }}
-                                 helperText={
-                      formik.touched.company_certificate &&
-                      formik.errors.company_certificate
-                    }
-                                
-                              />
-                            )}
-
-                            {formik.values.company_certificate_url && (
-                              <Card sx={{ width: "max-content" }}>
-                                <CardContent
-                                  sx={{
-                                    pb: "10px !important",
-                                    pt: "30px !important",
-                                    px: "10px !important",
-                                  }}
-                                >
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      top: 5,
-                                      right: 6,
-                                    }}
-                                  >
-                                    <Card sx={{ borderRadius: "50%" }}>
-                                      <IconButton
-                                        size="small"
-                                        onClick={() => {
-                                          formik.setFieldValue(
-                                            "company_certificate",
-                                            ""
-                                          );
-                                          formik.setFieldValue(
-                                            "company_certificate_url",
-                                            ""
-                                          );
-                                        }}
-                                      >
-                                        <Close fontSize="small" />
-                                      </IconButton>
-                                    </Card>
-                                  </Box>
-                                  <Box
-                                    component="img"
-                                    style={{ margin: "10px" }}
-                                    src={formik.values.company_certificate_url}
-                                    alt={formik.values.company_certificate.name}
-                                    width="150px"
-                                    height="150px"
-                                    thumbnail
-                                  />
-                                </CardContent>
-                              </Card>
-                            )}
-                          </Stack>
-                          <Stack textAlign={"center"} mt={2}>
-                            <Typography textAlign="left" variant="p">
-                              Company VAT Certificate (Optional)
-                            </Typography>
-                            {!formik.values.company_vat && (
-                              <TextBox
-                                fullWidth
-                                startIcon={
-                                  <Iconify
-                                    icon="solar:file-bold"
-                                    color="#ff7534"
-                                  />
-                                }
-                                type="file"
-                                size="small"
-                                value=""
-                                name="company_vat"
-                                onChange={(e) => {
-                                  formik.setFieldValue(
-                                    "company_vat",
-                                    e.target.files[0]
-                                  );
-                                  formik.setFieldValue(
-                                    "company_vat_url",
-                                    URL.createObjectURL(e.target.files[0])
-                                  );
-                                }}
-                                helperText={
-                      formik.touched.company_vat &&
-                      formik.errors.company_vat
-                    }
-                              />
-                            )}
-
-                            {formik.values.company_vat_url && (
-                              <Card sx={{ width: "max-content" }}>
-                                <CardContent
-                                  sx={{
-                                    pb: "10px !important",
-                                    pt: "30px !important",
-                                    px: "10px !important",
-                                  }}
-                                >
-                                  <Box
-                                    sx={{
-                                      position: "absolute",
-                                      top: 5,
-                                      right: 6,
-                                    }}
-                                  >
-                                    <Card sx={{ borderRadius: "50%" }}>
-                                      <IconButton
-                                        size="small"
-                                        onClick={() => {
-                                          formik.setFieldValue(
-                                            "company_vat",
-                                            ""
-                                          );
-                                          formik.setFieldValue(
-                                            "company_vat_url",
-                                            ""
-                                          );
-                                        }}
-                                      >
-                                        <Close fontSize="small" />
-                                      </IconButton>
-                                    </Card>
-                                  </Box>
-                                  <Box
-                                    component="img"
-                                    style={{ margin: "10px" }}
-                                    src={formik.values.company_vat_url}
-                                    alt={formik.values.company_vat.name}
-                                    width="150px"
-                                    height="150px"
-                                    thumbnail
-                                  />
-                                </CardContent>
-                              </Card>
-                            )}
-                          </Stack>
-                        </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
+                      <Typography
+                        fontSize={9}
+                        color={(theme) => theme.palette.grey[600]}
                       >
-                        <Box my={2}>
-                          <FormControl
-                            error={formik.errors.term ? true : false}
-                            fullWidth
+                        Sign up with Google
+                      </Typography>
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.grey[100],
+                        border: (theme) =>
+                          `1px solid ${theme.palette.grey[300]}`,
+                        borderRadius: "20px",
+                        px: 2,
+                        color: "#fff",
+                        ":hover": {
+                          backgroundColor: (theme) => theme.palette.grey[400],
+                        },
+                      }}
+                      startIcon={<Iconify icon="logos:facebook" />}
+                      // onClick={() => handleFacebookLogin()}
+                    >
+                      <Typography
+                        fontSize={9}
+                        color={(theme) => theme.palette.grey[600]}
+                      >
+                        Sign up with Facebook
+                      </Typography>
+                    </Button>
+                  </Box>
+                </Stack>
+
+                <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+                  <Box>
+                    <TextBox
+                      fullWidth
+                      placeholder={"Enter Your Full Name "}
+                      name="user_name"
+                      label="username"
+                      value={formik.values.user_name}
+                      onChange={formik.handleChange}
+                      helperText={
+                        formik.touched.user_name && formik.errors.user_name
+                      }
+                      size="small"
+                    />
+                  </Box>
+                  <Box>
+                    <TextBox
+                      fullWidth
+                      placeholder={"Enter Your Email Address"}
+                      name="email"
+                      label="Email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      helperText={formik.touched.email && formik.errors.email}
+                      size={"small"}
+                    />
+                  </Box>
+                  <Box>
+                    <TextBox
+                      fullWidth
+                      name="mobile"
+                      label="Contact Number"
+                      value={formik.values.mobile}
+                      onChange={formik.handleChange}
+                      helperText={formik.touched.mobile && formik.errors.mobile}
+                      placeholder={"Enter Your Contact Number"}
+                      size={"small"}
+                    />
+                  </Box>
+                  <Box>
+                    <PasswordBox
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      helperText={
+                        formik.touched.password && formik.errors.password
+                      }
+                      placeholder={"Enter Password"}
+                      size={"small"}
+                    />
+                  </Box>
+                  <Box>
+                    <PasswordBox
+                      name="password_confirmation"
+                      label="Confirm Password"
+                      value={formik.values.password_confirmation}
+                      onChange={formik.handleChange}
+                      helperText={
+                        formik.touched.password_confirmation &&
+                        formik.errors.password_confirmation
+                      }
+                      fullWidth
+                      placeholder={"Enter Confirm Password"}
+                      size="small"
+                    />
+                  </Box>
+                  <Box>
+                    <Stack textAlign={"center"}>
+                      <Typography textAlign="left" variant="p">
+                        Company Certificate
+                      </Typography>
+                      {!formik.values.company_certificate && (
+                        <TextBox
+                          fullWidth
+                          type="file"
+                          size="small"
+                          value=""
+                          name="company_certificate"
+                          onChange={(e) => {
+                            formik.setFieldValue(
+                              "company_certificate",
+                              e.target.files[0]
+                            );
+                            formik.setFieldValue(
+                              "company_certificate_url",
+                              URL.createObjectURL(e.target.files[0])
+                            );
+                          }}
+                          helperText={
+                            formik.touched.company_certificate &&
+                            formik.errors.company_certificate
+                          }
+                        />
+                      )}
+
+                      {formik.values.company_certificate_url && (
+                        <Card sx={{ width: "max-content" }}>
+                          <CardContent
+                            sx={{
+                              pb: "10px !important",
+                              pt: "30px !important",
+                              px: "10px !important",
+                            }}
                           >
-                            <FormControlLabel
-                              name="term"
-                              checked={formik.values.term == "yes"}
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  formik.setFieldValue("term", "yes");
-                                } else {
-                                  formik.setFieldValue("term", "no");
-                                }
+                            <Box
+                              sx={{
+                                position: "absolute",
+                                top: 5,
+                                right: 6,
                               }}
-                              control={
-                                <Checkbox
-                                  size=""
-                                  sx={{ marginBottom: "1.6em" }}
-                                />
-                              }
-                              label={
-                                <Typography textAlign="center">
-                                  I agree to the{" "}
-                                  <Typography color="primary" component="span" onClick={()=>router.push("/termandcondition")}>
-                                    Terms and Conditions
-                                  </Typography>{" "}
-                                  as set out by the user agreement.
-                                </Typography>
-                              }
+                            >
+                              <Card sx={{ borderRadius: "50%" }}>
+                                <IconButton
+                                  size="small"
+                                  onClick={() => {
+                                    formik.setFieldValue(
+                                      "company_certificate",
+                                      ""
+                                    );
+                                    formik.setFieldValue(
+                                      "company_certificate_url",
+                                      ""
+                                    );
+                                  }}
+                                >
+                                  <Close fontSize="small" />
+                                </IconButton>
+                              </Card>
+                            </Box>
+                            <Box
+                              component="img"
+                              style={{ margin: "10px" }}
+                              src={formik.values.company_certificate_url}
+                              alt={formik.values.company_certificate.name}
+                              width="150px"
+                              height="150px"
+                              thumbnail
                             />
-                            
+                          </CardContent>
+                        </Card>
+                      )}
+                    </Stack>
+                    <Stack textAlign={"center"} mt={2}>
+                      <Typography textAlign="left" variant="p">
+                        Company VAT Certificate (Optional)
+                      </Typography>
+                      {!formik.values.company_vat && (
+                        <TextBox
+                          fullWidth
+                          type="file"
+                          size="small"
+                          value=""
+                          name="company_vat"
+                          onChange={(e) => {
+                            formik.setFieldValue(
+                              "company_vat",
+                              e.target.files[0]
+                            );
+                            formik.setFieldValue(
+                              "company_vat_url",
+                              URL.createObjectURL(e.target.files[0])
+                            );
+                          }}
+                          helperText={
+                            formik.touched.company_vat &&
+                            formik.errors.company_vat
+                          }
+                        />
+                      )}
 
-                            {formik.errors.term && (
-                              <FormHelperText  sx={{textAlign:"center"}}>
-                                {formik.errors.term}
-                              </FormHelperText>
-                            )}
-                          </FormControl>
-                        </Box>
-                      </Box>
-                      <Stack direction={"row"} justifyContent={"space-around"}>
-                        <Box>
-                          <Button
-                            fullWidth
-                            variant="contained"
-                            type="submit"
-                            color="primary"
+                      {formik.values.company_vat_url && (
+                        <Card sx={{ width: "max-content" }}>
+                          <CardContent
+                            sx={{
+                              pb: "10px !important",
+                              pt: "30px !important",
+                              px: "10px !important",
+                            }}
                           >
-                            <Typography px="1.5em">Register Now</Typography>
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Button fullWidth variant="contained" color="dark" onClick={formik.resetForm}> 
-                            <Typography px="2.1em">Reset Now</Typography>
-                          </Button>
-                        </Box>
-                      </Stack>
-
-                      <Stack
-                        my={1.6}
-                        direction={"row"}
-                        justifyContent={"center"}
-                        spacing={0.5}
+                            <Box
+                              sx={{
+                                position: "absolute",
+                                top: 5,
+                                right: 6,
+                              }}
+                            >
+                              <Card sx={{ borderRadius: "50%" }}>
+                                <IconButton
+                                  size="small"
+                                  onClick={() => {
+                                    formik.setFieldValue("company_vat", "");
+                                    formik.setFieldValue("company_vat_url", "");
+                                  }}
+                                >
+                                  <Close fontSize="small" />
+                                </IconButton>
+                              </Card>
+                            </Box>
+                            <Box
+                              component="img"
+                              style={{ margin: "10px" }}
+                              src={formik.values.company_vat_url}
+                              alt={formik.values.company_vat.name}
+                              width="150px"
+                              height="150px"
+                              thumbnail
+                            />
+                          </CardContent>
+                        </Card>
+                      )}
+                    </Stack>
+                  </Box>
+                  <Stack justifyContent="space-between" alignItems="left">
+                    <Box my={1}>
+                      <FormControl
+                        error={formik.errors.term ? true : false}
+                        fullWidth
                       >
-                        <Typography variant="p">
-                          Already have An Account?
-                        </Typography>{" "}
-                        <Typography
-                          color={"primary"}
-                          onClick={() => router.push("/auth/login")}
-                          sx={{ cursor: "pointer" }}
-                        >
-                          Login Here
-                        </Typography>
-                      </Stack>
-                      <Box>
+                        <FormControlLabel
+                          name="term"
+                          checked={formik.values.term == "yes"}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              formik.setFieldValue("term", "yes");
+                            } else {
+                              formik.setFieldValue("term", "no");
+                            }
+                          }}
+                          control={<Checkbox size="" />}
+                          label={
+                            <Typography textAlign="center">
+                              I accept the
+                              <Typography
+                                color="primary"
+                                ml={0.5}
+                                component="span"
+                                onClick={() => router.push("/termandcondition")}
+                              >
+                                terms & Condition
+                              </Typography>{" "}
+                            </Typography>
+                          }
+                        />
+
+                        {formik.errors.term && (
+                          <FormHelperText sx={{ textAlign: "center" }}>
+                            {formik.errors.term}
+                          </FormHelperText>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Stack>
+                  <Stack
+                    direction="row"
+                    spacing={3}
+                    justifyContent="space-around"
+                  >
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      type="submit"
+                      color="primary"
+                    >
+                      Sign up
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      color="dark"
+                      onClick={formik.resetForm}
+                    >
+                      <Typography>Reset Now</Typography>
+                    </Button>
+                  </Stack>
+
+                  <Stack
+                    my={1.5}
+                    direction={"row"}
+                    justifyContent={"center"}
+                    spacing={0.5}
+                  >
+                    <Typography variant="p">Already a member?</Typography>{" "}
+                    <Typography
+                      color={"primary"}
+                      onClick={() => router.push("/auth/login")}
+                      sx={{ cursor: "pointer" }}
+                    >
+                      Login Here
+                    </Typography>
+                  </Stack>
+                  {/* <Box>
                         <Typography textAlign={"center"}>
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit, sed do eiusmod tempor incididunt ut labore et
                           dolore magna aliqua.
                         </Typography>
-                      </Box>
-                      <Box>
-                        <Button
-                          onClick={() => router.push("/auth/driver_register")}
-                          fullWidth
-                          sx={{
-                            backgroundColor: "#ff7534",
-                            color: "#fff",
-                            my: 1,
-                            ":hover": {
-                              backgroundColor: "#ff7534",
-                            },
-                          }}
-                          startIcon={
-                            <Iconify icon="ion:bicycle" color="white" />
-                          }
-                        >
-                          <Typography>Want To Become A Driver</Typography>
-                        </Button>
-                      </Box>
-                    </Box>
-                  </CardContent>
-                </Card>
+                      </Box> */}
+                  <Box>
+                    <Button
+                      onClick={() => router.push("/auth/driver_register")}
+                      fullWidth
+                      variant="outlined"
+                      startIcon={<Iconify icon="ion:bicycle" color="primary" />}
+                    >
+                      <Typography>Want To Become A Driver</Typography>
+                    </Button>
+                  </Box>
+                </Box>
               </Stack>
             </Grid>
           </Grid>
