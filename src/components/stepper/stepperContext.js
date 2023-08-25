@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { createContext, useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const StepperContext = createContext({});
 
@@ -16,23 +16,28 @@ function StepperProvider({ children }) {
 
   const getTagsLength = (tabs) => {
     setTagLength(tabs?.length - 1);
-  }
-  
-  useEffect(() => {
-    setValue(0);
-  },[])
+  };
 
   useEffect(() => {
     setValue(0);
-  },[id])
-  
+  }, []);
 
-  return <StepperContext.Provider value={{ value, setValue, handleChange, getTagsLength, tagLength }}>{children}</StepperContext.Provider>;
+  useEffect(() => {
+    setValue(0);
+  }, [id]);
+
+  return (
+    <StepperContext.Provider
+      value={{ value, setValue, handleChange, getTagsLength, tagLength }}
+    >
+      {children}
+    </StepperContext.Provider>
+  );
 }
 
 export { StepperProvider, StepperContext };
 
-
+// const { value, setValue } = useContext(StepperContext);
 // const tabs = [
 //   {
 //     title: 'Basic',
@@ -168,6 +173,13 @@ export { StepperProvider, StepperContext };
 //   },
 // ];
 
-{/* <ScrollableTabs isLastStep={isLastStep} tabs={tabs} formik={formik} /> */}
+{
+  /* <ScrollableTabs isLastStep={isLastStep} tabs={tabs} formik={formik} /> */
+}
 
 // const isLastStep = value === 3 - 1; //Number of tabs Length
+
+// if (isLastStep) {
+// } else {
+//   setValue(value + 1);
+// }
