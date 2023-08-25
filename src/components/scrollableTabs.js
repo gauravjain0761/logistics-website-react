@@ -1,22 +1,47 @@
 import { useContext } from "react";
-import CustomeButton from "@component/button/button";
-import { SubmitButton } from "src/component/button";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Tab from "@mui/material/Tab";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Stack, Typography, styled } from "@mui/material";
 import { useRouter } from "next/router";
+import { CustomeButton, SubmitButton } from "./button";
 import { StepperContext } from "./stepper/stepperContext";
+
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 10,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
 let highestIndex = 0;
 
-const ScrollableTabs = ({ tabs, formik, isLastStep, disabled, hideButton }) => {
+const ScrollableTabs = ({
+  tabs,
+  formik,
+  isLastStep,
+  disabled,
+  hideButton,
+  setStep,
+}) => {
   const router = useRouter();
   const { id } = router.query;
   const { value, setValue, handleChange } = useContext(StepperContext);
+
+  console.log("dkhhfasdjhf", formik);
   const checkError = () => {
     let selectTab = [];
     if (tabs) {
@@ -56,66 +81,48 @@ const ScrollableTabs = ({ tabs, formik, isLastStep, disabled, hideButton }) => {
   const _handleBack = () => {
     setValue(value - 1);
   };
+  let steps = 100 / setStep;
+  let finalValue = (value + 1) * steps;
 
   return (
     <>
       <TabContext value={value}>
-        <TabList
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="auto"
-          TabIndicatorProps={{
-            sx: {
-              backgroundColor: "#A1242E",
-            },
-          }}
-        >
-          {tabs &&
-            tabs.map((tab, index) => (
-              <Tab
-                disabled={index > highestIndex && id === "new" ? true : false}
-                sx={{
-                  paddingLeft: "15px",
-                  paddingRight: "15px",
-                  backgroundColor:
-                    Number(value) === index
-                      ? "rgb(220, 163, 43)!important"
-                      : "",
-                  color:
-                    Number(value) === index
-                      ? "rgb(255, 255, 255) !important"
-                      : "",
-                }}
-                key={`tab${index}`}
-                label={tab.title}
-                value={index}
-              />
-            ))}
-        </TabList>
+      <Box textAlign="right" mb={1}>
+        <Typography color="primary" fontSize={14} fontWeight={500} >Step {value+1}<Typography ml={0.7} component="span" color="grey" fontSize={14} fontWeight={500}>Of 3</Typography></Typography>
+      </Box>
+        <Box>
+          <BorderLinearProgress variant="determinate" value={finalValue} />
+        </Box>
         <br />
         {tabs &&
           tabs.map((tab, index) => (
-            <TabPanel key={`tab${index}`} value={index}>
+            <TabPanel sx={{p:0,my:2}} key={`tab${index}`} value={index}>
               {tab.component}
             </TabPanel>
           ))}
       </TabContext>
       {!hideButton && (
         <>
-          <Box sx={{ display: "flex", marginTop: "20px" }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            justifyContent="center"
+            sx={{ marginTop: "20px" }}
+          >
             {/* {value !== 0 && ( */}
-            <Box sx={{ marginRight: "15px" }}>
+            <Box sx={{width:"20%"}}>
               <CustomeButton
-                color="secondary"
+                color="primary"
                 onClick={() => _handleBack()}
                 variant="outlined"
-                title="Back"
+                title="Cancel"
                 disabled={value <= 0}
               />
             </Box>
             {/* )} */}
 
-            <Box>
+            <Box sx={{width:"20%"}}>
               <SubmitButton
                 loading={formik.isSubmitting}
                 disabled={formik.isSubmitting || disabled}
@@ -125,7 +132,7 @@ const ScrollableTabs = ({ tabs, formik, isLastStep, disabled, hideButton }) => {
                 }
               />
             </Box>
-          </Box>
+          </Stack>
         </>
       )}
     </>

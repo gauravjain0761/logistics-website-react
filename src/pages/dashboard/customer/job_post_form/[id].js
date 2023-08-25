@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
@@ -9,12 +9,15 @@ import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { StepperContext } from "@/components/stepper/stepperContext";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuthContext();
+  const { value, setValue } = useContext(StepperContext);
+  const isLastStep = value === 3 - 1;
   const PickupAddress = {
     address: "",
     lat: 3434.34,
@@ -60,18 +63,18 @@ const PostJob = () => {
         errors.name = "Job Title is required";
       }
 
-      if (!values.vehicle) {
-        errors.vehicle = "Vehicle is required";
-      }
+      // if (!values.vehicle) {
+      //   errors.vehicle = "Vehicle is required";
+      // }
 
-      if (!values.description) {
-        errors.description = "Description is required";
-      }
+      // if (!values.description) {
+      //   errors.description = "Description is required";
+      // }
 
       return errors;
     },
     onSubmit: async (values, { setErrors, setFieldValue }) => {
-      values["items"] = JSON.stringify(values?.items);
+      
       // let formData = new FormData();
 
       let url, method;
@@ -89,46 +92,93 @@ const PostJob = () => {
       // formData.append("size", values?.size);
       // formData.append("quantity", values?.quantity);
       // console.log("valuesvalues", values);
-
-      await axiosInstance
-        .request({
-          url: url,
-          method: method,
-          data: values,
-        })
-        .then((response) => {
-          if (response?.status === 200) {
+      if (id !== "create") {
+        values["items"] = JSON.stringify(values?.items);
+        await axiosInstance
+          .request({
+            url: url,
+            method: method,
+            data: values,
+          })
+          .then((response) => {
+            if (response?.status === 200) {
+              setFieldValue("items", JSON.parse(values?.items));
+              router.push("/dashboard/customer/job_posted");
+              enqueueSnackbar(response.data.message, {
+                variant: "success",
+              });
+              formik.resetForm();
+            } else {
+              setFieldValue("items", JSON.parse(values?.items));
+              enqueueSnackbar(response.data.message, {
+                variant: "error",
+              });
+            }
+          })
+          .catch((error) => {
             setFieldValue("items", JSON.parse(values?.items));
-            router.push("/dashboard/customer/job_posted");
-            enqueueSnackbar(response.data.message, {
-              variant: "success",
-            });
-            formik.resetForm();
-          } else {
-            setFieldValue("items", JSON.parse(values?.items));
-            enqueueSnackbar(response.data.message, {
-              variant: "error",
-            });
-          }
-        })
-        .catch((error) => {
-          setFieldValue("items", JSON.parse(values?.items));
-          const { response } = error;
-          if (response.status === 422) {
-            console.log("response", response.data.error);
-            // eslint-disable-next-line no-unused-vars
-            for (const [key] of Object.entries(values)) {
-              if (response.data.error[key]) {
-                setErrors({ [key]: response.data.error[key][0] });
+            const { response } = error;
+            if (response.status === 422) {
+              console.log("response", response.data.error);
+              // eslint-disable-next-line no-unused-vars
+              for (const [key] of Object.entries(values)) {
+                if (response.data.error[key]) {
+                  setErrors({ [key]: response.data.error[key][0] });
+                }
               }
             }
-          }
-          if (response?.data?.status === 406) {
-            enqueueSnackbar(response.data.message, {
-              variant: "error",
+            if (response?.data?.status === 406) {
+              enqueueSnackbar(response.data.message, {
+                variant: "error",
+              });
+            }
+          });
+      } else {
+        if (isLastStep) {
+          values["items"] = JSON.stringify(values?.items);
+          await axiosInstance
+            .request({
+              url: url,
+              method: method,
+              data: values,
+            })
+            .then((response) => {
+              if (response?.status === 200) {
+                setFieldValue("items", JSON.parse(values?.items));
+                router.push("/dashboard/customer/job_posted");
+                enqueueSnackbar(response.data.message, {
+                  variant: "success",
+                });
+                formik.resetForm();
+              } else {
+                setFieldValue("items", JSON.parse(values?.items));
+                enqueueSnackbar(response.data.message, {
+                  variant: "error",
+                });
+              }
+            })
+            .catch((error) => {
+              setFieldValue("items", JSON.parse(values?.items));
+              const { response } = error;
+              if (response.status === 422) {
+                console.log("response", response.data.error);
+                // eslint-disable-next-line no-unused-vars
+                for (const [key] of Object.entries(values)) {
+                  if (response.data.error[key]) {
+                    setErrors({ [key]: response.data.error[key][0] });
+                  }
+                }
+              }
+              if (response?.data?.status === 406) {
+                enqueueSnackbar(response.data.message, {
+                  variant: "error",
+                });
+              }
             });
-          }
-        });
+        } else {
+          setValue(value + 1);
+        }
+      }
     },
   });
 
