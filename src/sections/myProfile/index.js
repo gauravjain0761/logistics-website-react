@@ -456,7 +456,6 @@ const ChangePasswordModal = () => {
                 fullWidth
                 size="small"
                 name="password"
-                label="Current Password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 placeholder="Enter Current Password"
@@ -471,7 +470,6 @@ const ChangePasswordModal = () => {
                 fullWidth
                 size="small"
                 name="new_password"
-                label="New Password"
                 value={formik.values.new_password}
                 onChange={formik.handleChange}
                 placeholder="Enter New Password"
@@ -485,7 +483,6 @@ const ChangePasswordModal = () => {
               <PasswordBox
                 fullWidth
                 size="small"
-                label="New Password Confirm"
                 name="new_password_confirmation"
                 value={formik.values.new_password_confirmation}
                 onChange={formik.handleChange}
