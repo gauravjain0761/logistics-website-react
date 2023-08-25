@@ -73,29 +73,28 @@ const PasswordBox = (props) => {
           // autoComplete={"false"} //MUI pickUp the string value on autoComplete
           autoComplete="new-password"
           onChange={(e) => props.onChange(e)}
-          InputProps={
-            {
-              // endAdornment: (
-              //   <InputAdornment position={inputAdornmentPosition || "end"}>
-              //     <Icon onClick={() => setShowPassword(!showPassword)} color="primary" fontSize="small">
-              //       {showPassword ? "visibility" : "visibility_off"}
-              //     </Icon>
-              //   </InputAdornment>
-              // ),
-              // startAdornment: (
-              //   <InputAdornment position={inputAdornmentPosition || "start"}>
-              //     {startIcon}
-              //   </InputAdornment>
-              // ),
-            }
-          }
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position={inputAdornmentPosition || "end"}>
+                <Icon
+                  onClick={() => setShowPassword(!showPassword)}
+                  color= "#d3d3d3"
+                  fontSize="small"
+                >
+                  {showPassword ? "visibility" : "visibility_off"}
+                </Icon>
+              </InputAdornment>
+            ),
+            // startAdornment: (
+            //   <InputAdornment position={inputAdornmentPosition || "start"}>
+            //     {startIcon}
+            //   </InputAdornment>
+            // ),
+          }}
         />
-        <Box
+        {/* <Box
           sx={{
             ml: 0,
-            background: (theme) => theme.palette.grey[300],
-            border: "1px solid",
-            borderColor: (theme) => alpha(theme.palette.grey[500], 0.32),
             padding: ".375rem .75rem",
             borderRadius: ".25rem",
             display: "flex",
@@ -105,13 +104,13 @@ const PasswordBox = (props) => {
         >
           <Icon
             onClick={() => setShowPassword(!showPassword)}
-            color="primary"
+            color=""
             fontSize="small"
             sx={{ fontSize: "18px!important" }}
           >
             {showPassword ? "visibility" : "visibility_off"}
           </Icon>
-        </Box>
+        </Box> */}
       </Stack>
 
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
