@@ -179,7 +179,9 @@ const JobPostForm = ({
                 >
                   Job Posted
                 </Box>
-                <Typography color="text.primary">Job Post form</Typography>
+                <Typography color="text.primary">
+                  {id === "create" ? "Job Post Form" : "Job Edit Form"}
+                </Typography>
               </Breadcrumbs>
             </Box>
             <Box>
