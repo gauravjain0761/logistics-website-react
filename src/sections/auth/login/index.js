@@ -208,9 +208,9 @@ const Login = () => {
                             control={<Checkbox size="" defaultChecked />}
                             label="Remember me"
                             sx={{
-                              fontSize: 12,
+                              fontSize: 14,
                               "&..MuiFormControlLabel-label":{
-                                fontSize: "2px",
+                                fontSize: "4px",
                               },
                             }}
                           />
@@ -224,7 +224,7 @@ const Login = () => {
                             // }
                             type="submit"
                           >
-                            <Typography fontSize={9}>Login Now</Typography>
+                            <Typography fontSize={12}>Login Now</Typography>
                           </Button>
                         </Box>
                         {/* <Box>
@@ -254,14 +254,14 @@ const Login = () => {
 
                     <Box>
                       <Box textAlign={"center"} mt={4}>
-                        <Typography variant="p" fontSize={9}>
+                        <Typography variant="p" fontSize={12}>
                           Don{"’"}t have an account?
                         </Typography>
                         <Typography
                           component="span"
                           color="primary"
                           onClick={() => router.push("/auth/register")}
-                          sx={{ cursor: "pointer", fontSize: "9px", ml: 0.5 }}
+                          sx={{ cursor: "pointer", fontSize:12, ml: 0.5 ,borderBottom:"1px solid" ,fontWeight:600}}
                         >
                           SIGNUP
                         </Typography>

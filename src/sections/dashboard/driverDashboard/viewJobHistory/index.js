@@ -1,6 +1,7 @@
 import Iconify from "@/components/iconify/Iconify";
 import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import axiosInstance from "@/utils/axios";
+import { Visibility } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -10,6 +11,7 @@ import {
   Divider,
   Grid,
   List,
+  Modal,
   Rating,
   Stack,
   Table,
@@ -28,7 +30,9 @@ const ViewJobHistory = () => {
   const { id } = router.query;
   const [jobDetail, setJobDetail] = useState([]);
   const [ratings, setRatings] = useState([]);
-
+  const [addressOpen, setAddressOpen] = useState(false);
+  const handleAddressOpen = (address) => setAddressOpen(address);
+  const handleAddressClose = () => setAddressOpen(false);
   // Rating list api
   const getJobDetail = async () => {
     // setLoader(true);
@@ -37,7 +41,7 @@ const ViewJobHistory = () => {
       .then((response) => {
         if (response?.status === 200) {
           setJobDetail(response?.data?.view_data);
-          setRatings(response?.data?.view_data?.ratings)
+          setRatings(response?.data?.view_data?.ratings);
         }
       })
       .catch((error) => {
@@ -50,8 +54,6 @@ const ViewJobHistory = () => {
       getJobDetail();
     }
   }, [id]);
-
-
 
   console.log("jobDetail", jobDetail, ratings);
   return (
@@ -97,7 +99,7 @@ const ViewJobHistory = () => {
                         </Grid>
                         <Grid item md={12} mt={2}>
                           <Typography fontWeight={500}>
-                            Pick Up Address 
+                            Pick Up Address
                           </Typography>
                         </Grid>
                         <Grid item md={12}>
@@ -128,6 +130,7 @@ const ViewJobHistory = () => {
                                   <TableCell align="center">Quantity</TableCell>
                                   <TableCell align="center">Image</TableCell>
                                   <TableCell align="center">Material</TableCell>
+                                  <TableCell align="center">Address</TableCell>
                                 </TableRow>
                               </TableHead>
                               <TableBody>
@@ -186,6 +189,16 @@ const ViewJobHistory = () => {
                                             {item?.product?.material}
                                           </Typography>
                                         </TableCell>
+                                        <TableCell align="center">
+                                          <Button
+                                            onClick={() =>
+                                              handleAddressOpen(item?.address)
+                                            }
+                                            sx={{ color: "grey" }}
+                                          >
+                                            <Visibility />
+                                          </Button>
+                                        </TableCell>
                                       </TableRow>
                                     );
                                   })}
@@ -193,106 +206,6 @@ const ViewJobHistory = () => {
                             </Table>
                           </TableContainer>
                         </Grid>
-                        {/* <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>
-                            Delivery Address :-
-                          </Typography>
-                        </Grid>
-                        <Grid item md={12}>
-                          <TableContainer
-                            sx={{
-                              borderRadius: "10px",
-                              border: "1px solid",
-                              borderColor: (theme) =>
-                                theme.palette.primary.main,
-                            }}
-                          >
-                            <Table aria-label="simple table">
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell>Address</TableCell>
-                                  <TableCell align="center">Date</TableCell>
-                                  <TableCell align="center">Time</TableCell>
-                                  <TableCell align="center">Quantity</TableCell>
-                                  <TableCell align="center">Image</TableCell>
-                                  <TableCell align="center">Material</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                <TableRow
-                                  sx={{
-                                    "&:last-child td, &:last-child th": {
-                                      border: 0,
-                                    },
-                                  }}
-                                >
-                                  <TableCell component="th" scope="row">
-                                    <Typography>
-                                      Xyz,Address ,city,12122
-                                    </Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>06/02/2000</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>10:00 A.M.</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>6</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Box>
-                                      <Box
-                                        component="img"
-                                        m="auto"
-                                        src="/serviceblog.jpg"
-                                        width={80}
-                                      />
-                                    </Box>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>Material</Typography>
-                                  </TableCell>
-                                </TableRow>
-                                <TableRow
-                                  sx={{
-                                    "&:last-child td, &:last-child th": {
-                                      border: 0,
-                                    },
-                                  }}
-                                >
-                                  <TableCell component="th" scope="row">
-                                    <Typography>
-                                      Xyz,Address ,city,12122
-                                    </Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>06/02/2000</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>10:00 A.M.</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>6</Typography>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Box>
-                                      <Box
-                                        component="img"
-                                        m="auto"
-                                        src="/serviceblog.jpg"
-                                        width={80}
-                                      />
-                                    </Box>
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Typography>Material</Typography>
-                                  </TableCell>
-                                </TableRow>
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Grid> */}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -318,7 +231,6 @@ const ViewJobHistory = () => {
                               height={60}
                             />
                             <Stack direction="column" spacing={1}>
-                             
                               <Box>
                                 <Rating
                                   value={item?.rating}
@@ -344,7 +256,68 @@ const ViewJobHistory = () => {
             </Card>
           </Box>
         </Container>
-      </Box>{" "}
+      </Box>
+
+      <Modal
+        open={addressOpen}
+        onClose={handleAddressClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "80%",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            borderRadius: "10px",
+            p: 4,
+          }}
+        >
+          <TableContainer
+            sx={{
+              borderRadius: "10px",
+              border: "1px solid",
+              borderColor: (theme) => theme.palette.grey[300],
+            }}
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Sr. No.</TableCell>
+                  <TableCell align="left">Address</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {addressOpen &&
+                  addressOpen?.length > 0 &&
+                  addressOpen.map((item, index) => {
+                    return (
+                      <TableRow
+                        key={`jobDetail${index}`}
+                        sx={{
+                          "&:last-child td, &:last-child th": {
+                            border: 0,
+                          },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <Typography>{index + 1}</Typography>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Typography sx={{maxWidth:"52em", wordWrap:"break-word"}}>{item?.address}</Typography>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Modal>
     </React.Fragment>
   );
 };
