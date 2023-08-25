@@ -128,7 +128,7 @@ const ScrollableTabs = ({
                 disabled={formik.isSubmitting || disabled}
                 variant="contained"
                 title={
-                  isLastStep ? (id === "create" ? "Submit" : "Update") : "Next"
+                  isLastStep ? (id === "create" ? "Post Job" : "Update") : "Next"
                 }
               />
             </Box>
