@@ -185,6 +185,7 @@ const Login = () => {
                       <Box>
                         <PasswordBox
                           label="Password"
+                          variant="standard"
                           onChange={formik.handleChange}
                           fullWidth
                           placeholder={"Enter Password"}
