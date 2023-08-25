@@ -56,6 +56,7 @@ const PasswordBox = (props) => {
           fullWidth={fullWidth}
           error={helperText ? true : false}
           name={name}
+          variant="standard"
           size={size}
           placeholder={placeholder}
           label={label}
