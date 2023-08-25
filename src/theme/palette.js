@@ -6,11 +6,10 @@ import { alpha } from "@mui/material/styles";
 
 const GREY = {
   0: "#FFFFFF",
-  
+
   //
   100: "#f8f9fa",
   //
-
 
   200: "#f6f6f7",
   300: "#DFE3E8",
@@ -18,7 +17,6 @@ const GREY = {
   //
   400: "#ececec",
   //
-
 
   500: "#919EAB",
   600: "#637381",
@@ -90,6 +88,11 @@ const DARK = {
   contrastText: "#fff",
 };
 
+const GREYLIGHT = {
+  main: "#ABAFB1",
+  contrastText: "#ABAFB1",
+};
+
 const LIGHT = {
   main: "#ffffff",
 };
@@ -104,6 +107,7 @@ const COMMON = {
   error: ERROR,
   grey: GREY,
   dark: DARK,
+  greyLight: GREYLIGHT,
   light: LIGHT,
   divider: alpha(GREY[500], 0.24),
   action: {

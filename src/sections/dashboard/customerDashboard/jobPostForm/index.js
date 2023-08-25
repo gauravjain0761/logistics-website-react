@@ -20,7 +20,12 @@ import {
 import { useRouter } from "next/router";
 import Iconify from "@/components/iconify/Iconify";
 import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
-import { ArrowDropDownCircle, Close, LocationOn } from "@mui/icons-material";
+import {
+  Add,
+  ArrowDropDownCircle,
+  Close,
+  LocationOn,
+} from "@mui/icons-material";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { BsX } from "react-icons/bs";
 import moment from "moment";
@@ -133,7 +138,7 @@ const JobPostForm = ({
                       </Grid>
                       <Grid item md={12}>
                         <Divider sx={{ my: 3 }} />
-                        <Box>
+                        <Box sx={{ mb: 3 }}>
                           {formik?.values?.items &&
                             formik?.values?.items?.length > 0 &&
                             formik.values.items.map(
@@ -146,7 +151,13 @@ const JobPostForm = ({
                                 );
                                 return (
                                   <Box key={productIndex} sx={{ mt: 1 }}>
-                                    <Card>
+                                    <Card
+                                      sx={{
+                                        borderRadius: "0px",
+                                        border: "0px",
+                                        boxShadow: "none",
+                                      }}
+                                    >
                                       <CardHeader
                                         subheader={`Add Pickup Address-${
                                           productIndex + 1
@@ -161,7 +172,9 @@ const JobPostForm = ({
                                           </IconButton>
                                         }
                                       />
-                                      <CardContent>
+                                      <CardContent
+                                        sx={{ pb: "0px !important" }}
+                                      >
                                         <Grid container spacing={3}>
                                           <Grid item md={6}>
                                             <Box>
@@ -452,7 +465,21 @@ const JobPostForm = ({
                                             </Box>
                                           </Grid>
                                         </Grid>
-
+                                        <Box>
+                                          <Divider
+                                            sx={{
+                                              my: 2,
+                                            }}
+                                          />
+                                          <Typography
+                                            component="h5"
+                                            variant="h5"
+                                            fontSize={15}
+                                            fontWeight={400}
+                                          >
+                                            Add Delivery Address
+                                          </Typography>
+                                        </Box>
                                         <Box sx={{ my: 4 }}>
                                           {productItem?.address &&
                                             productItem?.address?.length > 0 &&
@@ -462,32 +489,44 @@ const JobPostForm = ({
                                                   key={productIndex}
                                                   sx={{ mt: 1 }}
                                                 >
-                                                  <Card>
-                                                    <CardHeader
+                                                  <Card
+                                                    sx={{
+                                                      borderRadius: "0px",
+                                                      border: "0px",
+                                                      boxShadow: "none",
+                                                    }}
+                                                  >
+                                                    {/* <CardHeader
                                                       subheader={`Delivery Address-${
                                                         addressIndex + 1
                                                       }`}
-                                                      action={
-                                                        <IconButton
-                                                          onClick={() =>
-                                                            removeAddress(
-                                                              productIndex,
-                                                              addressIndex
-                                                            )
-                                                          }
-                                                        >
-                                                          <Close />
-                                                        </IconButton>
-                                                      }
-                                                    />
-                                                    <CardContent>
+                                                      // action={
+                                                      //   <IconButton
+                                                      //     onClick={() =>
+                                                      //       removeAddress(
+                                                      //         productIndex,
+                                                      //         addressIndex
+                                                      //       )
+                                                      //     }
+                                                      //   >
+                                                      //     <Close />
+                                                      //   </IconButton>
+                                                      // }
+                                                    /> */}
+                                                    <CardContent
+                                                      sx={{
+                                                        pb: "0px !important",
+                                                      }}
+                                                    >
                                                       <Grid
                                                         container
                                                         spacing={3}
                                                       >
                                                         <Grid item md={12}>
                                                           <Box>
-                                                            <Typography>
+                                                            <Typography
+                                                              fontSize={14}
+                                                            >
                                                               Select Address
                                                               Type
                                                             </Typography>
@@ -615,7 +654,7 @@ const JobPostForm = ({
                                                 </Box>
                                               )
                                             )}
-                                          <Box sx={{ mt: 2 }}>
+                                          {/* <Box sx={{ mt: 2 }}>
                                             <Button
                                               variant="outlined"
                                               onClick={() =>
@@ -627,7 +666,7 @@ const JobPostForm = ({
                                             >
                                               + Add Another
                                             </Button>
-                                          </Box>
+                                          </Box> */}
                                         </Box>
                                       </CardContent>
                                     </Card>
@@ -636,12 +675,13 @@ const JobPostForm = ({
                               }
                             )}
                         </Box>
-                        <Divider sx={{ my: 3 }} />
                         <Button
-                          variant="contained"
+                          variant="outlined"
                           onClick={() => addProduct()}
+                          startIcon={<Add />}
+                          color="greyLight"
                         >
-                          Add Pick Up Address
+                          Add Another
                         </Button>
                         <Divider sx={{ my: 3 }} />
                       </Grid>
@@ -711,6 +751,7 @@ const JobPostForm = ({
                         spacing={2}
                         alignItems="center"
                         justifyContent="center"
+                        sx={{ mt: 1 }}
                       >
                         <Grid item md={2}>
                           <Box>
@@ -737,7 +778,6 @@ const JobPostForm = ({
                             </Button>
                           </Box>
                         </Grid>
-                       
                       </Grid>
                     </Grid>
                   </Box>
