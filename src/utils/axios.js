@@ -12,11 +12,11 @@ axiosInstance.interceptors.response.use(
   async (response) => response,
   async (error) => {
     const { response } = error;
-    if (response.status === 401) {
-      console.log("response 401", response);
-      await setSession(null);
-      Router.push("/auth/login");
-    }
+    // if (response.status === 401) {
+    //   console.log("response 401", response);
+    //   await setSession(null);
+    //   Router.push("/auth/login");
+    // }
     return Promise.reject((error && error) || "Something went wrong");
   }
 );
