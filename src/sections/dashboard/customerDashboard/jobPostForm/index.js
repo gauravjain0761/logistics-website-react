@@ -180,7 +180,7 @@ const JobPostForm = ({
                   Job Posted
                 </Box>
                 <Typography color="text.primary">
-                  {id === "create" ? "Job Post Form" : "Job Edit Form"}
+                  {id === "create" ? "Add New Job" : "Edit Job"}
                 </Typography>
               </Breadcrumbs>
             </Box>
