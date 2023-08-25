@@ -82,163 +82,140 @@ const Login = () => {
         password: values.password,
       };
       login(data);
-      // await axiosInstance
-      //   .post("api/auth/login", data)
-      //   .then((response) => {
-      //     console.log(response.data.user.user_type, "logintype");
-      //     if (response?.status === 200) {
-      //       enqueueSnackbar(response.data.message, {
-      //         variant: "success",
-      //       });
-
-      //       // formik.resetForm();
-      //       console.log("response.data", response.data);
-
-      //       if (response.data.user.user_type === "customer") {
-      //         router.push("/dashboard/customer");
-      //         setSession(response.data.access_token);
-
-      //         // localStorage.setItem("token", response.data.access_token);
-      //       } else if (response.data.user.user_type === "driver") {
-      //         router.push("/dashboard/driver/active_jobs");
-      //         setSession(response.data.access_token);
-
-      //         // localStorage.setItem("token", response.data.access_token);
-      //       } else if (response.data.user.user_type === "company") {
-      //         router.push("/dashboard/company");
-      //         setSession(response.data.access_token);
-
-      //         // localStorage.setItem("token", response.data.access_token);
-      //       }
-      //     } else {
-      //       enqueueSnackbar(response.data.message, {
-      //         variant: "error",
-      //       });
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     const { response } = error;
-      //     if (response.status === 422) {
-      //       // eslint-disable-next-line no-unused-vars
-      //       for (const [key, value] of Object.entries(values)) {
-      //         if (response.data.error[key]) {
-      //           setErrors({ [key]: response.data.error[key][0] });
-      //         }
-      //       }
-      //     }
-      //     if (response?.data?.status === 406) {
-      //       enqueueSnackbar(response.data.message, {
-      //         variant: "error",
-      //       });
-      //     }
-      //   });
     },
   });
 
   return (
     <React.Fragment>
-      <Box
-        sx={{ pb: 4, background: (theme) => theme.palette.grey[400], pt: 12 }}
-      >
+      <Box sx={{ pb: 4, pt: 12 }}>
         <Container>
-          <Grid sx={{ justifyContent: "center" }} container>
-            <Grid item md={5.4} sm={12} xs={12}>
-              <Stack spacing={0.9}>
-                <Card
-                  sx={{
-                    borderRadius: 0,
-                    boxShadow: 0,
-                    background: (theme) => theme.palette.grey[100],
-                  }}
+          <Grid
+            spacing={0}
+            sx={{ justifyContent: "center", alignItems: "center" }}
+            container
+          >
+            <Grid item md={6}>
+              <Box>
+                <Box src="/login/pana.png" component="img" />
+              </Box>
+            </Grid>
+            <Grid item md={4} sm={12} xs={12}>
+              <Stack spacing={3}>
+                <Box textAlign="center">
+                  <Typography fontSize={20} fontWeight={600}>
+                    Hey! Welcome Back
+                  </Typography>
+                </Box>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <CardContent>
-                    <Stack
-                      direction={"row"}
-                      justifyContent={"center"}
-                      alignItems="center"
+                  <Box>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.grey[100],
+                        border: (theme) =>
+                          `1px solid ${theme.palette.grey[300]}`,
+                        borderRadius: "20px",
+                        px: 2,
+                        color: "#fff",
+                        ":hover": {
+                          backgroundColor: (theme) => theme.palette.grey[400],
+                        },
+                      }}
+                      startIcon={<Iconify icon="flat-color-icons:google" />}
+                      onClick={() => handleGoogleLogin()}
                     >
-                      <Iconify icon="uis:unlock" width="30px" color="#ff7534" />
                       <Typography
-                        color={"primary"}
-                        variant="h4"
-                        fontWeight={500}
-                        sx={{ fontSize: "1.95rem!important" }}
+                        fontSize={9}
+                        color={(theme) => theme.palette.grey[600]}
                       >
-                        Hello Again!
+                        Sign in with Google
                       </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-                <Card
-                  sx={{
-                    borderRadius: 0,
-                    boxShadow: 0,
-                    background: (theme) => theme.palette.grey[100],
-                  }}
-                >
-                  <CardContent sx={{ px: "3em" }}>
-                    <Stack spacing={1} py={2}>
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: (theme) => theme.palette.grey[100],
+                        border: (theme) =>
+                          `1px solid ${theme.palette.grey[300]}`,
+                        borderRadius: "20px",
+                        px: 2,
+                        color: "#fff",
+                        ":hover": {
+                          backgroundColor: (theme) => theme.palette.grey[400],
+                        },
+                      }}
+                      startIcon={<Iconify icon="logos:facebook" />}
+                      onClick={() => handleFacebookLogin()}
+                    >
+                      <Typography
+                        fontSize={9}
+                        color={(theme) => theme.palette.grey[600]}
+                      >
+                        Sign in with Facebook
+                      </Typography>
+                    </Button>
+                  </Box>
+                </Stack>
+                <Stack spacing={1} py={1}>
+                  <Box
+                    component="form"
+                    noValidate
+                    onSubmit={formik.handleSubmit}
+                  >
+                    <Stack spacing={2}>
+                      <Box>
+                        <TextBox
+                          fullWidth
+                          label="Email"
+                          placeholder="Enter Your Email Address"
+                          size={"small"}
+                          onChange={formik.handleChange}
+                          value={formik.values.email}
+                          name="email"
+                          helperText={formik?.errors?.email}
+                        />
+                      </Box>
+                      <Box>
+                        <PasswordBox
+                          label="Password"
+                          onChange={formik.handleChange}
+                          fullWidth
+                          placeholder={"Enter Password"}
+                          size={"small"}
+                          value={formik.values.password}
+                          name="password"
+                          helperText={formik?.errors?.password}
+                        />
+                      </Box>
+
                       <Box
-                        component="form"
-                        noValidate
-                        onSubmit={formik.handleSubmit}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
                       >
                         <Box>
-                          <TextBox
-                            fullWidth
-                            placeholder={"Enter Your Email Address"}
-                            startIcon={
-                              <Iconify icon="mdi:user" color="#ff7534" />
-                            }
-                            size={"small"}
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                            name="email"
-                            helperText={formik?.errors?.email}
+                          <FormControlLabel
+                            control={<Checkbox size="" defaultChecked />}
+                            label="Remember me"
+                            sx={{
+                              fontSize: 12,
+                              "&..MuiFormControlLabel-label":{
+                                fontSize: "2px",
+                              },
+                            }}
                           />
                         </Box>
                         <Box>
-                          <PasswordBox
-                            onChange={formik.handleChange}
-                            fullWidth
-                            placeholder={"Enter Password"}
-                            startIcon={
-                              <Iconify icon="solar:lock-bold" color="#ff7534" />
-                            }
-                            size={"small"}
-                            value={formik.values.password}
-                            name="password"
-                            helperText={formik?.errors?.password}
-                          />
-                        </Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Box >
-                            <FormControlLabel
-                              control={<Checkbox size="" defaultChecked />}
-                              label="Remember me"
-                              
-                            />
-                          </Box>
-                          <Box>
-                            <Typography
-                              onClick={() => setOpen(true)}
-                              variant="p"
-                              color="primary"
-                              sx={{ cursor: "pointer", fontSize: "15px" }}
-                            >
-                              Forget Password ?
-                            </Typography>
-                          </Box>
-                        </Box>
-                        <Box mt={2}>
                           <Button
-                            fullWidth
                             variant="contained"
                             color="primary"
                             // onClick={() =>
@@ -246,98 +223,51 @@ const Login = () => {
                             // }
                             type="submit"
                           >
-                            <Typography>Login Now</Typography>
+                            <Typography fontSize={9}>Login Now</Typography>
                           </Button>
                         </Box>
-                        <Box>
-                          <Box textAlign={"center"} mt={4}>
-                            <Typography variant="p" sx={{ fontSize: "1rem" }}>
-                              Don{"'"}t have An Account?{" "}
-                              <Typography
-                                component="span"
-                                color="primary"
-                                onClick={() => router.push("/auth/register")}
-                                sx={{ cursor: "pointer", fontSize: "15px" }}
-                              >
-                                Register Now
-                              </Typography>
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Button
-                              fullWidth
-                              sx={{
-                                backgroundColor: "#2A4E95",
-                                color: "#fff",
-                                my: 1,
-                                ":hover": {
-                                  backgroundColor: "#2a4e95de",
-                                },
-                              }}
-                              startIcon={
-                                <Iconify
-                                  icon="ic:baseline-facebook"
-                                  color="white"
-                                />
-                              }
-                              onClick={() => handleFacebookLogin()}
-                            >
-                              <Typography fontSize={"15px"}>
-                                Continue with Facebook
-                              </Typography>
-                            </Button>
-                          </Box>
-                          <Box>
-                            <Button
-                              fullWidth
-                              sx={{
-                                backgroundColor: "#CD2C2E",
-                                color: "#fff",
-                                ":hover": {
-                                  backgroundColor: "#cd2c2edb",
-                                },
-                              }}
-                              startIcon={
-                                <Iconify
-                                  icon="ant-design:google-outlined"
-                                  color="white"
-                                />
-                              }
-                              onClick={() => handleGoogleLogin()}
-                            >
-                              <Typography fontSize={"15px"}>
-                                Continue with Google
-                              </Typography>
-                            </Button>
-                          </Box>
-                          {/* <Box>
-                            <Button
-                              fullWidth
-                              sx={{
-                                backgroundColor: "#0f0f0f",
-                                color: "#fff",
-                                my: 1,
-                                ":hover": {
-                                  backgroundColor: "#0f0f0fba",
-                                },
-                              }}
-                              startIcon={
-                                <Iconify
-                                  icon="ic:baseline-apple"
-                                  color="white"
-                                />
-                              }
-                            >
-                              <Typography fontSize={"15px"}>
-                                Continue with Apple
-                              </Typography>
-                            </Button>
-                          </Box> */}
-                        </Box>
+                        {/* <Box>
+                          <Typography
+                            onClick={() => setOpen(true)}
+                            variant="p"
+                            color="primary"
+                            sx={{ cursor: "pointer", fontSize: "15px" }}
+                          >
+                            Forget Password ?
+                          </Typography>
+                        </Box> */}
                       </Box>
+                      {/* <Box mt={2} >
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          // onClick={() =>
+                          //   router.push("/dashboard/driver/driver")
+                          // }
+                          type="submit"
+                        >
+                          <Typography fontSize={9}>Login Now</Typography>
+                        </Button>
+                      </Box> */}
                     </Stack>
-                  </CardContent>
-                </Card>
+
+                    <Box>
+                      <Box textAlign={"center"} mt={4}>
+                        <Typography variant="p" fontSize={9}>
+                          Don{"’"}t have an account?
+                        </Typography>
+                        <Typography
+                          component="span"
+                          color="primary"
+                          onClick={() => router.push("/auth/register")}
+                          sx={{ cursor: "pointer", fontSize: "9px", ml: 0.5 }}
+                        >
+                          SIGNUP
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Stack>
               </Stack>
             </Grid>
           </Grid>

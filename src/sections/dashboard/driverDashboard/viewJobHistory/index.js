@@ -37,6 +37,7 @@ const ViewJobHistory = () => {
       .then((response) => {
         if (response?.status === 200) {
           setJobDetail(response?.data?.view_data);
+          setRatings(response?.data?.view_data?.ratings)
         }
       })
       .catch((error) => {
@@ -50,26 +51,7 @@ const ViewJobHistory = () => {
     }
   }, [id]);
 
-  // Rating list api
-  const getRating = async () => {
-    // setLoader(true);
-    await axiosInstance
-      .get(`api/auth/rating/view/${id}`)
-      .then((response) => {
-        if (response?.status === 200) {
-          setRatings(response?.data?.view_data);
-        }
-      })
-      .catch((error) => {
-        console.log("RatignList", error);
-      });
-  };
-  // End
-  React.useEffect(() => {
-    if (id) {
-      getRating();
-    }
-  }, [id]);
+
 
   console.log("jobDetail", jobDetail, ratings);
   return (
@@ -115,7 +97,7 @@ const ViewJobHistory = () => {
                         </Grid>
                         <Grid item md={12} mt={2}>
                           <Typography fontWeight={500}>
-                            Pick Up Address :-
+                            Pick Up Address 
                           </Typography>
                         </Grid>
                         <Grid item md={12}>
@@ -322,31 +304,27 @@ const ViewJobHistory = () => {
                       Rating & Reviews
                     </Typography>
                   </Box>
-                  {jobDetail?.ratings &&
-                    jobDetail?.ratings?.length > 0 &&
-                    jobDetail?.ratings.map((item, index) => {
+
+                  {ratings &&
+                    ratings?.length > 0 &&
+                    ratings.map((item, index) => {
                       return (
                         <React.Fragment key={`jobDetail-${index}`}>
-                          <Stack spacing={3} direction="row">
+                          <Stack spacing={3} direction="row" mt={3}>
                             <Box
                               component="img"
                               src={`${item?.base_url}${item?.image}`}
                               width={60}
                               height={60}
                             />
-                            <Stack direction="column" spacing={2}>
-                              {/* <Box>
-                                <Typography variant="subtitle1" color="primary">
-                                  {item?.name}
-                                </Typography>
-                              </Box> */}
+                            <Stack direction="column" spacing={1}>
+                             
                               <Box>
                                 <Rating
                                   value={item?.rating}
                                   readOnly
                                   size="small"
                                 />
-                                <Divider />
                               </Box>
                               <Box>
                                 <Typography fontSize={14}>
@@ -362,7 +340,6 @@ const ViewJobHistory = () => {
                       );
                     })}
                 </Box>
-                <Divider />
               </CardContent>
             </Card>
           </Box>

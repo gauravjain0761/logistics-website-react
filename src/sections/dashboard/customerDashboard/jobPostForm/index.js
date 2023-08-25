@@ -527,15 +527,16 @@ const JobPostForm = ({
                                                             <Typography
                                                               fontSize={14}
                                                             >
-                                                              Select Address
+                                                              Address
                                                               Type
                                                             </Typography>
                                                             <Stack
                                                               direction="row"
                                                               mb={1.3}
                                                             >
-                                                              <SelectBox
+                                                              <TextBox
                                                                 fullWidth
+                                                                disabled
                                                                 placeholder="Enter Pickup or Drop"
                                                                 options={
                                                                   DropTypeSelect
@@ -560,12 +561,6 @@ const JobPostForm = ({
                                                                     .type
                                                                 }
                                                                 size="small"
-                                                                startIcon={
-                                                                  <Iconify
-                                                                    icon="uil:focus"
-                                                                    color="#ff7534"
-                                                                  />
-                                                                }
                                                                 type="small"
                                                               />
                                                             </Stack>
