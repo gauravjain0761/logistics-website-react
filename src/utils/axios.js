@@ -16,10 +16,8 @@ axiosInstance.interceptors.response.use(
       console.log("response 401", response);
       await setSession(null);
       Router.push("/auth/login");
-      // window.location.href = "/auth/login";
-    } else {
-      return Promise.reject((error && error) || "Something went wrong");
     }
+    return Promise.reject((error && error) || "Something went wrong");
   }
 );
 
