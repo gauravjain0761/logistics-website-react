@@ -90,8 +90,6 @@ export function AuthProvider({ children }) {
 
         const user = response?.data?.view_data;
 
-        console.log("useruser", user);
-
         dispatch({
           type: "INITIAL",
           payload: {
@@ -110,6 +108,7 @@ export function AuthProvider({ children }) {
       }
     } catch (error) {
       console.error(error);
+      const { response } = error;
       dispatch({
         type: "INITIAL",
         payload: {
@@ -117,6 +116,12 @@ export function AuthProvider({ children }) {
           user: null,
         },
       });
+      if (response.status === 401) {
+        router.push("/auth/login");
+        dispatch({
+          type: "LOGOUT",
+        });
+      }
     }
   }, [storageAvailable]);
 
@@ -182,6 +187,12 @@ export function AuthProvider({ children }) {
       });
     } catch (error) {
       const { response } = error;
+      if (response.status === 401) {
+        router.push("/auth/login");
+        dispatch({
+          type: "LOGOUT",
+        });
+      }
       enqueueSnackbar(response?.data?.error, {
         variant: "error",
       });
