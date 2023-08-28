@@ -182,6 +182,13 @@ const Header = (props) => {
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
                           : theme.palette.text.primary,
+                      borderColor: (theme) =>
+                        router.asPath.startsWith("/dashboard")
+                          ? theme.palette.primary.main
+                          : theme.palette.text.primary,
+                      borderBottom: router.asPath.startsWith("/dashboard")
+                        ? "2px solid"
+                        : "",
                       ...theme.typography.subtitle2,
                       textDecoration: "none",
                     }}
@@ -202,6 +209,13 @@ const Header = (props) => {
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
                           : theme.palette.text.primary,
+                      borderColor: (theme) =>
+                        router.asPath.startsWith("/dashboard")
+                          ? theme.palette.primary.main
+                          : theme.palette.text.primary,
+                      borderBottom: router.asPath.startsWith("/dashboard")
+                        ? "2px solid"
+                        : "",
                       ...theme.typography.subtitle2,
                       textDecoration: "none",
                     }}
@@ -224,6 +238,14 @@ const Header = (props) => {
                       router.asPath === `/${user?.user_type}/profile`
                         ? theme.palette.primary.main
                         : theme.palette.text.primary,
+                    borderColor: (theme) =>
+                      router.asPath === `/${user?.user_type}/profile`
+                        ? theme.palette.primary.main
+                        : theme.palette.text.primary,
+                    borderBottom:
+                      router.asPath === `/${user?.user_type}/profile`
+                        ? "2px solid"
+                        : "",
                     ...theme.typography.subtitle2,
                     textDecoration: "none",
                   }}
@@ -236,7 +258,7 @@ const Header = (props) => {
               <div>
                 <Button
                   variant="outlined"
-                  sx={{ color: "#000",ml:0.8, mr: 1.5 }}
+                  sx={{ color: "#000", ml: 0.8, mr: 1.5 }}
                   onClick={() => router.push("/contact_us")}
                 >
                   Contact us
