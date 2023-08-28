@@ -177,7 +177,7 @@ const Header = (props) => {
                 (user?.user_type !== "driver" ? (
                   <Typography
                     sx={{
-                      mr: 1.1,
+                      mx: 1,
                       color: (theme) =>
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
