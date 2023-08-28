@@ -2,29 +2,71 @@ import { SelectBox, TextBox } from "@/components/form";
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const VehicleSelect = [
+const VehicleTypeTruck = [
   {
-    label: "Choose Vehicle",
+    label: "7.5t",
+    value: "7.5t",
+  },
+  {
+    label: "10t",
+    value: "10t",
+  },
+  {
+    label: "18t",
+    value: "18t",
+  },
+  {
+    label: "26t",
+    value: "26t",
+  },
+  {
+    label: "Trailer",
+    value: "Trailer",
+  },
+  {
+    label: "Attic",
+    value: "Attic",
+  },
+];
+const VehicleTypeVan = [
+  {
+    label: "Small van",
+    value: "Small van",
+  },
+  {
+    label: "SWB 2.4 m ",
+    value: "SWB 2.4 m ",
+  },
+  {
+    label: "Medium 3 m",
+    value: "Medium 3 m",
+  },
+  {
+    label: "Lwb 4m",
+    value: "Lwb 4m",
+  },
+  {
+    label: "XLWB",
+    value: "XLWB",
+  },
+];
+const VehicleType = [
+  {
+    label: "Choose Vehicle Type",
     value: 0,
   },
   {
-    label: "Bike",
-    value: "Bike",
+    label: "Vans",
+    value: "van",
   },
+
   {
-    label: "Van",
-    value: "Van",
-  },
-  {
-    label: "Truck",
-    value: "Truck",
-  },
-  {
-    label: "Other",
-    value: "Other",
+    label: "Trucks/ lorrys",
+    value: "truck",
   },
 ];
 const StepThree = ({ formik }) => {
+  const [vehicle, setVehicle] = React.useState([]);
   return (
     <>
       <Box mb={2}>
@@ -33,14 +75,39 @@ const StepThree = ({ formik }) => {
         </Typography>
       </Box>
 
-      <Grid container>
+      <Grid container spacing={2}>
+        <Grid item md={12}>
+          <SelectBox
+            fullWidth
+            label="Vehicle Type"
+            value={formik.values?.vehical_type}
+            name={`vehical_type`}
+            options={VehicleType}
+            onChange={(e) => {
+              formik.setFieldValue("vehical_type", e.target.value);
+              formik.setFieldValue("vehicle", "");
+              if (e.target.value === "van") {
+                setVehicle(VehicleTypeVan);
+              } else if (e.target.value === "truck") {
+                setVehicle(VehicleTypeTruck);
+              } else {
+                setVehicle([]);
+              }
+            }}
+            helperText={
+              formik.touched.vehical_type && formik.errors.vehical_type
+            }
+            size="small"
+            vehicle="small"
+          />
+        </Grid>
         <Grid item md={12}>
           <SelectBox
             fullWidth
             label="Vehicle"
             value={formik.values?.vehicle}
             name={`vehicle`}
-            options={VehicleSelect}
+            options={vehicle}
             onChange={formik.handleChange}
             helperText={formik.touched.vehicle && formik.errors.vehicle}
             size="small"

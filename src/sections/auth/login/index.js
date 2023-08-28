@@ -87,7 +87,7 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <Box sx={{ pb: 4, pt: 12 }}>
+      <Box sx={{ py:14 }}>
         <Container>
           <Grid
             spacing={0}

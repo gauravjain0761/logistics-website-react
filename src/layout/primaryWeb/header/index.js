@@ -218,8 +218,8 @@ const Header = (props) => {
               {isAuthenticated && (
                 <Typography
                   sx={{
-                    mx: 1,
-                    pr:1,
+                    mx: 1.5,
+                    pr: 1,
                     color: (theme) =>
                       router.asPath === `/${user?.user_type}/profile`
                         ? theme.palette.primary.main
@@ -234,6 +234,13 @@ const Header = (props) => {
                 </Typography>
               )}
               <div>
+                <Button
+                  variant="outlined"
+                  sx={{ color: "#000",ml:0.8, mr: 1.5 }}
+                  onClick={() => router.push("/contact_us")}
+                >
+                  Contact us
+                </Button>
                 <Button variant="contained" onClick={handleAuth}>
                   {isAuthenticated ? "Log Out" : "Log in"}
                 </Button>

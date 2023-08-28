@@ -149,7 +149,7 @@ const JobPostForm = ({
 
   return (
     <React.Fragment>
-      <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8 }}>
+      <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8, pb:12 }}>
         <Container sx={{ py: 3 }}>
           <Stack spacing={4}>
             <Box>

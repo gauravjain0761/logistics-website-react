@@ -15,7 +15,7 @@ import React from "react";
 const TrackJob = ({ formik }) => {
   return (
     <React.Fragment>
-      <Box mt={12}>
+      <Box mt={12} pb={12}>
         <Container>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
             <TrackGoogleMaps />

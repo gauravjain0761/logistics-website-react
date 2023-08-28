@@ -46,15 +46,15 @@ const navConfig = [
     token: (token) => true,
   },
   {
-    title: "Blog",
+    title: "Blogs",
     path: "/blogs",
     token: (token) => true,
   },
-  {
-    title: "Contact Us",
-    path: "/contact_us",
-    token: (token) => true,
-  },
+  // {
+  //   title: "Contact Us",
+  //   path: "/contact_us",
+  //   token: (token) => true,
+  // },
   // {
   //   title: "My Profile",
   //   path: "/dashboard/customer/profile",

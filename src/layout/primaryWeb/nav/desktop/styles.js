@@ -29,6 +29,7 @@ export const ListItem = styled(ListItemButton, {
     padding: 0,
     height: "100%",
     color: theme.palette.text.primary,
+    
     transition: theme.transitions.create("opacity", {
       duration: theme.transitions.duration.shorter,
     }),
@@ -40,6 +41,8 @@ export const ListItem = styled(ListItemButton, {
     ...(subItem && {
       ...theme.typography.body2,
       color: theme.palette.text.secondary,
+     
+      
     }),
     // isOffset
     ...(isOffset && {
@@ -48,6 +51,8 @@ export const ListItem = styled(ListItemButton, {
     // Active
     ...(active && {
       color: `${theme.palette.primary.main} !important`,
+      borderBottom:"2px solid",
+     
       // "&::before": dotActive,
     }),
 
@@ -64,6 +69,7 @@ export const ListItem = styled(ListItemButton, {
       subItem && {
         ...theme.typography.subtitle2,
         color: theme.palette.text.primary,
+        
         "&::before": {
           // ...dotActive,
           color: theme.palette.primary.main,
@@ -90,6 +96,7 @@ export const ListSubItem = styled(ListItemButton, {
     position: "absolute",
     width: 6,
     height: 6,
+  
     left: -14,
     opacity: 0.48,
     backgroundColor: "currentColor",

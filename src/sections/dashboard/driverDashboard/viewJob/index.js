@@ -61,7 +61,7 @@ const ViewJobDetail = () => {
  
   return (
     <React.Fragment>
-      <Box mt={10}>
+      <Box mt={10} pb={12}>
         <Container>
           {loader ? (
             <SkeletonLoader />

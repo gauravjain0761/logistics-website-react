@@ -39,6 +39,9 @@ const TextBox = (props) => {
     min,
     readOnly,
     onSelect,
+    textBoxSx,
+    isBackgroundColor = false,
+    IconSx,
   } = props;
 
   return (
@@ -46,7 +49,10 @@ const TextBox = (props) => {
       key={`key${name}`}
       error={helperText ? true : false}
       fullWidth={fullWidth}
-      sx={formSx}
+      sx={{
+        ...formSx,
+        borderRadius: "0.25rem",
+      }}
     >
       <Stack direction="row">
         {startIcon && (
@@ -71,13 +77,16 @@ const TextBox = (props) => {
           error={helperText ? true : false}
           variant={variant}
           name={name}
-          sx={{
-            background: (theme) => theme.palette.common.white,
-
-            "&.MuiOutlinedInput-input": {
-              background: (theme) => theme.palette.common.white,
-            },
-          }}
+          sx={
+            !isBackgroundColor
+              ? {
+                  "& .MuiOutlinedInput-input": {
+                    background: (theme) => theme.palette.common.white,
+                    borderRadius: "0.25rem",
+                  },
+                }
+              : { ...textBoxSx }
+          }
           label={label}
           InputLabelProps={InputLabelProps}
           type={type}
