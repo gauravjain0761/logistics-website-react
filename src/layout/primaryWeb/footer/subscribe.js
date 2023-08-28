@@ -21,10 +21,17 @@ import React from "react";
 
 const Subscribe = () => {
   return (
-    <Box sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}>
+    <Box>
       <Container>
-        <CardContent sx={{ paddingBottom: "24px!imporatant" }}>
+        <CardContent sx={{ paddingBottom: "24px!imporatant",position:"relative" }}>
           <Stack
+            sx={{
+              backgroundColor: (theme) => theme.palette.primary.main,
+              p: 3,
+              borderRadius: "20px",
+              position:"absolute",
+              top:"-4em"
+            }}
             justifyContent="space-between"
             direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
             alignItems="center"
@@ -33,76 +40,43 @@ const Subscribe = () => {
             <Box>
               <Stack direction="row" spacing={6}>
                 <Box>
-                  <Stack direction="row" spacing={1.5} alignItems="center">
+                  <Stack direction="column" spacing={1.5} alignItems="left">
                     <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: (theme) => alpha(theme.palette.common.black, 1),
-                        fontSize: "18px",
-                      }}
+                      color={(theme) => theme.palette.common.white}
+                      fontSize={24}
+                      fontWeight={600}
                     >
-                      Call Us
-                    </Typography>
+                      Subscribe To Our newsletter
+                    </Typography>{" "}
                     <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: (theme) =>
-                          alpha(theme.palette.common.black, 0.6),
-                        fontSize: "18px",
-                      }}
+                      color={(theme) => theme.palette.common.white}
+                      fontSize={14}
+                      fontWeight={400}
                     >
-                      0123456789
+                      Lorem ipsum dolor sit amet consectetur. Mi nibh venenatis
+                      in suscipit turpis.
                     </Typography>
                   </Stack>
                 </Box>
-                <Box>
-                  <Stack direction="row" spacing={1.5} alignItems="center">
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: (theme) => alpha(theme.palette.common.black, 1),
-                        fontSize: "18px",
-                      }}
-                    >
-                      Email
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: (theme) =>
-                          alpha(theme.palette.common.black, 0.6),
-                        fontSize: "18px",
-                      }}
-                    >
-                      info@abcd.co.uk
-                    </Typography>
-                  </Stack>
-                </Box>
-              </Stack>
-            </Box>
-            <Box>
-              <Stack direction="row" spacing={1}>
-                <Box>
-                  <LinkedIn fontSize="large" />
-                </Box>
-                <Box>
-                  <Twitter fontSize="large" />
-                </Box>
-                <Box>
-                  <Facebook fontSize="large" />
-                </Box>
-                <Box>
-                  <YouTube fontSize="large" />
-                </Box>
-                <Box>
-                  <Instagram fontSize="large" />
-                </Box>
+                <Stack direction="row" alignItems="center">
+                  <Box>
+                    <TextBox
+                      fullWidth
+                      sx={{ backgroundColor: "transparent" }}
+                      label="Enter Your Email"
+                      size="small"
+                      onChange={(e) => e.target.value}
+                    />
+                  </Box>
+                  <Box>
+                    <Button variant="contained">Subscribe Now</Button>
+                  </Box>
+                </Stack>
               </Stack>
             </Box>
           </Stack>
         </CardContent>
         <Container>
-          <Divider sx={{ mx: 0 }} />
         </Container>
       </Container>
     </Box>

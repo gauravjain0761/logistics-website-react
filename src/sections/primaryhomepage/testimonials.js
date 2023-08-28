@@ -37,7 +37,7 @@ const Testimonials = () => {
   };
   return (
     <>
-      <Box sx={{ backgroundColor: "#FFF8F4", py: 8, position: "relative" }}>
+      <Box sx={{ backgroundColor: "#FFF8F4", py: 8,pb:20, position: "relative" }}>
         <Container>
           <Box textAlign="center" mb={8}>
             <Box>
