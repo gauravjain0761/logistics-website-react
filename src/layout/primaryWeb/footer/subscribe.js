@@ -23,14 +23,16 @@ const Subscribe = () => {
   return (
     <Box>
       <Container>
-        <CardContent sx={{ paddingBottom: "24px!imporatant",position:"relative" }}>
+        <CardContent
+          sx={{ paddingBottom: "24px!imporatant", position: "relative" }}
+        >
           <Stack
             sx={{
               backgroundColor: (theme) => theme.palette.primary.main,
               p: 3,
               borderRadius: "20px",
-              position:"absolute",
-              top:"-4em"
+              position: "absolute",
+              top: "-4em",
             }}
             justifyContent="space-between"
             direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
@@ -58,26 +60,48 @@ const Subscribe = () => {
                     </Typography>
                   </Stack>
                 </Box>
-                <Stack direction="row" alignItems="center">
+                <Stack direction="row" spacing={2} alignItems="center">
                   <Box>
                     <TextBox
                       fullWidth
-                      sx={{ backgroundColor: "transparent" }}
+                      isBackgroundColor={true}
+                      textBoxSx={{
+                        "& .MuiOutlinedInput-input": {
+                          background: "transparent !important",
+                          color: "#fff",
+                        },
+                        "& .MuiInputLabel-root": {
+                          color: "#fff !important",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderRadius: "10px",
+                          borderColor: "#DFDFDF !important",
+                        },
+                      }}
                       label="Enter Your Email"
                       size="small"
                       onChange={(e) => e.target.value}
                     />
                   </Box>
                   <Box>
-                    <Button variant="contained">Subscribe Now</Button>
+                    <Button
+                      variant="contained"
+                      color="light"
+                      sx={{
+                        height: "40px",
+                        borderRadius: "10px",
+                        color: (theme) => theme.palette.primary.main,
+                      }}
+                    >
+                      Subscribe Now
+                    </Button>
                   </Box>
                 </Stack>
               </Stack>
             </Box>
           </Stack>
         </CardContent>
-        <Container>
-        </Container>
+        <Container></Container>
       </Container>
     </Box>
   );
