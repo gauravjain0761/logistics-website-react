@@ -1,5 +1,5 @@
 import { Heading } from "@/components/typography";
-import { List, ListItemButton, ListItemText } from "@mui/material";
+import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import React from "react";
 import { StyledListItemText } from "./footerStyle";
 
@@ -17,7 +17,11 @@ const SectionTwo = () => {
 
         }}
       /> */}
+      
       <List>
+      <ListItem>
+<Typography fontSize={20} fontWeight={600}>Website Links</Typography>
+      </ListItem>
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Jobs" />
         </ListItemButton>

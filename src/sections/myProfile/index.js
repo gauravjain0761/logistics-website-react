@@ -109,12 +109,12 @@ const Profile = ({ data, formik, loader }) => {
                                   m: "auto",
                                 }}
                               >
-                                <Iconify icon="et:profile-male" width="110px" />
+                                <Iconify icon="et:profile-male" width="100px" />
                                 <Box
                                   sx={{
                                     position: "absolute",
                                     bottom: "0px",
-                                    right: "11em",
+                                    right: "0em",
                                   }}
                                 >
                                   <Iconify
