@@ -197,7 +197,7 @@ const DashboardJobPost = () => {
   // }, [user, user?.id]);
   return (
     <React.Fragment>
-      <Box py={3}>
+      <Box py={3} pb={12}>
         <Container>
           <Box py={5}>
             <DashboardCard activeJob={data} />

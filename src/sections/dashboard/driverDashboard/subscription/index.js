@@ -53,22 +53,22 @@ const SubscriptionsPage = () => {
         alt=""
         title="Subscription"
       />
-      <Box sx={{ backgroundColor: "#f5f5f5" }}>
+      <Box sx={{ backgroundColor: "#f5f5f5" ,pb:6  }}>
         {loading ? (
           <>
             <SkeletonLoader />
           </>
         ) : (
           <Container>
-            <Stack textAlign="center" mx={18} py={8}>
+            <Stack textAlign="center" mx={18} py={8} >
               <Box>
                 <Typography variant="h3">
                   Choose the Right Plan For You
                 </Typography>
               </Box>
             </Stack>
-            <Box pb={6}>
-              <Grid container spacing={6}>
+            <Box pb={14}>
+              <Grid container spacing={6} >
                 {data &&
                   data?.length > 0 &&
                   data.map((elem, index) => {

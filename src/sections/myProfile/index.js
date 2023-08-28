@@ -30,7 +30,7 @@ const Profile = ({ data, formik, loader }) => {
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: (theme) => theme.palette.grey[300] }}>
-        <Box mt={8}>
+        <Box mt={8} pb={14}>
           <Container>
             {loader ? (
               <Box sx={{ py: 4 }}>

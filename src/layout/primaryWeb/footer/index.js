@@ -23,6 +23,7 @@ const Footer = () => {
       <Box
         sx={{
           backgroundColor: (theme) => theme.palette.common.white,
+          position: "relative",
         }}
       >
         <Subscribe />

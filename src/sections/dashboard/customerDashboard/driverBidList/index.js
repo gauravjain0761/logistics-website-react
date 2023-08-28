@@ -109,7 +109,7 @@ const BidList = () => {
 
   return (
     <React.Fragment>
-      <Box py={4} sx={{ mt: 10 }}>
+      <Box py={4} sx={{ mt: 10 }} pb={12}>
         <Container>
           <Grid container spacing={2}>
             <Grid item md={6}>

@@ -21,6 +21,7 @@ const PrimaryWebLayout = (props) => {
       <Header />
       <Box id="back-to-top-anchor" />
       {children}
+      {/* <Toolbar /> */}
       <Footer />
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">

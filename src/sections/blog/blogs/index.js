@@ -58,7 +58,7 @@ const Blogs = ({ formik }) => {
         subTitle="Here are some Informational Blogs to enhance
 your understanding of of our website."
       />
-      <Box py={9}>
+      <Box py={9} pb={14}>
         <Container>
           {loader ? (
             <SkeletonLoader />

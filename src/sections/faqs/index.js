@@ -52,7 +52,7 @@ const FaqsPage = () => {
         alt=""
         title="FAQs"
       />
-      <Box py={8}>
+      <Box py={8} pb={14}>
         <Container>
           {loading ? (
             <SkeletonLoader />

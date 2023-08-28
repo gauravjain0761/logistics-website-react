@@ -61,7 +61,7 @@ const ViewJobHistory = () => {
   console.log("jobDetail", jobDetail, ratings);
   return (
     <React.Fragment>
-      <Box mt={10}>
+      <Box mt={10} pb={12}>
         <Container>
           <Box my={4}>
             <Button

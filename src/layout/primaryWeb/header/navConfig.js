@@ -14,14 +14,7 @@ export const navItems = [
     link: "/jobs",
     isArrow: false,
   },
-  // {
-  //   name: "Testimonials",
-  //   link: "/testimonials",
-  // },
-  // {
-  //   name: "FAQ",
-  //   link: "/contact",
-  // },
+  
   {
     name: "Contact us",
     link: "/contact",

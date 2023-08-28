@@ -86,7 +86,7 @@ const BlogDetail = () => {
         alt=""
         title="Blog Detail"
       />
-      <Box py={5}>
+      <Box py={5} pb={14}>
         {loader ? (
           <Container>
             <SkeletonLoader />

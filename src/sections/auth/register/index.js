@@ -26,7 +26,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
 
   return (
     <React.Fragment>
-      <Box sx={{ pb: 4, pt: 12 }}>
+      <Box sx={{ pb: 4, py: 12 }}>
         <Container>
           <Grid sx={{ justifyContent: "center" }} spacing={0} container>
             <Grid item md={6}>

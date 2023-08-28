@@ -120,7 +120,7 @@ const DashboardJobPost = ({ formik }) => {
   ];
   return (
     <React.Fragment>
-      <Box py={3}>
+      <Box py={3} pb={12}>
         <Container>
           <Box py={5}>
             <DashboardCard jobPost={data?.length} />
@@ -907,7 +907,6 @@ const DeleteModal = ({ id }) => {
   return (
     <Box>
       <Button onClick={handleOpen}>
-        {" "}
         <Iconify
           icon="fluent:delete-12-regular"
           width="1.7em"
