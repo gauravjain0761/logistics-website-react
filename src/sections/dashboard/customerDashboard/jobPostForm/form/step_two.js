@@ -142,13 +142,13 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           value={moment(productItem?.product?.drop_date).format(
                             "YYYY-MM-DD"
                           )}
-                          min={
-                            productItem?.product?.drop_date
-                              ? new Date(productItem?.product?.drop_date)
-                                  .toISOString()
-                                  .split("T")[0]
-                              : new Date().toISOString().split("T")[0]
-                          }
+                          // min={
+                          //   productItem?.product?.drop_date
+                          //     ? new Date(productItem?.product?.drop_date)
+                          //         .toISOString()
+                          //         .split("T")[0]
+                          //     : new Date().toISOString().split("T")[0]
+                          // }
                           name={`items[${productIndex}].product.drop_date`}
                           onChange={(e) => {
                             formik.setFieldValue(
