@@ -103,8 +103,9 @@ const MyProfilePage = () => {
   React.useEffect(() => {
     getProfile();
   }, [user, user?.id]);
+ 
 
-  console.log("datadata", loader);
+  console.log("datadataformik", formik);
   return (
     <AuthGuard>
       <Profile formik={formik} data={data} loader={loader} />

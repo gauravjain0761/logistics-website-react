@@ -107,7 +107,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               ""
                             );
                           }}
-                          onKeyDown={(event) => event.preventDefault()}
+                          // onKeyDown={(event) => event.preventDefault()}
                           size={"small"}
                         />
                       </Box>
@@ -156,7 +156,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               e.target.value
                             );
                           }}
-                          onKeyDown={(event) => event.preventDefault()}
+                          // onKeyDown={(event) => event.preventDefault()}
                           size={"small"}
                         />
                       </Box>

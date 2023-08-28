@@ -235,7 +235,7 @@ const Header = (props) => {
               )}
               <div>
                 <Button variant="contained" onClick={handleAuth}>
-                  {isAuthenticated ? "Log Out" : "Sign in/ Sign up"}
+                  {isAuthenticated ? "Log Out" : "Log in"}
                 </Button>
                 {/* {token ? (
                   <Box component="div">
