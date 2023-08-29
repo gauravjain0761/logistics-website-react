@@ -110,6 +110,7 @@ const StepThree = ({ formik }) => {
             options={vehicle}
             onChange={formik.handleChange}
             helperText={formik.touched.vehicle && formik.errors.vehicle}
+         
             size="small"
             vehicle="small"
           />

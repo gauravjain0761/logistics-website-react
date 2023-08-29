@@ -3,7 +3,7 @@ import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
-import { every, isEmpty, reject } from "lodash";
+import { every, includes, isEmpty, reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
@@ -69,12 +69,13 @@ const PostJob = () => {
               };
             } else {
               addressObject = {
-                address: "Address is required",
+                address: "",
                 index: addressIndex,
               };
             }
             address.push(addressObject);
             itemObject["address"] = address;
+            addressObject = {};
           });
         }
 
@@ -149,10 +150,20 @@ const PostJob = () => {
         let address = false;
 
         if (product?.address) {
-          address = every(product?.address, (address) => isEmpty(address));
+          address = every(product?.address, (address) => !address?.address);
         }
 
-        isProduct = isEmpty(product?.product);
+        isProduct =
+          isEmpty(product?.product?.image) &&
+          isEmpty(product?.product?.height) &&
+          isEmpty(product?.product?.length) &&
+          isEmpty(product?.product?.width) &&
+          isEmpty(product?.product?.material) &&
+          isEmpty(product?.product?.pickup_date) &&
+          isEmpty(product?.product?.pickup_time) &&
+          isEmpty(product?.product?.drop_date) &&
+          isEmpty(product?.product?.drop_time);
+
 
         if (isProduct && address) {
           return true;
@@ -187,13 +198,15 @@ const PostJob = () => {
       if (values?.items?.length) {
         itemsValidation(values, errors);
       }
-      // if (!values.vehicle) {
-      //   errors.vehicle = "Vehicle is required";
-      // }
+      if (!values.vehicle) {
+        errors.vehicle = "Vehicle is required";
+      }if (!values.vehical_type) {
+        errors.vehical_type = "Vehicle Type is required";
+      }
 
-      // if (!values.description) {
-      //   errors.description = "Description is required";
-      // }
+      if (!values.description) {
+        errors.description = "Description is required";
+      }
 
       return errors;
     },
