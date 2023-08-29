@@ -124,7 +124,7 @@ const JobPostForm = ({
     },
     {
       title: "Details",
-      fields: [""],
+      fields: ["items"],
       component: (
         <>
           <StepTwo
@@ -155,25 +155,33 @@ const JobPostForm = ({
             <Box>
               {/* <DashboardCard /> */}
               <Breadcrumbs aria-label="breadcrumb">
-              
-                <Box component={Link}  sx={{textDecoration:"none",}} color="grey" href="/">
+                <Box
+                  component={Link}
+                  sx={{ textDecoration: "none" }}
+                  color="grey"
+                  href="/"
+                >
                   Home
                 </Box>
                 <Box
-                component={Link}  sx={{textDecoration:"none",}} 
+                  component={Link}
+                  sx={{ textDecoration: "none" }}
                   color="grey"
                   href="/dashboard/customer"
                 >
                   Dashboard
                 </Box>
                 <Box
-                component={Link}  sx={{textDecoration:"none",}} 
+                  component={Link}
+                  sx={{ textDecoration: "none" }}
                   color="grey"
                   href="/dashboard/customer/job_posted"
                 >
                   Job Posted
                 </Box>
-                <Typography color="text.primary">Job Post form</Typography>
+                <Typography color="text.primary">
+                  {id === "create" ? "Add New Job" : "Edit Job"}
+                </Typography>
               </Breadcrumbs>
             </Box>
             <Box>
@@ -183,7 +191,7 @@ const JobPostForm = ({
                     {/* <Iconify width="2em" icon="ion:briefcase" color="#ff7534" /> */}
                     <Typography fontWeight={500} fontSize={24}>
                       {" "}
-                      Post Your Job
+                      {id === "create" ? "Post Your Job" : "Edit Your Job"}
                     </Typography>
                   </Stack>
                   <Box
@@ -211,7 +219,6 @@ const JobPostForm = ({
                             addProduct={addProduct}
                           />
                         </Grid>
-
                         <Grid item md={12}>
                           <StepThree formik={formik} />
                         </Grid>

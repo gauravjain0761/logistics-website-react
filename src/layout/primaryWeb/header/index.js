@@ -178,6 +178,11 @@ const Header = (props) => {
                   <Typography
                     sx={{
                       mx: 1,
+                      borderBottom: (theme) =>
+                        router.asPath.startsWith("/dashboard")
+                          ? "2px solid"
+                          : "none",
+                      
                       color: (theme) =>
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
@@ -205,6 +210,11 @@ const Header = (props) => {
                   <Typography
                     sx={{
                       mx: 1,
+                      borderBottom: (theme) =>
+                      router.asPath.startsWith("/dashboard")
+                        ? "2px solid"
+                        : "none",
+                    
                       color: (theme) =>
                         router.asPath.startsWith("/dashboard")
                           ? theme.palette.primary.main
@@ -234,6 +244,11 @@ const Header = (props) => {
                   sx={{
                     mx: 1.5,
                     pr: 1,
+                    borderBottom: (theme) =>
+                    router.asPath === `/${user?.user_type}/profile`
+                      ? "2px solid"
+                      : "none",
+                  
                     color: (theme) =>
                       router.asPath === `/${user?.user_type}/profile`
                         ? theme.palette.primary.main
@@ -266,39 +281,7 @@ const Header = (props) => {
                 <Button variant="contained" onClick={handleAuth}>
                   {isAuthenticated ? "Log Out" : "Log in"}
                 </Button>
-                {/* {token ? (
-                  <Box component="div">
-                    <Button
-                      onClick={() => {
-                        clearToken();
-                        router.push("/auth/login");
-                      }}
-                      sx={{ color: "#fff", ml: 1 }}
-                      aria-owns="mouse-over-popover"
-                      aria-haspopup="true"
-                      variant="contained"
-                    >
-                      <Typography variant="subtitle2">Log out</Typography>
-                    </Button>
-                  </Box>
-                ) : (
-                  <Box component="div">
-                    <Button
-                      onClick={() => {
-                        // clearToken();
-                        router.push("/auth/login");
-                      }}
-                      sx={{ color: "#fff", ml: 1 }}
-                      aria-owns="mouse-over-popover"
-                      aria-haspopup="true"
-                      variant="contained"
-                    >
-                      <Typography variant="subtitle2">
-                        Sign in/ Sign up
-                      </Typography>
-                    </Button>
-                  </Box>
-                )} */}
+             
               </div>
             </Stack>
             <IconButton

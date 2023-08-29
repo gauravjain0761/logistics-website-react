@@ -3,7 +3,7 @@ import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
-import { reject } from "lodash";
+import { every, isEmpty, reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
@@ -18,6 +18,7 @@ const PostJob = () => {
   const { user } = useAuthContext();
   const { value, setValue } = useContext(StepperContext);
   const isLastStep = value === 3 - 1;
+
   const PickupAddress = {
     address: "",
     lat: 3434.34,
@@ -47,13 +48,132 @@ const PostJob = () => {
     address: [PickupAddress, DropAddress],
   };
 
+  const itemsValidation = (values, errors) => {
+    errors.items = [];
+    let address = [];
+
+    let itemObject = {};
+    let addressObject = {};
+
+    values?.items &&
+      values?.items?.length > 0 &&
+      values?.items.forEach((element, elementIndex) => {
+        itemObject["product"] = {};
+
+        if (element?.address?.length) {
+          element.address.forEach((addressElement, addressIndex) => {
+            if (!addressElement?.address) {
+              addressObject = {
+                address: "Address is required",
+                index: addressIndex,
+              };
+            } else {
+              addressObject = {
+                address: "Address is required",
+                index: addressIndex,
+              };
+            }
+            address.push(addressObject);
+            itemObject["address"] = address;
+          });
+        }
+
+        itemObject["product"]["index"] = elementIndex;
+
+        if (!element?.product?.image) {
+          itemObject["product"]["image"] = "Image is required";
+        } else {
+          itemObject["product"]["image"] = "";
+        }
+
+        if (!element?.product?.height) {
+          itemObject["product"]["height"] = "Height is required";
+        } else {
+          itemObject["product"]["height"] = "";
+        }
+
+        if (!element?.product?.length) {
+          itemObject["product"]["length"] = "Length is required";
+        } else {
+          itemObject["product"]["length"] = "";
+        }
+
+        if (!element?.product?.width) {
+          itemObject["product"]["width"] = "Width is required";
+        } else {
+          itemObject["product"]["width"] = "";
+        }
+
+        if (!element?.product?.material) {
+          itemObject["product"]["material"] = "Material is required";
+        } else {
+          itemObject["product"]["material"] = "";
+        }
+
+        if (!element?.product?.pickup_date) {
+          itemObject["product"]["pickup_date"] = "Pickup date is required";
+        } else {
+          itemObject["product"]["pickup_date"] = "";
+        }
+
+        if (!element?.product?.pickup_time) {
+          itemObject["product"]["pickup_time"] = "Pickup time is required";
+        } else {
+          itemObject["product"]["pickup_time"] = "";
+        }
+
+        if (!element?.product?.drop_date) {
+          itemObject["product"]["drop_date"] = "Drop date is required";
+        } else {
+          itemObject["product"]["drop_date"] = "";
+        }
+
+        if (!element?.product?.drop_time) {
+          itemObject["product"]["drop_time"] = "Drop time is required";
+        } else {
+          itemObject["product"]["drop_time"] = "";
+        }
+
+        errors.items.push({
+          ...itemObject,
+          address: address,
+        });
+        itemObject = {};
+        address = [];
+        addressObject = {};
+      });
+
+    if (errors?.items?.length) {
+      let isAllProductEmpty = every(errors?.items, (product) => {
+        let isProduct = false;
+        let address = false;
+
+        if (product?.address) {
+          address = every(product?.address, (address) => isEmpty(address));
+        }
+
+        isProduct = isEmpty(product?.product);
+
+        if (isProduct && address) {
+          return true;
+        }
+        return false;
+      });
+      if (isAllProductEmpty) {
+        errors = delete errors.items;
+      }
+    }
+
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       user_id: user?.id,
       created_by: "customer",
       name: "",
       vehicle: 0,
-      vehical_type:0,
+      vehical_type: 0,
       items: [product],
       description: "",
     },
@@ -64,6 +184,9 @@ const PostJob = () => {
         errors.name = "Job Title is required";
       }
 
+      if (values?.items?.length) {
+        itemsValidation(values, errors);
+      }
       // if (!values.vehicle) {
       //   errors.vehicle = "Vehicle is required";
       // }
@@ -75,7 +198,6 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors, setFieldValue }) => {
-      
       // let formData = new FormData();
 
       let url, method;
@@ -182,6 +304,8 @@ const PostJob = () => {
       }
     },
   });
+
+  console.log("formik.errors", formik.errors);
 
   React.useEffect(() => {
     formik.setFieldValue("user_id", user?.id);
