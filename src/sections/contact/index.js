@@ -94,7 +94,7 @@ const ContactSection = ({ formik }) => {
               </Typography>
             </Breadcrumbs>
           </Box>
-          <Grid container spacing={10}>
+          <Grid container spacing={10} pb={12}>
             <Grid item md={6}>
               <Box sx={{ mb: 4 }}>
                 <Typography

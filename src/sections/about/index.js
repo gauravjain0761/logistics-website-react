@@ -45,7 +45,7 @@ const AboutUs = () => {
         alt=""
         title="About Us"
       />
-      <Box py={6}>
+      <Box py={6} pb={12}>
         <Container>
           <div>
             {!loader ? (

@@ -150,7 +150,7 @@ export function AuthProvider({ children }) {
     } catch (error) {
       const { response } = error;
 
-      enqueueSnackbar(response.data.message, {
+      enqueueSnackbar(response.data.error, {
         variant: "error",
       });
     }
@@ -186,6 +186,7 @@ export function AuthProvider({ children }) {
         type: "LOGOUT",
       });
     } catch (error) {
+     
       const { response } = error;
       if (response.status === 401) {
         router.push("/auth/login");
