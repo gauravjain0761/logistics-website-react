@@ -197,7 +197,6 @@ const BidList = () => {
                               <Box>
                                 <TextBox
                                   fullWidth
-                                  
                                   size="small"
                                   value={search}
                                   endIcon={
@@ -328,10 +327,14 @@ const BidList = () => {
                                         onClick={() =>
                                           elem?.status !== 1 &&
                                           elem?.status !== 4 &&
+                                          elem?.status !== 2 &&
+                                          elem?.status !== 3 &&
                                           setStartChat(elem?.id)
                                         }
                                       >
-                                        {elem?.status === 1
+                                        {elem?.status === 1 ||
+                                        elem?.status === 2 ||
+                                        elem?.status === 3
                                           ? "Accepted"
                                           : elem?.status === 4
                                           ? "Declined"

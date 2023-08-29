@@ -115,6 +115,8 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             formik?.errors?.items &&
                             formik?.errors?.items?.length > 0 &&
                             formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
                               ?.pickup_date
                           }
                         />
@@ -138,6 +140,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size={"small"}
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.pickup_time
+                          }
                         />
                       </Box>
                     </Grid>
@@ -166,6 +177,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           }}
                           // onKeyDown={(event) => event.preventDefault()}
                           size={"small"}
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.drop_date
+                          }
                         />
                       </Box>
                     </Grid>
@@ -187,6 +207,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size={"small"}
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.drop_time
+                          }
                         />
                       </Box>
                     </Grid>
@@ -205,6 +234,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size="small"
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.quantity
+                          }
                         />
                       </Box>
                     </Grid>
@@ -224,6 +262,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size="small"
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product?.length
+                          }
                         />
                       </Box>
                     </Grid>
@@ -242,6 +288,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size="small"
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product?.width
+                          }
                         />
                       </Box>
                     </Grid>
@@ -260,6 +314,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             );
                           }}
                           size="small"
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product?.height
+                          }
                         />
                       </Box>
                     </Grid>
@@ -281,6 +343,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               e
                             );
                           }}
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product?.image
+                          }
                         />
                       </Box>
                     </Grid>
@@ -302,6 +372,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             }}
                             options={MaterialSelect}
                             vehicle="small"
+                            helperText={
+                              !isEmpty(formik.touched) &&
+                              formik?.errors?.items &&
+                              formik?.errors?.items?.length > 0 &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.index === productIndex &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.material
+                            }
                           />
                         </Stack>
                       </Box>
@@ -354,10 +433,6 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                           e.target.value
                                         );
                                       }}
-                                      helperText={
-                                        formik.touched.type &&
-                                        formik.errors.type
-                                      }
                                       size="small"
                                       type="small"
                                     />
@@ -379,6 +454,13 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                       );
                                     }}
                                     size="small"
+                                    helperText={
+                                      !isEmpty(formik.touched) &&
+                                      formik?.errors?.items &&
+                                      
+                                      formik?.errors?.items[productIndex]
+                                        ?.address[addressIndex].address
+                                    }
                                   />
                                 </Box>
                               </Grid>
