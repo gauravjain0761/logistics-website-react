@@ -24,6 +24,8 @@ const SelectBox = (props) => {
     startIcon,
     endIcon,
     placeholder,
+    formSx,
+    sx,
   } = props;
 
   return (
@@ -31,6 +33,7 @@ const SelectBox = (props) => {
       key={`key${name}`}
       error={helperText ? true : false}
       fullWidth={fullWidth}
+      sx={formSx}
       style={
         !fullWidth ? { width: "50%", paddingLeft: 5, paddingRight: 5 } : {}
       }
@@ -38,6 +41,7 @@ const SelectBox = (props) => {
       {label && <InputLabel>{`${label} ${isRequired ? "*" : ""}`}</InputLabel>}
 
       <Select
+        sx={sx}
         size={size}
         name={name}
         label={label}

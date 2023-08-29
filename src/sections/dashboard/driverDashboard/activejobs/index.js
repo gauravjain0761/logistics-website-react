@@ -511,7 +511,7 @@ const DashboardJobPost = () => {
                                       startIcon={<Iconify icon="gg:track" />}
                                       onClick={() =>
                                         router.push(
-                                          "/dashboard/driver/track_job"
+                                          `/dashboard/driver/track_job/${elem.bid_id}`
                                         )
                                       }
                                       sx={{
