@@ -44,8 +44,8 @@ const BidList = () => {
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const handleFilterClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -165,8 +165,10 @@ const BidList = () => {
                       />
                     </Box>
 
-                    <Box onClick={handleFilterClick} aria-describedby={id}>
+                    <Box>
                       <Iconify
+                        onClick={handleFilterClick}
+                        aria-describedby={id}
                         icon="lucide:filter"
                         width={24}
                         sx={{ cursor: "pointer" }}
@@ -178,8 +180,8 @@ const BidList = () => {
                         anchorEl={anchorEl}
                         onClose={handleFilterClose}
                         anchorReference="anchorPosition"
-                        sx={{width:"45em"}}
-                        anchorPosition={{ top: 150, left: 260 }}
+                        sx={{ width: "40em" }}
+                        anchorPosition={{ top: 150, left: 370 }}
                         anchorOrigin={{
                           vertical: "bottom",
                           horizontal: "left",
@@ -189,28 +191,38 @@ const BidList = () => {
                           horizontal: "left",
                         }}
                       >
-                        <Box>
-                        <CardContent>
+                        <Box px={2} py={2}>
                           <Stack direction="column" spacing={2}>
                             <Stack spacing={2}>
                               <Box>
-                                <Typography variant="body1" fontWeight={600}>
-                                  Search
-                                </Typography>
                                 <TextBox
                                   fullWidth
+                                  
                                   size="small"
                                   value={search}
+                                  endIcon={
+                                    <Iconify icon="iconamoon:search-bold" />
+                                  }
                                   placeholder="Search"
                                   onChange={(e) => setSearch(e.target.value)}
                                 />
                               </Box>
                               <Box>
-                                <Box>
-                                  <Typography variant="body1" fontWeight={600}>
-                                    Price : ${filterPrice}
-                                  </Typography>
-                                </Box>
+                                <Stack
+                                  direction="row"
+                                  justifyContent="space-between"
+                                >
+                                  <Box>
+                                    <Typography fontSize={14} fontWeight={500}>
+                                      Price
+                                    </Typography>
+                                  </Box>
+                                  <Box>
+                                    <Typography fontSize={14} fontWeight={500}>
+                                      ${filterPrice}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
                                 <Slider
                                   size="large"
                                   value={
@@ -222,8 +234,8 @@ const BidList = () => {
                                 />
                               </Box>
                               <Box>
-                                <Box>
-                                  <Typography variant="body1" fontWeight={600}>
+                                <Box mb={0.6}>
+                                  <Typography fontSize={14} fontWeight={500}>
                                     Rating
                                   </Typography>
                                 </Box>
@@ -231,8 +243,7 @@ const BidList = () => {
                                   <Box>
                                     <Rating
                                       sx={{
-                                        color: (theme) =>
-                                          theme.palette.primary.main,
+                                        color: "#FBBC04",
                                       }}
                                     />
                                   </Box>
@@ -240,15 +251,15 @@ const BidList = () => {
                               </Box>
                             </Stack>
                           </Stack>
-                          <Stack direction="row" spacing={1} p={2}>
-                            <Button variant="outlined" color="dark" fullWidth>
-                              Cancel
-                            </Button>
-                            <Button variant="contained" fullWidth>
-                              Filter
-                            </Button>
+                          <Divider sx={{ my: 2 }} />
+                          <Stack
+                            direction="row"
+                            spacing={1}
+                            justifyContent="end"
+                          >
+                            <Button color="dark">Cancel</Button>
+                            <Button variant="contained">Filter</Button>
                           </Stack>
-                          </CardContent>
                         </Box>
                       </Popover>
                     </Box>
