@@ -12,6 +12,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import {
+  LocalizationProvider,
+  TimeField,
+  TimePicker,
+} from "@mui/x-date-pickers";
 import { isEmpty } from "lodash";
 import moment from "moment";
 import React from "react";
@@ -124,6 +129,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     </Grid>
                     <Grid item md={6}>
                       <Box>
+                        <TimePicker label="Pickup Time" fullWidth size="small"/>
                         <TextBox
                           fullWidth
                           type="time"
@@ -457,7 +463,6 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                     helperText={
                                       !isEmpty(formik.touched) &&
                                       formik?.errors?.items &&
-                                      
                                       formik?.errors?.items[productIndex]
                                         ?.address[addressIndex].address
                                     }
