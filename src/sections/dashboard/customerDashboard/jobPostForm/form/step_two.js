@@ -129,7 +129,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     </Grid>
                     <Grid item md={6}>
                       <Box>
-                        <TimePicker label="Pickup Time" fullWidth size="small"/>
+                        {/* <TimePicker label="Pickup Time" fullWidth size="small"/> */}
                         <TextBox
                           fullWidth
                           type="time"

@@ -7,6 +7,8 @@ import { StepperProvider } from "@/components/stepper/stepperContext";
 import { store } from "@/redux/store";
 import "@/styles/globals.css";
 import ThemeProvider from "@/theme";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
 
 // redux
@@ -24,16 +26,18 @@ export default function App(props) {
     <React.Fragment>
       <ReduxProvider store={store}>
         <ThemeProvider>
-          <ProgressBar />
-          <SnackbarProvider>
-            <AuthProvider>
-              <AuthFirebaseProvider>
-                <StepperProvider>
-                  {getLayout(<Component {...pageProps} />)}
-                </StepperProvider>
-              </AuthFirebaseProvider>
-            </AuthProvider>
-          </SnackbarProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <ProgressBar />
+            <SnackbarProvider>
+              <AuthProvider>
+                <AuthFirebaseProvider>
+                  <StepperProvider>
+                    {getLayout(<Component {...pageProps} />)}
+                  </StepperProvider>
+                </AuthFirebaseProvider>
+              </AuthProvider>
+            </SnackbarProvider>
+          </LocalizationProvider>
         </ThemeProvider>
       </ReduxProvider>
     </React.Fragment>
