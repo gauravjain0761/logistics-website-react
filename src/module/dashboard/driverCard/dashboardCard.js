@@ -71,13 +71,13 @@ const DashboardCard = () => {
                 p: 1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/job_request"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
+                    ? "#145365"
+                    : "#145365",
+                border: "1px solid #145365",
                 color:
                   router.pathname === "/dashboard/driver/job_request"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/driver/job_request")}
@@ -92,8 +92,8 @@ const DashboardCard = () => {
                   sx={{
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/job_request"
-                        ? theme.palette.primary.main
-                        : alpha(theme.palette.primary.main, 0.1),
+                        ? "#246678"
+                        : "#246678",
                     width: "60px",
                     height: "60px",
                     display: "flex",
@@ -124,13 +124,13 @@ const DashboardCard = () => {
                 p: 1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/active_jobs"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
+                    ? "#ff7533"
+                    : "#ff7533",
+                border: "1px solid #ff7533",
                 color:
                   router.pathname === "/dashboard/driver/active_jobs"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/driver/active_jobs")}
@@ -145,8 +145,8 @@ const DashboardCard = () => {
                   sx={{
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/job_post"
-                        ? theme.palette.primary.main
-                        : alpha(theme.palette.primary.main, 0.1),
+                        ? "#ff884f"
+                        :  "#ff884f",
                   }}
                   height="60px"
                   py={0.5}
@@ -168,69 +168,20 @@ const DashboardCard = () => {
             </Card>
           </Grid>
 
-          {/* <Grid item md={2.4}>
-            <Card
-              variant="outlined"
-              sx={{
-                backgroundColor:
-                  router.pathname === "/dashboard/driver/money_earned"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
-                color:
-                  router.pathname === "/dashboard/driver/money_earned"
-                    ? "#fff"
-                    : "#ff7534",
-                cursor: "pointer",
-              }}
-              onClick={() => router.push("/dashboard/driver/money_earned")}
-            >
-              <Stack
-                direction="row"
-                p={1.5}
-                justifyContent="space-around"
-                alignItems="center"
-                spacing={0}
-              >
-                <Box
-                  sx={{
-                    backgroundColor: (theme) =>
-                      router.pathname === "/dashboard/driver/money_earned"
-                        ? theme.palette.primary.main
-                        : alpha(theme.palette.primary.main, 0.1),
-                  }}
-                  height="60px"
-                  py={0.5}
-                  px={1}
-                  borderRadius={2}
-                  component="div"
-                >
-                  <Iconify icon="ph:money-fill" width={45} />
-                </Box>
-                <Box>
-                  <Typography fontSize={16} fontWeight={300}>
-                    MONEY EARNED
-                  </Typography>
-                  <Typography variant="h5" textAlign="center">
-                    $ 10000
-                  </Typography>
-                </Box>
-              </Stack>
-            </Card>
-          </Grid> */}
+          
           <Grid item md={3}>
             <Card
               sx={{
                 p: 1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/job_history"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
+                    ? "#FD9B3D"
+                    : "#FD9B3D",
+                border: "1px solid #FD9B3D",
                 color:
                   router.pathname === "/dashboard/driver/job_history"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/driver/job_history")}
@@ -245,8 +196,8 @@ const DashboardCard = () => {
                   sx={{
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/job_history"
-                        ? theme.palette.primary.main
-                        : alpha(theme.palette.primary.main, 0.1),
+                        ? "#ffa54e"
+                        : "#ffa54e",
                   }}
                   height="60px"
                   py={0.5}
@@ -254,7 +205,7 @@ const DashboardCard = () => {
                   borderRadius={2}
                   component="div"
                 >
-                  <Iconify icon="ri:history-fill" width={45} />{" "}
+                  <Iconify icon="ri:history-fill" width={48} />{" "}
                 </Box>
                 <Box>
                   <Typography fontSize={16} fontWeight={300}>
@@ -273,13 +224,13 @@ const DashboardCard = () => {
                 p: 1.5,
                 backgroundColor:
                   router.pathname === "/dashboard/driver/subscription"
-                    ? "#ff7534"
-                    : "#fff",
-                border: "1px solid #ff7534",
+                    ? "#FECA3C"
+                    : "#FECA3C",
+                border: "1px solid #FECA3C",
                 color:
                   router.pathname === "/dashboard/driver/subscription"
                     ? "#fff"
-                    : "#ff7534",
+                    : "#fff",
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/driver/subscription")}
@@ -294,8 +245,8 @@ const DashboardCard = () => {
                   sx={{
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/subscription"
-                        ? theme.palette.primary.main
-                        : alpha(theme.palette.primary.main, 0.1),
+                        ?  "#ffd768"
+                        :  "#ffd768",
                   }}
                   height="60px"
                   py={0.5}

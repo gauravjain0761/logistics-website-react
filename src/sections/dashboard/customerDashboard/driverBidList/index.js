@@ -27,6 +27,7 @@ import GoogleMaps from "@/module/map";
 import { useRouter } from "next/router";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
+import SkeletonLoader from "@/components/skeleton";
 
 const BidList = () => {
   const router = useRouter();
@@ -41,6 +42,7 @@ const BidList = () => {
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
+  const [loading, setLoading] = useState(false);
   const sortBy = [
     {
       label: "Sort(Default)",
@@ -62,11 +64,14 @@ const BidList = () => {
     await axiosInstance
       .get(`api/auth/jobs/job-bids/${router.query.id}`)
       .then((response) => {
+        setLoading(true);
         if (response.status === 200) {
+          setLoading(false);
           setData(response.data?.view_data);
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   };
@@ -112,53 +117,51 @@ const BidList = () => {
       <Box py={4} sx={{ mt: 10 }} pb={12}>
         <Container>
           <Grid container spacing={2}>
-            <Grid item md={6}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+            {loading ? (
+              <Grid item md={6}>
+                <SkeletonLoader />
+              </Grid>
+            ) : (
+              <Grid item md={6}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Box>
+                    <Typography fontSize={28} color="primary" fontWeight={600}>
+                      Applied Bids
+                    </Typography>
+                  </Box>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <Box>
+                      <SelectBox
+                        fullWidth
+                       
+                        size="small"
+                        color="#fff"
+                        value={select}
+                        onChange={(e) => setSelect(e.target.value)}
+                        options={sortBy}
+                      />
+                    </Box>
+                    <Box onClick={() => setOpen(true)}>
+                      <Iconify
+                        icon="lucide:filter"
+                        width={30}
+                        color={(theme) => theme.palette.primary.main}
+                      />
+                    </Box>
+                  </Stack>
+                </Stack>
                 <Box>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<Iconify icon="lucide:filter" />}
-                    sx={{ mb: 2, px: 2, py: 1 }}
-                    onClick={() => setOpen(true)}
-                  >
-                    Filters
-                  </Button>
-                </Box>
-                <Box>
-                  <SelectBox
-                    fullWidth
-                    size="small"
-                    color="#fff"
-                    value={select}
-                    onChange={(e) => setSelect(e.target.value)}
-                    options={sortBy}
-                  />
-                </Box>
-              </Stack>
-              <Box>
-                {data &&
-                  data.length > 0 &&
-                  data.map((elem, index) => {
-                    return (
-                      <Card
-                        key={index}
-                        sx={{
-                          my: 2,
+                  {data &&
+                    data.length > 0 &&
+                    data.map((elem, index) => {
+                      return (
+                        <Box key={index}>
+                          <Divider sx={{ my: 2 }} />
 
-                          ":hover": {
-                            borderColor: "#ff7534",
-                            // cursor: "pointer",
-                            transition: " all 0.3s ease-in-out",
-                          },
-                        }}
-                        variant="outlined"
-                      >
-                        <CardContent>
                           <Grid container spacing={2}>
                             <Grid item md={2}>
                               <Box
@@ -170,22 +173,12 @@ const BidList = () => {
                                   width: "65px",
                                   objectFit: "cover",
                                   height: "65px",
-                                  border: "3px solid #ff7534",
+                                  border: "1px solid #f2f2f2",
                                 }}
                               />
                             </Grid>
                             <Grid item md={10}>
                               <Stack direction="column">
-                                {/* <Box>
-                                <Typography
-                                  color="primary"
-                                  fontSize={14}
-                                  fontWeight={600}
-                                >
-                                  Job Success Rate: 98 %
-                                </Typography>
-                              </Box> */}
-
                                 <Box pb={0.3}>
                                   <Stack
                                     direction="row"
@@ -193,39 +186,59 @@ const BidList = () => {
                                     justifyContent="space-between"
                                   >
                                     <Box>
-                                      <Typography variant="h5" fontWeight={500}>
+                                      <Typography
+                                        fontSize={16}
+                                        fontWeight={500}
+                                      >
                                         {elem?.driver?.user_name}
                                       </Typography>
                                     </Box>
-                                    <Stack>
-                                      <Stack direction="row" spacing={0.4}>
-                                        <Box>
-                                          <Typography fontWeight={400}>
-                                            Job Success Rate :
-                                          </Typography>
-                                        </Box>
-                                        <Box>
-                                          <Typography
-                                            color="primary"
-                                            fontWeight={600}
-                                          >
-                                            98 %
-                                          </Typography>
-                                        </Box>
-                                      </Stack>
-                                      <Box>
-                                        <LinearProgress
-                                          variant="determinate"
-                                          value={98}
-                                        />
-                                      </Box>
+                                    <Box>
+                                      <Typography
+                                        fontSize={16}
+                                        fontWeight={600}
+                                      >
+                                        ${elem?.ammount}
+                                      </Typography>
+                                    </Box>
+                                    <Stack direction="row" spacing={1}>
+                                      <Button
+                                        sx={{
+                                          cursor:
+                                            elem?.status === 4
+                                              ? "not-allowed"
+                                              : "pointer",
+                                        }}
+                                        icon={
+                                          <Iconify icon="material-symbols:check-circle" />
+                                        }
+                                        // disabled={elem?.status === 4}
+                                        variant="contained"
+                                        onClick={() =>
+                                          elem?.status !== 1 &&
+                                          elem?.status !== 4 &&
+                                          setStartChat(elem?.id)
+                                        }
+                                      >
+                                        {elem?.status === 1
+                                          ? "Accepted"
+                                          : elem?.status === 4
+                                          ? "Declined"
+                                          : "Accept"}
+                                      </Button>
                                     </Stack>
                                   </Stack>
                                 </Box>
-                                <Typography fontSize={14}>
-                                  {" "}
-                                  {elem?.description}
-                                </Typography>
+                                <Box>
+                                  <Rating
+                                    value={4}
+                                    readOnly
+                                    size="small"
+                                    sx={{
+                                      color: "#FBBC04",
+                                    }}
+                                  />
+                                </Box>
                               </Stack>
                             </Grid>
                           </Grid>
@@ -235,105 +248,89 @@ const BidList = () => {
                             alignItems="center"
                             pt={2}
                           >
-                            <Stack direction="row" spacing={1}>
-                              <Chip
-                                sx={{
-                                  cursor:
-                                    elem?.status === 4
-                                      ? "not-allowed"
-                                      : "pointer",
-                                }}
-                                icon={
-                                  <Iconify icon="material-symbols:check-circle" />
-                                }
-                                // disabled={elem?.status === 4}
-                                label={
-                                  elem?.status === 1
-                                    ? "Accepted"
-                                    : elem?.status === 4
-                                    ? "Declined"
-                                    : "Accept Driver Bid"
-                                }
-                                variant="outlined"
-                                onClick={() =>
-                                  elem?.status !== 1 &&
-                                  elem?.status !== 4 &&
-                                  setStartChat(elem?.id)
-                                }
-                              />
+                            <Stack>
+                              <Stack direction="row" spacing={0.4}>
+                                <Box>
+                                  <Typography
+                                    color="#5D5D5D"
+                                    fontSize={14}
+                                    fontWeight={400}
+                                  >
+                                    Job Success Rate :
+                                  </Typography>
+                                </Box>
+                                <Box>
+                                  <Typography
+                                    color="#5D5D5D"
+                                    fontSize={14}
+                                    fontWeight={600}
+                                  >
+                                    78 %
+                                  </Typography>
+                                </Box>
+                              </Stack>
+                              <Box>
+                                <LinearProgress
+                                  variant="determinate"
+                                  value={78}
+                                />
+                              </Box>
                             </Stack>
                             <Stack>
-                              <Rating
-                                value={4}
-                                readOnly
-                                size="small"
-                                sx={{
-                                  color: (theme) => theme.palette.primary.main,
-                                }}
-                              />
-                            </Stack>
-                          </Stack>
-                          <Divider sx={{ my: 2 }} />
-                          <Box>
-                            <Stack
-                              direction="row"
-                              justifyContent="space-between"
-                            >
-                              <Typography variant="subtitle2">
-                                Bid: ${elem?.ammount}
-                              </Typography>
-                              <Typography variant="subtitle2">
+                              <Typography fontSize={14} fontWeight={500}>
                                 Earned: $30K+
                               </Typography>
                             </Stack>
-                          </Box>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-              </Box>
-              <Box>
-                <Stack alignItems="center" justifyContent="center">
-                  <Pagination
-                    count={pageCount}
-                    color="primary"
-                    page={page}
-                    onChange={handlePageChange}
-                    variant="outlined"
-                    shape="rounded"
-                    renderItem={(item) => (
-                      <PaginationItem
-                        slots={{
-                          previous: () => {
-                            return (
-                              <Stack
-                                direction="row"
-                                spacing={0.5}
-                                alignItems="center"
-                              >
-                                <NavigateBeforeIcon />
-                              </Stack>
-                            );
-                          },
-                          next: () => {
-                            return (
-                              <Stack
-                                direction="row"
-                                spacing={0.5}
-                                alignItems="center"
-                              >
-                                <NavigateNextIcon />
-                              </Stack>
-                            );
-                          },
-                        }}
-                        {...item}
-                      />
-                    )}
-                  />
-                </Stack>
-              </Box>
-            </Grid>
+                          </Stack>
+                          <Divider sx={{ my: 2 }} />
+                        </Box>
+                      );
+                    })}
+                </Box>
+                <Box>
+                  <Stack alignItems="center" justifyContent="center">
+                    <Pagination
+                      count={pageCount}
+                      color="primary"
+                      page={page}
+                      onChange={handlePageChange}
+                      variant="outlined"
+                      shape="rounded"
+                      renderItem={(item) => (
+                        <PaginationItem
+                          slots={{
+                            previous: () => {
+                              return (
+                                <Stack
+                                  direction="row"
+                                  spacing={0.5}
+                                  alignItems="center"
+                                >
+                                  <NavigateBeforeIcon />
+                                </Stack>
+                              );
+                            },
+                            next: () => {
+                              return (
+                                <Stack
+                                  direction="row"
+                                  spacing={0.5}
+                                  alignItems="center"
+                                >
+                                  <NavigateNextIcon />
+                                </Stack>
+                              );
+                            },
+                          }}
+                          {...item}
+                        />
+                      )}
+                    />
+                  </Stack>
+                </Box>
+              </Grid>
+            )}
+
             <Grid item md={6}>
               <Box sx={{ position: "sticky", top: 75, display: "block" }}>
                 <GoogleMaps />
