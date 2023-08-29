@@ -112,12 +112,12 @@ const TextBox = (props) => {
           InputProps={{
             readOnly: readOnly,
             min: min,
-            // endAdornment: (
-            //   <InputAdornment position={inputEndAdornmentPosition}>
-            //     {/* <Icon>{icon}</Icon> */}
-            //     {endIcon}
-            //   </InputAdornment>
-            // ),
+            endAdornment: (
+              <InputAdornment position={inputEndAdornmentPosition}>
+                {/* <Icon>{icon}</Icon> */}
+                {endIcon}
+              </InputAdornment>
+            ),
             // startAdornment: (
             //   <InputAdornment position={inputStartAdornmentPosition}>
             //     {/* <Icon>{icon}</Icon> */}
@@ -126,7 +126,7 @@ const TextBox = (props) => {
             // ),
           }}
         />
-        {endIcon && (
+        {/* {endIcon && (
           <Box
             sx={{
               ml: 0,
@@ -142,7 +142,7 @@ const TextBox = (props) => {
           >
             {endIcon}
           </Box>
-        )}
+        )} */}
       </Stack>
 
       <Box sx={{ display: "flex" }}>
