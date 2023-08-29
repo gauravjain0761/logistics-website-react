@@ -124,7 +124,7 @@ const JobPostForm = ({
     },
     {
       title: "Details",
-      fields: [""],
+      fields: ["items"],
       component: (
         <>
           <StepTwo
