@@ -12,6 +12,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { isEmpty } from "lodash";
 import moment from "moment";
 import React from "react";
 
@@ -109,6 +110,13 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           }}
                           // onKeyDown={(event) => event.preventDefault()}
                           size={"small"}
+                          helperText={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.pickup_date
+                          }
                         />
                       </Box>
                     </Grid>
