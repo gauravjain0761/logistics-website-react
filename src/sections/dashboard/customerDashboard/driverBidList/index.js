@@ -15,6 +15,7 @@ import {
   Modal,
   Pagination,
   PaginationItem,
+  Popover,
   Rating,
   Slider,
   Stack,
@@ -35,14 +36,26 @@ const BidList = () => {
   const [startChat, setStartChat] = React.useState("");
   const handleOpen = () => setStartChat(true);
   const handleClose = () => setStartChat(false);
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [select, setSelect] = React.useState(0);
-  const [page, setPage] = React.useState(1);
+  // const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleFilterClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleFilterClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   const sortBy = [
     {
       label: "Sort(Default)",
@@ -136,8 +149,14 @@ const BidList = () => {
                   <Stack direction="row" alignItems="center" spacing={2}>
                     <Box>
                       <SelectBox
+                        formSx={{ marginBottom: 0 }}
+                        sx={{
+                          borderRadius: "3em",
+                          height: "26px",
+                          fontSize: "12px",
+                          fontWeight: 500,
+                        }}
                         fullWidth
-                       
                         size="small"
                         color="#fff"
                         value={select}
@@ -148,9 +167,22 @@ const BidList = () => {
                     <Box onClick={() => setOpen(true)}>
                       <Iconify
                         icon="lucide:filter"
-                        width={30}
+                        width={24}
+                        sx={{ cursor: "pointer" }}
                         color={(theme) => theme.palette.primary.main}
                       />
+                      <Popover
+                        open={open}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "left",
+                        }}
+                      >
+                        <Typography sx={{ p: 2 }}>
+                          The content of the Popover.
+                        </Typography>
+                      </Popover>
                     </Box>
                   </Stack>
                 </Stack>
@@ -339,7 +371,7 @@ const BidList = () => {
           </Grid>
         </Container>
       </Box>
-      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
+      {/* <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <DialogContent sx={{ pt: 4 }}>
           <Stack direction="column" spacing={2}>
             <Stack spacing={2}>
@@ -392,7 +424,7 @@ const BidList = () => {
             Clear All
           </Button>
         </Stack>
-      </Drawer>
+      </Drawer> */}
 
       <Box>
         <Modal

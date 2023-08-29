@@ -7,7 +7,7 @@ import AuthGuard from "@/auth/AuthGuard";
 const StartJobPage = () => {
   const formik = useFormik({
     initialValues: {
-      location: "",
+     
     },
   });
   return (

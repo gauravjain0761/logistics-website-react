@@ -778,7 +778,7 @@ const DashboardJobPost = ({ formik }) => {
                                     }
                                     onClick={() =>
                                       router.push(
-                                        `/dashboard/customer/job_post_form/${item?.id}`
+                                        `/dashboard/customer/job_post_form/${item?.bid_id}`
                                       )
                                     }
                                     sx={{
@@ -788,26 +788,28 @@ const DashboardJobPost = ({ formik }) => {
                                     Edit Job
                                   </Button>
                                 </Box>
-                                <Box>
-                                  <Button
-                                    color="primary"
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={
-                                      <Iconify icon="mingcute:foot-fill" />
-                                    }
-                                    onClick={() =>
-                                      router.push(
-                                        "/dashboard/customer/track_job"
-                                      )
-                                    }
-                                    sx={{
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    Track Job
-                                  </Button>
-                                </Box>
+                                {item?.bid_id && item?.bid_id !== null && (
+                                  <Box>
+                                    <Button
+                                      color="primary"
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="mingcute:foot-fill" />
+                                      }
+                                      onClick={() =>
+                                        router.push(
+                                          `/dashboard/customer/track_job/${item.bid_id}`
+                                        )
+                                      }
+                                      sx={{
+                                        fontWeight: 500,
+                                      }}
+                                    >
+                                      Track Job
+                                    </Button>
+                                  </Box>
+                                )}
                               </Stack>
                             </Stack>
                           </Box>
