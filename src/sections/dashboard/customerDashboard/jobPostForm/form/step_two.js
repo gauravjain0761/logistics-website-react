@@ -1,22 +1,24 @@
-import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
+import {
+  FormControl,
+  SelectBox,
+  TextBox,
+  UploadFileBox,
+} from "@/components/form";
 import { Add, Close } from "@mui/icons-material";
 import {
   Box,
   Button,
   Card,
-  CardContent,
   CardHeader,
   Divider,
+  FormHelperText,
   Grid,
   IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  LocalizationProvider,
-  TimeField,
-  TimePicker,
-} from "@mui/x-date-pickers";
+import { TimePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import { isEmpty } from "lodash";
 import moment from "moment";
 import React from "react";
@@ -129,24 +131,10 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     </Grid>
                     <Grid item md={6}>
                       <Box>
-                        {/* <TimePicker label="Pickup Time" fullWidth size="small"/> */}
-                        <TextBox
+                        <FormControl
                           fullWidth
-                          type="time"
-                          label="Pickup Time"
-                          value={productItem?.product?.pickup_time}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          name={`items[${productIndex}].product.pickup_time`}
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              `items[${productIndex}].product.pickup_time`,
-                              e.target.value
-                            );
-                          }}
-                          size={"small"}
-                          helperText={
+                          size="small"
+                          error={
                             !isEmpty(formik.touched) &&
                             formik?.errors?.items &&
                             formik?.errors?.items?.length > 0 &&
@@ -155,7 +143,58 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             formik?.errors?.items[productIndex]?.product
                               ?.pickup_time
                           }
-                        />
+                        >
+                          <TimePicker
+                            sx={{
+                              "& .MuiOutlinedInput-input": {
+                                padding: "8.5px 14px !important",
+                              },
+                            }}
+                            fullWidth
+                            format="hh:mm A"
+                            label="Pickup Time"
+                            value={productItem?.product?.pickup_time}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            name={`items[${productIndex}].product.pickup_time`}
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                `items[${productIndex}].product.pickup_time`,
+                                moment(e).format("hh:mm a")
+                              );
+                            }}
+                            size={"small"}
+                            helperText={
+                              !isEmpty(formik.touched) &&
+                              formik?.errors?.items &&
+                              formik?.errors?.items?.length > 0 &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.index === productIndex &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.pickup_time
+                            }
+                          />
+                          <Box sx={{ display: "flex" }}>
+                            {!isEmpty(formik.touched) &&
+                              formik?.errors?.items &&
+                              formik?.errors?.items?.length > 0 &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.index === productIndex &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.pickup_time && (
+                                <FormHelperText>
+                                  {!isEmpty(formik.touched) &&
+                                    formik?.errors?.items &&
+                                    formik?.errors?.items?.length > 0 &&
+                                    formik?.errors?.items[productIndex]?.product
+                                      ?.index === productIndex &&
+                                    formik?.errors?.items[productIndex]?.product
+                                      ?.pickup_time}
+                                </FormHelperText>
+                              )}
+                          </Box>
+                        </FormControl>
                       </Box>
                     </Grid>
                     <Grid item md={6}>
@@ -197,6 +236,72 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     </Grid>
                     <Grid item md={6}>
                       <Box>
+                        <FormControl
+                          fullWidth
+                          size="small"
+                          error={
+                            !isEmpty(formik.touched) &&
+                            formik?.errors?.items &&
+                            formik?.errors?.items?.length > 0 &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.index === productIndex &&
+                            formik?.errors?.items[productIndex]?.product
+                              ?.drop_time
+                          }
+                        >
+                          <TimePicker
+                            sx={{
+                              "& .MuiOutlinedInput-input": {
+                                padding: "8.5px 14px !important",
+                              },
+                            }}
+                            fullWidth
+                            format="hh:mm A"
+                            label="Drop Time"
+                            value={productItem?.product?.drop_time}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            name={`items[${productIndex}].product.drop_time`}
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                `items[${productIndex}].product.drop_time`,
+                                moment(e).format("hh:mm a")
+                              );
+                            }}
+                            size={"small"}
+                            helperText={
+                              !isEmpty(formik.touched) &&
+                              formik?.errors?.items &&
+                              formik?.errors?.items?.length > 0 &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.index === productIndex &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.drop_time
+                            }
+                          />
+                          <Box sx={{ display: "flex" }}>
+                            {!isEmpty(formik.touched) &&
+                              formik?.errors?.items &&
+                              formik?.errors?.items?.length > 0 &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.index === productIndex &&
+                              formik?.errors?.items[productIndex]?.product
+                                ?.drop_time && (
+                                <FormHelperText>
+                                  {!isEmpty(formik.touched) &&
+                                    formik?.errors?.items &&
+                                    formik?.errors?.items?.length > 0 &&
+                                    formik?.errors?.items[productIndex]?.product
+                                      ?.index === productIndex &&
+                                    formik?.errors?.items[productIndex]?.product
+                                      ?.drop_time}
+                                </FormHelperText>
+                              )}
+                          </Box>
+                        </FormControl>
+                      </Box>
+                      {/* <Box>
                         <TextBox
                           fullWidth
                           type="time"
@@ -223,7 +328,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               ?.drop_time
                           }
                         />
-                      </Box>
+                      </Box> */}
                     </Grid>
                     <Grid item md={6}>
                       <Box>

@@ -135,6 +135,12 @@ const PostJob = () => {
           itemObject["product"]["drop_time"] = "";
         }
 
+        if (!element?.product?.quantity) {
+          itemObject["product"]["quantity"] = "Quantity is required";
+        } else {
+          itemObject["product"]["quantity"] = "";
+        }
+
         errors.items.push({
           ...itemObject,
           address: address,
@@ -163,7 +169,6 @@ const PostJob = () => {
           isEmpty(product?.product?.pickup_time) &&
           isEmpty(product?.product?.drop_date) &&
           isEmpty(product?.product?.drop_time);
-
 
         if (isProduct && address) {
           return true;
@@ -200,7 +205,8 @@ const PostJob = () => {
       }
       if (!values.vehicle) {
         errors.vehicle = "Vehicle is required";
-      }if (!values.vehical_type) {
+      }
+      if (!values.vehical_type) {
         errors.vehical_type = "Vehicle Type is required";
       }
 
