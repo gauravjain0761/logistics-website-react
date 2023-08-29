@@ -164,7 +164,7 @@ const BidList = () => {
                         options={sortBy}
                       />
                     </Box>
-                   
+
                     <Box onClick={handleFilterClick} aria-describedby={id}>
                       <Iconify
                         icon="lucide:filter"
@@ -177,14 +177,79 @@ const BidList = () => {
                         open={filterOpen}
                         anchorEl={anchorEl}
                         onClose={handleFilterClose}
+                        anchorReference="anchorPosition"
+                        sx={{width:"45em"}}
+                        anchorPosition={{ top: 150, left: 260 }}
                         anchorOrigin={{
                           vertical: "bottom",
-                          horizontal: "center",
+                          horizontal: "left",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "left",
                         }}
                       >
-                        <Typography sx={{ p: 2 }}>
-                          The content of the Popover.
-                        </Typography>
+                        <Box>
+                        <CardContent>
+                          <Stack direction="column" spacing={2}>
+                            <Stack spacing={2}>
+                              <Box>
+                                <Typography variant="body1" fontWeight={600}>
+                                  Search
+                                </Typography>
+                                <TextBox
+                                  fullWidth
+                                  size="small"
+                                  value={search}
+                                  placeholder="Search"
+                                  onChange={(e) => setSearch(e.target.value)}
+                                />
+                              </Box>
+                              <Box>
+                                <Box>
+                                  <Typography variant="body1" fontWeight={600}>
+                                    Price : ${filterPrice}
+                                  </Typography>
+                                </Box>
+                                <Slider
+                                  size="large"
+                                  value={
+                                    typeof filterPrice === "number"
+                                      ? filterPrice
+                                      : 0
+                                  }
+                                  onChange={handleInputChange}
+                                />
+                              </Box>
+                              <Box>
+                                <Box>
+                                  <Typography variant="body1" fontWeight={600}>
+                                    Rating
+                                  </Typography>
+                                </Box>
+                                <Box>
+                                  <Box>
+                                    <Rating
+                                      sx={{
+                                        color: (theme) =>
+                                          theme.palette.primary.main,
+                                      }}
+                                    />
+                                  </Box>
+                                </Box>
+                              </Box>
+                            </Stack>
+                          </Stack>
+                          <Stack direction="row" spacing={1} p={2}>
+                            <Button variant="outlined" color="dark" fullWidth>
+                              Cancel
+                            </Button>
+                            <Button variant="contained" fullWidth>
+                              Filter
+                            </Button>
+                          </Stack>
+                          </CardContent>
+                        </Box>
                       </Popover>
                     </Box>
                   </Stack>
@@ -376,57 +441,8 @@ const BidList = () => {
       </Box>
       {/* <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <DialogContent sx={{ pt: 4 }}>
-          <Stack direction="column" spacing={2}>
-            <Stack spacing={2}>
-              <Box>
-                <Typography variant="body1" fontWeight={600}>
-                  Search
-                </Typography>
-                <TextBox
-                  fullWidth
-                  size="small"
-                  value={search}
-                  placeholder="Search"
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </Box>
-              <Box>
-                <Box>
-                  <Typography variant="body1" fontWeight={600}>
-                    Price : ${filterPrice}
-                  </Typography>
-                </Box>
-                <Slider
-                  size="large"
-                  value={typeof filterPrice === "number" ? filterPrice : 0}
-                  onChange={handleInputChange}
-                />
-              </Box>
-              <Box>
-                <Box>
-                  <Typography variant="body1" fontWeight={600}>
-                    Rating
-                  </Typography>
-                </Box>
-                <Box>
-                  <Box>
-                    <Rating
-                      sx={{ color: (theme) => theme.palette.primary.main }}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Stack>
-          </Stack>
+         
         </DialogContent>
-        <Stack direction="column" spacing={1} p={2}>
-          <Button variant="contained" fullWidth>
-            Apply
-          </Button>
-          <Button variant="outlined" fullWidth>
-            Clear All
-          </Button>
-        </Stack>
       </Drawer> */}
 
       <Box>
