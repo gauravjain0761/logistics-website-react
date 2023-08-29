@@ -37,6 +37,7 @@ import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "@/redux/store";
 import { getJobAlert, setJobAlertPage } from "@/redux/slices/job/driver";
 import { includes, some } from "lodash";
+import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, timelineItemClasses } from "@mui/lab";
 const DashboardJobRequest = () => {
   const dispatch = useDispatch();
   const {
@@ -187,7 +188,6 @@ const DashboardJobRequest = () => {
               </Grid>
             )}
           </Box>
-
           <Box py={2} sx={{ background: " " }}>
             <Grid container rowSpacing={0}>
               {data && data?.length > 0 ? (
@@ -199,6 +199,7 @@ const DashboardJobRequest = () => {
                       <Card
                         sx={{
                           my: 2,
+                          borderWidth: "2px",
                           ":hover": {
                             borderColor: "#ff7534",
                             transition: " all 0.3s ease-in-out",
@@ -206,181 +207,532 @@ const DashboardJobRequest = () => {
                         }}
                         variant="outlined"
                       >
-                        <CardContent>
-                          <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            alignItems="center"
-                          >
-                            <Stack direction="row" mb={1} spacing={0.5}>
-                              <Box>
-                                <Typography variant="subtitle1">
-                                  Job Title :{" "}
-                                </Typography>
-                              </Box>
-                              <Box>
-                                <Typography color="primary" variant="subtitle1">
-                                  {" "}
-                                  {item?.name}
-                                </Typography>
-                              </Box>
-                            </Stack>
+                        <Stack
+                          direction="row"
+                          justifyContent="space-between"
+                          px={2}
+                          py={1.4}
+                          alignItems="center"
+                        >
+                          <Stack direction="row" spacing={0.5}>
+                            <Box>
+                              <Typography
+                                color="common.black"
+                                fontSize={17}
+                                fontWeight={600}
+                              >
+                                {" "}
+                                {item?.name}
+                              </Typography>
+                            </Box>
                           </Stack>
-                          <Divider />
-                          <Grid
-                            container
-                            mt={0.5}
-                            spacing={2}
-                            alignItems="center"
-                          >
-                            <Grid item md={2}>
-                              <Box
-                                component="img"
-                                src={
-                                  item?.image
-                                    ? `${item?.base_url}${item?.image}`
-                                    : "/assets/images/dashboard/portfolio.jpeg"
-                                }
-                                sx={{
-                                  width: "100px",
-                                  borderRadius: "50%",
-                                  border: "2px solid #ff7534",
-                                }}
-                              />
-                            </Grid>
-                            <Grid item md={4}>
-                              <Grid container>
-                                <Grid item md={4.5}>
+                          <Box>
+                            {/* <DeleteModal id={item?.id} /> */}
+                          </Box>
+                        </Stack>
+                        <Divider />
+                        <CardContent>
+                          <Grid container spacing={2} alignItems="start">
+                            <Grid item md={3}>
+                              <Box>
+                                <Typography fontSize={28} fontWeight={500}>
+                                  Gourmet Box
+                                </Typography>
+                              </Box>
+                              <Stack direction="row" spacing={2} mb={2}>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={0.6}
+                                >
+                                  <Stack alignItems="center">
+                                    <Iconify
+                                      icon="bx:layer"
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      width={22}
+                                    />
+                                  </Stack>
                                   <Box>
-                                    <Typography variant="subtitle1">
-                                      Pick-Up Date
+                                    <Typography fontSize={12} color="grey">
+                                    {productDetail?.product?.material ||
+                                        "N/A"}
                                     </Typography>
                                   </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
+                                </Stack>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={0.6}
+                                >
+                                  <Stack alignItems="center">
+                                    <Iconify
+                                      icon="gg:expand"
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      width={22}
+                                    />
+                                  </Stack>
+                                  <Box>
+                                    <Typography fontSize={12} color="grey">
+                                      {`${ productDetail?.product?.length ||
+                                        "N/A"}*${productDetail?.product?.width ||
+                                        "N/A"}*${productDetail?.product?.height ||
+                                        "N/A"}`}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={0.6}
+                                >
+                                  <Stack alignItems="center">
+                                    <Iconify
+                                      icon="uil:weight"
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      width={22}
+                                    />
+                                  </Stack>
+                                  <Box>
+                                    <Typography fontSize={12} color="grey">
+                                      4 Kg
+                                    </Typography>
+                                  </Box>
+                                </Stack>
+                              </Stack>
+                              <Stack direction="row" spacing={1}>
+                                <Box
+                                  component="img"
+                                  src="/assets/images/dashboard/portfolio.jpeg"
+                                  sx={{
+                                    width: "83px",
+                                    height: "59px",
+                                  }}
+                                />
+                                <Box
+                                  component="img"
+                                  src="/assets/images/dashboard/portfolio.jpeg"
+                                  sx={{
+                                    width: "83px",
+                                    height: "59px",
+                                  }}
+                                />
+                              </Stack>
+                            </Grid>
+                            <Grid item md={3}>
+                              <Box mb={4}>
+                                <Box>
+                                  <Typography fontSize={13} fontWeight={600}>
+                                    Pick up Date
+                                  </Typography>
+                                </Box>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  alignItems="center"
+                                >
+                                  <Box
+                                    sx={{
+                                      backgroundColor: "#FEE6BB",
+                                      width: "28px",
+                                      height: "28px",
+                                      borderRadius: "50%",
+                                      p: "5px",
+                                    }}
+                                  >
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      icon="majesticons:calendar-line"
+                                    />
+                                  </Box>
                                   <Box>
                                     <Typography
-                                      color="primary"
-                                      variant="subtitle1"
+                                      color="grey"
+                                      fontWeight={400}
+                                      fontSize={13}
                                     >
                                       {productDetail?.product?.pickup_date ||
                                         "N/A"}
                                     </Typography>
                                   </Box>
-                                </Grid>
-                              </Grid>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Pick-Up Time
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {productDetail?.product?.pickup_time ||
-                                        "N/A"}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
+                                </Stack>
+                              </Box>
 
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Material
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {productDetail?.product?.material ||
-                                        "N/A"}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
+                              <Box>
+                                <Typography fontSize={13} fontWeight={600}>
+                                  Pick up Time
+                                </Typography>
+                              </Box>
+                              <Stack
+                                direction="row"
+                                spacing={1}
+                                alignItems="center"
+                              >
+                                <Box
+                                  sx={{
+                                    backgroundColor: "#FEE6BB",
+                                    width: "28px",
+                                    height: "28px",
+                                    borderRadius: "50%",
+                                    p: "5px",
+                                  }}
+                                >
+                                  <Iconify
+                                    color={(theme) =>
+                                      theme.palette.primary.main
+                                    }
+                                    icon="majesticons:calendar-line"
+                                  />
+                                </Box>
+                                <Box>
+                                  <Typography
+                                    color="grey"
+                                    fontWeight={400}
+                                    fontSize={13}
+                                  >
+                                    {productDetail?.product?.pickup_time ||
+                                      "N/A"}
+                                  </Typography>
+                                </Box>
+                              </Stack>
                             </Grid>
-                            <Grid item md={4}>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Drop-Out Date
-                                    </Typography>
+                            <Grid item md={3}>
+                              <Box mb={4}>
+                                <Box>
+                                  <Typography fontSize={13} fontWeight={600}>
+                                    Drop out Date
+                                  </Typography>
+                                </Box>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  alignItems="center"
+                                >
+                                  <Box
+                                    sx={{
+                                      backgroundColor: "#FEE6BB",
+                                      width: "28px",
+                                      height: "28px",
+                                      borderRadius: "50%",
+                                      p: "5px",
+                                    }}
+                                  >
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      icon="majesticons:calendar-line"
+                                    />
                                   </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
                                   <Box>
                                     <Typography
-                                      color="primary"
-                                      variant="subtitle1"
+                                      color="grey"
+                                      fontWeight={400}
+                                      fontSize={13}
                                     >
                                       {productDetail?.product?.drop_date ||
                                         "N/A"}
                                     </Typography>
                                   </Box>
-                                </Grid>
-                              </Grid>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Drop-Out Time
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {productDetail?.product?.pickup_time ||
-                                        "N/A"}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                            <Grid item md={2}>
+                                </Stack>
+                              </Box>
+                              <Box>
+                                <Typography fontSize={13} fontWeight={600}>
+                                  Drop out Time
+                                </Typography>
+                              </Box>
                               <Stack
                                 direction="row"
-                                justifyContent="space-between"
-                                alignItems="center"
                                 spacing={1}
+                                alignItems="center"
                               >
-                                <Stack spacing={1}>
-                                  <Box>
+                                <Box
+                                  sx={{
+                                    backgroundColor: "#FEE6BB",
+                                    width: "28px",
+                                    height: "28px",
+                                    borderRadius: "50%",
+                                    p: "5px",
+                                  }}
+                                >
+                                  <Iconify
+                                    color={(theme) =>
+                                      theme.palette.primary.main
+                                    }
+                                    icon="majesticons:calendar-line"
+                                  />
+                                </Box>
+                                <Box>
+                                  <Typography
+                                    color="grey"
+                                    fontWeight={400}
+                                    fontSize={13}
+                                  >
+                                    {productDetail?.product?.drop_time || "N/A"}
+                                  </Typography>
+                                </Box>
+                              </Stack>
+                            </Grid>
+                            <Grid item md={3}>
+                              <Timeline
+                                sx={{
+                                  [`& .${timelineItemClasses.root}:before`]: {
+                                    flex: 0,
+                                    padding: 0,
+                                  },
+                                }}
+                              >
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator>
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      width={30}
+                                      icon="carbon:location-star-filled"
+                                    />
+                                    <TimelineConnector
+                                      sx={{
+                                        "&.MuiTimelineConnector-root": {
+                                          border: (theme) =>
+                                            `1px solid ${alpha(
+                                              theme.palette.common.black,
+                                              0.6
+                                            )}`,
+                                          width: "0px",
+                                          borderStyle: "dashed",
+                                          backgroundColor: "transparent",
+                                        },
+                                      }}
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent
+                                    sx={{ fontSize: 14, fontweight: 600 }}
+                                  >
+                                    10 Street London
+                                  </TimelineContent>
+                                </TimelineItem>
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator sx={{ ml: 1.1 }}>
+                                    <TimelineDot
+                                      sx={{
+                                        backgroundColor: (theme) =>
+                                          theme.palette.primary.main,
+                                      }}
+                                    />
+                                    <TimelineConnector
+                                      sx={{
+                                        "&.MuiTimelineConnector-root": {
+                                          border: (theme) =>
+                                            `1px solid ${alpha(
+                                              theme.palette.common.black,
+                                              0.6
+                                            )}`,
+                                          width: "0px",
+                                          borderStyle: "dashed",
+                                          backgroundColor: "transparent",
+                                        },
+                                      }}
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent sx={{ fontSize: "11px" }}>
+                                    Location 1{" "}
+                                    <Typography
+                                      fontSize={8}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      Pickup
+                                    </Typography>
+                                  </TimelineContent>
+                                </TimelineItem>
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator sx={{ ml: 1.1 }}>
+                                    <TimelineDot
+                                      sx={{
+                                        backgroundColor: (theme) =>
+                                          theme.palette.primary.main,
+                                      }}
+                                    />
+                                    <TimelineConnector
+                                      sx={{
+                                        "&.MuiTimelineConnector-root": {
+                                          border: (theme) =>
+                                            `1px solid ${alpha(
+                                              theme.palette.common.black,
+                                              0.6
+                                            )}`,
+                                          width: "0px",
+                                          borderStyle: "dashed",
+                                          backgroundColor: "transparent",
+                                        },
+                                      }}
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent sx={{ fontSize: "11px" }}>
+                                    Location 2{" "}
+                                    <Typography
+                                      fontSize={8}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      Pickup
+                                    </Typography>
+                                  </TimelineContent>
+                                </TimelineItem>
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator sx={{ ml: 1.1 }}>
+                                    <TimelineDot
+                                      sx={{
+                                        backgroundColor: "#5D5D5D",
+                                      }}
+                                    />
+                                    <TimelineConnector
+                                      sx={{
+                                        "&.MuiTimelineConnector-root": {
+                                          border: (theme) =>
+                                            `1px solid ${alpha(
+                                              theme.palette.common.black,
+                                              0.6
+                                            )}`,
+                                          width: "0px",
+                                          borderStyle: "dashed",
+                                          backgroundColor: "transparent",
+                                        },
+                                      }}
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent sx={{ fontSize: "11px" }}>
+                                    Location 3{" "}
+                                    <Typography
+                                      fontSize={8}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      Drop-off
+                                    </Typography>
+                                  </TimelineContent>
+                                </TimelineItem>
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator sx={{ ml: 1.1 }}>
+                                    <TimelineDot
+                                      sx={{
+                                        backgroundColor: (theme) =>
+                                          theme.palette.primary.main,
+                                      }}
+                                    />
+                                    <TimelineConnector
+                                      sx={{
+                                        "&.MuiTimelineConnector-root": {
+                                          border: (theme) =>
+                                            `1px solid ${alpha(
+                                              theme.palette.common.black,
+                                              0.6
+                                            )}`,
+                                          width: "0px",
+                                          borderStyle: "dashed",
+                                          backgroundColor: "transparent",
+                                        },
+                                      }}
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent sx={{ fontSize: "11px" }}>
+                                    Location 4{" "}
+                                    <Typography
+                                      fontSize={8}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      Pickup
+                                    </Typography>
+                                  </TimelineContent>
+                                </TimelineItem>
+
+                                <TimelineItem
+                                  sx={{
+                                    "&.MuiTimelineItem-root": {
+                                      minHeight: "50px",
+                                    },
+                                  }}
+                                >
+                                  <TimelineSeparator>
+                                    <Iconify
+                                      width={30}
+                                      icon="carbon:location-star-filled"
+                                    />
+                                  </TimelineSeparator>
+                                  <TimelineContent
+                                    sx={{ fontSize: 14, fontweight: 600 }}
+                                  >
+                                    Small Heath, Birmingham
+                                  </TimelineContent>
+                                </TimelineItem>
+                              </Timeline>
+                            </Grid>
+                          </Grid>
+                          {/* <Box pt={2}>
+                            <Typography fontSize={14}>
+                              {" "}
+                              {item?.description}
+                            </Typography>
+                          </Box> */}
+
+                          <Divider sx={{ my: 2 }} />
+                          <Box>
+                            <Stack
+                              direction="row"
+                              alignItems="center"
+                              justifyContent="space-between"
+                            >
+                              <Typography variant="subtitle2">
+                                Job Budget: $500
+                              </Typography>
+                              {/* <Typography variant="subtitle2">
+                              Total Spend: $30K+
+                            </Typography> */}
+                              <Stack direction="row" spacing={1}>
+                              <Box>
                                     <Button
                                       sx={{ fontWeight: 500 }}
                                       fullWidth
-                                      variant="outlined"
+                                      variant="contained"
                                       startIcon={
                                         <Iconify icon="carbon:view-filled" />
                                       }
@@ -449,34 +801,8 @@ const DashboardJobRequest = () => {
                                     </Button>
                                     {/* )} */}
                                   </Box>
-                                </Stack>
+                               
                               </Stack>
-                              <Stack
-                                mt={1}
-                                position="absolute"
-                                right={33}
-                              ></Stack>
-                            </Grid>
-                          </Grid>
-                          <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {item?.description}
-                            </Typography>
-                          </Box>
-
-                          <Divider sx={{ my: 2 }} />
-                          <Box>
-                            <Stack
-                              direction="row"
-                              justifyContent="space-between"
-                            >
-                              <Typography variant="subtitle2">
-                                Job Budget: $500
-                              </Typography>
-                              <Typography variant="subtitle2">
-                                Customer Spend: $30K+
-                              </Typography>
                             </Stack>
                           </Box>
                         </CardContent>
@@ -487,11 +813,13 @@ const DashboardJobRequest = () => {
               ) : (
                 <>{!loader && <JobSekelton title="No active Jobs..." />}</>
               )}
+
+              {/* )} */}
             </Grid>
             <Box>
               <Stack alignItems="center" justifyContent="center">
                 <Pagination
-                  count={Number(pageCount)}
+                  count={pageCount}
                   color="primary"
                   page={page}
                   onChange={handlePageChange}
@@ -530,6 +858,7 @@ const DashboardJobRequest = () => {
               </Stack>
             </Box>
           </Box>
+         
         </Container>
 
         <Box>
