@@ -207,7 +207,7 @@ const DriverPage = () => {
         formData = formDatas;
       }
       await axiosInstance
-        .post("api/user/driver-register", driverFormData, { setErrors })
+        .post(url, formData, { setErrors })
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
