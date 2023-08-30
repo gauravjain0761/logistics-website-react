@@ -226,11 +226,21 @@ const ViewJobHistory = () => {
                           <Stack spacing={3} direction="row" mt={3}>
                             <Box
                               component="img"
-                              src={`${item?.base_url}${item?.image}`}
+                              src={`${item?.user?.base_url}${item?.user?.profile_img}`}
                               width={60}
                               height={60}
+                              sx={{ objectFit: "cover" }}
                             />
-                            <Stack direction="column" spacing={1}>
+                            <Stack direction="column">
+                              <Box>
+                                <Typography
+                                  fontSize={16}
+                                  fontWeight={500}
+                                  color="primary"
+                                >
+                                  {item?.user?.user_name}
+                                </Typography>
+                              </Box>
                               <Box>
                                 <Rating
                                   value={item?.rating}
@@ -308,7 +318,11 @@ const ViewJobHistory = () => {
                           <Typography>{index + 1}</Typography>
                         </TableCell>
                         <TableCell align="left">
-                          <Typography sx={{maxWidth:"52em", wordWrap:"break-word"}}>{item?.address}</Typography>
+                          <Typography
+                            sx={{ maxWidth: "52em", wordWrap: "break-word" }}
+                          >
+                            {item?.address}
+                          </Typography>
                         </TableCell>
                       </TableRow>
                     );

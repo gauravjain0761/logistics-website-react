@@ -19,7 +19,7 @@ const SectionThree = () => {
             Services
           </Typography>
         </ListItem>
-        <ListItemButton component="a" href="#simple-list">
+        <ListItemButton component="a" href="/blogs">
           <StyledListItemText primary="Blogs" />
         </ListItemButton>
         <ListItemButton component="a" href="#simple-list">
@@ -28,7 +28,7 @@ const SectionThree = () => {
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Services" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
+        <ListItemButton component="a" href="/testimonial/testimonials">
           <StyledListItemText primary="Testimonials" />
         </ListItemButton>
       </List>

@@ -13,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
+  Breadcrumbs,
   Card,
   CardContent,
   Container,
@@ -81,11 +82,91 @@ const BlogDetail = () => {
 
   return (
     <React.Fragment>
-      <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
-        alt=""
-        title="Blog Detail"
-      />
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: { lg: "450px", md: "350px", sm: "100%", xs: "100%" },
+          backgroundImage: `url("/blog/blogDetail.png")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+          zIndex: 5,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          "&::before": {
+            content: '""',
+            backgroundImage:
+              "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            zIndex: 7,
+          },
+        }}
+      >
+        <Box
+          sx={{ zIndex: 9, position: "absolute", left: "10%", bottom: "25%" }}
+        >
+          <Stack direction="column" alignItems="start">
+            <Box>
+              <Typography fontSize={30} fontWeight={600} color="white">
+                Blog Detail
+              </Typography>
+            </Box>
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Box>
+                <Typography fontSize={20} fontWeight={400} color="white">
+                  by Lorem Ipsum
+                </Typography>
+              </Box>
+              <Box sx={{ borderBottom: "1px solid white", width: "1.5em" }} />
+
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Iconify icon="ph:clock" color="common.white" width={18} />
+                <Box>
+                  <Typography fontSize={16} fontWeight={400} color="white">
+                    2 minute read
+                  </Typography>
+                </Box>
+                <Box sx={{ borderBottom: "1px solid white", width: "1.5em" }} />
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Iconify
+                  icon="material-symbols:bar-chart"
+                  color="common.white"
+                  width={18}
+                />
+                <Box>
+                  <Typography fontSize={16} fontWeight={400} color="white">
+                    1.6K views
+                  </Typography>
+                </Box>
+                <Box sx={{ borderBottom: "1px solid white", width: "1.5em" }} />
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Iconify
+                  icon="ic:outline-facebook"
+                  color="common.white"
+                  width={18}
+                />
+                <Iconify icon="mdi:twitter" color="common.white" width={18} />
+                <Iconify icon="mdi:pinterest" color="common.white" width={18} />
+                <Box>
+                  <Typography fontSize={16} fontWeight={400} color="white">
+                    1.2K shares
+                  </Typography>
+                </Box>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Box>
+      </Box>
       <Box py={5} pb={14}>
         {loader ? (
           <Container>

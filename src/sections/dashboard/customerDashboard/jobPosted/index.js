@@ -778,7 +778,7 @@ const DashboardJobPost = ({ formik }) => {
                                     }
                                     onClick={() =>
                                       router.push(
-                                        `/dashboard/customer/job_post_form/${item?.bid_id}`
+                                        `/dashboard/customer/job_post_form/${item?.id}`
                                       )
                                     }
                                     sx={{

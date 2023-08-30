@@ -256,7 +256,9 @@ const BidList = () => {
                             spacing={1}
                             justifyContent="end"
                           >
-                            <Button color="dark">Cancel</Button>
+                            <Button color="dark" onClick={handleFilterClose}>
+                              Cancel
+                            </Button>
                             <Button variant="contained">Filter</Button>
                           </Stack>
                         </Box>
@@ -265,8 +267,7 @@ const BidList = () => {
                   </Stack>
                 </Stack>
                 <Box>
-                  {data &&
-                    data.length > 0 &&
+                  {data && data.length > 0 ? (
                     data.map((elem, index) => {
                       return (
                         <Box key={index}>
@@ -399,7 +400,12 @@ const BidList = () => {
                           <Divider sx={{ my: 2 }} />
                         </Box>
                       );
-                    })}
+                    })
+                  ) : (
+                    <Box textAlign="center" py={6}>
+                      <Typography variant="h4">No Bids Yet !</Typography>
+                    </Box>
+                  )}
                 </Box>
                 <Box>
                   <Stack alignItems="center" justifyContent="center">
