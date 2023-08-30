@@ -163,7 +163,7 @@ const DriverPage = () => {
     },
     onSubmit: async (values, { setErrors }) => {
       let url, formData;
-      // if (values.user_type === "driver") {
+      if (values.user_type === "driver") {
       url = "api/user/driver-register";
       let driverFormData = new FormData();
       driverFormData.append("user_name", values?.user_name);
@@ -189,23 +189,23 @@ const DriverPage = () => {
       driverFormData.append("dvia_cert", values?.dvia_cert);
       driverFormData.append("nationality_cert", values?.nationality_cert);
       formData = driverFormData;
-      // } else {
-      //   url = "/api/user/company-register";
-      //   let formDatas = new FormData();
-      //   formDatas.append("user_name", values?.user_name);
-      //   formDatas.append("user_type", values?.user_type);
-      //   formDatas.append("email", values?.email);
-      //   formDatas.append("mobile", values?.mobile);
-      //   formDatas.append("term", values?.term);
-      //   formDatas.append("password", values?.password);
-      //   formDatas.append(
-      //     "password_confirmation",
-      //     values?.password_confirmation
-      //   );
-      //   formDatas.append("company_certificate", values?.company_certificate);
-      //   formDatas.append("company_vat", values?.company_vat);
-      //   formData = formDatas;
-      // }
+      } else {
+        url = "/api/user/company-register";
+        let formDatas = new FormData();
+        formDatas.append("user_name", values?.user_name);
+        formDatas.append("user_type", values?.user_type);
+        formDatas.append("email", values?.email);
+        formDatas.append("mobile", values?.mobile);
+        formDatas.append("term", values?.term);
+        formDatas.append("password", values?.password);
+        formDatas.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
+        formDatas.append("company_certificate", values?.company_certificate);
+        formDatas.append("company_vat", values?.company_vat);
+        formData = formDatas;
+      }
       await axiosInstance
         .post("api/user/driver-register", driverFormData, { setErrors })
         .then((response) => {
