@@ -28,10 +28,10 @@ const SectionTwo = () => {
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Help" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
+        <ListItemButton component="a" href="/faqs">
           <StyledListItemText primary="Faq" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
+        <ListItemButton component="a" href="/contact_us">
           <StyledListItemText primary="Contact us" />
         </ListItemButton>
       </List>

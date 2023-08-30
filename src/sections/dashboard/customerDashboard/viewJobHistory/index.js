@@ -229,14 +229,16 @@ const ViewJobHistory = () => {
                       <Stack spacing={3} direction="row" key={index}> 
                         <Box
                           component="img"
-                          src={`${item?.base_url}${item?.image}`}
+                          src={`${item?.user?.base_url}${item?.user?.profile_img}`}
                           width={60}
                           height={60}
+                          sx={{objectFit:"cover"}}
                         />
                         <Stack direction="column">
+                        
                           <Box>
-                            <Typography variant="subtitle1" color="primary">
-                              {item?.name}
+                            <Typography fontSize={16} fontWeight={500} color="primary">
+                              {item?.user?.user_name}
                             </Typography>
                           </Box>
                           <Box>

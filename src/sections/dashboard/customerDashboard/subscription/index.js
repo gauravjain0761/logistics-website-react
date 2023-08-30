@@ -4,6 +4,7 @@ import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
+  Breadcrumbs,
   Button,
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const SubscriptionsPage = () => {
@@ -47,19 +49,96 @@ const SubscriptionsPage = () => {
 
   return (
     <React.Fragment>
-      <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
-        alt=""
-        title="Subscription"
-      />
-      <Box sx={{ backgroundColor: "#f5f5f5",pb:8 }}>
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: { lg: "350px", md: "350px", sm: "100%", xs: "100%" },
+          backgroundImage: `url("/assets/images/contact/contact-us-banner.jpg")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+          zIndex: 5,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          "&::before": {
+            content: '""',
+            backgroundImage:
+              "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            zIndex: 7,
+          },
+        }}
+      >
+        <Stack
+          sx={{ zIndex: 8, position: "absolute", left: "8em", top: "5em" }}
+        >
+          <Breadcrumbs aria-label="breadcrumb">
+            <Box
+              component={Link}
+              sx={{ textDecoration: "none" }}
+              color="common.white"
+              href="/"
+            >
+              Home
+            </Box>
+            <Box
+              sx={{ textDecoration: "none" }}
+              component={Link}
+              color="common.white"
+              href="/dashboard/customer"
+            >
+              Dashboard
+            </Box>
+            <Typography color="common.white">Subscription</Typography>
+          </Breadcrumbs>
+        </Stack>
+        <CardContent
+          sx={{
+            paddingTop: {
+              lg: "6rem!important",
+              md: "6rem!important",
+              sm: "3rem!important",
+              xs: "3rem!important",
+            },
+            paddingBottom: {
+              lg: "4rem!important",
+              md: "4rem!important",
+              sm: "2rem!important",
+              xs: "2rem!important",
+            },
+            position: "relative",
+            zIndex: 9,
+          }}
+        >
+          {/* <CardContentOverlay> */}
+
+          <Typography
+            gutterBottom
+            fontSize={44}
+            component="h1"
+            fontWeight={600}
+            color="white"
+          >
+            Subscription
+          </Typography>
+        </CardContent>
+      </Box>
+      <Box sx={{ backgroundColor: "#f5f5f5", pb: 8 }}>
         {loading ? (
           <>
             <SkeletonLoader />
           </>
         ) : (
           <Container>
-            <Stack textAlign="center" mx={18} py={8} >
+            <Stack textAlign="center" mx={18} py={8}>
               <Box>
                 <Typography variant="h3">
                   Choose the Right Plan For You
