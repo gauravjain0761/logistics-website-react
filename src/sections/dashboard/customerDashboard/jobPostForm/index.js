@@ -138,7 +138,7 @@ const JobPostForm = ({
     },
     {
       title: "Address",
-      fields: ["vehicle","vehical_type", "description"],
+      fields: ["vehicle","vehical_type","job_budget", "description"],
       component: (
         <>
           <StepThree formik={formik} />

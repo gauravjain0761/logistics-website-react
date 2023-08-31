@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -15,6 +16,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import Iconify from "@/components/iconify/Iconify";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,7 +31,21 @@ const JobDialog = ({ addressOpen = [], onClose }) => {
       onClose={() => onClose(false)}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>Drop Address Detail</DialogTitle>
+      <Box textAlign="end">
+        <Iconify
+          onClick={() => onClose(false)}
+          sx={{
+            cursor: "pointer",
+            borderRadius: "50%",
+            border: "1px solid grey",
+            mt: 2,
+            mr: 2,
+          }}
+          icon="basil:cross-solid"
+          width={30}
+        />
+      </Box>
+      <DialogTitle align="center">Address Detail</DialogTitle>
       <DialogContent>
         {addressOpen?.address &&
           addressOpen?.address?.length > 0 &&
