@@ -42,6 +42,7 @@ const TextBox = (props) => {
     textBoxSx,
     isBackgroundColor = false,
     IconSx,
+    ...rest
   } = props;
 
   return (
@@ -73,6 +74,7 @@ const TextBox = (props) => {
           </Box>
         )}
         <TextField
+          {...rest}
           fullWidth={fullWidth}
           error={helperText ? true : false}
           variant={variant}

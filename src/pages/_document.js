@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -9,6 +10,10 @@ export default function Document() {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
         <link rel="icon" href="/faviconweb.jpg" />
+
+        <script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}&libraries=places`}
+        ></script>
       </Head>
       <body>
         <Main />
