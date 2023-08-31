@@ -15,8 +15,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
+import Iconify from "@/components/iconify/Iconify";
 
 const TrackJob = () => {
+  const router = useRouter();
   const { query } = useRouter();
   const { id } = query;
   const { user } = useAuthContext();
@@ -46,6 +48,16 @@ const TrackJob = () => {
     <React.Fragment>
       <Box py={12}>
         <Container>
+        <Box my={1}>
+            <Button
+              variant="outlined"
+              sx={{ my: 0 }}
+              onClick={() => router.push("/dashboard/driver/active_jobs")}
+            >
+              <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />
+              Back
+            </Button>
+          </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
             <TrackGoogleMaps />
             <Box

@@ -64,6 +64,7 @@ const DropTypeSelect = [
   },
 ];
 const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
+  console.log("formikformikformik", formik?.values?.items);
   return (
     <>
       <Divider sx={{ my: 3 }} />
@@ -449,6 +450,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           value={productItem?.product?.image}
                           name={`items[${productIndex}].product.image`}
                           onChange={(e) => {
+                            console.log("ProductImage",e)
                             formik.setFieldValue(
                               `items[${productIndex}].product.image`,
                               e
@@ -550,6 +552,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   </Stack>
                                 </Box>
                               </Grid>
+
                               <Grid item md={12}>
                                 <Box>
                                   <TextBox
@@ -588,7 +591,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
         variant="outlined"
         onClick={() => addProduct()}
         startIcon={<Add />}
-        color="greyLight"
+        color="primary"
       >
         Add Another
       </Button>

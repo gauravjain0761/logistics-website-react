@@ -110,7 +110,6 @@ const StepThree = ({ formik }) => {
             options={vehicle}
             onChange={formik.handleChange}
             helperText={formik.touched.vehicle && formik.errors.vehicle}
-         
             size="small"
             vehicle="small"
           />
@@ -119,7 +118,20 @@ const StepThree = ({ formik }) => {
           <Box>
             <TextBox
               fullWidth
-              placeholder="Important Note:"
+              label="Job Budget"
+              name={`job_budget`}
+              value={formik?.values?.job_budget}
+              onChange={formik.handleChange}
+              size={"small"}
+              helperText={formik.touched.job_budget && formik.errors.job_budget}
+            />
+          </Box>
+        </Grid>
+        <Grid item md={12}>
+          <Box>
+            <TextBox
+              fullWidth
+              label="Important Note:"
               name={`description`}
               value={formik?.values?.description}
               onChange={formik.handleChange}

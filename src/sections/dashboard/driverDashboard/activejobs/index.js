@@ -60,7 +60,7 @@ const DashboardJobPost = () => {
   const [layout, setLayout] = useState(false);
   const [setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
-  const [openPDf, setOpenPDF] = React.useState(false);
+  // const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   const [pageData, setPageData] = React.useState({});
@@ -70,7 +70,6 @@ const DashboardJobPost = () => {
   const handleStartClose = () => setStartOpen(false);
 
   const [completeOpen, setCompleteOpen] = React.useState(false);
-  console.log(completeOpen, "uiudsiusd");
   const handleCompleteOpen = (id) => setCompleteOpen(id);
   const handleCompleteClose = () => setCompleteOpen(false);
 
@@ -288,9 +287,12 @@ const DashboardJobPost = () => {
                             <Grid item md={2}>
                               <Box
                                 component="img"
-                                src="/assets/images/dashboard/portfolio.jpeg"
+                                src={`${elem?.items[0]?.product?.base_url}${elem?.items[0]?.product?.image}`}
+                                alt={`${elem?.items[0]?.product?.image}`}
                                 sx={{
                                   width: "100px",
+                                  height:"100px",
+                                  objectFit:"cover",
                                   borderRadius: "50%",
                                   border: "2px solid #ff7534",
                                 }}
@@ -314,7 +316,7 @@ const DashboardJobPost = () => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem?.items[0]?.product?.pickup_time}
+                                      {elem?.items[0]?.product?.pickup_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -521,7 +523,7 @@ const DashboardJobPost = () => {
                                       Track Job
                                     </Button>
                                   </Box>
-                                  <Box>
+                                  {/* <Box>
                                     <Button
                                       sx={{ fontWeight: 500 }}
                                       fullWidth
@@ -533,7 +535,7 @@ const DashboardJobPost = () => {
                                     >
                                       View PDF
                                     </Button>
-                                  </Box>
+                                  </Box> */}
                                 </Stack>
                               </Stack>
                               <Stack
@@ -791,7 +793,7 @@ const DashboardJobPost = () => {
           </Box>
         </Container>
       </Box>
-      <Dialog fullScreen open={openPDf}>
+      {/* <Dialog fullScreen open={openPDf}>
         <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <DialogActions
             sx={{
@@ -818,7 +820,7 @@ const DashboardJobPost = () => {
             </PDFViewer>
           </Box>
         </Box>
-      </Dialog>
+      </Dialog> */}
     </React.Fragment>
   );
 };

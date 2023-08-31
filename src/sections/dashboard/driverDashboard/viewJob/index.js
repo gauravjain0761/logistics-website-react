@@ -97,6 +97,14 @@ const ViewJobDetail = () => {
                           </Grid>
                           <Grid item md={2.5}>
                             <Typography fontWeight={500}>
+                              Vehicle Type :
+                            </Typography>
+                          </Grid>
+                          <Grid item md={9.5}>
+                            <Typography>{data?.vehical_type}</Typography>
+                          </Grid>
+                          <Grid item md={2.5}>
+                            <Typography fontWeight={500}>
                               Vehicle Name :
                             </Typography>
                           </Grid>
@@ -105,7 +113,7 @@ const ViewJobDetail = () => {
                           </Grid>
                           <Grid item md={12} mt={2}>
                             <Typography fontWeight={500}>
-                              Pick Up Address :-
+                              Pick Up Address 
                             </Typography>
                           </Grid>
                           <Grid item md={12}>
@@ -120,7 +128,7 @@ const ViewJobDetail = () => {
                               <Table aria-label="simple table">
                                 <TableHead>
                                   <TableRow>
-                                    <TableCell>Address</TableCell>
+                                    <TableCell align="center">Sr. No.</TableCell>
                                     <TableCell align="center">
                                       Pickup Data
                                     </TableCell>
@@ -136,6 +144,9 @@ const ViewJobDetail = () => {
                                     <TableCell align="center">Image</TableCell>
                                     <TableCell align="center">
                                       Material
+                                    </TableCell>
+                                    <TableCell align="center">
+                                     Quantity
                                     </TableCell>
                                     <TableCell align="center">
                                       Address
@@ -156,9 +167,9 @@ const ViewJobDetail = () => {
                                               },
                                           }}
                                         >
-                                          <TableCell component="th" scope="row">
+                                          <TableCell align="center" component="th" scope="row">
                                             <Typography>
-                                              {item?.product?.job_id}
+                                              {index+1}
                                             </Typography>
                                           </TableCell>
                                           <TableCell align="center">
@@ -197,6 +208,11 @@ const ViewJobDetail = () => {
                                             </Typography>
                                           </TableCell>
                                           <TableCell align="center">
+                                            <Typography>
+                                              {item?.product?.quantity}
+                                            </Typography>
+                                          </TableCell>
+                                          <TableCell align="center">
                                             <IconButton
                                               onClick={() =>
                                                 setAddressopen(item)
@@ -220,6 +236,7 @@ const ViewJobDetail = () => {
                 </CardContent>
                 <Box sx={{ position: "absolute", right: "30px", top: "150px" }}>
                   <Stack spacing={1}>
+                  
                     <MapModal />
                     <ApplyJobModal />
                   </Stack>
