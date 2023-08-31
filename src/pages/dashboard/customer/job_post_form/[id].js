@@ -221,8 +221,6 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors, setFieldValue }) => {
-      // let formData = new FormData();
-
       let url, method;
 
       if (id === "create") {
@@ -232,12 +230,6 @@ const PostJob = () => {
         url = `/api/auth/jobs/update/${id}`;
         method = "POST";
       }
-
-      // formData.append("job_title", values?.job_title);
-      // formData.append("image", values?.image);
-      // formData.append("size", values?.size);
-      // formData.append("quantity", values?.quantity);
-      // console.log("valuesvalues", values);
       if (id !== "create") {
         values["items"] = JSON.stringify(values?.items);
         await axiosInstance
@@ -253,7 +245,7 @@ const PostJob = () => {
               enqueueSnackbar(response.data.message, {
                 variant: "success",
               });
-              formik.resetForm();
+              // formik.resetForm();
             } else {
               setFieldValue("items", JSON.parse(values?.items));
               enqueueSnackbar(response.data.message, {
@@ -295,7 +287,7 @@ const PostJob = () => {
                 enqueueSnackbar(response.data.message, {
                   variant: "success",
                 });
-                formik.resetForm();
+                // formik.resetForm();
               } else {
                 setFieldValue("items", JSON.parse(values?.items));
                 enqueueSnackbar(response.data.message, {

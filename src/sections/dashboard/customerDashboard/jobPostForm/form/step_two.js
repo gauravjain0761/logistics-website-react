@@ -101,9 +101,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           fullWidth
                           type="date"
                           label="Pickup Date"
-                          value={moment(
-                            productItem?.product?.pickup_date
-                          ).format("YYYY-MM-DD")}
+                          value={productItem?.product?.pickup_date}
                           min={new Date().toISOString().split("T")[0]}
                           name={`items[${productIndex}].product.pickup_date`}
                           onChange={(e) => {
@@ -112,7 +110,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               e.target.value
                             );
                             formik.setFieldValue(
+                              `items[${productIndex}].product.pickup_time`,
+                              ""
+                            );
+                            formik.setFieldValue(
                               `items[${productIndex}].product.drop_date`,
+                              ""
+                            );
+                            formik.setFieldValue(
+                              `items[${productIndex}].product.drop_time`,
                               ""
                             );
                           }}
@@ -152,9 +158,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               },
                             }}
                             fullWidth
-                            format="hh:mm A"
+                            format="hh:mm a"
                             label="Pickup Time"
-                            value={productItem?.product?.pickup_time}
+                            value={dayjs(
+                              `${productItem?.product?.pickup_date}T${moment(
+                                productItem?.product?.pickup_time,
+                                "hh:mm a"
+                              ).format("HH:mm")}`
+                            )}
                             InputLabelProps={{
                               shrink: true,
                             }}
@@ -162,7 +173,11 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             onChange={(e) => {
                               formik.setFieldValue(
                                 `items[${productIndex}].product.pickup_time`,
-                                moment(e).format("hh:mm a")
+                                dayjs(e).format("hh:mm a")
+                              );
+                              formik.setFieldValue(
+                                `items[${productIndex}].product.drop_time`,
+                                ""
                               );
                             }}
                             size={"small"}
@@ -204,18 +219,13 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           fullWidth
                           type="date"
                           label="Drop Date"
-                          value={moment(productItem?.product?.drop_date).format(
-                            "YYYY-MM-DD"
-                          )}
-                          // min={
-                          //   productItem?.product?.drop_date
-                          //     ? new Date(productItem?.product?.drop_date)
-                          //         .toISOString()
-                          //         .split("T")[0]
-                          //     : new Date().toISOString().split("T")[0]
-                          // }
+                          value={productItem?.product?.drop_date}
                           name={`items[${productIndex}].product.drop_date`}
                           onChange={(e) => {
+                            formik.setFieldValue(
+                              `items[${productIndex}].product.drop_time`,
+                              ""
+                            );
                             formik.setFieldValue(
                               `items[${productIndex}].product.drop_date`,
                               e.target.value
@@ -257,9 +267,14 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               },
                             }}
                             fullWidth
-                            format="hh:mm A"
+                            format="hh:mm a"
                             label="Drop Time"
-                            value={productItem?.product?.drop_time}
+                            value={dayjs(
+                              `${productItem?.product?.drop_date}T${moment(
+                                productItem?.product?.drop_time,
+                                "hh:mm a"
+                              ).format("HH:mm")}`
+                            )}
                             InputLabelProps={{
                               shrink: true,
                             }}
@@ -267,7 +282,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             onChange={(e) => {
                               formik.setFieldValue(
                                 `items[${productIndex}].product.drop_time`,
-                                moment(e).format("hh:mm a")
+                                dayjs(e).format("hh:mm a")
                               );
                             }}
                             size={"small"}
@@ -336,6 +351,9 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                         <TextBox
                           fullWidth
                           label="Quantity"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
                           placeholder="Enter Quantity"
                           value={productItem?.product?.quantity}
                           name={`items[${productIndex}].product.quantity`}
@@ -450,7 +468,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           value={productItem?.product?.image}
                           name={`items[${productIndex}].product.image`}
                           onChange={(e) => {
-                            console.log("ProductImage",e)
+                            console.log("ProductImage", e);
                             formik.setFieldValue(
                               `items[${productIndex}].product.image`,
                               e
