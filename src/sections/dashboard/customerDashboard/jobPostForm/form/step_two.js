@@ -7,6 +7,7 @@ import {
 } from "@/components/form";
 import { Add, Close } from "@mui/icons-material";
 import {
+  Autocomplete,
   Box,
   Button,
   Card,
@@ -576,6 +577,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                 <GoogleAutocomplete
                                   fullWidth
                                   size="small"
+                                  labelName="Address"
                                   name={`items[${productIndex}].address[${addressIndex}].address`}
                                   value={addressItem?.address}
                                   onSelect={(address, lat, long) => {

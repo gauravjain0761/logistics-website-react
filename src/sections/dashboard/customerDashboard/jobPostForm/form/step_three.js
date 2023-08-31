@@ -137,7 +137,7 @@ const StepThree = ({ formik }) => {
               value={formik?.values?.job_budget}
               onChange={formik.handleChange}
               size={"small"}
-              helperText={formik.touched.job_budget && formik.errors.job_budget}
+              helperText={formik.errors.job_budget}
             />
           </Box>
         </Grid>

@@ -116,11 +116,9 @@ export function AuthProvider({ children }) {
           user: null,
         },
       });
-      if (response.status === 401) {
-        dispatch({
-          type: "LOGOUT",
-        });
-      }
+      dispatch({
+        type: "LOGOUT",
+      });
     }
   }, [storageAvailable]);
 
