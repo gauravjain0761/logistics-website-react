@@ -2,6 +2,7 @@ import React from "react";
 import {
   Box,
   Divider,
+  FormHelperText,
   InputAdornment,
   List,
   ListItem,
@@ -152,6 +153,9 @@ const GoogleAutocomplete = (props) => {
                   className: "location-search-input",
                 })}
               />
+              <Box sx={{ display: "flex" }}>
+                {helperText && <FormHelperText>{helperText}</FormHelperText>}
+              </Box>
             </FormControl>
             <Box sx={{ position: "relative" }}>
               <Paper
