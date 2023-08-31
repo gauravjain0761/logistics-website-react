@@ -9,6 +9,7 @@ import {
 import { Box } from "@mui/material";
 import DirectionRenderComponent from "./directionRenderComponent";
 import DummyLocations from "@/utils/dummyLocations";
+import Iconify from "@/components/iconify/Iconify";
 
 const containerStyle = {
   width: "100%",
@@ -20,7 +21,7 @@ const center = {
   lng: 150.644,
 };
 
-function TrackGoogleMaps() {
+function TrackGoogleMaps( {close}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
@@ -41,6 +42,7 @@ function TrackGoogleMaps() {
 
   return isLoaded ? (
     <Box component="div" sx={{ position: "relative", width: "100%" }}>
+   
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={new window.google.maps.LatLng(23.21632, 72.641219)}

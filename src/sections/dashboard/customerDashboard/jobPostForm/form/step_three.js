@@ -1,5 +1,6 @@
 import { SelectBox, TextBox } from "@/components/form";
 import { Box, Grid, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 
 const VehicleTypeTruck = [
@@ -67,6 +68,19 @@ const VehicleType = [
 ];
 const StepThree = ({ formik }) => {
   const [vehicle, setVehicle] = React.useState([]);
+  const { query } = useRouter();
+  const { id } = query;
+  React.useEffect(() => {
+    if (id !== "create") {
+      if (formik.values.vehical_type === "van") {
+        setVehicle(VehicleTypeVan);
+      } else if (formik.values.vehical_type === "truck") {
+        setVehicle(VehicleTypeTruck);
+      } else {
+        setVehicle([]);
+      }
+    }
+  }, [vehicle, formik.values, id]);
   return (
     <>
       <Box mb={2}>
@@ -110,7 +124,6 @@ const StepThree = ({ formik }) => {
             options={vehicle}
             onChange={formik.handleChange}
             helperText={formik.touched.vehicle && formik.errors.vehicle}
-         
             size="small"
             vehicle="small"
           />
@@ -119,7 +132,20 @@ const StepThree = ({ formik }) => {
           <Box>
             <TextBox
               fullWidth
-              placeholder="Important Note:"
+              label="Job Budget"
+              name={`job_budget`}
+              value={formik?.values?.job_budget}
+              onChange={formik.handleChange}
+              size={"small"}
+              helperText={formik.touched.job_budget && formik.errors.job_budget}
+            />
+          </Box>
+        </Grid>
+        <Grid item md={12}>
+          <Box>
+            <TextBox
+              fullWidth
+              label="Important Note:"
               name={`description`}
               value={formik?.values?.description}
               onChange={formik.handleChange}

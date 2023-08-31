@@ -37,7 +37,15 @@ import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "@/redux/store";
 import { getJobAlert, setJobAlertPage } from "@/redux/slices/job/driver";
 import { includes, some } from "lodash";
-import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, timelineItemClasses } from "@mui/lab";
+import {
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineItem,
+  TimelineSeparator,
+  timelineItemClasses,
+} from "@mui/lab";
 const DashboardJobRequest = () => {
   const dispatch = useDispatch();
   const {
@@ -194,6 +202,7 @@ const DashboardJobRequest = () => {
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
+                 
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -209,34 +218,33 @@ const DashboardJobRequest = () => {
                       >
                         <Stack
                           direction="row"
-                          justifyContent="space-between"
+                          alignItems="center"
+                          spacing={0.5}
                           px={2}
                           py={1.4}
-                          alignItems="center"
                         >
-                          <Stack direction="row" spacing={0.5}>
-                            <Box>
-                              <Typography
-                                color="common.black"
-                                fontSize={17}
-                                fontWeight={600}
-                              >
-                                {" "}
-                                {item?.name}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            {/* <DeleteModal id={item?.id} /> */}
+                          <Box sx={{ width: "95%" }}>
+                            <Typography
+                              color="common.black"
+                              fontSize={17}
+                              sx={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                              fontWeight={500}
+                            >
+                              {item?.description}
+                            </Typography>
                           </Box>
                         </Stack>
+
                         <Divider />
                         <CardContent>
                           <Grid container spacing={2} alignItems="start">
                             <Grid item md={3}>
                               <Box>
                                 <Typography fontSize={28} fontWeight={500}>
-                                  Gourmet Box
+                                  {item.name}
                                 </Typography>
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
@@ -256,8 +264,7 @@ const DashboardJobRequest = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                    {productDetail?.product?.material ||
-                                        "N/A"}
+                                      {productDetail?.product?.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -277,10 +284,13 @@ const DashboardJobRequest = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {`${ productDetail?.product?.length ||
-                                        "N/A"}*${productDetail?.product?.width ||
-                                        "N/A"}*${productDetail?.product?.height ||
-                                        "N/A"}`}
+                                      {`${
+                                        productDetail?.product?.length || "N/A"
+                                      }*${
+                                        productDetail?.product?.width || "N/A"
+                                      }*${
+                                        productDetail?.product?.height || "N/A"
+                                      }`}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -300,28 +310,32 @@ const DashboardJobRequest = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      4 Kg
+                                      {productDetail?.product?.quantity} Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
                               </Stack>
                               <Stack direction="row" spacing={1}>
-                                <Box
-                                  component="img"
-                                  src="/assets/images/dashboard/portfolio.jpeg"
-                                  sx={{
-                                    width: "83px",
-                                    height: "59px",
-                                  }}
-                                />
-                                <Box
-                                  component="img"
-                                  src="/assets/images/dashboard/portfolio.jpeg"
-                                  sx={{
-                                    width: "83px",
-                                    height: "59px",
-                                  }}
-                                />
+                                {item.items.map((elem, index) => {
+                                  if (index > 2) {
+                                    return "";
+                                  }
+                                  return (
+                                    <React.Fragment key={index}>
+                                      <Box
+                                        component="img"
+                                        alt={elem.product.image}
+                                        src={`${elem.product.base_url}${elem.product.image}`}
+                                        sx={{
+                                          width: "83px",
+                                          height: "59px",
+                                          border: "1px solid lightgrey",
+                                          objectFit: "cover",
+                                        }}
+                                      />
+                                    </React.Fragment>
+                                  );
+                                })}
                               </Stack>
                             </Grid>
                             <Grid item md={3}>
@@ -522,10 +536,17 @@ const DashboardJobRequest = () => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    10 Street London
+                                    {productDetail && productDetail?.address[1]?.address}{" "}
+                                    <Typography
+                                      fontSize={10}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      { productDetail &&  productDetail?.address[1]?.type}
+                                    </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
-                                <TimelineItem
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -564,8 +585,8 @@ const DashboardJobRequest = () => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -604,8 +625,8 @@ const DashboardJobRequest = () => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -643,8 +664,8 @@ const DashboardJobRequest = () => {
                                       Drop-off
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -683,7 +704,7 @@ const DashboardJobRequest = () => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
+                                </TimelineItem> */}
 
                                 <TimelineItem
                                   sx={{
@@ -701,7 +722,14 @@ const DashboardJobRequest = () => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    Small Heath, Birmingham
+                                    {productDetail && productDetail?.address[0]?.address}{" "}
+                                    <Typography
+                                      fontSize={10}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      { productDetail &&  productDetail?.address[0]?.type}
+                                    </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
                               </Timeline>
@@ -728,80 +756,79 @@ const DashboardJobRequest = () => {
                               Total Spend: $30K+
                             </Typography> */}
                               <Stack direction="row" spacing={1}>
-                              <Box>
-                                    <Button
-                                      sx={{ fontWeight: 500 }}
-                                      fullWidth
-                                      variant="contained"
-                                      startIcon={
-                                        <Iconify icon="carbon:view-filled" />
-                                      }
-                                      onClick={() =>
-                                        router.push(
-                                          `/dashboard/driver/view_job/${item?.id}`
-                                        )
-                                      }
-                                    >
-                                      View Job
-                                    </Button>
-                                  </Box>
-                                  <Box>
-                                    <Button
-                                      color={
-                                        !some(item?.job_requests, {
-                                          job_id: item?.id,
-                                        }) &&
-                                        !some(item?.job_requests, {
-                                          driver_id: user?.id,
-                                        })
-                                          ? "dark"
-                                          : "warning"
-                                      }
-                                      fullWidth
-                                      variant="outlined"
-                                      startIcon={
-                                        <Iconify
-                                          sx={{
-                                            "& svg, g": {
-                                              stroke: (theme) =>
-                                                !some(item?.job_requests, {
-                                                  job_id: item?.id,
-                                                }) &&
-                                                !some(item?.job_requests, {
-                                                  driver_id: user?.id,
-                                                })
-                                                  ? theme?.palette.dark.main
-                                                  : theme?.palette.warning.main,
-                                            },
-                                          }}
-                                          icon="icon-park:check-correct"
-                                        />
-                                      }
-                                      onClick={() => {
-                                        !some(item?.job_requests, {
-                                          job_id: item?.id,
-                                        }) &&
-                                          !some(item?.job_requests, {
-                                            driver_id: user?.id,
-                                          }) &&
-                                          handleOpen(item?.id);
-                                      }}
-                                      sx={{
-                                        fontWeight: 500,
-                                      }}
-                                    >
-                                      {!some(item?.job_requests, {
+                                <Box>
+                                  <Button
+                                    sx={{ fontWeight: 500 }}
+                                    fullWidth
+                                    variant="contained"
+                                    startIcon={
+                                      <Iconify icon="carbon:view-filled" />
+                                    }
+                                    onClick={() =>
+                                      router.push(
+                                        `/dashboard/driver/view_job/${item?.id}`
+                                      )
+                                    }
+                                  >
+                                    View Job
+                                  </Button>
+                                </Box>
+                                <Box>
+                                  <Button
+                                    color={
+                                      !some(item?.job_requests, {
                                         job_id: item?.id,
                                       }) &&
                                       !some(item?.job_requests, {
                                         driver_id: user?.id,
                                       })
-                                        ? "Apply Job"
-                                        : "Pending"}
-                                    </Button>
-                                    {/* )} */}
-                                  </Box>
-                               
+                                        ? "dark"
+                                        : "warning"
+                                    }
+                                    fullWidth
+                                    variant="outlined"
+                                    startIcon={
+                                      <Iconify
+                                        sx={{
+                                          "& svg, g": {
+                                            stroke: (theme) =>
+                                              !some(item?.job_requests, {
+                                                job_id: item?.id,
+                                              }) &&
+                                              !some(item?.job_requests, {
+                                                driver_id: user?.id,
+                                              })
+                                                ? theme?.palette.dark.main
+                                                : theme?.palette.warning.main,
+                                          },
+                                        }}
+                                        icon="icon-park:check-correct"
+                                      />
+                                    }
+                                    onClick={() => {
+                                      !some(item?.job_requests, {
+                                        job_id: item?.id,
+                                      }) &&
+                                        !some(item?.job_requests, {
+                                          driver_id: user?.id,
+                                        }) &&
+                                        handleOpen(item?.id);
+                                    }}
+                                    sx={{
+                                      fontWeight: 500,
+                                    }}
+                                  >
+                                    {!some(item?.job_requests, {
+                                      job_id: item?.id,
+                                    }) &&
+                                    !some(item?.job_requests, {
+                                      driver_id: user?.id,
+                                    })
+                                      ? "Apply Job"
+                                      : "Pending"}
+                                  </Button>
+                                  {/* )} */}
+                                </Box>
                               </Stack>
                             </Stack>
                           </Box>
@@ -858,7 +885,6 @@ const DashboardJobRequest = () => {
               </Stack>
             </Box>
           </Box>
-         
         </Container>
 
         <Box>

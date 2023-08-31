@@ -11,6 +11,7 @@ const MapModal = () => {
   const handleClose = () => setOpen(false);
   return (
     <Box>
+    
       <Button
         color="secondary"
         fullWidth
@@ -45,17 +46,31 @@ const MapModal = () => {
         >
           <Box>
             <Box
-              sx={{ position: "relative", overflow: "hidden", height: "30em" }}
+              sx={{ position: "relative", overflow: "hidden", height: "35em" }}
             >
-              <TrackGoogleMaps />
+             <Box textAlign="end">
+        <Iconify
+          onClick={handleClose}
+          sx={{
+            cursor: "pointer",
+            borderRadius: "50%",
+            border: "1px solid grey",
+            mt: 2,
+            mr: 2,
+          }}
+          icon="basil:cross-solid"
+          width={30}
+        />
+      </Box>
+              <TrackGoogleMaps close={handleClose}/>
               <Box
                 sx={{
                   position: "absolute",
-                  top: "6em",
+                  top: "7em",
                   left: "10px",
                   pr: 1,
                   py: 1,
-                  maxHeight: "39em",
+                  maxHeight: "28em",
                   overflowY: "scroll",
                 }}
               >

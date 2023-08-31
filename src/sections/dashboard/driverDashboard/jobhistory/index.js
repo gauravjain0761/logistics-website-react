@@ -9,6 +9,8 @@ import {
   CardContent,
   Chip,
   Container,
+  Dialog,
+  DialogActions,
   Divider,
   Grid,
   IconButton,
@@ -17,6 +19,7 @@ import {
   Rating,
   Stack,
   TextField,
+  Tooltip,
   Typography,
   alpha,
 } from "@mui/material";
@@ -30,7 +33,13 @@ import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import { useDispatch, useSelector } from "@/redux/store";
-import { getJobHistory, setJobActivePage, setJobHistoryPage } from "@/redux/slices/job/driver";
+import {
+  getJobHistory,
+  setJobActivePage,
+  setJobHistoryPage,
+} from "@/redux/slices/job/driver";
+import { PDFViewer } from "@react-pdf/renderer";
+import InvoicePDF from "../activejobs/InvoicePDF";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -46,11 +55,12 @@ const JobHistory = ({ formik }) => {
     dispatch(
       getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
     );
-  }, [page,pageSize]);
+  }, [page, pageSize]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
   // const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   // const [pageCount, setPageCount] = React.useState(1);
@@ -61,9 +71,6 @@ const JobHistory = ({ formik }) => {
   //   setPage(value);
   // };
   // const [data, setData] = React.useState([]);
-
-  
-
 
   return (
     <React.Fragment>
@@ -134,13 +141,21 @@ const JobHistory = ({ formik }) => {
                             alignItems="center"
                           >
                             <Stack direction="row" mb={1} spacing={0.5}>
-                              <Box>
+                              <Box sx={{width:"100%"}}>
                                 <Typography variant="subtitle1">
-                                  Job Title :{" "}
+                                  Job Title :
                                 </Typography>
                               </Box>
-                              <Box>
-                                <Typography color="primary" variant="subtitle1">
+                              <Box sx={{width:"80%"}}>
+                                <Typography
+                                  color="primary"
+                                  variant="subtitle1"
+                                  sx={{
+                                    overflow: "hidden",
+                                    whiteSpace:"nowrap",
+                                    textOverflow: "ellipsis",
+                                  }}
+                                >
                                   {elem.name}
                                 </Typography>
                               </Box>
@@ -156,9 +171,12 @@ const JobHistory = ({ formik }) => {
                             <Grid item md={2}>
                               <Box
                                 component="img"
-                                src="/assets/images/dashboard/portfolio.jpeg"
+                                src={`${elem?.items[0]?.product?.base_url}${elem?.items[0]?.product?.image}`}
+                                alt={`${elem?.items[0]?.product?.image}`}
                                 sx={{
                                   width: "100px",
+                                  height:"100px",
+                                  objectFit:"cover",
                                   borderRadius: "50%",
                                   border: "2px solid #ff7534",
                                 }}
@@ -182,7 +200,7 @@ const JobHistory = ({ formik }) => {
                                       color="primary"
                                       variant="subtitle1"
                                     >
-                                      {elem?.items[0]?.product?.pickup_time}
+                                      {elem?.items[0]?.product?.pickup_date}
                                     </Typography>
                                   </Box>
                                 </Grid>
@@ -329,6 +347,20 @@ const JobHistory = ({ formik }) => {
                                       View Detail
                                     </Button>
                                   </Box>
+                                  <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      color="secondary"
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:view-filled" />
+                                      }
+                                      onClick={() => setOpenPDF(true)}
+                                    >
+                                      View PDF
+                                    </Button>
+                                  </Box>
                                 </Stack>
                               </Stack>
                               <Stack
@@ -415,6 +447,34 @@ const JobHistory = ({ formik }) => {
           </Box>
         </Container>
       </Box>
+      <Dialog fullScreen open={openPDf}>
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <DialogActions
+            sx={{
+              zIndex: 9,
+              padding: "12px !important",
+              boxShadow: (theme) => theme.customShadows.z8,
+            }}
+          >
+            <Tooltip title="Close">
+              <IconButton color="inherit" onClick={() => setOpenPDF(false)}>
+                <Iconify icon="eva:close-fill" />
+              </IconButton>
+            </Tooltip>
+          </DialogActions>
+          <Box sx={{ flexGrow: 1, height: "100%", overflow: "hidden" }}>
+            <PDFViewer
+              fileName={`Test-Name`}
+              width="100%"
+              height="100%"
+              style={{ border: "none" }}
+              showToolbar={false}
+            >
+              <InvoicePDF />
+            </PDFViewer>
+          </Box>
+        </Box>
+      </Dialog>
     </React.Fragment>
   );
 };

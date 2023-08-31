@@ -35,6 +35,7 @@ const UploadFileBox = (props) => {
   } = props;
 
   const fileUpload = async (e) => {
+    props.onChange("");
     setMessage("");
     setError("");
     let file = e.target.files[0];

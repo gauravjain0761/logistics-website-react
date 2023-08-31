@@ -43,6 +43,7 @@ import {
   TimelineSeparator,
   timelineItemClasses,
 } from "@mui/lab";
+import TextMaxLine from "@/components/text-max-line/TextMaxLine";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -223,6 +224,8 @@ const DashboardJobPost = ({ formik }) => {
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
+                  let addressDetail =
+                    item?.items && item?.items?.length > 0 && item?.items[0];
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -243,18 +246,19 @@ const DashboardJobPost = ({ formik }) => {
                           py={1.4}
                           alignItems="center"
                         >
-                          <Stack direction="row" spacing={0.5}>
-                            <Box>
-                              <Typography
-                                color="common.black"
-                                fontSize={17}
-                                fontWeight={600}
-                              >
-                                {" "}
-                                {item?.name}
-                              </Typography>
-                            </Box>
-                          </Stack>
+                          <Box sx={{ width: "90%" }}>
+                            <Typography
+                              color="common.black"
+                              fontSize={17}
+                              sx={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                              fontWeight={500}
+                            >
+                              {item?.description}
+                            </Typography>
+                          </Box>
                           <Box>
                             <DeleteModal id={item?.id} />
                           </Box>
@@ -265,7 +269,7 @@ const DashboardJobPost = ({ formik }) => {
                             <Grid item md={3}>
                               <Box>
                                 <Typography fontSize={28} fontWeight={500}>
-                                  Gourmet Box
+                                  {item.name}
                                 </Typography>
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
@@ -285,7 +289,7 @@ const DashboardJobPost = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      Liquid
+                                      {item.items[0].product.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -305,7 +309,7 @@ const DashboardJobPost = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {`${10}*${10}*${10}`}
+                                      {`${item.items[0].product.length}*${item.items[0].product.width}*${item.items[0].product.height}`}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -325,28 +329,32 @@ const DashboardJobPost = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      4 Kg
+                                      {item.items[0].product.quantity} Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
                               </Stack>
                               <Stack direction="row" spacing={1}>
-                                <Box
-                                  component="img"
-                                  src="/assets/images/dashboard/portfolio.jpeg"
-                                  sx={{
-                                    width: "83px",
-                                    height: "59px",
-                                  }}
-                                />
-                                <Box
-                                  component="img"
-                                  src="/assets/images/dashboard/portfolio.jpeg"
-                                  sx={{
-                                    width: "83px",
-                                    height: "59px",
-                                  }}
-                                />
+                                {item.items.map((elem, index) => {
+                                  if (index > 2) {
+                                    return "";
+                                  }
+                                  return (
+                                    <React.Fragment key={index}>
+                                      <Box
+                                        component="img"
+                                        alt={elem.product.image}
+                                        src={`${elem.product.base_url}${elem.product.image}`}
+                                        sx={{
+                                          width: "83px",
+                                          height: "59px",
+                                          border: "1px solid lightgrey",
+                                          objectFit: "cover",
+                                        }}
+                                      />
+                                    </React.Fragment>
+                                  );
+                                })}
                               </Stack>
                             </Grid>
                             <Grid item md={3}>
@@ -547,10 +555,17 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    10 Street London
+                                    {addressDetail.address[1].address}{" "}
+                                    <Typography
+                                      fontSize={10}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      {addressDetail.address[1].type}
+                                    </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
-                                <TimelineItem
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -589,8 +604,8 @@ const DashboardJobPost = ({ formik }) => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -629,8 +644,8 @@ const DashboardJobPost = ({ formik }) => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -668,8 +683,8 @@ const DashboardJobPost = ({ formik }) => {
                                       Drop-off
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
-                                <TimelineItem
+                                </TimelineItem> */}
+                                {/* <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
                                       minHeight: "50px",
@@ -708,7 +723,7 @@ const DashboardJobPost = ({ formik }) => {
                                       Pickup
                                     </Typography>
                                   </TimelineContent>
-                                </TimelineItem>
+                                </TimelineItem> */}
 
                                 <TimelineItem
                                   sx={{
@@ -726,7 +741,14 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    Small Heath, Birmingham
+                                    {addressDetail.address[0].address}{" "}
+                                    <Typography
+                                      fontSize={10}
+                                      component="span"
+                                      color="primary"
+                                    >
+                                      {addressDetail.address[0].type}
+                                    </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
                               </Timeline>
