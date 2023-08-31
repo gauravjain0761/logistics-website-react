@@ -117,7 +117,6 @@ export function AuthProvider({ children }) {
         },
       });
       if (response.status === 401) {
-        router.push("/auth/login");
         dispatch({
           type: "LOGOUT",
         });
@@ -127,7 +126,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     initialize();
-  }, [initialize]);
+  }, [initialize, router]);
 
   // LOGIN
   const login = useCallback(async (data) => {
@@ -186,7 +185,6 @@ export function AuthProvider({ children }) {
         type: "LOGOUT",
       });
     } catch (error) {
-     
       const { response } = error;
       if (response.status === 401) {
         router.push("/auth/login");
