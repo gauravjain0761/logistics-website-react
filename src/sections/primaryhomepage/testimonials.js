@@ -92,7 +92,7 @@ const Testimonials = () => {
                 );
               })}
             </Slider>
-            <Box sx={{ position: "absolute", top: "58%", left: "4%" }}>
+            <Box sx={{ position: "absolute", top: "48%", left: "4%" }}>
               <Card
                 onClick={previous}
                 variant="outlined"
@@ -111,7 +111,7 @@ const Testimonials = () => {
                 </IconButton>
               </Card>
             </Box>
-            <Box sx={{ position: "absolute", top: "58%", right: "4%" }}>
+            <Box sx={{ position: "absolute", top: "48%", right: "4%" }}>
               <Card
                 onClick={next}
                 variant="outlined"
