@@ -1,3 +1,4 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import OTPDialogBox from "@/components/dialog/otpModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
@@ -23,7 +24,30 @@ import React from "react";
 
 const Register = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
+  const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
 
+
+  const handleGoogleLogin = async () => {
+    try {
+      if (loginWithGoogle) {
+        loginWithGoogle();
+      }
+      console.log("GOOGLE LOGIN");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      if (loginWithFacebook) {
+        loginWithFacebook();
+      }
+      console.log("FACEBOOK LOGIN");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <React.Fragment>
       <Box sx={{ pb: 4, py: 12 }}>
@@ -62,7 +86,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                         },
                       }}
                       startIcon={<Iconify icon="flat-color-icons:google" />}
-                      // onClick={() => handleGoogleLogin()}
+                      onClick={() => handleGoogleLogin()}
                     >
                       <Typography
                         fontSize={9}
@@ -87,7 +111,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                         },
                       }}
                       startIcon={<Iconify icon="logos:facebook" />}
-                      // onClick={() => handleFacebookLogin()}
+                      onClick={() => handleFacebookLogin()}
                     >
                       <Typography
                         fontSize={9}

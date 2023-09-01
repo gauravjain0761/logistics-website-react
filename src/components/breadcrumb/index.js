@@ -54,7 +54,7 @@ export const BreadcrumbComponent = () => {
                 key={`breadcrumb-${index}`}
                 
                 sx={{
-                  textTransform: "capitalize",
+                  textTransform: "uppercase",
                   
                   color: (theme) => theme.palette.common.white,
                   
