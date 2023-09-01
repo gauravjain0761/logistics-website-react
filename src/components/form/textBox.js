@@ -86,6 +86,7 @@ const TextBox = (props) => {
                     background: (theme) => theme.palette.common.white,
                     borderRadius: "0.25rem",
                   },
+                  ...textBoxSx,
                 }
               : { ...textBoxSx }
           }

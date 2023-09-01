@@ -26,7 +26,6 @@ const Register = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
   const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
 
-
   const handleGoogleLogin = async () => {
     try {
       if (loginWithGoogle) {
@@ -126,7 +125,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                 <Box component="form" noValidate onSubmit={formik.handleSubmit}>
                   <Box>
                     <TextBox
-                    variant="standard"
+                      variant="standard"
                       fullWidth
                       placeholder={"Enter Your Full Name "}
                       name="user_name"
@@ -141,7 +140,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                   </Box>
                   <Box>
                     <TextBox
-                    variant="standard"
+                      variant="standard"
                       fullWidth
                       placeholder={"Enter Your Email Address"}
                       name="email"
@@ -154,7 +153,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                   </Box>
                   <Box>
                     <TextBox
-                    variant="standard"
+                      variant="standard"
                       fullWidth
                       name="mobile"
                       label="Contact Number"
@@ -197,13 +196,13 @@ const Register = ({ formik, open, handleOpenClose }) => {
                     />
                   </Box>
                   <Box>
-                    <Stack textAlign={"center"}>
+                    <Stack textAlign={"center"} sx={{ mt: 2 }}>
                       <Typography textAlign="left" variant="p">
                         Company Certificate
                       </Typography>
                       {!formik.values.company_certificate && (
                         <TextBox
-                        variant="standard"
+                          variant="standard"
                           fullWidth
                           type="file"
                           size="small"
@@ -223,6 +222,16 @@ const Register = ({ formik, open, handleOpenClose }) => {
                             formik.touched.company_certificate &&
                             formik.errors.company_certificate
                           }
+                          isBackgroundColor={true}
+                          textBoxSx={{
+                            "& .MuiInput-root:after": {
+                              borderBottom: "0px !important",
+                            },
+                            "& .MuiInput-root:before": {
+                              borderBottom: "0px !important",
+                              content: '""',
+                            },
+                          }}
                         />
                       )}
 
@@ -273,13 +282,13 @@ const Register = ({ formik, open, handleOpenClose }) => {
                         </Card>
                       )}
                     </Stack>
-                    <Stack textAlign={"center"} mt={2}>
+                    <Stack textAlign={"center"} sx={{ mt: 2 }}>
                       <Typography textAlign="left" variant="p">
                         Company VAT Certificate (Optional)
                       </Typography>
                       {!formik.values.company_vat && (
                         <TextBox
-                        variant="standard"
+                          variant="standard"
                           fullWidth
                           type="file"
                           size="small"
@@ -299,6 +308,16 @@ const Register = ({ formik, open, handleOpenClose }) => {
                             formik.touched.company_vat &&
                             formik.errors.company_vat
                           }
+                          isBackgroundColor={true}
+                          textBoxSx={{
+                            "& .MuiInput-root:after": {
+                              borderBottom: "0px !important",
+                            },
+                            "& .MuiInput-root:before": {
+                              borderBottom: "0px !important",
+                              content: '""',
+                            },
+                          }}
                         />
                       )}
 
