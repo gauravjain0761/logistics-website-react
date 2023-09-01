@@ -21,15 +21,15 @@ const PostJob = () => {
 
   const PickupAddress = {
     address: "",
-    lat: 3434.34,
-    long: 23423,
+    lat: 0,
+    long: 0,
     type: "pickup",
   };
 
   const DropAddress = {
     address: "",
-    lat: 3434.34,
-    long: 23423,
+    lat: 0,
+    long: 0,
     type: "drop",
   };
 

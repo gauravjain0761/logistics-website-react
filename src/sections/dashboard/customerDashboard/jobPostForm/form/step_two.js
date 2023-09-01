@@ -1,11 +1,13 @@
 import {
   FormControl,
+  GoogleAutocomplete,
   SelectBox,
   TextBox,
   UploadFileBox,
 } from "@/components/form";
 import { Add, Close } from "@mui/icons-material";
 import {
+  Autocomplete,
   Box,
   Button,
   Card,
@@ -578,7 +580,64 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               </Grid>
 
                               <Grid item md={12}>
-                                <Box>
+                                <GoogleAutocomplete
+                                  fullWidth
+                                  size="small"
+                                  labelName="Address"
+                                  name={`items[${productIndex}].address[${addressIndex}].address`}
+                                  value={addressItem?.address}
+                                  onSelect={(address, lat, long) => {
+                                    formik.setFieldValue(
+                                      `items[${productIndex}].address[${addressIndex}].address`,
+                                      address
+                                    );
+                                    formik.setFieldValue(
+                                      `items[${productIndex}].address[${addressIndex}].lat`,
+                                      lat
+                                    );
+                                    formik.setFieldValue(
+                                      `items[${productIndex}].address[${addressIndex}].long`,
+                                      long
+                                    );
+                                  }}
+                                  onChange={(e) => {
+                                    formik.setFieldValue(
+                                      `items[${productIndex}].address[${addressIndex}].address`,
+                                      e
+                                    );
+                                  }}
+                                  endIcon={
+                                    addressItem?.address && (
+                                      <IconButton
+                                        size="small"
+                                        inputEndAdornmentPosition="end"
+                                        onClick={() => {
+                                          formik.setFieldValue(
+                                            `items[${productIndex}].address[${addressIndex}].address`,
+                                            ""
+                                          );
+                                          formik.setFieldValue(
+                                            `items[${productIndex}].address[${addressIndex}].lat`,
+                                            ""
+                                          );
+                                          formik.setFieldValue(
+                                            `items[${productIndex}].address[${addressIndex}].long`,
+                                            ""
+                                          );
+                                        }}
+                                      >
+                                        <Close fontSize="small" />
+                                      </IconButton>
+                                    )
+                                  }
+                                  helperText={
+                                    !isEmpty(formik.touched) &&
+                                    formik?.errors?.items &&
+                                    formik?.errors?.items[productIndex]
+                                      ?.address[addressIndex].address
+                                  }
+                                />
+                                {/* <Box>
                                   <TextBox
                                     fullWidth
                                     placeholder="Type Address"
@@ -599,7 +658,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                         ?.address[addressIndex].address
                                     }
                                   />
-                                </Box>
+                                </Box> */}
                               </Grid>
                             </Grid>
                           </Card>

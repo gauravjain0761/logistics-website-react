@@ -136,18 +136,15 @@ export function AuthProvider({ children }) {
           user: null,
         },
       });
-      if (response.status === 401) {
-        router.push("/auth/login");
-        dispatch({
-          type: "LOGOUT",
-        });
-      }
+      dispatch({
+        type: "LOGOUT",
+      });
     }
   }, [storageAvailable]);
 
   useEffect(() => {
     initialize();
-  }, [initialize]);
+  }, [initialize, router]);
 
   const socialLogin = async (initialValues) => {
     await axios
