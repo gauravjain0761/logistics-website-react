@@ -65,6 +65,9 @@ const Testimonials = () => {
           <Box>
             <Slider {...settings} ref={ref}>
               {data?.tsti?.map((elem, index) => {
+                if (index > 12) {
+                  return "";
+                }
                 return (
                   <Box key={index} px={1}>
                     <Card
@@ -94,18 +97,17 @@ const Testimonials = () => {
                             <Typography
                               textAlign="center"
                               sx={{
-                               overflow:"hidden",
-                               textOverflow:"ellipsis",
-                               display:"-webkit-box",
-                               WebkitLineClamp:"3",
-                               WebkitBoxOrient:"vertical" 
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: "3",
+                                WebkitBoxOrient: "vertical",
                               }}
                               fontSize={14}
                             >
                               {'"'}
                               {elem.text}
                               {'"'}
-                              
                             </Typography>
                           </Box>
                         </Stack>

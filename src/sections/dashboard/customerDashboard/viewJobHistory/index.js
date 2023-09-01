@@ -26,11 +26,13 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import React, { useState, useEffect } from "react";
 
 const ViewJobHistory = () => {
   const router = useRouter();
   const { user } = useAuthContext();
+  const { enqueueSnackbar } = useSnackbar();
   const { id } = router.query;
   const [jobDetail, setJobDetail] = useState([]);
   const [ratings, setRatings] = useState([]);
@@ -66,11 +68,12 @@ const ViewJobHistory = () => {
         .post("api/auth/rating/add", formik.values)
         .then((response) => {
           if (response.status === 200) {
+            formik.handleReset();
             setReviewOpen(false);
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-
+            getJobDetail();
             handleClose(true);
           }
         })
@@ -103,7 +106,8 @@ const ViewJobHistory = () => {
 
   useEffect(() => {
     formik.setFieldValue("user_id", user?.id);
-  }, [user, user?.id]);
+    formik.setFieldValue("job_id", id);
+  }, [user, user?.id, id]);
 
   console.log("jobDetail", jobDetail, ratings);
   return (
@@ -286,11 +290,14 @@ const ViewJobHistory = () => {
                       </Typography>
                     </Box>
                   </Box>
+
                   {ratings &&
                     ratings?.length > 0 &&
                     ratings.map((item, index) => {
                       return (
-                        <Stack spacing={3} direction="row" key={index}>
+                        <Box key={index}>
+                        
+                        <Stack spacing={3} direction="row"  py={2}>
                           <Box
                             component="img"
                             src={`${item?.user?.base_url}${item?.user?.profile_img}`}
@@ -322,10 +329,13 @@ const ViewJobHistory = () => {
                             </Box>
                           </Stack>
                         </Stack>
+<Divider/>
+
+                        </Box>
+
                       );
                     })}
                 </Box>
-                <Divider />
               </CardContent>
             </Card>
           </Box>

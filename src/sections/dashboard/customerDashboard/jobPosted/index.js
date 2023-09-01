@@ -3,6 +3,7 @@ import Iconify from "@/components/iconify/Iconify";
 import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
+  Badge,
   Box,
   Button,
   Card,
@@ -774,21 +775,32 @@ const DashboardJobPost = ({ formik }) => {
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
                             </Typography> */}
-                              <Stack direction="row" spacing={1}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    variant="contained"
-                                    startIcon={<Iconify icon="ph:hand-fill" />}
-                                    onClick={() =>
-                                      router.push(
-                                        `/dashboard/customer/driver_bid_list/${item.id}`
-                                      )
-                                    }
+                                  <Badge
+                                    badgeContent={item?.job_requests?.length}
+                                    color="secondary"
+                                    anchorOrigin={{
+                                      vertical: "top",
+                                      horizontal: "right",
+                                    }}
                                   >
-                                    View Bids
-                                  </Button>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="contained"
+                                      startIcon={
+                                        <Iconify icon="ph:hand-fill" />
+                                      }
+                                      onClick={() =>
+                                        router.push(
+                                          `/dashboard/customer/driver_bid_list/${item.id}`
+                                        )
+                                      }
+                                    >
+                                      View Bids
+                                    </Button>
+                                  </Badge>
                                 </Box>
                                 <Box>
                                   <Button

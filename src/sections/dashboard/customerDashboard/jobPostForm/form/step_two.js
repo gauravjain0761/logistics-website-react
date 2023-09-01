@@ -66,7 +66,6 @@ const DropTypeSelect = [
   },
 ];
 const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
-  console.log("formikformikformik", formik?.values?.items);
   return (
     <>
       <Divider sx={{ my: 3 }} />
@@ -476,7 +475,11 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           value={productItem?.product?.image}
                           name={`items[${productIndex}].product.image`}
                           onChange={(e) => {
-                            console.log("ProductImage", e);
+                            console.log(
+                              "ProductImage",
+                              e,
+                              `items[${productIndex}].product.image`
+                            );
                             formik.setFieldValue(
                               `items[${productIndex}].product.image`,
                               e

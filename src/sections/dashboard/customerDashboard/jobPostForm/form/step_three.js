@@ -133,11 +133,11 @@ const StepThree = ({ formik }) => {
             <TextBox
               fullWidth
               label="Job Budget"
-              name={`job_budget`}
-              value={formik?.values?.job_budget}
+              name={`budget`}
+              value={formik?.values?.budget}
               onChange={formik.handleChange}
               size={"small"}
-              helperText={formik.errors.job_budget}
+              helperText={formik.touched.budget && formik.errors.budget}
             />
           </Box>
         </Grid>

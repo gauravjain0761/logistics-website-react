@@ -73,7 +73,7 @@ const UploadFileBox = (props) => {
     <React.Fragment>
       <input
         style={{ display: "none" }}
-        id="document-file"
+        id={`${name}-document-file`}
         type="file"
         accept={accept}
         onChange={(e) => {
@@ -83,7 +83,7 @@ const UploadFileBox = (props) => {
       />
 
       <FormControl
-        key={`key${name}`}
+        // key={`${name}`}
         error={helperText ? true : false}
         fullWidth={fullWidth}
         required={required}
@@ -123,7 +123,7 @@ const UploadFileBox = (props) => {
               endAdornment: (
                 <InputAdornment position={inputAdornmentPosition}>
                   {loading && <CircularProgress size={25} />}
-                  <label htmlFor="document-file">
+                  <label htmlFor={`${name}-document-file`}>
                     {!loading && <Icon>{icon}</Icon>}
                   </label>
                 </InputAdornment>
