@@ -555,13 +555,13 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {addressDetail.address[1].address}{" "}
+                                    {addressDetail?.address[1]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      {addressDetail.address[1].type}
+                                      {addressDetail?.address[1]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
@@ -741,13 +741,13 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {addressDetail.address[0].address}{" "}
+                                    {addressDetail?.address[0]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      {addressDetail.address[0].type}
+                                      {addressDetail?.address[0]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>

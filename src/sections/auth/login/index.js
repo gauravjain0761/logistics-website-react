@@ -27,7 +27,7 @@ const Login = () => {
 
   const { login } = useAuthContext();
 
-  const { loginWithGoogle, user, loginWithFacebook } = useFirebaseContext();
+  const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
 
   console.log("firebaseAppuser", user);
 
@@ -87,7 +87,7 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <Box sx={{ py:14 }}>
+      <Box sx={{ py: 14 }}>
         <Container>
           <Grid
             spacing={0}
@@ -172,7 +172,7 @@ const Login = () => {
                     <Stack spacing={2}>
                       <Box>
                         <TextBox
-                        variant="standard"
+                          variant="standard"
                           fullWidth
                           label="Email"
                           placeholder="Enter Your Email Address"
