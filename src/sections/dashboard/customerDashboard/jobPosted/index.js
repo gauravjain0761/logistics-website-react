@@ -803,6 +803,12 @@ const DashboardJobPost = ({ formik }) => {
                                         `/dashboard/customer/job_post_form/${item?.id}`
                                       )
                                     }
+                                    disabled={
+                                      item?.status === 1 ||
+                                      item?.status === 2 ||
+                                      item.status === 3 ||
+                                      item?.status === 4
+                                    }
                                     sx={{
                                       fontWeight: 500,
                                     }}

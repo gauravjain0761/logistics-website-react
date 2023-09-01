@@ -17,6 +17,7 @@ const TotalDrivers = () => {
   const {
     totalUser: { data },
   } = useSelector((state) => state.home);
+
   useEffect(() => {
     dispatch(getTotalUser());
   }, []);

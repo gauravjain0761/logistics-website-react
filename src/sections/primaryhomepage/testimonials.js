@@ -1,4 +1,3 @@
-import Iconify from "@/components/iconify/Iconify";
 import {
   Avatar,
   Box,
@@ -11,12 +10,18 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useDispatch, useSelector } from "@/redux/store";
+import { getTestimonial } from "@/redux/slices/home/home";
 
 const Testimonials = () => {
+  const dispatch = useDispatch();
+  const {
+    testimonial: { data },
+  } = useSelector((state) => state.home);
   const ref = useRef();
   const settings = {
     dots: false,
@@ -35,9 +40,15 @@ const Testimonials = () => {
   const previous = () => {
     ref.current.slickPrev();
   };
+
+  useEffect(() => {
+    dispatch(getTestimonial());
+  }, []);
   return (
     <>
-      <Box sx={{ backgroundColor: "#FFF8F4", py: 8,pb:20, position: "relative" }}>
+      <Box
+        sx={{ backgroundColor: "#FFF8F4", py: 8, pb: 20, position: "relative" }}
+      >
         <Container>
           <Box textAlign="center" mb={8}>
             <Box>
@@ -53,12 +64,13 @@ const Testimonials = () => {
           </Box>
           <Box>
             <Slider {...settings} ref={ref}>
-              {[...Array(4)].map((elem, index) => {
+              {data?.tsti?.map((elem, index) => {
                 return (
                   <Box key={index} px={1}>
                     <Card
                       variant="outlined"
                       sx={{
+                        height: "17em",
                         borderColor: (theme) => theme.palette.primary.main,
                       }}
                     >
@@ -66,23 +78,34 @@ const Testimonials = () => {
                         <Stack alignItems="center">
                           <Box>
                             <Avatar
-                              src="/testimonialimage.png"
+                              src={`${elem.base_url}${elem.image}`}
                               sx={{ width: "100px", height: "100px" }}
                             />
                           </Box>
                           <Box>
                             <Typography variant="subtitle1">
-                              James Pattinson
+                              {elem.name}
                             </Typography>
                           </Box>
                           <Box>
-                            <Rating value={4} readOnly size="small" />
+                            <Rating value={elem.rating} readOnly size="small" />
                           </Box>
                           <Box>
-                            <Typography textAlign="center" fontSize={14}>
-                              “Lobortis leo pretium facilisis amet nisl at nec.
-                              Scelerisque risus tortor donec ipsum consequat
-                              semper consequat adipiscing ultrices.”
+                            <Typography
+                              textAlign="center"
+                              sx={{
+                               overflow:"hidden",
+                               textOverflow:"ellipsis",
+                               display:"-webkit-box",
+                               WebkitLineClamp:"3",
+                               WebkitBoxOrient:"vertical" 
+                              }}
+                              fontSize={14}
+                            >
+                              {'"'}
+                              {elem.text}
+                              {'"'}
+                              
                             </Typography>
                           </Box>
                         </Stack>
@@ -124,14 +147,13 @@ const Testimonials = () => {
                   <ArrowForwardIcon
                     sx={{
                       color: (theme) => alpha(theme.palette.common.white, 0.9),
-                      
+
                       fontWeight: 500,
                     }}
                   />
                 </IconButton>
               </Card>
             </Box>
-          
           </Box>
         </Container>
       </Box>

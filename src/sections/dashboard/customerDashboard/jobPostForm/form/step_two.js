@@ -103,6 +103,9 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           fullWidth
                           type="date"
                           label="Pickup Date"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
                           value={productItem?.product?.pickup_date}
                           min={new Date().toISOString().split("T")[0]}
                           name={`items[${productIndex}].product.pickup_date`}
@@ -221,6 +224,9 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           fullWidth
                           type="date"
                           label="Drop Date"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
                           value={productItem?.product?.drop_date}
                           name={`items[${productIndex}].product.drop_date`}
                           onChange={(e) => {

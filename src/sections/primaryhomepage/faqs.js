@@ -2,6 +2,8 @@ import { BannerSection } from "@/components/banner";
 import Iconify from "@/components/iconify/Iconify";
 import { JobSekelton } from "@/components/not-found";
 import SkeletonLoader from "@/components/skeleton";
+import { getTestimonial } from "@/redux/slices/home/home";
+import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import {
   Accordion,
@@ -15,29 +17,16 @@ import {
 import React, { useEffect, useState } from "react";
 
 const Faqs = () => {
+  const dispatch = useDispatch();
+  const {
+    testimonial: { data },
+  } = useSelector((state) => state.home);
   const [expanded, setExpanded] = React.useState(false);
-  const [data, setData] = useState("");
+ 
   const [loading, setLoading] = React.useState(false);
-  const FaqApi = async () => {
-    setLoading(true);
-    await axiosInstance
-      .get("api/front/page-details/faq")
-      .then((response) => {
-        if (response?.status === 200) {
-          setLoading(false);
-          setData(response.data.view_data);
-        } else {
-          console.log("error");
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error, "About Us Page");
-      });
-  };
+
   useEffect(() => {
-    FaqApi();
+    dispatch(getTestimonial());
   }, []);
 
   const handleChange = (panel) => (event, isExpanded) => {
