@@ -5,6 +5,7 @@ import {
   useReducer,
   useCallback,
   useMemo,
+  useState,
 } from "react";
 import { initializeApp } from "firebase/app";
 import {
@@ -18,6 +19,7 @@ import {
 // config
 import { FIREBASE_API } from "../config-global";
 import { result } from "lodash";
+import axiosInstance from "@/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -66,7 +68,6 @@ AuthFirebaseContext.propTypes = {
 
 export function AuthFirebaseProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const initialize = useCallback(() => {
     try {
       onAuthStateChanged(AUTH, async (user) => {
@@ -100,10 +101,34 @@ export function AuthFirebaseProvider({ children }) {
     initialize();
   }, [initialize]);
 
+
+  const loginApi = async (initialValues) => {
+    await axiosInstance
+      .post("api/auth/social-login", initialValues)
+      .then((response) => {
+        if (response?.status === 200) {
+          console.log("response login social", response?.data);
+        } else {
+          console.log("error", response?.error);
+        }
+      })
+      .catch((error) => {
+        console.log(error, "error");
+      });
+  };
+
   const loginWithGoogle = useCallback(() => {
     signInWithPopup(AUTH, GOOGLE_PROVIDER)
       .then((response) => {
-        console.log("loginWithGoogle", response);
+        let initialValues = {
+          email: "",
+          social_type: "gmail",
+        };
+
+        initialValues.email = response?.user?.email;
+
+        loginApi(initialValues);
+        console.log("loginWithGoogle", response?.user?.email);
       })
       .catch((error) => {
         console.log("Error Google Login", error);
@@ -116,11 +141,12 @@ export function AuthFirebaseProvider({ children }) {
         console.log("loginWithFacebook", response);
       })
       .catch((error) => {
-        const errorMessage = error.message;
+        const errorMessage = error?.message;
         console.log("Error Facebook Login", errorMessage);
       });
   }, []);
 
+ 
   // LOGOUT
   const logout = useCallback(() => {
     signOut(AUTH)

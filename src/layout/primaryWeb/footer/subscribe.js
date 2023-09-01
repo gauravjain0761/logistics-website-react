@@ -1,5 +1,6 @@
 import SubscribeButton from "@/components/button/subscribeButton";
 import { TextBox } from "@/components/form";
+import axiosInstance from "@/utils/axios";
 import {
   Facebook,
   Instagram,
@@ -17,9 +18,30 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import React from "react";
+import { useFormik } from "formik";
+import React, { useState } from "react";
 
 const Subscribe = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    onSubmit: async ({initialValues}) => {
+      await axiosInstance
+        .post("api/auth/master/subscribe/add", {
+          email: email,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("dddd", response.data);
+          }
+        }).catch((error)=>{
+          const {response}= error;
+          console.log(response)
+        });
+    },
+  });
+
   return (
     <Box>
       <Container>
@@ -65,10 +87,20 @@ const Subscribe = () => {
                   suscipit turpis.
                 </Typography>
               </Stack>
-              <Stack direction="row" spacing={2} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                component="form"
+                onSubmit={formik.handleSubmit}
+              >
                 <TextBox
                   fullWidth
                   isBackgroundColor={true}
+                  value={formik.values.email}
+                  onChange={(e) =>
+                    formik.setFieldValue("email", e.target.value)
+                  }
                   textBoxSx={{
                     width: "16em",
                     "& .MuiOutlinedInput-input": {
@@ -88,15 +120,15 @@ const Subscribe = () => {
                   }}
                   label="Enter Your Email"
                   size="small"
-                  onChange={(e) => e.target.value}
                 />
                 <Box>
                   <Button
                     variant="contained"
                     fullWidth
                     color="light"
+                    type="submit"
                     sx={{
-                      width:"10em",
+                      width: "10em",
                       height: "40px",
                       borderRadius: "10px",
                       color: (theme) => theme.palette.primary.main,
