@@ -29,7 +29,6 @@ const Login = () => {
 
   const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
 
-  console.log("firebaseAppuser", user);
 
   const handleGoogleLogin = async () => {
     try {
