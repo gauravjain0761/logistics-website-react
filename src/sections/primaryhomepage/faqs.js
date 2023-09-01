@@ -22,7 +22,7 @@ const Faqs = () => {
     testimonial: { data },
   } = useSelector((state) => state.home);
   const [expanded, setExpanded] = React.useState(false);
- 
+
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
@@ -67,6 +67,9 @@ const Faqs = () => {
                 {data && data?.faqs && data?.faqs?.length > 0 ? (
                   Array.isArray(data?.faqs) &&
                   data?.faqs.map((elem, index) => {
+                    if (index > 7) {
+                      return "";
+                    }
                     return (
                       <Accordion
                         key={index}
