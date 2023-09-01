@@ -19,25 +19,44 @@ import {
   alpha,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 
 const Subscribe = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    onSubmit: async ({initialValues}) => {
+    validate: (values) => {
+      const errors = {};
+
+      if (!values.email) {
+        errors.email = "Email is required";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
+      }
+      return errors;
+    },
+
+    onSubmit: async (values) => {
       await axiosInstance
-        .post("api/auth/master/subscribe/add", {
-          email: email,
-        })
+        .post("api/auth/master/subscribe/add", values)
         .then((response) => {
           if (response.status === 200) {
-            console.log("dddd", response.data);
+            formik.resetForm();
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
           }
-        }).catch((error)=>{
-          const {response}= error;
-          console.log(response)
+        })
+        .catch((error) => {
+          const { response } = error;
+          enqueueSnackbar(response.data.error, {
+            variant: "error",
+          });
         });
     },
   });
@@ -93,7 +112,10 @@ const Subscribe = () => {
                 alignItems="center"
                 component="form"
                 onSubmit={formik.handleSubmit}
+              
               >
+              <Box>
+
                 <TextBox
                   fullWidth
                   isBackgroundColor={true}
@@ -118,9 +140,12 @@ const Subscribe = () => {
                       borderColor: "#DFDFDF !important",
                     },
                   }}
+                 
                   label="Enter Your Email"
                   size="small"
                 />
+                <Typography fontSize={10} color="common.black">{formik.touched.email && formik.errors.email}</Typography>
+              </Box>
                 <Box>
                   <Button
                     variant="contained"
