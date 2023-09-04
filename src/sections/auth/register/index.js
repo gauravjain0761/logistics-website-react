@@ -450,7 +450,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       </Box> */}
                   <Box>
                     <Button
-                      onClick={() => router.push("/auth/driver_register")}
+                      onClick={() => router.push("/auth/register/driver")}
                       fullWidth
                       variant="outlined"
                       startIcon={<Iconify icon="ion:bicycle" color="primary" />}

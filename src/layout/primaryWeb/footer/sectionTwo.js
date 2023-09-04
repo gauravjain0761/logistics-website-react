@@ -1,7 +1,15 @@
 import { Heading } from "@/components/typography";
-import { Box, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { StyledListItemText } from "./footerStyle";
+import Link from "next/link";
 
 const SectionTwo = () => {
   return (
@@ -17,21 +25,23 @@ const SectionTwo = () => {
 
         }}
       /> */}
-      
+
       <List>
-      <ListItem>
-<Typography fontSize={20} fontWeight={600}>Website Links</Typography>
-      </ListItem>
-        <ListItemButton component="a" href="#simple-list">
-          <StyledListItemText primary="Jobs" />
+        <ListItem>
+          <Typography fontSize={20} fontWeight={600}>
+            Website Links
+          </Typography>
+        </ListItem>
+        <ListItemButton component={Link} href="/aboutus">
+          <StyledListItemText primary="About us" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
-          <StyledListItemText primary="Help" />
+        <ListItemButton component={Link} href="/testimonial/testimonials">
+          <StyledListItemText primary="Testimonials" />
         </ListItemButton>
-        <ListItemButton component="a" href="/faqs">
+        <ListItemButton component={Link} href="/faqs">
           <StyledListItemText primary="Faq" />
         </ListItemButton>
-        <ListItemButton component="a" href="/contact_us">
+        <ListItemButton component={Link} href="/contact_us">
           <StyledListItemText primary="Contact us" />
         </ListItemButton>
       </List>

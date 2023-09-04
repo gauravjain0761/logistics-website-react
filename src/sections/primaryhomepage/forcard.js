@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 
 const ForCard = () => {
@@ -48,7 +49,12 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button variant="contained" color="primary">
+                      <Button
+                        LinkComponent={Link}
+                        href="/auth/register/driver"
+                        variant="contained"
+                        color="primary"
+                      >
                         Signup as a Driver
                       </Button>
                     </Box>
@@ -77,7 +83,12 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button variant="contained" color="primary">
+                      <Button
+                        LinkComponent={Link}
+                        href="/auth/register/company"
+                        variant="contained"
+                        color="primary"
+                      >
                         Login to ship Manager
                       </Button>
                     </Box>
@@ -105,7 +116,12 @@ const ForCard = () => {
                       parcels,check order details and history
                     </Typography>
                     <Box>
-                      <Button variant="contained" color="primary">
+                      <Button
+                        LinkComponent={Link}
+                        href="/auth/login"
+                        variant="contained"
+                        color="primary"
+                      >
                         Login to Driver
                       </Button>
                     </Box>

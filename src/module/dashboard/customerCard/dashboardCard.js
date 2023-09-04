@@ -44,6 +44,29 @@ const DashboardCard = ({ jobPost }) => {
       })
     );
   }, [jobHistory?.page, jobHistory?.pageSize]);
+
+  const [subscription, setSubscription] = React.useState([]);
+  // API FETCH LIST
+  const fetchdata = async (type = "customer") => {
+    await axiosInstance
+      .get(`/api/auth/master/plan/list/${type}`)
+      .then((response) => {
+        if (response.status === 200) {
+          // setLoadingCard(false);
+          let subscriptionData = find(response?.data.view_data, { default: 1 });
+          setSubscription(subscriptionData);
+        }
+      })
+      .catch((error) => {
+        // setLoadingCard(false);
+        console.log("error", error);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchdata();
+  }, []);
+
   return (
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
@@ -228,7 +251,7 @@ const DashboardCard = ({ jobPost }) => {
                       backgroundColor: (theme) =>
                         router.pathname === "/dashboard/customer/subscription"
                           ? "#ffd768"
-                          : "#ffd768"
+                          : "#ffd768",
                     }}
                     height="80px"
                     p={2}
@@ -246,7 +269,7 @@ const DashboardCard = ({ jobPost }) => {
                       SUBSCRIPTION
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      3 Month
+                      {subscription?.duration || 0} Month
                     </Typography>
                   </Box>
                 </Stack>

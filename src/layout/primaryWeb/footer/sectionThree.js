@@ -12,7 +12,6 @@ import { StyledListItemText } from "./footerStyle";
 const SectionThree = () => {
   return (
     <>
-    
       <List>
         <ListItem>
           <Typography fontSize={20} fontWeight={600}>
@@ -22,9 +21,9 @@ const SectionThree = () => {
         <ListItemButton component="a" href="/blogs">
           <StyledListItemText primary="Blogs" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
+        {/* <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="News" />
-        </ListItemButton>
+        </ListItemButton> */}
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Services" />
         </ListItemButton>

@@ -9,6 +9,7 @@ import React from "react";
 
 const DriverPage = () => {
   const router = useRouter();
+  const { slug } = router.query;
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
   const handleOpenClose = () => {
@@ -17,7 +18,7 @@ const DriverPage = () => {
   const formik = useFormik({
     initialValues: {
       user_name: "",
-      user_type: "driver",
+      user_type: slug === "driver" ? "driver" : "company",
       email: "",
       driver_type: "individual",
       mobile: "",
@@ -164,31 +165,31 @@ const DriverPage = () => {
     onSubmit: async (values, { setErrors }) => {
       let url, formData;
       if (values.user_type === "driver") {
-      url = "api/user/driver-register";
-      let driverFormData = new FormData();
-      driverFormData.append("user_name", values?.user_name);
-      driverFormData.append("user_type", values?.user_type);
-      driverFormData.append("email", values?.email);
-      driverFormData.append("mobile", values?.mobile);
-      driverFormData.append("term", values?.term);
-      driverFormData.append("password", values?.password);
-      driverFormData.append("driver_type", values?.driver_type);
-      driverFormData.append(
-        "password_confirmation",
-        values?.password_confirmation
-      );
-      driverFormData.append("profile_img", values?.profile_img);
-      driverFormData.append("licence_front", values?.licence_front);
-      driverFormData.append("licence_back", values?.licence_back);
-      driverFormData.append("address_proof", values?.address_proof);
-      driverFormData.append("insurance_cert", values?.insurance_cert);
-      driverFormData.append("transit_cert", values?.transit_cert);
-      driverFormData.append("liability_cert", values?.liability_cert);
-      driverFormData.append("vehicle_cert", values?.vehicle_cert);
-      driverFormData.append("v5c_cert", values?.v5c_cert);
-      driverFormData.append("dvia_cert", values?.dvia_cert);
-      driverFormData.append("nationality_cert", values?.nationality_cert);
-      formData = driverFormData;
+        url = "api/user/driver-register";
+        let driverFormData = new FormData();
+        driverFormData.append("user_name", values?.user_name);
+        driverFormData.append("user_type", values?.user_type);
+        driverFormData.append("email", values?.email);
+        driverFormData.append("mobile", values?.mobile);
+        driverFormData.append("term", values?.term);
+        driverFormData.append("password", values?.password);
+        driverFormData.append("driver_type", values?.driver_type);
+        driverFormData.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
+        driverFormData.append("profile_img", values?.profile_img);
+        driverFormData.append("licence_front", values?.licence_front);
+        driverFormData.append("licence_back", values?.licence_back);
+        driverFormData.append("address_proof", values?.address_proof);
+        driverFormData.append("insurance_cert", values?.insurance_cert);
+        driverFormData.append("transit_cert", values?.transit_cert);
+        driverFormData.append("liability_cert", values?.liability_cert);
+        driverFormData.append("vehicle_cert", values?.vehicle_cert);
+        driverFormData.append("v5c_cert", values?.v5c_cert);
+        driverFormData.append("dvia_cert", values?.dvia_cert);
+        driverFormData.append("nationality_cert", values?.nationality_cert);
+        formData = driverFormData;
       } else {
         url = "/api/user/company-register";
         let formDatas = new FormData();

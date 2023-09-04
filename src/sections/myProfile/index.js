@@ -433,7 +433,7 @@ const ChangePasswordModal = () => {
                   <Iconify icon="radix-icons:dot-filled" />
                 </ListItemIcon>
                 <Typography fontSize={12}>
-                  Is longer than 7 characters{" "}
+                  Is longer than 6 characters{" "}
                 </Typography>
               </ListItem>
               <ListItem>
@@ -449,7 +449,12 @@ const ChangePasswordModal = () => {
           </Box>
           <Stack spacing={1} mt={1}>
             <Box>
-              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
+              <Typography
+                fontSize={14}
+                textAlign="left"
+                fontWeight={600}
+                mb={1}
+              >
                 Current Password
               </Typography>
               <PasswordBox
@@ -463,7 +468,12 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
-              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
+              <Typography
+                fontSize={14}
+                textAlign="left"
+                fontWeight={600}
+                mb={1}
+              >
                 New Password
               </Typography>
               <PasswordBox
@@ -477,7 +487,12 @@ const ChangePasswordModal = () => {
               />
             </Box>
             <Box>
-              <Typography fontSize={14} textAlign="left" fontWeight={600}  mb={1}>
+              <Typography
+                fontSize={14}
+                textAlign="left"
+                fontWeight={600}
+                mb={1}
+              >
                 Confirm New Password
               </Typography>
               <PasswordBox

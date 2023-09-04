@@ -10,7 +10,7 @@ import {
   alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobActive,
@@ -21,6 +21,7 @@ import {
   setJobHistoryPage,
 } from "@/redux/slices/job/driver";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { find } from "lodash";
 
 const DashboardCard = () => {
   const router = useRouter();
@@ -60,6 +61,28 @@ const DashboardCard = () => {
       })
     );
   }, [jobHistory?.page, jobHistory?.pageSize]);
+
+  const [subscription, setSubscription] = React.useState([]);
+  // API FETCH LIST
+  const fetchdata = async (type = "driver") => {
+    await axiosInstance
+      .get(`/api/auth/master/plan/list/${type}`)
+      .then((response) => {
+        if (response.status === 200) {
+          // setLoadingCard(false);
+          let subscriptionData = find(response?.data.view_data, { default: 1 });
+          setSubscription(subscriptionData);
+        }
+      })
+      .catch((error) => {
+        // setLoadingCard(false);
+        console.log("error", error);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchdata();
+  }, []);
 
   return (
     <React.Fragment>
@@ -146,7 +169,7 @@ const DashboardCard = () => {
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/job_post"
                         ? "#ff884f"
-                        :  "#ff884f",
+                        : "#ff884f",
                   }}
                   height="60px"
                   py={0.5}
@@ -168,7 +191,6 @@ const DashboardCard = () => {
             </Card>
           </Grid>
 
-          
           <Grid item md={3}>
             <Card
               sx={{
@@ -245,8 +267,8 @@ const DashboardCard = () => {
                   sx={{
                     backgroundColor: (theme) =>
                       router.pathname === "/dashboard/driver/subscription"
-                        ?  "#ffd768"
-                        :  "#ffd768",
+                        ? "#ffd768"
+                        : "#ffd768",
                   }}
                   height="60px"
                   py={0.5}
@@ -264,7 +286,7 @@ const DashboardCard = () => {
                     SUBSCRIPTION
                   </Typography>
                   <Typography variant="h5" textAlign="center">
-                    3 Month
+                    {subscription?.duration || 0} Month
                   </Typography>
                 </Box>
               </Stack>

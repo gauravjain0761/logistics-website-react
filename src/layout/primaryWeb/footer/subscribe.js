@@ -112,40 +112,42 @@ const Subscribe = () => {
                 alignItems="center"
                 component="form"
                 onSubmit={formik.handleSubmit}
-              
               >
-              <Box>
-
-                <TextBox
-                  fullWidth
-                  isBackgroundColor={true}
-                  value={formik.values.email}
-                  onChange={(e) =>
-                    formik.setFieldValue("email", e.target.value)
-                  }
-                  textBoxSx={{
-                    width: "16em",
-                    "& .MuiOutlinedInput-input": {
-                      background: "transparent !important",
-                      color: "#fff",
-                    },
-                    "& .MuiFormControl-root": {
-                      margin: "0px !important",
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "#fff !important",
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderRadius: "10px",
-                      borderColor: "#DFDFDF !important",
-                    },
-                  }}
-                 
-                  label="Enter Your Email"
-                  size="small"
-                />
-                <Typography fontSize={10} color="common.black">{formik.touched.email && formik.errors.email}</Typography>
-              </Box>
+                <Box>
+                  <TextBox
+                    fullWidth
+                    isBackgroundColor={true}
+                    value={formik.values.email}
+                    onChange={(e) =>
+                      formik.setFieldValue("email", e.target.value)
+                    }
+                    formSx={{
+                      mb: 0,
+                    }}
+                    textBoxSx={{
+                      width: "16em",
+                      "& .MuiOutlinedInput-input": {
+                        background: "transparent !important",
+                        color: "#fff",
+                      },
+                      "& .MuiFormControl-root": {
+                        margin: "0px !important",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#fff !important",
+                      },
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderRadius: "10px",
+                        borderColor: "#DFDFDF !important",
+                      },
+                    }}
+                    label="Enter Your Email"
+                    size="small"
+                  />
+                  <Typography fontSize={10} color="common.black">
+                    {formik.touched.email && formik.errors.email}
+                  </Typography>
+                </Box>
                 <Box>
                   <Button
                     variant="contained"
@@ -157,6 +159,7 @@ const Subscribe = () => {
                       height: "40px",
                       borderRadius: "10px",
                       color: (theme) => theme.palette.primary.main,
+                      mb: formik.touched.email && formik.errors.email ? 2 : 0,
                     }}
                   >
                     Subscribe Now

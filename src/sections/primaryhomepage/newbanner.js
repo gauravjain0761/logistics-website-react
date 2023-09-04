@@ -10,7 +10,7 @@ import {
 // import { m } from "framer-motion";
 import React from "react";
 import { motion } from "framer-motion";
-import { MotionViewport, varFade } from "@/components/animate";
+import Link from "next/link";
 const NewBanner = () => {
   return (
     <React.Fragment>
@@ -234,6 +234,8 @@ const NewBanner = () => {
                         >
                           <Button
                             variant="contained"
+                            LinkComponent={Link}
+                            href="/auth/login"
                             size="large"
                             sx={{
                               backgroundColor: "#000",
@@ -263,6 +265,8 @@ const NewBanner = () => {
                             variant="contained"
                             size="large"
                             color="primary"
+                            LinkComponent={Link}
+                            href="/auth/login"
                           >
                             <Typography fontWeight={500}>
                               For Businesses
@@ -281,7 +285,13 @@ const NewBanner = () => {
                             ease: "easeInOut",
                           }}
                         >
-                          <Button variant="outlined" color="dark" size="large">
+                          <Button
+                            LinkComponent={Link}
+                            href="/auth/login"
+                            variant="outlined"
+                            color="dark"
+                            size="large"
+                          >
                             <Typography fontWeight={500}>For Driver</Typography>
                           </Button>
                         </Box>
