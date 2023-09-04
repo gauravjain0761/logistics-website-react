@@ -57,7 +57,7 @@ const PasswordBox = (props) => {
           fullWidth={fullWidth}
           error={helperText ? true : false}
           name={name}
-          variant={variant}
+          variant={"standard"}
           size={size}
           placeholder={placeholder}
           label={label}
@@ -65,10 +65,10 @@ const PasswordBox = (props) => {
           required={required}
           value={value}
           sx={{
-            background: (theme) => theme.palette.common.white,
+            background: (theme) => alpha(theme.palette.common.white, 0),
 
             "&.MuiOutlinedInput-input": {
-              background: (theme) => theme.palette.common.white,
+              background: (theme) => alpha(theme.palette.common.white, 0),
             },
           }}
           disabled={disabled}
@@ -80,7 +80,7 @@ const PasswordBox = (props) => {
               <InputAdornment position={inputAdornmentPosition || "end"}>
                 <Icon
                   onClick={() => setShowPassword(!showPassword)}
-                  color= "#cdcdcd"
+                  color="#cdcdcd"
                   fontSize="small"
                 >
                   {showPassword ? "visibility" : "visibility_off"}

@@ -121,10 +121,7 @@ const RegisterPage = () => {
       formData.append("mobile", values?.mobile);
       formData.append("term", values?.term);
       formData.append("password", values?.password);
-      formData.append(
-        "password_confirmation",
-        values?.password_confirmation
-      );
+      formData.append("password_confirmation", values?.password_confirmation);
       formData.append("company_certificate", values?.company_certificate);
       formData.append("company_vat", values?.company_vat);
       await axiosInstance

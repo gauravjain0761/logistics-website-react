@@ -116,7 +116,7 @@ const Subscribe = () => {
                 <Box>
                   <TextBox
                     fullWidth
-                    isBackgroundColor={true}
+                    isAdditional={true}
                     value={formik.values.email}
                     onChange={(e) =>
                       formik.setFieldValue("email", e.target.value)

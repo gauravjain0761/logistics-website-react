@@ -40,7 +40,7 @@ const TextBox = (props) => {
     readOnly,
     onSelect,
     textBoxSx,
-    isBackgroundColor = false,
+    isAdditional = false,
     IconSx,
     ...rest
   } = props;
@@ -77,10 +77,10 @@ const TextBox = (props) => {
           {...rest}
           fullWidth={fullWidth}
           error={helperText ? true : false}
-          variant={variant}
+          variant={"standard"}
           name={name}
           sx={
-            !isBackgroundColor
+            !isAdditional
               ? {
                   "& .MuiOutlinedInput-input": {
                     background: (theme) => theme.palette.common.white,
@@ -88,7 +88,9 @@ const TextBox = (props) => {
                   },
                   ...textBoxSx,
                 }
-              : { ...textBoxSx }
+              : {
+                  ...textBoxSx,
+                }
           }
           label={label}
           InputLabelProps={InputLabelProps}

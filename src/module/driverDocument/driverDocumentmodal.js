@@ -101,7 +101,7 @@ const DocumentModal = ({ formik }) => {
             top: "50%",
             left: "50%",
             width: "70%",
-            height: "70%",
+            height: "auto",
             overflow: "hidden",
             overflowY: "scroll",
             textAlign: "center",
@@ -113,7 +113,7 @@ const DocumentModal = ({ formik }) => {
             p: 2,
           }}
         >
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item md={4}>
               <Stack textAlign={"center"}>
                 <Typography textAlign="left" variant="p">
@@ -122,9 +122,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.profile_img && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -192,9 +199,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.licence_front && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -263,9 +277,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.licence_back && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -333,9 +354,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.address_proof && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -404,9 +432,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.insurance_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -475,9 +510,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.transit_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -545,9 +587,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.liability_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -616,9 +665,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.vehicle_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -686,9 +742,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.v5c_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -756,9 +819,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.dvia_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""
@@ -826,9 +896,16 @@ const DocumentModal = ({ formik }) => {
                 {!formik.values.nationality_cert && (
                   <TextBox
                     fullWidth
-                    startIcon={
-                      <Iconify icon="solar:file-bold" color="#ff7534" />
-                    }
+                    isAdditional={true}
+                    textBoxSx={{
+                      "& .MuiInput-root:after": {
+                        borderBottom: "0px !important",
+                      },
+                      "& .MuiInput-root:before": {
+                        borderBottom: "0px !important",
+                        content: '""',
+                      },
+                    }}
                     type="file"
                     size="small"
                     value=""

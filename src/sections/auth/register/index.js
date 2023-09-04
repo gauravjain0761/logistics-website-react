@@ -222,7 +222,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                             formik.touched.company_certificate &&
                             formik.errors.company_certificate
                           }
-                          isBackgroundColor={true}
+                          isAdditional={true}
                           textBoxSx={{
                             "& .MuiInput-root:after": {
                               borderBottom: "0px !important",
@@ -308,7 +308,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                             formik.touched.company_vat &&
                             formik.errors.company_vat
                           }
-                          isBackgroundColor={true}
+                          isAdditional={true}
                           textBoxSx={{
                             "& .MuiInput-root:after": {
                               borderBottom: "0px !important",

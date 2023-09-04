@@ -112,6 +112,7 @@ const UploadFileBox = (props) => {
             success={error ? false : true}
             name={name}
             label={label}
+            variant="standad"
             type="url"
             readOnly={disabled}
             size={size}
