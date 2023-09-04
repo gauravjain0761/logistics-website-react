@@ -182,8 +182,8 @@ const DashboardJobPost = ({ formik }) => {
 
                 <Grid item md={3}>
                   <Box>
-                    <Stack direction="row" mb={1.3}>
-                      <Box>
+                    {/* <Stack direction="row" mb={1.3}> */}
+                    {/* <Box>
                         <Box
                           sx={{
                             ml: 0,
@@ -203,19 +203,19 @@ const DashboardJobPost = ({ formik }) => {
                             color="#ff7534"
                           />
                         </Box>
-                      </Box>
-                      <SelectBox
-                        sx={{ mb: 0 }}
-                        size="small"
-                        fullWidth
-                        options={MonthSelect}
-                        name={`month`}
-                        value={formik?.values?.month}
-                        onChange={formik.handleChange}
-                        error={formik.touched.month && formik.errors.month}
-                        helperText={formik.touched.month && formik.errors.month}
-                      />
-                    </Stack>
+                      </Box> */}
+                    <SelectBox
+                      sx={{ mb: 0 }}
+                      size="small"
+                      fullWidth
+                      options={MonthSelect}
+                      name={`month`}
+                      value={formik?.values?.month}
+                      onChange={formik.handleChange}
+                      error={formik.touched.month && formik.errors.month}
+                      helperText={formik.touched.month && formik.errors.month}
+                    />
+                    {/* </Stack> */}
                   </Box>
                 </Grid>
                 <Grid item md={2}>
