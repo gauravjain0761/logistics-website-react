@@ -1,4 +1,5 @@
 import { useAuthContext } from "@/auth/useAuthContext";
+import Iconify from "@/components/iconify/Iconify";
 import TrackGoogleMaps from "@/module/map/track_job";
 import axiosInstance from "@/utils/axios";
 import {
@@ -17,7 +18,7 @@ import React, { useEffect, useState } from "react";
 
 const TrackJob = ({ formik }) => {
   const { user } = useAuthContext();
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const { id } = query;
   console.log(id, user?.id, "iddddd");
   const [data, setData] = useState([]);
@@ -46,6 +47,16 @@ const TrackJob = ({ formik }) => {
     <React.Fragment>
       <Box py={12}>
         <Container>
+          <Box mb={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => push("/dashboard/customer/job_posted")}
+            >
+              <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />{" "}
+              Back
+            </Button>
+          </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
             <TrackGoogleMaps />
             <Box
