@@ -47,13 +47,10 @@ const JobHistory = ({ formik }) => {
     dispatch(
       getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
     );
-  }, [page,pageSize]);
+  }, [page, pageSize]);
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
-
-
-
 
   return (
     <React.Fragment>
@@ -91,7 +88,6 @@ const JobHistory = ({ formik }) => {
                         start={0}
                         duration={1}
                         end={data && data.length}
-                        
                       />
                     </Typography>
                   </Box>
@@ -338,7 +334,7 @@ const JobHistory = ({ formik }) => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Job Budget: $500
+                                Job Budget: ${item?.elem}
                               </Typography>
                               <Typography variant="subtitle2">
                                 Customer Spend: $30K+
