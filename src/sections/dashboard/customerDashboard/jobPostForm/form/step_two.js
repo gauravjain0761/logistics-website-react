@@ -563,6 +563,19 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                       }}
                                       size="small"
                                       type="small"
+                                      isAdditional={true}
+                                      textBoxSx={{
+                                        "& .MuiInput-input": {
+                                          textTransform: "capitalize",
+                                        },
+                                        "& .MuiInput-root:after": {
+                                          borderBottomStyle: "solid",
+                                        },
+                                        "& .MuiInput-root:before": {
+                                          borderBottomStyle: "solid",
+                                          content: '""',
+                                        },
+                                      }}
                                     />
                                   </Stack>
                                 </Box>
