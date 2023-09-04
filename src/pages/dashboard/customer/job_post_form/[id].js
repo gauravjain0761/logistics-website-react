@@ -191,7 +191,7 @@ const PostJob = () => {
       vehicle: 0,
       vehical_type: 0,
       items: [product],
-      job_budget: "",
+      budget: "",
       description: "",
     },
 
@@ -211,8 +211,8 @@ const PostJob = () => {
         errors.vehical_type = "Vehicle Type is required";
       }
 
-      if (!values.job_budget) {
-        errors.job_budget = "Job budget is required";
+      if (!values.budget) {
+        errors.budget = "Job budget is required";
       }
       if (!values.description) {
         errors.description = "Description is required";

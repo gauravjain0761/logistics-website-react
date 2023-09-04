@@ -27,9 +27,7 @@ const Login = () => {
 
   const { login } = useAuthContext();
 
-  const { loginWithGoogle, user, loginWithFacebook } = useFirebaseContext();
-
-  console.log("firebaseAppuser", user);
+  const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
 
   const handleGoogleLogin = async () => {
     try {
@@ -216,41 +214,28 @@ const Login = () => {
                             }}
                           />
                         </Box>
+
                         <Box>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            // onClick={() =>
-                            //   router.push("/dashboard/driver/driver")
-                            // }
-                            type="submit"
-                          >
-                            <Typography fontSize={12}>Login Now</Typography>
-                          </Button>
-                        </Box>
-                        {/* <Box>
                           <Typography
                             onClick={() => setOpen(true)}
                             variant="p"
                             color="primary"
-                            sx={{ cursor: "pointer", fontSize: "15px" }}
+                            sx={{ cursor: "pointer", fontSize: "12px" }}
                           >
                             Forget Password ?
                           </Typography>
-                        </Box> */}
+                        </Box>
                       </Box>
-                      {/* <Box mt={2} >
+                      <Box>
                         <Button
                           variant="contained"
                           color="primary"
-                          // onClick={() =>
-                          //   router.push("/dashboard/driver/driver")
-                          // }
                           type="submit"
+                          fullWidth
                         >
-                          <Typography fontSize={9}>Login Now</Typography>
+                          <Typography fontSize={12}>Login Now</Typography>
                         </Button>
-                      </Box> */}
+                      </Box>
                     </Stack>
 
                     <Box>

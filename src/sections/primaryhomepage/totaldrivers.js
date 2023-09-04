@@ -1,3 +1,5 @@
+import { getTotalUser } from "@/redux/slices/home/home";
+import { useDispatch, useSelector } from "@/redux/store";
 import {
   Box,
   Container,
@@ -7,10 +9,19 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import CountUp from "react-countup";
 
 const TotalDrivers = () => {
+  const dispatch = useDispatch();
+  const {
+    totalUser: { data },
+  } = useSelector((state) => state.home);
+
+  useEffect(() => {
+    dispatch(getTotalUser());
+  }, []);
+
   return (
     <React.Fragment>
       <Box
@@ -20,79 +31,72 @@ const TotalDrivers = () => {
         }}
       >
         <Container sx={{ py: 5 }}>
-          <Stack
-            direction="row"
-            spacing={7}
-            divider={
-              <Divider
-                orientation="vertical"
-                sx={{
-                  borderColor: (theme) =>
-                    alpha(theme.palette.common.white, 0.2),
-                }}
-                flexItem
-              />
-            }
-            justifyContent="center"
-          >
-         
-            <Box>
-          <Box component="img"  src="/home/Accountuser.png"/>
-              <Typography variant="h3">
-                <CountUp
-                  start={978}
-                  end={1211}
-                  duration={3}
-                  enableScrollSpy={true}
-                  scrollSpyDelay={500}
-                />
-                +
-              </Typography>
-              <Typography>Total User</Typography>
-            </Box>
-            <Box>
-            <Box component="img"  src="/home/Driver.png"/>
-              <Typography variant="h3">
-                <CountUp
-                  start={5894}
-                  duration={3}
-                  end={5999}
-                  enableScrollSpy={true}
-                  scrollSpyDelay={500}
-                />{" "}
-                +
-              </Typography>
-              <Typography>Total Drivers</Typography>
-            </Box>
-            <Box>
-            <Box component="img"  src="/home/jobs.png"/>
-              <Typography variant="h3">
-                <CountUp
-                  start={25878}
-                  duration={3}
-                  end={25987}
-                  enableScrollSpy={true}
-                  scrollSpyDelay={500}
-                />{" "}
-                +
-              </Typography>
-              <Typography>Total Jobs</Typography>
-            </Box>
-            <Box>
-            <Box component="img"  src="/home/Business.png"/>
-              <Typography variant="h3">
-                <CountUp
-                  start={978}
-                  duration={3}
-                  end={1211}
-                  enableScrollSpy={true}
-                  scrollSpyDelay={500}
-                />{" "}
-                +
-              </Typography>
-              <Typography>Total User</Typography>
-            </Box>
-          </Stack>
+          <Grid container spacing={6} textAlign="center">
+            <Grid item md={3} sm={2} xs={1}>
+              <Box>
+                <Box component="img" src="/home/Accountuser.png" m="auto" />
+                <Typography variant="h3">
+                  <CountUp
+                    start={0}
+                    duration={2}
+                    end={data?.customers}
+                    enableScrollSpy={true}
+                    scrollSpyDelay={500}
+                  />
+                  +
+                </Typography>
+                <Typography>Total User</Typography>
+              </Box>
+            </Grid>
+            <Grid item md={3} sm={2} xs={1}>
+              <Box>
+                <Box component="img" src="/home/Driver.png" m="auto" />
+                <Typography variant="h3">
+                  <CountUp
+                    start={0}
+                    duration={2}
+                    end={data?.drivers}
+                    enableScrollSpy={true}
+                    scrollSpyDelay={500}
+                  />{" "}
+                  +
+                </Typography>
+                <Typography>Total Drivers</Typography>
+              </Box>
+            </Grid>
+            <Grid item md={3} sm={2} xs={1}>
+              <Box>
+                <Box component="img" src="/home/jobs.png" m="auto" />
+                <Typography variant="h3">
+                  <CountUp
+                    start={0}
+                    duration={2}
+                    end={data?.jobs}
+                    enableScrollSpy={true}
+                    scrollSpyDelay={500}
+                  />{" "}
+                  +
+                </Typography>
+                <Typography>Total Jobs</Typography>
+              </Box>
+            </Grid>
+            <Grid item md={3} sm={2} xs={1}>
+              <Box>
+                <Box component="img" src="/home/Business.png" m="auto" />
+                <Typography variant="h3">
+                  <CountUp
+                    start={0}
+                    duration={2}
+                    end={data?.companies}
+                    enableScrollSpy={true}
+                    scrollSpyDelay={500}
+                  />{" "}
+                  +
+                </Typography>
+                <Typography>Total Company</Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </React.Fragment>

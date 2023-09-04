@@ -3,6 +3,7 @@ import Iconify from "@/components/iconify/Iconify";
 import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
+  Badge,
   Box,
   Button,
   Card,
@@ -555,13 +556,13 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {addressDetail.address[1].address}{" "}
+                                    {addressDetail?.address[1]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      {addressDetail.address[1].type}
+                                      {addressDetail?.address[1]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
@@ -741,13 +742,13 @@ const DashboardJobPost = ({ formik }) => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {addressDetail.address[0].address}{" "}
+                                    {addressDetail?.address[0]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      {addressDetail.address[0].type}
+                                      {addressDetail?.address[0]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
@@ -774,21 +775,32 @@ const DashboardJobPost = ({ formik }) => {
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
                             </Typography> */}
-                              <Stack direction="row" spacing={1}>
+                              <Stack direction="row" spacing={2}>
                                 <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    variant="contained"
-                                    startIcon={<Iconify icon="ph:hand-fill" />}
-                                    onClick={() =>
-                                      router.push(
-                                        `/dashboard/customer/driver_bid_list/${item.id}`
-                                      )
-                                    }
+                                  <Badge
+                                    badgeContent={item?.job_requests?.length}
+                                    color="secondary"
+                                    anchorOrigin={{
+                                      vertical: "top",
+                                      horizontal: "right",
+                                    }}
                                   >
-                                    View Bids
-                                  </Button>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="contained"
+                                      startIcon={
+                                        <Iconify icon="ph:hand-fill" />
+                                      }
+                                      onClick={() =>
+                                        router.push(
+                                          `/dashboard/customer/driver_bid_list/${item.id}`
+                                        )
+                                      }
+                                    >
+                                      View Bids
+                                    </Button>
+                                  </Badge>
                                 </Box>
                                 <Box>
                                   <Button
@@ -802,6 +814,12 @@ const DashboardJobPost = ({ formik }) => {
                                       router.push(
                                         `/dashboard/customer/job_post_form/${item?.id}`
                                       )
+                                    }
+                                    disabled={
+                                      item?.status === 1 ||
+                                      item?.status === 2 ||
+                                      item.status === 3 ||
+                                      item?.status === 4
                                     }
                                     sx={{
                                       fontWeight: 500,

@@ -1,5 +1,6 @@
 import SubscribeButton from "@/components/button/subscribeButton";
 import { TextBox } from "@/components/form";
+import axiosInstance from "@/utils/axios";
 import {
   Facebook,
   Instagram,
@@ -17,9 +18,49 @@ import {
   Typography,
   alpha,
 } from "@mui/material";
-import React from "react";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
 
 const Subscribe = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validate: (values) => {
+      const errors = {};
+
+      if (!values.email) {
+        errors.email = "Email is required";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
+      }
+      return errors;
+    },
+
+    onSubmit: async (values) => {
+      await axiosInstance
+        .post("api/auth/master/subscribe/add", values)
+        .then((response) => {
+          if (response.status === 200) {
+            formik.resetForm();
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
+          enqueueSnackbar(response.data.error, {
+            variant: "error",
+          });
+        });
+    },
+  });
+
   return (
     <Box>
       <Container>
@@ -65,10 +106,23 @@ const Subscribe = () => {
                   suscipit turpis.
                 </Typography>
               </Stack>
-              <Stack direction="row" spacing={2} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                component="form"
+                onSubmit={formik.handleSubmit}
+              
+              >
+              <Box>
+
                 <TextBox
                   fullWidth
                   isBackgroundColor={true}
+                  value={formik.values.email}
+                  onChange={(e) =>
+                    formik.setFieldValue("email", e.target.value)
+                  }
                   textBoxSx={{
                     width: "16em",
                     "& .MuiOutlinedInput-input": {
@@ -86,17 +140,20 @@ const Subscribe = () => {
                       borderColor: "#DFDFDF !important",
                     },
                   }}
+                 
                   label="Enter Your Email"
                   size="small"
-                  onChange={(e) => e.target.value}
                 />
+                <Typography fontSize={10} color="common.black">{formik.touched.email && formik.errors.email}</Typography>
+              </Box>
                 <Box>
                   <Button
                     variant="contained"
                     fullWidth
                     color="light"
+                    type="submit"
                     sx={{
-                      width:"10em",
+                      width: "10em",
                       height: "40px",
                       borderRadius: "10px",
                       color: (theme) => theme.palette.primary.main,
