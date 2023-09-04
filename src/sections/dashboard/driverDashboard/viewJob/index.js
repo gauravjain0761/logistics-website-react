@@ -58,7 +58,6 @@ const ViewJobDetail = () => {
     }
   }, [id]);
 
- 
   return (
     <React.Fragment>
       <Box mt={10} pb={12}>
@@ -111,9 +110,17 @@ const ViewJobDetail = () => {
                           <Grid item md={9.5}>
                             <Typography>{data?.vehicle}</Typography>
                           </Grid>
+                          <Grid item md={2.5}>
+                            <Typography fontWeight={500}>
+                              Job Budget :
+                            </Typography>
+                          </Grid>
+                          <Grid item md={9.5}>
+                            <Typography>{data?.budget}</Typography>
+                          </Grid>
                           <Grid item md={12} mt={2}>
                             <Typography fontWeight={500}>
-                              Pick Up Address 
+                              Pick Up Address
                             </Typography>
                           </Grid>
                           <Grid item md={12}>
@@ -128,7 +135,9 @@ const ViewJobDetail = () => {
                               <Table aria-label="simple table">
                                 <TableHead>
                                   <TableRow>
-                                    <TableCell align="center">Sr. No.</TableCell>
+                                    <TableCell align="center">
+                                      Sr. No.
+                                    </TableCell>
                                     <TableCell align="center">
                                       Pickup Data
                                     </TableCell>
@@ -146,7 +155,7 @@ const ViewJobDetail = () => {
                                       Material
                                     </TableCell>
                                     <TableCell align="center">
-                                     Quantity
+                                      Quantity
                                     </TableCell>
                                     <TableCell align="center">
                                       Address
@@ -167,10 +176,12 @@ const ViewJobDetail = () => {
                                               },
                                           }}
                                         >
-                                          <TableCell align="center" component="th" scope="row">
-                                            <Typography>
-                                              {index+1}
-                                            </Typography>
+                                          <TableCell
+                                            align="center"
+                                            component="th"
+                                            scope="row"
+                                          >
+                                            <Typography>{index + 1}</Typography>
                                           </TableCell>
                                           <TableCell align="center">
                                             <Typography>
@@ -232,11 +243,9 @@ const ViewJobDetail = () => {
                       </Grid>
                     </Grid>
                   </Box>
-                
                 </CardContent>
                 <Box sx={{ position: "absolute", right: "30px", top: "150px" }}>
                   <Stack spacing={1}>
-                  
                     <MapModal />
                     <ApplyJobModal />
                   </Stack>

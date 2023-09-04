@@ -153,11 +153,17 @@ const ViewJobHistory = () => {
                         </Grid>
                         <Grid item md={2.5}>
                           <Typography fontWeight={500}>
-                            Vehicle Requirement :
+                            Vehicle Name :
                           </Typography>
                         </Grid>
                         <Grid item md={9.5}>
                           <Typography>{jobDetail?.vehicle}</Typography>
+                        </Grid>
+                        <Grid item md={2.5}>
+                          <Typography fontWeight={500}>Job Budget :</Typography>
+                        </Grid>
+                        <Grid item md={9.5}>
+                          <Typography>{jobDetail?.budget}</Typography>
                         </Grid>
                         <Grid item md={12} mt={2}>
                           <Typography fontWeight={500}>
@@ -296,43 +302,40 @@ const ViewJobHistory = () => {
                     ratings.map((item, index) => {
                       return (
                         <Box key={index}>
-                        
-                        <Stack spacing={3} direction="row"  py={2}>
-                          <Box
-                            component="img"
-                            src={`${item?.user?.base_url}${item?.user?.profile_img}`}
-                            width={60}
-                            height={60}
-                            sx={{ objectFit: "cover" }}
-                          />
-                          <Stack direction="column">
-                            <Box>
-                              <Typography
-                                fontSize={16}
-                                fontWeight={500}
-                                color="primary"
-                              >
-                                {item?.user?.user_name}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Rating
-                                value={item?.rating}
-                                readOnly
-                                size="small"
-                              />
-                            </Box>
-                            <Box>
-                              <Typography fontSize={14}>
-                                {item?.review}
-                              </Typography>
-                            </Box>
+                          <Stack spacing={3} direction="row" py={2}>
+                            <Box
+                              component="img"
+                              src={`${item?.user?.base_url}${item?.user?.profile_img}`}
+                              width={60}
+                              height={60}
+                              sx={{ objectFit: "cover" }}
+                            />
+                            <Stack direction="column">
+                              <Box>
+                                <Typography
+                                  fontSize={16}
+                                  fontWeight={500}
+                                  color="primary"
+                                >
+                                  {item?.user?.user_name}
+                                </Typography>
+                              </Box>
+                              <Box>
+                                <Rating
+                                  value={item?.rating}
+                                  readOnly
+                                  size="small"
+                                />
+                              </Box>
+                              <Box>
+                                <Typography fontSize={14}>
+                                  {item?.review}
+                                </Typography>
+                              </Box>
+                            </Stack>
                           </Stack>
-                        </Stack>
-<Divider/>
-
+                          <Divider />
                         </Box>
-
                       );
                     })}
                 </Box>

@@ -91,11 +91,25 @@ const ViewJobHistory = () => {
                         </Grid>
                         <Grid item md={2.5}>
                           <Typography fontWeight={500}>
-                            Vehicle Requirement :
+                            Vehicle Type :
+                          </Typography>
+                        </Grid>
+                        <Grid item md={9.5}>
+                          <Typography>{jobDetail?.vehical_type}</Typography>
+                        </Grid>
+                        <Grid item md={2.5}>
+                          <Typography fontWeight={500}>
+                            Vehicle Name :
                           </Typography>
                         </Grid>
                         <Grid item md={9.5}>
                           <Typography>{jobDetail?.vehicle}</Typography>
+                        </Grid>
+                        <Grid item md={2.5}>
+                          <Typography fontWeight={500}>Job Budget :</Typography>
+                        </Grid>
+                        <Grid item md={9.5}>
+                          <Typography>{jobDetail?.budget}</Typography>
                         </Grid>
                         <Grid item md={12} mt={2}>
                           <Typography fontWeight={500}>
