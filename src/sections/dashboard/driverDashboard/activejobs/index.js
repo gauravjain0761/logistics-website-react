@@ -559,7 +559,7 @@ const DashboardJobPost = () => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Job Budget: $500
+                                Job Budget: ${elem.budget}
                               </Typography>
                               <Typography variant="subtitle2">
                                 Customer Spend: $30K+

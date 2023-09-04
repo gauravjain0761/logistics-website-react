@@ -48,7 +48,7 @@ const TrackJob = () => {
     <React.Fragment>
       <Box py={12}>
         <Container>
-        <Box my={1}>
+          <Box my={1}>
             <Button
               variant="outlined"
               sx={{ my: 0 }}
@@ -78,8 +78,13 @@ const TrackJob = () => {
                   return (
                     <Box key={index} sx={{ scrollSnapAlign: "start" }}>
                       <Card sx={{ p: 2, mb: 0.5 }}>
-                        <Stack direction="row" justifyContent="space-between"  alignItems="center"  spacing={3}>
-                          <Stack >
+                        <Stack
+                          direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          spacing={3}
+                        >
+                          <Stack>
                             <Box>
                               <Typography fontWeight={500}>
                                 Pickup {index + 1}
