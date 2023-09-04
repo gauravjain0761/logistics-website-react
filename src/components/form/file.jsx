@@ -83,7 +83,7 @@ const UploadFileBox = (props) => {
       />
 
       <FormControl
-        // key={`${name}`}
+        key={`${name}`}
         error={helperText ? true : false}
         fullWidth={fullWidth}
         required={required}
@@ -111,8 +111,17 @@ const UploadFileBox = (props) => {
             error={helperText || error ? true : false}
             success={error ? false : true}
             name={name}
+            sx={{
+              "& .MuiInput-root:after": {
+               borderBottomStyle:"solid",
+              },
+              "& .MuiInput-root:before": {
+               borderBottomStyle:"solid",
+                content: '""',
+              },
+            }}
             label={label}
-            variant="standad"
+            variant="standard"
             type="url"
             readOnly={disabled}
             size={size}

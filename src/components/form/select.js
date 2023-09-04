@@ -26,6 +26,7 @@ const SelectBox = (props) => {
     placeholder,
     formSx,
     sx,
+    variant = "standard",
   } = props;
 
   return (
@@ -42,6 +43,7 @@ const SelectBox = (props) => {
 
       <Select
         sx={sx}
+        variant={variant}
         size={size}
         name={name}
         label={label}

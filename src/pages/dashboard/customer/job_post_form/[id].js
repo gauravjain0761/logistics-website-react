@@ -320,8 +320,6 @@ const PostJob = () => {
     },
   });
 
-  console.log("formik.errors", formik.errors);
-
   React.useEffect(() => {
     formik.setFieldValue("user_id", user?.id);
   }, [user, user?.id]);

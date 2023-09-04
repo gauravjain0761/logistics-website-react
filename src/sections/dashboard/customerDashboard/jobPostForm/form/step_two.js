@@ -160,8 +160,15 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               "& .MuiOutlinedInput-input": {
                                 padding: "8.5px 14px !important",
                               },
+                              "& .MuiOutlinedInput-notchedOutline": {
+                                borderRight: "0px !important",
+                                borderTop: "0px !important",
+                                borderLeft: "0px !important",
+                                borderRadius: "0px",
+                              },
                             }}
                             fullWidth
+                            variant="standard"
                             format="hh:mm a"
                             label="Pickup Time"
                             value={dayjs(
@@ -272,6 +279,12 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               "& .MuiOutlinedInput-input": {
                                 padding: "8.5px 14px !important",
                               },
+                              "& .MuiOutlinedInput-notchedOutline": {
+                                borderRight: "0px !important",
+                                borderTop: "0px !important",
+                                borderLeft: "0px !important",
+                                borderRadius: "0px",
+                              },
                             }}
                             fullWidth
                             format="hh:mm a"
@@ -324,34 +337,6 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           </Box>
                         </FormControl>
                       </Box>
-                      {/* <Box>
-                        <TextBox
-                          fullWidth
-                          type="time"
-                          value={productItem?.product?.drop_time}
-                          label="Drop Time"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          name={`items[${productIndex}].product.drop_time`}
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              `items[${productIndex}].product.drop_time`,
-                              e.target.value
-                            );
-                          }}
-                          size={"small"}
-                          helperText={
-                            !isEmpty(formik.touched) &&
-                            formik?.errors?.items &&
-                            formik?.errors?.items?.length > 0 &&
-                            formik?.errors?.items[productIndex]?.product
-                              ?.index === productIndex &&
-                            formik?.errors?.items[productIndex]?.product
-                              ?.drop_time
-                          }
-                        />
-                      </Box> */}
                     </Grid>
                     <Grid item md={6}>
                       <Box>
@@ -504,6 +489,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             fullWidth
                             placeholder="Select"
                             size="small"
+                            variant="standard"
                             value={productItem?.product?.material}
                             name={`items[${productIndex}].product.material`}
                             onChange={(e) => {
@@ -640,28 +626,6 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                       ?.address[addressIndex].address
                                   }
                                 />
-                                {/* <Box>
-                                  <TextBox
-                                    fullWidth
-                                    placeholder="Type Address"
-                                    label="Address"
-                                    value={addressItem?.address}
-                                    name={`items[${productIndex}].address[${addressIndex}].address`}
-                                    onChange={(e) => {
-                                      formik.setFieldValue(
-                                        `items[${productIndex}].address[${addressIndex}].address`,
-                                        e.target.value
-                                      );
-                                    }}
-                                    size="small"
-                                    helperText={
-                                      !isEmpty(formik.touched) &&
-                                      formik?.errors?.items &&
-                                      formik?.errors?.items[productIndex]
-                                        ?.address[addressIndex].address
-                                    }
-                                  />
-                                </Box> */}
                               </Grid>
                             </Grid>
                           </Card>

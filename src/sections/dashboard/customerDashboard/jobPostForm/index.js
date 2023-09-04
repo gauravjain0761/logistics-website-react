@@ -1,35 +1,16 @@
 import React, { useContext } from "react";
 import {
-  Autocomplete,
   Box,
   Breadcrumbs,
   Button,
   Card,
   CardContent,
-  CardHeader,
   Container,
-  Divider,
   Grid,
-  IconButton,
-  MenuItem,
-  Select,
   Stack,
-  TextField,
   Typography,
-  alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import Iconify from "@/components/iconify/Iconify";
-import { SelectBox, TextBox, UploadFileBox } from "@/components/form";
-import {
-  Add,
-  ArrowDropDownCircle,
-  Close,
-  LocationOn,
-} from "@mui/icons-material";
-import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
-import { BsX } from "react-icons/bs";
-import moment from "moment";
 import StepOne from "./form/step_one";
 import ScrollableTabs from "@/components/scrollableTabs";
 import StepTwo from "./form/step_two";
@@ -37,68 +18,6 @@ import StepThree from "./form/step_three";
 import { StepperContext } from "@/components/stepper/stepperContext";
 import Link from "next/link";
 
-const VehicleSelect = [
-  {
-    label: "Choose Vehicle",
-    value: 0,
-  },
-  {
-    label: "Bike",
-    value: "Bike",
-  },
-  {
-    label: "Van",
-    value: "Van",
-  },
-  {
-    label: "Truck",
-    value: "Truck",
-  },
-  {
-    label: "Other",
-    value: "Other",
-  },
-];
-const MaterialSelect = [
-  {
-    label: "Choose Material",
-    value: 0,
-  },
-  {
-    label: "Liquid",
-    value: "Liquid",
-  },
-  {
-    label: "Solid",
-    value: "Solid",
-  },
-  {
-    label: "Gas",
-    value: "Gas",
-  },
-  {
-    label: "Solution",
-    value: "Solution",
-  },
-  {
-    label: "Other",
-    value: "Other",
-  },
-];
-const DropTypeSelect = [
-  {
-    label: "Choose Address Type",
-    value: 0,
-  },
-  {
-    label: "Pickup",
-    value: "pickup",
-  },
-  {
-    label: "Drop",
-    value: "drop",
-  },
-];
 const JobPostForm = ({
   formik,
   addProduct,
@@ -138,7 +57,7 @@ const JobPostForm = ({
     },
     {
       title: "Address",
-      fields: ["vehicle","vehical_type","budget", "description"],
+      fields: ["vehicle", "vehical_type", "budget", "description"],
       component: (
         <>
           <StepThree formik={formik} />
@@ -149,7 +68,9 @@ const JobPostForm = ({
 
   return (
     <React.Fragment>
-      <Box sx={{ background: (theme) => theme.palette.grey[400], mt: 8, pb:12 }}>
+      <Box
+        sx={{ background: (theme) => theme.palette.grey[400], mt: 8, pb: 12 }}
+      >
         <Container sx={{ py: 3 }}>
           <Stack spacing={4}>
             <Box>

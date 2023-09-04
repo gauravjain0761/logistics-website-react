@@ -139,7 +139,7 @@ const GoogleAutocomplete = (props) => {
                 <TextField
                   fullWidth={fullWidth}
                   error={helperText ? true : false}
-                  variant={variant}
+                  variant={"standard"}
                   sx={
                     !isBackgroundColor
                       ? {

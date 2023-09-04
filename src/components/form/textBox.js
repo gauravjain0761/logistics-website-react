@@ -15,7 +15,7 @@ const TextBox = (props) => {
     name,
     label,
     format,
-    variant,
+    // variant,
     type,
     InputLabelProps,
     startIcon,
@@ -77,7 +77,7 @@ const TextBox = (props) => {
           {...rest}
           fullWidth={fullWidth}
           error={helperText ? true : false}
-          variant={"standard"}
+          variant="standard"
           name={name}
           sx={
             !isAdditional
@@ -162,7 +162,7 @@ TextBox.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   format: PropTypes.string,
-  variant: PropTypes.string,
+  // variant: PropTypes.string,
   type: PropTypes.string,
   InputLabelProps: PropTypes.string,
   icon: PropTypes.string,
