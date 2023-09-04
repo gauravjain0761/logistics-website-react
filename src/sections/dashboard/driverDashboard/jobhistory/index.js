@@ -141,18 +141,18 @@ const JobHistory = ({ formik }) => {
                             alignItems="center"
                           >
                             <Stack direction="row" mb={1} spacing={0.5}>
-                              <Box sx={{width:"100%"}}>
+                              <Box sx={{ width: "100%" }}>
                                 <Typography variant="subtitle1">
                                   Job Title :
                                 </Typography>
                               </Box>
-                              <Box sx={{width:"80%"}}>
+                              <Box sx={{ width: "80%" }}>
                                 <Typography
                                   color="primary"
                                   variant="subtitle1"
                                   sx={{
                                     overflow: "hidden",
-                                    whiteSpace:"nowrap",
+                                    whiteSpace: "nowrap",
                                     textOverflow: "ellipsis",
                                   }}
                                 >
@@ -175,8 +175,8 @@ const JobHistory = ({ formik }) => {
                                 alt={`${elem?.items[0]?.product?.image}`}
                                 sx={{
                                   width: "100px",
-                                  height:"100px",
-                                  objectFit:"cover",
+                                  height: "100px",
+                                  objectFit: "cover",
                                   borderRadius: "50%",
                                   border: "2px solid #ff7534",
                                 }}
@@ -383,7 +383,7 @@ const JobHistory = ({ formik }) => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Job Budget: $500
+                                Job Budget: ${elem?.budget}
                               </Typography>
                               <Typography variant="subtitle2">
                                 Customer Spend: $30K+

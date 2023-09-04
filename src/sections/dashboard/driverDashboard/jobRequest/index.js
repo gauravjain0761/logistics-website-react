@@ -202,7 +202,7 @@ const DashboardJobRequest = () => {
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
-                 
+
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -536,13 +536,15 @@ const DashboardJobRequest = () => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {productDetail && productDetail?.address[1]?.address}{" "}
+                                    {productDetail &&
+                                      productDetail?.address[1]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      { productDetail &&  productDetail?.address[1]?.type}
+                                      {productDetail &&
+                                        productDetail?.address[1]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
@@ -722,13 +724,15 @@ const DashboardJobRequest = () => {
                                   <TimelineContent
                                     sx={{ fontSize: 14, fontweight: 600 }}
                                   >
-                                    {productDetail && productDetail?.address[0]?.address}{" "}
+                                    {productDetail &&
+                                      productDetail?.address[0]?.address}{" "}
                                     <Typography
                                       fontSize={10}
                                       component="span"
                                       color="primary"
                                     >
-                                      { productDetail &&  productDetail?.address[0]?.type}
+                                      {productDetail &&
+                                        productDetail?.address[0]?.type}
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
@@ -750,7 +754,7 @@ const DashboardJobRequest = () => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Job Budget: $500
+                                Job Budget: ${item?.budget}
                               </Typography>
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
