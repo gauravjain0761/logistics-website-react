@@ -291,8 +291,8 @@ const DashboardJobPost = () => {
                                 alt={`${elem?.items[0]?.product?.image}`}
                                 sx={{
                                   width: "100px",
-                                  height:"100px",
-                                  objectFit:"cover",
+                                  height: "100px",
+                                  objectFit: "cover",
                                   borderRadius: "50%",
                                   border: "2px solid #ff7534",
                                 }}
@@ -505,24 +505,26 @@ const DashboardJobPost = () => {
                                     Give Review
                                   </Button>
                                 </Box> */}
-                                  <Box>
-                                    <Button
-                                      color="secondary"
-                                      fullWidth
-                                      variant="outlined"
-                                      startIcon={<Iconify icon="gg:track" />}
-                                      onClick={() =>
-                                        router.push(
-                                          `/dashboard/driver/track_job/${elem.bid_id}`
-                                        )
-                                      }
-                                      sx={{
-                                        fontWeight: 500,
-                                      }}
-                                    >
-                                      Track Job
-                                    </Button>
-                                  </Box>
+                                  {elem?.status != 0 && elem?.status != 1 && (
+                                    <Box>
+                                      <Button
+                                        color="secondary"
+                                        fullWidth
+                                        variant="outlined"
+                                        startIcon={<Iconify icon="gg:track" />}
+                                        onClick={() =>
+                                          router.push(
+                                            `/dashboard/driver/track_job/${elem.bid_id}`
+                                          )
+                                        }
+                                        sx={{
+                                          fontWeight: 500,
+                                        }}
+                                      >
+                                        Track Job
+                                      </Button>
+                                    </Box>
+                                  )}
                                   {/* <Box>
                                     <Button
                                       sx={{ fontWeight: 500 }}

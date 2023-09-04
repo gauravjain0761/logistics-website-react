@@ -34,7 +34,11 @@ const TrackJob = () => {
       .post(`api/auth/jobs/job-tasks`, initialValues)
       .then((response) => {
         if (response.status === 200) {
-          setData(response.data.view_data);
+          setData(
+            response.data.view_data && response.data.view_data?.length > 0
+              ? response.data.view_data[0]
+              : []
+          );
         }
       })
       .catch((error) => console.log(error));
@@ -59,7 +63,7 @@ const TrackJob = () => {
             </Button>
           </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps />
+            <TrackGoogleMaps data={data} />
             <Box
               sx={{
                 position: "absolute",
@@ -92,7 +96,7 @@ const TrackJob = () => {
                             </Box>
                             <Box>
                               <Typography color="grey">
-                                {elem[0].address}
+                                {elem.address}
                               </Typography>
                             </Box>
                           </Stack>
@@ -107,31 +111,6 @@ const TrackJob = () => {
                           </Box>
                         </Stack>
                       </Card>
-                      {/* <Card sx={{ p: 2, mb: 2 }}>
-                        <Stack direction="row" alignItems="center"  justifyContent="space-between" spacing={3}>
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500}>
-                                Drop Off {index + 1}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                {elem[0].address}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
-                            >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Card> */}
                     </Box>
                   );
                 })}

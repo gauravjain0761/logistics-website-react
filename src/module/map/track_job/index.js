@@ -21,7 +21,8 @@ const center = {
   lng: 150.644,
 };
 
-function TrackGoogleMaps( {close}) {
+function TrackGoogleMaps({ data }) {
+  const [mapData, setMapData] = React.useState([]);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
@@ -36,44 +37,70 @@ function TrackGoogleMaps( {close}) {
     },
   });
 
+  React.useEffect(() => {
+    let newArray = [];
+    if (data && data?.length > 0) {
+      data.forEach((element, index) => {
+        if (element?.type == "drop") {
+          newArray[index] = {
+            from: {
+              lat: element?.lat,
+              lng: element?.long,
+            },
+          };
+        } else if (element?.type == "pickup") {
+          newArray[index - 1] = {
+            from: { ...newArray[index - 1].from },
+            to: {
+              lat: element?.lat,
+              lng: element?.long,
+            },
+          };
+        }
+      });
+    }
+    setMapData(newArray);
+  }, [data, data?.length]);
+
   const [map, setMap] = React.useState(null);
   const [showPopUp, setShowPopUp] = React.useState(false);
 
-
+  console.log("DummyLocations", DummyLocations);
   return isLoaded ? (
     <Box component="div" sx={{ position: "relative", width: "100%" }}>
-   
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={new window.google.maps.LatLng(23.21632, 72.641219)}
         zoom={state.defaultZoom}
       >
-        {DummyLocations.map((elem, index) => {
-          return (
-            <DirectionRenderComponent
-              key={index}
-              index={index + 1}
-              strokeColor={elem.strokeColor}
-              from={elem.from}
-              to={elem.to}
-              onClickMarker={() => {
-                setShowPopUp(1);
-              }}
-              showPopUp={
-                <>
-                  {showPopUp == 1 && (
-                    <InfoWindow onCloseClick={() => setShowPopUp(false)}>
-                      <div>
-                        <div>nhà trọ cho thuê</div>
-                        <div>1.500.000đ</div>
-                      </div>
-                    </InfoWindow>
-                  )}
-                </>
-              }
-            />
-          );
-        })}
+        {mapData &&
+          mapData?.length > 0 &&
+          mapData.map((elem, index) => {
+            return (
+              <DirectionRenderComponent
+                key={index}
+                index={index + 1}
+                strokeColor={elem.strokeColor}
+                from={elem.from}
+                to={elem.to}
+                onClickMarker={() => {
+                  setShowPopUp(1);
+                }}
+                showPopUp={
+                  <>
+                    {showPopUp == 1 && (
+                      <InfoWindow onCloseClick={() => setShowPopUp(false)}>
+                        <div>
+                          <div>nhà trọ cho thuê</div>
+                          <div>1.500.000đ</div>
+                        </div>
+                      </InfoWindow>
+                    )}
+                  </>
+                }
+              />
+            );
+          })}
 
         {/* <Marker
           //   key={index}

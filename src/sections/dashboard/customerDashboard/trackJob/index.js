@@ -58,7 +58,7 @@ const TrackJob = ({ formik }) => {
             </Button>
           </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps />
+            <TrackGoogleMaps data={data} />
             <Box
               sx={{
                 position: "absolute",

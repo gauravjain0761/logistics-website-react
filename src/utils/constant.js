@@ -8,7 +8,7 @@ const convertTolatLng = (latLng, title) => {
 };
 
 export const locationsList = {
-  Mumbai: convertTolatLng("19.022002, 72.867721", "Mumbai"),
+  Mumbai: convertTolatLng("19.0759837, 72.8776559", "Mumbai"),
   Pune: convertTolatLng("18.469086, 73.907005", "Pune"),
   Goa: convertTolatLng("15.233341, 73.909253", "Goa"),
   Ratnagiri: convertTolatLng("16.964074, 73.326397", "Ratnagiri"),
@@ -22,7 +22,7 @@ export const locationsList = {
   Tirupati: convertTolatLng("13.638829, 79.414973", "Tirupati"),
   Kochi: convertTolatLng("9.912442, 76.264116", "Kochi"),
   Thiruvalla: convertTolatLng("9.383452,	76.574059", "Thiruvalla"),
-  Udaipur: convertTolatLng("24.580824, 73.719209", "Udaipur"),
+  Udaipur: convertTolatLng("26.9124336, 75.7872709", "Udaipur"),
   Jodhpur: convertTolatLng("26.347757, 73.000038", "Jodhpur"),
   Jaisalmer: convertTolatLng("27.068332, 71.007781", "Jaisalmer"),
   Jaipur: convertTolatLng("26.906955, 75.799071", "Jaipur"),
