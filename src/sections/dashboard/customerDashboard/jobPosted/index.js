@@ -769,7 +769,7 @@ const DashboardJobPost = ({ formik }) => {
                               justifyContent="space-between"
                             >
                               <Typography variant="subtitle2">
-                                Bid: $500
+                                Bid: ${item?.budget}
                               </Typography>
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
