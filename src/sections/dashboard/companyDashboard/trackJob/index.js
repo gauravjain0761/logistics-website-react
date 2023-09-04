@@ -18,14 +18,14 @@ const StartJob = ({ formik }) => {
       <Box mt={12}>
         <Container>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps />
+            <TrackGoogleMaps data={[]} />
             <Box
               sx={{
                 position: "absolute",
                 top: "6em",
                 left: "10px",
-                pr:1,
-                py:1,
+                pr: 1,
+                py: 1,
                 maxHeight: "39em",
                 overflowY: "scroll",
               }}

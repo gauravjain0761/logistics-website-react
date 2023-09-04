@@ -21,7 +21,7 @@ const center = {
   lng: 150.644,
 };
 
-function TrackGoogleMaps({ data }) {
+function TrackGoogleMaps({ data = [] }) {
   const [mapData, setMapData] = React.useState([]);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

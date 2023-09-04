@@ -33,7 +33,11 @@ const TrackJob = ({ formik }) => {
       .then((response) => {
         if (response.status === 200) {
           console.log(response, "responsedata");
-          setData(response.data.view_data[0]);
+          setData(
+            response.data.view_data && response.data.view_data?.length > 0
+              ? response.data.view_data[0]
+              : []
+          );
         }
       })
       .catch((error) => console.log(error));
