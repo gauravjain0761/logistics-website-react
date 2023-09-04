@@ -126,6 +126,8 @@ const BidList = () => {
     setFilterPrice(event.target.value);
   };
 
+  console.log("datadata", data);
+
   return (
     <React.Fragment>
       <Box py={4} sx={{ mt: 10 }} pb={12}>
