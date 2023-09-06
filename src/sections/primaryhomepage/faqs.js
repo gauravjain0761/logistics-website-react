@@ -36,7 +36,7 @@ const Faqs = () => {
     <React.Fragment>
       <Box mb={6}>
         <Container>
-          <Box textAlign="center" mb={6}>
+          <Box textAlign="center" mb={6} >
             <Box>
               <Typography fontSize={28} fontWeight={600}>
                 Frequently Asked{" "}
@@ -51,8 +51,8 @@ const Faqs = () => {
                 </Typography>
               </Typography>
             </Box>
-            <Box my={1}>
-              <Typography fontSize={14}>
+            <Box my={1} width="25em" m="auto">
+              <Typography  fontSize={14} >
                 Here are some frequently asked questions to enhance your
                 understanding of of our website.
               </Typography>
@@ -93,7 +93,7 @@ const Faqs = () => {
                               <Iconify
                                 icon="uiw:plus-circle"
                                 width={35}
-                                color={(theme) => theme.palette.primary.main}
+                               
                               />
                             )
                           }
@@ -105,13 +105,14 @@ const Faqs = () => {
                               margin: "10px 0px",
                             },
                             "&.MuiAccordionSummary-root.Mui-expanded": {
-                              background: (theme) => theme.palette.primary.main,
+                             
                               px: 4,
-                              color: "#fff",
                               minHeight: "100%",
                               margin: "0px 0px",
                             },
                             borderRadius: "40px",
+                            background: (theme) => theme.palette.primary.main,
+                            color: "#fff",
                             px: 4,
                             boxShadow: (theme) => theme.shadows[9],
                             py: 1,

@@ -126,9 +126,9 @@ const Subscribe = () => {
                     }}
                     textBoxSx={{
                       width: "16em",
-                      "& .MuiOutlinedInput-input": {
-                        background: "transparent !important",
-                        color: "#fff",
+
+                      "& .MuiInput-root": {
+                        color: "#fff !important",
                       },
                       "& .MuiFormControl-root": {
                         margin: "0px !important",
@@ -136,9 +136,11 @@ const Subscribe = () => {
                       "& .MuiInputLabel-root": {
                         color: "#fff !important",
                       },
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderRadius: "10px",
-                        borderColor: "#DFDFDF !important",
+                      "& .MuiInput-root:before": {
+                        borderColor: "#fff !important",
+                      },
+                      "& .MuiInput-root:after": {
+                        borderColor: "#fff !important",
                       },
                     }}
                     label="Enter Your Email"
