@@ -55,6 +55,7 @@ const DashboardJobRequest = () => {
   const router = useRouter();
   const { user } = useAuthContext();
   const driverId = user?.id;
+ 
   const { enqueueSnackbar } = useSnackbar();
 
   const [layout, setLayout] = useState(false);
@@ -203,7 +204,7 @@ const DashboardJobRequest = () => {
                 data.map((item, index) => {
                   let productDetail =
                     item?.items && item?.items?.length > 0 && item?.items[0];
-
+                 
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -782,10 +783,7 @@ const DashboardJobRequest = () => {
                                   <Button
                                     color={
                                       !some(item?.job_requests, {
-                                        job_id: item?.id,
-                                      }) &&
-                                      !some(item?.job_requests, {
-                                        driver_id: user?.id,
+                                        driver_id: driverId,
                                       })
                                         ? "dark"
                                         : "warning"
@@ -797,12 +795,9 @@ const DashboardJobRequest = () => {
                                         sx={{
                                           "& svg, g": {
                                             stroke: (theme) =>
-                                              !some(item?.job_requests, {
-                                                job_id: item?.id,
-                                              }) &&
-                                              !some(item?.job_requests, {
-                                                driver_id: user?.id,
-                                              })
+                                            !some(item?.job_requests, {
+                                              driver_id: driverId,
+                                            })
                                                 ? theme?.palette.dark.main
                                                 : theme?.palette.warning.main,
                                           },
@@ -812,23 +807,22 @@ const DashboardJobRequest = () => {
                                     }
                                     onClick={() => {
                                       !some(item?.job_requests, {
-                                        job_id: item?.id,
+                                        driver_id: driverId,
                                       }) &&
-                                        !some(item?.job_requests, {
-                                          driver_id: user?.id,
-                                        }) &&
                                         handleOpen(item?.id);
                                     }}
                                     sx={{
                                       fontWeight: 500,
                                     }}
                                   >
-                                    {!some(item?.job_requests, {
-                                      job_id: item?.id,
-                                    }) &&
-                                    !some(item?.job_requests, {
-                                      driver_id: user?.id,
-                                    })
+                                    {console.log("CDdvd",
+                                      some(item?.job_requests, {
+                                        driver_id: driverId,
+                                      })
+                                    )}
+                                    { !some(item?.job_requests, {
+                                        driver_id: driverId,
+                                      })
                                       ? "Apply Job"
                                       : "Pending"}
                                   </Button>
