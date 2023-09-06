@@ -146,7 +146,7 @@ const Subscribe = () => {
                     label="Enter Your Email"
                     size="small"
                   />
-                  <Typography fontSize={10} color="common.black">
+                  <Typography fontSize={10} color="common.white">
                     {formik.touched.email && formik.errors.email}
                   </Typography>
                 </Box>
