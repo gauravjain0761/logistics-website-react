@@ -83,11 +83,11 @@ const AboutSlider = () => {
                       >
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever sinceLorem Ipsum is
+                        industry{"'"}s standard dummy text ever sinceLorem Ipsum is
                         simply dummy text of the printing and typesetting
                         industr. Lorem Ipsum is simply dummy text of the
                         printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever sinceLorem Ipsum
+                        the industry{"'"}s standard dummy text ever sinceLorem Ipsum
                         is simply dummy text of the Surendra Kumar
                       </Typography>
                     </Box>
