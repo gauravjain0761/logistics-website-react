@@ -40,12 +40,8 @@ const AboutUs = () => {
   };
   return (
     <React.Fragment>
-      <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
-        alt=""
-        title="About Us"
-      />
-      <Box py={6} pb={12}>
+    
+      <Box  py={12}>
         <Container>
           <div>
             {!loader ? (
