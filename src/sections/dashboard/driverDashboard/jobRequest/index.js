@@ -54,6 +54,7 @@ const DashboardJobRequest = () => {
 
   const router = useRouter();
   const { user } = useAuthContext();
+  const driverId = user?.id;
   const { enqueueSnackbar } = useSnackbar();
 
   const [layout, setLayout] = useState(false);

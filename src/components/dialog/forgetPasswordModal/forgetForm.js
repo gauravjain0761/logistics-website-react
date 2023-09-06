@@ -41,7 +41,7 @@ export const ForgetForm = ({ formik }) => {
         fullWidth
       >
         <Stack direction="row">
-          <Box
+          {/* <Box
             sx={{
               ml: 0,
               background: (theme) => theme.palette.grey[100],
@@ -55,7 +55,7 @@ export const ForgetForm = ({ formik }) => {
             }}
           >
             <ArrowDropDownCircleIcon color="primary" fontSize="small" />
-          </Box>
+          </Box> */}
 
           <Autocomplete
             sx={{ mb: 0 }}
@@ -88,7 +88,7 @@ export const ForgetForm = ({ formik }) => {
       {formik.values.type == "email" && (
         <TextBox
           size="small"
-          startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
+          // startIcon={<Iconify icon="material-symbols:mail" color={"#ff7534"} />}
           fullWidth
           start
           // label="Email"

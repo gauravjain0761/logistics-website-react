@@ -90,8 +90,8 @@ const TrackJob = () => {
                         >
                           <Stack>
                             <Box>
-                              <Typography fontWeight={500}>
-                                Pickup {index + 1}
+                              <Typography fontWeight={500} textTransform="uppercase">
+                               {elem.type} 
                               </Typography>
                             </Box>
                             <Box>
