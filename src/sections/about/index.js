@@ -138,8 +138,8 @@ const AboutUs = () => {
                     rotate: "33.61deg",
                   bottom: "-5em",
                     zIndex: 3,
-                  }}
-                />
+                  }} 
+                /> 
 
                 <Grid container spacing={1} mt={16} alignItems="center">
                   <Grid item md={6}>
