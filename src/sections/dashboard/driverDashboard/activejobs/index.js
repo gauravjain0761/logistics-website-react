@@ -564,7 +564,7 @@ const DashboardJobPost = () => {
                                 Job Budget: ${elem.budget}
                               </Typography>
                               <Typography variant="subtitle2">
-                                Customer Spend: $30K+
+                                Customer Spend: ${elem?.spentmoney}+
                               </Typography>
                             </Stack>
                           </Box>

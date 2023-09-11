@@ -387,7 +387,7 @@ const BidList = () => {
                                   </Box>
                                   <Box>
                                     <Rating
-                                      value={4}
+                                      value={elem?.rating}
                                       readOnly
                                       size="small"
                                       sx={{
@@ -421,20 +421,20 @@ const BidList = () => {
                                       fontSize={14}
                                       fontWeight={600}
                                     >
-                                      78 %
+                                      {elem?.jobpercent} %
                                     </Typography>
                                   </Box>
                                 </Stack>
                                 <Box>
                                   <LinearProgress
                                     variant="determinate"
-                                    value={78}
+                                    value={elem?.jobpercent}
                                   />
                                 </Box>
                               </Stack>
                               <Stack>
                                 <Typography fontSize={14} fontWeight={500}>
-                                  Earned: $30K+
+                                  Earned: ${elem?.earning}+
                                 </Typography>
                               </Stack>
                             </Stack>
