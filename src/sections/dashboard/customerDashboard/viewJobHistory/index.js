@@ -261,9 +261,9 @@ const ViewJobHistory = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {jobDetail?.pickup &&
-                          jobDetail?.pickup?.length > 0 &&
-                          jobDetail?.pickup.map((item, index) => {
+                        {jobDetail?.drop &&
+                          jobDetail?.drop?.length > 0 &&
+                          jobDetail?.drop.map((item, index) => {
                             return (
                               <TableRow
                                 key={`jobDetail${index}`}
