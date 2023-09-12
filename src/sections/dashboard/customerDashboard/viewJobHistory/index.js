@@ -436,8 +436,6 @@ const ViewJobHistory = () => {
       <Dialog
         open={reviewOpen}
         onClose={handleReviewOpen}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-review"
         maxWidth="xs"
         fullWidth={true}
       >
