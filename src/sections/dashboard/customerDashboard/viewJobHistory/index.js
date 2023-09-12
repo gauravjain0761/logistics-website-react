@@ -441,7 +441,7 @@ const ViewJobHistory = () => {
         maxWidth="xs"
         fullWidth={true}
       >
-        <DialogContent sx={{ my: 2 }}>
+        <DialogContent sx={{ my: 3 }}>
           <Box component="form" noValidate onSubmit={formik.handleSubmit}>
             <Box align="right">
               <Iconify
