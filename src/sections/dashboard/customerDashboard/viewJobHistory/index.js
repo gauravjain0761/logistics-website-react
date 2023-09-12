@@ -1,9 +1,7 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import ApplyJobModal from "@/module/dashboard/driverCard/applyJob";
 import axiosInstance from "@/utils/axios";
-import { Visibility } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -11,8 +9,6 @@ import {
   CardContent,
   Container,
   Divider,
-  Grid,
-  List,
   Modal,
   Rating,
   Stack,
@@ -86,7 +82,7 @@ const ViewJobHistory = () => {
   const getJobDetail = async () => {
     // setLoader(true);
     await axiosInstance
-      .get(`api/auth/master/jobs/view/${id}`)
+      .get(`api/auth/jobs/view/${id}`)
       .then((response) => {
         if (response?.status === 200) {
           setJobDetail(response?.data?.view_data);
@@ -109,7 +105,7 @@ const ViewJobHistory = () => {
     formik.setFieldValue("job_id", id);
   }, [user, user?.id, id]);
 
-  console.log("jobDetail", jobDetail, ratings);
+  console.log("jobDetail345", jobDetail, ratings);
   return (
     <React.Fragment>
       <Box mt={10} pb={12}>
@@ -124,159 +120,185 @@ const ViewJobHistory = () => {
               Back
             </Button>
             <Card sx={{ position: "relative" }}>
+              <Typography textAlign="center" variant="h6" my={1} fontSize={17}>
+                Job Detail
+              </Typography>
+              <Divider />
               <CardContent>
-                <Typography
-                  textAlign="center"
-                  variant="h3"
-                  color={(theme) => theme.palette.grey[700]}
-                  my={2}
-                >
-                  Job Detail
+                <Typography variant="h4" component="h4" textAlign="center">
+                  {jobDetail?.job?.name}
                 </Typography>
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={2}
+                  my={1}
+                >
+                  <Typography component="p" variant="body2" fontWeight={500}>
+                    Vehicle Requirment:
+                  </Typography>
+                  <Typography component="p" variant="body2" fontWeight={600}>
+                    {jobDetail?.job?.vehicle}
+                  </Typography>
+                </Stack>
+                <Divider sx={{ my: 4 }} />
                 <Box>
-                  <Grid container justifyContent="center">
-                    <Grid item md={12}>
-                      <Grid container spacing={2}>
-                        <Grid item md={2.5}>
-                          <Typography fontWeight={500}>Job Title :</Typography>
-                        </Grid>
-                        <Grid item md={9.5}>
-                          <Typography>{jobDetail?.name}</Typography>
-                        </Grid>
-                        <Grid item md={2.5}>
-                          <Typography fontWeight={500}>
-                            Vehicle Type :
-                          </Typography>
-                        </Grid>
-                        <Grid item md={9.5}>
-                          <Typography>{jobDetail?.vehical_type}</Typography>
-                        </Grid>
-                        <Grid item md={2.5}>
-                          <Typography fontWeight={500}>
-                            Vehicle Name :
-                          </Typography>
-                        </Grid>
-                        <Grid item md={9.5}>
-                          <Typography>{jobDetail?.vehicle}</Typography>
-                        </Grid>
-                        <Grid item md={2.5}>
-                          <Typography fontWeight={500}>Job Budget :</Typography>
-                        </Grid>
-                        <Grid item md={9.5}>
-                          <Typography>{jobDetail?.budget}</Typography>
-                        </Grid>
-                        <Grid item md={12} mt={2}>
-                          <Typography fontWeight={500}>
-                            Pick Up Address
-                          </Typography>
-                        </Grid>
-                        <Grid item md={12}>
-                          <TableContainer
-                            sx={{
-                              borderRadius: "10px",
-                              border: "1px solid",
-                              borderColor: (theme) =>
-                                theme.palette.primary.main,
-                            }}
-                          >
-                            <Table aria-label="simple table">
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell align="center">
-                                    Pickup Date
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    Pickup Time
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    Drop Date
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    Drop Time
-                                  </TableCell>
-                                  <TableCell align="center">L*W*H</TableCell>
-                                  <TableCell align="center">Quantity</TableCell>
-                                  <TableCell align="center">Image</TableCell>
-                                  <TableCell align="center">Material</TableCell>
-                                  <TableCell align="center">Address</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {jobDetail?.items &&
-                                  jobDetail?.items?.length > 0 &&
-                                  jobDetail?.items.map((item, index) => {
-                                    return (
-                                      <TableRow
-                                        key={`jobDetail${index}`}
-                                        sx={{
-                                          "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                          },
-                                        }}
-                                      >
-                                        <TableCell component="th" scope="row">
-                                          <Typography>
-                                            {item?.product?.pickup_date}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>
-                                            {item?.product?.pickup_time}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>
-                                            {item?.product?.drop_date}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>
-                                            {item?.product?.drop_time}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>{`${item?.product?.length} * ${item?.product?.width} * ${item?.product?.height}`}</Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>
-                                            {item?.product?.quantity}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Box>
-                                            <Box
-                                              component="img"
-                                              m="auto"
-                                              src={`${item?.product?.base_url}${item?.product?.image}`}
-                                              width={80}
-                                            />
-                                          </Box>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Typography>
-                                            {item?.product?.material}
-                                          </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                          <Button
-                                            onClick={() =>
-                                              handleAddressOpen(item?.address)
-                                            }
-                                            sx={{ color: "grey" }}
-                                          >
-                                            <Visibility />
-                                          </Button>
-                                        </TableCell>
-                                      </TableRow>
-                                    );
-                                  })}
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                  <Typography
+                    component="p"
+                    variant="body1"
+                    fontWeight={500}
+                    textAlign="center"
+                    mb={2}
+                  >
+                    Pickup Details
+                  </Typography>
+                  <TableContainer
+                    sx={{
+                      borderRadius: "10px",
+                      border: "1px solid",
+                      borderColor: (theme) => theme.palette.primary.main,
+                    }}
+                  >
+                    <Table aria-label="simple table" sx={{ minWidth: "100%" }}>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell align="center">Address</TableCell>
+                          <TableCell align="center">Pickup Date</TableCell>
+                          <TableCell align="center">Pickup Time</TableCell>
+                          <TableCell align="center">L*W*H</TableCell>
+                          <TableCell align="center">Quantity</TableCell>
+                          <TableCell align="center">Image</TableCell>
+                          <TableCell align="center">Material</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {jobDetail?.pickup &&
+                          jobDetail?.pickup?.length > 0 &&
+                          jobDetail?.pickup.map((item, index) => {
+                            return (
+                              <TableRow
+                                key={`jobDetail${index}`}
+                                sx={{
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
+                                }}
+                              >
+                                <TableCell component="th" scope="row">
+                                  <Typography component="p" variant="body2">
+                                    {item?.address}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                  <Typography component="p" variant="body2">
+                                    {item?.pickup_date}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.pickup_time}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography
+                                    component="p"
+                                    variant="body2"
+                                  >{`${item?.length} * ${item?.width} * ${item?.height}`}</Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.quantity}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Box>
+                                    <Box
+                                      component="img"
+                                      m="auto"
+                                      src={`${item?.base_url}${item?.image}`}
+                                      width={80}
+                                    />
+                                  </Box>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.material}
+                                  </Typography>
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Box>
+                <Divider sx={{ my: 4 }} />
+                <Box>
+                  <Typography
+                    component="p"
+                    variant="body1"
+                    fontWeight={500}
+                    textAlign="center"
+                    mb={2}
+                  >
+                    Delivery Details
+                  </Typography>
+                  <TableContainer
+                    sx={{
+                      borderRadius: "10px",
+                      border: "1px solid",
+                      borderColor: (theme) => theme.palette.primary.main,
+                    }}
+                  >
+                    <Table aria-label="simple table" sx={{ minWidth: "100%" }}>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell align="center">Address</TableCell>
+                          <TableCell align="center">Drop Date</TableCell>
+                          <TableCell align="center">Drop Time</TableCell>
+                          <TableCell align="center">Quantity</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {jobDetail?.pickup &&
+                          jobDetail?.pickup?.length > 0 &&
+                          jobDetail?.pickup.map((item, index) => {
+                            return (
+                              <TableRow
+                                key={`jobDetail${index}`}
+                                sx={{
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
+                                }}
+                              >
+                                <TableCell component="th" scope="row">
+                                  <Typography component="p" variant="body2">
+                                    {item?.address}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.drop_date}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.drop_time}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell align="center">
+                                  <Typography component="p" variant="body2">
+                                    {item?.quantity}
+                                  </Typography>
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Box>
                 <Box my={4}>
                   <Divider />
