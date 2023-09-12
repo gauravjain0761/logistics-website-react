@@ -47,6 +47,8 @@ const TrackJob = ({ formik }) => {
       fetchTrackJob();
     }
   }, [id, user?.id]);
+
+  console.log(data, "elemmmdata");
   return (
     <React.Fragment>
       <Box py={12}>

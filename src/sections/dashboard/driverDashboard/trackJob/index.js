@@ -23,7 +23,7 @@ const TrackJob = () => {
   const { id } = query;
   const { user } = useAuthContext();
   const [data, setData] = useState([]);
-  console.log(data[0], "responsedata");
+  const [mapData, setMapData] = React.useState([]);
 
   const initialValues = {
     id: id,
@@ -34,9 +34,10 @@ const TrackJob = () => {
       .post(`api/auth/jobs/job-tasks`, initialValues)
       .then((response) => {
         if (response.status === 200) {
+          console.log(response.data.view_data, "elemmmdata");
           setData(
             response.data.view_data && response.data.view_data?.length > 0
-              ? response.data.view_data[0]
+              ? response.data.view_data
               : []
           );
         }
@@ -48,6 +49,36 @@ const TrackJob = () => {
       fetchTrackJob();
     }
   }, [id, user?.id]);
+
+  React.useEffect(() => {
+    let newArray = [];
+    let finalArray = [];
+    if (data && data?.length > 0) {
+      data.forEach((element) => {
+        element.forEach((newElement, elementIndex) => {
+          if (newElement?.type == "drop") {
+            newArray[elementIndex] = {
+              from: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+          } else if (newElement?.type == "pickup") {
+            newArray[elementIndex - 1] = {
+              from: { ...newArray[elementIndex - 1].from },
+              to: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+            finalArray.push(...newArray);
+          }
+        });
+      });
+    }
+    setMapData(finalArray);
+  }, [data, data?.length]);
+
   return (
     <React.Fragment>
       <Box py={12}>
@@ -63,7 +94,7 @@ const TrackJob = () => {
             </Button>
           </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps data={data} />
+            <TrackGoogleMaps data={mapData} />
             <Box
               sx={{
                 position: "absolute",
@@ -77,41 +108,55 @@ const TrackJob = () => {
             >
               {data.length > 0 &&
                 data &&
-                data.map((elem, index) => {
-                  console.log(elem, "elemmm");
+                data.map((elem) => {
                   return (
-                    <Box key={index} sx={{ scrollSnapAlign: "start" }}>
-                      <Card sx={{ p: 2, mb: 0.5 }}>
-                        <Stack
-                          direction="row"
-                          justifyContent="space-between"
-                          alignItems="center"
-                          spacing={3}
-                        >
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500} textTransform="uppercase">
-                               {elem.type} 
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                {elem.address}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
+                    elem &&
+                    elem?.length > 0 &&
+                    elem.map((item, index) => {
+                      return (
+                        <Box key={index} sx={{ scrollSnapAlign: "start" }}>
+                          <Card
+                            sx={{
+                              p: 2,
+                              mb: 0.5,
+                              maxWidth: "400px",
+                            }}
+                          >
+                            <Stack
+                              direction="row"
+                              justifyContent="space-between"
+                              alignItems="center"
+                              spacing={3}
                             >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Card>
-                    </Box>
+                              <Stack>
+                                <Box>
+                                  <Typography
+                                    fontWeight={500}
+                                    textTransform="uppercase"
+                                  >
+                                    {item.type}
+                                  </Typography>
+                                </Box>
+                                <Box>
+                                  <Typography color="grey">
+                                    {item.address}
+                                  </Typography>
+                                </Box>
+                              </Stack>
+                              <Box>
+                                <Button
+                                  variant="outlined"
+                                  color="dark"
+                                  size="small"
+                                >
+                                  View
+                                </Button>
+                              </Box>
+                            </Stack>
+                          </Card>
+                        </Box>
+                      );
+                    })
                   );
                 })}
             </Box>

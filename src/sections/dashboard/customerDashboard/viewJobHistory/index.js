@@ -194,23 +194,23 @@ const ViewJobHistory = () => {
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.pickup_date}
+                                    {item?.item?.pickup_date}
                                   </Typography>
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.pickup_time}
+                                    {item?.item?.pickup_time}
                                   </Typography>
                                 </TableCell>
                                 <TableCell>
                                   <Typography
                                     component="p"
                                     variant="body2"
-                                  >{`${item?.length} * ${item?.width} * ${item?.height}`}</Typography>
+                                  >{`${item?.item?.length} * ${item?.item?.width} * ${item?.item?.height}`}</Typography>
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.quantity}
+                                    {item?.item?.quantity}
                                   </Typography>
                                 </TableCell>
                                 <TableCell>
@@ -218,14 +218,14 @@ const ViewJobHistory = () => {
                                     <Box
                                       component="img"
                                       m="auto"
-                                      src={`${item?.base_url}${item?.image}`}
+                                      src={`${item?.item?.base_url}${item?.item?.image}`}
                                       width={80}
                                     />
                                   </Box>
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.material}
+                                    {item?.item?.material}
                                   </Typography>
                                 </TableCell>
                               </TableRow>
@@ -282,17 +282,17 @@ const ViewJobHistory = () => {
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.drop_date}
+                                    {item?.item?.drop_date}
                                   </Typography>
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.drop_time}
+                                    {item?.item?.drop_time}
                                   </Typography>
                                 </TableCell>
                                 <TableCell>
                                   <Typography component="p" variant="body2">
-                                    {item?.quantity}
+                                    {item?.item?.quantity}
                                   </Typography>
                                 </TableCell>
                               </TableRow>
