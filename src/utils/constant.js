@@ -67,3 +67,14 @@ export const locationsList = {
   Porbandar: convertTolatLng("21.637215, 69.628066", "Porbandar"),
   Srinagar: convertTolatLng("34.076263, 74.800088", "Srinagar"),
 };
+
+export const PageSizes = [
+  {
+    label: "10",
+    value: 10,
+  },
+  {
+    label: "20",
+    value: 20,
+  },
+];
