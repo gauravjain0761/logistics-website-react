@@ -93,72 +93,100 @@ const TrackJob = () => {
             </Button>
           </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps data={mapData} />
-            <Box
-              sx={{
-                position: "absolute",
-                top: "6em",
-                left: "10px",
-                pr: 1,
-                py: 1,
-                maxHeight: "39em",
-                overflowY: "scroll",
-              }}
-            >
-              {data.length > 0 &&
-                data &&
-                data.map((elem) => {
-                  return (
-                    elem &&
-                    elem?.length > 0 &&
-                    elem.map((item, index) => {
+            <Grid container>
+              <Grid item md={6}>
+                <Card
+                  sx={{
+                    position: "relative",
+                    pr: 0,
+                    py: 0,
+                    maxHeight: "92vh",
+                    overflowY: "scroll",
+                    height: "100%",
+                    borderRadius: "0px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      my: 0,
+                      ml: 0,
+                      position: "sticky",
+                      top: 0,
+                      zIndex: 1200,
+                      background: (theme) => theme.palette.common.white,
+                    }}
+                  >
+                    <Typography
+                      component="h3"
+                      variant="h3"
+                      sx={{ py: 1 }}
+                      color="primary"
+                    >
+                      Track Job
+                    </Typography>
+                    <Divider />
+                  </Box>
+                  {data.length > 0 &&
+                    data &&
+                    data.map((elem) => {
                       return (
-                        <Box key={index} sx={{ scrollSnapAlign: "start" }}>
-                          <Card
-                            sx={{
-                              p: 2,
-                              mb: 0.5,
-                              maxWidth: "400px",
-                            }}
-                          >
-                            <Stack
-                              direction="row"
-                              justifyContent="space-between"
-                              alignItems="center"
-                              spacing={3}
-                            >
-                              <Stack>
-                                <Box>
-                                  <Typography
-                                    fontWeight={500}
-                                    textTransform="uppercase"
-                                  >
-                                    {item.type}
-                                  </Typography>
-                                </Box>
-                                <Box>
-                                  <Typography color="grey">
-                                    {item.address}
-                                  </Typography>
-                                </Box>
-                              </Stack>
-                              <Box>
-                                <Button
-                                  variant="outlined"
-                                  color="dark"
-                                  size="small"
+                        elem &&
+                        elem?.length > 0 &&
+                        elem.map((item, index) => {
+                          return (
+                            <Box key={index} sx={{ scrollSnapAlign: "start" }}>
+                              <Card
+                                sx={{
+                                  p: 2,
+                                  mb: 0.5,
+                                  borderRadius: "0px",
+                                  boxShadow: "none",
+                                }}
+                              >
+                                <Stack
+                                  direction="row"
+                                  justifyContent="space-between"
+                                  alignItems="center"
+                                  spacing={3}
                                 >
-                                  View
-                                </Button>
-                              </Box>
-                            </Stack>
-                          </Card>
-                        </Box>
+                                  <Stack>
+                                    <Box>
+                                      <Typography
+                                        fontWeight={500}
+                                        textTransform="uppercase"
+                                      >
+                                        {item?.type}
+                                      </Typography>
+                                    </Box>
+                                    <Box>
+                                      <Typography color="grey">
+                                        {item?.address}
+                                      </Typography>
+                                    </Box>
+                                  </Stack>
+                                  <Box>
+                                    <Button
+                                      variant="outlined"
+                                      color="dark"
+                                      size="small"
+                                    >
+                                      View
+                                    </Button>
+                                  </Box>
+                                </Stack>
+                              </Card>
+                              <Divider />
+                            </Box>
+                          );
+                        })
                       );
-                    })
-                  );
-                })}
-            </Box>
+                    })}
+                </Card>
+              </Grid>
+              <Grid item md={6}>
+                <TrackGoogleMaps data={mapData} />
+              </Grid>
+            </Grid>
           </Box>
         </Container>
       </Box>
