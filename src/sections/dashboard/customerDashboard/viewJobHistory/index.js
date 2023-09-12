@@ -8,6 +8,8 @@ import {
   Card,
   CardContent,
   Container,
+  Dialog,
+  DialogContent,
   Divider,
   Modal,
   Rating,
@@ -25,7 +27,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React, { useState, useEffect } from "react";
 
-const   ViewJobHistory = () => {
+const ViewJobHistory = () => {
   const router = useRouter();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
@@ -431,74 +433,62 @@ const   ViewJobHistory = () => {
         </Box>
       </Modal>
       {/* =================   Rating & Review Modal       ================== */}
-      <Modal
+      <Dialog
         open={reviewOpen}
         onClose={handleReviewOpen}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-review"
+        maxWidth="xs"
+        fullWidth={true}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            textAlign: "center",
-            transform: "translate(-50%, -50%)",
-
-            bgcolor: "background.paper",
-            border: "1px solid #f5f5f5",
-            boxShadow: 24,
-            p: 4,
-          }}
-          component="form"
-          noValidate
-          onSubmit={formik.handleSubmit}
-        >
-          <Box align="right">
-            <Iconify
-              icon="basil:cross-solid"
-              width={40}
-              onClick={handleReviewClose}
-              sx={{
-                border: "1px solid grey",
-                borderRadius: "50%",
-                cursor: "pointer",
-              }}
-            />
+        <DialogContent sx={{ my: 2 }}>
+          <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+            <Box align="right">
+              <Iconify
+                icon="basil:cross-solid"
+                width={20}
+                onClick={handleReviewClose}
+                sx={{
+                  border: "1px solid grey",
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+              />
+            </Box>
+            <Typography mb={2} variant="subtitle1">
+              Review
+            </Typography>
+            <Stack spacing={1}>
+              <Box>
+                <Rating
+                  value={formik.values.rating}
+                  onChange={formik.handleChange}
+                  name="rating"
+                  helperText={formik.touched.rating && formik.errors.rating}
+                />
+              </Box>
+              <Box>
+                <TextBox
+                  size="small"
+                  name="review"
+                  label="Review"
+                  fullWidth
+                  multiline={true}
+                  rows="4"
+                  value={formik.values.review}
+                  onChange={formik.handleChange}
+                  helperText={formik.touched.review && formik.errors.review}
+                />
+              </Box>
+            </Stack>
+            <Stack direction="row" spacing={8}>
+              <Button fullWidth variant="outlined" type="submit">
+                Submit
+              </Button>
+            </Stack>
           </Box>
-          <Typography mb={2} variant="subtitle1">
-            Review
-          </Typography>
-          <Stack spacing={1}>
-            <Box>
-              <Rating
-                value={formik.values.rating}
-                onChange={formik.handleChange}
-                name="rating"
-                helperText={formik.touched.rating && formik.errors.rating}
-              />
-            </Box>
-            <Box>
-              <TextBox
-                size="small"
-                name="review"
-                label="Review"
-                fullWidth
-                multiline={true}
-                rows="4"
-                value={formik.values.review}
-                onChange={formik.handleChange}
-                helperText={formik.touched.review && formik.errors.review}
-              />
-            </Box>
-          </Stack>
-          <Stack direction="row" spacing={8}>
-            <Button fullWidth variant="outlined" type="submit">
-              Submit
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </React.Fragment>
   );
 };
