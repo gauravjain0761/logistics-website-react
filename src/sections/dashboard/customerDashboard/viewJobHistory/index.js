@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React, { useState, useEffect } from "react";
 
-const ViewJobHistory = () => {
+const   ViewJobHistory = () => {
   const router = useRouter();
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
@@ -86,7 +86,7 @@ const ViewJobHistory = () => {
       .then((response) => {
         if (response?.status === 200) {
           setJobDetail(response?.data?.view_data);
-          setRatings(response?.data?.view_data?.ratings);
+          setRatings(response?.data?.view_data?.job?.ratings);
         }
       })
       .catch((error) => {
@@ -163,13 +163,13 @@ const ViewJobHistory = () => {
                     <Table aria-label="simple table" sx={{ minWidth: "100%" }}>
                       <TableHead>
                         <TableRow>
-                          <TableCell align="center">Address</TableCell>
-                          <TableCell align="center">Pickup Date</TableCell>
-                          <TableCell align="center">Pickup Time</TableCell>
-                          <TableCell align="center">L*W*H</TableCell>
-                          <TableCell align="center">Quantity</TableCell>
-                          <TableCell align="center">Image</TableCell>
-                          <TableCell align="center">Material</TableCell>
+                          <TableCell align="left">Address</TableCell>
+                          <TableCell align="left">Pickup Date</TableCell>
+                          <TableCell align="left">Pickup Time</TableCell>
+                          <TableCell align="left">L*W*H</TableCell>
+                          <TableCell align="left">Quantity</TableCell>
+                          <TableCell align="left">Image</TableCell>
+                          <TableCell align="left">Material</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -190,28 +190,28 @@ const ViewJobHistory = () => {
                                     {item?.address}
                                   </Typography>
                                 </TableCell>
-                                <TableCell component="th" scope="row">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.pickup_date}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.pickup_time}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography
                                     component="p"
                                     variant="body2"
                                   >{`${item?.length} * ${item?.width} * ${item?.height}`}</Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.quantity}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Box>
                                     <Box
                                       component="img"
@@ -221,7 +221,7 @@ const ViewJobHistory = () => {
                                     />
                                   </Box>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.material}
                                   </Typography>
@@ -254,10 +254,10 @@ const ViewJobHistory = () => {
                     <Table aria-label="simple table" sx={{ minWidth: "100%" }}>
                       <TableHead>
                         <TableRow>
-                          <TableCell align="center">Address</TableCell>
-                          <TableCell align="center">Drop Date</TableCell>
-                          <TableCell align="center">Drop Time</TableCell>
-                          <TableCell align="center">Quantity</TableCell>
+                          <TableCell align="left">Address</TableCell>
+                          <TableCell align="left">Drop Date</TableCell>
+                          <TableCell align="left">Drop Time</TableCell>
+                          <TableCell align="left">Quantity</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -278,17 +278,17 @@ const ViewJobHistory = () => {
                                     {item?.address}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.drop_date}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.drop_time}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">
+                                <TableCell>
                                   <Typography component="p" variant="body2">
                                     {item?.quantity}
                                   </Typography>
