@@ -77,6 +77,9 @@ const slice = createSlice({
     setJobHistoryPage(state, action) {
       state.jobHistory.page = action.payload;
     },
+    setJobHistoryPageSize(state, action) {
+      state.jobHistory.pageSize = action.payload;
+    },
     // SET JOB HISTORY END
 
     // ========================================================
@@ -91,6 +94,7 @@ export const {
   startJobPostLoading,
   setJobPostPage,
   setJobHistoryPage,
+  setJobHistoryPageSize,
 } = slice.actions;
 
 // ----------------------------------------------------------------------
@@ -112,7 +116,6 @@ export const getJobPost = (params) => {
     }
   };
 };
-
 
 export const getJobHistory = (params) => {
   return async (dispatch) => {

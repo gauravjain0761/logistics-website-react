@@ -31,14 +31,19 @@ import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { useDispatch, useSelector } from "@/redux/store";
-import { getJobHistory, setJobHistoryPage } from "@/redux/slices/job/customer";
+import {
+  getJobHistory,
+  setJobHistoryPage,
+  setJobHistoryPageSize,
+} from "@/redux/slices/job/customer";
 import TextMaxLine from "@/components/text-max-line";
+import { PageSizes } from "@/utils/constant";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const { user } = useAuthContext();
   const dispatch = useDispatch();
   const {
-    jobHistory: { pageCount, data, page, pageSize },
+    jobHistory: { pageCount, data, page, pageSize, dataCount },
   } = useSelector((state) => state.customerJob);
 
   const handlePageChange = (event, value) => {
@@ -738,48 +743,70 @@ const JobHistory = ({ formik }) => {
                   <Typography variant="h4">No Job History</Typography>
                 </Box>
               )}
-
-              {/* )} */}
             </Grid>
-            <Box>
-              <Stack alignItems="center" justifyContent="center">
-                <Pagination
-                  count={pageCount}
-                  color="primary"
-                  page={page}
-                  onChange={handlePageChange}
-                  variant="outlined"
-                  shape="rounded"
-                  renderItem={(item) => (
-                    <PaginationItem
-                      slots={{
-                        previous: () => {
-                          return (
-                            <Stack
-                              direction="row"
-                              spacing={0.5}
-                              alignItems="center"
-                            >
-                              <NavigateBeforeIcon />
-                            </Stack>
-                          );
-                        },
-                        next: () => {
-                          return (
-                            <Stack
-                              direction="row"
-                              spacing={0.5}
-                              alignItems="center"
-                            >
-                              <NavigateNextIcon />
-                            </Stack>
-                          );
-                        },
-                      }}
-                      {...item}
-                    />
-                  )}
-                />
+            <Box sx={{ mt: 4 }}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                spacing={2}
+              >
+                <Box>
+                  <SelectBox
+                    fullWidth
+                    name="pageSize"
+                    value={pageSize}
+                    formSx={{ marginBottom: "0px" }}
+                    onChange={(e) => {
+                      dispatch(setJobHistoryPageSize(e.target.value));
+                    }}
+                    options={PageSizes}
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="body2" component="p">
+                    {page} - {page * pageSize} of {dataCount}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Pagination
+                    count={pageCount}
+                    color="primary"
+                    page={page}
+                    onChange={handlePageChange}
+                    variant="outlined"
+                    shape="rounded"
+                    renderItem={(item) => (
+                      <PaginationItem
+                        slots={{
+                          previous: () => {
+                            return (
+                              <Stack
+                                direction="row"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <NavigateBeforeIcon />
+                              </Stack>
+                            );
+                          },
+                          next: () => {
+                            return (
+                              <Stack
+                                direction="row"
+                                spacing={0.5}
+                                alignItems="center"
+                              >
+                                <NavigateNextIcon />
+                              </Stack>
+                            );
+                          },
+                        }}
+                        {...item}
+                      />
+                    )}
+                  />
+                </Box>
               </Stack>
             </Box>
           </Box>
