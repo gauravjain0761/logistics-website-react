@@ -1,5 +1,4 @@
 import { useAuthContext } from "@/auth/useAuthContext";
-import Iconify from "@/components/iconify/Iconify";
 import TrackGoogleMaps from "@/module/map/track_job";
 import axiosInstance from "@/utils/axios";
 import {
@@ -13,15 +12,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import Iconify from "@/components/iconify/Iconify";
 
-const TrackJob = ({ formik }) => {
-  const { user } = useAuthContext();
-  const { query, push } = useRouter();
+const TrackJob = () => {
+  const router = useRouter();
+  const { query } = useRouter();
   const { id } = query;
-  console.log(id, user?.id, "iddddd");
+  const { user } = useAuthContext();
   const [data, setData] = useState([]);
+  const [mapData, setMapData] = React.useState([]);
 
   const initialValues = {
     id: Number(id),
@@ -32,10 +34,10 @@ const TrackJob = ({ formik }) => {
       .post(`api/auth/jobs/job-tasks`, initialValues)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response, "responsedata");
+          console.log(response.data.view_data, "elemmmdata");
           setData(
             response.data.view_data && response.data.view_data?.length > 0
-              ? response.data.view_data[0]
+              ? response.data.view_data
               : []
           );
         }
@@ -48,23 +50,51 @@ const TrackJob = ({ formik }) => {
     }
   }, [id, user?.id]);
 
-  console.log(data, "elemmmdata");
+  React.useEffect(() => {
+    let newArray = [];
+    let finalArray = [];
+    if (data && data?.length > 0) {
+      data.forEach((element) => {
+        element.forEach((newElement, elementIndex) => {
+          if (newElement?.type == "drop") {
+            newArray[elementIndex] = {
+              from: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+          } else if (newElement?.type == "pickup") {
+            newArray[elementIndex - 1] = {
+              from: { ...newArray[elementIndex - 1].from },
+              to: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+            finalArray.push(...newArray);
+          }
+        });
+      });
+    }
+    setMapData(finalArray);
+  }, [data, data?.length]);
+
   return (
     <React.Fragment>
       <Box py={12}>
         <Container>
-          <Box mb={2}>
+          <Box my={1}>
             <Button
               variant="outlined"
-              color="primary"
-              onClick={() => push("/dashboard/customer/job_posted")}
+              sx={{ my: 0 }}
+              onClick={() => router.push("/dashboard/customer/job_posted")}
             >
-              <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />{" "}
+              <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />
               Back
             </Button>
           </Box>
           <Box sx={{ position: "relative", overflow: "hidden" }}>
-            <TrackGoogleMaps data={data} />
+            <TrackGoogleMaps data={mapData} />
             <Box
               sx={{
                 position: "absolute",
@@ -78,61 +108,55 @@ const TrackJob = ({ formik }) => {
             >
               {data.length > 0 &&
                 data &&
-                data.map((elem, index) => {
-                  console.log(elem, "elemmm");
+                data.map((elem) => {
                   return (
-                    <Box key={index} sx={{ scrollSnapAlign: "start" }}>
-                      <Card sx={{ p: 2, mb: 0.5 }}>
-                        <Stack direction="row" alignItems="center" spacing={3}>
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500}>
-                                Pickup {index + 1}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                {elem.address}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
+                    elem &&
+                    elem?.length > 0 &&
+                    elem.map((item, index) => {
+                      return (
+                        <Box key={index} sx={{ scrollSnapAlign: "start" }}>
+                          <Card
+                            sx={{
+                              p: 2,
+                              mb: 0.5,
+                              maxWidth: "400px",
+                            }}
+                          >
+                            <Stack
+                              direction="row"
+                              justifyContent="space-between"
+                              alignItems="center"
+                              spacing={3}
                             >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Card>
-                      <Card sx={{ p: 2, mb: 2 }}>
-                        <Stack direction="row" alignItems="center" spacing={3}>
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500}>
-                                {elem.type} {index + 1}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                {elem.address}
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
-                            >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Card>
-                    </Box>
+                              <Stack>
+                                <Box>
+                                  <Typography
+                                    fontWeight={500}
+                                    textTransform="uppercase"
+                                  >
+                                    {item.type}
+                                  </Typography>
+                                </Box>
+                                <Box>
+                                  <Typography color="grey">
+                                    {item.address}
+                                  </Typography>
+                                </Box>
+                              </Stack>
+                              <Box>
+                                <Button
+                                  variant="outlined"
+                                  color="dark"
+                                  size="small"
+                                >
+                                  View
+                                </Button>
+                              </Box>
+                            </Stack>
+                          </Card>
+                        </Box>
+                      );
+                    })
                   );
                 })}
             </Box>

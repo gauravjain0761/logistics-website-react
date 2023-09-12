@@ -20,7 +20,7 @@ const center = {
   lng: 150.644,
 };
 
-function GoogleMaps() {
+function GoogleMaps({ data = [] }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
@@ -45,7 +45,7 @@ function GoogleMaps() {
         center={new window.google.maps.LatLng(23.21632, 72.641219)}
         zoom={state.defaultZoom}
       >
-        {DummyLocations.map((elem, index) => {
+        {data.map((elem, index) => {
           return (
             <DirectionRenderComponent
               key={index}

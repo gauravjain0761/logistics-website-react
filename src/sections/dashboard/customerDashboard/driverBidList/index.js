@@ -45,6 +45,8 @@ const BidList = () => {
   const [pageSize, setPageSize] = React.useState(10);
   const [filterPrice, setFilterPrice] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [mapData, setMapData] = React.useState([]);
+  const [datas, setDatas] = React.useState([]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleFilterClick = (event) => {
@@ -95,6 +97,58 @@ const BidList = () => {
     }
   }, [router.query.id]);
 
+  const fetchMapData = async () => {
+    await axiosInstance
+      .get(`api/auth/master/jobs/edit/${router.query.id}`)
+      .then((response) => {
+        setLoading(true);
+        if (response.status === 200) {
+          setLoading(false);
+          setDatas(response.data?.view_data);
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    if (router.query.id) {
+      fetchMapData();
+    }
+  }, [router.query.id]);
+
+  React.useEffect(() => {
+    let newArray = [];
+    let finalArray = [];
+    if (datas?.items && datas?.items?.length > 0) {
+      datas?.items.forEach((element) => {
+        element?.address &&
+          element?.address?.length > 0 &&
+          element?.address.forEach((newElement, elementIndex) => {
+            if (newElement?.type == "drop") {
+              newArray[elementIndex] = {
+                from: {
+                  lat: newElement?.lat,
+                  lng: newElement?.long,
+                },
+              };
+            } else if (newElement?.type == "pickup") {
+              newArray[elementIndex - 1] = {
+                from: { ...newArray[elementIndex - 1].from },
+                to: {
+                  lat: newElement?.lat,
+                  lng: newElement?.long,
+                },
+              };
+              finalArray.push(...newArray);
+            }
+          });
+      });
+    }
+    setMapData(finalArray);
+  }, [datas, datas?.length]);
+
   // Accept Bid Api
   const fetchBidApi = async (id) => {
     await axiosInstance
@@ -115,6 +169,8 @@ const BidList = () => {
         console.log(error);
       });
   };
+
+  console.log("mapData", mapData);
 
   // Bid Api End
 
@@ -495,7 +551,7 @@ const BidList = () => {
 
             <Grid item md={6}>
               <Box sx={{ position: "sticky", top: 75, display: "block" }}>
-                <GoogleMaps />
+                <GoogleMaps data={mapData} />
               </Box>
             </Grid>
           </Grid>

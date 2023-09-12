@@ -34,7 +34,6 @@ const TrackJob = () => {
       .post(`api/auth/jobs/job-tasks`, initialValues)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data.view_data, "elemmmdata");
           setData(
             response.data.view_data && response.data.view_data?.length > 0
               ? response.data.view_data
