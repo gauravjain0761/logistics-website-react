@@ -1,6 +1,7 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
+import AuthGuard from "@/auth/AuthGuard";
 import JobHistory from "@/sections/dashboard/companyDashboard/jobhistory";
 
 const JobHistoryPage = () => {
@@ -10,7 +11,12 @@ const JobHistoryPage = () => {
     },
   });
 
-  return <JobHistory formik={formik} />;
+  console.log("formikformik", formik);
+  return (
+    <AuthGuard>
+      <JobHistory formik={formik} />
+    </AuthGuard>
+  );
 };
 
 JobHistoryPage.getLayout = function getLayout(page) {
