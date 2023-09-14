@@ -1,11 +1,10 @@
 import React from "react";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-// import DashboardJobPost from "@/sections/dashboard/customerDashboard/jobPost";
 import AuthGuard from "@/auth/AuthGuard";
-import DashboardJobPost from "@/sections/dashboard/companyDashboard/jobPost";
+import DriverJobListSection from "@/sections/dashboard/companyDashboard/driver/list";
 
-const DashboardPageNext = () => {
+const DriverJobList = () => {
   const formik = useFormik({
     initialValues: {
       month: 0,
@@ -13,12 +12,12 @@ const DashboardPageNext = () => {
   });
   return (
     <AuthGuard>
-      <DashboardJobPost formik={formik} />
+      <DriverJobListSection formik={formik} />
     </AuthGuard>
   );
 };
 
-DashboardPageNext.getLayout = function getLayout(page) {
+DriverJobList.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default DashboardPageNext;
+export default DriverJobList;

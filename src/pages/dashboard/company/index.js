@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { PrimaryWebLayout } from "@/layout";
 import CompanyDashboard from "@/sections/dashboard/companyDashboard";
 import AuthGuard from "@/auth/AuthGuard";
+
 const DashboardPage = () => {
   const formik = useFormik({});
   return (
