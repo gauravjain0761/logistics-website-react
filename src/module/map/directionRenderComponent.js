@@ -17,14 +17,15 @@ import {
 } from "@mui/material";
 import Iconify from "@/components/iconify/Iconify";
 
-const getGooglePopUp = () => {
+const getGooglePopUp = (data) => {
+  console.log("datadtaa", data);
   return (
     <Box>
       <Stack direction="row" spacing={2}>
         <Box>
           <Box
             component="img"
-            src="/assets/images/dashboard//portfolio.jpeg"
+            src={`${data?.product?.base_url}${data?.product?.image}`}
             sx={{
               borderRadius: "50%",
               border: "3px solid #ff7534",
@@ -82,14 +83,6 @@ const getGooglePopUp = () => {
             label="Send Message"
             variant="outlined"
             color="primary"
-            sx={{ fontSize: "10px", cursor: "pointer" }}
-          />
-          <Chip
-            icon={<Iconify icon="material-symbols:check-circle" width={14} />}
-            size="small"
-            label="Start Job"
-            variant="outlined"
-            onClick={() => router.push("/dashboard/driver/track_job")}
             sx={{ fontSize: "10px", cursor: "pointer" }}
           />
         </Stack>
@@ -163,7 +156,7 @@ const DirectionRenderComponent = (props) => {
       >
         {showPopUp == 1 && (
           <InfoWindow onCloseClick={() => setShowPopUp(false)}>
-            {getGooglePopUp()}
+            {getGooglePopUp(props.data)}
           </InfoWindow>
         )}
       </Marker>
