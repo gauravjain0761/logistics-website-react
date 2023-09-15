@@ -44,6 +44,12 @@ const SectionTwo = () => {
         <ListItemButton component={Link} href="/contact_us">
           <StyledListItemText primary="Contact us" />
         </ListItemButton>
+        <ListItemButton component={Link} href="/privacy_policy">
+          <StyledListItemText primary="Privacy Policy" />
+        </ListItemButton>
+        <ListItemButton component={Link} href="/term_and_condition">
+          <StyledListItemText primary="Term & Condition" />
+        </ListItemButton>
       </List>
     </>
   );
