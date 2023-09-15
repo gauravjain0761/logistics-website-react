@@ -72,7 +72,7 @@ const JobHistory = ({ formik }) => {
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography
                     fontSize="1.75rem"
-                    fontWeight={500}
+                    fontWeight={600}
                     color="primary"
                   >
                     Job History
