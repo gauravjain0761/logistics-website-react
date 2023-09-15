@@ -1,6 +1,6 @@
-import { SelectBox } from "@/components/form";
+import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add } from "@mui/icons-material";
+import { Add, Search } from "@mui/icons-material";
 import {
   Autocomplete,
   Box,
@@ -72,6 +72,8 @@ const JobHistory = ({ formik }) => {
   //   setPage(value);
   // };
   // const [data, setData] = React.useState([]);
+  const [search, setSearch] = React.useState("");
+  const [date, setDate] = React.useState("");
 
   return (
     <React.Fragment>
@@ -82,37 +84,60 @@ const JobHistory = ({ formik }) => {
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
-              <Grid item md={7}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Typography
-                    fontSize="1.75rem"
-                    fontWeight={600}
-                    color="primary"
-                  >
-                    Job History
-                  </Typography>
-
-                  <Box
-                    borderRadius="50%"
-                    border="1px solid"
-                    borderColor={(theme) => theme.palette.primary.main}
-                    color={(theme) => theme.palette.primary.main}
-                    py={0.6}
-                    px={1.8}
-                  >
+              <Grid item md={12}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack direction="row" spacing={1} alignItems="center">
                     <Typography
-                      fontSize="1.3rem"
-                      fontWeight={500}
+                      fontSize="1.75rem"
+                      fontWeight={600}
                       color="primary"
                     >
-                      <CountUp
-                        start={0}
-                        duration={1}
-                        end={data && data.length}
-                        enableScrollSpy={true}
-                        scrollSpyDelay={200}
-                      />
+                      Job History
                     </Typography>
+
+                    <Box
+                      borderRadius="50%"
+                      border="1px solid"
+                      borderColor={(theme) => theme.palette.primary.main}
+                      color={(theme) => theme.palette.primary.main}
+                      py={0.6}
+                      px={1.8}
+                    >
+                      <Typography
+                        fontSize="1.3rem"
+                        fontWeight={500}
+                        color="primary"
+                      >
+                        <CountUp
+                          start={0}
+                          duration={1}
+                          end={data && data.length}
+                        />
+                      </Typography>
+                    </Box>
+                  </Stack>
+                  <Box>
+                    <Stack direction="row" spacing={2}>
+                      <TextBox
+                        fullWidth
+                        name="search"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        endIcon={<Search />}
+                        placeholder="Search"
+                      />
+                      <TextBox
+                        fullWidth
+                        name="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        type="date"
+                      />
+                    </Stack>
                   </Box>
                 </Stack>
               </Grid>
