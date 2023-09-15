@@ -8,7 +8,6 @@ import {
 } from "@react-google-maps/api";
 import { Box } from "@mui/material";
 import DirectionRenderComponent from "./directionRenderComponent";
-import DummyLocations from "@/utils/dummyLocations";
 
 const containerStyle = {
   width: "100%",
@@ -53,6 +52,7 @@ function GoogleMaps({ data = [] }) {
               strokeColor={elem.strokeColor}
               from={elem.from}
               to={elem.to}
+              data={elem.data}
             />
           );
         })}

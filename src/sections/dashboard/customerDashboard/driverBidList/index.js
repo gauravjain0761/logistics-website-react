@@ -128,6 +128,7 @@ const BidList = () => {
           element?.address.forEach((newElement, elementIndex) => {
             if (newElement?.type == "drop") {
               newArray[elementIndex] = {
+                data: element,
                 from: {
                   lat: newElement?.lat,
                   lng: newElement?.long,
@@ -135,6 +136,7 @@ const BidList = () => {
               };
             } else if (newElement?.type == "pickup") {
               newArray[elementIndex - 1] = {
+                data: { ...newArray[elementIndex - 1].data },
                 from: { ...newArray[elementIndex - 1].from },
                 to: {
                   lat: newElement?.lat,
@@ -170,7 +172,7 @@ const BidList = () => {
       });
   };
 
-  console.log("mapData", mapData);
+  console.log("mapData", datas);
 
   // Bid Api End
 
