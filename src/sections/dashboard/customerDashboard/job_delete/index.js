@@ -1,6 +1,6 @@
-import { DatePickerBox, SelectBox, TextBox } from "@/components/form";
+import { SelectBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add, Search } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import {
   Autocomplete,
   Badge,
@@ -39,7 +39,7 @@ import {
 import TextMaxLine from "@/components/text-max-line";
 import { PageSizes } from "@/utils/constant";
 
-const JobHistory = ({ formik }) => {
+const JobDelete = ({ formik }) => {
   const router = useRouter();
   const { user } = useAuthContext();
   const dispatch = useDispatch();
@@ -59,8 +59,6 @@ const JobHistory = ({ formik }) => {
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
-  const [search, setSearch] = React.useState("");
-  const [date, setDate] = React.useState("");
 
   return (
     <React.Fragment>
@@ -71,60 +69,35 @@ const JobHistory = ({ formik }) => {
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
-              <Grid item md={12}>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Stack direction="row" spacing={1} alignItems="center">
+              <Grid item md={7}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography
+                    fontSize="1.75rem"
+                    fontWeight={500}
+                    color="primary"
+                  >
+                    Job Delete
+                  </Typography>
+
+                  <Box
+                    borderRadius="50%"
+                    border="1px solid"
+                    borderColor={(theme) => theme.palette.primary.main}
+                    color={(theme) => theme.palette.primary.main}
+                    py={0.6}
+                    px={1.8}
+                  >
                     <Typography
-                      fontSize="1.75rem"
-                      fontWeight={600}
+                      fontSize="1.3rem"
+                      fontWeight={500}
                       color="primary"
                     >
-                      Job History
+                      <CountUp
+                        start={0}
+                        duration={1}
+                        end={data && data.length}
+                      />
                     </Typography>
-
-                    <Box
-                      borderRadius="50%"
-                      border="1px solid"
-                      borderColor={(theme) => theme.palette.primary.main}
-                      color={(theme) => theme.palette.primary.main}
-                      py={0.6}
-                      px={1.8}
-                    >
-                      <Typography
-                        fontSize="1.3rem"
-                        fontWeight={500}
-                        color="primary"
-                      >
-                        <CountUp
-                          start={0}
-                          duration={1}
-                          end={data && data.length}
-                        />
-                      </Typography>
-                    </Box>
-                  </Stack>
-                  <Box>
-                    <Stack direction="row" spacing={2}>
-                      <TextBox
-                        fullWidth
-                        name="search"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        endIcon={<Search />}
-                        placeholder="Search"
-                      />
-                      <TextBox
-                        fullWidth
-                        name="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        type="date"
-                      />
-                    </Stack>
                   </Box>
                 </Stack>
               </Grid>
@@ -167,17 +140,6 @@ const JobHistory = ({ formik }) => {
                             >
                               {elem?.description}
                             </TextMaxLine>
-                            {/* <Typography
-                              color="common.black"
-                              fontSize={17}
-                              sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              fontWeight={500}
-                            >
-                              {elem?.description}
-                            </Typography> */}
                           </Box>
                         </Stack>
                         <Divider />
@@ -193,9 +155,6 @@ const JobHistory = ({ formik }) => {
                                 >
                                   {elem.name}
                                 </TextMaxLine>
-                                {/* <Typography fontSize={28} fontWeight={500}>
-                                  {elem.name}
-                                </Typography> */}
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
                                 <Stack
@@ -494,13 +453,6 @@ const JobHistory = ({ formik }) => {
                               </Box>
                             </Grid>
                           </Grid>
-                          {/* <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {elem?.description}
-                            </Typography>
-                          </Box> */}
-
                           <Divider sx={{ my: 2 }} />
                           <Box>
                             <Stack
@@ -511,9 +463,6 @@ const JobHistory = ({ formik }) => {
                               <Typography variant="subtitle2">
                                 Job Budget: ${elem?.budget}
                               </Typography>
-                              {/* <Typography variant="subtitle2">
-                              Total Spend: $30K+
-                            </Typography> */}
                               <Typography variant="subtitle2">
                                 Customer Spend: ${elem?.spentmoney}+
                               </Typography>
@@ -526,7 +475,7 @@ const JobHistory = ({ formik }) => {
                 })
               ) : (
                 <Box my={4}>
-                  <Typography variant="h4">No Job History</Typography>
+                  <Typography variant="h4">No Job Delete</Typography>
                 </Box>
               )}
             </Grid>
@@ -602,4 +551,4 @@ const JobHistory = ({ formik }) => {
   );
 };
 
-export default JobHistory;
+export default JobDelete;

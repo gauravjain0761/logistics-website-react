@@ -165,28 +165,6 @@ const DashboardJobPost = ({ formik }) => {
 
                 <Grid item md={3}>
                   <Box>
-                    {/* <Stack direction="row" mb={1.3}>
-                      <Box>
-                        <Box
-                          sx={{
-                            ml: 0,
-                            background: (theme) => theme.palette.grey[100],
-                            border: "1px solid",
-                            borderColor: (theme) =>
-                              alpha(theme.palette.grey[500], 0.32),
-                            padding: ".63rem 0.76rem",
-                            borderRadius: ".25rem",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Iconify
-                            icon="mingcute:calendar-fill"
-                            color="#ff7534"
-                          />
-                        </Box>
-                      </Box> */}
                     <SelectBox
                       sx={{ mb: 0 }}
                       size="small"

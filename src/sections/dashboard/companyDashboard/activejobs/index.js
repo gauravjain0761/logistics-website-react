@@ -1,130 +1,241 @@
-import { DatePickerBox, SelectBox, TextBox } from "@/components/form";
+import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add, Search } from "@mui/icons-material";
 import {
-  Autocomplete,
-  Badge,
   Box,
   Button,
   Card,
   CardContent,
-  Chip,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
   Divider,
   Grid,
   IconButton,
+  Modal,
   Pagination,
   PaginationItem,
   Rating,
   Stack,
-  TextField,
+  Tooltip,
   Typography,
-  alpha,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-// import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
-import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
+import { useFormik } from "formik";
+import { useSnackbar } from "notistack";
+import { PDFViewer } from "@react-pdf/renderer";
+import InvoicePDF from "./InvoicePDF";
 import { useDispatch, useSelector } from "@/redux/store";
 import {
+  getJobActive,
   getJobHistory,
-  setJobHistoryPage,
-  setJobHistoryPageSize,
-} from "@/redux/slices/job/customer";
+  setJobActivePage,
+} from "@/redux/slices/job/driver";
 import TextMaxLine from "@/components/text-max-line";
-import { PageSizes } from "@/utils/constant";
 
-const JobHistory = ({ formik }) => {
-  const router = useRouter();
-  const { user } = useAuthContext();
+const DashboardAddJob = () => {
   const dispatch = useDispatch();
   const {
-    jobHistory: { pageCount, data, page, pageSize, dataCount },
-  } = useSelector((state) => state.customerJob);
+    jobActive: { pageCount, data, page, pageSize },
+    jobHistory,
+  } = useSelector((state) => state.driverJob);
 
   const handlePageChange = (event, value) => {
-    dispatch(setJobHistoryPage(value));
+    dispatch(setJobActivePage(value));
   };
 
   React.useEffect(() => {
     dispatch(
-      getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
+      getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
     );
-  }, [page, pageSize]);
+  }, [page]);
+  const router = useRouter();
+  const { user } = useAuthContext();
+  const { enqueueSnackbar } = useSnackbar();
   const [layout, setLayout] = useState(false);
+  const [setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
+  // const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
-  const [search, setSearch] = React.useState("");
-  const [date, setDate] = React.useState("");
 
+  const [pageData, setPageData] = React.useState({});
+
+  const [startOpen, setStartOpen] = React.useState(false);
+  const handleStartOpen = (id) => setStartOpen(id);
+  const handleStartClose = () => setStartOpen(false);
+
+  const [completeOpen, setCompleteOpen] = React.useState(false);
+  const handleCompleteOpen = (id) => setCompleteOpen(id);
+  const handleCompleteClose = () => setCompleteOpen(false);
+
+  // Rating
+  const [reviewOpen, setReviewOpen] = React.useState(false);
+  const handleReviewOpen = (id) => setReviewOpen(id);
+  const handleReviewClose = () => setReviewOpen(false);
+
+  const [loader, setLoader] = React.useState(false);
+
+  const formData = useFormik({
+    initialValues: {
+      id: "",
+      driver_id: user?.id,
+    },
+  });
+  // Start Job Api
+  const startJobApi = async () => {
+    await axiosInstance
+      .post("api/auth/jobs/start-job", formData.values)
+      .then((response) => {
+        if (response.status === 200) {
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          setStartOpen(false);
+          dispatch(
+            getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
+          handleClose(true);
+        }
+      })
+      .catch((error) => {
+        const { response } = error;
+
+        // enqueueSnackbar(response.data.error, {
+        //   variant: "error",
+        // });
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    formik.setFieldValue("user_id", user?.id);
+  }, [user, user?.id]);
+
+  // Complete Job Api
+  const completeJobApi = async () => {
+    await axiosInstance
+      .post("api/auth/jobs/complete-job", formData.values)
+      .then((response) => {
+        if (response.status === 200) {
+          setCompleteOpen(false);
+          setReviewOpen(true);
+          dispatch(
+            getJobActive({ page: page, pageSize: pageSize, user_id: user?.id })
+          );
+          dispatch(
+            getJobHistory({
+              page: jobHistory?.page,
+              pageSize: jobHistory?.pageSize,
+              user_id: user?.id,
+            })
+          );
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          handleClose(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      job_id: "",
+      user_id: "",
+      given_by: "driver",
+      rating: "",
+      review: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.review) {
+        errors.review = "Note is required";
+      }
+      if (!values.rating) {
+        errors.rating = "Rating is required";
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      await axiosInstance
+        .post("api/auth/rating/add", formik.values)
+        .then((response) => {
+          if (response.status === 200) {
+            setReviewOpen(false);
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+            dispatch(
+              getJobActive({
+                page: page,
+                pageSize: pageSize,
+                user_id: user?.id,
+              })
+            );
+            handleClose(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  });
+
+  // useEffect(() => {
+  //   formik.setFieldValue("id", startOpen);
+  // }, [startOpen]);
+  // useEffect(() => {
+  //   formik.setFieldValue("driver_id", user?.id);
+  // }, [user, user?.id]);
   return (
     <React.Fragment>
       <Box py={3} pb={12}>
         <Container>
           <Box py={5}>
-            <DashboardCard />
+            <DashboardCard activeJob={data} />
           </Box>
           <Box py={2}>
             <Grid container spacing={2}>
               <Grid item md={12}>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Stack direction="row" spacing={1} alignItems="center">
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography
+                    fontSize="1.75rem"
+                    fontWeight={600}
+                    color="primary"
+                  >
+                    Active Jobs
+                  </Typography>
+
+                  <Box
+                    borderRadius="50%"
+                    border="1px solid"
+                    borderColor={(theme) => theme.palette.primary.main}
+                    color={(theme) => theme.palette.primary.main}
+                    py={0.6}
+                    px={1.8}
+                  >
                     <Typography
-                      fontSize="1.75rem"
-                      fontWeight={600}
+                      fontSize="1.3rem"
+                      fontWeight={500}
                       color="primary"
                     >
-                      Job History
+                      <CountUp
+                        start={0}
+                        duration={1}
+                        end={data.length}
+                        enableScrollSpy={true}
+                        scrollSpyDelay={200}
+                      />
                     </Typography>
-
-                    <Box
-                      borderRadius="50%"
-                      border="1px solid"
-                      borderColor={(theme) => theme.palette.primary.main}
-                      color={(theme) => theme.palette.primary.main}
-                      py={0.6}
-                      px={1.8}
-                    >
-                      <Typography
-                        fontSize="1.3rem"
-                        fontWeight={500}
-                        color="primary"
-                      >
-                        <CountUp
-                          start={0}
-                          duration={1}
-                          end={data && data.length}
-                        />
-                      </Typography>
-                    </Box>
-                  </Stack>
-                  <Box>
-                    <Stack direction="row" spacing={2}>
-                      <TextBox
-                        fullWidth
-                        name="search"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        endIcon={<Search />}
-                        placeholder="Search"
-                      />
-                      <TextBox
-                        fullWidth
-                        name="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        type="date"
-                      />
-                    </Stack>
                   </Box>
                 </Stack>
               </Grid>
@@ -278,6 +389,7 @@ const JobHistory = ({ formik }) => {
                                           borderRadius: "4px",
                                           backgroundSize: "cover",
                                           backgroundRepeat: "no-repeat",
+                                          objectFit: "contain",
                                         }}
                                       />
                                     </React.Fragment>
@@ -478,20 +590,112 @@ const JobHistory = ({ formik }) => {
                               </Stack>
                             </Grid>
                             <Grid item md={2}>
-                              <Box>
-                                <Button
-                                  sx={{ fontWeight: 500 }}
-                                  fullWidth
-                                  variant="outlined"
-                                  onClick={() =>
-                                    router.push(
-                                      `/dashboard/customer/job_history/detail/${elem.id}`
-                                    )
-                                  }
-                                >
-                                  View Detail
-                                </Button>
-                              </Box>
+                              <Stack
+                                direction="row"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                spacing={1}
+                              >
+                                <Stack spacing={1}>
+                                  <Box>
+                                    {elem.status === 1 ? (
+                                      <Button
+                                        color="success"
+                                        fullWidth
+                                        variant="outlined"
+                                        startIcon={
+                                          <Iconify icon="icon-park:check-correct" />
+                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          setStartOpen(true);
+                                        }}
+                                        sx={{
+                                          fontWeight: 500,
+                                        }}
+                                      >
+                                        Start Job
+                                      </Button>
+                                    ) : (
+                                      <Button
+                                        sx={{ fontWeight: 500 }}
+                                        fullWidth
+                                        color="success"
+                                        variant="outlined"
+                                        startIcon={
+                                          <Iconify icon="carbon:task-complete" />
+                                        }
+                                        onClick={() => {
+                                          formData.setFieldValue(
+                                            "id",
+                                            elem?.bid_id
+                                          );
+                                          formik.setFieldValue(
+                                            "job_id",
+                                            elem?.id
+                                          );
+                                          setCompleteOpen(true);
+                                        }}
+                                      >
+                                        Complete Job
+                                      </Button>
+                                    )}
+                                  </Box>
+                                  {/* <Box>
+                                  <Button
+                                    sx={{ fontWeight: 500 }}
+                                    fullWidth
+                                    color="success"
+                                    variant="outlined"
+                                    startIcon={<Iconify icon="carbon:star" />}
+                                    onClick={() => handleReviewOpen(1)}
+                                  >
+                                    Give Review
+                                  </Button>
+                                </Box> */}
+                                  {elem?.status != 0 && elem?.status != 1 && (
+                                    <Box>
+                                      <Button
+                                        color="secondary"
+                                        fullWidth
+                                        variant="outlined"
+                                        startIcon={<Iconify icon="gg:track" />}
+                                        onClick={() =>
+                                          router.push(
+                                            `/dashboard/driver/track_job/${elem.bid_id}`
+                                          )
+                                        }
+                                        sx={{
+                                          fontWeight: 500,
+                                        }}
+                                      >
+                                        Track Job
+                                      </Button>
+                                    </Box>
+                                  )}
+                                  {/* <Box>
+                                    <Button
+                                      sx={{ fontWeight: 500 }}
+                                      fullWidth
+                                      variant="outlined"
+                                      startIcon={
+                                        <Iconify icon="carbon:view-filled" />
+                                      }
+                                      onClick={() => setOpenPDF(true)}
+                                    >
+                                      View PDF
+                                    </Button>
+                                  </Box> */}
+                                </Stack>
+                              </Stack>
+                              <Stack
+                                mt={1}
+                                position="absolute"
+                                right={33}
+                              ></Stack>
                             </Grid>
                           </Grid>
                           {/* <Box pt={2}>
@@ -525,81 +729,247 @@ const JobHistory = ({ formik }) => {
                   );
                 })
               ) : (
-                <Box my={4}>
-                  <Typography variant="h4">No Job History</Typography>
+                <Box my={6}>
+                  <Typography variant="h4">No Active Jobs</Typography>
                 </Box>
               )}
             </Grid>
-            <Box sx={{ mt: 4 }}>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="center"
-                spacing={2}
+            <Box>
+              <Modal
+                open={completeOpen}
+                onClose={handleCompleteClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-review"
               >
-                <Box>
-                  <SelectBox
-                    fullWidth
-                    name="pageSize"
-                    value={pageSize}
-                    formSx={{ marginBottom: "0px" }}
-                    onChange={(e) => {
-                      dispatch(setJobHistoryPageSize(e.target.value));
-                    }}
-                    options={PageSizes}
-                  />
-                </Box>
-                <Box>
-                  <Typography variant="body2" component="p">
-                    {page} - {page * pageSize} of {dataCount}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    textAlign: "center",
+                    transform: "translate(-50%, -50%)",
+
+                    bgcolor: "background.paper",
+                    border: "1px solid #f5f5f5",
+                    boxShadow: 24,
+                    p: 4,
+                  }}
+                  component="form"
+                  noValidate
+                >
+                  <Typography mb={2}>
+                    Are you sure you have completed the job?
                   </Typography>
+                  <Stack direction="row" spacing={8}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        completeJobApi();
+                      }}
+                    >
+                      Yes
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        handleCompleteClose();
+                      }}
+                    >
+                      No
+                    </Button>
+                  </Stack>
                 </Box>
-                <Box>
-                  <Pagination
-                    count={pageCount}
-                    color="primary"
-                    page={page}
-                    onChange={handlePageChange}
-                    variant="outlined"
-                    shape="rounded"
-                    renderItem={(item) => (
-                      <PaginationItem
-                        slots={{
-                          previous: () => {
-                            return (
-                              <Stack
-                                direction="row"
-                                spacing={0.5}
-                                alignItems="center"
-                              >
-                                <NavigateBeforeIcon />
-                              </Stack>
-                            );
-                          },
-                          next: () => {
-                            return (
-                              <Stack
-                                direction="row"
-                                spacing={0.5}
-                                alignItems="center"
-                              >
-                                <NavigateNextIcon />
-                              </Stack>
-                            );
-                          },
-                        }}
-                        {...item}
-                      />
-                    )}
-                  />
+              </Modal>
+            </Box>
+            <Box>
+              <Modal
+                open={startOpen}
+                onClose={handleStartClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    textAlign: "center",
+                    transform: "translate(-50%, -50%)",
+
+                    bgcolor: "background.paper",
+                    border: "1px solid #f5f5f5",
+                    boxShadow: 24,
+                    p: 4,
+                  }}
+                  component="form"
+                  noValidate
+                >
+                  <Typography mb={2}>
+                    Are you sure you want to start the job?
+                  </Typography>
+                  <Stack direction="row" spacing={8}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        startJobApi();
+                      }}
+                    >
+                      Yes
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => {
+                        handleStartClose();
+                      }}
+                    >
+                      No
+                    </Button>
+                  </Stack>
                 </Box>
+              </Modal>
+            </Box>
+            <Box>
+              <Stack alignItems="center" justifyContent="center">
+                <Pagination
+                  count={pageCount}
+                  color="primary"
+                  page={page}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                  renderItem={(item) => (
+                    <PaginationItem
+                      slots={{
+                        previous: () => {
+                          return (
+                            <Stack
+                              direction="row"
+                              spacing={0.5}
+                              alignItems="center"
+                            >
+                              <NavigateBeforeIcon />
+                            </Stack>
+                          );
+                        },
+                        next: () => {
+                          return (
+                            <Stack
+                              direction="row"
+                              spacing={0.5}
+                              alignItems="center"
+                            >
+                              <NavigateNextIcon />
+                            </Stack>
+                          );
+                        },
+                      }}
+                      {...item}
+                    />
+                  )}
+                />
               </Stack>
             </Box>
+            <Box></Box>
+            <Box>
+              <Dialog
+                open={reviewOpen}
+                onClose={handleReviewOpen}
+                maxWidth="xs"
+                fullWidth={true}
+              >
+                <DialogContent sx={{ my: 3 }}>
+                  <Typography mb={2} variant="subtitle1">
+                    Review
+                  </Typography>
+                  <Box
+                    component="form"
+                    noValidate
+                    onSubmit={formik.handleSubmit}
+                  >
+                    <Stack spacing={2}>
+                      <Box>
+                        <Rating
+                          value={formik.values.rating}
+                          onChange={formik.handleChange}
+                          name="rating"
+                          helperText={
+                            formik.touched.rating && formik.errors.rating
+                          }
+                        />
+                      </Box>
+                      <Box>
+                        <TextBox
+                          size="small"
+                          name="review"
+                          label="Review"
+                          fullWidth
+                          multiline={true}
+                          rows="4"
+                          value={formik.values.review}
+                          onChange={formik.handleChange}
+                          helperText={
+                            formik.touched.review && formik.errors.review
+                          }
+                        />
+                      </Box>
+                    </Stack>
+                    <Stack direction="row" spacing={8}>
+                      <Button fullWidth variant="outlined" type="submit">
+                        Submit
+                      </Button>
+                    </Stack>
+                  </Box>
+                </DialogContent>
+              </Dialog>
+            </Box>
+            {/* <Stack alignItems="center">
+              <Box>
+                <Typography variant="h5">No Active Jobs.....</Typography>
+              </Box>
+              <Box
+                component="img"
+                sx={{ width: "400px" }}
+                src="/assets/images/home/new/banner-image.jpg"
+                alt="truck"
+              />
+            </Stack> */}
           </Box>
         </Container>
       </Box>
+      {/* <Dialog fullScreen open={openPDf}>
+        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+          <DialogActions
+            sx={{
+              zIndex: 9,
+              padding: "12px !important",
+              boxShadow: (theme) => theme.customShadows.z8,
+            }}
+          >
+            <Tooltip title="Close">
+              <IconButton color="inherit" onClick={() => setOpenPDF(false)}>
+                <Iconify icon="eva:close-fill" />
+              </IconButton>
+            </Tooltip>
+          </DialogActions>
+          <Box sx={{ flexGrow: 1, height: "100%", overflow: "hidden" }}>
+            <PDFViewer
+              fileName={`Test-Name`}
+              width="100%"
+              height="100%"
+              style={{ border: "none" }}
+              showToolbar={false}
+            >
+              <InvoicePDF />
+            </PDFViewer>
+          </Box>
+        </Box>
+      </Dialog> */}
     </React.Fragment>
   );
 };
 
-export default JobHistory;
+export default DashboardAddJob;
