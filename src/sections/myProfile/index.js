@@ -10,6 +10,8 @@ import {
   Card,
   CardContent,
   Container,
+  Dialog,
+  DialogContent,
   Divider,
   IconButton,
   List,
@@ -26,7 +28,6 @@ import { useSnackbar } from "notistack";
 import React from "react";
 
 const Profile = ({ data, formik, loader }) => {
-  console.log("loaderloader", loader);
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: (theme) => theme.palette.grey[300] }}>
@@ -374,138 +375,131 @@ const ChangePasswordModal = () => {
       >
         Change Password
       </Button>
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        fullWidth={true}
+        maxWidth="xs"
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            textAlign: "center",
-            transform: "translate(-50%, -50%)",
-            width: "417px",
-            bgcolor: "background.paper",
-            border: "1px solid #f5f5f5",
-            boxShadow: 24,
-            p: 4,
-          }}
-          component="form"
-          noValidate
-          onSubmit={formik.handleSubmit}
-        >
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            mb={2}
-          >
-            <Typography component="h5" fontSize={25} fontWeight={600}>
-              Change Password
-            </Typography>
+        <DialogContent sx={{ py: 4, px: 4 }}>
+          <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Typography component="h5" fontSize={25} fontWeight={600}>
+                Change Password
+              </Typography>
 
-            <Box>
-              <Card sx={{ borderRadius: "50%" }}>
-                <IconButton
-                  size="small"
-                  onClick={() => {
-                    handleClose();
-                    formik.resetForm();
+              <Box>
+                <Card
+                  sx={{
+                    borderRadius: "50%",
+                    backgroundColor: (theme) => theme.palette.grey[400],
                   }}
+                  variant="outlined"
                 >
-                  <Close fontSize="small" />
-                </IconButton>
-              </Card>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      handleClose();
+                      formik.resetForm();
+                    }}
+                  >
+                    <Close fontSize="inherit" />
+                  </IconButton>
+                </Card>
+              </Box>
+            </Stack>
+            <Box>
+              <Typography textAlign="left" fontSize={12}>
+                In order to protect your account, make sure your password:
+              </Typography>
             </Box>
-          </Stack>
-          <Box>
-            <Typography textAlign="left" fontSize={12}>
-              In order to protect your account, make sure your password:
-            </Typography>
-          </Box>
-          <Box>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <Iconify icon="radix-icons:dot-filled" />
-                </ListItemIcon>
-                <Typography fontSize={12}>
-                  Is longer than 6 characters{" "}
+            <Box>
+              <List>
+                <ListItem>
+                  <ListItemIcon>
+                    <Iconify icon="radix-icons:dot-filled" />
+                  </ListItemIcon>
+                  <Typography fontSize={12}>
+                    Is longer than 6 characters{" "}
+                  </Typography>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <Iconify icon="radix-icons:dot-filled" />
+                  </ListItemIcon>
+                  <Typography fontSize={12}>
+                    Does not match or significantly contain your username, e.g.
+                    do not use {"‘"}username123{"’"}.
+                  </Typography>
+                </ListItem>
+              </List>
+            </Box>
+            <Stack spacing={1} mt={1}>
+              <Box>
+                <Typography
+                  fontSize={14}
+                  textAlign="left"
+                  fontWeight={600}
+                  mb={1}
+                >
+                  Current Password
                 </Typography>
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <Iconify icon="radix-icons:dot-filled" />
-                </ListItemIcon>
-                <Typography fontSize={12}>
-                  Does not match or significantly contain your username, e.g. do
-                  not use {"‘"}username123{"’"}.
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  placeholder="Enter Current Password"
+                  helperText={formik?.errors?.password}
+                />
+              </Box>
+              <Box>
+                <Typography
+                  fontSize={14}
+                  textAlign="left"
+                  fontWeight={600}
+                  mb={1}
+                >
+                  New Password
                 </Typography>
-              </ListItem>
-            </List>
-          </Box>
-          <Stack spacing={1} mt={1}>
-            <Box>
-              <Typography
-                fontSize={14}
-                textAlign="left"
-                fontWeight={600}
-                mb={1}
-              >
-                Current Password
-              </Typography>
-              <PasswordBox
-                fullWidth
-                size="small"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                placeholder="Enter Current Password"
-                helperText={formik?.errors?.password}
-              />
-            </Box>
-            <Box>
-              <Typography
-                fontSize={14}
-                textAlign="left"
-                fontWeight={600}
-                mb={1}
-              >
-                New Password
-              </Typography>
-              <PasswordBox
-                fullWidth
-                size="small"
-                name="new_password"
-                value={formik.values.new_password}
-                onChange={formik.handleChange}
-                placeholder="Enter New Password"
-                helperText={formik?.errors?.new_password}
-              />
-            </Box>
-            <Box>
-              <Typography
-                fontSize={14}
-                textAlign="left"
-                fontWeight={600}
-                mb={1}
-              >
-                Confirm New Password
-              </Typography>
-              <PasswordBox
-                fullWidth
-                size="small"
-                name="new_password_confirmation"
-                value={formik.values.new_password_confirmation}
-                onChange={formik.handleChange}
-                placeholder="Enter Confirm Password"
-                helperText={formik?.errors?.new_password_confirmation}
-              />
-            </Box>
-            {/* <Typography
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="new_password"
+                  value={formik.values.new_password}
+                  onChange={formik.handleChange}
+                  placeholder="Enter New Password"
+                  helperText={formik?.errors?.new_password}
+                />
+              </Box>
+              <Box>
+                <Typography
+                  fontSize={14}
+                  textAlign="left"
+                  fontWeight={600}
+                  mb={1}
+                >
+                  Confirm New Password
+                </Typography>
+                <PasswordBox
+                  fullWidth
+                  size="small"
+                  name="new_password_confirmation"
+                  value={formik.values.new_password_confirmation}
+                  onChange={formik.handleChange}
+                  placeholder="Enter Confirm Password"
+                  helperText={formik?.errors?.new_password_confirmation}
+                />
+              </Box>
+              {/* <Typography
               id="modal-modal-title"
               variant="h6"
               component="h2"
@@ -513,19 +507,20 @@ const ChangePasswordModal = () => {
             >
               Are you sure you want to Change Password ?
             </Typography> */}
-          </Stack>
-          <Stack direction="row" mt={2}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              // onClick={handleClose}
-            >
-              Change Password
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
+            </Stack>
+            <Stack direction="row" mt={2}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                // onClick={handleClose}
+              >
+                Change Password
+              </Button>
+            </Stack>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

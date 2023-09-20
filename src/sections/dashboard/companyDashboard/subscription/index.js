@@ -54,8 +54,8 @@ const SubscriptionsPage = () => {
           position: "relative",
           overflow: "hidden",
           width: "100%",
-          height: { lg: "350px", md: "350px", sm: "100%", xs: "100%" },
-          backgroundImage: `url("/assets/images/contact/contact-us-banner.jpg")`,
+          height: { lg: "550px", md: "550px", sm: "100%", xs: "100%" },
+          backgroundImage: `url("/banner/banner.png")`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right center",
@@ -64,23 +64,23 @@ const SubscriptionsPage = () => {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          "&::before": {
-            content: '""',
-            backgroundImage:
-              "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            zIndex: 7,
-          },
+          // "&::before": {
+          //   content: '""',
+          //   backgroundImage:
+          //     "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
+          //   position: "absolute",
+          //   top: 0,
+          //   left: 0,
+          //   bottom: 0,
+          //   right: 0,
+          //   zIndex: 7,
+          // },
         }}
       >
         <Stack
-          sx={{ zIndex: 8, position: "absolute", left: "8em", top: "5em" }}
+          sx={{ zIndex: 8, position: "absolute", left: "8em", top: "6em" }}
         >
-          <Breadcrumbs aria-label="breadcrumb">
+          <Breadcrumbs aria-label="breadcrumb" sx={{ color: "common.white" }}>
             <Box
               component={Link}
               sx={{ textDecoration: "none" }}
@@ -90,14 +90,19 @@ const SubscriptionsPage = () => {
               Home
             </Box>
             <Box
-              sx={{ textDecoration: "none" }}
               component={Link}
+              sx={{ textDecoration: "none" }}
               color="common.white"
               href="/dashboard/company"
             >
               Dashboard
             </Box>
-            <Typography color="common.white">Subscription</Typography>
+            <Typography
+              sx={{ textDecoration: "none", fontWeight: 600 }}
+              color="common.white"
+            >
+              Subscription
+            </Typography>
           </Breadcrumbs>
         </Stack>
         <CardContent
@@ -119,164 +124,191 @@ const SubscriptionsPage = () => {
           }}
         >
           {/* <CardContentOverlay> */}
-
-          <Typography
-            gutterBottom
-            fontSize={44}
-            component="h1"
-            fontWeight={600}
-            color="white"
-          >
-            Subscription
-          </Typography>
+          <Stack spacing={4}>
+            <Typography
+              gutterBottom
+              fontSize={44}
+              component="h2"
+              fontWeight={600}
+              color="white"
+              variant="h2"
+            >
+              Our Subscription Plans
+            </Typography>
+            <Typography variant="body1" component="p" color="common.white">
+              Choose the right plan made for you
+            </Typography>
+          </Stack>
         </CardContent>
       </Box>
-      <Box sx={{ backgroundColor: "#f5f5f5", pb: 8 }}>
+      <Box sx={{ backgroundColor: "#f5f5f5", pb: 6 }}>
         {loading ? (
           <>
-            <SkeletonLoader />
+            <Container>
+              <SkeletonLoader />
+            </Container>
           </>
         ) : (
-          <Container>
-            <Stack textAlign="center" mx={18} py={8}>
-              <Box>
-                <Typography variant="h3">
-                  Choose the Right Plan For You
-                </Typography>
-              </Box>
-            </Stack>
-            <Box pb={12}>
-              <Grid container spacing={6}>
-                {data &&
-                  data?.length > 0 &&
-                  data.map((elem, index) => {
-                    return (
-                      <Grid item md={4} key={index}>
-                        <Card
-                          sx={{ borderRadius: "5px" }}
-                          onMouseOver={() => setHover(index)}
-                          onMouseOut={() => setHover(false)}
-                        >
-                          <Box
-                            sx={{
-                              textAlign: "center",
-                              py: 5,
-                              color: hover === index ? "#fff" : "",
-                              background:
-                                hover === index ? "#ff7534" : "#ff5d010f",
-                            }}
+          <Box
+            sx={{
+              position: "relative",
+              top: -140,
+              zIndex: 6,
+            }}
+          >
+            <Container>
+              <Box pb={0}>
+                <Grid container spacing={6}>
+                  {data &&
+                    data?.length > 0 &&
+                    data.map((elem, index) => {
+                      return (
+                        <Grid item md={4} key={index}>
+                          <Card
+                            sx={{ borderRadius: "20px" }}
+                            onMouseOver={() => setHover(index)}
+                            onMouseOut={() => setHover(false)}
                           >
-                            <Box>
-                              <Typography variant="h4">{elem?.name}</Typography>
-                            </Box>
-                            <Stack
-                              direction="row"
-                              spacing={0.6}
-                              alignItems="center"
-                              justifyContent="center"
-                            >
-                              <Typography>$ </Typography>
-                              <Typography variant="h3">
-                                {elem?.price}
-                              </Typography>
-                              <Typography fontSize={12} fontWeight={500}>
-                                PER MONTH
-                              </Typography>
-                            </Stack>
-                          </Box>
-                          <CardContent>
-                            <Stack spacing={1}>
-                              <Box>
-                                <Box textAlign="center">
-                                  <List>
-                                    <ListItem>
-                                      <ListItemIcon>
-                                        <Iconify
-                                          icon="charm:square-tick"
-                                          color={(theme) =>
-                                            theme.palette.success.main
-                                          }
-                                        />
-                                      </ListItemIcon>
-                                      <ListItemText
-                                        sx={{ ml: 7 }}
-                                        primary="Online System"
-                                      />
-                                    </ListItem>
-                                    <ListItem>
-                                      <ListItemIcon>
-                                        <Iconify
-                                          icon="charm:square-tick"
-                                          color={(theme) =>
-                                            theme.palette.success.main
-                                          }
-                                        />
-                                      </ListItemIcon>
-                                      <ListItemText
-                                        sx={{ ml: 8.5 }}
-                                        primary=" Free apps"
-                                      />
-                                    </ListItem>
-                                    <ListItem>
-                                      <ListItemIcon>
-                                        <Iconify
-                                          icon="system-uicons:cross"
-                                          color="red"
-                                        />
-                                      </ListItemIcon>
-                                      <ListItemText
-                                        sx={{ ml: 8.5 }}
-                                        primary=" Free apps"
-                                      />
-                                    </ListItem>
-                                    <ListItem>
-                                      <ListItemIcon>
-                                        <Iconify
-                                          icon="charm:square-tick"
-                                          color={(theme) =>
-                                            theme.palette.success.main
-                                          }
-                                        />
-                                      </ListItemIcon>
-                                      <ListItemText
-                                        sx={{ ml: 8 }}
-                                        primary="live preview"
-                                      />
-                                    </ListItem>
-                                    <ListItem>
-                                      <ListItemIcon>
-                                        <Iconify
-                                          icon="system-uicons:cross"
-                                          color="red"
-                                        />
-                                      </ListItemIcon>
-                                      <ListItemText
-                                        sx={{ ml: 5 }}
-                                        primary="Support unlimited"
-                                      />
-                                    </ListItem>
-                                  </List>
+                            <CardContent>
+                              <Box
+                                sx={{
+                                  textAlign: "center",
+                                  py: 5,
+                                  backgroundImage:
+                                    "url(/assets/images/home/subscription/subscription_banner.png)",
+                                  backgroundRepeat: "no-repeat",
+                                  objectFit: "contain",
+                                }}
+                              >
+                                <Box>
+                                  <Typography
+                                    variant="h4"
+                                    color="common.white"
+                                    fontWeight={600}
+                                  >
+                                    {elem?.name}
+                                  </Typography>
                                 </Box>
                               </Box>
-
-                              <Stack alignItems="center">
-                                <Button
-                                  variant="contained"
-                                  width="min-content"
-                                  sx={{ px: 5 }}
+                              <Box>
+                                <Stack
+                                  direction="column"
+                                  spacing={0.6}
+                                  alignItems="center"
+                                  justifyContent="center"
                                 >
-                                  Buy Now
-                                </Button>
+                                  <Typography variant="h3">
+                                    ${elem?.price}
+                                  </Typography>
+                                  <Typography variant="body1" fontWeight={400}>
+                                    /month
+                                  </Typography>
+                                </Stack>
+                              </Box>
+                              <Stack spacing={1}>
+                                <Box>
+                                  <Box textAlign="center">
+                                    <List>
+                                      <ListItem sx={{ position: "relative" }}>
+                                        <ListItemIcon
+                                          sx={{ position: "absolute" }}
+                                        >
+                                          <Iconify
+                                            icon="charm:square-tick"
+                                            color={(theme) =>
+                                              theme.palette.success.main
+                                            }
+                                          />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                          sx={{ textAlign: "center" }}
+                                          primary="Online System"
+                                        />
+                                      </ListItem>
+                                      <ListItem sx={{ position: "relative" }}>
+                                        <ListItemIcon
+                                          sx={{ position: "absolute" }}
+                                        >
+                                          <Iconify
+                                            icon="charm:square-tick"
+                                            color={(theme) =>
+                                              theme.palette.success.main
+                                            }
+                                          />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                          sx={{ textAlign: "center" }}
+                                          primary=" Free apps"
+                                        />
+                                      </ListItem>
+                                      <ListItem sx={{ position: "relative" }}>
+                                        <ListItemIcon
+                                          sx={{ position: "absolute" }}
+                                        >
+                                          <Iconify
+                                            icon="system-uicons:cross"
+                                            color="red"
+                                          />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                          sx={{ textAlign: "center" }}
+                                          primary=" Free apps"
+                                        />
+                                      </ListItem>
+                                      <ListItem sx={{ position: "relative" }}>
+                                        <ListItemIcon
+                                          sx={{ position: "absolute" }}
+                                        >
+                                          <Iconify
+                                            icon="charm:square-tick"
+                                            color={(theme) =>
+                                              theme.palette.success.main
+                                            }
+                                          />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                          sx={{ textAlign: "center" }}
+                                          primary="live preview"
+                                        />
+                                      </ListItem>
+                                      <ListItem sx={{ position: "relative" }}>
+                                        <ListItemIcon
+                                          sx={{ position: "absolute" }}
+                                        >
+                                          <Iconify
+                                            icon="system-uicons:cross"
+                                            color="red"
+                                          />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                          sx={{ textAlign: "center" }}
+                                          primary="Support unlimited"
+                                        />
+                                      </ListItem>
+                                    </List>
+                                  </Box>
+                                </Box>
+
+                                <Stack alignItems="center">
+                                  <Button
+                                    fullWidth
+                                    variant="contained"
+                                    width="min-content"
+                                    sx={{ px: 5 }}
+                                  >
+                                    GET STARTED
+                                  </Button>
+                                </Stack>
                               </Stack>
-                            </Stack>
-                          </CardContent>
-                        </Card>
-                      </Grid>
-                    );
-                  })}
-              </Grid>
-            </Box>
-          </Container>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </Box>
+            </Container>
+          </Box>
         )}
       </Box>
     </React.Fragment>
