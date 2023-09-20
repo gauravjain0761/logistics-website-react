@@ -158,7 +158,12 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       name="mobile"
                       label="Contact Number"
                       value={formik.values.mobile}
-                      onChange={formik.handleChange}
+                      onChange={(e) =>
+                        formik.setFieldValue(
+                          "mobile",
+                          e.target.value.replace(/\D/gm, "")
+                        )
+                      }
                       helperText={formik.touched.mobile && formik.errors.mobile}
                       placeholder={"Enter Your Contact Number"}
                       size={"small"}

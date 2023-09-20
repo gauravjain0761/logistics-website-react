@@ -352,7 +352,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           onChange={(e) => {
                             formik.setFieldValue(
                               `items[${productIndex}].product.quantity`,
-                              e.target.value
+                              e.target.value.replace(/\D/gm, "")
                             );
                           }}
                           size="small"

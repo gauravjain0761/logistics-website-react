@@ -203,7 +203,12 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                       placeholder={"Enter Your Contact Number"}
                       name="mobile"
                       value={formik.values.mobile}
-                      onChange={formik.handleChange}
+                      onChange={(e) =>
+                        formik.setFieldValue(
+                          "mobile",
+                          e.target.value.replace(/\D/gm, "")
+                        )
+                      }
                       helperText={formik.touched.mobile && formik.errors.mobile}
                       size={"small"}
                     />
