@@ -519,7 +519,7 @@ const DriverJobListSection = ({ formik }) => {
                   );
                 })
               ) : (
-                <>{!loader && <JobSekelton title="No active Jobs..." />}</>
+                <>{!loader && <JobSekelton title="No Driver List..." />}</>
               )}
 
               {/* )} */}
