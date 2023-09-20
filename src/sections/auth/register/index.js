@@ -29,7 +29,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
   const handleGoogleLogin = async () => {
     try {
       if (signUpWithGoogle) {
-        signUpWithGoogle();
+        signUpWithGoogle("customer");
       }
       console.log("GOOGLE LOGIN");
     } catch (error) {
@@ -40,7 +40,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
   const handleFacebookLogin = async () => {
     try {
       if (signUpWithFacebook) {
-        signUpWithFacebook();
+        signUpWithFacebook("customer");
       }
       console.log("FACEBOOK LOGIN");
     } catch (error) {

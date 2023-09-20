@@ -164,14 +164,13 @@ export function AuthProvider({ children }) {
             },
           });
         } else {
-          console.log("error", response?.error);
+          console.log("error", response);
         }
       })
       .catch((error) => {
         console.log(error, "error");
         const { response } = error;
-
-        enqueueSnackbar(response.data.error, {
+        enqueueSnackbar(response?.data?.message, {
           variant: "error",
         });
       });
@@ -196,14 +195,13 @@ export function AuthProvider({ children }) {
           //   },
           // });
         } else {
-          console.log("error", response?.error);
+          console.log("error", response);
         }
       })
       .catch((error) => {
         console.log(error, "error");
         const { response } = error;
-
-        enqueueSnackbar(response.data.error, {
+        enqueueSnackbar(response?.data?.message, {
           variant: "error",
         });
       });
@@ -273,7 +271,7 @@ export function AuthProvider({ children }) {
       .then((response) => {
         let initialValues = {
           email: "",
-          social_type: "gmail",
+          social_type: "facebook",
           user_type: user_type,
           mobile: "",
           user_name: "",
