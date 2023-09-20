@@ -5,6 +5,7 @@ import {
   getJobPost,
   setJobPostPage,
 } from "@/redux/slices/job/customer";
+import { getJobActive } from "@/redux/slices/job/driver";
 import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import {
@@ -175,17 +176,17 @@ const DashboardCard = ({ jobPost }) => {
             <Card
               sx={{
                 backgroundColor:
-                  router.pathname === "/dashboard/company/job_active"
+                  router.pathname === "/dashboard/company/active_jobs"
                     ? "#FD9B3D"
                     : "#FD9B3D",
                 border: "1px solid #FD9B3D",
                 color:
-                  router.pathname === "/dashboard/company/job_active"
+                  router.pathname === "/dashboard/company/active_jobs"
                     ? "#fff"
                     : "#fff",
                 cursor: "pointer",
               }}
-              onClick={() => router.push("/dashboard/company/job_active")}
+              onClick={() => router.push("/dashboard/company/active_jobs")}
             >
               <CardContent>
                 <Stack
@@ -197,7 +198,7 @@ const DashboardCard = ({ jobPost }) => {
                   <Box
                     sx={{
                       backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/company/job_active"
+                        router.pathname === "/dashboard/company/job_post"
                           ? "#ffa54e"
                           : "#ffa54e",
                     }}
@@ -207,14 +208,14 @@ const DashboardCard = ({ jobPost }) => {
                     borderRadius="50%"
                     component="div"
                   >
-                    <Iconify icon="carbon:intent-request-active" width={48} />
+                    <Iconify icon="solar:user-linear" width={48} />
                   </Box>
                   <Box>
-                    <Typography variant="h6" fontWeight={300}>
-                      ACTIVE JOB
+                    <Typography fontSize={16} fontWeight={300}>
+                      ACTIVE JOBS
                     </Typography>
-                    <Typography variant="h4" textAlign={"center"}>
-                      {jobHistory?.dataCount}
+                    <Typography variant="h5" textAlign="center">
+                      {getJobActive?.dataCount}
                     </Typography>
                   </Box>
                 </Stack>
