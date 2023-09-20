@@ -541,44 +541,20 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               boxShadow: "none",
                             }}
                           >
-                            <Grid container spacing={3}>
+                            <Grid container spacing={0}>
                               <Grid item md={12}>
-                                <Box>
-                                  <Typography fontSize={14}>
-                                    Address Type
+                                <Stack
+                                  direction="row"
+                                  spacing={2}
+                                  alignItems="center"
+                                >
+                                  <Typography fontSize={16}>
+                                    Address Type :
                                   </Typography>
-                                  <Stack direction="row" mb={1.3}>
-                                    <TextBox
-                                      fullWidth
-                                      disabled
-                                      placeholder="Enter Pickup or Drop"
-                                      options={DropTypeSelect}
-                                      value={addressItem?.type}
-                                      name={`items[${productIndex}].address[${addressIndex}].type`}
-                                      onChange={(e) => {
-                                        formik.setFieldValue(
-                                          `items[${productIndex}].address[${addressIndex}].type`,
-                                          e.target.value
-                                        );
-                                      }}
-                                      size="small"
-                                      type="small"
-                                      isAdditional={true}
-                                      textBoxSx={{
-                                        "& .MuiInput-input": {
-                                          textTransform: "capitalize",
-                                        },
-                                        "& .MuiInput-root:after": {
-                                          borderBottomStyle: "solid",
-                                        },
-                                        "& .MuiInput-root:before": {
-                                          borderBottomStyle: "solid",
-                                          content: '""',
-                                        },
-                                      }}
-                                    />
-                                  </Stack>
-                                </Box>
+                                  <Typography fontSize={14}>
+                                    {addressItem?.type}
+                                  </Typography>
+                                </Stack>
                               </Grid>
 
                               <Grid item md={12}>
