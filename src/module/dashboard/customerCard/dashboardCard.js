@@ -71,7 +71,7 @@ const DashboardCard = ({ jobPost }) => {
     <React.Fragment>
       <Box sx={{ mt: 4 }}>
         <Grid container spacing={2}>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
@@ -121,59 +121,8 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          {/* <Grid item md={4}>
-            <Card
-              variant="outlined"
-              sx={{
-                backgroundColor:
-                  router.pathname === "/dashboard/customer/money_spend"
-                    ? "#ff7533"
-                    : "#ff7533",
-                border: "1px solid #ff7533",
-                color:
-                  router.pathname === "/dashboard/customer/money_spend"
-                    ? "#fff"
-                    : "#fff",
-                cursor: "pointer",
-              }}
-              onClick={() => router.push("/dashboard/customer/money_spend")}
-            >
-              <CardContent>
-                <Stack
-                  direction="row"
-                  justifyContent="space-around"
-                  alignItems="center"
-                  spacing={0}
-                >
-                  <Box
-                    sx={{
-                      backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/customer/money_spend"
-                          ? "#ff884f"
-                          : "#ff884f",
-                    }}
-                    height="80px"
-                    p={2}
-                    width="80px"
-                    borderRadius="50%"
-                    component="div"
-                  >
-                    {" "}
-                    <Iconify icon="ph:money-fill" width={48} />
-                  </Box>
-                  <Box>
-                    <Typography variant="h6" fontWeight={300}>
-                      MONEY SPEND
-                    </Typography>
-                    <Typography variant="h4" textAlign="center">
-                      $ 20000
-                    </Typography>
-                  </Box>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid> */}
-          <Grid item md={4}>
+
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
@@ -223,7 +172,61 @@ const DashboardCard = ({ jobPost }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item md={4}>
+
+          <Grid item md={3}>
+            <Card
+              sx={{
+                backgroundColor:
+                  router.pathname === "/dashboard/customer/job_delete"
+                    ? "#FD9B3D"
+                    : "#FD9B3D",
+                border: "1px solid #FD9B3D",
+                color:
+                  router.pathname === "/dashboard/customer/job_delete"
+                    ? "#fff"
+                    : "#fff",
+                cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/customer/job_delete")}
+            >
+              <CardContent>
+                <Stack
+                  direction={"row"}
+                  justifyContent="space-around"
+                  alignItems="center"
+                  spacing={0}
+                >
+                  <Box
+                    sx={{
+                      backgroundColor: (theme) =>
+                        router.pathname === "/dashboard/customer/job_delete"
+                          ? "#ffa54e"
+                          : "#ffa54e",
+                    }}
+                    height="80px"
+                    p={2}
+                    width="80px"
+                    borderRadius="50%"
+                    component="div"
+                  >
+                    <Iconify
+                      icon="material-symbols:delete-outline"
+                      width={48}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="h6" fontWeight={300}>
+                      JOB DELETE
+                    </Typography>
+                    <Typography variant="h4" textAlign={"center"}>
+                      {jobHistory?.dataCount}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item md={3}>
             <Card
               sx={{
                 backgroundColor:
