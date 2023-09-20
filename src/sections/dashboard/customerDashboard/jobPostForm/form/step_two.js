@@ -352,7 +352,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           onChange={(e) => {
                             formik.setFieldValue(
                               `items[${productIndex}].product.quantity`,
-                              e.target.value
+                              e.target.value.replace(/\D/gm, "")
                             );
                           }}
                           size="small"
@@ -380,7 +380,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           onChange={(e) => {
                             formik.setFieldValue(
                               `items[${productIndex}].product.length`,
-                              e.target.value
+                              e.target.value.replace(/\D/gm, "")
                             );
                           }}
                           size="small"
@@ -406,7 +406,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           onChange={(e) => {
                             formik.setFieldValue(
                               `items[${productIndex}].product.width`,
-                              e.target.value
+                              e.target.value.replace(/\D/gm, "")
                             );
                           }}
                           size="small"
@@ -432,7 +432,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                           onChange={(e) => {
                             formik.setFieldValue(
                               `items[${productIndex}].product.height`,
-                              e.target.value
+                              e.target.value.replace(/\D/gm, "")
                             );
                           }}
                           size="small"

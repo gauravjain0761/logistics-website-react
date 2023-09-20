@@ -135,7 +135,12 @@ const StepThree = ({ formik }) => {
               label="Job Budget"
               name={`budget`}
               value={formik?.values?.budget}
-              onChange={formik.handleChange}
+              onChange={(e) =>
+                formik.setFieldValue(
+                  "budget",
+                  e.target.value.replace(/\D/gm, "")
+                )
+              }
               size={"small"}
               helperText={formik.touched.budget && formik.errors.budget}
             />
