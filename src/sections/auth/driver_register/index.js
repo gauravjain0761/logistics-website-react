@@ -26,12 +26,12 @@ import { useAuthContext } from "@/auth/useAuthContext";
 
 const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
-  const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
+  const { signUpWithGoogle, user, signUpWithFacebook } = useAuthContext();
 
   const handleGoogleLogin = async () => {
     try {
-      if (loginWithGoogle) {
-        loginWithGoogle();
+      if (signUpWithGoogle) {
+        signUpWithGoogle(formik.values.user_type);
       }
       console.log("GOOGLE LOGIN");
     } catch (error) {
@@ -41,8 +41,8 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
 
   const handleFacebookLogin = async () => {
     try {
-      if (loginWithFacebook) {
-        loginWithFacebook();
+      if (signUpWithFacebook) {
+        signUpWithFacebook(formik.values.user_type);
       }
       console.log("FACEBOOK LOGIN");
     } catch (error) {
