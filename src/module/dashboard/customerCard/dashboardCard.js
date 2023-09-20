@@ -176,15 +176,9 @@ const DashboardCard = ({ jobPost }) => {
           <Grid item md={3}>
             <Card
               sx={{
-                backgroundColor:
-                  router.pathname === "/dashboard/customer/job_delete"
-                    ? "#FD9B3D"
-                    : "#FD9B3D",
-                border: "1px solid #FD9B3D",
-                color:
-                  router.pathname === "/dashboard/customer/job_delete"
-                    ? "#fff"
-                    : "#fff",
+                backgroundColor: (theme) => theme.palette.error.main,
+                border: (theme) => `1px solid ${theme.palette.error.main}`,
+                color: (theme) => theme.palette.common.white,
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/customer/job_delete")}
@@ -199,9 +193,7 @@ const DashboardCard = ({ jobPost }) => {
                   <Box
                     sx={{
                       backgroundColor: (theme) =>
-                        router.pathname === "/dashboard/customer/job_delete"
-                          ? "#ffa54e"
-                          : "#ffa54e",
+                        alpha(theme.palette.error.light, 0.3),
                     }}
                     height="80px"
                     p={2}
