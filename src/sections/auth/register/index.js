@@ -24,12 +24,12 @@ import React from "react";
 
 const Register = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
-  const { loginWithGoogle, user, loginWithFacebook } = useAuthContext();
+  const { signUpWithGoogle, user, signUpWithFacebook } = useAuthContext();
 
   const handleGoogleLogin = async () => {
     try {
-      if (loginWithGoogle) {
-        loginWithGoogle();
+      if (signUpWithGoogle) {
+        signUpWithGoogle();
       }
       console.log("GOOGLE LOGIN");
     } catch (error) {
@@ -39,8 +39,8 @@ const Register = ({ formik, open, handleOpenClose }) => {
 
   const handleFacebookLogin = async () => {
     try {
-      if (loginWithFacebook) {
-        loginWithFacebook();
+      if (signUpWithFacebook) {
+        signUpWithFacebook();
       }
       console.log("FACEBOOK LOGIN");
     } catch (error) {

@@ -177,6 +177,38 @@ export function AuthProvider({ children }) {
       });
   };
 
+  const socialSignUp = async (initialValues) => {
+    await axios
+      .post("api/auth/social-signup", initialValues)
+      .then((response) => {
+        if (response?.status === 200) {
+          console.log("response.data", response.data);
+          // const { access_token, user } = response.data;
+          enqueueSnackbar(response.data.message, {
+            variant: "success",
+          });
+          // setSession(access_token);
+
+          // dispatch({
+          //   type: "LOGIN",
+          //   payload: {
+          //     user,
+          //   },
+          // });
+        } else {
+          console.log("error", response?.error);
+        }
+      })
+      .catch((error) => {
+        console.log(error, "error");
+        const { response } = error;
+
+        enqueueSnackbar(response.data.error, {
+          variant: "error",
+        });
+      });
+  };
+
   const loginWithGoogle = useCallback(() => {
     signInWithPopup(AUTH, GOOGLE_PROVIDER)
       .then((response) => {
@@ -205,6 +237,52 @@ export function AuthProvider({ children }) {
         initialValues.email = response?.user?.email;
 
         socialLogin(initialValues);
+      })
+      .catch((error) => {
+        const errorMessage = error?.message;
+        console.log("Error Facebook Login", errorMessage);
+      });
+  }, []);
+
+  const signUpWithGoogle = useCallback((user_type) => {
+    signInWithPopup(AUTH, GOOGLE_PROVIDER)
+      .then((response) => {
+        console.log("responseresponse", response);
+        let initialValues = {
+          email: "",
+          social_type: "gmail",
+          user_type: user_type,
+          mobile: "",
+          user_name: "",
+        };
+
+        initialValues.email = response?.user?.email;
+        initialValues.user_name = response?.user?.displayName;
+        initialValues.mobile = response?.user?.phoneNumber;
+
+        console.log("SignupGoogle", response);
+        socialSignUp(initialValues);
+      })
+      .catch((error) => {
+        console.log("Error Google Login", error);
+      });
+  }, []);
+
+  const signUpWithFacebook = useCallback((user_type) => {
+    signInWithPopup(AUTH, FACEBOOK_PROVIDER)
+      .then((response) => {
+        let initialValues = {
+          email: "",
+          social_type: "gmail",
+          user_type: user_type,
+          mobile: "",
+          user_name: "",
+        };
+
+        initialValues.email = response?.user?.email;
+        initialValues.user_name = response?.user?.displayName;
+        initialValues.mobile = response?.user?.phoneNumber;
+        socialSignUp(initialValues);
       })
       .catch((error) => {
         const errorMessage = error?.message;
@@ -301,6 +379,8 @@ export function AuthProvider({ children }) {
       logout,
       loginWithGoogle,
       loginWithFacebook,
+      signUpWithGoogle,
+      signUpWithFacebook,
     }),
     [
       state.isAuthenticated,
@@ -311,6 +391,8 @@ export function AuthProvider({ children }) {
       register,
       loginWithGoogle,
       loginWithFacebook,
+      signUpWithGoogle,
+      signUpWithFacebook,
     ]
   );
 
