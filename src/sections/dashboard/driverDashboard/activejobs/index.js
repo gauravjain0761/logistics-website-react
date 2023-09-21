@@ -617,7 +617,7 @@ const DashboardJobPost = () => {
                                           fontWeight: 500,
                                         }}
                                       >
-                                        Start Job
+                                        Confirm Job
                                       </Button>
                                     ) : (
                                       <Button
@@ -712,14 +712,29 @@ const DashboardJobPost = () => {
                               alignItems="center"
                               justifyContent="space-between"
                             >
-                              <Typography variant="subtitle2">
-                                Job Budget: ${elem?.budget}
+                              <Typography
+                                variant="subtitle2"
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                }}
+                              >
+                                Job Budget: <Iconify icon="bi:currency-pound" />
+                                {elem?.budget}
                               </Typography>
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+
                             </Typography> */}
-                              <Typography variant="subtitle2">
-                                Customer Spend: ${elem?.spentmoney}+
+                              <Typography
+                                variant="subtitle2"
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                }}
+                              >
+                                Customer Spend:{" "}
+                                <Iconify icon="bi:currency-pound" />
+                                {elem?.spentmoney}+
                               </Typography>
                             </Stack>
                           </Box>

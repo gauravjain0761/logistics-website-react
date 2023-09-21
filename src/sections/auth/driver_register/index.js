@@ -213,6 +213,23 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                       size={"small"}
                     />
                   </Box>
+
+                  {formik.values.user_type === "company" && (
+                    <Box sx={{ mt: 2 }}>
+                      <TextBox
+                        fullWidth
+                        placeholder="Register Number"
+                        name="register_number"
+                        value={formik.values.register_number}
+                        onChange={formik.handleChange}
+                        helperText={
+                          formik.touched.register_number &&
+                          formik.errors.register_number
+                        }
+                        size={"small"}
+                      />
+                    </Box>
+                  )}
                   <Box sx={{ mt: 2 }}>
                     <PasswordBox
                       fullWidth

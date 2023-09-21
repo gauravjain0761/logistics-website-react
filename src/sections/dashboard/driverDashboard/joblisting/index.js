@@ -304,8 +304,16 @@ const JobList = () => {
               </Box>
               <Box>
                 <Box>
-                  <Typography variant="body1" fontWeight={600}>
-                    Price : ${filterPrice}
+                  <Typography
+                    variant="body1"
+                    fontWeight={600}
+                    sx={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    Price : <Iconify icon="bi:currency-pound" />
+                    {filterPrice}
                   </Typography>
                 </Box>
                 <Slider

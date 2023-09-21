@@ -87,7 +87,7 @@ const GoogleAutocomplete = (props) => {
       })
       .catch((error) => {
         address = "";
-        latLongValue = "";
+        // latLongValue = "";
         console.error("Error", error);
       });
     await onSelect(address, lat, long);
