@@ -490,11 +490,11 @@ const BidList = () => {
                                   />
                                 </Box>
                               </Stack>
-                              <Stack>
+                              {/* <Stack>
                                 <Typography fontSize={14} fontWeight={500}>
-                                  Earned: ${elem?.earning}+
+                                  Earned: <Iconify icon="bi:currency-pound" />{elem?.earning}+
                                 </Typography>
-                              </Stack>
+                              </Stack> */}
                             </Stack>
                             <Divider sx={{ my: 2 }} />
                           </Box>

@@ -52,6 +52,7 @@ const DriverPage = () => {
       nationality_cert: "",
       nationality_cert_url: "",
       document: "",
+      register_number: "",
     },
     validate: (values) => {
       const errors = {};
@@ -95,7 +96,7 @@ const DriverPage = () => {
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
-      if (values?.driver_type === "driver") {
+      if (values?.user_type === "driver") {
         if (!values.profile_img) {
           errors.profile_img = "Driver Photo is required";
         }
@@ -147,12 +148,15 @@ const DriverPage = () => {
         }
       }
 
-      if (values?.driver_type === "company") {
+      if (values?.user_type === "company") {
         if (!values.company_certificate) {
           errors.company_certificate = "Company Certificate is required";
         }
         if (!values.company_vat) {
           errors.company_vat = "Company Vat is required";
+        }
+        if (!values.register_number) {
+          errors.register_number = "Register Number is required";
         }
       }
 

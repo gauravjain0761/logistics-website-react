@@ -747,8 +747,15 @@ const DashboardJobPost = ({ formik }) => {
                               alignItems="center"
                               justifyContent="space-between"
                             >
-                              <Typography variant="subtitle2">
-                                Bid: ${item?.budget}
+                              <Typography
+                                variant="subtitle2"
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                }}
+                              >
+                                Bid: <Iconify icon="bi:currency-pound" />
+                                {item?.budget}
                               </Typography>
                               {/* <Typography variant="subtitle2">
                               Total Spend: $30K+

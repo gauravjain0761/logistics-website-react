@@ -489,8 +489,16 @@ const BidList = () => {
                                 </Box>
                               </Stack>
                               <Stack>
-                                <Typography fontSize={14} fontWeight={500}>
-                                  Earned: ${elem?.earning}+
+                                <Typography
+                                  fontSize={14}
+                                  fontWeight={500}
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                  }}
+                                >
+                                  Earned: <Iconify icon="bi:currency-pound" />
+                                  {elem?.earning}+
                                 </Typography>
                               </Stack>
                             </Stack>
