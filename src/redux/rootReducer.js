@@ -4,7 +4,8 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 // slices
 import driverJobReducer from "./slices/job/driver";
 import customerJobReducer from "./slices/job/customer";
-import homeReducer from "./slices/home/home"; 
+import companyJobReducer from "./slices/job/company";
+import homeReducer from "./slices/home/home";
 // ----------------------------------------------------------------------
 
 export const createNoopStorage = () => ({
@@ -44,6 +45,12 @@ export const customerJobPersistConfig = {
   keyPrefix: "redux-",
   whitelist: [],
 };
+export const companyJobPersistConfig = {
+  key: "companyJob",
+  storage,
+  keyPrefix: "redux-",
+  whitelist: [],
+};
 export const homeTotalJobPersistConfig = {
   key: "home",
   storage,
@@ -54,6 +61,7 @@ export const homeTotalJobPersistConfig = {
 const rootReducer = combineReducers({
   driverJob: persistReducer(driverJobPersistConfig, driverJobReducer),
   customerJob: persistReducer(customerJobPersistConfig, customerJobReducer),
+  companyJob: persistReducer(companyJobPersistConfig, companyJobReducer),
   home: persistReducer(homeTotalJobPersistConfig, homeReducer),
 });
 

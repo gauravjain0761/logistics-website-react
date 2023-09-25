@@ -100,4 +100,4 @@ export const hideScrollbarX = {
   '&::-webkit-scrollbar': {
     display: 'none',
   },
-};
+}
