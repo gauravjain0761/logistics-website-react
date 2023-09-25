@@ -77,9 +77,9 @@ const DriverJobForm = ({ formik }) => {
                     </Typography>
                   </Stack>
                   <Box
-                    component="form"
-                    noValidate
-                    onSubmit={formik.handleSubmit}
+                    // component="form"
+                    // noValidate
+                    // onSubmit={formik.handleSubmit}
                   >
                     <Container>
                       <Box

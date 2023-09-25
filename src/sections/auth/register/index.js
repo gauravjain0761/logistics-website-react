@@ -24,6 +24,7 @@ import React from "react";
 
 const Register = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();
+
   const { signUpWithGoogle, user, signUpWithFacebook } = useAuthContext();
 
   const handleGoogleLogin = async () => {
@@ -207,7 +208,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       </Typography>
                       {!formik.values.company_certificate && (
                         <TextBox
-                          variant="standard"
+                          variant="standard"  
                           fullWidth
                           type="file"
                           size="small"

@@ -30,27 +30,29 @@ import { JobSekelton } from "@/components/not-found";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useDispatch, useSelector } from "@/redux/store";
 import { getJobPost, setJobPostPage } from "@/redux/slices/job/customer";
+import { getDriver } from "@/redux/slices/job/company";
 const DriverJobListSection = ({ formik }) => {
+  const { user } = useAuthContext();
   const router = useRouter();
   const dispatch = useDispatch();
   const {
-    jobPost: { pageCount, data, page, pageSize },
-  } = useSelector((state) => state.customerJob);
+    Driver: { pageCount, data, page, pageSize },
+  } = useSelector((state) => state.companyJob);
 
   const handlePageChange = (event, value) => {
     dispatch(setJobPostPage(value));
   };
 
   React.useEffect(() => {
-    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
-  }, [page, pageSize]);
-  const { user } = useAuthContext();
+    dispatch(getDriver({ page: page, pageSize: pageSize, user_id: user?.id }));
+  }, [page, pageSize, user?.id]);
+
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   const [loader, setLoader] = React.useState(false);
-
+  console.log("datadata", data);
   const MonthSelect = [
     {
       label: "Choose Month",
@@ -185,10 +187,7 @@ const DriverJobListSection = ({ formik }) => {
             <Grid container rowSpacing={0}>
               {data && data?.length > 0 ? (
                 data.map((item, index) => {
-                  let productDetail =
-                    item?.items && item?.items?.length > 0 && item?.items[0];
-                  let addressDetail =
-                    item?.items && item?.items?.length > 0 && item?.items[0];
+                  let productDetail = "N/A";
                   return (
                     <Grid item md={12} key={index}>
                       <Card
@@ -219,7 +218,7 @@ const DriverJobListSection = ({ formik }) => {
                               }}
                               fontWeight={500}
                             >
-                              {item?.description}
+                              {item?.email}
                             </Typography>
                           </Box>
                           <Box>
@@ -232,99 +231,31 @@ const DriverJobListSection = ({ formik }) => {
                             <Grid item md={3}>
                               <Box>
                                 <Typography fontSize={28} fontWeight={500}>
-                                  {item.name}
+                                  {item.user_name}
                                 </Typography>
                               </Box>
-                              <Stack direction="row" spacing={2} mb={2}>
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={0.6}
-                                >
-                                  <Stack alignItems="center">
-                                    <Iconify
-                                      icon="bx:layer"
-                                      color={(theme) =>
-                                        theme.palette.primary.main
-                                      }
-                                      width={22}
-                                    />
-                                  </Stack>
-                                  <Box>
-                                    <Typography fontSize={12} color="grey">
-                                      {item.items[0].product.material}
-                                    </Typography>
-                                  </Box>
-                                </Stack>
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={0.6}
-                                >
-                                  <Stack alignItems="center">
-                                    <Iconify
-                                      icon="gg:expand"
-                                      color={(theme) =>
-                                        theme.palette.primary.main
-                                      }
-                                      width={22}
-                                    />
-                                  </Stack>
-                                  <Box>
-                                    <Typography fontSize={12} color="grey">
-                                      {`${item.items[0].product.length}*${item.items[0].product.width}*${item.items[0].product.height}`}
-                                    </Typography>
-                                  </Box>
-                                </Stack>
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={0.6}
-                                >
-                                  <Stack alignItems="center">
-                                    <Iconify
-                                      icon="uil:weight"
-                                      color={(theme) =>
-                                        theme.palette.primary.main
-                                      }
-                                      width={22}
-                                    />
-                                  </Stack>
-                                  <Box>
-                                    <Typography fontSize={12} color="grey">
-                                      {item.items[0].product.quantity} Qty
-                                    </Typography>
-                                  </Box>
-                                </Stack>
-                              </Stack>
+                             
                               <Stack direction="row" spacing={1}>
-                                {item.items.map((elem, index) => {
-                                  if (index > 2) {
-                                    return "";
-                                  }
-                                  return (
-                                    <React.Fragment key={index}>
-                                      <Box
-                                        component="img"
-                                        alt={elem.product.image}
-                                        src={`${elem.product.base_url}${elem.product.image}`}
-                                        sx={{
-                                          width: "83px",
-                                          height: "59px",
-                                          border: "1px solid lightgrey",
-                                          objectFit: "cover",
-                                        }}
-                                      />
-                                    </React.Fragment>
-                                  );
-                                })}
+                                <React.Fragment key={index}>
+                                  <Box
+                                    component="img"
+                                    alt={item.user_name}
+                                    src={`${item.base_url}${item.profile_img}`}
+                                    sx={{
+                                      width: "83px",
+                                      height: "59px",
+                                      border: "1px solid lightgrey",
+                                      objectFit: "cover",
+                                    }}
+                                  />
+                                </React.Fragment>
                               </Stack>
                             </Grid>
                             <Grid item md={3}>
                               <Box mb={4}>
                                 <Box>
                                   <Typography fontSize={13} fontWeight={600}>
-                                    Pick up Date
+                                    Mobile
                                   </Typography>
                                 </Box>
                                 <Stack
@@ -354,8 +285,7 @@ const DriverJobListSection = ({ formik }) => {
                                       fontWeight={400}
                                       fontSize={13}
                                     >
-                                      {productDetail?.product?.pickup_date ||
-                                        "N/A"}
+                                      {item?.mobile || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -363,7 +293,7 @@ const DriverJobListSection = ({ formik }) => {
 
                               <Box>
                                 <Typography fontSize={13} fontWeight={600}>
-                                  Pick up Time
+                                  State
                                 </Typography>
                               </Box>
                               <Stack
@@ -393,8 +323,7 @@ const DriverJobListSection = ({ formik }) => {
                                     fontWeight={400}
                                     fontSize={13}
                                   >
-                                    {productDetail?.product?.pickup_time ||
-                                      "N/A"}
+                                    {item?.state || "N/A"}
                                   </Typography>
                                 </Box>
                               </Stack>
@@ -403,7 +332,7 @@ const DriverJobListSection = ({ formik }) => {
                               <Box mb={4}>
                                 <Box>
                                   <Typography fontSize={13} fontWeight={600}>
-                                    Drop out Date
+                                    City
                                   </Typography>
                                 </Box>
                                 <Stack
@@ -433,48 +362,12 @@ const DriverJobListSection = ({ formik }) => {
                                       fontWeight={400}
                                       fontSize={13}
                                     >
-                                      {productDetail?.product?.drop_date ||
-                                        "N/A"}
+                                      {item?.city || "N/A"}
                                     </Typography>
                                   </Box>
                                 </Stack>
                               </Box>
-                              <Box>
-                                <Typography fontSize={13} fontWeight={600}>
-                                  Drop out Time
-                                </Typography>
-                              </Box>
-                              <Stack
-                                direction="row"
-                                spacing={1}
-                                alignItems="center"
-                              >
-                                <Box
-                                  sx={{
-                                    backgroundColor: "#FEE6BB",
-                                    width: "28px",
-                                    height: "28px",
-                                    borderRadius: "50%",
-                                    p: "5px",
-                                  }}
-                                >
-                                  <Iconify
-                                    color={(theme) =>
-                                      theme.palette.primary.main
-                                    }
-                                    icon="majesticons:calendar-line"
-                                  />
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    color="grey"
-                                    fontWeight={400}
-                                    fontSize={13}
-                                  >
-                                    {productDetail?.product?.drop_time || "N/A"}
-                                  </Typography>
-                                </Box>
-                              </Stack>
+                              
                             </Grid>
                             <Grid item md={3}></Grid>
                           </Grid>
@@ -497,12 +390,6 @@ const DriverJobListSection = ({ formik }) => {
                                     router.push(
                                       `/dashboard/company/driver/form/${item?.id}`
                                     )
-                                  }
-                                  disabled={
-                                    item?.status === 1 ||
-                                    item?.status === 2 ||
-                                    item.status === 3 ||
-                                    item?.status === 4
                                   }
                                   sx={{
                                     fontWeight: 500,
