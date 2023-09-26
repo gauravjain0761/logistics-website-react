@@ -108,7 +108,9 @@ const slice = createSlice({
       state.jobHistory.page = action.payload;
     },
     // SET JOB HISTORY END
-
+    setJobHistoryPageSize(state, action) {
+      state.jobHistory.pageSize = action.payload;
+    },
     // ========================================================
   },
 });
@@ -123,6 +125,7 @@ export const {
   setDriverPage,
   setJobActivePage,
   setJobHistoryPage,
+  setJobHistoryPageSize,
 } = slice.actions;
 
 // ----------------------------------------------------------------------
