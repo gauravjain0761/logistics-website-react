@@ -222,7 +222,7 @@ const DriverJobListSection = ({ formik }) => {
                             </Typography>
                           </Box>
                           <Box>
-                            <DeleteModal id={item?.id} />
+                            {/* <DeleteModal id={item?.id} /> */}
                           </Box>
                         </Stack>
                         <Divider />
@@ -293,7 +293,7 @@ const DriverJobListSection = ({ formik }) => {
 
                               <Box>
                                 <Typography fontSize={13} fontWeight={600}>
-                                  State
+                                  Driver job completed
                                 </Typography>
                               </Box>
                               <Stack
@@ -332,7 +332,7 @@ const DriverJobListSection = ({ formik }) => {
                               <Box mb={4}>
                                 <Box>
                                   <Typography fontSize={13} fontWeight={600}>
-                                    City
+                                    Running Job
                                   </Typography>
                                 </Box>
                                 <Stack
@@ -388,14 +388,14 @@ const DriverJobListSection = ({ formik }) => {
                                   }
                                   onClick={() =>
                                     router.push(
-                                      `/dashboard/company/driver/form/${item?.id}`
+                                      `/dashboard/company/driver/form/${item?.user_id}`
                                     )
                                   }
                                   sx={{
                                     fontWeight: 500,
                                   }}
                                 >
-                                  Edit Job
+                                  Edit Driver
                                 </Button>
                               </Box>
                             </Stack>

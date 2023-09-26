@@ -71,8 +71,7 @@ const DriverJobForm = ({ formik }) => {
               <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>
                   <Stack direction="row" spacing={1} py={2}>
-                    <Typography fontWeight={500} fontSize={24}>
-                      {" "}
+                    <Typography fontWeight={500} fontSize={24}> 
                       {id === "create" ? "Add Driver" : "Update Driver"}
                     </Typography>
                   </Stack>
@@ -94,7 +93,7 @@ const DriverJobForm = ({ formik }) => {
                               placeholder={
                                 formik.values.user_type === "company"
                                   ? "Enter Company Name"
-                                  : "Enter Your Full Name "
+                                  : "Enter Your Full Name"
                               }
                               name="user_name"
                               value={formik.values.user_name}

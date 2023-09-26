@@ -26,9 +26,12 @@ const DashboardCard = ({ jobPost }) => {
   const { user } = useAuthContext();
   const dispatch = useDispatch();
   const {
-    Driver: { pageCount, data, page, pageSize },
+    Driver: { pageCount, page, pageSize },
     jobHistory,
   } = useSelector((state) => state.companyJob);
+
+
+  const [data, setData] = React.useState([]);
 
   const handlePageChange = (event, value) => {
     dispatch(setJobPostPage(value));
@@ -68,6 +71,37 @@ const DashboardCard = ({ jobPost }) => {
   React.useEffect(() => {
     fetchdata();
   }, []);
+
+
+  // API FETCH LIST
+  const getData = async (type = "company") => {
+    await axiosInstance
+      .get(`api/auth/company/dashboard`,{
+        params:{
+          user_id:user.id
+        }
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          // setLoadingCard(false);
+          console.log("res",response);
+          setData(response?.data?.view_data);
+        }
+      })
+      .catch((error) => {
+        // setLoadingCard(false);
+        console.log("error", error);
+      });
+  };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+
+
+
+
 
   return (
     <React.Fragment>
@@ -116,7 +150,7 @@ const DashboardCard = ({ jobPost }) => {
                       Driver List
                     </Typography>
                     <Typography variant="h4" textAlign="center">
-                      {data?.length}
+                      {data?.drivers}
                     </Typography>
                   </Box>
                 </Stack>
@@ -166,7 +200,7 @@ const DashboardCard = ({ jobPost }) => {
                       JOB HISTORY
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      {jobHistory?.dataCount}
+                      {data?.history}
                     </Typography>
                   </Box>
                 </Stack>
@@ -216,7 +250,7 @@ const DashboardCard = ({ jobPost }) => {
                       ACTIVE JOBS
                     </Typography>
                     <Typography variant="h5" textAlign="center">
-                      {getJobActive?.dataCount}
+                      {data?.active}
                     </Typography>
                   </Box>
                 </Stack>

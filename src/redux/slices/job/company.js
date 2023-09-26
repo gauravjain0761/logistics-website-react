@@ -147,13 +147,13 @@ export const getJobActive = (params) => {
   return async (dispatch) => {
     dispatch(slice.actions.startJobActiveLoading());
     try {
-      const response = await axiosInstance.get("api/auth/jobs/list", {
-        params: {
-          status: "active",
-          type: "driver",
+      const response = await axiosInstance.post(
+        "api/auth/company/drivers-job",
+        {
+          type: "active",
           ...params,
-        },
-      });
+        }
+      );
       dispatch(slice.actions.setJobActive(response?.data?.view_data));
     } catch (error) {
       dispatch(slice.actions.hasJobActiveError(error));
@@ -164,13 +164,13 @@ export const getJobHistory = (params) => {
   return async (dispatch) => {
     dispatch(slice.actions.startJobHistoryLoading());
     try {
-      const response = await axiosInstance.get("api/auth/jobs/list", {
-        params: {
-          status: "history",
-          type: "driver",
+      const response = await axiosInstance.post(
+        "api/auth/company/drivers-job",
+        {
+          type: "history",
           ...params,
-        },
-      });
+        }
+      );
       dispatch(slice.actions.setJobHistory(response?.data?.view_data));
     } catch (error) {
       dispatch(slice.actions.hasJobHistoryError(error));

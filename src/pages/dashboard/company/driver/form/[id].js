@@ -54,6 +54,8 @@ const DriverJob = () => {
       nationality_cert_url: "",
       document: "",
       register_number: "",
+      password: "",
+      password_confirmation: "",
     },
 
     validate: (values) => {
@@ -106,7 +108,7 @@ const DriverJob = () => {
           errors.licence_front = "Driver Licence is required";
         }
         if (!values.licence_back) {
-          errors.licence_back = "Driver Licence is required";
+          errors.licence_back = "Driver Licence back is required";
         }
         if (!values.address_proof) {
           errors.address_proof = "Address proof is required";
@@ -206,7 +208,7 @@ const DriverJob = () => {
             });
             // handleOpenClose();
             formik.resetForm();
-            // router.push("/auth/login");
+            router.push("/dashboard/company/driver/list");
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",
@@ -236,22 +238,76 @@ const DriverJob = () => {
     formik.setFieldValue("user_id", user?.id);
   }, [user, user?.id]);
 
+  console.log("formk123", formik);
+
   const bindData = async () => {
     await axiosInstance
-      .get(`/api/auth/company/driver/edit/${id}`)
+      .get(`/api/auth/company/edit-driver/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          if (response?.data?.view_data) {
-            let newData = response?.data?.view_data;
-            for (const [key] of Object.entries(formik.values)) {
-              // if (key === "items") {
-              //   formik.setFieldValue("items", newData?.items);
-              // } else {
-              formik.setFieldValue([key], newData[key]);
-              // }
+          if (response.status === 200) {
+            if (response?.data?.view_data?.length > 0) {
+              let data = response?.data?.view_data[0];
+              for (const [key] of Object.entries(formik.values)) {
+                if (data[key]) {
+                  formik.setFieldValue([key], data[key]);
+                } else {
+                  formik.setFieldValue([key], "");
+                }
+              }
+
+              formik.setFieldValue(
+                "profile_img_url",
+                `${data?.base_url}${data?.profile_img}`
+              );
+              console.log("ddd", data);
+              formik.setFieldValue(
+                "licence_front_url",
+                `${data?.base_url}${data?.licence_front}`
+              );
+              formik.setFieldValue(
+                "licence_back_url",
+                `${data?.base_url}${data?.licence_back}`
+              );
+              formik.setFieldValue(
+                "address_proof_url",
+                `${data?.base_url}${data?.address_proof}`
+              );
+              formik.setFieldValue(
+                "insurance_cert_url",
+                `${data?.base_url}${data?.insurance_cert}`
+              );
+              formik.setFieldValue(
+                "transit_cert_url",
+                `${data?.base_url}${data?.transit_cert}`
+              );
+              formik.setFieldValue(
+                "liability_cert_url",
+                `${data?.base_url}${data?.liability_cert}`
+              );
+              formik.setFieldValue(
+                "vehicle_cert_url",
+                `${data?.base_url}${data?.vehicle_cert}`
+              );
+              formik.setFieldValue(
+                "v5c_cert_url",
+                `${data?.base_url}${data?.v5c_cert}`
+              );
+              formik.setFieldValue(
+                "dvia_cert_url",
+                `${data?.base_url}${data?.dvia_cert}`
+              );
+              formik.setFieldValue(
+                "nationality_cert_url",
+                `${data?.base_url}${data?.nationality_cert}`
+              );
             }
           }
+          // console.log("iii",response)
         }
+      })
+      .catch((error) => {
+        console.log("eee", error);
       });
   };
 
@@ -272,5 +328,3 @@ DriverJob.getLayout = function getLayout(page) {
   return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default DriverJob;
-
-
