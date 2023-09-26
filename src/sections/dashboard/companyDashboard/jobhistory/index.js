@@ -35,7 +35,7 @@ import {
   getJobHistory,
   setJobHistoryPage,
   setJobHistoryPageSize,
-} from "@/redux/slices/job/customer";
+} from "@/redux/slices/job/company";
 import TextMaxLine from "@/components/text-max-line";
 import { PageSizes } from "@/utils/constant";
 const JobHistory = ({ formik }) => {

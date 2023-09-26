@@ -7,17 +7,14 @@ import {
   CardContent,
   Container,
   Dialog,
-  DialogActions,
   DialogContent,
   Divider,
   Grid,
-  IconButton,
   Modal,
   Pagination,
   PaginationItem,
   Rating,
   Stack,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -25,19 +22,17 @@ import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
 import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import { PDFViewer } from "@react-pdf/renderer";
-import InvoicePDF from "./InvoicePDF";
 import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobActive,
   getJobHistory,
   setJobActivePage,
-} from "@/redux/slices/job/driver";
+} from "@/redux/slices/job/company";
 import TextMaxLine from "@/components/text-max-line";
 
 const DashboardAddJob = () => {
@@ -45,7 +40,7 @@ const DashboardAddJob = () => {
   const {
     jobActive: { pageCount, data, page, pageSize },
     jobHistory,
-  } = useSelector((state) => state.driverJob);
+  } = useSelector((state) => state.companyJob);
 
   const handlePageChange = (event, value) => {
     dispatch(setJobActivePage(value));
@@ -597,7 +592,7 @@ const DashboardAddJob = () => {
                                 spacing={1}
                               >
                                 <Stack spacing={1}>
-                                  <Box>
+                                  {/* <Box>
                                     {elem.status === 1 ? (
                                       <Button
                                         color="success"
@@ -643,7 +638,7 @@ const DashboardAddJob = () => {
                                         Complete Job
                                       </Button>
                                     )}
-                                  </Box>
+                                  </Box> */}
                                   {/* <Box>
                                   <Button
                                     sx={{ fontWeight: 500 }}
