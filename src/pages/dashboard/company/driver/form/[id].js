@@ -23,7 +23,7 @@ const DriverJob = () => {
       vehicle: 0,
       vehical_type: 0,
       budget: "",
-      description: "",
+      description: "", 
     },
 
     validate: (values) => {
@@ -187,6 +187,8 @@ const DriverJob = () => {
 };
 
 DriverJob.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return <Primary WebLayout>{page}</Primary>;
 };
 export default DriverJob;
+
+
