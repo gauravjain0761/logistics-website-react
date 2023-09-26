@@ -1,5 +1,6 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
+import { getDriver } from "@/redux/slices/job/company";
 import {
   getJobHistory,
   getJobPost,
@@ -25,15 +26,15 @@ const DashboardCard = ({ jobPost }) => {
   const { user } = useAuthContext();
   const dispatch = useDispatch();
   const {
-    jobPost: { pageCount, data, page, pageSize },
+    Driver: { pageCount, data, page, pageSize },
     jobHistory,
-  } = useSelector((state) => state.customerJob);
+  } = useSelector((state) => state.companyJob);
 
   const handlePageChange = (event, value) => {
     dispatch(setJobPostPage(value));
   };
   useEffect(() => {
-    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
+    dispatch(getDriver({ page: page, pageSize: pageSize, user_id: user?.id }));
   }, [page, pageSize]);
 
   React.useEffect(() => {
