@@ -1,6 +1,7 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
 import {
+  getJobDelete,
   getJobHistory,
   getJobPost,
   setJobPostPage,
@@ -26,6 +27,7 @@ const DashboardCard = ({ jobPost }) => {
   const {
     jobPost: { pageCount, data, page, pageSize },
     jobHistory,
+    jobDelete,
   } = useSelector((state) => state.customerJob);
 
   const handlePageChange = (event, value) => {
@@ -44,6 +46,16 @@ const DashboardCard = ({ jobPost }) => {
       })
     );
   }, [jobHistory?.page, jobHistory?.pageSize]);
+
+  React.useEffect(() => {
+    dispatch(
+      getJobDelete({
+        page: jobDelete?.page,
+        pageSize: jobDelete?.pageSize,
+        user_id: user?.id,
+      })
+    );
+  }, [jobDelete?.page, jobDelete?.pageSize]);
 
   const [subscription, setSubscription] = React.useState([]);
   // API FETCH LIST
@@ -211,7 +223,7 @@ const DashboardCard = ({ jobPost }) => {
                       JOB DELETE
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      {jobHistory?.dataCount}
+                      {jobDelete?.dataCount}
                     </Typography>
                   </Box>
                 </Stack>

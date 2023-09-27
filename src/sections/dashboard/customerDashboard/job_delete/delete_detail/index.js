@@ -432,7 +432,7 @@ const JobDeleteDetail = () => {
           </TableContainer>
         </Box>
       </Modal>
-      {/* =================   Rating & Review Modal       ================== */}
+      {/* =================   Rating & Review Modal    ================== */}
       <Dialog
         open={reviewOpen}
         onClose={handleReviewOpen}
