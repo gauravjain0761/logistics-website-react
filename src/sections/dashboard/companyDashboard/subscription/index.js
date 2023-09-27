@@ -25,7 +25,7 @@ const SubscriptionsPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   // API FETCH LIST
-  const fetchdata = async (type = "customer") => {
+  const fetchdata = async (type = "company") => {
     setLoading(true);
     await axiosInstance
       .get(`/api/auth/master/plan/list/${type}`)
@@ -44,8 +44,6 @@ const SubscriptionsPage = () => {
   React.useEffect(() => {
     fetchdata();
   }, []);
-
-  console.log("datadata", data);
 
   return (
     <React.Fragment>

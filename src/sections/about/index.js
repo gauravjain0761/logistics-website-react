@@ -82,7 +82,6 @@ const AboutUs = () => {
                       fontSize={34}
                       fontWeight={600}
                     >
-                      {" "}
                       Efficiently
                     </Typography>
                   </Typography>

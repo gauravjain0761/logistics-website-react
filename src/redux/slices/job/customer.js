@@ -23,6 +23,16 @@ const initialState = {
     page: 1,
     pageSize: 10,
   },
+
+  isJobDeleteLoading: false,
+  jobDeleteError: null,
+  jobDelete: {
+    data: [],
+    pageCount: 0,
+    dataCount: 0,
+    page: 1,
+    pageSize: 10,
+  },
 };
 
 const slice = createSlice({
@@ -38,6 +48,10 @@ const slice = createSlice({
       state.isJobActiveLoading = true;
     },
 
+    startJobDeleteLoading(state) {
+      state.isJobDeleteLoading = true;
+    },
+
     // HAS ERROR START
     hasJobPostError(state, action) {
       state.isJobPostLoading = false;
@@ -46,6 +60,11 @@ const slice = createSlice({
 
     hasJobHistoryError(state, action) {
       state.isJobActiveLoading = false;
+      state.error = action.payload;
+    },
+
+    hasJobDeleteError(state, action) {
+      state.isJobDeleteLoading = false;
       state.error = action.payload;
     },
 
@@ -64,7 +83,7 @@ const slice = createSlice({
     },
     // SET JOB END
 
-    // =====================================================
+    // =======================================================
 
     // SET JOB hISTORY
     setJobHistory(state, action) {
@@ -83,6 +102,21 @@ const slice = createSlice({
     // SET JOB HISTORY END
 
     // ========================================================
+
+    // SET JOB DELETE
+    setJobDelete(state, action) {
+      state.isJobDeleteLoading = false;
+      state.jobDelete.data = action.payload.data;
+      state.jobDelete.dataCount = action.payload.data.length;
+      state.jobDelete.pageCount = action.payload.meta?.last_page;
+    },
+
+    setJobDeletePage(state, action) {
+      state.jobDelete.page = action.payload;
+    },
+    // SET JOB END
+
+    // =====================================================
   },
 });
 
@@ -95,6 +129,7 @@ export const {
   setJobPostPage,
   setJobHistoryPage,
   setJobHistoryPageSize,
+  setJobDeletePage,
 } = slice.actions;
 
 // ----------------------------------------------------------------------
@@ -131,6 +166,25 @@ export const getJobHistory = (params) => {
       dispatch(slice.actions.setJobHistory(response?.data?.view_data));
     } catch (error) {
       dispatch(slice.actions.hasJobHistoryError(error));
+    }
+  };
+};
+
+export const getJobDelete = (params) => {
+  return async (dispatch) => {
+    dispatch(slice.actions.startJobDeleteLoading());
+    try {
+      const response = await axiosInstance.get("api/auth/jobs/list", {
+        params: {
+          status: "pending",
+          type: "customer",
+          is_deleted: 1,
+          ...params,
+        },
+      });
+      dispatch(slice.actions.setJobDelete(response?.data?.view_data));
+    } catch (error) {
+      dispatch(slice.actions.hasJobDeleteError(error));
     }
   };
 };

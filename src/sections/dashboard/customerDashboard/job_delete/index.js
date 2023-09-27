@@ -32,9 +32,8 @@ import { useAuthContext } from "@/auth/useAuthContext";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { useDispatch, useSelector } from "@/redux/store";
 import {
-  getJobHistory,
-  setJobHistoryPage,
-  setJobHistoryPageSize,
+  getJobDelete,
+  setJobDeletePage,
 } from "@/redux/slices/job/customer";
 import TextMaxLine from "@/components/text-max-line";
 import { PageSizes } from "@/utils/constant";
@@ -44,18 +43,19 @@ const JobDelete = ({ formik }) => {
   const { user } = useAuthContext();
   const dispatch = useDispatch();
   const {
-    jobHistory: { pageCount, data, page, pageSize, dataCount },
+    jobDelete: { pageCount, data, page, pageSize, dataCount },
   } = useSelector((state) => state.customerJob);
 
   const handlePageChange = (event, value) => {
-    dispatch(setJobHistoryPage(value));
+    dispatch(setJobDeletePage(value));
   };
 
   React.useEffect(() => {
     dispatch(
-      getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
+      getJobDelete({ page: page, pageSize: pageSize, user_id: user?.id })
     );
   }, [page, pageSize]);
+
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [select, setSelect] = React.useState("new");
@@ -501,7 +501,7 @@ const JobDelete = ({ formik }) => {
                 justifyContent="center"
                 spacing={2}
               >
-                <Box>
+                {/* <Box>
                   <SelectBox
                     fullWidth
                     name="pageSize"
@@ -512,7 +512,7 @@ const JobDelete = ({ formik }) => {
                     }}
                     options={PageSizes}
                   />
-                </Box>
+                </Box> */}
                 <Box>
                   <Typography variant="body2" component="p">
                     {page} - {page * pageSize} of {dataCount}
@@ -567,3 +567,6 @@ const JobDelete = ({ formik }) => {
 };
 
 export default JobDelete;
+
+
+
