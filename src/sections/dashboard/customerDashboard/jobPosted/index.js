@@ -60,7 +60,14 @@ const DashboardJobPost = ({ formik }) => {
   };
 
   React.useEffect(() => {
-    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
+    dispatch(
+      getJobPost({
+        page: page,
+        pageSize: pageSize,
+        user_id: user?.id,
+        is_deleted: 0,
+      })
+    );
   }, [page, pageSize]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
@@ -241,14 +248,16 @@ const DashboardJobPost = ({ formik }) => {
                               {item?.description}
                             </Typography>
                           </Box>
-                          <Box>
-                            <DeleteModal
-                              params={{
-                                user_id: user?.id,
-                                job_id: item?.id,
-                              }}
-                            />
-                          </Box>
+                          {item?.status <= 0 && (
+                            <Box>
+                              <DeleteModal
+                                params={{
+                                  user_id: user?.id,
+                                  job_id: item?.id,
+                                }}
+                              />
+                            </Box>
+                          )}
                         </Stack>
                         <Divider />
                         <CardContent>
@@ -941,7 +950,12 @@ const DeleteModal = ({ params }) => {
           if (response?.status === 200) {
             handleClose();
             dispatch(
-              getJobPost({ page: page, pageSize: pageSize, user_id: user?.id })
+              getJobPost({
+                page: page,
+                pageSize: pageSize,
+                user_id: user?.id,
+                is_deleted: 0,
+              })
             );
             enqueueSnackbar(response.data.message, {
               variant: "success",
