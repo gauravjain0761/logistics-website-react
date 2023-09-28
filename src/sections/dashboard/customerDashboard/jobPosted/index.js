@@ -1,4 +1,4 @@
-import { SelectBox } from "@/components/form";
+import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { Add } from "@mui/icons-material";
 import {
@@ -10,6 +10,8 @@ import {
   CardContent,
   Chip,
   Container,
+  Dialog,
+  DialogContent,
   Divider,
   Grid,
   IconButton,
@@ -45,6 +47,7 @@ import {
   timelineItemClasses,
 } from "@mui/lab";
 import TextMaxLine from "@/components/text-max-line/TextMaxLine";
+import { useFormik } from "formik";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -57,7 +60,14 @@ const DashboardJobPost = ({ formik }) => {
   };
 
   React.useEffect(() => {
-    dispatch(getJobPost({ page: page, pageSize: pageSize, user_id: user?.id }));
+    dispatch(
+      getJobPost({
+        page: page,
+        pageSize: pageSize,
+        user_id: user?.id,
+        is_deleted: 0,
+      })
+    );
   }, [page, pageSize]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
@@ -238,9 +248,16 @@ const DashboardJobPost = ({ formik }) => {
                               {item?.description}
                             </Typography>
                           </Box>
-                          <Box>
-                            <DeleteModal id={item?.id} />
-                          </Box>
+                          {item?.status <= 0 && (
+                            <Box>
+                              <DeleteModal
+                                params={{
+                                  user_id: user?.id,
+                                  job_id: item?.id,
+                                }}
+                              />
+                            </Box>
+                          )}
                         </Stack>
                         <Divider />
                         <CardContent>
@@ -899,38 +916,61 @@ const DashboardJobPost = ({ formik }) => {
 
 export default DashboardJobPost;
 
-const DeleteModal = ({ id }) => {
+const DeleteModal = ({ params }) => {
   const [open, setOpen] = React.useState(false);
   const { user } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    formik.resetForm();
+  };
   const dispatch = useDispatch();
   const {
     jobPost: { pageCount, data, page, pageSize },
   } = useSelector((state) => state.customerJob);
 
-  const deleteData = async () => {
-    await axiosInstance
-      .delete(`api/auth/master/jobs/delete/${id}`)
-      .then((response) => {
-        if (response?.status === 200) {
-          handleClose();
-          dispatch(
-            getJobPost({ page: page, pageSize: pageSize, user_id: user?.id })
-          );
+  const formik = useFormik({
+    initialValues: {
+      ...params,
+      reason: "",
+      is_deleted: 1,
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.reason) {
+        errors.reason = "Reason is required";
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      await axiosInstance
+        .post(`api/auth/jobs/delete-job`, values)
+        .then((response) => {
+          if (response?.status === 200) {
+            handleClose();
+            dispatch(
+              getJobPost({
+                page: page,
+                pageSize: pageSize,
+                user_id: user?.id,
+                is_deleted: 0,
+              })
+            );
+            enqueueSnackbar(response.data.message, {
+              variant: "success",
+            });
+          }
+        })
+        .catch((error) => {
+          const { response } = error;
           enqueueSnackbar(response.data.message, {
-            variant: "success",
+            variant: "error",
           });
-        }
-      })
-      .catch((error) => {
-        const { response } = error;
-        enqueueSnackbar(response.data.message, {
-          variant: "error",
         });
-      });
-  };
+    },
+  });
+
   return (
     <Box>
       <Button onClick={handleOpen}>
@@ -940,27 +980,20 @@ const DeleteModal = ({ id }) => {
           color={(theme) => theme.palette.primary.main}
         />
       </Button>
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        fullWidth={true}
+        maxWidth="xs"
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            textAlign: "center",
-            transform: "translate(-50%, -50%)",
-            borderRadius: "8px",
-            bgcolor: "background.paper",
-            border: "1px solid #f5f5f5",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Stack spacing={1} sx={{ mb: 4 }}>
+        <DialogContent sx={{ py: 2 }}>
+          <Stack
+            spacing={1}
+            sx={{ mb: 0, height: "100%" }}
+            justifyContent="space-between"
+          >
             <Typography
               id="modal-modal-title"
               fontweight={600}
@@ -969,29 +1002,32 @@ const DeleteModal = ({ id }) => {
             >
               Sure you want to delete?
             </Typography>
-
-            <Typography
-              id="modal-modal-title"
-              fontweight={400}
-              fontSize={14}
-              component="p"
-              sx={{
-                color: "#54595E",
-              }}
-            >
-              Are you sure you want to delete this?
-            </Typography>
+            <Box>
+              <TextBox
+                size="small"
+                name="reason"
+                label="Reason"
+                fullWidth
+                multiline={true}
+                rows="4"
+                value={formik.values.reason}
+                onChange={formik.handleChange}
+                helperText={formik.touched.reason && formik.errors.reason}
+              />
+            </Box>
+            <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+              <Stack direction="row" spacing={3}>
+                <Button fullWidth variant="outlined" onClick={handleClose}>
+                  No, cancel
+                </Button>
+                <Button fullWidth variant="contained" type="submit">
+                  Yes, Delete
+                </Button>
+              </Stack>
+            </Box>
           </Stack>
-          <Stack direction="row" spacing={3}>
-            <Button fullWidth variant="outlined" onClick={handleClose}>
-              No, cancel
-            </Button>
-            <Button fullWidth variant="contained" onClick={deleteData}>
-              Yes, Delete
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };
