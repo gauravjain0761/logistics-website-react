@@ -71,14 +71,14 @@ const DriverJobForm = ({ formik }) => {
               <Card sx={{ borderRadius: "0px" }}>
                 <CardContent>
                   <Stack direction="row" spacing={1} py={2}>
-                    <Typography fontWeight={500} fontSize={24}> 
+                    <Typography fontWeight={500} fontSize={24}>
                       {id === "create" ? "Add Driver" : "Update Driver"}
                     </Typography>
                   </Stack>
                   <Box
-                    // component="form"
-                    // noValidate
-                    // onSubmit={formik.handleSubmit}
+                  // component="form"
+                  // noValidate
+                  // onSubmit={formik.handleSubmit}
                   >
                     <Container>
                       <Box
@@ -140,34 +140,38 @@ const DriverJobForm = ({ formik }) => {
                               size={"small"}
                             />
                           </Grid>
-                          <Grid item md={6} sm={12} xs={12}>
-                            <PasswordBox
-                              fullWidth
-                              placeholder={"Enter Password"}
-                              name="password"
-                              value={formik.values.password}
-                              onChange={formik.handleChange}
-                              helperText={
-                                formik.touched.password &&
-                                formik.errors.password
-                              }
-                              size={"small"}
-                            />
-                          </Grid>
-                          <Grid item md={6} sm={12} xs={12}>
-                            <PasswordBox
-                              fullWidth
-                              placeholder={"Enter Confirm Password"}
-                              name="password_confirmation"
-                              value={formik.values.password_confirmation}
-                              onChange={formik.handleChange}
-                              helperText={
-                                formik.touched.password_confirmation &&
-                                formik.errors.password_confirmation
-                              }
-                              size={"small"}
-                            />
-                          </Grid>
+                          {id === "create" && (
+                            <>
+                              <Grid item md={6} sm={12} xs={12}>
+                                <PasswordBox
+                                  fullWidth
+                                  placeholder={"Enter Password"}
+                                  name="password"
+                                  value={formik.values.password}
+                                  onChange={formik.handleChange}
+                                  helperText={
+                                    formik.touched.password &&
+                                    formik.errors.password
+                                  }
+                                  size={"small"}
+                                />
+                              </Grid>
+                              <Grid item md={6} sm={12} xs={12}>
+                                <PasswordBox
+                                  fullWidth
+                                  placeholder={"Enter Confirm Password"}
+                                  name="password_confirmation"
+                                  value={formik.values.password_confirmation}
+                                  onChange={formik.handleChange}
+                                  helperText={
+                                    formik.touched.password_confirmation &&
+                                    formik.errors.password_confirmation
+                                  }
+                                  size={"small"}
+                                />
+                              </Grid>
+                            </>
+                          )}
                           <Grid item md={4}>
                             <Stack textAlign={"center"}>
                               <Typography textAlign="left" variant="p">

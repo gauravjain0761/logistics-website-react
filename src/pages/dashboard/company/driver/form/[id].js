@@ -81,25 +81,28 @@ const DriverJob = () => {
         errors.mobile = "Please enter valid number";
       }
 
-      if (!values.password) {
-        errors.password = "Password is required";
-      } else if (!passwordRegex.test(values.password)) {
-        errors.password =
-          "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
+      if (id === "create") {
+        if (!values.password) {
+          errors.password = "Password is required";
+        } else if (!passwordRegex.test(values.password)) {
+          errors.password =
+            "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
+        }
+
+        if (!values.password_confirmation) {
+          errors.password_confirmation = "Confirm password is required";
+        } else if (!passwordRegex.test(values.password_confirmation)) {
+          errors.password_confirmation =
+            "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
+        } else if (
+          values.password &&
+          values.password_confirmation &&
+          values.password != values.password_confirmation
+        ) {
+          errors.password_confirmation = "Password didn't match.";
+        }
       }
 
-      if (!values.password_confirmation) {
-        errors.password_confirmation = "Confirm password is required";
-      } else if (!passwordRegex.test(values.password_confirmation)) {
-        errors.password_confirmation =
-          "Min 8 letter password, with at least a symbol, upper and lower case letters and a number";
-      } else if (
-        values.password &&
-        values.password_confirmation &&
-        values.password != values.password_confirmation
-      ) {
-        errors.password_confirmation = "Password didn't match.";
-      }
       if (values?.user_type === "driver") {
         if (!values.profile_img) {
           errors.profile_img = "Driver Photo is required";
