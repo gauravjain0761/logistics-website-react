@@ -74,7 +74,6 @@ const MapModal = ({ id }) => {
     setMapData(finalArray);
   }, [data, data?.length]);
 
-  console.log("getMapData", data);
   return (
     <Box>
       <Button
