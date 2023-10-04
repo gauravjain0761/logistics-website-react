@@ -81,7 +81,7 @@ const ViewJobHistory = () => {
                     </Typography>
                   </Grid>
                   <Grid item md={2} sm={12}>
-                    <MapModal />
+                    <MapModal id={id} />
                   </Grid>
                 </Grid>
               </Box>

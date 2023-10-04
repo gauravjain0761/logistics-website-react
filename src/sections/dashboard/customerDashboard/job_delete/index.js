@@ -445,7 +445,7 @@ const JobDelete = ({ formik }) => {
                                   variant="outlined"
                                   onClick={() =>
                                     router.push(
-                                      `/dashboard/customer/job_history/detail/${elem.id}`
+                                      `/dashboard/customer/job_delete/detail/${elem.id}`
                                     )
                                   }
                                 >

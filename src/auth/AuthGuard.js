@@ -35,14 +35,13 @@ export default function AuthGuard({ children }) {
 
   if (!isInitialized) {
     return (
-      <PrimaryWebLayout>
+      // <PrimaryWebLayout>
         <Box mt={10}>
           <Container>
             <SkeletonLoader />
           </Container>
         </Box>
-        {/* <LoadingScreen /> */}
-      </PrimaryWebLayout>
+      // </PrimaryWebLayout>
     );
   }
 
