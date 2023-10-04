@@ -265,6 +265,7 @@ const DriverJob = () => {
               );
               console.log("ddd", data);
               formik.setFieldValue(
+                
                 "licence_front_url",
                 `${data?.base_url}${data?.licence_front}`
               );

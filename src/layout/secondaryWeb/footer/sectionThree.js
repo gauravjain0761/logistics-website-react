@@ -23,9 +23,9 @@ const SectionThree = () => {
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="News" />
         </ListItemButton>
-        <ListItemButton component="a" href="#simple-list">
+        {/* <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Services" />
-        </ListItemButton>
+        </ListItemButton> */}
         <ListItemButton component="a" href="#simple-list">
           <StyledListItemText primary="Testimonials" />
         </ListItemButton>
