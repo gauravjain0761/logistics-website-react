@@ -42,13 +42,15 @@ export default function GuestGuard({ children }) {
 
   if (isInitialized === isAuthenticated) {
     return (
-      <PrimaryWebLayout>
+      <>
+        {/* <PrimaryWebLayout> */}
         <Box mt={10}>
           <Container>
             <SkeletonLoader />
           </Container>
         </Box>
-      </PrimaryWebLayout>
+        {/* </PrimaryWebLayout> */}
+      </>
     );
   }
 
