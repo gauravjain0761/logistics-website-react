@@ -41,6 +41,7 @@ import {
 import { PDFViewer } from "@react-pdf/renderer";
 import InvoicePDF from "../activejobs/InvoicePDF";
 import TextMaxLine from "@/components/text-max-line";
+import moment from "moment";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -48,15 +49,6 @@ const JobHistory = ({ formik }) => {
     jobHistory: { pageCount, data, page, pageSize },
   } = useSelector((state) => state.driverJob);
 
-  const handlePageChange = (event, value) => {
-    dispatch(setJobHistoryPage(value));
-  };
-
-  React.useEffect(() => {
-    dispatch(
-      getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
-    );
-  }, [page, pageSize]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
   // const [page, setPage] = React.useState(1);
@@ -74,6 +66,22 @@ const JobHistory = ({ formik }) => {
   // const [data, setData] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [date, setDate] = React.useState("");
+
+  const handlePageChange = (event, value) => {
+    dispatch(setJobHistoryPage(value));
+  };
+
+  React.useEffect(() => {
+    dispatch(
+      getJobHistory({
+        page: page,
+        pageSize: pageSize,
+        user_id: user?.id,
+        search: search,
+        date: date ? moment(date).format("YYYY-MM-DD h:mm:ss") : "",
+      })
+    );
+  }, [page, pageSize, date, search]);
 
   return (
     <React.Fragment>
@@ -227,7 +235,9 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.material}
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem.items[0].product.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -247,7 +257,19 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {`${elem.items[0].product.length}*${elem.items[0].product.width}*${elem.items[0].product.height}`}
+                                      {`${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem.items[0].product.length
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem.items[0].product.width
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem.items[0].product.height
+                                      }`}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -267,7 +289,10 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.quantity} Qty
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem.items[0].product.quantity}{" "}
+                                      Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
