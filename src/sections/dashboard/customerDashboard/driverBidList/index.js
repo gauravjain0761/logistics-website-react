@@ -80,7 +80,7 @@ const BidList = () => {
     await axiosInstance
       .get(`api/auth/jobs/job-bids/${router.query.id}`, {
         params: {
-          sort: sort,
+          sort: sort ? sort : "",
           search: search,
           price: filterPrice,
         },
