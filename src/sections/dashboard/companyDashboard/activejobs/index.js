@@ -320,7 +320,9 @@ const DashboardAddJob = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.material}
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        [0]?.product?.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -340,7 +342,19 @@ const DashboardAddJob = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {`${elem.items[0].product.length}*${elem.items[0].product.width}*${elem.items[0].product.height}`}
+                                      {`${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        [0]?.product?.length
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        [0]?.product?.width
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        [0]?.product?.height
+                                      }`}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -360,7 +374,10 @@ const DashboardAddJob = () => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.quantity} Qty
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        [0]?.product?.quantity}{" "}
+                                      Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
