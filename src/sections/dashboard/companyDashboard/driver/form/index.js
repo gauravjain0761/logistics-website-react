@@ -211,52 +211,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.profile_img_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.profile_img_url &&
+                                formik.values.profile_img && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "profile_img",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "profile_img_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.profile_img_url}
-                                      alt={formik.values.profile_img.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "profile_img",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "profile_img_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.profile_img_url}
+                                        alt={formik.values.profile_img.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -298,52 +299,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.licence_front_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.licence_front_url &&
+                                formik.values.licence_front && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "licence_front",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "licence_front_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.licence_front_url}
-                                      alt={formik.values.licence_front.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "licence_front",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "licence_front_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.licence_front_url}
+                                        alt={formik.values.licence_front.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -385,52 +387,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.licence_back_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.licence_back_url &&
+                                formik.values.licence_back && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "licence_back",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "licence_back_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.licence_back_url}
-                                      alt={formik.values.licence_back.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "licence_back",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "licence_back_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.licence_back_url}
+                                        alt={formik.values.licence_back.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -472,52 +475,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.address_proof_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.address_proof_url &&
+                                formik.values.address_proof && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "address_proof",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "address_proof_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.address_proof_url}
-                                      alt={formik.values.address_proof.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "address_proof",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "address_proof_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.address_proof_url}
+                                        alt={formik.values.address_proof.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -559,52 +563,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.insurance_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.insurance_cert_url &&
+                                formik.values.insurance_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "insurance_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "insurance_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.insurance_cert_url}
-                                      alt={formik.values.insurance_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "insurance_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "insurance_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.insurance_cert_url}
+                                        alt={formik.values.insurance_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -646,52 +651,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.transit_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.transit_cert_url &&
+                                formik.values.transit_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "transit_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "transit_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.transit_cert_url}
-                                      alt={formik.values.transit_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "transit_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "transit_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.transit_cert_url}
+                                        alt={formik.values.transit_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>{" "}
                           <Grid item md={4}>
@@ -733,52 +739,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.liability_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.liability_cert_url &&
+                                formik.values.liability_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "liability_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "liability_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.liability_cert_url}
-                                      alt={formik.values.liability_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "liability_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "liability_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.liability_cert_url}
+                                        alt={formik.values.liability_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>{" "}
                           <Grid item md={4}>
@@ -820,52 +827,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.vehicle_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.vehicle_cert_url &&
+                                formik.values.vehicle_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "vehicle_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "vehicle_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.vehicle_cert_url}
-                                      alt={formik.values.vehicle_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "vehicle_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "vehicle_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.vehicle_cert_url}
+                                        alt={formik.values.vehicle_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>{" "}
                           <Grid item md={4}>
@@ -907,52 +915,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.v5c_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.v5c_cert_url &&
+                                formik.values.v5c_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "v5c_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "v5c_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.v5c_cert_url}
-                                      alt={formik.values.v5c_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "v5c_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "v5c_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.v5c_cert_url}
+                                        alt={formik.values.v5c_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>{" "}
                           <Grid item md={4}>
@@ -994,52 +1003,53 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.dvia_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.dvia_cert_url &&
+                                formik.values.dvia_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "dvia_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "dvia_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.dvia_cert_url}
-                                      alt={formik.values.dvia_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "dvia_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "dvia_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.dvia_cert_url}
+                                        alt={formik.values.dvia_cert.name}
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                           <Grid item md={4}>
@@ -1081,52 +1091,55 @@ const DriverJobForm = ({ formik }) => {
                                 />
                               )}
 
-                              {formik.values.nationality_cert_url && (
-                                <Card sx={{ width: "max-content" }}>
-                                  <CardContent
-                                    sx={{
-                                      pb: "10px !important",
-                                      pt: "30px !important",
-                                      px: "10px !important",
-                                    }}
-                                  >
-                                    <Box
+                              {formik.values.nationality_cert_url &&
+                                formik.values.nationality_cert && (
+                                  <Card sx={{ width: "max-content" }}>
+                                    <CardContent
                                       sx={{
-                                        position: "absolute",
-                                        top: 5,
-                                        right: 6,
+                                        pb: "10px !important",
+                                        pt: "30px !important",
+                                        px: "10px !important",
                                       }}
                                     >
-                                      <Card sx={{ borderRadius: "50%" }}>
-                                        <IconButton
-                                          size="small"
-                                          onClick={() => {
-                                            formik.setFieldValue(
-                                              "nationality_cert",
-                                              ""
-                                            );
-                                            formik.setFieldValue(
-                                              "nationality_cert_url",
-                                              ""
-                                            );
-                                          }}
-                                        >
-                                          <Close fontSize="small" />
-                                        </IconButton>
-                                      </Card>
-                                    </Box>
-                                    <Box
-                                      component="img"
-                                      style={{ margin: "10px" }}
-                                      src={formik.values.nationality_cert_url}
-                                      alt={formik.values.nationality_cert.name}
-                                      width="100px"
-                                      height="100px"
-                                      thumbnail
-                                    />
-                                  </CardContent>
-                                </Card>
-                              )}
+                                      <Box
+                                        sx={{
+                                          position: "absolute",
+                                          top: 5,
+                                          right: 6,
+                                        }}
+                                      >
+                                        <Card sx={{ borderRadius: "50%" }}>
+                                          <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                              formik.setFieldValue(
+                                                "nationality_cert",
+                                                ""
+                                              );
+                                              formik.setFieldValue(
+                                                "nationality_cert_url",
+                                                ""
+                                              );
+                                            }}
+                                          >
+                                            <Close fontSize="small" />
+                                          </IconButton>
+                                        </Card>
+                                      </Box>
+                                      <Box
+                                        component="img"
+                                        style={{ margin: "10px" }}
+                                        src={formik.values.nationality_cert_url}
+                                        alt={
+                                          formik.values.nationality_cert.name
+                                        }
+                                        width="100px"
+                                        height="100px"
+                                        thumbnail
+                                      />
+                                    </CardContent>
+                                  </Card>
+                                )}
                             </Stack>
                           </Grid>
                         </Grid>
@@ -1151,9 +1164,7 @@ const DriverJobForm = ({ formik }) => {
                               <Typography
                                 px="2.1em"
                                 component={Link}
-                                href={
-                                  "http://localhost:3000/dashboard/company/driver/list"
-                                }
+                                href={"/dashboard/company/driver/list"}
                                 sx={{ textDecoration: "none", color: "white" }}
                               >
                                 Cancel
