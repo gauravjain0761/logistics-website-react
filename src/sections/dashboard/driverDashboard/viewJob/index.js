@@ -53,6 +53,7 @@ const ViewJobHistory = () => {
     }
   }, [id]);
 
+  
   return (
     <React.Fragment>
       <Box mt={10} pb={12}>
