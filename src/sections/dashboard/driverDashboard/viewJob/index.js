@@ -61,7 +61,7 @@ const ViewJobHistory = () => {
             <Button
               variant="outlined"
               sx={{ my: 2 }}
-              onClick={() => router.push("/dashboard/driver/job_history")}
+              onClick={() => router.push("/dashboard/driver/job_request")}
             >
               <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />
               Back
