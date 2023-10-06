@@ -43,7 +43,7 @@ const BidList = () => {
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
-  const [filterPrice, setFilterPrice] = useState(10);
+  const [filterPrice, setFilterPrice] = useState(0);
   const [loading, setLoading] = useState(false);
   const [mapData, setMapData] = React.useState([]);
   const [datas, setDatas] = React.useState([]);
