@@ -158,9 +158,9 @@ const BidList = () => {
   }, [datas, datas?.length]);
 
   // Accept Bid Api
-  const fetchBidApi = async (id) => {
+  const fetchBidApi = async () => {
     await axiosInstance
-      .get(`api/auth/jobs/accept-bid/${id}`)
+      .get(`api/auth/jobs/accept-bid/${router.query.id}`)
       .then((response) => {
         if (response.status === 200) {
           router.push("/dashboard/customer/job_posted");
