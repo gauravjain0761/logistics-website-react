@@ -1,14 +1,79 @@
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import TrackGoogleMaps from "@/module/map/track_job";
+import axiosInstance from "@/utils/axios";
+import { Close } from "@mui/icons-material";
 
-import { Box, Button, Card, Modal, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Dialog,
+  DialogContent,
+  Divider,
+  Grid,
+  IconButton,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
-const MapModal = () => {
+const MapModal = ({ id }) => {
   const [open, setOpen] = React.useState(false);
+  const [mapData, setMapData] = React.useState([]);
+  const [data, setData] = React.useState([]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const getMapData = async () => {
+    await axiosInstance
+      .get(`api/auth/jobs/job-address/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setData(response?.data && response?.data?.view_data);
+        }
+      })
+      .catch((error) => {
+        console.log("MapDataError", error);
+      });
+  };
+  React.useEffect(() => {
+    if (id) {
+      getMapData();
+    }
+  }, [id]);
+
+  React.useEffect(() => {
+    let newArray = [];
+    let finalArray = [];
+    if (data && data?.length > 0) {
+      data.forEach((element) => {
+        element.forEach((newElement, elementIndex) => {
+          if (newElement?.type == "drop") {
+            newArray[elementIndex] = {
+              from: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+          } else if (newElement?.type == "pickup") {
+            newArray[elementIndex - 1] = {
+              from: { ...newArray[elementIndex - 1].from },
+              to: {
+                lat: newElement?.lat,
+                lng: newElement?.long,
+              },
+            };
+            finalArray.push(...newArray);
+          }
+        });
+      });
+    }
+    setMapData(finalArray);
+  }, [data, data?.length]);
+
   return (
     <Box>
       <Button
@@ -23,117 +88,143 @@ const MapModal = () => {
       >
         Map
       </Button>
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        fullWidth={true}
+        maxWidth="md"
+        fullScreen={true}
       >
-        <Box
+        <DialogContent
           sx={{
-            position: "relative",
-            top: "50%",
-            left: "50%",
-            width: "70%",
-            textAlign: "center",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            border: "1px solid #f5f5f5",
-            boxShadow: 24,
-            p: 2,
+            height: "90vh",
+            py: 2,
           }}
         >
-          <Box>
-            <Box
-              sx={{ position: "relative", overflow: "hidden", height: "35em" }}
+          <Box
+            sx={{
+              position: "absolute",
+              right: 25,
+              top: 10,
+            }}
+          >
+            <Card
+              variant="outlined"
+              sx={{ borderRadius: "50%" }}
+              onClick={() => handleClose()}
             >
-              <Box textAlign="end">
-                <Iconify
-                  onClick={handleClose}
-                  sx={{
-                    cursor: "pointer",
-                    borderRadius: "50%",
-                    border: "1px solid grey",
-                    mt: 2,
-                    mr: 2,
-                  }}
-                  icon="basil:cross-solid"
-                  width={30}
-                />
-              </Box>
-              <TrackGoogleMaps data={[]} close={handleClose} />
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "7em",
-                  left: "10px",
-                  pr: 1,
-                  py: 1,
-                  maxHeight: "28em",
-                  overflowY: "scroll",
-                }}
-              >
-                {[...Array(5)].map((elem, index) => {
-                  return (
-                    <Box key={index} sx={{ scrollSnapAlign: "start" }}>
-                      <Card sx={{ p: 2, mb: 0.5 }}>
-                        <Stack direction="row" alignItems="center" spacing={3}>
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500}>
-                                Pickup {index + 1}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                123 Address Xyz, State
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
-                            >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
+              <IconButton size="small">
+                <Close fontSize="small" />
+              </IconButton>
+            </Card>
+          </Box>
+          <Box>
+            <Box>
+              <Container>
+                <Box sx={{ position: "relative", overflow: "hidden" }}>
+                  <Grid container>
+                    <Grid item md={6}>
+                      <Card
+                        sx={{
+                          position: "relative",
+                          pr: 0,
+                          py: 0,
+                          maxHeight: "100%",
+                          overflowY: "scroll",
+                          height: "100%",
+                          borderRadius: "0px",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            position: "sticky",
+                            top: 0,
+                            zIndex: 1200,
+                            background: (theme) => theme.palette.common.white,
+                          }}
+                        >
+                          <Typography
+                            component="h3"
+                            variant="h3"
+                            sx={{ py: 1 }}
+                            color="primary"
+                          >
+                            Track Job
+                          </Typography>
+                          <Divider />
+                        </Box>
+                        {data.length > 0 &&
+                          data &&
+                          data.map((elem) => {
+                            return (
+                              elem &&
+                              elem?.length > 0 &&
+                              elem.map((item, index) => {
+                                return (
+                                  <Box
+                                    key={index}
+                                    sx={{ scrollSnapAlign: "start" }}
+                                  >
+                                    <Card
+                                      sx={{
+                                        p: 2,
+                                        mb: 0.5,
+                                        borderRadius: "0px",
+                                        boxShadow: "none",
+                                      }}
+                                    >
+                                      <Stack
+                                        direction="row"
+                                        justifyContent="space-between"
+                                        alignItems="center"
+                                        spacing={3}
+                                      >
+                                        <Stack>
+                                          <Box>
+                                            <Typography
+                                              fontWeight={500}
+                                              textTransform="uppercase"
+                                            >
+                                              {item?.type}
+                                            </Typography>
+                                          </Box>
+                                          <Box>
+                                            <Typography color="grey">
+                                              {item?.address}
+                                            </Typography>
+                                          </Box>
+                                        </Stack>
+                                        <Box>
+                                          <Button
+                                            variant="outlined"
+                                            color="dark"
+                                            size="small"
+                                          >
+                                            View
+                                          </Button>
+                                        </Box>
+                                      </Stack>
+                                    </Card>
+                                    <Divider />
+                                  </Box>
+                                );
+                              })
+                            );
+                          })}
                       </Card>
-                      <Card sx={{ p: 2, mb: 2 }}>
-                        <Stack direction="row" alignItems="center" spacing={3}>
-                          <Stack>
-                            <Box>
-                              <Typography fontWeight={500}>
-                                Drop off {index + 1}
-                              </Typography>
-                            </Box>
-                            <Box>
-                              <Typography color="grey">
-                                427 Address Xyz, State
-                              </Typography>
-                            </Box>
-                          </Stack>
-                          <Box>
-                            <Button
-                              variant="outlined"
-                              color="dark"
-                              size="small"
-                            >
-                              View
-                            </Button>
-                          </Box>
-                        </Stack>
-                      </Card>
-                    </Box>
-                  );
-                })}
-              </Box>
+                    </Grid>
+                    <Grid item md={6}>
+                      <TrackGoogleMaps data={mapData} />
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Container>
             </Box>
           </Box>
-        </Box>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

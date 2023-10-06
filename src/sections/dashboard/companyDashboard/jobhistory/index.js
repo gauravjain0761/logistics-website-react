@@ -44,7 +44,7 @@ const JobHistory = ({ formik }) => {
   const dispatch = useDispatch();
   const {
     jobHistory: { pageCount, data, page, pageSize, dataCount },
-  } = useSelector((state) => state.customerJob);
+  } = useSelector((state) => state.companyJob);
 
   const handlePageChange = (event, value) => {
     dispatch(setJobHistoryPage(value));
@@ -60,7 +60,6 @@ const JobHistory = ({ formik }) => {
   const [select, setSelect] = React.useState("new");
   const [search, setSearch] = React.useState("");
   const [date, setDate] = React.useState("");
-
   return (
     <React.Fragment>
       <Box py={3} pb={12}>
@@ -213,7 +212,9 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.material}
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product?.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -233,7 +234,19 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {`${elem.items[0].product.length}*${elem.items[0].product.width}*${elem.items[0].product.height}`}
+                                      {`${
+                                        elem.items &&
+                                        elem.items?.length > 0 &&
+                                        elem.items[0].product.length
+                                      }*${
+                                        elem.items &&
+                                        elem.items?.length > 0 &&
+                                        elem.items[0].product.width
+                                      }*${
+                                        elem.items &&
+                                        elem.items?.length > 0 &&
+                                        elem.items[0].product.height
+                                      }`}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -253,7 +266,10 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.quantity} Qty
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product?.quantity}{" "}
+                                      Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
