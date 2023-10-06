@@ -830,28 +830,30 @@ const DashboardJobPost = ({ formik }) => {
                                     Edit Job
                                   </Button>
                                 </Box>
-                                {item?.bid_id && item?.bid_id !== null && (
-                                  <Box>
-                                    <Button
-                                      color="primary"
-                                      fullWidth
-                                      variant="outlined"
-                                      startIcon={
-                                        <Iconify icon="mingcute:foot-fill" />
-                                      }
-                                      onClick={() =>
-                                        router.push(
-                                          `/dashboard/customer/track_job/${item.bid_id}/${item.id}`
-                                        )
-                                      }
-                                      sx={{
-                                        fontWeight: 500,
-                                      }}
-                                    >
-                                      Track Job
-                                    </Button>
-                                  </Box>
-                                )}
+                                {item?.bid_id &&
+                                  item?.bid_id !== null &&
+                                  item?.status !== 1 && (
+                                    <Box>
+                                      <Button
+                                        color="primary"
+                                        fullWidth
+                                        variant="outlined"
+                                        startIcon={
+                                          <Iconify icon="mingcute:foot-fill" />
+                                        }
+                                        onClick={() =>
+                                          router.push(
+                                            `/dashboard/customer/track_job/${item.bid_id}/${item.id}`
+                                          )
+                                        }
+                                        sx={{
+                                          fontWeight: 500,
+                                        }}
+                                      >
+                                        Track Job
+                                      </Button>
+                                    </Box>
+                                  )}
                               </Stack>
                             </Stack>
                           </Box>
