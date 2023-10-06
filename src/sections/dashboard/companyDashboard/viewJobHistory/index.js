@@ -301,7 +301,7 @@ const ViewJobHistory = () => {
                     </Table>
                   </TableContainer>
                 </Box>
-                <Box my={4}>
+                {/* <Box my={4}>
                   <Divider />
 
                   <Box my={3}>
@@ -361,7 +361,7 @@ const ViewJobHistory = () => {
                         </Box>
                       );
                     })}
-                </Box>
+                </Box> */}
               </CardContent>
             </Card>
           </Box>

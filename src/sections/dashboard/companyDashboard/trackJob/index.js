@@ -20,18 +20,20 @@ import Iconify from "@/components/iconify/Iconify";
 const TrackJob = () => {
   const router = useRouter();
   const { query } = useRouter();
-  const { id } = query;
+  const { slug } = query;
+  const [bid_id, job_id, driver_id] = slug;
   const { user } = useAuthContext();
   const [data, setData] = useState([]);
   const [mapData, setMapData] = React.useState([]);
 
   const initialValues = {
-    id: id,
-    driver_id: user?.id,
+    bid_id: bid_id,
+    user_id: driver_id,
+    job_id: job_id,
   };
   const fetchTrackJob = async () => {
     await axiosInstance
-      .post(`api/auth/jobs/job-tasks`, initialValues)
+      .post(`api/auth/jobs/track-job`, initialValues)
       .then((response) => {
         if (response.status === 200) {
           setData(
@@ -44,10 +46,12 @@ const TrackJob = () => {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
-    if (id && user?.id) {
+    if (bid_id && job_id && driver_id) {
       fetchTrackJob();
     }
-  }, [id, user?.id]);
+  }, [bid_id, job_id, driver_id]);
+
+  console.log("queryquery", query);
 
   React.useEffect(() => {
     let newArray = [];
