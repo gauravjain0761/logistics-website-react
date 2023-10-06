@@ -247,8 +247,14 @@ const JobHistory = ({ formik }) => {
                                         elem?.items &&
                                         elem?.items?.length > 0 &&
                                         elem.items[0].product.length
-                                      }*${elem.items[0].product.width}*${
-                                        elem.items[0].product.height
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product.width
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product.height
                                       }`}
                                     </Typography>
                                   </Box>
