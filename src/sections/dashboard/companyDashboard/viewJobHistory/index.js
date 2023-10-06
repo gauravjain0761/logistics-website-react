@@ -107,7 +107,6 @@ const ViewJobHistory = () => {
     formik.setFieldValue("job_id", id);
   }, [user, user?.id, id]);
 
-  console.log("jobDetail345", jobDetail, ratings);
   return (
     <React.Fragment>
       <Box mt={10} pb={12}>
@@ -116,7 +115,7 @@ const ViewJobHistory = () => {
             <Button
               variant="outlined"
               sx={{ my: 2 }}
-              onClick={() => router.push("/dashboard/customer/job_history")}
+              onClick={() => router.push("/dashboard/company/job_history")}
             >
               <Iconify icon="ion:play-back" sx={{ mr: "7px" }} width={14} />
               Back

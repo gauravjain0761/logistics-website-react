@@ -509,7 +509,7 @@ const JobHistory = ({ formik }) => {
                                   variant="outlined"
                                   onClick={() =>
                                     router.push(
-                                      `/dashboard/customer/job_history/detail/${elem.id}`
+                                      `/dashboard/company/job_history/detail/${elem.id}`
                                     )
                                   }
                                 >
