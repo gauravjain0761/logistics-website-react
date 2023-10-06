@@ -31,10 +31,13 @@ const initialState = {
     page: 1,
     pageSize: 10,
   },
+  isDashboardLoading: false,
+  dashboardError: null,
+  dashboard: null,
 };
 
 const slice = createSlice({
-  name: "driverJob",
+  name: "company",
   initialState,
   reducers: {
     // START LOADING
@@ -47,6 +50,10 @@ const slice = createSlice({
     },
     startJobHistoryLoading(state) {
       state.isJobActiveLoading = true;
+    },
+
+    startDashboardLoading(state) {
+      state.isDashboardLoading = true;
     },
 
     // HAS ERROR START
@@ -62,6 +69,10 @@ const slice = createSlice({
     hasJobHistoryError(state, action) {
       state.isJobActiveLoading = false;
       state.error = action.payload;
+    },
+    hasDashboardError(state, action) {
+      state.isDashboardLoading = false;
+      state.dashboardError = action.payload;
     },
 
     // HAS ERROR END
@@ -111,14 +122,18 @@ const slice = createSlice({
     setJobHistoryPageSize(state, action) {
       state.jobHistory.pageSize = action.payload;
     },
+
+    // SET DASHBOARD
+    setDashboard(state, action) {
+      state.isDashboardLoading = false;
+      state.dashboard = action.payload;
+    },
     // ========================================================
   },
 });
 
 // Reducer
 export default slice.reducer;
-// export default{ sliceActive.reducer};
-
 // Actions
 export const {
   startDriverLoading,
@@ -130,6 +145,21 @@ export const {
 
 // ----------------------------------------------------------------------
 
+export const getCompanyDashboard = (params) => {
+  return async (dispatch) => {
+    dispatch(slice.actions.startDashboardLoading());
+    try {
+      const response = await axiosInstance.get("api/auth/company/dashboard", {
+        params: {
+          ...params,
+        },
+      });
+      dispatch(slice.actions.setDashboard(response?.data?.view_data));
+    } catch (error) {
+      dispatch(slice.actions.hasDashboardError(error));
+    }
+  };
+};
 export const getDriver = (params) => {
   return async (dispatch) => {
     dispatch(slice.actions.startDriverLoading());
@@ -174,6 +204,7 @@ export const getJobHistory = (params) => {
           ...params,
         }
       );
+      console.log("response?.data?.view_data", response?.data);
       dispatch(slice.actions.setJobHistory(response?.data?.view_data));
     } catch (error) {
       dispatch(slice.actions.hasJobHistoryError(error));

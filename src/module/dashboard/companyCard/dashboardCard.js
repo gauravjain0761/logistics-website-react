@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
-import { getDriver } from "@/redux/slices/job/company";
+import { getCompanyDashboard, getDriver } from "@/redux/slices/job/company";
 import {
   getJobHistory,
   getJobPost,
@@ -25,32 +25,9 @@ const DashboardCard = ({ jobPost }) => {
   const router = useRouter();
   const { user } = useAuthContext();
   const dispatch = useDispatch();
-  const {
-    Driver: { pageCount, page, pageSize },
-    jobHistory,
-  } = useSelector((state) => state.companyJob);
-
-
-  const [data, setData] = React.useState([]);
-
-  const handlePageChange = (event, value) => {
-    dispatch(setJobPostPage(value));
-  };
-  useEffect(() => {
-    dispatch(getDriver({ page: page, pageSize: pageSize, user_id: user?.id }));
-  }, [page, pageSize]);
-
-  React.useEffect(() => {
-    dispatch(
-      getJobHistory({
-        page: jobHistory?.page,
-        pageSize: jobHistory?.pageSize,
-        user_id: user?.id,
-      })
-    );
-  }, [jobHistory?.page, jobHistory?.pageSize]);
-
+  const { dashboard } = useSelector((state) => state.companyJob);
   const [subscription, setSubscription] = React.useState([]);
+  
   // API FETCH LIST
   const fetchdata = async (type = "company") => {
     await axiosInstance
@@ -72,36 +49,9 @@ const DashboardCard = ({ jobPost }) => {
     fetchdata();
   }, []);
 
-
-  // API FETCH LIST
-  const getData = async (type = "company") => {
-    await axiosInstance
-      .get(`api/auth/company/dashboard`,{
-        params:{
-          user_id:user.id
-        }
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          // setLoadingCard(false);
-          console.log("res",response);
-          setData(response?.data?.view_data);
-        }
-      })
-      .catch((error) => {
-        // setLoadingCard(false);
-        console.log("error", error);
-      });
-  };
-
-  React.useEffect(() => {
-    getData();
-  }, []);
-
-
-
-
-
+  useEffect(() => {
+    dispatch(getCompanyDashboard({ user_id: user?.id }));
+  }, [user?.id]);
 
   return (
     <React.Fragment>
@@ -150,7 +100,7 @@ const DashboardCard = ({ jobPost }) => {
                       Driver List
                     </Typography>
                     <Typography variant="h4" textAlign="center">
-                      {data?.drivers}
+                      {dashboard?.drivers}
                     </Typography>
                   </Box>
                 </Stack>
@@ -200,7 +150,7 @@ const DashboardCard = ({ jobPost }) => {
                       JOB HISTORY
                     </Typography>
                     <Typography variant="h4" textAlign={"center"}>
-                      {data?.history}
+                      {dashboard?.history}
                     </Typography>
                   </Box>
                 </Stack>
@@ -250,7 +200,7 @@ const DashboardCard = ({ jobPost }) => {
                       ACTIVE JOBS
                     </Typography>
                     <Typography variant="h5" textAlign="center">
-                      {data?.active}
+                      {dashboard?.active}
                     </Typography>
                   </Box>
                 </Stack>

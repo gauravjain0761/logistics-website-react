@@ -45,7 +45,7 @@ const JobHistory = ({ formik }) => {
   const dispatch = useDispatch();
   const {
     jobHistory: { pageCount, data, page, pageSize, dataCount },
-  } = useSelector((state) => state.customerJob);
+  } = useSelector((state) => state.companyJob);
 
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -221,7 +221,9 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.material}
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product?.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -245,8 +247,14 @@ const JobHistory = ({ formik }) => {
                                         elem?.items &&
                                         elem?.items?.length > 0 &&
                                         elem.items[0].product.length
-                                      }*${elem.items[0].product.width}*${
-                                        elem.items[0].product.height
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product.width
+                                      }*${
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product.height
                                       }`}
                                     </Typography>
                                   </Box>
@@ -267,7 +275,10 @@ const JobHistory = ({ formik }) => {
                                   </Stack>
                                   <Box>
                                     <Typography fontSize={12} color="grey">
-                                      {elem.items[0].product.quantity} Qty
+                                      {elem?.items &&
+                                        elem?.items?.length > 0 &&
+                                        elem?.items[0]?.product?.quantity}{" "}
+                                      Qty
                                     </Typography>
                                   </Box>
                                 </Stack>
