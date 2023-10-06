@@ -322,7 +322,7 @@ const DashboardAddJob = () => {
                                     <Typography fontSize={12} color="grey">
                                       {elem?.items &&
                                         elem?.items?.length > 0 &&
-                                        [0]?.product?.material}
+                                        elem?.items[0]?.product?.material}
                                     </Typography>
                                   </Box>
                                 </Stack>
@@ -345,15 +345,15 @@ const DashboardAddJob = () => {
                                       {`${
                                         elem?.items &&
                                         elem?.items?.length > 0 &&
-                                        [0]?.product?.length
+                                        elem?.items[0]?.product?.length
                                       }*${
                                         elem?.items &&
                                         elem?.items?.length > 0 &&
-                                        [0]?.product?.width
+                                        elem?.items[0]?.product?.width
                                       }*${
                                         elem?.items &&
                                         elem?.items?.length > 0 &&
-                                        [0]?.product?.height
+                                        elem?.items[0]?.product?.height
                                       }`}
                                     </Typography>
                                   </Box>
@@ -376,7 +376,7 @@ const DashboardAddJob = () => {
                                     <Typography fontSize={12} color="grey">
                                       {elem?.items &&
                                         elem?.items?.length > 0 &&
-                                        [0]?.product?.quantity}{" "}
+                                        elem?.items[0]?.product?.quantity}{" "}
                                       Qty
                                     </Typography>
                                   </Box>
