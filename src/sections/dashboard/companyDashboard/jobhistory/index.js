@@ -38,6 +38,7 @@ import {
 } from "@/redux/slices/job/company";
 import TextMaxLine from "@/components/text-max-line";
 import { PageSizes } from "@/utils/constant";
+import moment from "moment";
 const JobHistory = ({ formik }) => {
   const router = useRouter();
   const { user } = useAuthContext();
@@ -46,20 +47,28 @@ const JobHistory = ({ formik }) => {
     jobHistory: { pageCount, data, page, pageSize, dataCount },
   } = useSelector((state) => state.companyJob);
 
+  const [layout, setLayout] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [select, setSelect] = React.useState("new");
+  const [search, setSearch] = React.useState("");
+  const [date, setDate] = React.useState("");
+
   const handlePageChange = (event, value) => {
     dispatch(setJobHistoryPage(value));
   };
 
   React.useEffect(() => {
     dispatch(
-      getJobHistory({ page: page, pageSize: pageSize, user_id: user?.id })
+      getJobHistory({
+        page: page,
+        pageSize: pageSize,
+        user_id: user?.id,
+        search: search,
+        date: date ? moment(date).format("YYYY-MM-DD h:mm:ss") : "",
+      })
     );
-  }, [page, pageSize]);
-  const [layout, setLayout] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [select, setSelect] = React.useState("new");
-  const [search, setSearch] = React.useState("");
-  const [date, setDate] = React.useState("");
+  }, [page, pageSize, date, search]);
+
   return (
     <React.Fragment>
       <Box py={3} pb={12}>
@@ -235,16 +244,10 @@ const JobHistory = ({ formik }) => {
                                   <Box>
                                     <Typography fontSize={12} color="grey">
                                       {`${
-                                        elem.items &&
-                                        elem.items?.length > 0 &&
+                                        elem?.items &&
+                                        elem?.items?.length > 0 &&
                                         elem.items[0].product.length
-                                      }*${
-                                        elem.items &&
-                                        elem.items?.length > 0 &&
-                                        elem.items[0].product.width
-                                      }*${
-                                        elem.items &&
-                                        elem.items?.length > 0 &&
+                                      }*${elem.items[0].product.width}*${
                                         elem.items[0].product.height
                                       }`}
                                     </Typography>

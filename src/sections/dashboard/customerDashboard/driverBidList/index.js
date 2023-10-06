@@ -39,7 +39,7 @@ const BidList = () => {
   const handleClose = () => setStartChat(false);
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
-  const [select, setSelect] = React.useState(0);
+  const [sort, setSort] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [pageCount, setPageCount] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(10);
@@ -66,11 +66,11 @@ const BidList = () => {
     },
     {
       label: "Sort(New)",
-      value: "new",
+      value: "DESC",
     },
     {
       label: "Sort(Last)",
-      value: "last",
+      value: "ASC",
     },
   ];
   const { enqueueSnackbar } = useSnackbar();
@@ -78,7 +78,13 @@ const BidList = () => {
   // Api Fetch
   const fetchApi = async () => {
     await axiosInstance
-      .get(`api/auth/jobs/job-bids/${router.query.id}`)
+      .get(`api/auth/jobs/job-bids/${router.query.id}`, {
+        params: {
+          sort: sort ? sort : "",
+          search: search,
+          price: filterPrice,
+        },
+      })
       .then((response) => {
         setLoading(true);
         if (response.status === 200) {
@@ -95,7 +101,7 @@ const BidList = () => {
     if (router.query.id) {
       fetchApi();
     }
-  }, [router.query.id]);
+  }, [router.query.id, search, sort, filterPrice]);
 
   const fetchMapData = async () => {
     await axiosInstance
@@ -252,8 +258,8 @@ const BidList = () => {
                           fullWidth
                           size="small"
                           color="#fff"
-                          value={select}
-                          onChange={(e) => setSelect(e.target.value)}
+                          value={sort}
+                          onChange={(e) => setSort(e.target.value)}
                           options={sortBy}
                         />
                       </Box>
