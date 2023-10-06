@@ -45,7 +45,7 @@ const slice = createSlice({
     startJobActiveLoading(state) {
       state.isJobActiveLoading = true;
     },
-      startJobHistoryLoading(state) {
+    startJobHistoryLoading(state) {
       state.isJobActiveLoading = true;
     },
 
@@ -118,8 +118,12 @@ export default slice.reducer;
 // export default{ sliceActive.reducer};
 
 // Actions
-export const { startJobAlertLoading, setJobAlertPage, setJobActivePage ,setJobHistoryPage} =
-  slice.actions;
+export const {
+  startJobAlertLoading,
+  setJobAlertPage,
+  setJobActivePage,
+  setJobHistoryPage,
+} = slice.actions;
 
 // ----------------------------------------------------------------------
 
@@ -175,4 +179,3 @@ export const getJobHistory = (params) => {
     }
   };
 };
-

@@ -43,6 +43,7 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
         .post("api/auth/jobs/apply-bid", formik.values)
         .then((response) => {
           if (response.status === 200) {
+            formik.resetForm();
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
