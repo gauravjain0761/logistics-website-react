@@ -53,6 +53,8 @@ const DriverPage = () => {
       nationality_cert_url: "",
       document: "",
       register_number: "",
+      vehicle: 0,
+      vehical_type: 0,
     },
     validate: (values) => {
       const errors = {};

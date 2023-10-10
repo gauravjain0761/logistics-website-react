@@ -3,6 +3,7 @@ import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { JobSekelton } from "@/components/not-found";
 import SkeletonLoader from "@/components/skeleton";
+import TextMaxLine from "@/components/text-max-line";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { getJobPost, setJobPostPage } from "@/redux/slices/job/customer";
 import { useDispatch, useSelector } from "@/redux/store";
@@ -287,9 +288,9 @@ const DashboardJobPost = ({ formik }) => {
                                 })}
                               </Stack>
                               <Box>
-                                <Typography fontSize={28} fontWeight={500}>
+                                <TextMaxLine line={4} component="p" variant="body2">
                                   {item.description}
-                                </Typography>
+                                </TextMaxLine>
                               </Box>
                             </Grid>
                             <Grid item md={3}>
