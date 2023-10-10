@@ -533,7 +533,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     {productItem?.address &&
                       productItem?.address?.length > 0 &&
                       productItem?.address.map((addressItem, addressIndex) => (
-                        <Box key={productIndex} sx={{ mt: 1 }}>
+                        <Box key={productIndex} sx={{ mt: 4 }}>
                           <Card
                             sx={{
                               borderRadius: "0px",
