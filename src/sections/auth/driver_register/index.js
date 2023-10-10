@@ -1,6 +1,9 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import OTPDialogBox from "@/components/dialog/otpModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import DocumentModal from "@/module/driverDocument/driverDocumentmodal";
+import { Close } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -9,20 +12,15 @@ import {
   Checkbox,
   Container,
   FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
+  FormControlLabel, FormHelperText,
   Grid,
   IconButton,
   Radio,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
-import { Close } from "@mui/icons-material";
-import DocumentModal from "@/module/driverDocument/driverDocumentmodal";
-import { useAuthContext } from "@/auth/useAuthContext";
 
 const DriverRegister = ({ formik, open, handleOpenClose }) => {
   const router = useRouter();

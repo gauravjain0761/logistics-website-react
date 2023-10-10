@@ -1,8 +1,7 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
-import TrackJob from "@/sections/dashboard/customerDashboard/trackJob";
 import AuthGuard from "@/auth/AuthGuard";
+import { PrimaryWebLayout } from "@/layout";
+import TrackJob from "@/sections/dashboard/customerDashboard/trackJob";
+import { useFormik } from "formik";
 
 const StartJobPage = () => {
   const formik = useFormik({

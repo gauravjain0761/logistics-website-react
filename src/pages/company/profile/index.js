@@ -1,10 +1,10 @@
-import React from "react";
-import { useFormik } from "formik";
+import AuthGuard from "@/auth/AuthGuard";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
-import AuthGuard from "@/auth/AuthGuard";
+import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
+import React from "react";
 
 const MyProfilePage = () => {
   const { enqueueSnackbar } = useSnackbar();

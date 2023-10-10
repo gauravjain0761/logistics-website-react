@@ -1,17 +1,11 @@
-import { Heading } from "@/components/typography";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import { StyledListItemText } from "./footerStyle";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Iconify from "@/components/iconify/Iconify";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import {
+  List,
+  ListItem, Stack,
+  Typography
+} from "@mui/material";
+import { StyledListItemText } from "./footerStyle";
 const SectionOne = () => {
   return (
     <>

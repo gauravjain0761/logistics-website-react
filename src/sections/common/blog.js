@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/router";
-import React from "react";
 
 const CommonBlog = ({ data }) => {
   const router = useRouter();
@@ -49,7 +48,6 @@ const CommonBlog = ({ data }) => {
                         spacing={1}
                         direction="row"
                         alignItems="center"
-                        // justifyContent="left"
                       >
                         <Box>
                           <Avatar

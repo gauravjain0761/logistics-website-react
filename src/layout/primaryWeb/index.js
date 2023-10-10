@@ -12,16 +12,11 @@ import useResponsive from "@/hooks/useResponsive";
 const PrimaryWebLayout = (props) => {
   const { children } = props;
   const isMobile = useResponsive("down", "md");
-  // const responsiveHeight = isMobile ? 78.5 : 52;
-  // const value = useOffSetTop(responsiveHeight, {
-  //   offset: ["start end", "end end"],
-  // });
   return (
     <>
       <Header />
       <Box id="back-to-top-anchor" />
       {children}
-      {/* <Toolbar /> */}
       <Footer />
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">

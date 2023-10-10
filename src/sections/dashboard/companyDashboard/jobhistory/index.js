@@ -1,42 +1,29 @@
 import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
-  Autocomplete,
-  Badge,
   Box,
   Button,
   Card,
-  CardContent,
-  Chip,
-  Container,
+  CardContent, Container,
   Divider,
-  Grid,
-  IconButton,
-  Pagination,
-  PaginationItem,
-  Rating,
-  Stack,
-  TextField,
-  Typography,
-  alpha,
+  Grid, Pagination,
+  PaginationItem, Stack, Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-// import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
-import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
+import TextMaxLine from "@/components/text-max-line";
 import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
-import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobHistory,
   setJobHistoryPage,
   setJobHistoryPageSize,
 } from "@/redux/slices/job/company";
-import TextMaxLine from "@/components/text-max-line";
+import { useDispatch, useSelector } from "@/redux/store";
 import { PageSizes } from "@/utils/constant";
 import moment from "moment";
 const JobHistory = ({ formik }) => {
@@ -174,17 +161,6 @@ const JobHistory = ({ formik }) => {
                             >
                               {elem?.description}
                             </TextMaxLine>
-                            {/* <Typography
-                              color="common.black"
-                              fontSize={17}
-                              sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              fontWeight={500}
-                            >
-                              {elem?.description}
-                            </Typography> */}
                           </Box>
                         </Stack>
                         <Divider />
@@ -200,9 +176,6 @@ const JobHistory = ({ formik }) => {
                                 >
                                   {elem.name}
                                 </TextMaxLine>
-                                {/* <Typography fontSize={28} fontWeight={500}>
-                                  {elem.name}
-                                </Typography> */}
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
                                 <Stack
@@ -518,13 +491,6 @@ const JobHistory = ({ formik }) => {
                               </Box>
                             </Grid>
                           </Grid>
-                          {/* <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {elem?.description}
-                            </Typography>
-                          </Box> */}
-
                           <Divider sx={{ my: 2 }} />
                           <Box>
                             <Stack
@@ -542,9 +508,6 @@ const JobHistory = ({ formik }) => {
                                 Job Budget: <Iconify icon="bi:currency-pound" />
                                 {elem?.budget}
                               </Typography>
-                              {/* <Typography variant="subtitle2">
-                              Total Spend: $30K+
-                            </Typography> */}
                               <Typography
                                 variant="subtitle2"
                                 sx={{
@@ -561,247 +524,6 @@ const JobHistory = ({ formik }) => {
                         </CardContent>
                       </Card>
 
-                      {/* <Card
-                        sx={{
-                          my: 2,
-                          ":hover": {
-                            borderColor: "#ff7534",
-                            transition: " all 0.3s ease-in-out",
-                          },
-                        }}
-                        variant="outlined"
-                      >
-                        <CardContent>
-                          <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            alignItems="center"
-                          >
-                            <Stack direction="row" mb={1} spacing={0.5}>
-                              <Box>
-                                <Typography variant="subtitle1">
-                                  Job Title :
-                                </Typography>
-                              </Box>
-                              <Box>
-                                <Typography color="primary" variant="subtitle1">
-                                  {elem.name}
-                                </Typography>
-                              </Box>
-                            </Stack>
-                          </Stack>
-                          <Divider />
-                          <Grid
-                            container
-                            mt={0.5}
-                            spacing={2}
-                            alignItems="center"
-                          >
-                            <Grid item md={2}>
-                              <Box
-                                component="img"
-                                src="/assets/images/dashboard/portfolio.jpeg"
-                                sx={{
-                                  width: "100px",
-                                  borderRadius: "50%",
-                                  border: "2px solid #ff7534",
-                                }}
-                              />
-                            </Grid>
-                            <Grid item md={4}>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Pick-Up Date
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product?.pickup_date}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Pick-Up Time
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product?.pickup_time}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Material
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product.material}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                            <Grid item md={4}>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Drop-Out Date
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product.drop_date}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Drop-Out Time
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product.drop_time}
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-
-                              <Grid container>
-                                <Grid item md={4.5}>
-                                  <Box>
-                                    <Typography variant="subtitle1">
-                                      Size
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                                <Grid item md={1}>
-                                  <Typography variant="subtitle1">:</Typography>
-                                </Grid>
-                                <Grid item md={6}>
-                                  <Box>
-                                    <Typography
-                                      color="primary"
-                                      variant="subtitle1"
-                                    >
-                                      {elem?.items[0]?.product.length} x{" "}
-                                      {elem?.items[0]?.product.width} x{" "}
-                                      {elem?.items[0]?.product.height} inch
-                                    </Typography>
-                                  </Box>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                            <Grid item md={2}>
-                              <Stack
-                                direction="row"
-                                justifyContent="space-between"
-                                alignItems="center"
-                                spacing={1}
-                              >
-                                <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    variant="outlined"
-                                    startIcon={
-                                      <Iconify icon="carbon:view-filled" />
-                                    }
-                                    onClick={() =>
-                                      router.push(
-                                        `/dashboard/customer/job_history/detail/${elem.id}`
-                                      )
-                                    }
-                                  >
-                                    View Detail
-                                  </Button>
-                                </Box>
-                              </Stack>
-                              <Stack
-                                mt={1}
-                                position="absolute"
-                                right={33}
-                              ></Stack>
-                            </Grid>
-                          </Grid>
-                          <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {elem.description}
-                            </Typography>
-                          </Box>
-
-                          <Divider sx={{ my: 2 }} />
-                          <Box>
-                            <Stack
-                              direction="row"
-                              justifyContent="space-between"
-                            >
-                              <Typography variant="subtitle2">
-                                Job Budget: <Iconify icon="bi:currency-pound" />{elem?.budget}
-                              </Typography>
-                              <Typography variant="subtitle2">
-                                Customer Spend: <Iconify icon="bi:currency-pound" />{elem?.spentmoney}+
-                              </Typography>
-                            </Stack>
-                          </Box>
-                        </CardContent>
-                      </Card> */}
                     </Grid>
                   );
                 })

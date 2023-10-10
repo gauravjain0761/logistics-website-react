@@ -64,13 +64,11 @@ const DashboardCard = ({ jobPost }) => {
       .get(`/api/auth/master/plan/list/${type}`)
       .then((response) => {
         if (response.status === 200) {
-          // setLoadingCard(false);
           let subscriptionData = find(response?.data.view_data, { default: 1 });
           setSubscription(subscriptionData);
         }
       })
       .catch((error) => {
-        // setLoadingCard(false);
         console.log("error", error);
       });
   };

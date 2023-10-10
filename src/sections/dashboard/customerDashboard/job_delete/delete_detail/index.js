@@ -25,7 +25,7 @@ import {
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const JobDeleteDetail = () => {
   const router = useRouter();
@@ -82,7 +82,6 @@ const JobDeleteDetail = () => {
   });
 
   const getJobDetail = async () => {
-    // setLoader(true);
     await axiosInstance
       .get(`api/auth/jobs/view/${id}`)
       .then((response) => {

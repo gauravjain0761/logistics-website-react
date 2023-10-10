@@ -1,6 +1,5 @@
 import { TextBox } from "@/components/form";
 import { Box, Typography } from "@mui/material";
-import React from "react";
 
 const StepOne = ({ formik }) => {
   return (

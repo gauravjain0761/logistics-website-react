@@ -1,5 +1,17 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import TextMaxLine from "@/components/text-max-line";
+import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
+import {
+  getJobActive,
+  getJobHistory,
+  setJobActivePage,
+} from "@/redux/slices/job/company";
+import { useDispatch, useSelector } from "@/redux/store";
+import axiosInstance from "@/utils/axios";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
   Box,
   Button,
@@ -17,23 +29,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import CountUp from "react-countup";
-import DashboardCard from "@/module/dashboard/companyCard/dashboardCard";
-import axiosInstance from "@/utils/axios";
-import { useAuthContext } from "@/auth/useAuthContext";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import { useDispatch, useSelector } from "@/redux/store";
-import {
-  getJobActive,
-  getJobHistory,
-  setJobActivePage,
-} from "@/redux/slices/job/company";
-import TextMaxLine from "@/components/text-max-line";
+import React, { useEffect, useState } from "react";
+import CountUp from "react-countup";
 
 const DashboardAddJob = () => {
   const dispatch = useDispatch();
@@ -57,7 +57,6 @@ const DashboardAddJob = () => {
   const [layout, setLayout] = useState(false);
   const [setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
-  // const [openPDf, setOpenPDF] = React.useState(false);
   const [select, setSelect] = React.useState("new");
 
   const [pageData, setPageData] = React.useState({});
@@ -101,10 +100,6 @@ const DashboardAddJob = () => {
       })
       .catch((error) => {
         const { response } = error;
-
-        // enqueueSnackbar(response.data.error, {
-        //   variant: "error",
-        // });
         console.log(error);
       });
   };
@@ -185,12 +180,6 @@ const DashboardAddJob = () => {
     },
   });
 
-  // useEffect(() => {
-  //   formik.setFieldValue("id", startOpen);
-  // }, [startOpen]);
-  // useEffect(() => {
-  //   formik.setFieldValue("driver_id", user?.id);
-  // }, [user, user?.id]);
   return (
     <React.Fragment>
       <Box py={3} pb={12}>
@@ -273,17 +262,6 @@ const DashboardAddJob = () => {
                             >
                               {elem?.description}
                             </TextMaxLine>
-                            {/* <Typography
-                              color="common.black"
-                              fontSize={17}
-                              sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              fontWeight={500}
-                            >
-                              {elem?.description}
-                            </Typography> */}
                           </Box>
                         </Stack>
                         <Divider />
@@ -299,9 +277,6 @@ const DashboardAddJob = () => {
                                 >
                                   {elem.name}
                                 </TextMaxLine>
-                                {/* <Typography fontSize={28} fontWeight={500}>
-                                  {elem.name}
-                                </Typography> */}
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
                                 <Stack
@@ -609,65 +584,6 @@ const DashboardAddJob = () => {
                                 spacing={1}
                               >
                                 <Stack spacing={1}>
-                                  {/* <Box>
-                                    {elem.status === 1 ? (
-                                      <Button
-                                        color="success"
-                                        fullWidth
-                                        variant="outlined"
-                                        startIcon={
-                                          <Iconify icon="icon-park:check-correct" />
-                                        }
-                                        onClick={() => {
-                                          formData.setFieldValue(
-                                            "id",
-                                            elem?.bid_id
-                                          );
-                                          setStartOpen(true);
-                                        }}
-                                        sx={{
-                                          fontWeight: 500,
-                                        }}
-                                      >
-                                        Start Job
-                                      </Button>
-                                    ) : (
-                                      <Button
-                                        sx={{ fontWeight: 500 }}
-                                        fullWidth
-                                        color="success"
-                                        variant="outlined"
-                                        startIcon={
-                                          <Iconify icon="carbon:task-complete" />
-                                        }
-                                        onClick={() => {
-                                          formData.setFieldValue(
-                                            "id",
-                                            elem?.bid_id
-                                          );
-                                          formik.setFieldValue(
-                                            "job_id",
-                                            elem?.id
-                                          );
-                                          setCompleteOpen(true);
-                                        }}
-                                      >
-                                        Complete Job
-                                      </Button>
-                                    )}
-                                  </Box> */}
-                                  {/* <Box>
-                                  <Button
-                                    sx={{ fontWeight: 500 }}
-                                    fullWidth
-                                    color="success"
-                                    variant="outlined"
-                                    startIcon={<Iconify icon="carbon:star" />}
-                                    onClick={() => handleReviewOpen(1)}
-                                  >
-                                    Give Review
-                                  </Button>
-                                </Box> */}
                                   {elem?.status != 0 && elem?.status != 1 && (
                                     <Box>
                                       <Button
@@ -688,19 +604,6 @@ const DashboardAddJob = () => {
                                       </Button>
                                     </Box>
                                   )}
-                                  {/* <Box>
-                                    <Button
-                                      sx={{ fontWeight: 500 }}
-                                      fullWidth
-                                      variant="outlined"
-                                      startIcon={
-                                        <Iconify icon="carbon:view-filled" />
-                                      }
-                                      onClick={() => setOpenPDF(true)}
-                                    >
-                                      View PDF
-                                    </Button>
-                                  </Box> */}
                                 </Stack>
                               </Stack>
                               <Stack
@@ -710,13 +613,6 @@ const DashboardAddJob = () => {
                               ></Stack>
                             </Grid>
                           </Grid>
-                          {/* <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {elem?.description}
-                            </Typography>
-                          </Box> */}
-
                           <Divider sx={{ my: 2 }} />
                           <Box>
                             <Stack
@@ -734,9 +630,6 @@ const DashboardAddJob = () => {
                                 Job Budget: <Iconify icon="bi:currency-pound" />
                                 {elem?.budget}
                               </Typography>
-                              {/* <Typography variant="subtitle2">
-                              Total Spend: $30K+
-                            </Typography> */}
                               <Typography
                                 variant="subtitle2"
                                 sx={{
@@ -953,48 +846,9 @@ const DashboardAddJob = () => {
                 </DialogContent>
               </Dialog>
             </Box>
-            {/* <Stack alignItems="center">
-              <Box>
-                <Typography variant="h5">No Active Jobs.....</Typography>
-              </Box>
-              <Box
-                component="img"
-                sx={{ width: "400px" }}
-                src="/assets/images/home/new/banner-image.jpg"
-                alt="truck"
-              />
-            </Stack> */}
           </Box>
         </Container>
       </Box>
-      {/* <Dialog fullScreen open={openPDf}>
-        <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-          <DialogActions
-            sx={{
-              zIndex: 9,
-              padding: "12px !important",
-              boxShadow: (theme) => theme.customShadows.z8,
-            }}
-          >
-            <Tooltip title="Close">
-              <IconButton color="inherit" onClick={() => setOpenPDF(false)}>
-                <Iconify icon="eva:close-fill" />
-              </IconButton>
-            </Tooltip>
-          </DialogActions>
-          <Box sx={{ flexGrow: 1, height: "100%", overflow: "hidden" }}>
-            <PDFViewer
-              fileName={`Test-Name`}
-              width="100%"
-              height="100%"
-              style={{ border: "none" }}
-              showToolbar={false}
-            >
-              <InvoicePDF />
-            </PDFViewer>
-          </Box>
-        </Box>
-      </Dialog> */}
     </React.Fragment>
   );
 };

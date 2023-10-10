@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
+import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
 import PropTypes from "prop-types";
-import { Page, View, Text, Image, Document } from "@react-pdf/renderer";
 // utils
-import styles from "./InvoiceStyle";
 import moment from "moment";
+import styles from "./InvoiceStyle";
 
 // ----------------------------------------------------------------------
 

@@ -1,7 +1,6 @@
-import React from "react";
 import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
 import FaqsPage from "@/sections/faqs";
+import { useFormik } from "formik";
 
 const Faqs = () => {
   const formik = useFormik({});

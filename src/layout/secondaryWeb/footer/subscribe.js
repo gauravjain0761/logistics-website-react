@@ -1,14 +1,10 @@
 import SubscribeButton from "@/components/button/subscribeButton";
-import { TextBox } from "@/components/form";
 import {
-  Box,
-  Button,
-  CardContent,
+  Box, CardContent,
   Container,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
-import React from "react";
 
 const Subscribe = () => {
   return (

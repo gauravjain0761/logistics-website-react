@@ -1,56 +1,50 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import { JobSekelton } from "@/components/not-found";
+import SkeletonLoader from "@/components/skeleton";
+import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
+import { getJobPost, setJobPostPage } from "@/redux/slices/job/customer";
+import { useDispatch, useSelector } from "@/redux/store";
+import axiosInstance from "@/utils/axios";
 import { Add } from "@mui/icons-material";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
-  Autocomplete,
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineItem,
+  TimelineSeparator,
+  timelineItemClasses,
+} from "@mui/lab";
+import {
   Badge,
   Box,
   Button,
   Card,
   CardContent,
-  Chip,
   Container,
   Dialog,
   DialogContent,
   Divider,
   Grid,
-  IconButton,
-  Modal,
   Pagination,
   PaginationItem,
-  Rating,
   Stack,
-  TextField,
   Typography,
   alpha,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import CountUp from "react-countup";
-import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
-import axiosInstance from "@/utils/axios";
-import { useSnackbar } from "notistack";
-import SkeletonLoader from "@/components/skeleton";
-import { JobSekelton } from "@/components/not-found";
-import { useAuthContext } from "@/auth/useAuthContext";
-import { dispatch, useDispatch, useSelector } from "@/redux/store";
-import { getJobPost, setJobPostPage } from "@/redux/slices/job/customer";
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-  timelineItemClasses,
-} from "@mui/lab";
-import TextMaxLine from "@/components/text-max-line/TextMaxLine";
 import { useFormik } from "formik";
+import moment from "moment";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
+import CountUp from "react-countup";
 const DashboardJobPost = ({ formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [date, setDate] = React.useState("");
   const {
     jobPost: { pageCount, data, page, pageSize },
   } = useSelector((state) => state.customerJob);
@@ -65,10 +59,11 @@ const DashboardJobPost = ({ formik }) => {
         page: page,
         pageSize: pageSize,
         user_id: user?.id,
+        date: date,
         is_deleted: 0,
       })
     );
-  }, [page, pageSize]);
+  }, [page, pageSize, date]);
   const { user } = useAuthContext();
   const [layout, setLayout] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -76,60 +71,6 @@ const DashboardJobPost = ({ formik }) => {
 
   const [loader, setLoader] = React.useState(false);
 
-  const MonthSelect = [
-    {
-      label: "Choose Month",
-      value: 0,
-    },
-    {
-      label: "January",
-      value: "January",
-    },
-    {
-      label: "February",
-      value: "February",
-    },
-    {
-      label: "March",
-      value: "March",
-    },
-    {
-      label: "April",
-      value: "April",
-    },
-    {
-      label: "May",
-      value: "May",
-    },
-    {
-      label: "June",
-      value: "June",
-    },
-    {
-      label: "July",
-      value: "July",
-    },
-    {
-      label: "August",
-      value: "August",
-    },
-    {
-      label: "September",
-      value: "September",
-    },
-    {
-      label: "October",
-      value: "October",
-    },
-    {
-      label: "November",
-      value: "November",
-    },
-    {
-      label: "December",
-      value: "December",
-    },
-  ];
   return (
     <React.Fragment>
       <Box py={3} pb={12}>
@@ -175,16 +116,14 @@ const DashboardJobPost = ({ formik }) => {
 
                 <Grid item md={3}>
                   <Box>
-                    <SelectBox
+                    <TextBox
+                      type="date"
                       sx={{ mb: 0 }}
                       size="small"
                       fullWidth
-                      options={MonthSelect}
-                      name={`month`}
-                      value={formik?.values?.month}
-                      onChange={formik.handleChange}
-                      error={formik.touched.month && formik.errors.month}
-                      helperText={formik.touched.month && formik.errors.month}
+                      name={`date`}
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
                     />
                     {/* </Stack> */}
                   </Box>
@@ -245,7 +184,7 @@ const DashboardJobPost = ({ formik }) => {
                               }}
                               fontWeight={500}
                             >
-                              {item?.description}
+                              {item?.name}
                             </Typography>
                           </Box>
                           {item?.status <= 0 && (
@@ -263,11 +202,6 @@ const DashboardJobPost = ({ formik }) => {
                         <CardContent>
                           <Grid container spacing={2} alignItems="start">
                             <Grid item md={3}>
-                              <Box>
-                                <Typography fontSize={28} fontWeight={500}>
-                                  {item.name}
-                                </Typography>
-                              </Box>
                               <Stack direction="row" spacing={2} mb={2}>
                                 <Stack
                                   direction="row"
@@ -352,6 +286,11 @@ const DashboardJobPost = ({ formik }) => {
                                   );
                                 })}
                               </Stack>
+                              <Box>
+                                <Typography fontSize={28} fontWeight={500}>
+                                  {item.description}
+                                </Typography>
+                              </Box>
                             </Grid>
                             <Grid item md={3}>
                               <Box mb={4}>
@@ -561,166 +500,6 @@ const DashboardJobPost = ({ formik }) => {
                                     </Typography>
                                   </TimelineContent>
                                 </TimelineItem>
-                                {/* <TimelineItem
-                                  sx={{
-                                    "&.MuiTimelineItem-root": {
-                                      minHeight: "50px",
-                                    },
-                                  }}
-                                >
-                                  <TimelineSeparator sx={{ ml: 1.1 }}>
-                                    <TimelineDot
-                                      sx={{
-                                        backgroundColor: (theme) =>
-                                          theme.palette.primary.main,
-                                      }}
-                                    />
-                                    <TimelineConnector
-                                      sx={{
-                                        "&.MuiTimelineConnector-root": {
-                                          border: (theme) =>
-                                            `1px solid ${alpha(
-                                              theme.palette.common.black,
-                                              0.6
-                                            )}`,
-                                          width: "0px",
-                                          borderStyle: "dashed",
-                                          backgroundColor: "transparent",
-                                        },
-                                      }}
-                                    />
-                                  </TimelineSeparator>
-                                  <TimelineContent sx={{ fontSize: "11px" }}>
-                                    Location 1{" "}
-                                    <Typography
-                                      fontSize={8}
-                                      component="span"
-                                      color="primary"
-                                    >
-                                      Pickup
-                                    </Typography>
-                                  </TimelineContent>
-                                </TimelineItem> */}
-                                {/* <TimelineItem
-                                  sx={{
-                                    "&.MuiTimelineItem-root": {
-                                      minHeight: "50px",
-                                    },
-                                  }}
-                                >
-                                  <TimelineSeparator sx={{ ml: 1.1 }}>
-                                    <TimelineDot
-                                      sx={{
-                                        backgroundColor: (theme) =>
-                                          theme.palette.primary.main,
-                                      }}
-                                    />
-                                    <TimelineConnector
-                                      sx={{
-                                        "&.MuiTimelineConnector-root": {
-                                          border: (theme) =>
-                                            `1px solid ${alpha(
-                                              theme.palette.common.black,
-                                              0.6
-                                            )}`,
-                                          width: "0px",
-                                          borderStyle: "dashed",
-                                          backgroundColor: "transparent",
-                                        },
-                                      }}
-                                    />
-                                  </TimelineSeparator>
-                                  <TimelineContent sx={{ fontSize: "11px" }}>
-                                    Location 2{" "}
-                                    <Typography
-                                      fontSize={8}
-                                      component="span"
-                                      color="primary"
-                                    >
-                                      Pickup
-                                    </Typography>
-                                  </TimelineContent>
-                                </TimelineItem> */}
-                                {/* <TimelineItem
-                                  sx={{
-                                    "&.MuiTimelineItem-root": {
-                                      minHeight: "50px",
-                                    },
-                                  }}
-                                >
-                                  <TimelineSeparator sx={{ ml: 1.1 }}>
-                                    <TimelineDot
-                                      sx={{
-                                        backgroundColor: "#5D5D5D",
-                                      }}
-                                    />
-                                    <TimelineConnector
-                                      sx={{
-                                        "&.MuiTimelineConnector-root": {
-                                          border: (theme) =>
-                                            `1px solid ${alpha(
-                                              theme.palette.common.black,
-                                              0.6
-                                            )}`,
-                                          width: "0px",
-                                          borderStyle: "dashed",
-                                          backgroundColor: "transparent",
-                                        },
-                                      }}
-                                    />
-                                  </TimelineSeparator>
-                                  <TimelineContent sx={{ fontSize: "11px" }}>
-                                    Location 3{" "}
-                                    <Typography
-                                      fontSize={8}
-                                      component="span"
-                                      color="primary"
-                                    >
-                                      Drop-off
-                                    </Typography>
-                                  </TimelineContent>
-                                </TimelineItem> */}
-                                {/* <TimelineItem
-                                  sx={{
-                                    "&.MuiTimelineItem-root": {
-                                      minHeight: "50px",
-                                    },
-                                  }}
-                                >
-                                  <TimelineSeparator sx={{ ml: 1.1 }}>
-                                    <TimelineDot
-                                      sx={{
-                                        backgroundColor: (theme) =>
-                                          theme.palette.primary.main,
-                                      }}
-                                    />
-                                    <TimelineConnector
-                                      sx={{
-                                        "&.MuiTimelineConnector-root": {
-                                          border: (theme) =>
-                                            `1px solid ${alpha(
-                                              theme.palette.common.black,
-                                              0.6
-                                            )}`,
-                                          width: "0px",
-                                          borderStyle: "dashed",
-                                          backgroundColor: "transparent",
-                                        },
-                                      }}
-                                    />
-                                  </TimelineSeparator>
-                                  <TimelineContent sx={{ fontSize: "11px" }}>
-                                    Location 4{" "}
-                                    <Typography
-                                      fontSize={8}
-                                      component="span"
-                                      color="primary"
-                                    >
-                                      Pickup
-                                    </Typography>
-                                  </TimelineContent>
-                                </TimelineItem> */}
-
                                 <TimelineItem
                                   sx={{
                                     "&.MuiTimelineItem-root": {
@@ -748,15 +527,50 @@ const DashboardJobPost = ({ formik }) => {
                                   </TimelineContent>
                                 </TimelineItem>
                               </Timeline>
+                              <Box mt={4}>
+                                <Box>
+                                  <Typography fontSize={13} fontWeight={600}>
+                                    Created At
+                                  </Typography>
+                                </Box>
+                                <Stack
+                                  direction="row"
+                                  spacing={1}
+                                  alignItems="center"
+                                >
+                                  <Box
+                                    sx={{
+                                      backgroundColor: "#FEE6BB",
+                                      width: "28px",
+                                      height: "28px",
+                                      borderRadius: "50%",
+                                      p: "5px",
+                                    }}
+                                  >
+                                    <Iconify
+                                      color={(theme) =>
+                                        theme.palette.primary.main
+                                      }
+                                      icon="ion:time"
+                                    />
+                                  </Box>
+                                  <Box>
+                                    <Typography
+                                      color="grey"
+                                      fontWeight={400}
+                                      fontSize={13}
+                                    >
+                                      {item?.created_at
+                                        ? moment(item?.created_at).format(
+                                            "DD MMM"
+                                          )
+                                        : "" || "N/A"}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
+                              </Box>
                             </Grid>
                           </Grid>
-                          {/* <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {item?.description}
-                            </Typography>
-                          </Box> */}
-
                           <Divider sx={{ my: 2 }} />
                           <Box>
                             <Stack
@@ -774,9 +588,6 @@ const DashboardJobPost = ({ formik }) => {
                                 Bid: <Iconify icon="bi:currency-pound" />
                                 {item?.budget}
                               </Typography>
-                              {/* <Typography variant="subtitle2">
-                              Total Spend: $30K+
-                            </Typography> */}
                               <Stack direction="row" spacing={2}>
                                 <Box>
                                   <Badge

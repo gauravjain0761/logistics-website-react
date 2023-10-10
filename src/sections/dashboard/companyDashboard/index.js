@@ -51,12 +51,6 @@ const CustomerDashboard = () => {
               </Box>
               <CardContent sx={{ height: "100%", px: 10 }}>
                 <Grid container alignItems="center" sx={{ height: "inherit" }}>
-                  {/* <Grid item md={7}>
-                    <Box
-                      component={"img"}
-                      src="/assets/images/dashboard/logistic.png"
-                    />
-                  </Grid> */}
                   <Grid item md={5}>
                     <Stack direction={"row"} alignItems="center" height="100%">
                       <Stack spacing={2}>
@@ -87,15 +81,6 @@ const CustomerDashboard = () => {
                               )
                             }
                             color="dark"
-                            // sx={{
-                            //   py: 1.4,
-                            //   borderRadius: "50px",
-                            //   width: "20em",
-                            //   ":hover": {
-                            //     backgroundColor: "#000",
-                            //     color: "#fff",
-                            //   },
-                            // }}
                           >
                             Add Driver
                           </Button>

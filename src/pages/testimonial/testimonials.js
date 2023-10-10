@@ -1,7 +1,6 @@
-import React from "react";
 import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
 import TestimonialPage from "@/sections/testimonial/testimonialpage";
+import { useFormik } from "formik";
 const Testimonial = () => {
   const formik = useFormik({});
   return <TestimonialPage formik={formik} />;

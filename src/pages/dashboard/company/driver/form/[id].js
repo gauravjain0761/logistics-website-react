@@ -1,13 +1,12 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
-import { reject } from "lodash";
-import axiosInstance from "@/utils/axios";
-import { useSnackbar } from "notistack";
-import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { PrimaryWebLayout } from "@/layout";
 import DriverJobForm from "@/sections/dashboard/companyDashboard/driver/form";
+import axiosInstance from "@/utils/axios";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import React from "react";
 
 const DriverJob = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -209,7 +208,6 @@ const DriverJob = () => {
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            // handleOpenClose();
             formik.resetForm();
             router.push("/dashboard/company/driver/list");
           } else {
@@ -307,7 +305,6 @@ const DriverJob = () => {
               );
             }
           }
-          // console.log("iii",response)
         }
       })
       .catch((error) => {

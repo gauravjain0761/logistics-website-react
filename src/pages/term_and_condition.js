@@ -1,7 +1,6 @@
-import React from "react";
 import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
 import TermAndConditionSection from "@/sections/term_and_condition";
+import { useFormik } from "formik";
 
 const TermConditionPage = () => {
   const formik = useFormik({});

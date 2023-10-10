@@ -1,14 +1,12 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
-import Iconify from "@/components/iconify/Iconify";
 import { getJobAlert } from "@/redux/slices/job/driver";
 import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
-import { digitRegex } from "@/utils/constant";
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
   const dispatch = useDispatch();
@@ -101,7 +99,6 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
                 fullWidth
                 size="small"
                 name="ammount"
-                // type="number"
                 value={formik.values.ammount}
                 isMaxLenght={5}
                 onChange={(e) => {
@@ -111,7 +108,6 @@ const ApplyJobModal = ({ job_id, applyOpen, handleClose, getData }) => {
                       e.target.value.replace(/\D/gm, "")
                     );
                   }
-                  // formik.handleChange;
                 }}
                 label="Bid Price"
                 placeholder="Bidding Price"

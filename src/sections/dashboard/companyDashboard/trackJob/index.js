@@ -1,21 +1,18 @@
 import { useAuthContext } from "@/auth/useAuthContext";
+import Iconify from "@/components/iconify/Iconify";
 import TrackGoogleMaps from "@/module/map/track_job";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  Container,
+  Card, Container,
   Divider,
   Grid,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import Iconify from "@/components/iconify/Iconify";
+import React, { useEffect, useState } from "react";
 
 const TrackJob = () => {
   const router = useRouter();

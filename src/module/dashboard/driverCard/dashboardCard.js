@@ -1,17 +1,5 @@
+import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
-import axiosInstance from "@/utils/axios";
-import {
-  Box,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
-  Typography,
-  alpha,
-} from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobActive,
   getJobAlert,
@@ -20,8 +8,17 @@ import {
   setJobAlertPage,
   setJobHistoryPage,
 } from "@/redux/slices/job/driver";
-import { useAuthContext } from "@/auth/useAuthContext";
+import { useDispatch, useSelector } from "@/redux/store";
+import axiosInstance from "@/utils/axios";
+import {
+  Box,
+  Card, Grid,
+  Stack,
+  Typography
+} from "@mui/material";
 import { find } from "lodash";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 const DashboardCard = () => {
   const router = useRouter();
@@ -69,13 +66,11 @@ const DashboardCard = () => {
       .get(`/api/auth/master/plan/list/${type}`)
       .then((response) => {
         if (response.status === 200) {
-          // setLoadingCard(false);
           let subscriptionData = find(response?.data.view_data, { default: 1 });
           setSubscription(subscriptionData);
         }
       })
       .catch((error) => {
-        // setLoadingCard(false);
         console.log("error", error);
       });
   };

@@ -1,33 +1,18 @@
-import { SelectBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
-import { Add } from "@mui/icons-material";
 import {
-  Autocomplete,
-  Badge,
   Box,
   Button,
   Card,
-  CardContent,
-  Chip,
-  Container,
+  CardContent, Container,
   Divider,
-  Grid,
-  IconButton,
-  Pagination,
-  PaginationItem,
-  Rating,
-  Stack,
-  TextField,
-  Typography,
-  alpha,
+  Grid, Pagination,
+  PaginationItem, Stack, Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import CountUp from "react-countup";
-// import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
-import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { useDispatch, useSelector } from "@/redux/store";
@@ -36,7 +21,6 @@ import {
   setJobDeletePage,
 } from "@/redux/slices/job/customer";
 import TextMaxLine from "@/components/text-max-line";
-import { PageSizes } from "@/utils/constant";
 
 const JobDelete = ({ formik }) => {
   const router = useRouter();
@@ -502,18 +486,6 @@ const JobDelete = ({ formik }) => {
                 justifyContent="center"
                 spacing={2}
               >
-                {/* <Box>
-                  <SelectBox
-                    fullWidth
-                    name="pageSize"
-                    value={pageSize}
-                    formSx={{ marginBottom: "0px" }}
-                    onChange={(e) => {
-                      dispatch(setJobHistoryPageSize(e.target.value));
-                    }}
-                    options={PageSizes}
-                  />
-                </Box> */}
                 <Box>
                   <Typography variant="body2" component="p">
                     {page} - {page * pageSize} of {dataCount}

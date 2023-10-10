@@ -1,20 +1,14 @@
 import { useAuthContext } from "@/auth/useAuthContext";
-import { useFirebaseContext } from "@/auth/useFirebaseContext";
 import ForgetPasswordDialogBox from "@/components/dialog/forgetPasswordModal";
 import { PasswordBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
+  Button, Checkbox,
   Container,
-  FormControlLabel,
-  FormGroup,
-  Grid,
+  FormControlLabel, Grid,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";

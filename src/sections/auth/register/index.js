@@ -11,13 +11,11 @@ import {
   Checkbox,
   Container,
   FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
+  FormControlLabel, FormHelperText,
   Grid,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
@@ -447,13 +445,6 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       Login Here
                     </Typography>
                   </Stack>
-                  {/* <Box>
-                        <Typography textAlign={"center"}>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua.
-                        </Typography>
-                      </Box> */}
                   <Box>
                     <Button
                       onClick={() => router.push("/auth/register/driver")}

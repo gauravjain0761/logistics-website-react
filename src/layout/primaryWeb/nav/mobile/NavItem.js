@@ -5,7 +5,6 @@ import NextLink from 'next/link';
 import { Link, ListItemText, ListItemIcon } from '@mui/material';
 // components
 import Iconify from '@/components/iconify/Iconify';
-import Image from '@/components/image/Image';
 //
 import { ListItem } from './styles';
 

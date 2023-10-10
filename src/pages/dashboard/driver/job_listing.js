@@ -1,8 +1,7 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
-import JobList from "@/sections/dashboard/driverDashboard/joblisting";
 import AuthGuard from "@/auth/AuthGuard";
+import { PrimaryWebLayout } from "@/layout";
+import JobList from "@/sections/dashboard/driverDashboard/joblisting";
+import { useFormik } from "formik";
 
 const JobListing = () => {
   const formik = useFormik({});

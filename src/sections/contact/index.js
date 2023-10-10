@@ -1,18 +1,11 @@
-import { BannerSection } from "@/components/banner";
-import { TextBox } from "@/components/form";
-import Iconify from "@/components/iconify";
 import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
   Box,
-  Breadcrumbs,
-  Button,
-  Card,
-  CardContent,
-  Container,
+  Breadcrumbs, Container,
   Grid,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -49,11 +42,6 @@ const ContactSection = ({ formik }) => {
   // API Fetch End
   return (
     <React.Fragment>
-      {/* <BannerSection
-        src="/assets/images/contact/contact-us-banner.jpg"
-        alt=""
-        title="Contact Us"
-      /> */}
       <Box sx={{ pt: 13, position: "relative", pb: 10 }}>
         <Box
           sx={{

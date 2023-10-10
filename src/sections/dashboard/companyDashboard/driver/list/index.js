@@ -2,7 +2,6 @@ import { SelectBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import { Add } from "@mui/icons-material";
 import {
-  Badge,
   Box,
   Button,
   Card,
@@ -14,8 +13,7 @@ import {
   Pagination,
   PaginationItem,
   Stack,
-  Typography,
-  alpha,
+  Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -222,7 +220,6 @@ const DriverJobListSection = ({ formik }) => {
                             </Typography>
                           </Box>
                           <Box>
-                            {/* <DeleteModal id={item?.id} /> */}
                           </Box>
                         </Stack>
                         <Divider />

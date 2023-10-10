@@ -1,7 +1,5 @@
+import { Box, Drawer } from "@mui/material";
 import React from "react";
-import { Box, Drawer, Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Typography from "@/theme/overrides/Typography";
 
 const MobileDrawer = ({
   handleDrawerToggle,
