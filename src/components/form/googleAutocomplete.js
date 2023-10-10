@@ -94,7 +94,7 @@ const GoogleAutocomplete = (props) => {
   };
 
   return (
-    <Box sx={{ my: 4, width: "100%", position: "relative", height: "100%" }}>
+    <Box sx={{ my: 0, width: "100%", position: "relative"}}>
       <PlacesAutocomplete
         value={value}
         onChange={(e) => onChange(e)}
