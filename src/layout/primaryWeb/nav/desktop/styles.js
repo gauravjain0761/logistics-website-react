@@ -53,29 +53,17 @@ export const ListItem = styled(ListItemButton, {
       color: `${theme.palette.primary.main} !important`,
       borderBottom:"2px solid",
      
-      // "&::before": dotActive,
     }),
 
-    // ...(!active &&
-    //   !value && {
-    //     color: `${theme.palette.common.white} !important`,
-    //   }),
-    // ...(!active &&
-    //   value && {
-    //     color: `${theme.palette.common.black} !important`,
-    //   }),
-    // Active sub item
     ...(active &&
       subItem && {
         ...theme.typography.subtitle2,
         color: theme.palette.text.primary,
         
         "&::before": {
-          // ...dotActive,
           color: theme.palette.primary.main,
         },
       }),
-    // Open
     ...(open && {
       opacity: 0.48,
     }),
@@ -148,18 +136,13 @@ export const ListSubItem = styled(ListItemButton, {
 
 export const StyledMenu = styled(Paper)(({ theme }) => {
   return {
-    // top: 95,
-    // left: 0,
     right: 250,
-    // marginLeft: 'auto',
-    // marginRigth: '100px',
     display: "grid",
     position: "fixed",
     alignItems: "flex-start",
     zIndex: theme.zIndex.modal,
     padding: theme.spacing(1, 1, 1, 3),
     boxShadow: theme.customShadows.dialog,
-    // maxWidth: "150px",
     gridTemplateColumns: "repeat(3, 1fr)",
     borderRadius: Number(theme.shape.borderRadius) * 2,
     border: `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,

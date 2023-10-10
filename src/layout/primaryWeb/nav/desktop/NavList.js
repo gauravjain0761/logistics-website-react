@@ -35,10 +35,6 @@ export default function NavList({ item, isOffset }) {
     offset: ["start end", "end end"],
   });
 
-  // const isTop = useOffSetTop(10, {
-  //   offset: ["start end", "end end"],
-  // });
-
   useEffect(() => {
     if (openMenu) {
       handleCloseMenu();
@@ -118,7 +114,6 @@ function NavSubList({ items, isDashboard, subheader, onClose }) {
       gridColumn={isDashboard ? "span 6" : "span 2"}
       alignItems="flex-start"
     >
-      {/* <StyledSubheader disableSticky>{subheader}</StyledSubheader> */}
 
       {items &&
         items.length > 0 &&

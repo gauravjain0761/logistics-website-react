@@ -1,44 +1,31 @@
-import { DatePickerBox, SelectBox, TextBox } from "@/components/form";
-import Iconify from "@/components/iconify/Iconify";
-import { Add, Search } from "@mui/icons-material";
-import {
-  Autocomplete,
-  Badge,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  Pagination,
-  PaginationItem,
-  Rating,
-  Stack,
-  TextField,
-  Typography,
-  alpha,
-} from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import CountUp from "react-countup";
-// import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
-import axiosInstance from "@/utils/axios";
 import { useAuthContext } from "@/auth/useAuthContext";
+import { SelectBox, TextBox } from "@/components/form";
+import Iconify from "@/components/iconify/Iconify";
+import TextMaxLine from "@/components/text-max-line";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
-import { useDispatch, useSelector } from "@/redux/store";
 import {
   getJobHistory,
   setJobHistoryPage,
   setJobHistoryPageSize,
 } from "@/redux/slices/job/customer";
-import TextMaxLine from "@/components/text-max-line";
+import { useDispatch, useSelector } from "@/redux/store";
 import { PageSizes } from "@/utils/constant";
+import { Search } from "@mui/icons-material";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent, Container,
+  Divider,
+  Grid, Pagination,
+  PaginationItem, Stack, Typography
+} from "@mui/material";
 import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import CountUp from "react-countup";
 
 const JobHistory = ({ formik }) => {
   const router = useRouter();
@@ -174,17 +161,6 @@ const JobHistory = ({ formik }) => {
                             >
                               {elem?.description}
                             </TextMaxLine>
-                            {/* <Typography
-                              color="common.black"
-                              fontSize={17}
-                              sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                              fontWeight={500}
-                            >
-                              {elem?.description}
-                            </Typography> */}
                           </Box>
                         </Stack>
                         <Divider />
@@ -200,9 +176,6 @@ const JobHistory = ({ formik }) => {
                                 >
                                   {elem.name}
                                 </TextMaxLine>
-                                {/* <Typography fontSize={28} fontWeight={500}>
-                                  {elem.name}
-                                </Typography> */}
                               </Box>
                               <Stack direction="row" spacing={2} mb={2}>
                                 <Stack
@@ -518,13 +491,6 @@ const JobHistory = ({ formik }) => {
                               </Box>
                             </Grid>
                           </Grid>
-                          {/* <Box pt={2}>
-                            <Typography fontSize={14}>
-                              {" "}
-                              {elem?.description}
-                            </Typography>
-                          </Box> */}
-
                           <Divider sx={{ my: 2 }} />
                           <Box>
                             <Stack
@@ -542,9 +508,6 @@ const JobHistory = ({ formik }) => {
                                 Job Budget: <Iconify icon="bi:currency-pound" />
                                 {elem?.budget}
                               </Typography>
-                              {/* <Typography variant="subtitle2">
-                              Total Spend: $30K+
-                            </Typography> */}
                               <Typography
                                 variant="subtitle2"
                                 sx={{

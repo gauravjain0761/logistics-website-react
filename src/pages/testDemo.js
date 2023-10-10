@@ -1,6 +1,6 @@
-import { Autocomplete, Box, Button, Fade, MenuItem, Paper, Popper, TextField, Typography } from '@mui/material'
+import { Button, Fade, Paper, Popper, Typography } from '@mui/material';
 import React from 'react';
-import PlacesAutocomplete, {
+import {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
@@ -24,7 +24,6 @@ const TestDemo = () => {
 
     const handleChange = (address) => {
         console.log("address", address)
-        // setState({ address });
     };
 
     const handleSelect = address => {

@@ -1,10 +1,7 @@
 import React from "react";
 import {
-  GoogleMap,
-  useJsApiLoader,
   Marker,
-  InfoWindow,
-  DirectionsRenderer,
+  InfoWindow
 } from "@react-google-maps/api";
 import {
   Box,
@@ -119,7 +116,6 @@ const DirectionRenderComponent = (props) => {
         travelMode: window.google.maps.TravelMode.DRIVING,
       },
       (result, status) => {
-        // console.log("status", status);
         if (status === window.google.maps.DirectionsStatus.OK) {
           setState({
             directions: result,
@@ -128,7 +124,6 @@ const DirectionRenderComponent = (props) => {
           status === window.google.maps.DirectionsStatus.OVER_QUERY_LIMIT
         ) {
           delayFactor += 0.2;
-          // if (delayFactor <= 10) delayFactor = 0.2;
           setTimeout(() => {
             getDirections(startLoc, destinationLoc);
           }, delayFactor * 200);
@@ -161,46 +156,11 @@ const DirectionRenderComponent = (props) => {
         )}
       </Marker>
     );
-    // destinationMarker = (
-    //   <Marker
-    //     label={props.index.toString()}
-    //     defaultIcon={null}
-    //     position={{
-    //       lat: parseFloat(props.to.lat),
-    //       lng: parseFloat(props.to.lng),
-    //     }}
-    //     onClick={() => {
-    //       setShowPopUp(1);
-    //     }}
-    //   >
-    //     {showPopUp == 1 && (
-    //       <InfoWindow onCloseClick={() => setShowPopUp(false)}>
-    //         {getGooglePopUp()}
-    //       </InfoWindow>
-    //     )}
-    //   </Marker>
-    // );
   }
 
   return (
     <div>
       {originMarker}
-      {/* {destinationMarker}
-      {state.directions && (
-        <DirectionsRenderer
-          directions={state.directions}
-          options={{
-            polylineOptions: {
-              storkeColor: props.storkeColor,
-              strokeOpacity: 0.4,
-              strokeWeight: 4,
-            },
-            preserveViewport: true,
-            suppressMarkers: true,
-            icon: { scale: 3 },
-          }}
-        />
-      )} */}
     </div>
   );
 };

@@ -1,8 +1,7 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
 import AuthGuard from "@/auth/AuthGuard";
+import { PrimaryWebLayout } from "@/layout";
 import JobHistory from "@/sections/dashboard/customerDashboard/jobhistory";
+import { useFormik } from "formik";
 
 const JobHistoryPage = () => {
   const formik = useFormik({

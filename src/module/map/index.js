@@ -1,12 +1,9 @@
-import React from "react";
+import { Box } from "@mui/material";
 import {
   GoogleMap,
-  useJsApiLoader,
-  Marker,
-  InfoWindow,
-  DirectionsRenderer,
+  useJsApiLoader
 } from "@react-google-maps/api";
-import { Box } from "@mui/material";
+import React from "react";
 import DirectionRenderComponent from "./directionRenderComponent";
 
 const containerStyle = {

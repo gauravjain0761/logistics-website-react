@@ -1,6 +1,5 @@
 import { AuthFirebaseProvider } from "@/auth/FirebaseContext";
 import { AuthProvider } from "@/auth/JwtContext";
-import { MotionLazyContainer } from "@/components/animate";
 import ProgressBar from "@/components/progressBar";
 import SnackbarProvider from "@/components/snackbar/SnackbarProvider";
 import { StepperProvider } from "@/components/stepper/stepperContext";

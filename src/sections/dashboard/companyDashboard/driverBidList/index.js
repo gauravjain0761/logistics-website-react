@@ -1,16 +1,13 @@
 import { SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
+import SkeletonLoader from "@/components/skeleton";
+import GoogleMaps from "@/module/map";
+import axiosInstance from "@/utils/axios";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Container,
-  DialogContent,
-  Divider,
-  Drawer,
-  Grid,
+  Button, Container, Divider, Grid,
   LinearProgress,
   Modal,
   Pagination,
@@ -19,17 +16,11 @@ import {
   Rating,
   Slider,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import GoogleMaps from "@/module/map";
 import { useRouter } from "next/router";
-import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
-import SkeletonLoader from "@/components/skeleton";
-import { StackedBarChartTwoTone } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
 
 const BidList = () => {
   const router = useRouter();
@@ -565,12 +556,6 @@ const BidList = () => {
           </Grid>
         </Container>
       </Box>
-      {/* <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
-        <DialogContent sx={{ pt: 4 }}>
-         
-        </DialogContent>
-      </Drawer> */}
-
       <Box>
         <Modal
           open={startChat}

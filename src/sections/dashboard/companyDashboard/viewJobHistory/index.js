@@ -25,7 +25,7 @@ import {
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const ViewJobHistory = () => {
   const router = useRouter();
@@ -82,7 +82,6 @@ const ViewJobHistory = () => {
   });
 
   const getJobDetail = async () => {
-    // setLoader(true);
     await axiosInstance
       .get(`api/auth/jobs/view/${id}`)
       .then((response) => {
@@ -301,67 +300,6 @@ const ViewJobHistory = () => {
                     </Table>
                   </TableContainer>
                 </Box>
-                {/* <Box my={4}>
-                  <Divider />
-
-                  <Box my={3}>
-                    <Box textAlign="right">
-                      <Button
-                        variant="outlined"
-                        onClick={() => setReviewOpen(true)}
-                      >
-                        + Add Rating
-                      </Button>
-                    </Box>
-                    <Box>
-                      <Typography textAlign="center" variant="h4">
-                        Rating & Reviews
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {ratings &&
-                    ratings?.length > 0 &&
-                    ratings.map((item, index) => {
-                      return (
-                        <Box key={index}>
-                          <Stack spacing={3} direction="row" py={2}>
-                            <Box
-                              component="img"
-                              src={`${item?.user?.base_url}${item?.user?.profile_img}`}
-                              width={60}
-                              height={60}
-                              sx={{ objectFit: "cover" }}
-                            />
-                            <Stack direction="column">
-                              <Box>
-                                <Typography
-                                  fontSize={16}
-                                  fontWeight={500}
-                                  color="primary"
-                                >
-                                  {item?.user?.user_name}
-                                </Typography>
-                              </Box>
-                              <Box>
-                                <Rating
-                                  value={item?.rating}
-                                  readOnly
-                                  size="small"
-                                />
-                              </Box>
-                              <Box>
-                                <Typography fontSize={14}>
-                                  {item?.review}
-                                </Typography>
-                              </Box>
-                            </Stack>
-                          </Stack>
-                          <Divider />
-                        </Box>
-                      );
-                    })}
-                </Box> */}
               </CardContent>
             </Card>
           </Box>

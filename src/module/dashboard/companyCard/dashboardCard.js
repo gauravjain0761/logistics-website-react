@@ -1,12 +1,6 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import Iconify from "@/components/iconify/Iconify";
-import { getCompanyDashboard, getDriver } from "@/redux/slices/job/company";
-import {
-  getJobHistory,
-  getJobPost,
-  setJobPostPage,
-} from "@/redux/slices/job/customer";
-import { getJobActive } from "@/redux/slices/job/driver";
+import { getCompanyDashboard } from "@/redux/slices/job/company";
 import { useDispatch, useSelector } from "@/redux/store";
 import axiosInstance from "@/utils/axios";
 import {
@@ -15,8 +9,7 @@ import {
   CardContent,
   Grid,
   Stack,
-  Typography,
-  alpha,
+  Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -34,13 +27,11 @@ const DashboardCard = ({ jobPost }) => {
       .get(`/api/auth/master/plan/list/${type}`)
       .then((response) => {
         if (response.status === 200) {
-          // setLoadingCard(false);
           let subscriptionData = find(response?.data.view_data, { default: 1 });
           setSubscription(subscriptionData);
         }
       })
       .catch((error) => {
-        // setLoadingCard(false);
         console.log("error", error);
       });
   };

@@ -1,8 +1,7 @@
-import React from "react";
-import { useFormik } from "formik";
+import AuthGuard from "@/auth/AuthGuard";
 import { PrimaryWebLayout } from "@/layout";
 import CustomerDashboard from "@/sections/dashboard/customerDashboard";
-import AuthGuard from "@/auth/AuthGuard";
+import { useFormik } from "formik";
 
 const DashboardPage = () => {
   const formik = useFormik({});

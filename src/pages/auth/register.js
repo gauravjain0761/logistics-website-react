@@ -4,7 +4,6 @@ import { PrimaryWebLayout } from "@/layout";
 import Register from "@/sections/auth/register";
 import axiosInstance from "@/utils/axios";
 import { useFormik } from "formik";
-import { isEqual } from "lodash";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";
@@ -112,8 +111,6 @@ const RegisterPage = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
-      // console.log("test 13", values);
-      // register("/api/user/cust-register", values);
       let formData = new FormData();
       formData.append("user_name", values?.user_name);
       formData.append("user_type", values?.user_type);
@@ -128,17 +125,11 @@ const RegisterPage = () => {
         .post("/api/user/cust-register", formData)
         .then((response) => {
           if (response?.status === 200) {
-            // sendOtp({
-            //   email: values.email,
-            //   type: values.user_type,
-            // });
-            // handleOpenClose();
             formik.resetForm();
             router.push("/auth/login");
             enqueueSnackbar(response.data.message, {
               variant: "success",
             });
-            // formik.resetForm();
           } else {
             enqueueSnackbar(response.data.message, {
               variant: "error",

@@ -556,8 +556,31 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   </Typography>
                                 </Stack>
                               </Grid>
-
-                              <Grid item md={12}>
+                              <Grid item md={6}>
+                                <Box>
+                                  <TextBox
+                                    fullWidth
+                                    label="Postal Code"
+                                    placeholder="Enter Postal Code"
+                                    value={addressItem?.postal_code}
+                                    name={`items[${productIndex}].address[${addressIndex}].postal_code`}
+                                    onChange={(e) => {
+                                      formik.setFieldValue(
+                                        `items[${productIndex}].address[${addressIndex}].postal_code`,
+                                        e.target.value.replace(/\D/gm, "")
+                                      );
+                                    }}
+                                    size="small"
+                                    helperText={
+                                      !isEmpty(formik.touched) &&
+                                      formik?.errors?.items &&
+                                      formik?.errors?.items[productIndex]
+                                        ?.address[addressIndex].postal_code
+                                    }
+                                  />
+                                </Box>
+                              </Grid>
+                              <Grid item md={6}>
                                 <GoogleAutocomplete
                                   fullWidth
                                   size="small"

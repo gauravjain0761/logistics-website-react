@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 // slices
-import driverJobReducer from "./slices/job/driver";
-import customerJobReducer from "./slices/job/customer";
-import companyJobReducer from "./slices/job/company";
 import homeReducer from "./slices/home/home";
+import companyJobReducer from "./slices/job/company";
+import customerJobReducer from "./slices/job/customer";
+import driverJobReducer from "./slices/job/driver";
 // ----------------------------------------------------------------------
 
 export const createNoopStorage = () => ({

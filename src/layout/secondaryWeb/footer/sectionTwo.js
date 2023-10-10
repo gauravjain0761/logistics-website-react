@@ -1,6 +1,5 @@
 import { Heading } from "@/components/typography";
-import { List, ListItemButton, ListItemText } from "@mui/material";
-import React from "react";
+import { List, ListItemButton } from "@mui/material";
 import { StyledListItemText } from "./footerStyle";
 
 const SectionTwo = () => {

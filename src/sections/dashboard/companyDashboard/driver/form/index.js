@@ -1,28 +1,20 @@
-import React from "react";
+import { PasswordBox, TextBox } from "@/components/form";
+import { Close } from "@mui/icons-material";
 import {
   Box,
   Breadcrumbs,
   Button,
   Card,
   CardContent,
-  Checkbox,
   Container,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
   Grid,
   IconButton,
-  Radio,
   Stack,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import Iconify from "@/components/iconify";
-import { PasswordBox, TextBox } from "@/components/form";
-import DocumentModal from "@/module/driverDocument/driverDocumentmodal";
-import { Close } from "@mui/icons-material";
-import OTPDialogBox from "@/components/dialog/otpModal";
+import { useRouter } from "next/router";
+import React from "react";
 
 const DriverJobForm = ({ formik }) => {
   const router = useRouter();
@@ -36,7 +28,6 @@ const DriverJobForm = ({ formik }) => {
         <Container sx={{ py: 3 }}>
           <Stack spacing={4}>
             <Box>
-              {/* <DashboardCard /> */}
               <Breadcrumbs aria-label="breadcrumb">
                 <Box
                   component={Link}
@@ -76,10 +67,8 @@ const DriverJobForm = ({ formik }) => {
                     </Typography>
                   </Stack>
                   <Box
-                  // component="form"
-                  // noValidate
-                  // onSubmit={formik.handleSubmit}
                   >
+                  
                     <Container>
                       <Box
                         component="form"

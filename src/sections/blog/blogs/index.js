@@ -1,22 +1,11 @@
 import { BannerSection } from "@/components/banner";
 import { JobSekelton } from "@/components/not-found";
 import SkeletonLoader from "@/components/skeleton";
-import TextMaxLine from "@/components/text-max-line/TextMaxLine";
 import CommonBlog from "@/sections/common/blog";
 import axiosInstance from "@/utils/axios";
 import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
+  Box, Container, Grid
 } from "@mui/material";
-import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 

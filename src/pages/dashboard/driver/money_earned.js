@@ -1,9 +1,8 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
-import { Box, Card, CardContent, Container, Typography } from "@mui/material";
 import AuthGuard from "@/auth/AuthGuard";
+import { PrimaryWebLayout } from "@/layout";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import { Box, Card, CardContent, Container, Typography } from "@mui/material";
+import { useFormik } from "formik";
 
 const MoneyEarnedList = () => {
   const formik = useFormik({});

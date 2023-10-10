@@ -1,4 +1,3 @@
-import { BannerSection } from "@/components/banner";
 import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
 import {
@@ -11,8 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TotalDrivers from "../primaryhomepage/totaldrivers";
 import AboutSlider from "./aboutSlider";
 

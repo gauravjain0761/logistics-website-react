@@ -1,26 +1,14 @@
-import SubscribeButton from "@/components/button/subscribeButton";
 import { TextBox } from "@/components/form";
 import axiosInstance from "@/utils/axios";
-import {
-  Facebook,
-  Instagram,
-  LinkedIn,
-  Twitter,
-  YouTube,
-} from "@mui/icons-material";
 import {
   Box,
   Button,
   CardContent,
-  Container,
-  Divider,
-  Stack,
-  Typography,
-  alpha,
+  Container, Stack,
+  Typography
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
 
 const Subscribe = () => {
   const { enqueueSnackbar } = useSnackbar();

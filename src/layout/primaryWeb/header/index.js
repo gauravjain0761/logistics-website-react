@@ -1,41 +1,33 @@
-import React from "react";
-import MobileDrawer from "./drawer";
-import { useRouter } from "next/router";
+import { useAuthContext } from "@/auth/useAuthContext";
+import useOffSetTop from "@/hooks/useOffSetTop";
+import useResponsive from "@/hooks/useResponsive";
+import { HEADER } from "@/utils/config-global";
+import { isAccessToken } from "@/utils/localStorageAvailable";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   AppBar,
   Box,
   Button,
   Container,
   Divider,
-  Grid,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  ListSubheader,
-  Popover,
   Stack,
   Toolbar,
   Typography,
-  alpha,
   useTheme,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import Link from "next/link";
-import { navItems } from "./navConfig";
-import useOffSetTop from "@/hooks/useOffSetTop";
-import useResponsive from "@/hooks/useResponsive";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { clearToken, isAccessToken } from "@/utils/localStorageAvailable";
-import NavDesktop from "../nav/desktop/NavDesktop";
-import navConfig from "../nav/config-navigation";
-import { HEADER } from "@/utils/config-global";
 import { filter } from "lodash";
-import { useAuthContext } from "@/auth/useAuthContext";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import navConfig from "../nav/config-navigation";
+import NavDesktop from "../nav/desktop/NavDesktop";
+import MobileDrawer from "./drawer";
+import { navItems } from "./navConfig";
 
 const drawerWidth = 240;
 
@@ -44,7 +36,6 @@ const Header = (props) => {
   const token = isAccessToken();
   const { user, isAuthenticated, logout } = useAuthContext();
   const isMobile = useResponsive("down", "md");
-  // const responsiveHeight = isMobile ? 78.5 : 52;
   const value = useOffSetTop(10, {
     offset: ["start end", "end end"],
   });

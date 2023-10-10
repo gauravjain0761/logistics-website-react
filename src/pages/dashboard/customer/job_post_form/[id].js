@@ -3,7 +3,7 @@ import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
-import { every, includes, isEmpty, reject } from "lodash";
+import { every, isEmpty, reject } from "lodash";
 import axiosInstance from "@/utils/axios";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
@@ -24,6 +24,7 @@ const PostJob = () => {
     lat: 0,
     long: 0,
     type: "pickup",
+    postal_code: "",
   };
 
   const DropAddress = {
@@ -31,6 +32,7 @@ const PostJob = () => {
     lat: 0,
     long: 0,
     type: "drop",
+    postal_code: "",
   };
 
   const product = {
@@ -62,6 +64,7 @@ const PostJob = () => {
 
         if (element?.address?.length) {
           element.address.forEach((addressElement, addressIndex) => {
+            // itemObject["address"]["index"] = elementIndex;
             if (!addressElement?.address) {
               addressObject = {
                 address: "Address is required",
@@ -70,6 +73,20 @@ const PostJob = () => {
             } else {
               addressObject = {
                 address: "",
+                index: addressIndex,
+              };
+            }
+
+            if (!addressElement?.postal_code) {
+              addressObject = {
+                ...addressObject,
+                postal_code: "Postal Code is required",
+                index: addressIndex,
+              };
+            } else {
+              addressObject = {
+                ...addressObject,
+                postal_code: "",
                 index: addressIndex,
               };
             }
@@ -245,7 +262,6 @@ const PostJob = () => {
               enqueueSnackbar(response.data.message, {
                 variant: "success",
               });
-              // formik.resetForm();
             } else {
               setFieldValue("items", JSON.parse(values?.items));
               enqueueSnackbar(response.data.message, {
@@ -287,7 +303,6 @@ const PostJob = () => {
                 enqueueSnackbar(response.data.message, {
                   variant: "success",
                 });
-                // formik.resetForm();
               } else {
                 setFieldValue("items", JSON.parse(values?.items));
                 enqueueSnackbar(response.data.message, {
@@ -361,11 +376,7 @@ const PostJob = () => {
           if (response?.data?.view_data) {
             let newData = response?.data?.view_data;
             for (const [key] of Object.entries(formik.values)) {
-              // if (key === "items") {
-              //   formik.setFieldValue("items", newData?.items);
-              // } else {
               formik.setFieldValue([key], newData[key]);
-              // }
             }
           }
         }
@@ -377,6 +388,8 @@ const PostJob = () => {
       bindData();
     }
   }, [id]);
+
+  console.log("formik", formik);
 
   return (
     <AuthGuard>

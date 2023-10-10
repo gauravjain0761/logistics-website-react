@@ -1,10 +1,7 @@
-import React from "react";
+import AuthGuard from "@/auth/AuthGuard";
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-// import JobPostForm from "@/sections/dashboard/driverDashboard/jobPostForm";
 import { reject } from "lodash";
-import AuthGuard from "@/auth/AuthGuard";
-import JobPostForm from "@/sections/dashboard/customerDashboard/jobPostForm";
 
 const PostJob = () => {
   const defaultPickupAddressValues = {
@@ -34,41 +31,6 @@ const PostJob = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
-      // await apiAdminConfig
-      //   .post("/api/auth/master/page/update/faq", values)
-      //   .then((response) => {
-      //     if (response?.status === 200) {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "success",
-      //       });
-      //       formik.resetForm();
-      //       bindData();
-      //     } else {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "error",
-      //       });
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     const { response } = error;
-      //     if (response.status === 422) {
-      //       console.log("response", response.data.error);
-      //       // eslint-disable-next-line no-unused-vars
-      //       for (const [key, value] of Object.entries(values)) {
-      //         if (response.data.error[key]) {
-      //           setErrors({ [key]: response.data.error[key][0] });
-      //         }
-      //       }
-      //     }
-      //     if (response?.data?.status === 406) {
-      //       snackbar({
-      //         message: response.data.message,
-      //         severity: "success",
-      //       });
-      //     }
-      //   });
     },
   });
 
@@ -108,13 +70,6 @@ const PostJob = () => {
   return (
     <AuthGuard>
     <p>not found</p>
-      {/* <JobPostForm
-        addPickupAddress={addPickupAddress}
-        removePickupAddress={removePickupAddress}
-        addDeliveryAddress={addDeliveryAddress}
-        removeDeliveryAddress={removeDeliveryAddress}
-        formik={formik}
-      /> */}
     </AuthGuard>
   );
 };

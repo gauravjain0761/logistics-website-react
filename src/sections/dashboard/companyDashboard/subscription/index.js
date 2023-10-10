@@ -1,4 +1,3 @@
-import { BannerSection } from "@/components/banner";
 import Iconify from "@/components/iconify";
 import SkeletonLoader from "@/components/skeleton";
 import axiosInstance from "@/utils/axios";
@@ -62,17 +61,6 @@ const SubscriptionsPage = () => {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          // "&::before": {
-          //   content: '""',
-          //   backgroundImage:
-          //     "linear-gradient(to left, rgba(77,39,63,0) 0%, #463b46 160%)",
-          //   position: "absolute",
-          //   top: 0,
-          //   left: 0,
-          //   bottom: 0,
-          //   right: 0,
-          //   zIndex: 7,
-          // },
         }}
       >
         <Stack
@@ -121,7 +109,6 @@ const SubscriptionsPage = () => {
             zIndex: 9,
           }}
         >
-          {/* <CardContentOverlay> */}
           <Stack spacing={4}>
             <Typography
               gutterBottom

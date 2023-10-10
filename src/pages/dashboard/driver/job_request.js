@@ -1,10 +1,7 @@
-import React from "react";
-import { PrimaryWebLayout } from "@/layout";
-import { useFormik } from "formik";
-import DashboardJobRequest from "@/sections/dashboard/driverDashboard/jobRequest";
 import AuthGuard from "@/auth/AuthGuard";
-import { Box } from "@mui/material";
-import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
+import { PrimaryWebLayout } from "@/layout";
+import DashboardJobRequest from "@/sections/dashboard/driverDashboard/jobRequest";
+import { useFormik } from "formik";
 
 const JobRequestPage = () => {
   const formik = useFormik({});

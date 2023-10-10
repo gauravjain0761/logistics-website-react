@@ -1,15 +1,13 @@
 import { Heading } from "@/components/typography";
+import { Mail } from "@mui/icons-material";
+import CallIcon from "@mui/icons-material/Call";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   List,
   ListItemButton,
-  ListItemIcon,
-  ListItemText,
+  ListItemIcon
 } from "@mui/material";
-import React from "react";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CallIcon from "@mui/icons-material/Call";
 import { StyledListItemText } from "./footerStyle";
-import { Mail } from "@mui/icons-material";
 
 const SectionFour = () => {
   return (

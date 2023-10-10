@@ -2,18 +2,12 @@ import {
   Box,
   CardContent,
   Container,
-  Grid,
-  Stack,
-  Typography,
+  Grid, Typography
 } from "@mui/material";
-import React from "react";
-import SectionOne from "./sectionOne";
-import SectionTwo from "./sectionTwo";
-import SectionThree from "./sectionThree";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import PinterestIcon from "@mui/icons-material/Pinterest";
 import SectionFour from "./sectionFour";
+import SectionOne from "./sectionOne";
+import SectionThree from "./sectionThree";
+import SectionTwo from "./sectionTwo";
 import Subscribe from "./subscribe";
 
 const Footer = () => {

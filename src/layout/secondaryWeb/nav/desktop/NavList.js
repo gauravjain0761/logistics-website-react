@@ -113,8 +113,6 @@ function NavSubList({ items, isDashboard, subheader, onClose }) {
       gridColumn={isDashboard ? "span 6" : "span 2"}
       alignItems="flex-start"
     >
-      {/* <StyledSubheader disableSticky>{subheader}</StyledSubheader> */}
-
       {items &&
         items.length > 0 &&
         items.map((item) =>

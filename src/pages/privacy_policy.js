@@ -1,7 +1,6 @@
 import { PrimaryWebLayout } from "@/layout";
 import PrivacyPolicySection from "@/sections/privacy_policy";
 import { Box } from "@mui/material";
-import React from "react";
 
 const PrivacyPolicy = () => {
   return (
