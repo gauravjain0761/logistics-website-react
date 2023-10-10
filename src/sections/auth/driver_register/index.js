@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/auth/useAuthContext";
 import OTPDialogBox from "@/components/dialog/otpModal";
-import { PasswordBox, TextBox } from "@/components/form";
+import { PasswordBox, SelectBox, TextBox } from "@/components/form";
 import Iconify from "@/components/iconify/Iconify";
 import DocumentModal from "@/module/driverDocument/driverDocumentmodal";
 import { Close } from "@mui/icons-material";
@@ -255,6 +255,44 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                       size={"small"}
                     />
                   </Box>
+                  <Grid item md={12}>
+          <SelectBox
+            fullWidth
+            label="Vehicle Type"
+            value={formik.values?.vehical_type}
+            name={`vehical_type`}
+            options={VehicleType}
+            onChange={(e) => {
+              formik.setFieldValue("vehical_type", e.target.value);
+              formik.setFieldValue("vehicle", "");
+              if (e.target.value === "van") {
+                setVehicle(VehicleTypeVan);
+              } else if (e.target.value === "truck") {
+                setVehicle(VehicleTypeTruck);
+              } else {
+                setVehicle([]);
+              }
+            }}
+            helperText={
+              formik.touched.vehical_type && formik.errors.vehical_type
+            }
+            size="small"
+            vehicle="small"
+          />
+        </Grid>
+        <Grid item md={12}>
+          <SelectBox
+            fullWidth
+            label="Vehicle"
+            value={formik.values?.vehicle}
+            name={`vehicle`}
+            // options={vehicle}
+            onChange={formik.handleChange}
+            helperText={formik.touched.vehicle && formik.errors.vehicle}
+            size="small"
+            vehicle="small"
+          />
+        </Grid>
                   {formik.values.user_type === "driver" ? (
                     <Box textAlign="center">
                       <DocumentModal formik={formik} />

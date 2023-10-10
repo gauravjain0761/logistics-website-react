@@ -533,7 +533,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                     {productItem?.address &&
                       productItem?.address?.length > 0 &&
                       productItem?.address.map((addressItem, addressIndex) => (
-                        <Box key={productIndex} sx={{ mt: 1 }}>
+                        <Box key={productIndex} sx={{ mt: 4 }}>
                           <Card
                             sx={{
                               borderRadius: "0px",
@@ -541,7 +541,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                               boxShadow: "none",
                             }}
                           >
-                            <Grid container spacing={0}>
+                            <Grid container spacing={3}>
                               <Grid item md={12}>
                                 <Stack
                                   direction="row"
@@ -556,7 +556,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   </Typography>
                                 </Stack>
                               </Grid>
-                              <Grid item md={6}>
+                              <Grid item md={12}>
                                 <Box>
                                   <TextBox
                                     fullWidth
@@ -580,7 +580,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   />
                                 </Box>
                               </Grid>
-                              <Grid item md={6}>
+                              <Grid item md={12}>
                                 <GoogleAutocomplete
                                   fullWidth
                                   size="small"
