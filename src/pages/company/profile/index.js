@@ -1,7 +1,17 @@
 import AuthGuard from "@/auth/AuthGuard";
+import { TextBox } from "@/components/form";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
+import { Close } from "@mui/icons-material";
+import {
+  Box,
+  Card,
+  CardContent,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import React from "react";
@@ -17,6 +27,10 @@ const MyProfilePage = () => {
       mobile: "",
       profile_img: "",
       profile_img_url: "",
+      company_certificate: "",
+      company_vat: "",
+      company_certificate_url: "",
+      company_vat_url: "",
     },
     validate: (values) => {},
     onSubmit: async (values) => {
@@ -25,7 +39,8 @@ const MyProfilePage = () => {
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
-      formData.append("plan", values?.plan);
+      formData.append("company_certificate", values?.company_certificate);
+      formData.append("company_vat", values?.company_vat);
 
       await axiosInstance
         .post("/api/auth/profile/update-profile", formData)
@@ -71,26 +86,33 @@ const MyProfilePage = () => {
           setData(response?.data?.view_data);
           let newData = response?.data?.view_data;
           console.log("newDatanewData", newData);
-          for (const [key] of Object.entries(formik.values)) {
-            if (key == "user_name") {
-              formik.setFieldValue("user_name", newData?.profile?.user_name);
-            } else if (key == "email") {
-              formik.setFieldValue("email", newData?.email);
-            } else if (key == "mobile") {
-              formik.setFieldValue("mobile", newData?.mobile);
-            } else if (key == "profile_img") {
-              formik.setFieldValue(
-                "profile_img",
-                `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
-              );
-              formik.setFieldValue(
-                "profile_img_url",
-                `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
-              );
-            } else if (key == "plan") {
-              formik.setFieldValue("plan", newData?.plan?.plan_name);
-            }
-          }
+          // for (const [key] of Object.entries(formik.values)) {
+          formik.setFieldValue("user_name", newData?.profile?.user_name);
+          formik.setFieldValue("email", newData?.email);
+          formik.setFieldValue("mobile", newData?.mobile);
+          formik.setFieldValue(
+            "profile_img",
+            `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
+          );
+          formik.setFieldValue(
+            "profile_img_url",
+            `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
+          );
+          formik.setFieldValue("plan", newData?.plan?.plan_name);
+          formik.setFieldValue(
+            "company_certificate",
+            newData?.profile?.company_certificate
+          );
+          formik.setFieldValue("company_vat", newData?.profile?.company_vat);
+
+          formik.setFieldValue(
+            "company_certificate_url",
+            `${newData?.profile?.base_url}${newData?.profile?.company_certificate}`
+          );
+          formik.setFieldValue(
+            "company_vat_url",
+            `${newData?.profile?.base_url}${newData?.profile?.company_vat}`
+          );
         }
       })
       .catch((error) => {
@@ -105,7 +127,161 @@ const MyProfilePage = () => {
   console.log("datadata", loader);
 
   const Content = () => {
-    return <>dslk</>;
+    return (
+      <Box sx={{ mt: 2 }}>
+        <Stack textAlign={"center"}>
+          <Typography textAlign="left" variant="p">
+            Company Certificate
+          </Typography>
+          {!formik.values.company_certificate && (
+            <TextBox
+              fullWidth
+              isAdditional={true}
+              textBoxSx={{
+                "& .MuiInput-root:after": {
+                  borderBottom: "0px !important",
+                },
+                "& .MuiInput-root:before": {
+                  borderBottom: "0px !important",
+                  content: '""',
+                },
+              }}
+              type="file"
+              size="small"
+              value=""
+              name="company_certificate"
+              onChange={(e) => {
+                formik.setFieldValue("company_certificate", e.target.files[0]);
+                formik.setFieldValue(
+                  "company_certificate_url",
+                  URL.createObjectURL(e.target.files[0])
+                );
+              }}
+              helperText={
+                formik.touched.company_certificate &&
+                formik.errors.company_certificate
+              }
+            />
+          )}
+
+          {formik.values.company_certificate_url && (
+            <Card sx={{ width: "max-content" }}>
+              <CardContent
+                sx={{
+                  pb: "10px !important",
+                  pt: "30px !important",
+                  px: "10px !important",
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 5,
+                    right: 6,
+                  }}
+                >
+                  <Card sx={{ borderRadius: "50%" }}>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        formik.setFieldValue("company_certificate", "");
+                        formik.setFieldValue("company_certificate_url", "");
+                      }}
+                    >
+                      <Close fontSize="small" />
+                    </IconButton>
+                  </Card>
+                </Box>
+                <Box
+                  component="img"
+                  style={{ margin: "10px" }}
+                  src={formik.values.company_certificate_url}
+                  alt={formik.values.company_certificate.name}
+                  width="150px"
+                  height="150px"
+                  thumbnail
+                />
+              </CardContent>
+            </Card>
+          )}
+        </Stack>
+        <Stack textAlign={"center"} mt={2}>
+          <Typography textAlign="left" variant="p">
+            Company VAT Certificate (Optional)
+          </Typography>
+          {!formik.values.company_vat && (
+            <TextBox
+              fullWidth
+              isAdditional={true}
+              textBoxSx={{
+                "& .MuiInput-root:after": {
+                  borderBottom: "0px !important",
+                },
+                "& .MuiInput-root:before": {
+                  borderBottom: "0px !important",
+                  content: '""',
+                },
+              }}
+              type="file"
+              size="small"
+              value=""
+              name="company_vat"
+              onChange={(e) => {
+                formik.setFieldValue("company_vat", e.target.files[0]);
+                formik.setFieldValue(
+                  "company_vat_url",
+                  URL.createObjectURL(e.target.files[0])
+                );
+              }}
+              helperText={
+                formik.touched.company_vat && formik.errors.company_vat
+              }
+            />
+          )}
+
+          {formik.values.company_vat_url && (
+            <Card sx={{ width: "max-content" }}>
+              <CardContent
+                sx={{
+                  pb: "10px !important",
+                  pt: "30px !important",
+                  px: "10px !important",
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 5,
+                    right: 6,
+                  }}
+                >
+                  <Card sx={{ borderRadius: "50%" }}>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        formik.setFieldValue("company_vat", "");
+                        formik.setFieldValue("company_vat_url", "");
+                      }}
+                    >
+                      <Close fontSize="small" />
+                    </IconButton>
+                  </Card>
+                </Box>
+                <Box
+                  component="img"
+                  style={{ margin: "10px" }}
+                  src={formik.values.company_vat_url}
+                  alt={formik.values.company_vat.name}
+                  width="150px"
+                  height="150px"
+                  thumbnail
+                />
+              </CardContent>
+            </Card>
+          )}
+        </Stack>
+      </Box>
+    );
   };
   return (
     <AuthGuard>
