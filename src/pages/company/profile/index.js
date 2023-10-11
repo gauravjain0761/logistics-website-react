@@ -21,11 +21,11 @@ const MyProfilePage = () => {
     validate: (values) => {},
     onSubmit: async (values) => {
       let formData = new FormData();
-      formData.append("user_name",values?.user_name);
-      formData.append("email",values?.email);
-      formData.append("mobile",values?.mobile);
-      formData.append("profile_img",values?.profile_img);
-      formData.append("plan",values?.plan);
+      formData.append("user_name", values?.user_name);
+      formData.append("email", values?.email);
+      formData.append("mobile", values?.mobile);
+      formData.append("profile_img", values?.profile_img);
+      formData.append("plan", values?.plan);
 
       await axiosInstance
         .post("/api/auth/profile/update-profile", formData)
@@ -103,9 +103,13 @@ const MyProfilePage = () => {
   }, []);
 
   console.log("datadata", loader);
+
+  const Content = () => {
+    return <>dslk</>;
+  };
   return (
     <AuthGuard>
-      <Profile formik={formik} data={data} loader={loader} />
+      <Profile formik={formik} data={data} loader={loader} Content={Content} />
     </AuthGuard>
   );
 };

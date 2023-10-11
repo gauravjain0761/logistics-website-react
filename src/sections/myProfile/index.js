@@ -27,7 +27,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import React from "react";
 
-const Profile = ({ data, formik, loader, Content }) => {
+const Profile = ({ data, formik, loader, Content = null }) => {
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: (theme) => theme.palette.grey[300] }}>
@@ -254,9 +254,11 @@ const Profile = ({ data, formik, loader, Content }) => {
                                 </Typography>
                               </Stack>
                             </Box>
-                            <Box mt={2} sx={{ width: "100%" }}>
-                              <Content />
-                            </Box>
+                            {Content && (
+                              <Box mt={2} sx={{ width: "100%" }}>
+                                <Content />
+                              </Box>
+                            )}
                             <Stack
                               direction="row"
                               // justifyContent="space-between"
