@@ -17,7 +17,7 @@ const MyProfilePage = () => {
       user_name: "",
       email: "",
       mobile: "",
-      plan_name:"",
+      plan_name: "",
       profile_img: "",
       profile_img_url: "",
     },
@@ -28,9 +28,8 @@ const MyProfilePage = () => {
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
-     
-      formData.append("plan_name", values?.plan_name);
 
+      formData.append("plan_name", values?.plan_name);
 
       await axiosInstance
         .post("/api/auth/profile/update-profile", formData)
@@ -92,8 +91,7 @@ const MyProfilePage = () => {
                 "profile_img_url",
                 `${newData?.profile?.base_url}${newData?.profile?.profile_img}`
               );
-            
-            }else if (key == "plan_name") {
+            } else if (key == "plan_name") {
               formik.setFieldValue("plan_name", newData?.plan_name);
             }
           }
@@ -107,12 +105,14 @@ const MyProfilePage = () => {
   React.useEffect(() => {
     getProfile();
   }, [user, user?.id]);
- 
 
   console.log("datadataformik", formik);
+  const Content = () => {
+    return <>asdf</>;
+  };
   return (
     <AuthGuard>
-      <Profile formik={formik} data={data} loader={loader} />
+      <Profile formik={formik} data={data} loader={loader} Content={Content} />
     </AuthGuard>
   );
 };

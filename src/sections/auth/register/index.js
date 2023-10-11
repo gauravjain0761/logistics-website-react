@@ -11,11 +11,13 @@ import {
   Checkbox,
   Container,
   FormControl,
-  FormControlLabel, FormHelperText,
+  FormControlLabel,
+  FormHelperText,
   Grid,
   IconButton,
+  Radio,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
@@ -120,15 +122,62 @@ const Register = ({ formik, open, handleOpenClose }) => {
                     </Button>
                   </Box>
                 </Stack>
-
+                <Box component="form" noValidate onSubmit={formik.handleSubmit}>
+                  <Box mb={3}>
+                    <FormControlLabel
+                      control={
+                        <Radio
+                          size="medium"
+                          name="user_type"
+                          onChange={(e) => {
+                            formik.resetForm();
+                            formik.setFieldValue("user_type", "customer");
+                          }}
+                          checked={formik.values.user_type === "customer"}
+                        />
+                      }
+                      label={
+                        <Typography variant="h5" fontWeight={500}>
+                          Customer
+                        </Typography>
+                      }
+                    />
+                    <FormControlLabel
+                      control={
+                        <Radio
+                          size="medium"
+                          name="user_type"
+                          onChange={(e) => {
+                            formik.resetForm();
+                            formik.setFieldValue("user_type", "company");
+                          }}
+                          checked={formik.values.user_type === "company"}
+                        />
+                      }
+                      label={
+                        <Typography variant="h5" fontWeight={500}>
+                          Company
+                        </Typography>
+                      }
+                    />
+                  </Box>
+                </Box>
                 <Box component="form" noValidate onSubmit={formik.handleSubmit}>
                   <Box>
                     <TextBox
                       variant="standard"
                       fullWidth
-                      placeholder={"Enter Your Full Name "}
+                      placeholder={
+                        formik.values.user_type === "company"
+                          ? "Enter Company Name"
+                          : "Username"
+                      }
                       name="user_name"
-                      label="Username"
+                      label={
+                        formik.values.user_type === "company"
+                          ? "Enter Company Name"
+                          : "Username"
+                      }
                       value={formik.values.user_name}
                       onChange={formik.handleChange}
                       helperText={
@@ -141,9 +190,17 @@ const Register = ({ formik, open, handleOpenClose }) => {
                     <TextBox
                       variant="standard"
                       fullWidth
-                      placeholder={"Enter Your Email Address"}
+                      placeholder={
+                        formik.values.user_type === "company"
+                          ? "Enter Your Company Email"
+                          : "Enter Your Email Adress"
+                      }
                       name="email"
-                      label="Email"
+                      label={
+                        formik.values.user_type === "company"
+                          ? "Enter Your Company Email"
+                          : "Enter Your Email Adress"
+                      }
                       value={formik.values.email}
                       onChange={formik.handleChange}
                       helperText={formik.touched.email && formik.errors.email}
@@ -206,7 +263,7 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       </Typography>
                       {!formik.values.company_certificate && (
                         <TextBox
-                          variant="standard"  
+                          variant="standard"
                           fullWidth
                           type="file"
                           size="small"
