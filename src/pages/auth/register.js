@@ -98,12 +98,14 @@ const RegisterPage = () => {
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
-      if (!values.company_certificate) {
+
+      if (values.user_type === "company" && !values.company_certificate) {
         errors.company_certificate = "Company Certificate is required";
       }
-      if (!values.company_vat) {
+      if (values.user_type === "company" && !values.company_vat) {
         errors.company_vat = "Company Vat is required";
       }
+
       if (values.term == "no") {
         errors.term = "T&C is required";
       }
@@ -111,18 +113,41 @@ const RegisterPage = () => {
       return errors;
     },
     onSubmit: async (values, { setErrors }) => {
-      let formData = new FormData();
-      formData.append("user_name", values?.user_name);
-      formData.append("user_type", values?.user_type);
-      formData.append("email", values?.email);
-      formData.append("mobile", values?.mobile);
-      formData.append("term", values?.term);
-      formData.append("password", values?.password);
-      formData.append("password_confirmation", values?.password_confirmation);
-      formData.append("company_certificate", values?.company_certificate);
-      formData.append("company_vat", values?.company_vat);
+      let url, formData;
+
+      if (values.user_type === "customer") {
+        url = "/api/user/cust-register";
+        let customerData = new FormData();
+        customerData.append("user_name", values?.user_name);
+        customerData.append("user_type", values?.user_type);
+        customerData.append("email", values?.email);
+        customerData.append("mobile", values?.mobile);
+        customerData.append("term", values?.term);
+        customerData.append("password", values?.password);
+        customerData.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
+        formData = customerData;
+      } else {
+        url = "/api/user/company-register";
+        let companyData = new FormData();
+        companyData.append("user_name", values?.user_name);
+        companyData.append("user_type", values?.user_type);
+        companyData.append("email", values?.email);
+        companyData.append("mobile", values?.mobile);
+        companyData.append("term", values?.term);
+        companyData.append("password", values?.password);
+        companyData.append(
+          "password_confirmation",
+          values?.password_confirmation
+        );
+        companyData.append("company_certificate", values?.company_certificate);
+        companyData.append("company_vat", values?.company_vat);
+        formData = companyData;
+      }
       await axiosInstance
-        .post("/api/user/cust-register", formData)
+        .post(url, formData)
         .then((response) => {
           if (response?.status === 200) {
             formik.resetForm();

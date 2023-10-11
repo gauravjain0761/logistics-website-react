@@ -256,174 +256,180 @@ const Register = ({ formik, open, handleOpenClose }) => {
                       size="small"
                     />
                   </Box>
-                  <Box>
-                    <Stack textAlign={"center"} sx={{ mt: 2 }}>
-                      <Typography textAlign="left" variant="p">
-                        Company Certificate
-                      </Typography>
-                      {!formik.values.company_certificate && (
-                        <TextBox
-                          variant="standard"
-                          fullWidth
-                          type="file"
-                          size="small"
-                          value=""
-                          name="company_certificate"
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              "company_certificate",
-                              e.target.files[0]
-                            );
-                            formik.setFieldValue(
-                              "company_certificate_url",
-                              URL.createObjectURL(e.target.files[0])
-                            );
-                          }}
-                          helperText={
-                            formik.touched.company_certificate &&
-                            formik.errors.company_certificate
-                          }
-                          isAdditional={true}
-                          textBoxSx={{
-                            "& .MuiInput-root:after": {
-                              borderBottom: "0px !important",
-                            },
-                            "& .MuiInput-root:before": {
-                              borderBottom: "0px !important",
-                              content: '""',
-                            },
-                          }}
-                        />
-                      )}
-
-                      {formik.values.company_certificate_url && (
-                        <Card sx={{ width: "max-content" }}>
-                          <CardContent
-                            sx={{
-                              pb: "10px !important",
-                              pt: "30px !important",
-                              px: "10px !important",
+                  {formik.values.user_type === "company" && (
+                    <Box>
+                      <Stack textAlign={"center"} sx={{ mt: 2 }}>
+                        <Typography textAlign="left" variant="p">
+                          Company Certificate
+                        </Typography>
+                        {!formik.values.company_certificate && (
+                          <TextBox
+                            variant="standard"
+                            fullWidth
+                            type="file"
+                            size="small"
+                            value=""
+                            name="company_certificate"
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                "company_certificate",
+                                e.target.files[0]
+                              );
+                              formik.setFieldValue(
+                                "company_certificate_url",
+                                URL.createObjectURL(e.target.files[0])
+                              );
                             }}
-                          >
-                            <Box
+                            helperText={
+                              formik.touched.company_certificate &&
+                              formik.errors.company_certificate
+                            }
+                            isAdditional={true}
+                            textBoxSx={{
+                              "& .MuiInput-root:after": {
+                                borderBottom: "0px !important",
+                              },
+                              "& .MuiInput-root:before": {
+                                borderBottom: "0px !important",
+                                content: '""',
+                              },
+                            }}
+                          />
+                        )}
+
+                        {formik.values.company_certificate_url && (
+                          <Card sx={{ width: "max-content" }}>
+                            <CardContent
                               sx={{
-                                position: "absolute",
-                                top: 5,
-                                right: 6,
+                                pb: "10px !important",
+                                pt: "30px !important",
+                                px: "10px !important",
                               }}
                             >
-                              <Card sx={{ borderRadius: "50%" }}>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => {
-                                    formik.setFieldValue(
-                                      "company_certificate",
-                                      ""
-                                    );
-                                    formik.setFieldValue(
-                                      "company_certificate_url",
-                                      ""
-                                    );
-                                  }}
-                                >
-                                  <Close fontSize="small" />
-                                </IconButton>
-                              </Card>
-                            </Box>
-                            <Box
-                              component="img"
-                              style={{ margin: "10px" }}
-                              src={formik.values.company_certificate_url}
-                              alt={formik.values.company_certificate.name}
-                              width="150px"
-                              height="150px"
-                              thumbnail
-                            />
-                          </CardContent>
-                        </Card>
-                      )}
-                    </Stack>
-                    <Stack textAlign={"center"} sx={{ mt: 2 }}>
-                      <Typography textAlign="left" variant="p">
-                        Company VAT Certificate (Optional)
-                      </Typography>
-                      {!formik.values.company_vat && (
-                        <TextBox
-                          variant="standard"
-                          fullWidth
-                          type="file"
-                          size="small"
-                          value=""
-                          name="company_vat"
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              "company_vat",
-                              e.target.files[0]
-                            );
-                            formik.setFieldValue(
-                              "company_vat_url",
-                              URL.createObjectURL(e.target.files[0])
-                            );
-                          }}
-                          helperText={
-                            formik.touched.company_vat &&
-                            formik.errors.company_vat
-                          }
-                          isAdditional={true}
-                          textBoxSx={{
-                            "& .MuiInput-root:after": {
-                              borderBottom: "0px !important",
-                            },
-                            "& .MuiInput-root:before": {
-                              borderBottom: "0px !important",
-                              content: '""',
-                            },
-                          }}
-                        />
-                      )}
-
-                      {formik.values.company_vat_url && (
-                        <Card sx={{ width: "max-content" }}>
-                          <CardContent
-                            sx={{
-                              pb: "10px !important",
-                              pt: "30px !important",
-                              px: "10px !important",
+                              <Box
+                                sx={{
+                                  position: "absolute",
+                                  top: 5,
+                                  right: 6,
+                                }}
+                              >
+                                <Card sx={{ borderRadius: "50%" }}>
+                                  <IconButton
+                                    size="small"
+                                    onClick={() => {
+                                      formik.setFieldValue(
+                                        "company_certificate",
+                                        ""
+                                      );
+                                      formik.setFieldValue(
+                                        "company_certificate_url",
+                                        ""
+                                      );
+                                    }}
+                                  >
+                                    <Close fontSize="small" />
+                                  </IconButton>
+                                </Card>
+                              </Box>
+                              <Box
+                                component="img"
+                                style={{ margin: "10px" }}
+                                src={formik.values.company_certificate_url}
+                                alt={formik.values.company_certificate.name}
+                                width="150px"
+                                height="150px"
+                                thumbnail
+                              />
+                            </CardContent>
+                          </Card>
+                        )}
+                      </Stack>
+                      <Stack textAlign={"center"} sx={{ mt: 2 }}>
+                        <Typography textAlign="left" variant="p">
+                          Company VAT Certificate (Optional)
+                        </Typography>
+                        {!formik.values.company_vat && (
+                          <TextBox
+                            variant="standard"
+                            fullWidth
+                            type="file"
+                            size="small"
+                            value=""
+                            name="company_vat"
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                "company_vat",
+                                e.target.files[0]
+                              );
+                              formik.setFieldValue(
+                                "company_vat_url",
+                                URL.createObjectURL(e.target.files[0])
+                              );
                             }}
-                          >
-                            <Box
+                            helperText={
+                              formik.touched.company_vat &&
+                              formik.errors.company_vat
+                            }
+                            isAdditional={true}
+                            textBoxSx={{
+                              "& .MuiInput-root:after": {
+                                borderBottom: "0px !important",
+                              },
+                              "& .MuiInput-root:before": {
+                                borderBottom: "0px !important",
+                                content: '""',
+                              },
+                            }}
+                          />
+                        )}
+
+                        {formik.values.company_vat_url && (
+                          <Card sx={{ width: "max-content" }}>
+                            <CardContent
                               sx={{
-                                position: "absolute",
-                                top: 5,
-                                right: 6,
+                                pb: "10px !important",
+                                pt: "30px !important",
+                                px: "10px !important",
                               }}
                             >
-                              <Card sx={{ borderRadius: "50%" }}>
-                                <IconButton
-                                  size="small"
-                                  onClick={() => {
-                                    formik.setFieldValue("company_vat", "");
-                                    formik.setFieldValue("company_vat_url", "");
-                                  }}
-                                >
-                                  <Close fontSize="small" />
-                                </IconButton>
-                              </Card>
-                            </Box>
-                            <Box
-                              component="img"
-                              style={{ margin: "10px" }}
-                              src={formik.values.company_vat_url}
-                              alt={formik.values.company_vat.name}
-                              width="150px"
-                              height="150px"
-                              thumbnail
-                            />
-                          </CardContent>
-                        </Card>
-                      )}
-                    </Stack>
-                  </Box>
+                              <Box
+                                sx={{
+                                  position: "absolute",
+                                  top: 5,
+                                  right: 6,
+                                }}
+                              >
+                                <Card sx={{ borderRadius: "50%" }}>
+                                  <IconButton
+                                    size="small"
+                                    onClick={() => {
+                                      formik.setFieldValue("company_vat", "");
+                                      formik.setFieldValue(
+                                        "company_vat_url",
+                                        ""
+                                      );
+                                    }}
+                                  >
+                                    <Close fontSize="small" />
+                                  </IconButton>
+                                </Card>
+                              </Box>
+                              <Box
+                                component="img"
+                                style={{ margin: "10px" }}
+                                src={formik.values.company_vat_url}
+                                alt={formik.values.company_vat.name}
+                                width="150px"
+                                height="150px"
+                                thumbnail
+                              />
+                            </CardContent>
+                          </Card>
+                        )}
+                      </Stack>
+                    </Box>
+                  )}
+
                   <Stack justifyContent="space-between" alignItems="left">
                     <Box my={1}>
                       <FormControl
