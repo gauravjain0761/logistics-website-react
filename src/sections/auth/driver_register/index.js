@@ -121,7 +121,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
     } else {
       setVehicle([]);
     }
-  }, [vehicle, formik.values]);
+  }, [formik.values]);
   
   return (
     <React.Fragment>
@@ -331,7 +331,7 @@ const DriverRegister = ({ formik, open, handleOpenClose }) => {
                       size={"small"}
                     />
                   </Box>
-                  <Box>
+                  <Box mt={2}>
                     <SelectBox
                       fullWidth
                       label="Vehicle Type"

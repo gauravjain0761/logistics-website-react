@@ -98,57 +98,57 @@ const DriverPage = () => {
       ) {
         errors.password_confirmation = "Password didn't match.";
       }
-      if (values?.user_type === "driver") {
-        if (!values.profile_img) {
-          errors.profile_img = "Driver Photo is required";
-        }
-        if (!values.licence_front) {
-          errors.licence_front = "Driver Licence is required";
-        }
-        if (!values.licence_back) {
-          errors.licence_back = "Driver Licence is required";
-        }
-        if (!values.address_proof) {
-          errors.address_proof = "Address proof is required";
-        }
-        if (!values.insurance_cert) {
-          errors.insurance_cert = "Insurance Certificate is required";
-        }
-        if (!values.transit_cert) {
-          errors.transit_cert = "Transit Certificate is required";
-        }
-        if (!values.liability_cert) {
-          errors.liability_cert = "Liability Certificate is required";
-        }
-        if (!values.vehicle_cert) {
-          errors.vehicle_cert = "Vehicle Certificate is required";
-        }
-        if (!values.v5c_cert) {
-          errors.v5c_cert = "V5C Certificate is required";
-        }
-        if (!values.dvia_cert) {
-          errors.dvia_cert = "Dvia Certificate is required";
-        }
-        if (!values.nationality_cert) {
-          errors.nationality_cert = "Nationality Proof is required";
-        }
+      // if (values?.user_type === "driver") {
+      //   if (!values.profile_img) {
+      //     errors.profile_img = "Driver Photo is required";
+      //   }
+      //   if (!values.licence_front) {
+      //     errors.licence_front = "Driver Licence is required";
+      //   }
+      //   if (!values.licence_back) {
+      //     errors.licence_back = "Driver Licence is required";
+      //   }
+      //   if (!values.address_proof) {
+      //     errors.address_proof = "Address proof is required";
+      //   }
+      //   if (!values.insurance_cert) {
+      //     errors.insurance_cert = "Insurance Certificate is required";
+      //   }
+      //   if (!values.transit_cert) {
+      //     errors.transit_cert = "Transit Certificate is required";
+      //   }
+      //   if (!values.liability_cert) {
+      //     errors.liability_cert = "Liability Certificate is required";
+      //   }
+      //   if (!values.vehicle_cert) {
+      //     errors.vehicle_cert = "Vehicle Certificate is required";
+      //   }
+      //   if (!values.v5c_cert) {
+      //     errors.v5c_cert = "V5C Certificate is required";
+      //   }
+      //   if (!values.dvia_cert) {
+      //     errors.dvia_cert = "Dvia Certificate is required";
+      //   }
+      //   if (!values.nationality_cert) {
+      //     errors.nationality_cert = "Nationality Proof is required";
+      //   }
 
-        if (
-          !values.profile_img ||
-          !values.licence_front ||
-          !values.licence_back ||
-          !values.address_proof ||
-          !values.insurance_cert ||
-          !values.transit_cert ||
-          !values.liability_cert ||
-          !values.vehicle_cert ||
-          !values.v5c_cert ||
-          !values.dvia_cert ||
-          !values.nationality_cert
-        ) {
-          errors.document = "Document is required";
-        }
-      }
+      //   if (
+      //     !values.profile_img ||
+      //     !values.licence_front ||
+      //     !values.licence_back ||
+      //     !values.address_proof ||
+      //     !values.insurance_cert ||
+      //     !values.transit_cert ||
+      //     !values.liability_cert ||
+      //     !values.vehicle_cert ||
+      //     !values.v5c_cert ||
+      //     !values.dvia_cert ||
+      //     !values.nationality_cert
+      //   ) {
+      //     errors.document = "Document is required";
+      //   }
+      // }
 
       if (values?.user_type === "company") {
         if (!values.company_certificate) {
@@ -247,8 +247,6 @@ const DriverPage = () => {
         });
     },
   });
-
-  console.log("documentdocument", formik);
 
   return (
     <GuestGuard>

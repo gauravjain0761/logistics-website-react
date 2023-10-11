@@ -80,7 +80,7 @@ const StepThree = ({ formik }) => {
         setVehicle([]);
       }
     }
-  }, [vehicle, formik.values, id]);
+  }, [formik.values, id]);
   return (
     <>
       <Box mb={2}>
