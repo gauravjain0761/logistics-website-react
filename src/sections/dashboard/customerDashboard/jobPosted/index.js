@@ -241,7 +241,7 @@ const DashboardJobPost = ({ formik }) => {
                                   <Box>
                                     <Typography fontSize={12} color="grey">
                                       {`${item.items[0].product.length}*${item.items[0].product.width}*${item.items[0].product.height}`}
-                                    </Typography>
+                                    </Typography> 
                                   </Box>
                                 </Stack>
                                 <Stack

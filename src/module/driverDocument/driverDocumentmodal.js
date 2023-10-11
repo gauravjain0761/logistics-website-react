@@ -142,9 +142,7 @@ const DocumentModal = ({ formik }) => {
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
-                    helperText={
-                      formik.touched.profile_img && formik.errors.profile_img
-                    }
+                  
                   />
                 )}
 
@@ -219,10 +217,7 @@ const DocumentModal = ({ formik }) => {
                         URL.createObjectURL(e.target.files[0])
                       );
                     }}
-                    helperText={
-                      formik.touched.licence_front &&
-                      formik.errors.licence_front
-                    }
+                   
                   />
                 )}
 
