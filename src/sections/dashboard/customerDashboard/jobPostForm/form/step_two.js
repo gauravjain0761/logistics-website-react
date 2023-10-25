@@ -61,7 +61,7 @@ const DropTypeSelect = [
     value: "pickup",
   },
   {
-    label: "Drop",
+    label: "Delivery",
     value: "drop",
   },
 ];
@@ -552,7 +552,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                     Address Type :
                                   </Typography>
                                   <Typography fontSize={14}>
-                                    {addressItem?.type}
+                                    {addressItem?.type == 'drop'?'Delivery':addressItem?.type}
                                   </Typography>
                                 </Stack>
                               </Grid>
