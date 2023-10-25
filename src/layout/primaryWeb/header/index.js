@@ -61,7 +61,7 @@ const Header = (props) => {
           component="img"
           width={200}
           height={50}
-          src="/assets/images/logo/logo.jpg"
+          src="/logo.png"
           alt="Logo"
           loading="lazy"
           sx={{
@@ -136,7 +136,7 @@ const Header = (props) => {
                 component="img"
                 width={200}
                 height={50}
-                src="/assets/images/logo/logo.jpg"
+                src="/logo.png"
                 alt="Logo"
                 loading="lazy"
                 sx={{
