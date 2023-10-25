@@ -551,7 +551,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   <Typography fontSize={16}>
                                     Address Type :
                                   </Typography>
-                                  <Typography fontSize={14}>
+                                  <Typography fontSize={14} sx={{textTransform:"capitalize"}}>
                                     {addressItem?.type == 'drop'?'Delivery':addressItem?.type}
                                   </Typography>
                                 </Stack>
