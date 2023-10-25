@@ -376,7 +376,7 @@ const DashboardJobPost = ({ formik }) => {
                               <Box mb={4}>
                                 <Box>
                                   <Typography fontSize={13} fontWeight={600}>
-                                    Drop out Date
+                                    Delivery out Date
                                   </Typography>
                                 </Box>
                                 <Stack
@@ -414,7 +414,7 @@ const DashboardJobPost = ({ formik }) => {
                               </Box>
                               <Box>
                                 <Typography fontSize={13} fontWeight={600}>
-                                  Drop out Time
+                                Delivery out Time
                                 </Typography>
                               </Box>
                               <Stack

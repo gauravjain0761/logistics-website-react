@@ -494,7 +494,7 @@ const DashboardAddJob = () => {
                                         fontSize={13}
                                         fontWeight={600}
                                       >
-                                        Drop out Date
+                                        Delivery out Date
                                       </Typography>
 
                                       <Stack
@@ -537,7 +537,7 @@ const DashboardAddJob = () => {
                                         fontSize={13}
                                         fontWeight={600}
                                       >
-                                        Drop out Time
+                                        Delivery out Time
                                       </Typography>
                                     </Box>
                                     <Stack
