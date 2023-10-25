@@ -255,8 +255,8 @@ const ViewJobHistory = () => {
                       <TableHead>
                         <TableRow>
                           <TableCell align="left">Address</TableCell>
-                          <TableCell align="left">Drop Date</TableCell>
-                          <TableCell align="left">Drop Time</TableCell>
+                          <TableCell align="left">Delivery Date</TableCell>
+                          <TableCell align="left">Delivery Time</TableCell>
                           <TableCell align="left">Quantity</TableCell>
                         </TableRow>
                       </TableHead>
