@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import BidList from "@/sections/dashboard/companyDashboard/driverBidList";
 import { useFormik } from "formik";
@@ -8,6 +9,7 @@ const JobListing = () => {
   return (
     <AuthGuard>
       <BidList formik={formik} />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };

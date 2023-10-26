@@ -3,6 +3,7 @@ import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
 import AuthGuard from "@/auth/AuthGuard";
 import DriverJobListSection from "@/sections/dashboard/companyDashboard/driver/list";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 
 const DriverJobList = () => {
   const formik = useFormik({
@@ -13,6 +14,7 @@ const DriverJobList = () => {
   return (
     <AuthGuard>
       <DriverJobListSection formik={formik} />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };

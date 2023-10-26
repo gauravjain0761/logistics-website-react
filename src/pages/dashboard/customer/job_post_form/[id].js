@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { StepperContext } from "@/components/stepper/stepperContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -409,6 +410,7 @@ const PostJob = () => {
         removeAddress={removeAddress}
         formik={formik}
       />
+       <SubscriptionDialog />
     </AuthGuard>
   );
 };
