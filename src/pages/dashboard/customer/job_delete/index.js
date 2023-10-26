@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import JobDelete from "@/sections/dashboard/customerDashboard/job_delete";
 import { useFormik } from "formik";
@@ -14,6 +15,7 @@ const JobHistoryPage = () => {
   return (
     <AuthGuard>
       <JobDelete formik={formik} />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };

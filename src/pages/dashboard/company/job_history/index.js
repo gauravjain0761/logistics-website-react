@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import JobHistory from "@/sections/dashboard/companyDashboard/jobhistory";
 import { useFormik } from "formik";
@@ -14,6 +15,7 @@ const JobHistoryPage = () => {
   return (
     <AuthGuard>
       <JobHistory formik={formik} />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };

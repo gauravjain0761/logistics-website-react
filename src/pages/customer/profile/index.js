@@ -15,6 +15,7 @@ const MyProfilePage = () => {
   const formik = useFormik({
     initialValues: {
       user_name: "",
+      user_type: "customer",
       email: "",
       mobile: "",
       plan_name: "",
@@ -32,7 +33,7 @@ const MyProfilePage = () => {
       formData.append("plan_name", values?.plan_name);
 
       await axiosInstance
-        .post("/api/auth/profile/update-profile", formData)
+        .post(`/api/auth/profile/update-customer-profile/${user?.id}`, formData)
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {

@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import ViewJobDetail from "@/sections/dashboard/driverDashboard/viewJob";
 import { useFormik } from "formik";
@@ -8,6 +9,8 @@ const ViewJobPage = () => {
   return (
     <AuthGuard>
       <ViewJobDetail formik={formik} />
+      <SubscriptionDialog />
+
     </AuthGuard>
   );
 };

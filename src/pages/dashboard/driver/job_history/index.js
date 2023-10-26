@@ -1,7 +1,8 @@
 import { PrimaryWebLayout } from "@/layout";
 import { useFormik } from "formik";
-import JobHistory from "@/sections/dashboard/driverDashboard/jobhistory";
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
+import JobHistory from "@/sections/dashboard/driverDashboard/jobHistory";
 
 const JobHistoryPage = () => {
   const formik = useFormik({
@@ -10,10 +11,11 @@ const JobHistoryPage = () => {
     },
   });
 
-  console.log("formikformik", formik);
   return (
     <AuthGuard>
       <JobHistory formik={formik} />
+      <SubscriptionDialog />
+
     </AuthGuard>
   );
 };

@@ -1,11 +1,14 @@
 import { PrimaryWebLayout } from "@/layout";
 import AuthGuard from "@/auth/AuthGuard";
 import ViewJobHistory from "@/sections/dashboard/companyDashboard/viewJobHistory";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 
 const ViewJobPage = () => {
   return (
     <AuthGuard>
+
       <ViewJobHistory />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };

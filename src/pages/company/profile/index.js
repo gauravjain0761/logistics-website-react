@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import { useAuthContext } from "@/auth/useAuthContext";
 import { TextBox } from "@/components/form";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
@@ -20,9 +21,11 @@ const MyProfilePage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState({});
+  const {user}= useAuthContext();
   const formik = useFormik({
     initialValues: {
       user_name: "",
+      user_type: "company",
       email: "",
       mobile: "",
       profile_img: "",
@@ -35,6 +38,7 @@ const MyProfilePage = () => {
     validate: (values) => {},
     onSubmit: async (values) => {
       let formData = new FormData();
+      formData.append("user_type", values?.user_type);
       formData.append("user_name", values?.user_name);
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
@@ -43,7 +47,7 @@ const MyProfilePage = () => {
       formData.append("company_vat", values?.company_vat);
 
       await axiosInstance
-        .post("/api/auth/profile/update-profile", formData)
+        .post(`/api/auth/profile/update-company-profile/${user?.id}`, formData)
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
