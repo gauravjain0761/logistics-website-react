@@ -14,15 +14,16 @@ const MyProfilePage = () => {
   const [data, setData] = React.useState({});
   const { user } = useAuthContext();
   const formik = useFormik({
-    initialValues: {
+    initialValues:  { 
       user_name: "",
       user_type: "customer",
       email: "",
-      mobile: "",
+       mobile: "",
       plan_name: "",
       profile_img: "",
       profile_img_url: "",
     },
+    
     validate: (values) => {},
     onSubmit: async (values) => {
       let formData = new FormData();
