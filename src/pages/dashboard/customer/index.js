@@ -9,6 +9,7 @@ const DashboardPage = () => {
   return (
     <AuthGuard>
       <CustomerDashboard formik={formik} />
+      <SubscriptionDialog/>
     </AuthGuard>
   );
 };

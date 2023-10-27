@@ -10,12 +10,16 @@ const JobRequestPage = () => {
   return (
     <AuthGuard>
       <DashboardJobRequest formik={formik} />
-      <SubscriptionDialog />
+      <SubscriptionDialog/>
     </AuthGuard>
   );
 };
 
 JobRequestPage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+     {page}
+    </PrimaryWebLayout>
+  );
 };
 export default JobRequestPage;

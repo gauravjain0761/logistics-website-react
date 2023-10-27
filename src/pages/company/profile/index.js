@@ -1,5 +1,6 @@
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { TextBox } from "@/components/form";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
@@ -21,7 +22,7 @@ const MyProfilePage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loader, setLoader] = React.useState(false);
   const [data, setData] = React.useState({});
-  const {user}= useAuthContext();
+  const { user } = useAuthContext();
   const formik = useFormik({
     initialValues: {
       user_name: "",
@@ -288,13 +289,19 @@ const MyProfilePage = () => {
     );
   };
   return (
-    <AuthGuard>
+    <>
       <Profile formik={formik} data={data} loader={loader} Content={Content} />
-    </AuthGuard>
+      <SubscriptionDialog />
+    </>
   );
 };
 
 MyProfilePage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+      {" "}
+      <AuthGuard>{page}</AuthGuard>
+    </PrimaryWebLayout>
+  );
 };
 export default MyProfilePage;

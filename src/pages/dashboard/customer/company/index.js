@@ -15,10 +15,6 @@ const DashboardPage = () => {
 };
 
 DashboardPage.getLayout = function getLayout(page) {
-  return (
-    <PrimaryWebLayout>
-      {page}
-    </PrimaryWebLayout>
-  );
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
 export default DashboardPage;

@@ -118,7 +118,7 @@ const TestimonialPage = () => {
                                     }}
                                   >
                                     <Avatar
-                                      alt="avatar"
+                                      alt={`${elem.name}`}
                                       src={`${elem.base_url}${elem.image}`}
                                       sx={{ width: 60, height: 60 }}
                                     />
