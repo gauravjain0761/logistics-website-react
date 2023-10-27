@@ -1,5 +1,6 @@
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
@@ -26,6 +27,7 @@ const MyProfilePage = () => {
     onSubmit: async (values) => {
       let formData = new FormData();
       formData.append("user_name", values?.user_name);
+      formData.append("user_type", values?.user_type);
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
@@ -107,18 +109,20 @@ const MyProfilePage = () => {
     getProfile();
   }, [user, user?.id]);
 
-  console.log("datadataformik", formik);
-  const Content = () => {
-    return <>asdf</>;
-  };
+
   return (
-    <AuthGuard>
-      <Profile formik={formik} data={data} loader={loader} Content={Content} />
-    </AuthGuard>
+    <>
+      <Profile formik={formik} data={data} loader={loader}  />
+      <SubscriptionDialog />
+    </>
   );
 };
 
 MyProfilePage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+      <AuthGuard>{page}</AuthGuard>
+    </PrimaryWebLayout>
+  );
 };
 export default MyProfilePage;

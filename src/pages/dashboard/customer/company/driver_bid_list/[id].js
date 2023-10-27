@@ -1,24 +1,20 @@
 import AuthGuard from "@/auth/AuthGuard";
 import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
-import CompanyDashboard from "@/sections/dashboard/companyDashboard";
+import BidList from "@/sections/dashboard/companyDashboard/driverBidList";
 import { useFormik } from "formik";
 
-const DashboardPage = () => {
+const JobListing = () => {
   const formik = useFormik({});
   return (
     <AuthGuard>
-      <CompanyDashboard formik={formik} />
+      <BidList formik={formik} />
       <SubscriptionDialog />
     </AuthGuard>
   );
 };
 
-DashboardPage.getLayout = function getLayout(page) {
-  return (
-    <PrimaryWebLayout>
-      {page}
-    </PrimaryWebLayout>
-  );
+JobListing.getLayout = function getLayout(page) {
+  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
 };
-export default DashboardPage;
+export default JobListing;
