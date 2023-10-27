@@ -61,7 +61,7 @@ const DropTypeSelect = [
     value: "pickup",
   },
   {
-    label: "Drop",
+    label: "Delivery",
     value: "drop",
   },
 ];
@@ -229,7 +229,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                         <TextBox
                           fullWidth
                           type="date"
-                          label="Drop Date"
+                          label="Delivery Date"
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -288,7 +288,7 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                             }}
                             fullWidth
                             format="hh:mm a"
-                            label="Drop Time"
+                            label="Delivery Time"
                             value={dayjs(
                               `${productItem?.product?.drop_date}T${moment(
                                 productItem?.product?.drop_time,
@@ -551,8 +551,8 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                   <Typography fontSize={16}>
                                     Address Type :
                                   </Typography>
-                                  <Typography fontSize={14}>
-                                    {addressItem?.type}
+                                  <Typography fontSize={14} sx={{textTransform:"capitalize"}}>
+                                    {addressItem?.type == 'drop'?'Delivery':addressItem?.type}
                                   </Typography>
                                 </Stack>
                               </Grid>
@@ -560,8 +560,8 @@ const StepTwo = ({ formik, id, addProduct, removeProduct }) => {
                                 <Box>
                                   <TextBox
                                     fullWidth
-                                    label="Postal Code"
-                                    placeholder="Enter Postal Code"
+                                    label="Post Code"
+                                    placeholder="Enter Post Code"
                                     value={addressItem?.postal_code}
                                     name={`items[${productIndex}].address[${addressIndex}].postal_code`}
                                     onChange={(e) => {

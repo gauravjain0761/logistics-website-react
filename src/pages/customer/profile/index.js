@@ -1,5 +1,6 @@
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
 import axiosInstance from "@/utils/axios";
@@ -13,18 +14,21 @@ const MyProfilePage = () => {
   const [data, setData] = React.useState({});
   const { user } = useAuthContext();
   const formik = useFormik({
-    initialValues: {
+    initialValues:  { 
       user_name: "",
+      user_type: "customer",
       email: "",
-      mobile: "",
+       mobile: "",
       plan_name: "",
       profile_img: "",
       profile_img_url: "",
     },
+    
     validate: (values) => {},
     onSubmit: async (values) => {
       let formData = new FormData();
       formData.append("user_name", values?.user_name);
+      formData.append("user_type", values?.user_type);
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
@@ -32,7 +36,7 @@ const MyProfilePage = () => {
       formData.append("plan_name", values?.plan_name);
 
       await axiosInstance
-        .post("/api/auth/profile/update-profile", formData)
+        .post(`/api/auth/profile/update-customer-profile/${user?.id}`, formData)
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
@@ -106,18 +110,20 @@ const MyProfilePage = () => {
     getProfile();
   }, [user, user?.id]);
 
-  console.log("datadataformik", formik);
-  const Content = () => {
-    return <>asdf</>;
-  };
+
   return (
-    <AuthGuard>
-      <Profile formik={formik} data={data} loader={loader} Content={Content} />
-    </AuthGuard>
+    <>
+      <Profile formik={formik} data={data} loader={loader}  />
+      <SubscriptionDialog />
+    </>
   );
 };
 
 MyProfilePage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+      <AuthGuard>{page}</AuthGuard>
+    </PrimaryWebLayout>
+  );
 };
 export default MyProfilePage;

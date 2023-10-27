@@ -33,7 +33,7 @@ const Footer = () => {
                 component="img"
                 width={186}
                 height={57}
-                src="/assets/images/logo/logo.jpg"
+                src="/logo.png"
                 alt="Logo"
                 loading="lazy"
                 sx={{

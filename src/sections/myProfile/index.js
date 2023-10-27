@@ -28,6 +28,7 @@ import { useSnackbar } from "notistack";
 import React from "react";
 
 const Profile = ({ data, formik, loader, Content = null }) => {
+  console.log(data?.plan_name,'formikss')
   return (
     <React.Fragment>
       <Box sx={{ backgroundColor: (theme) => theme.palette.grey[300] }}>
@@ -192,7 +193,7 @@ const Profile = ({ data, formik, loader, Content = null }) => {
                                   />
                                 </Box>
                                 <Typography component="body2" fontSize={15}>
-                                  {formik.values.plan_name || "N/A"}
+                                  {data?.plan_name || "N/A"}
                                 </Typography>
                               </Stack>
                             </Box>

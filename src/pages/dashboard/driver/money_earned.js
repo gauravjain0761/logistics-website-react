@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import DashboardCard from "@/module/dashboard/driverCard/dashboardCard";
 import { Box, Card, CardContent, Container, Typography } from "@mui/material";
@@ -12,6 +13,7 @@ const MoneyEarnedList = () => {
         <Container >
           <Box py={5}>
             <DashboardCard />
+            <SubscriptionDialog />
           </Box>
           <Card>
             <CardContent>

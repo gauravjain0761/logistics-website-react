@@ -1,4 +1,5 @@
 import AuthGuard from "@/auth/AuthGuard";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import CompanyDashboard from "@/sections/dashboard/companyDashboard";
 import { useFormik } from "formik";
@@ -8,11 +9,16 @@ const DashboardPage = () => {
   return (
     <AuthGuard>
       <CompanyDashboard formik={formik} />
+      <SubscriptionDialog />
     </AuthGuard>
   );
 };
 
 DashboardPage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+      {page}
+    </PrimaryWebLayout>
+  );
 };
 export default DashboardPage;

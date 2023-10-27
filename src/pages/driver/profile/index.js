@@ -1,5 +1,6 @@
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { TextBox } from "@/components/form";
 import { PrimaryWebLayout } from "@/layout";
 import Profile from "@/sections/myProfile";
@@ -26,6 +27,7 @@ const MyProfilePage = () => {
   const formik = useFormik({
     initialValues: {
       user_name: "",
+      user_type: "driver",
       email: "",
       mobile: "",
       plan_name: "",
@@ -60,6 +62,7 @@ const MyProfilePage = () => {
     onSubmit: async (values) => {
       let formData = new FormData();
       formData.append("user_name", values?.user_name);
+      formData.append("user_type", values?.user_type);
       formData.append("email", values?.email);
       formData.append("mobile", values?.mobile);
       formData.append("profile_img", values?.profile_img);
@@ -77,7 +80,7 @@ const MyProfilePage = () => {
       formData = formData;
 
       await axiosInstance
-        .post("/api/auth/profile/update-profile", formData)
+        .post(`/api/auth/profile/update-driver-profile/${user?.id}`, formData)
         .then((response) => {
           if (response?.status === 200) {
             enqueueSnackbar(response.data.message, {
@@ -1006,13 +1009,18 @@ const MyProfilePage = () => {
   };
 
   return (
-    <AuthGuard>
+    <>
       <Profile formik={formik} data={data} loader={loader} Content={Content} />
-    </AuthGuard>
+      <SubscriptionDialog />
+    </>
   );
 };
 
 MyProfilePage.getLayout = function getLayout(page) {
-  return <PrimaryWebLayout>{page}</PrimaryWebLayout>;
+  return (
+    <PrimaryWebLayout>
+      <AuthGuard>{page}</AuthGuard>
+    </PrimaryWebLayout>
+  );
 };
 export default MyProfilePage;

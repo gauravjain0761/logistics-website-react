@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import AuthGuard from "@/auth/AuthGuard";
 import { useAuthContext } from "@/auth/useAuthContext";
 import { StepperContext } from "@/components/stepper/stepperContext";
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 
 const PostJob = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -80,7 +81,16 @@ const PostJob = () => {
             if (!addressElement?.postal_code) {
               addressObject = {
                 ...addressObject,
-                postal_code: "Postal Code is required",
+                postal_code: "Post Code is required",
+                index: addressIndex,
+              };
+            } else if (
+              addressElement?.postal_code?.length < 5 ||
+              addressElement?.postal_code?.length > 8
+            ) {
+              addressObject = {
+                ...addressObject,
+                postal_code: "Min 5 digit and Max 8 digit is required",
                 index: addressIndex,
               };
             } else {
@@ -141,13 +151,13 @@ const PostJob = () => {
         }
 
         if (!element?.product?.drop_date) {
-          itemObject["product"]["drop_date"] = "Drop date is required";
+          itemObject["product"]["drop_date"] = "Delivery date is required";
         } else {
           itemObject["product"]["drop_date"] = "";
         }
 
         if (!element?.product?.drop_time) {
-          itemObject["product"]["drop_time"] = "Drop time is required";
+          itemObject["product"]["drop_time"] = "Delivery time is required";
         } else {
           itemObject["product"]["drop_time"] = "";
         }
@@ -400,6 +410,7 @@ const PostJob = () => {
         removeAddress={removeAddress}
         formik={formik}
       />
+       <SubscriptionDialog />
     </AuthGuard>
   );
 };

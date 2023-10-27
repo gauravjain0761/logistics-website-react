@@ -1,3 +1,4 @@
+import SubscriptionDialog from "@/components/dialog/subscriptionDialog";
 import { PrimaryWebLayout } from "@/layout";
 import DashboardCard from "@/module/dashboard/customerCard/dashboardCard";
 import { Box, Card, CardContent, Container, Typography } from "@mui/material";
@@ -10,6 +11,7 @@ const MoneySpendList = () => {
       <Container >
         <Box py={5}>
           <DashboardCard />
+          <SubscriptionDialog />
         </Box>
         <Card>
           <CardContent>
